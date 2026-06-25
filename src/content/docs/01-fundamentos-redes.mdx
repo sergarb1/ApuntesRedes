@@ -3,7 +3,7 @@ title: U01 — Fundamentos de redes
 description: La red mágica que no funciona 😵‍💫
 ---
 
-import WasmDemo from '../../components/WasmDemo.astro';
+import CodePlayground from '../../components/CodePlayground.astro';
 
 <p><small>La red mágica que no funciona 😵‍💫</small></p>
 
@@ -528,7 +528,34 @@ Tu PC (192.168.1.10) → ping 8.8.8.8
   <figcaption class="diagram-caption">El PC necesita la MAC del gateway para enviar paquetes fuera de su red. ARP resuelve la IP 192.168.1.1 a su MAC correspondiente.</figcaption>
 </figure>
 
-<WasmDemo demo="paquete-sim" />
+<CodePlayground
+  title="🧪 Simulador de envío de paquetes (editable)"
+  language="JavaScript"
+  code={`function simularEnvio(origen, destino) {
+  console.log('🏠 P4QU3T3 nace en ' + origen);
+  console.log('🎯 Quiere llegar a ' + destino);
+
+  if (destino.startsWith('192.168.')) {
+    console.log('🔍 Misma red local. Buscando MAC...');
+    console.log('📢 ARP Request: ¿Quién tiene ' + destino + '?');
+    console.log('✅ ARP Reply: MAC = BB:BB:BB:BB:BB:BB');
+    console.log('🚀 Enviando trama directa a ' + destino);
+  } else {
+    console.log('🌍 Otra red. Necesito el gateway');
+    console.log('🔍 ARP Request: ¿Quién tiene el gateway?');
+    console.log('✅ ARP Reply: MAC del gateway = CC:CC:CC:CC:CC:CC');
+    console.log('🧭 Router recibe el paquete, consulta tabla de rutas...');
+    console.log('🗺️  Tiene ruta hacia ' + destino + ' por WAN');
+    console.log('📦 Reenviando paquete (TTL: 64 → 63)');
+  }
+
+  console.log('🎉 ¡Paquete enviado correctamente!');
+}
+
+// Cambia los valores y ejecuta de nuevo
+simularEnvio('192.168.1.10', '8.8.8.8');
+`}
+/>
 
 ### Protocolo de diagnóstico paso a paso
 
