@@ -1,0 +1,107 @@
+
+note: |md
+# Red Doméstica Típica
+| {
+  shape: text
+  near: top-center
+  style.font-size: 20
+}
+
+direction: right
+
+modem: {
+  label: "Módem\nFibra/ADSL"
+  shape: rectangle
+  icon: ../icons/cable.svg
+  style.fill: "#f8fafc"
+  style.stroke: "#059669"
+  style.stroke-width: 3
+  style.border-radius: 8
+  width: 120
+  height: 80
+}
+router-wifi: {
+  label: "Router WiFi\n192.168.1.1"
+  shape: rectangle
+  icon: ../icons/router.svg
+  style.fill: "#f0f9ff"
+  style.stroke: "#2563eb"
+  style.stroke-width: 3
+  style.border-radius: 8
+  width: 130
+  height: 85
+}
+switch-casa: {
+  label: "Switch\n4 puertos"
+  shape: hexagon
+  icon: ../icons/network.svg
+  style.fill: "#eff6ff"
+  style.stroke: "#1e40af"
+  style.stroke-width: 3
+  style.font-size: 12
+  width: 110
+  height: 70
+}
+pc-casa: {
+  label: "PC sobremesa"
+  shape: rectangle
+  icon: ../icons/monitor.svg
+  style.fill: "#f8fafc"
+  style.stroke: "#1e40af"
+  style.stroke-width: 3
+  style.border-radius: 8
+  width: 120
+  height: 80
+}
+laptop: {
+  label: "Portátil\n(WiFi)"
+  shape: rectangle
+  icon: ../icons/laptop.svg
+  style.fill: "#f8fafc"
+  style.stroke: "#7c3aed"
+  style.stroke-width: 3
+  style.border-radius: 8
+  width: 120
+  height: 80
+}
+phone: {
+  label: "Móvil\n(WiFi)"
+  shape: rectangle
+  icon: ../icons/smartphone.svg
+  style.fill: "#f8fafc"
+  style.stroke: "#7c3aed"
+  style.stroke-width: 3
+  style.border-radius: 8
+  width: 110
+  height: 80
+}
+impresora: {
+  label: "Impresora\nred"
+  shape: rectangle
+  icon: ../icons/hard-drive.svg
+  style.fill: "#fefce8"
+  style.stroke: "#d97706"
+  style.stroke-width: 3
+  style.border-radius: 8
+  width: 110
+  height: 80
+}
+internet: {
+  label: "Internet"
+  shape: cloud
+  icon: ../icons/globe.svg
+  style.fill: "#f0f9ff"
+  style.stroke: "#3b82f6"
+  style.stroke-width: 3
+  style.font-size: 14
+  width: 130
+  height: 85
+}
+
+internet -> modem: {style.stroke: "#2563eb"; style.stroke-width: 2}
+modem -> router-wifi: {style.stroke: "#2563eb"; style.stroke-width: 2}
+router-wifi -> switch-casa: {style.stroke: "#2563eb"; style.stroke-width: 2}
+switch-casa -> pc-casa: {style.stroke: "#2563eb"; style.stroke-width: 2}
+switch-casa -> impresora: {style.stroke: "#2563eb"; style.stroke-width: 2}
+router-wifi -> laptop: {style.stroke: "#2563eb"; style.stroke-width: 2}
+router-wifi -> phone: {style.stroke: "#2563eb"; style.stroke-width: 2}

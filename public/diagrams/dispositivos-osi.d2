@@ -1,0 +1,117 @@
+
+note: |md
+# Dispositivos por Capa OSI
+| {
+  shape: text
+  near: top-center
+  style.font-size: 20
+}
+
+direction: up
+
+capa-7: {
+  label: "Capa 7 — Aplicación"
+  shape: rectangle
+  style.fill: "#f5f3ff"
+  style.stroke: "#7c3aed"
+  style.stroke-width: 2
+  style.font-size: 10
+  width: 280
+  height: 32
+}
+capa-4: {
+  label: "Capa 4 — Transporte"
+  shape: rectangle
+  style.fill: "#eff6ff"
+  style.stroke: "#2563eb"
+  style.stroke-width: 2
+  style.font-size: 10
+  width: 280
+  height: 32
+}
+capa-3: {
+  label: "Capa 3 — Red"
+  shape: rectangle
+  style.fill: "#f0f9ff"
+  style.stroke: "#3b82f6"
+  style.stroke-width: 2
+  style.font-size: 10
+  width: 280
+  height: 32
+}
+capa-2: {
+  label: "Capa 2 — Enlace"
+  shape: rectangle
+  style.fill: "#f0fdf4"
+  style.stroke: "#60a5fa"
+  style.stroke-width: 2
+  style.font-size: 10
+  width: 280
+  height: 32
+}
+capa-1: {
+  label: "Capa 1 — Física"
+  shape: rectangle
+  style.fill: "#fefce8"
+  style.stroke: "#93c5fd"
+  style.stroke-width: 2
+  style.font-size: 10
+  width: 280
+  height: 32
+}
+
+router: {
+  label: "Router\n(Capa 3)"
+  shape: rectangle
+  icon: ../icons/router.svg
+  style.fill: "#f8fafc"
+  style.stroke: "#1e40af"
+  style.stroke-width: 3
+  style.border-radius: 8
+  width: 130
+  height: 85
+}
+switch: {
+  label: "Switch\n(Capa 2)"
+  shape: hexagon
+  icon: ../icons/network.svg
+  style.fill: "#eff6ff"
+  style.stroke: "#1e40af"
+  style.stroke-width: 3
+  style.font-size: 12
+  width: 130
+  height: 80
+}
+pc: {
+  label: "PC\n(Capas 1-7)"
+  shape: rectangle
+  icon: ../icons/monitor.svg
+  style.fill: "#f8fafc"
+  style.stroke: "#1e40af"
+  style.stroke-width: 3
+  style.border-radius: 8
+  width: 130
+  height: 85
+}
+firewall: {
+  label: "Firewall\n(Capas 3-4)"
+  shape: rectangle
+  icon: ../icons/shield.svg
+  style.fill: "#fef2f2"
+  style.stroke: "#dc2626"
+  style.stroke-width: 3
+  style.border-radius: 8
+  width: 130
+  height: 85
+}
+
+capa-7 -> capa-4: {style.stroke: "#2563eb"; style.stroke-width: 2}
+capa-4 -> capa-3: {style.stroke: "#2563eb"; style.stroke-width: 2}
+capa-3 -> capa-2: {style.stroke: "#2563eb"; style.stroke-width: 2}
+capa-2 -> capa-1: {style.stroke: "#2563eb"; style.stroke-width: 2}
+
+capa-3 -> router
+capa-2 -> switch
+capa-1 -> pc
+capa-3 -> firewall
+capa-4 -> firewall

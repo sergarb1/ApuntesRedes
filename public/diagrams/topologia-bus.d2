@@ -1,0 +1,80 @@
+
+note: |md
+# Topología en Bus
+| {
+  shape: text
+  near: top-center
+  style.font-size: 20
+}
+
+direction: down
+
+
+pc-a: {
+  label: "PC-A"
+  shape: rectangle
+  style.fill: "#f8fafc"
+  style.stroke: "#1e40af"
+  style.stroke-width: 3
+  style.border-radius: 8
+  style.font-size: 13
+  width: 130
+  height: 85
+  icon: ../icons/monitor.svg
+}
+
+pc-b: {
+  label: "PC-B"
+  shape: rectangle
+  style.fill: "#f8fafc"
+  style.stroke: "#1e40af"
+  style.stroke-width: 3
+  style.border-radius: 8
+  style.font-size: 13
+  width: 130
+  height: 85
+  icon: ../icons/monitor.svg
+}
+
+pc-c: {
+  label: "PC-C"
+  shape: rectangle
+  style.fill: "#f8fafc"
+  style.stroke: "#1e40af"
+  style.stroke-width: 3
+  style.border-radius: 8
+  style.font-size: 13
+  width: 130
+  height: 85
+  icon: ../icons/monitor.svg
+}
+
+pc-d: {
+  label: "PC-D"
+  shape: rectangle
+  style.fill: "#f8fafc"
+  style.stroke: "#1e40af"
+  style.stroke-width: 3
+  style.border-radius: 8
+  style.font-size: 13
+  width: 130
+  height: 85
+  icon: ../icons/monitor.svg
+}
+
+cable: {
+  label: "Cable coaxial"
+  shape: rectangle
+  style.fill: "#e2e8f0"
+  style.stroke: "#94a3b8"
+  style.stroke-width: 1
+  style.font-size: 10
+  style.font-color: "#64748b"
+  width: 35
+  height: 280
+}
+
+pc-a -> cable: {style.stroke: "#2563eb"; style.stroke-width: 2}
+pc-b -> cable: {style.stroke: "#2563eb"; style.stroke-width: 2}
+pc-c -> cable: {style.stroke: "#2563eb"; style.stroke-width: 2}
+pc-d -> cable: {style.stroke: "#2563eb"; style.stroke-width: 2}

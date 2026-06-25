@@ -1,0 +1,93 @@
+
+note: |md
+# Modelo OSI — 7 Capas
+| {
+  shape: text
+  near: top-center
+  style.font-size: 20
+}
+
+
+capa-7: {
+  label: "7 — Aplicación\nHTTP, FTP, SMTP, DNS"
+  shape: rectangle
+  style.fill: "#f5f3ff"
+  style.stroke: "#7c3aed"
+  style.stroke-width: 2
+  style.font-size: 11
+  width: 360
+  height: 50
+}
+
+capa-6: {
+  label: "6 — Presentación\nSSL/TLS, JPEG, GIF"
+  shape: rectangle
+  style.fill: "#f3e8ff"
+  style.stroke: "#8b5cf6"
+  style.stroke-width: 2
+  style.font-size: 11
+  width: 360
+  height: 50
+}
+
+capa-5: {
+  label: "5 — Sesión\nNetBIOS, RPC, SQL"
+  shape: rectangle
+  style.fill: "#eef2ff"
+  style.stroke: "#a78bfa"
+  style.stroke-width: 2
+  style.font-size: 11
+  width: 360
+  height: 50
+}
+
+capa-4: {
+  label: "4 — Transporte\nTCP, UDP"
+  shape: rectangle
+  style.fill: "#eff6ff"
+  style.stroke: "#2563eb"
+  style.stroke-width: 2
+  style.font-size: 11
+  width: 360
+  height: 50
+}
+
+capa-3: {
+  label: "3 — Red\nIP, ICMP, ARP"
+  shape: rectangle
+  style.fill: "#f0f9ff"
+  style.stroke: "#3b82f6"
+  style.stroke-width: 2
+  style.font-size: 11
+  width: 360
+  height: 50
+}
+
+capa-2: {
+  label: "2 — Enlace\nEthernet, WiFi, MAC"
+  shape: rectangle
+  style.fill: "#f0fdf4"
+  style.stroke: "#60a5fa"
+  style.stroke-width: 2
+  style.font-size: 11
+  width: 360
+  height: 50
+}
+
+capa-1: {
+  label: "1 — Física\nCables, fibra, radio"
+  shape: rectangle
+  style.fill: "#fefce8"
+  style.stroke: "#93c5fd"
+  style.stroke-width: 2
+  style.font-size: 11
+  width: 360
+  height: 50
+}
+
+capa-7 -> capa-6: {style.stroke: "#94a3b8"; style.stroke-width: 1; style.stroke-dash: 3}
+capa-6 -> capa-5: {style.stroke: "#94a3b8"; style.stroke-width: 1; style.stroke-dash: 3}
+capa-5 -> capa-4: {style.stroke: "#94a3b8"; style.stroke-width: 1; style.stroke-dash: 3}
+capa-4 -> capa-3: {style.stroke: "#94a3b8"; style.stroke-width: 1; style.stroke-dash: 3}
+capa-3 -> capa-2: {style.stroke: "#94a3b8"; style.stroke-width: 1; style.stroke-dash: 3}
+capa-2 -> capa-1: {style.stroke: "#94a3b8"; style.stroke-width: 1; style.stroke-dash: 3}

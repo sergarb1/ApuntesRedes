@@ -1,0 +1,66 @@
+
+note: |md
+# Encapsulación TCP/IP
+| {
+  shape: text
+  near: top-center
+  style.font-size: 20
+}
+
+direction: down
+
+aplicacion: {
+  label: "Capa de Aplicación\n(HTTP request)"
+  shape: rectangle
+  style.fill: "#f5f3ff"
+  style.stroke: "#7c3aed"
+  style.stroke-width: 2
+  style.font-size: 11
+  width: 300
+  height: 40
+}
+transporte: {
+  label: "Capa de Transporte\nSegmento TCP (puerto 80)"
+  shape: rectangle
+  style.fill: "#eff6ff"
+  style.stroke: "#2563eb"
+  style.stroke-width: 2
+  style.font-size: 11
+  width: 300
+  height: 40
+}
+red: {
+  label: "Capa de Red\nPaquete IP (origen → destino)"
+  shape: rectangle
+  style.fill: "#f0f9ff"
+  style.stroke: "#3b82f6"
+  style.stroke-width: 2
+  style.font-size: 11
+  width: 300
+  height: 40
+}
+enlace: {
+  label: "Capa de Enlace\nTrama Ethernet (MACs + CRC)"
+  shape: rectangle
+  style.fill: "#f0fdf4"
+  style.stroke: "#60a5fa"
+  style.stroke-width: 2
+  style.font-size: 11
+  width: 300
+  height: 40
+}
+fisica: {
+  label: "Capa Física\nBits por el cable"
+  shape: rectangle
+  style.fill: "#fefce8"
+  style.stroke: "#93c5fd"
+  style.stroke-width: 2
+  style.font-size: 11
+  width: 300
+  height: 40
+}
+
+aplicacion -> transporte: {style.stroke: "#2563eb"; style.stroke-width: 2; label: "Añade cabecera TCP"}
+transporte -> red: {style.stroke: "#2563eb"; style.stroke-width: 2; label: "Añade cabecera IP"}
+red -> enlace: {style.stroke: "#2563eb"; style.stroke-width: 2; label: "Añade cabecera Ethernet + CRC"}
+enlace -> fisica: {style.stroke: "#2563eb"; style.stroke-width: 2; label: "Codifica en bits"}

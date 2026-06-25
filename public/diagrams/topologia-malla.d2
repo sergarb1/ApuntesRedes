@@ -1,0 +1,70 @@
+
+note: |md
+# Topología en Malla
+| {
+  shape: text
+  near: top-center
+  style.font-size: 20
+}
+
+direction: up
+
+
+pc-a: {
+  label: "PC-A"
+  shape: rectangle
+  style.fill: "#f8fafc"
+  style.stroke: "#1e40af"
+  style.stroke-width: 3
+  style.border-radius: 8
+  style.font-size: 13
+  width: 130
+  height: 85
+  icon: ../icons/monitor.svg
+}
+
+pc-b: {
+  label: "PC-B"
+  shape: rectangle
+  style.fill: "#f8fafc"
+  style.stroke: "#1e40af"
+  style.stroke-width: 3
+  style.border-radius: 8
+  style.font-size: 13
+  width: 130
+  height: 85
+  icon: ../icons/monitor.svg
+}
+
+pc-c: {
+  label: "PC-C"
+  shape: rectangle
+  style.fill: "#f8fafc"
+  style.stroke: "#1e40af"
+  style.stroke-width: 3
+  style.border-radius: 8
+  style.font-size: 13
+  width: 130
+  height: 85
+  icon: ../icons/monitor.svg
+}
+
+pc-d: {
+  label: "PC-D"
+  shape: rectangle
+  style.fill: "#f8fafc"
+  style.stroke: "#1e40af"
+  style.stroke-width: 3
+  style.border-radius: 8
+  style.font-size: 13
+  width: 130
+  height: 85
+  icon: ../icons/monitor.svg
+}
+
+pc-a -> pc-b: {style.stroke: "#2563eb"; style.stroke-width: 2}
+pc-a -> pc-c: {style.stroke: "#2563eb"; style.stroke-width: 2}
+pc-a -> pc-d: {style.stroke: "#2563eb"; style.stroke-width: 2}
+pc-b -> pc-c: {style.stroke: "#2563eb"; style.stroke-width: 2}
+pc-b -> pc-d: {style.stroke: "#2563eb"; style.stroke-width: 2}
+pc-c -> pc-d: {style.stroke: "#2563eb"; style.stroke-width: 2}

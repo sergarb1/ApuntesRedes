@@ -1,0 +1,59 @@
+
+note: |md
+# Flujo ARP — Gateway por defecto
+| {
+  shape: text
+  near: top-center
+  style.font-size: 20
+}
+
+direction: right
+
+pc-a: {
+  label: "PC-A\n192.168.1.10"
+  shape: rectangle
+  icon: ../icons/monitor.svg
+  style.fill: "#f8fafc"
+  style.stroke: "#1e40af"
+  style.stroke-width: 3
+  style.border-radius: 8
+  width: 130
+  height: 85
+}
+sw: {
+  label: "Switch\nCapa 2"
+  shape: hexagon
+  icon: ../icons/network.svg
+  style.fill: "#eff6ff"
+  style.stroke: "#1e40af"
+  style.stroke-width: 3
+  style.font-size: 12
+  width: 120
+  height: 75
+}
+gw: {
+  label: "Gateway\n192.168.1.1"
+  shape: rectangle
+  icon: ../icons/router.svg
+  style.fill: "#f8fafc"
+  style.stroke: "#2563eb"
+  style.stroke-width: 3
+  style.border-radius: 8
+  width: 130
+  height: 85
+}
+internet: {
+  label: "Internet"
+  shape: cloud
+  icon: ../icons/globe.svg
+  style.fill: "#f0f9ff"
+  style.stroke: "#3b82f6"
+  style.stroke-width: 3
+  style.font-size: 14
+  width: 140
+  height: 90
+}
+
+pc-a -> sw: {style.stroke: "#2563eb"; style.stroke-width: 2; label: "¿Quién tiene 192.168.1.1? (ARP)"}
+sw -> gw: {style.stroke: "#2563eb"; style.stroke-width: 2; label: "Yo, MAC: aa:bb:cc:01:01:01"}
+gw -> internet: {style.stroke: "#2563eb"; style.stroke-width: 2; label: "Salida a Internet"}

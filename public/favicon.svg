@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <rect width="200" height="200" rx="40" fill="#2563eb"/>
+  <circle cx="100" cy="80" r="30" fill="white" opacity="0.9"/>
+  <circle cx="60" cy="140" r="20" fill="white" opacity="0.7"/>
+  <circle cx="140" cy="140" r="20" fill="white" opacity="0.7"/>
+  <line x1="85" y1="105" x2="65" y2="128" stroke="white" stroke-width="3" stroke-linecap="round"/>
+  <line x1="115" y1="105" x2="135" y2="128" stroke="white" stroke-width="3" stroke-linecap="round"/>
+  <line x1="80" y1="140" x2="120" y2="140" stroke="white" stroke-width="3" stroke-linecap="round"/>
+  <text x="100" y="185" text-anchor="middle" fill="white" font-family="system-ui" font-weight="700" font-size="20">PAR</text>
+</svg>

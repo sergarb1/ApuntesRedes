@@ -1,0 +1,25 @@
+{
+  "name": "apuntes-par",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Apuntes de Planificación y Administración de Redes — CC BY-SA 4.0",
+  "scripts": {
+    "dev": "astro dev",
+    "diagrams": "node scripts/generate-diagrams.mjs",
+    "build": "npm run diagrams && astro build",
+    "preview": "astro preview",
+    "pdf": "npm run build && npx starlight-to-pdf https://sergarb1.github.io/ApuntesRedes -p public/pdf -f ApuntesPAR --footer scripts/pdf-footer.html --header scripts/pdf-header.html --preceding-html scripts/pdf-cover.html --print-bg",
+    "pdf:local": "npm run build && npx starlight-to-pdf http://localhost:4321/ApuntesRedes -p public/pdf -f ApuntesPAR --footer scripts/pdf-footer.html --header scripts/pdf-header.html --preceding-html scripts/pdf-cover.html --print-bg",
+    "epub": "pwsh -NoProfile -File scripts/generate-epub.ps1",
+    "export": "npm run pdf && npm run epub"
+  },
+  "dependencies": {
+    "@astrojs/starlight": "^0.41.0",
+    "@fontsource/geist-sans": "^5.2.5",
+    "astro": "^7.0.2",
+    "sharp": "^0.34.5"
+  },
+  "devDependencies": {
+    "starlight-to-pdf": "^1.4.0"
+  }
+}
