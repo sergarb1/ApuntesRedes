@@ -119,8 +119,11 @@ src/
 └── env.d.ts
 ├── scripts/
 │   ├── generate-diagrams.mjs     → Generación SVG con D2
-│   ├── generate-pdf.mjs          → Generación PDF con Puppeteer
-│   └── generate-epub.mjs         → Generación EPUB
+│   ├── pdf-cover.html             → Portada PDF
+│   ├── pdf-header.html            → Cabecera PDF
+│   ├── pdf-footer.html            → Pie PDF
+│   ├── epub.css                   → Estilos EPUB
+│   └── generate-epub.ps1          → Generación EPUB
 ├── .github/workflows/
 │   └── deploy.yml                → CI/CD a GitHub Pages
 ├── astro.config.mjs              → Config Astro + Starlight
