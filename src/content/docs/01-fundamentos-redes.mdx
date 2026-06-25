@@ -3,6 +3,8 @@ title: U01 — Fundamentos de redes
 description: La red mágica que no funciona 😵‍💫
 ---
 
+import WasmDemo from '../../components/WasmDemo.astro';
+
 <p><small>La red mágica que no funciona 😵‍💫</small></p>
 
 > 🗺️ **Ruta del paquete:** 🏠 **ORIGEN** → 📦 Encapsulado → 🔌 Cable → 🏷️ IP → 🌍 IPv6 → 🔀 Switch → 🏢 VLAN → 🧭 Router → 🗣️ OSPF → 🌐 NAT → 🩺 Diagnóstico → ☁️ Cloud
@@ -525,6 +527,8 @@ Tu PC (192.168.1.10) → ping 8.8.8.8
   <img src="/ApuntesRedes/diagrams/flujo-arp-gateway.svg" alt="Flujo ARP: PC solicita la MAC del gateway para salir a Internet" class="diagram-img" loading="lazy" />
   <figcaption class="diagram-caption">El PC necesita la MAC del gateway para enviar paquetes fuera de su red. ARP resuelve la IP 192.168.1.1 a su MAC correspondiente.</figcaption>
 </figure>
+
+<WasmDemo demo="paquete-sim" />
 
 ### Protocolo de diagnóstico paso a paso
 
