@@ -33,6 +33,15 @@ const unitLabels = [
   'Cloud, virtualización y futuro',
 ];
 
+const nn = (i) => String(i + 1).padStart(2, '0');
+
+const boletinItems = (i) => [
+  { link: `/boletines/boletin-u${nn(i)}-inicial-resuelto`, label: '✅ Inicial resuelto' },
+  { link: `/boletines/boletin-u${nn(i)}-inicial`, label: '🟢 Inicial por resolver' },
+  { link: `/boletines/boletin-u${nn(i)}-avanzado-resuelto`, label: '💪 Avanzado resuelto' },
+  { link: `/boletines/boletin-u${nn(i)}-avanzado`, label: '⭐ Avanzado por resolver' },
+];
+
 export default defineConfig({
   site: 'https://sergarb1.github.io/ApuntesRedes',
   base: '/ApuntesRedes',
@@ -71,32 +80,11 @@ export default defineConfig({
         {
           label: '📝 Boletines',
           collapsed: true,
-          items: [
-            { link: '/boletines/boletin-u01-inicial-resuelto', label: '✅ U01 — Inicial' },
-            { link: '/boletines/boletin-u01-avanzado-resuelto', label: '💪 U01 — Avanzado' },
-            { link: '/boletines/boletin-u02-inicial-resuelto', label: '✅ U02 — Inicial' },
-            { link: '/boletines/boletin-u02-avanzado-resuelto', label: '💪 U02 — Avanzado' },
-            { link: '/boletines/boletin-u03-inicial-resuelto', label: '✅ U03 — Inicial' },
-            { link: '/boletines/boletin-u03-avanzado-resuelto', label: '💪 U03 — Avanzado' },
-            { link: '/boletines/boletin-u04-inicial-resuelto', label: '✅ U04 — Inicial' },
-            { link: '/boletines/boletin-u04-avanzado-resuelto', label: '💪 U04 — Avanzado' },
-            { link: '/boletines/boletin-u05-inicial-resuelto', label: '✅ U05 — Inicial' },
-            { link: '/boletines/boletin-u05-avanzado-resuelto', label: '💪 U05 — Avanzado' },
-            { link: '/boletines/boletin-u06-inicial-resuelto', label: '✅ U06 — Inicial' },
-            { link: '/boletines/boletin-u06-avanzado-resuelto', label: '💪 U06 — Avanzado' },
-            { link: '/boletines/boletin-u07-inicial-resuelto', label: '✅ U07 — Inicial' },
-            { link: '/boletines/boletin-u07-avanzado-resuelto', label: '💪 U07 — Avanzado' },
-            { link: '/boletines/boletin-u08-inicial-resuelto', label: '✅ U08 — Inicial' },
-            { link: '/boletines/boletin-u08-avanzado-resuelto', label: '💪 U08 — Avanzado' },
-            { link: '/boletines/boletin-u09-inicial-resuelto', label: '✅ U09 — Inicial' },
-            { link: '/boletines/boletin-u09-avanzado-resuelto', label: '💪 U09 — Avanzado' },
-            { link: '/boletines/boletin-u10-inicial-resuelto', label: '✅ U10 — Inicial' },
-            { link: '/boletines/boletin-u10-avanzado-resuelto', label: '💪 U10 — Avanzado' },
-            { link: '/boletines/boletin-u11-inicial-resuelto', label: '✅ U11 — Inicial' },
-            { link: '/boletines/boletin-u11-avanzado-resuelto', label: '💪 U11 — Avanzado' },
-            { link: '/boletines/boletin-u12-inicial-resuelto', label: '✅ U12 — Inicial' },
-            { link: '/boletines/boletin-u12-avanzado-resuelto', label: '💪 U12 — Avanzado' },
-          ],
+          items: Array.from({ length: 12 }, (_, i) => ({
+            label: `${emojis[i]} Unidad ${nn(i)}`,
+            collapsed: true,
+            items: boletinItems(i),
+          })),
         },
       ],
     }),

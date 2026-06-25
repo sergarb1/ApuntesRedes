@@ -18,8 +18,8 @@ $units = @(
 )
 
 $boletinFiles = @(
-  "boletines/boletin-U{0}-simple-resuelto",
-  "boletines/boletin-U{0}-simple",
+  "boletines/boletin-U{0}-inicial-resuelto",
+  "boletines/boletin-U{0}-inicial",
   "boletines/boletin-U{0}-avanzado-resuelto",
   "boletines/boletin-U{0}-avanzado"
 )
@@ -30,7 +30,7 @@ $outFile = "ApuntesPAR.epub"
 
 $srcDir = "src/content/docs"
 $outPath = "$OutDir/$outFile"
-$coverPath = Join-Path (Get-Location) "public/portada.svg"
+$coverPath = Join-Path (Get-Location) "public/portada.png"
 
 New-Item -ItemType Directory -Path $OutDir -Force | Out-Null
 
