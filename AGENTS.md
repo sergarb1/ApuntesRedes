@@ -16,7 +16,7 @@ Apuntes del módulo **PAR** (Planificación y Administración de Redes) para CFG
 - **Idioma:** Solo castellano (NO hay versión valenciana)
 - **Tema:** Azul #2563eb + teal #4ecdc4, glassmorphism, degradados, Geist Sans
 - **Exportación:** PDF (starlight-to-pdf con portada) + EPUB (Pandoc)
-- **Despliegue:** GitHub Actions → GitHub Pages en rama `master`
+- **Despliegue:** GitHub Actions → GitHub Pages en rama `main`
 - **Diagramas:** D2 (Terrastruct) → SVGs en `public/diagrams/`
 
 
@@ -144,7 +144,7 @@ npm run diagrams  # Generar diagramas con D2 (Terrastruct)
 5. **Laboratorios SIEMPRE con fallo intencionado** — el 80% práctico es obligatorio.
 6. **Los boletines siguen el patrón:** `inicial` (fácil), `intermedio` (medio), `extras` (CodeWars/retos), cada uno con su `-resuelto`.
 7. **El CSS no debe romperse** — probar con `npm run build` después de cambios.
-8. **CI/CD en rama `master`** — no `main`.
+8. **CI/CD en rama `main`**.
 9. **Puppeteer** instalado para PDFs, pero con `PUPPETEER_SKIP_DOWNLOAD=true` en CI.
 10. **D2 (Terrastruct)** para diagramas — script en `scripts/generate-diagrams.mjs`, ejecuta D2 antes del build. Referenciar en `.mdx` como `/ApuntesRedes/diagrams/nombre.svg`. Requiere D2 CLI instalado.
 11. **El build ejecuta `npm run build` que genera diagramas automáticamente** (prependido en el script).
