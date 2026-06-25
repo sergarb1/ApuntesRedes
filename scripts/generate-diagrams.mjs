@@ -1,10 +1,12 @@
 import { execSync } from 'child_process';
-import { writeFileSync, mkdirSync } from 'fs';
+import { writeFileSync, mkdirSync, existsSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const D2 = 'C:\\Program Files\\D2\\d2.exe';
+const D2 = existsSync('C:\\Program Files\\D2\\d2.exe')
+  ? 'C:\\Program Files\\D2\\d2.exe'
+  : 'd2';
 const OUT = 'public/diagrams';
 const ICONS = 'public/icons';
 mkdirSync(OUT, { recursive: true });
