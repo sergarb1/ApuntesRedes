@@ -2,8 +2,5 @@ node_modules/
 dist/
 .astro/
 .env
-*.wasm
-pkg/
-target/
 public/pdf/
 *.epub

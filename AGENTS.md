@@ -18,7 +18,7 @@ Apuntes del módulo **PAR** (Planificación y Administración de Redes) para CFG
 - **Exportación:** PDF (starlight-to-pdf con portada) + EPUB (Pandoc)
 - **Despliegue:** GitHub Actions → GitHub Pages en rama `master`
 - **Diagramas:** D2 (Terrastruct) → SVGs en `public/diagrams/`
-- **WASM:** Rust + wasm-pack (código fuente didáctico)
+
 
 ---
 
@@ -29,7 +29,6 @@ src/content/docs/            → Unidades en Markdown (raíz)
 src/content/boletines/       → Ejercicios (inicial, intermedio, extras)
 src/styles/custom.css        → CSS del tema (azul #2563eb + teal #4ecdc4, Geist Sans, glassmorphism)
 src/assets/logo.svg          → Logo
-componentes-wasm/            → Código Rust para WebAssembly
 scripts/                     → Scripts de exportación (PDF, EPUB) y diagramas (D2)
 public/diagrams/             → SVGs generados con D2 (Terrastruct)
 public/portada.svg           → Portada para web, PDF y EPUB
@@ -95,20 +94,6 @@ description: Descripción corta 😵
 ```
 
 ---
-
-## 🧩 WASM (Rust)
-
-Los componentes WASM son didácticos: el código Rust debe estar comentado en castellano explicando cada paso. El alumno debe poder leer el `lib.rs` y entender qué hace.
-
-Cada proyecto WASM sigue esta estructura:
-
-```
-componentes-wasm/nombre/
-├── Cargo.toml         → wasm-bindgen como dependencia
-├── src/
-│   └── lib.rs         → Código comentado didácticamente
-└── README.md          → Cómo compilar y qué simula
-```
 
 ---
 

@@ -1,7 +1,7 @@
 # Apuntes PAR — Planificación y Administración de Redes
 
 > **Aprende redes como si la red se fuera a caer mañana.**  
-> 12 unidades didácticas · 80% práctico · Estilo _Head First_ · Rust + WASM
+> 12 unidades didácticas · 80% práctico · Estilo _Head First_
 
 **CC BY-SA 4.0** — [Sergi Garcia Barea](https://github.com/sergarb1)
 
@@ -76,32 +76,6 @@ U09: 🗣️ OSPF       → U10: 🌐 NAT          → U11: 🩺 Diagnóstico �
 
 ---
 
-## 🦀 Componentes WASM (Rust → WebAssembly)
-
-Los componentes interactivos están escritos en **Rust** y compilados a **WebAssembly** con `wasm-pack`.  
-Código fuente comentado didácticamente para que los alumnos puedan leerlo, modificarlo y compilarlo.
-
-```
-componentes-wasm/
-├── paquete-sim/         → Simulador de envío de paquetes (U01)
-├── encapsulador-osi/    → Encapsulador capa por capa (U02)     [pendiente]
-├── subnet-calc/         → Calculadora de subredes (U04)        [pendiente]
-├── stp-sim/             → Simulador STP (U06)                 [pendiente]
-├── vlan-tagger/         → Visualizador 802.1Q (U07)            [pendiente]
-├── routing-sim/         → Simulador de rutas (U08)             [pendiente]
-├── ospf-sim/            → Simulador OSPF (U09)                 [pendiente]
-├── nat-sim/             → Simulador NAT/PAT (U10)              [pendiente]
-├── incidencias-sim/     → Generador de fallos (U11)            [pendiente]
-└── sdn-sim/             → Simulador SDN (U12)                 [pendiente]
-```
-
-Compilar un componente:
-
-```bash
-cd componentes-wasm/paquete-sim
-wasm-pack build --target web
-```
-
 ---
 
 ## 📦 Scripts
@@ -143,7 +117,6 @@ src/
 ├── assets/
 │   └── logo.svg                  → Logo PAR
 └── env.d.ts
-├── componentes-wasm/             → Proyectos Rust/wasm-pack
 ├── scripts/
 │   ├── generate-diagrams.mjs     → Generación SVG con D2
 │   ├── generate-pdf.mjs          → Generación PDF con Puppeteer
@@ -165,7 +138,6 @@ src/
 4. Visualiza cambios: `npm run dev`
 5. Genera build: `npm run build`
 
-Para los componentes WASM necesitas Rust: [rustup.rs](https://rustup.rs/)
 
 ---
 
