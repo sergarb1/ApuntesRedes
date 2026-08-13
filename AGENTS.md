@@ -6,7 +6,7 @@ Este archivo ayuda a cualquier agente LLM (como opencode, Claude, ChatGPT, etc.)
 
 ## 📋 Descripción del proyecto
 
-Apuntes del módulo **PAR** (Planificación y Administración de Redes) para CFGS de Administración de Sistemas Informáticos en Red. 12 unidades didácticas con enfoque 80% práctico, estilo _Head First_. Publicado como web estática con Astro + Starlight + GitHub Pages.
+Apuntes del módulo **PAR** (Planificación y Administración de Redes) para CFGS de Administración de Sistemas Informáticos en Red. 13 secciones didácticas (Tema 0 + 12 unidades) con enfoque 80% práctico, estilo _Head First_. Publicado como web estática con Astro + Starlight + GitHub Pages.
 
 ---
 
@@ -25,8 +25,9 @@ Apuntes del módulo **PAR** (Planificación y Administración de Redes) para CFG
 ## 📁 Estructura de directorios
 
 ```
-src/content/docs/            → Unidades en Markdown (raíz)
-src/content/boletines/       → Ejercicios (inicial, intermedio, extras)
+src/content/docs/            → Secciones en Markdown (raíz, índice)
+src/content/docs/00-introduccion/… → 9 puntos por sección (01-…, 09-head-first)
+src/content/docs/boletines/  → Ejercicios (inicial, avanzado + resueltos)
 src/styles/custom.css        → CSS del tema (azul #2563eb + teal #4ecdc4, Geist Sans, glassmorphism)
 src/assets/logo.svg          → Logo
 scripts/                     → Scripts de exportación (PDF, EPUB) y diagramas (D2)
@@ -53,7 +54,7 @@ description: Descripción corta 😵
 
 ### Secciones obligatorias (en este orden)
 
-1. **Mapa viaje P4QU3T3** — barra de progreso con emojis
+1. **Mapa viaje / ruta del paquete** — barra de progreso con emojis
 2. **📚 Contenidos** — lista de temas
 3. **⭐ Sé el Paquete** — escenario interactivo con opciones múltiples
 4. **🔥 Fireside Chat** — debate entre dos conceptos
@@ -63,7 +64,7 @@ description: Descripción corta 😵
 8. **🧠 Atrévete a Pensar** — ejercicios con `<details>` solución
 9. **🧩 Crucigrama de Bits** — con `<details>` solución
 10. **💬 Entrevista de trabajo** — preguntas reales
-11. **🤷 No Hay Preguntas Tontas** — FAQ con P4QU3T3 y CONRAD
+11. **🤷 No Hay Preguntas Tontas** — FAQ (con CONRAD)
 12. **🎬 Post-Créditos** — escena cómica con "PRÓXIMAMENTE EN U0X"
 13. **✅ CEs cubiertos** — tabla de criterios de evaluación
 
@@ -142,14 +143,14 @@ npm run diagrams  # Generar diagramas con D2 (Terrastruct)
 3. **Siempre mantener las secciones Head First** — cada unidad debe tener todas las secciones enumeradas arriba.
 4. **Los ejercicios SIEMPRE con solución** en `<details>`.
 5. **Laboratorios SIEMPRE con fallo intencionado** — el 80% práctico es obligatorio.
-6. **Los boletines siguen el patrón:** `inicial` (fácil), `intermedio` (medio), `extras` (CodeWars/retos), cada uno con su `-resuelto`.
+6. **Los boletines siguen el patrón:** `inicial` (fácil) y `avanzado` (difícil), cada uno con su `-resuelto`, en `src/content/docs/boletines/` con nombre `boletin-UXX-inicial(-resuelto).md` / `boletin-UXX-avanzado(-resuelto).md`.
 7. **El CSS no debe romperse** — probar con `npm run build` después de cambios.
 8. **CI/CD en rama `main`**.
-9. **Puppeteer** instalado para PDFs, pero con `PUPPETEER_SKIP_DOWNLOAD=true` en CI.
+9. **Puppeteer** instalado para PDFs, pero con `PUPPETEER_SKIP_DOWNLOAD=true` en CI. En local, si la versión cacheada de Chrome falla, se usa el Chrome del sistema con `PUPPETEER_EXECUTABLE_PATH="C:\Program Files\Google\Chrome\Application\chrome.exe"`.
 10. **D2 (Terrastruct)** para diagramas — script en `scripts/generate-diagrams.mjs`, ejecuta D2 antes del build. Referenciar en `.mdx` como `/ApuntesRedes/diagrams/nombre.svg`. Requiere D2 CLI instalado.
 11. **El build ejecuta `npm run build` que genera diagramas automáticamente** (prependido en el script).
 12. **PDF** se genera con `starlight-to-pdf` — un único PDF con todas las unidades y portada. Ver `scripts/pdf-*.html`.
-13. **EPUB** se genera con Pandoc — `scripts/generate-epub.ps1` + `scripts/epub.css`.
+13. **EPUB** se genera con Pandoc — `scripts/generate-epub.ps1` + `scripts/epub.css`. El script reescribe las rutas `/ApuntesRedes/diagrams/` → `public/diagrams/` para que Pandoc encuentre los SVGs.
 
 ---
 
@@ -171,4 +172,4 @@ npm run diagrams  # Generar diagramas con D2 (Terrastruct)
 - [ ] ✅ CEs cubiertos (tabla)
 - [ ] Sidebar actualizado en `astro.config.mjs`
 - [ ] `npm run build` exitoso
-- [ ] Boletín creado (inicial + intermedio + extras + resueltos)
+- [ ] Boletín creado (inicial + avanzado + resueltos)

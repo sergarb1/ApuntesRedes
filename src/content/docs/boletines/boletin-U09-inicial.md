@@ -1,9 +1,9 @@
 ---
-title: Boletín U09 — Simple
+title: Boletín U09 — Inicial
 description: Ejercicios básicos de Routing Dinámico
 ---
 
-# 📝 Boletín U09 — Simple
+# 📝 Boletín U09 — Inicial
 
 > Ejercicios básicos para afianzar los conceptos de OSPF y routing dinámico.
 
@@ -61,3 +61,24 @@ Relaciona el tipo de router OSPF con su función:
 | 1. Internal Router | a) Introduce rutas externas |
 | 2. ABR | b) Conecta Área 0 con otras áreas |
 | 3. ASBR | c) Todas sus interfaces en la misma área |
+
+## 7. Dinámico vs estático
+
+a) Clasifica cada protocolo como IGP o EGP: **OSPF**, **RIP**, **BGP**, **EIGRP**.
+
+b) Enumera **3 ventajas** del routing dinámico frente al estático y pon un caso donde convenga usar estático.
+
+**Pista:** IGP enruta dentro de un AS y EGP entre AS (BGP). Dinámico = autoaprendizaje, convergencia automática y menos error humano; estático = determinista, útil en enlaces stub o redes muy pequeñas.
+
+## 8. Coste OSPF: tabla de velocidades
+
+Completa la tabla con el coste OSPF de cada velocidad usando la fórmula `coste = 10^8 / ancho_de_banda`:
+
+| Velocidad | Cálculo | Coste OSPF |
+|---|---|---|
+| 10 Mbps | 10⁸ / 10⁷ | |
+| 100 Mbps | 10⁸ / 10⁸ | |
+| 1 Gbps | 10⁸ / 10⁹ | |
+| 1.544 Mbps (T1) | 10⁸ / 1.544.000 | |
+
+**Pista:** el coste mínimo es 1: los enlaces a partir de 100 Mbps valen lo mismo por defecto. Los decimales se redondean hacia abajo.

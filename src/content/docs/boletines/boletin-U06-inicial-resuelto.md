@@ -1,9 +1,9 @@
 ---
-title: Boletín U06 — Simple (Resuelto)
-description: Soluciones ejercicios básicos de Switching y STP
+title: Boletín U06 — Inicial (Resuelto)
+description: Soluciones de los ejercicios básicos de Switching y STP
 ---
 
-# ✅ Boletín U06 — Simple (Resuelto)
+# ✅ Boletín U06 — Inicial (Resuelto)
 
 ---
 
@@ -46,3 +46,30 @@ c) **Alternate Port** — Puerto bloqueado como respaldo.
 ## 6. Tormenta de broadcast
 
 **b) Un bucle en la red.** Si hay caminos redundantes sin STP, los broadcasts rebotan infinitamente entre switches, saturando la red.
+
+## 7. Reenvío de tramas y la tabla CAM
+
+a) MAC origen `0050.7966.6801` → **aprende/refresca Fa0/2**. MAC destino `00D0.BC96.1A01` conocida → **reenvía solo por Fa0/3**.
+
+b) MAC origen `0050.7966.6800` → aprende/refresca Fa0/1 (ya estaba). MAC destino `0050.7966.6802` **desconocida** → **inunda por todos los puertos excepto Fa0/1**.
+
+c) Destino broadcast `FFFF.FFFF.FFFF` → **inunda por todos los puertos** excepto el de origen (Fa0/3).
+
+d) La MAC `0050.7966.6801` aparece por Fa0/4 cuando estaba aprendida en Fa0/2: el switch **actualiza la tabla CAM** y asocia la MAC a Fa0/4 (la entrada dinámica se mueve al puerto más reciente).
+
+## 8. Estados STP
+
+Tabla completada:
+
+| Estado | ¿Reenvía tráfico? | ¿Aprende MACs? | Tiempo |
+|---|---|---|---|
+| Blocking | No | No | 20 s (Max Age) |
+| Listening | No | No | 15 s |
+| Learning | No | Sí | 15 s |
+| Forwarding | Sí | Sí | Indefinido |
+
+a) **Blocking → Listening → Learning → Forwarding** (Disabled es un estado administrativo, no forma parte de la secuencia normal).
+
+b) Hasta **50 segundos**: 20 s (Blocking) + 15 s (Listening) + 15 s (Learning).
+
+c) **Forwarding**: es el único estado que reenvía tráfico (y además aprende MACs).

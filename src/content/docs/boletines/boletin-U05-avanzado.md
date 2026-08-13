@@ -93,3 +93,37 @@ d) ¿Quién responde y con qué?
 e) ¿Cómo se llama este proceso en IPv6?
 
 **Pista:** En IPv6 no hay ARP. El proceso equivalente es parte de NDP y usa una dirección multicast especial derivada de la IP destino (solicited-node multicast).
+
+## 7. Diagnóstico ping6
+
+Un PC (PC-A) tiene esta configuración en Windows:
+
+```
+Ethernet adapter Ethernet:
+   IPv6 Address: fe80::21a:2bff:fe3c:4d5e%12
+   IPv6 Address: 2001:db8:1::10
+   Default Gateway: fe80::1%12
+```
+
+PC-A hace `ping fe80::1` y **funciona**, pero `ping 2001:DB8:1::10` (una GUA en la misma LAN) **no responde**. Lista **3 causas posibles** y cómo verificarías cada una.
+
+**Pista:** el `ping` a una Link-Local del router funciona, así que la capa de enlace está bien. La diferencia está en cómo se resuelve un destino *global* vs uno *link-local* dentro de la misma subred y en los servicios que se permiten por defecto.
+
+## 8. Tabla IPv4 vs IPv6
+
+Completa la tabla comparativa:
+
+| Concepto | IPv4 | IPv6 |
+|---|---|---|
+| Bits de la dirección | 32 | |
+| Notación | Decimal con puntos | |
+| Direcciones privadas | RFC 1918 (192.168.0.0…, etc.) | |
+| Broadcast | Sí (envía a todos) | |
+| Resolución IP → MAC | ARP | |
+| Multicast de listeners | IGMP | |
+| Configuración automática | DHCP | |
+| Loopback | 127.0.0.1 | |
+| Fragmentación | La hacen cualquier router intermedio | |
+| Seguridad / NAT | NAT compartido para las privadas | |
+
+**Pista:** piensa en *qué sustituye a qué* en cada fila. Y recuerda: NAT no es seguridad, solo un ocultador de direcciones.

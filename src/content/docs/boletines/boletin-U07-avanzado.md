@@ -5,7 +5,7 @@ description: Ejercicios avanzados de VLANs
 
 # 📝 Boletín U07 — Avanzado
 
-> Ejercicios que requieren aplicar los conceptos de VLANs, trunks y routing de forma más profunda.
+> Ejercicios que requieren aplicar los conceptos de VLANs, trunks y routing de forma más profunda. En los difíciles tienes pista.
 
 ---
 
@@ -84,3 +84,23 @@ Enumera 3 riesgos de seguridad específicos de VLANs y cómo mitigarlos:
 | 3. | |
 
 **Pista:** Piensa en DTP, native VLAN, VTP, VLAN hopping, etc.
+
+## 7. VLAN hopping y hardening
+
+a) Describe **3 vectores de ataque** que permiten a un atacante salirse de su VLAN (VLAN hopping), explicando cómo funciona cada uno.
+b) Propón **3 mitigaciones concretas** de hardening con sus comandos.
+
+**Pista:** piensa en DTP/negociación de trunks, en el double tagging sobre la native VLAN y en el etiquetado 802.1Q aplicado a tramas que no deberían llevarlo. Las mitigaciones están en el punto 7 de seguridad: `switchport nonegotiate`, native VLAN ≠ 1, `allowed vlan`, VTP.
+
+## 8. Inter-VLAN con SVI paso a paso
+
+Escribe la configuración completa que necesita un **switch capa 3** (por ejemplo un 3560) para enrutar entre 3 VLANs (10 Ventas → 192.168.10.0/24, 20 RRHH → 192.168.20.0/24, 30 IT → 192.168.30.0/24), asumiendo que los puertos access ya están asignados.
+
+Incluye:
+
+a) La creación de las VLANs con nombre.
+b) El comando que activa el routing global.
+c) Los tres SVIs con su IP y `no shutdown`.
+d) El gateway que debe tener cada PC de cada VLAN.
+
+**Pista:** el orden de los comandos importa: primero `ip routing`, después cada `interface vlan X`. Sin `ip routing`, los SVIs existen pero no enrutan. El gateway de cada VLAN es la IP del SVI de esa VLAN.

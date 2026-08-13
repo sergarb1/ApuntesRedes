@@ -86,3 +86,31 @@ c) ¿Cómo forzarías a R1 como DR sin cambiar Router ID?
 ## 6. Troubleshooting OSPF
 
 Un administrador reporta que OSPF no funciona entre dos routers. Escribe el orden de diagnóstico que seguirías, incluyendo qué comandos usarías y qué esperarías ver en cada paso.
+
+## 7. Elección DR/BDR en otro segmento
+
+En un segmento Ethernet nuevo compiten 4 routers OSPF:
+
+| Router | Prioridad | Router ID |
+|---|---|---|
+| R-A | 1 | 10.0.0.1 |
+| R-B | 200 | 10.0.0.2 |
+| R-C | 150 | 10.0.0.3 |
+| R-D | 0 | 10.0.0.4 |
+
+a) ¿Quién es el DR y quién el BDR?
+b) ¿Qué papel juega R-D y por qué?
+c) R-A y R-B empiezan con la misma prioridad (1) pero R-B tiene el Router ID más alto. ¿Quién ganaría en ese caso, y por qué?
+d) La elección ya ha ocurrido y el DR es R-B. Si ahora subes la prioridad de R-C a 255, ¿cambia el DR? ¿Qué tendrías que hacer para que cambie?
+
+**Pista:** la elección se decide por prioridad y, en empate, por el Router ID más alto. Prioridad 0 queda fuera. La elección solo ocurre al arrancar o reiniciar el proceso OSPF.
+
+## 8. La adyacencia que no levanta
+
+R1 y R2 están conectados por un enlace Serial, ambos con OSPF configurado, pero `show ip ospf neighbor` sale vacío en los dos. El ping entre las IPs del enlace **sí funciona**.
+
+a) Como el ping funciona, ¿qué nivel queda descartado? ¿Por qué?
+b) Escribe el orden de diagnóstico completo que seguirías, con los comandos y qué esperarías ver en cada paso, para descartar, en orden: red no declarada o wildcard mal, área incorrecta, timers Hello/Dead distintos, y ACL que bloquea OSPF (protocolo 89).
+c) ¿Qué comando te confirmaría, sin ambigüedad, que una interfaz está participando en OSPF y con qué área?
+
+**Pista:** sigue la escalera de diagnóstico del punto 8 de la unidad: `show ip protocols`, `show ip ospf interface`, `show access-lists`. Los timers de Hello/Dead por defecto son 10/40 en broadcast, pero en enlaces punto a punto Serial suelen ser 30/120.

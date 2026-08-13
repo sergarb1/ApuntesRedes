@@ -1,7 +1,7 @@
 # Apuntes PAR — Planificación y Administración de Redes
 
 > **Aprende redes como si la red se fuera a caer mañana.**  
-> 12 unidades didácticas · 80% práctico · Estilo _Head First_
+> Tema 0 + 12 unidades didácticas · 80% práctico · Estilo _Head First_
 
 **CC BY-SA 4.0** — [Sergi Garcia Barea](https://github.com/sergarb1)
 
@@ -13,14 +13,14 @@
 
 ---
 
-## 🗺️ El Viaje de P4QU3T3
+## 🗺️ El Viaje del Paquete
 
-P4QU3T3 es un paquete IP perdido que intenta llegar a su destino. Cada unidad avanzamos con él.
+Un paquete IP viaja desde que nace en un navegador hasta la nube. Cada unidad avanza con él.
 
 ```
-U01: 🏠 Origen     → U02: 📦 Encapsulado → U03: 🔌 Cable     → U04: 🏷️ IP
-U05: 🌍 IPv6       → U06: 🔀 Switch       → U07: 🏢 VLAN      → U08: 🧭 Router
-U09: 🗣️ OSPF       → U10: 🌐 NAT          → U11: 🩺 Diagnóstico → U12: ☁️ Cloud
+U00: 🚪 Bienvenida  → U01: 🏠 Origen     → U02: 📦 Encapsulado → U03: 🔌 Cable
+U04: 🏷️ IP          → U05: 🌍 IPv6       → U06: 🔀 Switch      → U07: 🏢 VLAN
+U08: 🧭 Router      → U09: 🗣️ OSPF        → U10: 🌐 NAT         → U11: 🩺 Diagnóstico → U12: ☁️ Cloud
 ```
 
 ---
@@ -29,6 +29,7 @@ U09: 🗣️ OSPF       → U10: 🌐 NAT          → U11: 🩺 Diagnóstico �
 
 | # | Título | Nombre didáctico | RA | Proyecto |
 |---|---|---|---|---|
+| U00 | Tema 0 — Bienvenida | Tu punto de partida 🚪 | — | Ponerte al día |
 | U01 | Fundamentos de redes | La red mágica que no funciona 😵‍💫 | RA1 | Montar red desde cero |
 | U02 | Modelos y análisis de tráfico | El paquete perdido 🧳 | RA1 | Rastrear paquete con Wireshark |
 | U03 | Infraestructura física | El cable traicionero 🔌 | RA2 | Cableado oficina + crimpado |
@@ -48,7 +49,7 @@ U09: 🗣️ OSPF       → U10: 🌐 NAT          → U11: 🩺 Diagnóstico �
 
 | Sección | ¿Qué es? |
 |---|---|
-| ⭐ **Sé el Paquete** | Te pones en la piel de P4QU3T3 y tomas decisiones de routing |
+| ⭐ **Sé el Paquete** | Te pones en la piel del paquete y tomas decisiones de routing |
 | 🔥 **Fireside Chat** | Dos tecnologías discutiendo junto a la chimenea de datos |
 | 🕵️ **¿Quién Soy?** | Adivina el concepto de red por su descripción |
 | 🤬 **CONRAD VS EL MUNDO** | CONRAD (el switch cascarrabias) se queja de errores típicos |
@@ -56,7 +57,7 @@ U09: 🗣️ OSPF       → U10: 🌐 NAT          → U11: 🩺 Diagnóstico �
 | 🧠 **Atrévete a Pensar** | Ejercicios teórico-prácticos con soluciones |
 | 🧩 **Crucigrama de Bits** | Términos de red en formato puzzle |
 | 💬 **Entrevista de trabajo** | Preguntas reales de procesos de selección |
-| 🤷 **No Hay Preguntas Tontas** | FAQ con P4QU3T3 y CONRAD |
+| 🤷 **No Hay Preguntas Tontas** | FAQ con CONRAD |
 | 🏆 **Logros** | Gamificación: consigue todos los achievements |
 | 🎬 **Post-Créditos** | Escenas cómicas con continuidad narrativa |
 
@@ -66,9 +67,9 @@ U09: 🗣️ OSPF       → U10: 🌐 NAT          → U11: 🩺 Diagnóstico �
 
 | Capa | Tecnología |
 |---|---|
-| **Framework** | [Astro](https://astro.build/) 5 + [Starlight](https://starlight.astro.build/) |
-| **Tema** | Azul #2563eb + glassmorphism sidebar + degradados |
-| **Fuente** | Inter (Google Fonts) |
+| **Framework** | [Astro](https://astro.build/) 7 + [Starlight](https://starlight.astro.build/) |
+| **Tema** | Azul #2563eb + teal #4ecdc4 + glassmorphism sidebar + degradados |
+| **Fuente** | Geist Sans (fallback Inter) |
 | **Idioma** | Castellano (raíz `/`) |
 | **Buscador** | Pagefind integrado (Starlight) |
 | **Renderizado** | D2 (Terrastruct) → SVGs vectoriales |
@@ -85,8 +86,9 @@ npm run diagrams  # Generar diagramas con D2 → public/diagrams/
 npm run dev       # Servidor local → http://localhost:4321
 npm run build     # Genera diagramas + build estático → dist/
 npm run preview   # Previsualizar build
-npm run pdf       # Generar PDFs por unidad → public/pdf/
-npm run epub      # Generar EPUB completo → apuntes-par.epub
+npm run pdf       # PDF único (ApuntesPAR.pdf) desde GitHub Pages → public/pdf/
+npm run pdf:local # PDF único desde el servidor local (localhost:4321)
+npm run epub      # Generar EPUB completo → public/epub/
 npm run export    # PDF + EPUB (todo en uno)
 ```
 
@@ -94,7 +96,7 @@ npm run export    # PDF + EPUB (todo en uno)
 
 | Formato | Cómo generarlo | Uso |
 |---|---|---|
-| **PDF** | `npm run pdf` | 12 PDFs individuales (uno por unidad) en `public/pdf/` |
+| **PDF** | `npm run pdf` / `npm run pdf:local` | 1 PDF único con todas las unidades y portada → `public/pdf/ApuntesPAR.pdf` |
 | **EPUB** | `npm run epub` | 1 archivo EPUB completo para eBook readers |
 | **Ctrl+P** | Desde el navegador | Por página, con estilos print optimizados |
 
@@ -105,12 +107,11 @@ npm run export    # PDF + EPUB (todo en uno)
 ```
 src/
 ├── content/
-│   ├── docs/                     → 12 unidades en Markdown
+│   ├── docs/                     → Tema 0 + 12 unidades en Markdown
 │   │   ├── index.md              → Portada con hero + cards
-│   │   ├── 01-fundamentos-redes.md
-│   │   ├── 02-modelos-osi-analisis.md
-│   │   └── ... → 12 unidades
-│   ├── boletines/                → Ejercicios (inicial, intermedio, extras)
+│   │   ├── 00-introduccion.md …  → Índice de cada sección
+│   │   ├── 00-introduccion/      → 9 puntos por sección (01-…, 09-head-first)
+│   │   └── boletines/            → Ejercicios (inicial, avanzado + resueltos)
 │   └── config.ts                 → Colecciones de contenido
 ├── styles/
 │   └── custom.css                → Tema azul + glassmorphism + print

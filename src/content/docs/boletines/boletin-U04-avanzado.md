@@ -96,3 +96,27 @@ Te dan la red **10.0.0.0/22**.
 a) Diseña el VLSM completo
 b) ¿Cuántas IPs sobran?
 c) ¿Qué problemas podrías encontrar si la empresa crece al doble?
+
+## 7. VLSM con requisitos mínimos
+
+Tienes la red **192.168.1.0/24** y necesitas estas subredes:
+
+- **Producción:** 50 hosts
+- **Comercial:** 25 hosts
+- **Soporte:** 10 hosts
+- **Enlace WAN:** 2 hosts
+
+a) Diseña el **VLSM mínimo** (sin desperdiciar IPs): indica red, máscara, rango y broadcast de cada subred.
+b) ¿Qué bloque queda libre al final y de qué tamaño?
+
+**Pista:** Ordena de mayor a menor necesidad y elige para cada subred la máscara más pequeña que cumpla `2ʰ − 2 ≥ hosts`. Recuerda que cada subred empieza donde terminó la anterior.
+
+## 8. Conflicto de IP
+
+El administrador de una empresa configura **manual (estática)** la IP `192.168.1.20` en una impresora. Lamentablemente, esa IP está dentro del **pool DHCP** que reparte el router (`network 192.168.1.0 255.255.255.0`).
+
+a) Explica qué ocurre cuando un PC pide IP por DHCP y recibe `192.168.1.20`, que ya tiene la impresora.
+b) ¿Cómo detectaría el administrador el conflicto? ¿Qué comando usaría en el router?
+c) ¿Cómo se **previene** este problema desde el diseño?
+
+**Pista:** Antes de conceder una IP, el servidor DHCP suele comprobar (el RFC lo llama "ping") si la dirección ya está en uso. En Cisco el resultado se registra en una tabla concreta que se consulta con `show`. Y la solución de fondo ya la viste en el punto 8 de la unidad: `ip dhcp excluded-address`.

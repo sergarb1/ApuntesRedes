@@ -98,3 +98,42 @@ a) ¿Cuál es el Root Port de Switch C?
 b) ¿Qué coste tiene cada camino hacia el Root?
 c) ¿Cuál es el Alternate Port de Switch C?
 d) Si el coste de Fa0/3 se cambia a 4, ¿qué cambia?
+
+## 7. Topología STP/RSTP bajo análisis
+
+Tienes 4 switches con estas configuraciones:
+
+| Switch | Prioridad | MAC |
+|---|---|---|
+| SW1 | 4096 | 0011.2233.4400 |
+| SW2 | 32768 | 0011.2233.4401 |
+| SW3 | 32768 | 0011.2233.4402 |
+| SW4 | 32768 | 0011.2233.4403 |
+
+Conexiones (todas de coste 19):
+- SW1-SW2, SW1-SW3 y SW1-SW4 (enlace directo al Root)
+- SW2-SW3 (enlace redundante que cierra el bucle)
+
+a) ¿Quién es el Root Bridge y por qué?
+b) ¿Qué puertos quedan en estado Blocking/Discarding?
+c) ¿Cuántos Root Ports hay en total?
+d) Con RSTP, ¿cuánto tardaría la red en converger si SW1 se cae? ¿Y con STP clásico?
+e) ¿Qué papel juegan los puertos del Root Bridge?
+
+**Pista:** el Root Bridge es el de menor Bridge ID; todos sus puertos son Designated. Los switches no-root tienen 1 Root Port cada uno, y el enlace redundante SW2-SW3 crea un Alternate Port en el extremo con mayor coste acumulado hacia el Root.
+
+## 8. Laboratorio: Port Security en la sala de profesores
+
+Configura el puerto Fa0/24 del switch (donde se enchufa el PC de la sala de profesores) para que:
+
+a) Solo permita 1 MAC aprendida automáticamente y permanente (sticky).
+b) Si aparece una segunda MAC, el puerto se deshabilite (violación shutdown).
+c) Escribe los comandos completos y verifica con el comando de comprobación adecuado.
+
+Después, un profe desenchufa su PC y conecta su portátil personal. El puerto entra en errdisable.
+
+d) ¿Por qué ha ocurrido la violación si solo hay UN dispositivo conectado?
+e) ¿Qué dos comandos ejecutarías para recuperar el puerto?
+f) ¿Cómo evitarías el problema sin perder seguridad (piensa en el envejecimiento de la MAC sticky)?
+
+**Pista:** la MAC sticky NO caduca aunque el PC se desenchufe; si cambias de equipo, hay dos MACs distintas "conocidas" en el puerto y se supera el máximo. Para recuperar errdisable: `shutdown` + `no shutdown`. Para expirar la sticky cuando el dispositivo se desenchufa, configura el envejecimiento de la port security (`switchport port-security aging`).

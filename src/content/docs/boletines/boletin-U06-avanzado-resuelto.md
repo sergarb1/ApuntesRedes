@@ -1,6 +1,6 @@
 ---
 title: Boletín U06 — Avanzado (Resuelto)
-description: Soluciones ejercicios avanzados de Switching y STP
+description: Soluciones de los ejercicios avanzados de Switching y STP
 ---
 
 # ✅ Boletín U06 — Avanzado (Resuelto)
@@ -99,3 +99,51 @@ b) **Costes:** A→C directo = 19. A→B→C = 38.
 c) **Alternate Port:** Fa0/2 (el puerto del camino más caro que queda en discarding como respaldo).
 
 d) **Si el coste de Fa0/3 se cambia a 4:** El coste total por Fa0/3 baja a 4, reforzando aún más que Fa0/3 sea el Root Port. Si en cambio el coste de Fa0/3 subiera a 100, entonces el Root Port pasaría a ser por el camino A→B→C (coste 38 < 100).
+
+## 7. Topología STP/RSTP bajo análisis
+
+a) **Root Bridge: SW1.** Prioridad 4096, muy por debajo de los 32768 de los demás. No hace falta desempate por MAC.
+
+b) **Puerto en estado Discarding:** el enlace redundante **SW2-SW3**. Concretamente, el puerto de SW3 hacia SW2 (el extremo con mayor coste acumulado hacia el Root, que queda como **Alternate Port**). Los enlaces directos SW1-SW2, SW1-SW3 y SW1-SW4 son Designated (todos los puertos del Root).
+
+c) **3 Root Ports**: SW2, SW3 y SW4 son switches no-root, cada uno con su Root Port hacia SW1 (por su enlace directo de coste 19).
+
+d) **Con RSTP:** la red converge en **1-3 segundos** (handshake propuesta/acuerdo). **Con STP clásico:** **30-50 segundos** (esperando temporizadores).
+
+e) Los puertos del Root Bridge son todos **Designated**: son el "punto de referencia" del árbol y nunca se bloquean.
+
+## 8. Laboratorio: Port Security en la sala de profesores
+
+a) y b) Configuración completa:
+
+```bash
+Switch(config)# interface fa0/24
+Switch(config-if)# switchport mode access
+Switch(config-if)# switchport port-security
+Switch(config-if)# switchport port-security maximum 1
+Switch(config-if)# switchport port-security mac-address sticky
+Switch(config-if)# switchport port-security violation shutdown
+```
+
+c) Verificación: `Switch# show port-security interface fa0/24` (muestra el máximo, las MACs seguras y el estado del puerto).
+
+d) La violación ocurre porque la **MAC sticky del PC original NO caduca**: aunque el PC se desenchufe, su MAC permanece aprendida como permanente. Al conectar el portátil, su MAC nueva hace un total de 2 MACs en el puerto y se supera el máximo (1) → violación shutdown → errdisable.
+
+e) Recuperar el puerto:
+
+```bash
+Switch(config)# interface fa0/24
+Switch(config-if)# shutdown
+Switch(config-if)# no shutdown
+```
+
+(O configurar `errdisable recovery cause psecure-violation`.)
+
+f) Sin perder seguridad, puedes:
+   - Aumentar `maximum` a 2 si es un puerto compartido.
+   - Configurar el **envejecimiento de la port security** para que la MAC sticky expire si el dispositivo se desenchufa:
+     ```bash
+     Switch(config-if)# switchport port-security aging time 5
+     Switch(config-if)# switchport port-security aging type inactivity
+     ```
+   - O usar `violation restrict` (descarta el tráfico extra sin deshabilitar el puerto), aunque es menos estricto.

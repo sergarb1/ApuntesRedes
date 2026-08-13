@@ -51,3 +51,23 @@ b) **Security Group:** Firewall stateful a nivel de instancia (VM). Permite defi
 c) **Internet Gateway:** Puerta de enlace que permite a una VPC comunicarse con Internet.
 
 d) **Subnet pública:** Tiene ruta directa a Internet Gateway. **Subnet privada:** No tiene acceso directo a Internet (sale a través de NAT Gateway).
+
+## 7. ¿Qué modelo cloud es cada servicio?
+
+a) **IaaS** — gestionas tú el SO Linux y la red dentro de la VM EC2.
+b) **SaaS** — Salesforce es una aplicación completa accesible por Internet, sin gestionar nada.
+c) **PaaS** — despliegas tu código en Heroku y el proveedor gestiona la plataforma y el servidor.
+d) **SaaS** — Google Drive es una aplicación lista para usar (almacenamiento gestionado).
+e) **IaaS** — montas la base de datos en una VM de Azure y la gestionas tú.
+f) **PaaS** — Google App Engine ejecuta tu código sin que administres la infraestructura.
+
+**Regla:** en IaaS gestionas tú el SO y la red; en PaaS solo subes código; en SaaS todo está gestionado.
+
+## 8. Completa la tabla de redes Docker
+
+| Afirmación | Modo |
+|---|---|
+| a) Red NAT local por defecto. Los contenedores se ven por IP dentro de la misma red | **bridge** |
+| b) El contenedor comparte la pila de red del host. Sin NAT | **host** |
+| c) Sin red. Solo loopback | **none** |
+| d) Red distribuida entre múltiples hosts (Docker Swarm) | **overlay** |

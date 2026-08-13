@@ -1,9 +1,9 @@
 ---
-title: Boletín U05 — Simple
+title: Boletín U05 — Inicial
 description: Ejercicios básicos de IPv6 y Transición
 ---
 
-# 📝 Boletín U05 — Simple
+# 📝 Boletín U05 — Inicial
 
 > Ejercicios básicos para afianzar los conceptos de direccionamiento IPv6.
 
@@ -66,3 +66,26 @@ Relaciona cada mecanismo con su descripción:
 | 1. Dual Stack | a) Traduce IPv6 a IPv4 para acceder a servidores antiguos |
 | 2. Túnel 6to4 | b) IPv4 e IPv6 funcionando a la vez |
 | 3. NAT64 | c) Encapsula IPv6 dentro de IPv4 |
+
+## 7. Expande direcciones
+
+Descomprime estas direcciones a su forma **completa de 8 grupos**:
+
+a) `2001:DB8::1`
+b) `FE80::2AA:FF:FE9A:4CA2`
+c) `::1`
+
+Recuerda: el `::` oculta tantos grupos de ceros como falten para completar 8.
+
+## 8. Clasifica tipo y ámbito
+
+Indica para cada dirección su **tipo** (GUA, LLA, ULA, Loopback, Multicast) y su **ámbito** (global, enlace local, privado, este nodo):
+
+| Dirección | Tipo | Ámbito |
+|---|---|---|
+| a) `2001:DB8::1` | | |
+| b) `FE80::1` | | |
+| c) `FC00::1` | | |
+| d) `::1` | | |
+| e) `FF02::1` | | |
+| f) `2001:DB8:1:2:21A:2BFF:FE3C:4D5E` | | |

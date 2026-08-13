@@ -1,0 +1,35 @@
+schema: spec-driven
+
+# Project context (optional)
+# This is shown to AI when creating artifacts.
+# Add your tech stack, conventions, style guides, domain knowledge, etc.
+# Example:
+#   context: |
+#     Tech stack: TypeScript, React, Node.js
+#     We use conventional commits
+#     Domain: e-commerce platform
+
+context: |
+  Proyecto: Apuntes PAR (Planificación y Administración de Redes). CFGS ASIR.
+  Stack: Astro 7 + Starlight 0.41, castellano, GitHub Pages, base path /ApuntesRedes.
+  Contenido: Tema 0 de introducción (sin boletín) + 12 unidades didácticas (U01-U12),
+    cada unidad ampliada como "libro": un fichero Markdown por punto de teoría
+    (src/content/docs/<unidad>/<nn>-<punto>.md) más una página índice de unidad.
+    Secciones obligatorias Head First: Sé el Paquete, Fireside Chat, ¿Quién Soy?,
+    CONRAD VS EL MUNDO, Laboratorio de Tortura (con fallo intencionado), Atrévete a Pensar,
+    Crucigrama de Bits, Entrevista de trabajo, No hay preguntas tontas, Post-Créditos.
+    Soluciones SIEMPRE en <details>. Boletines en src/content/docs/boletines/ con patrón
+    inicial/avanzado + -resuelto. PDF por starlight-to-pdf, EPUB por Pandoc.
+  Norma de contenido: nivel de entrada cero, explicaciones con analogías cotidianas,
+  mínimo ~120-200 líneas por punto de teoría, cada ejercicio con solución y cada
+  laboratorio con un fallo intencionado.
+
+# Per-artifact rules (optional)
+# Add custom rules for specific artifacts.
+# Example:
+#   rules:
+#     proposal:
+#       - Keep proposals under 500 words
+#       - Always include a "Non-goals" section
+#     tasks:
+#       - Break tasks into chunks of max 2 hours

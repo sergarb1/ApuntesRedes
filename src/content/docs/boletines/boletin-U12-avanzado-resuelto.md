@@ -96,3 +96,61 @@ d) **Riesgos:**
 | **NDN** (Named Data Networking) | Enrutar por nombre de contenido, no por IP | Modelo host-centric vs content-centric |
 
 Ninguna ha reemplazado a IP. IPv6 es el estándar actual. Las demás son propuestas de investigación.
+
+## 7. Diseño de red cloud completo
+
+a) **Diagrama:**
+
+```
+                    Internet
+                       │
+               ┌───────┴───────┐
+               │ Internet GW   │
+               └───────┬───────┘
+                       │
+        ┌──────────────┼──────────────┐
+        │   ALB        │              │
+        └──────┬───────┘   ┌──────────┴──────────┐
+               │           │   NAT Gateway       │
+   ┌───────────┴─────┐     └──────────┬──────────┘
+   │ EC2 web 1 (pub) │                │
+   │ EC2 web 2 (pub) │                │
+   └───────────┬─────┘     ┌──────────┴──────────┐
+               │           │ EC2 API (privada)   │
+               └──────────►│ RDS MySQL (privada) │
+                           └─────────────────────┘
+```
+
+b) **Colocación:**
+   - **Frontend web (pública):** necesita recibir tráfico directo de Internet → subnet pública con ruta al IGW.
+   - **ALB (pública):** debe ser alcanzable desde Internet → subnet pública.
+   - **NAT Gateway (pública):** requiere IP elástica → subnet pública.
+   - **API y BD (privada):** sin IP pública → subnet privada; el frontend las alcanza por IP privada dentro de la VPC.
+
+c) **Security Groups:**
+   - **SG-ALB:** Inbound `80`/`443` desde `0.0.0.0/0`; Outbound `80` hacia SG-web.
+   - **SG-web:** Inbound `80` desde SG-ALB (solo el balanceador puede entrar); Outbound `8080` hacia SG-api.
+   - **SG-api:** Inbound `8080` desde SG-web (solo el frontend); Outbound `3306` hacia SG-rds y `443` hacia el NAT.
+   - **SG-rds:** Inbound `3306` desde SG-api (solo la API). Nunca desde `0.0.0.0/0`.
+
+d) **Flujo del tráfico:**
+   1. Usuario → Internet → **Internet Gateway** → **ALB** (autorizado por SG-ALB).
+   2. ALB → **EC2 web** (subnet pública, autorizado por SG-web).
+   3. EC2 web → **EC2 API** (subnet privada, misma VPC, ruta por route table privada; autorizado por SG-api).
+   4. EC2 API → **RDS MySQL** (autorizado por SG-rds, solo puerto 3306).
+
+e) **Si el NAT Gateway cae:** los servicios **entrantes** (web vía ALB/IGW) siguen funcionando; el tráfico que **sale a Internet desde la subnet privada** (la API hacia servicios externos, parches, actualizaciones) deja de funcionar, y las **respuestas entrantes de ese tráfico saliente** tampoco llegan. El backend puede perder integridad de datos si dependía de llamadas externas.
+
+## 8. Seguridad en cloud: SG vs NACL y NAT Gateway
+
+a) **Cómo es posible:** los **Security Groups** son la única capa que se configuró, pero solo protegen a nivel de instancia. La **Network ACL** de la subnet privada quedó con la **regla por defecto "Allow todo"**. Si además alguien lanzó la API/RDS con IP pública (o en una subnet con IGW), el tráfico externo entra sin pasar por ningún SG que lo bloquee. La capa de defensa que ha fallado es la **subred (NACL)**: sin NACL restrictiva, el tráfico se decide solo por rutas y SG, y un SG mal aplicado (o una IP pública en la instancia) lo deja pasar.
+
+b) **El deny que no funciona:** los Security Groups **no soportan deny explícito**; solo permiten (allow) reglas. No puedes "escribir un deny" en un SG: cualquier tráfico que no cumpla un allow se bloquea, pero no hay reglas de negación gestionables. Si intentaste bloquear con deny dentro de un SG, esa regla es ignorada/inválida. Para deny explícito se usa una **Network ACL**, que evalúa en **orden numérico** y sí soporta reglas de negación.
+
+c) **Corrección:**
+   - **NACL subnet privada:** Inbound `3306` desde SG/red de la API y `8080` desde el frontend; Deny al resto (regla `*` al final). Outbound: respuesta de esos puertos permitida (stateless → reglas explícitas de vuelta).
+   - **SG-api:** solo Inbound `8080` desde SG-web; Outbound `3306` a SG-rds y `443` hacia el NAT (por IP privada del NAT).
+   - **SG-rds:** solo Inbound `3306` desde SG-api; **sin** IP pública en la RDS y sin ruta a IGW en la subnet.
+   - Añadir NACL en la subnet pública para el resto de la VPC.
+
+d) **Salida de la API a Internet:** se añade un **NAT Gateway** en la **subnet pública** y una ruta en la route table de la subnet privada que apunte el tráfico `0.0.0.0/0` hacia el **NAT Gateway**. Al salir, la API envía el paquete con su **IP privada**; el NAT Gateway traduce el origen a su **IP elástica pública** (PAT) y recuerda la traducción en su tabla de estado. La **respuesta** llega al NAT (destino = IP elástica), que consulta la tabla y reescribe el destino a la IP privada original de la API. Por eso la API puede consumir servicios externos sin tener IP pública y las respuestas vuelven de forma transparente.

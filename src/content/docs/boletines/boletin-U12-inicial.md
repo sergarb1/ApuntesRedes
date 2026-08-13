@@ -59,3 +59,29 @@ a) VPC
 b) Security Group
 c) Internet Gateway
 d) Subnet pública vs privada
+
+## 7. ¿Qué modelo cloud es cada servicio?
+
+Clasifica cada servicio real según el modelo cloud (IaaS, PaaS o SaaS):
+
+a) Lanzas una VM EC2 en AWS y configuras tú el SO Linux y la red virtual.
+b) El departamento comercial usa Salesforce desde el navegador.
+c) Despliegas tu código en Heroku sin gestionar el servidor.
+d) Subes fotos a Google Drive para compartirlas con la familia.
+e) Montas una base de datos MySQL en una VM de Azure Virtual Machines.
+f) Una startup usa Google App Engine para publicar su app sin administrar infraestructura.
+
+**Pista:** piensa en quién gestiona cada capa. Si gestionas tú el SO y la red → IaaS. Si solo subes tu código y el proveedor gestiona la plataforma → PaaS. Si abres el navegador y usas la aplicación → SaaS.
+
+## 8. Completa la tabla de redes Docker
+
+Rellena los huecos con el modo de red correcto (bridge, host, none o overlay):
+
+| Afirmación | Modo |
+|---|---|
+| a) Red NAT local por defecto. Los contenedores se ven por IP dentro de la misma red | |
+| b) El contenedor comparte la pila de red del host. Sin NAT | |
+| c) Sin red. Solo loopback | |
+| d) Red distribuida entre múltiples hosts (Docker Swarm) | |
+
+**Pista:** recuerda el nivel de aislamiento de cada modo: medio, bajo, total o medio (multi-host). El único que no necesita NAT y usa la interfaz del host es el de menor aislamiento.

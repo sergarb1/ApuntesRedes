@@ -1,11 +1,11 @@
 ---
-title: Boletín U07 — Simple
+title: Boletín U07 — Inicial
 description: Ejercicios básicos de VLANs
 ---
 
-# 📝 Boletín U07 — Simple
+# 📝 Boletín U07 — Inicial
 
-> Ejercicios básicos para afianzar los conceptos de VLANs.
+> Ejercicios básicos para afianzar los conceptos de VLANs: tipos, 802.1Q, trunks e inter-VLAN routing.
 
 ---
 
@@ -60,3 +60,27 @@ a) Un trunk entre switches
 b) Un router o switch capa 3
 c) Un cable cruzado
 d) STP activado
+
+## 7. Comandos de resolución
+
+Relaciona cada comando de verificación con su utilidad:
+
+| Comando | Utilidad |
+|---|---|
+| 1. `show vlan brief` | a) Ver la native VLAN, VLANs permitidas y mismatches del trunk |
+| 2. `show interfaces trunk` | b) Ver la configuración completa actual del dispositivo |
+| 3. `show running-config` | c) Ver qué VLANs existen y qué puertos access tiene cada una |
+
+Además, responde:
+
+d) ¿Qué comando usarías para comprobar si las subinterfaces del router están Up/Up?
+
+## 8. V/F inter-VLAN
+
+Verdadero o falso sobre router-on-a-stick y SVIs:
+
+a) En router-on-a-stick, cada VLAN necesita su propia subinterfaz con `encapsulation dot1Q`.
+b) Un switch capa 3 enruta entre VLANs sin necesidad de router externo.
+c) El cuello de botella del router-on-a-stick es la única interfaz física que comparten todas las VLANs.
+d) Sin el comando `ip routing`, los SVIs de un switch capa 3 no enrutan entre VLANs.
+e) En router-on-a-stick, el tráfico de todas las VLANs pasa por la misma interfaz y por tanto se puede saturar con mucho tráfico.

@@ -8,7 +8,7 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
 </div>
 
 <div align="center" style="margin-bottom:2rem;">
-  <a href="/ApuntesRedes/01-fundamentos-redes" style="display:inline-block;padding:0.75rem 2rem;background:linear-gradient(135deg,#2563eb,#1a4060);color:#fff;border-radius:8px;text-decoration:none;font-weight:600;margin:0 0.5rem;">🌐 Empezar por la Unidad 1</a>
+  <a href="/ApuntesRedes/00-introduccion" style="display:inline-block;padding:0.75rem 2rem;background:linear-gradient(135deg,#2563eb,#1a4060);color:#fff;border-radius:8px;text-decoration:none;font-weight:600;margin:0 0.5rem;">🚪 Empezar por el Tema 0</a>
   <a href="https://github.com/sergarb1/ApuntesRedes" style="display:inline-block;padding:0.75rem 2rem;background:var(--sl-color-gray-5);color:var(--sl-color-white);border-radius:8px;text-decoration:none;font-weight:600;margin:0 0.5rem;">🐙 Ver en GitHub</a>
 </div>
 
@@ -27,6 +27,21 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
     <a href="/ApuntesRedes/pdf/ApuntesPAR.pdf" class="dl-btn">📄 PDF</a>
     <a href="/ApuntesRedes/epub/ApuntesPAR.epub" class="dl-btn">📱 EPUB</a>
   </div>
+</div>
+
+## 🚪 Tema 0 — Introducción
+
+<div class="unit-grid">
+
+<div class="unit-card">
+  <div class="unit-card-header">
+    <span class="num">Tema 0</span>
+  </div>
+  <a href="/ApuntesRedes/00-introduccion" class="title-link">Introducción a las redes</a>
+  <p class="desc">¿Empiezas de cero? 🚀 — Qué es una red, vocabulario básico, mapa del curso, herramientas y el método de diagnóstico.</p>
+  <a href="/ApuntesRedes/00-introduccion" class="unit-link">👉 Empezar por aquí 👈</a>
+</div>
+
 </div>
 
 ## 📚 Unidades
@@ -158,6 +173,18 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
 ## 📝 Boletines
 
 <div class="unit-grid">
+
+<div class="unit-card">
+  <div class="unit-card-header">
+    <span class="num">Tema 0</span>
+  </div>
+  <div class="ejercicio-links">
+    <a href="/ApuntesRedes/boletines/boletin-u00-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
+    <a href="/ApuntesRedes/boletines/boletin-u00-inicial" class="elink">🟢 Inicial por resolver</a>
+    <a href="/ApuntesRedes/boletines/boletin-u00-avanzado-resuelto" class="elink">💪 Avanzado resuelto</a>
+    <a href="/ApuntesRedes/boletines/boletin-u00-avanzado" class="elink">⭐ Avanzado por resolver</a>
+  </div>
+</div>
 
 <div class="unit-card">
   <div class="unit-card-header">

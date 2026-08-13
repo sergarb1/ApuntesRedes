@@ -1,9 +1,9 @@
 ---
-title: Boletín U03 — Simple (Resuelto)
-description: Soluciones ejercicios básicos de Infraestructura Física de Red
+title: Boletín U03 — Inicial (Resuelto)
+description: Soluciones de los ejercicios básicos de Infraestructura Física de Red
 ---
 
-# ✅ Boletín U03 — Simple (Resuelto)
+# ✅ Boletín U03 — Inicial (Resuelto)
 
 ---
 
@@ -48,3 +48,20 @@ e) **Falso.** La diafonía (crosstalk) es la interferencia entre pares. La pérd
 a) **RJ45** — Conector de 8 pines para cable UTP (cobre)
 b) **LC** — Conector de fibra óptica, pequeño, tipo push-pull
 c) **SC** — Conector de fibra óptica, cuadrado, push-pull
+
+## 7. Cableado estructurado
+
+1 → b (Latiguillo: flexible, une PC con roseta o patch panel con switch)
+2 → c (Keystone: conector hembra RJ45 en la roseta de pared)
+3 → a (Patch panel: concentra los cables horizontales en el rack)
+4 → d (Cable horizontal: sólido, empotrado, del patch panel al keystone)
+
+> 💡 **La idea:** el latiguillo es la parte flexible y desechable; el cable horizontal es la parte fija que no se toca nunca. El keystone es donde termina en la pared y el patch panel donde concentra el rack.
+
+## 8. Medios y estándares: verdadero o falso
+
+a) **Falso.** La fibra es INMUNE a las interferencias electromagnéticas: transmite luz, no electricidad, y los campos externos no afectan a los fotones.
+b) **Verdadero.** 802.11ax = WiFi 6 (2019, bandas de 2.4 y 5 GHz).
+c) **Verdadero.** El WiFi envía ondas electromagnéticas por el aire, sin medio conductor.
+d) **Falso.** Es la fibra **monomodo** la que llega a 40+ km. La **multimodo** se queda en unos 550 m a 10 Gbps.
+e) **Verdadero.** La velocidad real WiFi suele ser el 30-50% de la teórica por overhead, obstrucciones e interferencias.

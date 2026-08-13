@@ -1,9 +1,9 @@
 ---
-title: Boletín U09 — Simple (Resuelto)
-description: Soluciones ejercicios básicos de Routing Dinámico
+title: Boletín U09 — Inicial (Resuelto)
+description: Soluciones de los ejercicios básicos de Routing Dinámico
 ---
 
-# ✅ Boletín U09 — Simple (Resuelto)
+# ✅ Boletín U09 — Inicial (Resuelto)
 
 ---
 
@@ -47,3 +47,29 @@ d) `show ip ospf neighbor`
 1 → c (Internal Router: misma área)
 2 → b (ABR: conecta áreas)
 3 → a (ASBR: rutas externas)
+
+## 7. Dinámico vs estático
+
+a)
+- **OSPF → IGP**
+- **RIP → IGP**
+- **BGP → EGP**
+- **EIGRP → IGP** (interior, aunque propietario de Cisco)
+
+b) **Ventajas del dinámico:**
+1. **Autoaprendizaje:** las redes nuevas se comparten solas, sin ir router por router.
+2. **Convergencia automática:** si cae un enlace, la red recalcula y se reencamina sin intervención.
+3. **Menos error humano:** la tabla de rutas la calcula el protocolo, no un administrador tecleando.
+
+**Caso para estático:** redes muy pequeñas (2-3 routers), un enlace **stub** con una única salida, o una ruta de respaldo a mano (`floating static`): ahí el dinámico solo añadiría tráfico y complejidad.
+
+## 8. Coste OSPF: tabla de velocidades
+
+| Velocidad | Cálculo | Coste OSPF |
+|---|---|---|
+| 10 Mbps | 10⁸ / 10⁷ | **10** |
+| 100 Mbps | 10⁸ / 10⁸ | **1** |
+| 1 Gbps | 10⁸ / 10⁹ = 0,1 | **1** (mínimo) |
+| 1.544 Mbps (T1) | 10⁸ / 1.544.000 ≈ 64,8 | **64** |
+
+> El coste mínimo es **1**: todos los enlaces de 100 Mbps en adelante valen lo mismo por defecto, salvo que subas el `auto-cost reference-bandwidth`.

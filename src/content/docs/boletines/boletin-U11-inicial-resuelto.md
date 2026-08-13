@@ -54,3 +54,25 @@ d) **Falso.** Nivel 0 (Emergency) es el más grave. Nivel 7 (Debug) es el menos 
 a) **4 saltos** (el destino está en el salto 4).
 b) **El router en el salto 3 no responde a ICMP.** Puede ser un firewall que bloquea ICMP, pero eso no significa que no esté funcionando (el salto 4 responde).
 c) **Sí**, el destino final responde en el salto 4.
+
+## 7. Filtros de Wireshark
+
+| Filtro | Qué muestra |
+|---|---|
+| a) `tcp.flags.syn == 1` → **3** | Paquetes SYN (inicio de conexión) |
+| b) `ip.addr == 192.168.1.10` → **4** | Tráfico de/a esa IP |
+| c) `tcp.analysis.retransmission` → **2** | Retransmisiones TCP |
+| d) `dns` → **1** | Tráfico DNS |
+| e) `http.request` → **5** | Solo peticiones HTTP |
+
+## 8. Niveles de syslog
+
+De menos a más grave:
+
+1. **Debug** (7) — Depuración
+2. **Informational** (6) — Informativo
+3. **Warning** (4) — Advertencia
+4. **Critical** (2) — Crítica
+5. **Emergency** (0) — El más grave, sistema inusable
+
+**Nivel para producción:** **5 (notifications)** o **6 (informational)**. Dan suficiente detalle (caídas de interfaz, errores, eventos significativos) sin el torrente de mensajes del nivel 7 (debug), que llenaría el disco del servidor en pocas horas. Nivel 0-4, en cambio, filtraría demasiado y perderías avisos valiosos.

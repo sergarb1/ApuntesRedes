@@ -54,3 +54,19 @@ R1(config-if)# ip nat inside
 R1(config)# interface g0/1
 R1(config-if)# ip nat outside
 ```
+
+## 7. ¿Qué tipo de NAT es?
+
+| Escenario | Tipo |
+|---|---|
+| a) Servidor web 192.168.1.10 ↔ 83.45.12.78 fijo | **NAT estático** (1:1) |
+| b) Pool de 4 IPs públicas asignadas al vuelo | **NAT dinámico** (pool) |
+| c) 300 alumnos saliendo por una IP pública | **PAT** (sobrecarga) |
+| d) Puerto público 8080 → 192.168.1.10:80 | **NAT destino** (port forwarding) |
+
+## 8. Lee la tabla NAT
+
+a) **3 conexiones activas:** dos consultas DNS (8.8.8.8:53) y una sesión HTTPS (142.250.184.4:443).
+b) **49152** — es el puerto efímero original del PC 192.168.1.30 (columna *Inside local*).
+c) Porque **NAT asigna un puerto global distinto** a cada conexión (60001, 60002, 60003): los puertos efímeros duplicados no chocan porque el *Inside global* los desambigua.
+d) Las dos primeras van a **8.8.8.8:53 (DNS)**; la tercera a **142.250.184.4:443 (HTTPS)**.

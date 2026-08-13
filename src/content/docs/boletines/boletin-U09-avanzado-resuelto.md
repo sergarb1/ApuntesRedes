@@ -1,6 +1,6 @@
 ---
 title: Boletín U09 — Avanzado (Resuelto)
-description: Soluciones ejercicios avanzados de Routing Dinámico
+description: Soluciones de los ejercicios avanzados de Routing Dinámico
 ---
 
 # ✅ Boletín U09 — Avanzado (Resuelto)
@@ -111,3 +111,27 @@ c) Cambiar la **prioridad** de R1 a un valor más alto que 10:
 **Paso 5:** Verificar LSDB → `show ip ospf database`. Debe haber LSAs de todos los routers.
 
 **Paso 6:** Verificar tabla de rutas → `show ip route ospf`. Las rutas deben aparecer con prefijo O (OSPF).
+
+## 7. Elección DR/BDR en otro segmento
+
+a) **DR: R-B** (prioridad 200, la más alta). **BDR: R-C** (prioridad 150, segunda más alta).
+
+b) **R-D** tiene prioridad **0**: no participa en la elección. Solo actuará como **DROTHER**, sincronizándose con el DR y el BDR sin poder ser elegido.
+
+c) **R-B** — con prioridades empatadas (1 = 1), el desempate lo hace el **Router ID más alto** (10.0.0.2 > 10.0.0.1). La prioridad manda primero; el Router ID solo decide empates.
+
+d) **No cambia.** La elección de DR/BDR solo ocurre al arrancar OSPF o al reiniciar el proceso; subir la prioridad de R-C a 255 no destrona al DR ya elegido (R-B). Para que cambie tendrías que **reiniciar el proceso OSPF** (o el router) en los routers del segmento, y entonces R-C (prioridad 255) ganaría.
+
+## 8. La adyacencia que no levanta
+
+a) Al funcionar el ping, queda **descartado el plano físico/enlace y la capa 3** del enlace: las IPs se alcanzan. El problema está en el **plano OSPF** (configuración lógica del protocolo), no en la conectividad.
+
+b) **Orden de diagnóstico:**
+1. `show ip protocols` → comprobar que OSPF corre en ambos, que el **Router ID** no está duplicado y que las redes declaradas incluyen el enlace Serial.
+2. `show ip ospf interface` → confirmar en ambos routers que la interfaz **participa** en OSPF, y comparar **área**, **wildcard** y **timers** (Hello/Dead). Si no aparece, la red no está declarada o la wildcard está mal.
+3. Verificar que el **área** coincide en los dos lados del enlace (revisar el `network ... area X`).
+4. Comparar los **timers Hello/Dead** en ambos lados con `show ip ospf interface`: deben coincidir (en punto a punto Serial suelen ser 30/120; si uno quedó en 10/40, no forman vecindad).
+5. `show access-lists` (y contadores en la interfaz) → descartar una **ACL** que bloquee el **protocolo 89 (OSPF)** en el sentido de entrada/salida.
+6. Solo si todo lo anterior está bien, subir un nivel: `debug ip ospf events` (con cuidado) para ver por qué se rechaza el Hello.
+
+c) `show ip ospf interface <interfaz>`: si la interfaz aparece listada con su área y sus timers, está **participando en OSPF sin ambigüedad**. Si no sale, OSPF no la tiene declarada (falta `network` o wildcard incorrecta).

@@ -1,9 +1,9 @@
 ---
-title: Boletín U02 — Simple (Resuelto)
-description: Soluciones ejercicios básicos de Modelos OSI y Análisis de Tráfico
+title: Boletín U02 — Inicial (Resuelto)
+description: Soluciones de los ejercicios básicos de Modelos OSI y Análisis de Tráfico
 ---
 
-# ✅ Boletín U02 — Simple (Resuelto)
+# ✅ Boletín U02 — Inicial (Resuelto)
 
 ---
 
@@ -27,11 +27,11 @@ e) Direccionamiento MAC y detección de errores → **Capa 2 (Enlace)**
 
 ## 3. Verdadero o falso
 
-a) **Falso.** TCP/IP tiene 4 capas: Aplicación, Transporte, Internet, Acceso a Red.
-b) **Verdadero.** En capa 3 la PDU se llama paquete (o datagrama en IP).
-c) **Falso.** UDP no garantiza orden ni fiabilidad. Eso es TCP.
+a) **Falso.** TCP/IP tiene 4 capas: Aplicación, Transporte, Internet y Acceso a Red.
+b) **Verdadero.** En la capa de Red la PDU se llama paquete (datagrama en UDP).
+c) **Falso.** UDP no garantiza orden ni fiabilidad: eso es TCP.
 d) **Verdadero.** SYN, SYN-ACK, ACK: el three-way handshake es la esencia de TCP.
-e) **Falso.** En un switch solo ves tu propio tráfico unicast. Para ver el de otros necesitas un hub, puerto espejo, o ARP spoofing.
+e) **Falso.** Con un switch solo ves tu tráfico unicast; el de otros necesita un hub, puerto espejo o ARP spoofing.
 
 ## 4. Identifica el puerto
 
@@ -58,3 +58,17 @@ e) DHCP → **67-68/UDP**
 | 3. Red → c) | Paquete |
 | 2. Enlace → b) | Trama |
 | 1. Física → a) | Bits |
+
+## 7. El campo TTL
+
+a) **Evitar bucles infinitos:** cada router lo decrementa en 1 y, si llega a 0, el paquete se descarta.
+b) **64 - 57 = 7 saltos**.
+c) **0x0800** — el EtherType de IPv4 (0x86DD es IPv6 y 0x0806 es ARP).
+
+## 8. Origen y destino
+
+a) El **54321** es el efímero: está en el rango **49152-65535**.
+b) El **443** es **HTTPS** (web cifrada), un puerto *well-known* (0-1023).
+c) Un **socket** es la combinación `IP:puerto` que identifica un extremo completo de la conversación (aquí `192.168.1.10:54321` y `142.250.184.4:443`).
+
+>La conexión se define por DOS sockets: el de origen y el de destino.

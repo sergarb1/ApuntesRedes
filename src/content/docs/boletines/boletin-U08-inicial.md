@@ -1,9 +1,9 @@
 ---
-title: Boletín U08 — Simple
+title: Boletín U08 — Inicial
 description: Ejercicios básicos de Routing y ACLs
 ---
 
-# 📝 Boletín U08 — Simple
+# 📝 Boletín U08 — Inicial
 
 > Ejercicios básicos para afianzar los conceptos de routing y ACLs.
 
@@ -59,7 +59,27 @@ d) Privilegiado (`Router#`)
 
 ## 6. ACL básica
 
-Escribe el comando para:
+Escribe los comandos para:
 
 a) Crear una ACL estándar que permita la red 192.168.1.0/24
 b) Aplicarla a la interfaz G0/1 en sentido outbound
+
+## 7. Wildcard masks
+
+Las ACLs usan *wildcard masks*, el inverso de la máscara de subred. Para cada máscara de subred, escribe su wildcard y qué representa (qué bits quedan libres para cualquier valor):
+
+| Máscara de subred | Wildcard | ¿Qué representa? |
+|---|---|---|
+| 255.255.255.0 | | |
+| 255.255.255.255 | | |
+| 255.255.0.0 | | |
+
+## 8. Comandos de verificación
+
+Relaciona cada comando de verificación con su utilidad:
+
+| Comando | Utilidad |
+|---|---|
+| 1. `show ip route` | a) Ver qué ACLs están aplicadas y sus contadores |
+| 2. `show access-lists` | b) Resumen de interfaces: IP, estado y protocolo |
+| 3. `show ip interface brief` | c) Ver la tabla de rutas del router |

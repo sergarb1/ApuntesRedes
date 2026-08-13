@@ -73,3 +73,35 @@ c) **Dirección IPv6 destino:** **Multicast** (FF02::1:FF00:20 — la solicited-
 d) **PC-B responde con un Neighbor Advertisement (NA)** unicast dirigido a PC-A, indicando su MAC.
 
 e) **Este proceso se llama NDP** (Neighbor Discovery Protocol). Es parte de ICMPv6 y reemplaza a ARP. Es más eficiente que ARP porque usa multicast en lugar de broadcast, y solo los dispositivos interesados procesan el mensaje.
+
+## 7. Diagnóstico ping6
+
+Contexto: `ping fe80::1` (la Link-Local del gateway) funciona, así que el enlace, la MAC y NDP básico están OK. El fallo es exclusivo del destino *global* `2001:DB8:1::10`. Tres causas posibles:
+
+a) **Firewall del PC destino (o del propio PC-A) bloqueando ICMPv6 hacia la GUA.** Muchos sistemas abren por defecto el tráfico a Link-Local y al descubrimiento de vecinos, pero responden peor (o no responden) a pings a su dirección global.
+   - *Verificación:* intenta ping desde un tercer equipo; o desactiva temporalmente el firewall del PC destino y repite el ping. Si entonces funciona, es el firewall.
+
+b) **La GUA destino está duplicada o no es la activa.** Si el PC destino tiene varios adaptadores, o SLAAC le dio un prefijo distinto, la dirección que pingueas puede estar asignada en otra interfaz o marcada como *tentative* (durante DAD). El host simplemente no responde en esa dirección en la interfaz que esperas.
+   - *Verificación:* en el destino ejecuta `ipconfig /all` (Windows) o `ip -6 addr show` (Linux) y comprueba que `2001:DB8:1::10` exista y esté marcada como activa en esa interfaz (estado *preferred*). Prueba también `ping -6 2001:DB8:1::10%<id-interfaz>`.
+
+c) **Prefijo/ámbito fuera de la subred (on-link).** Para un *origen* con un prefijo distinto o sin ruta hacia `2001:DB8:1::/64`, esa GUA NO es *on-link*: el tráfico saldría al router (gateway), no resolvería la MAC por NDP local. Si la LAN es realmente `2001:DB8:1::/64` pero el PC-A o el switch han sido configurados con otro prefijo, el ping "no tiene a quién preguntar".
+   - *Verificación:* revisa que el prefijo del origen (`2001:db8:1:...`) y el destino compartan el mismo /64, y que el gateway `fe80::1` enrute correctamente. Un `pathping`/`tracert` IPv6 te dice si el salto intenta salir por el router o se queda en el enlace.
+
+> ✅ Resumen rápido: misma LAN + ping a LLA OK → el fallo al ping a GUA casi siempre es **firewall**, **dirección no activa** (tentative/duplicada) o **prefijo mal / fuera de enlace**.
+
+## 8. Tabla IPv4 vs IPv6
+
+| Concepto | IPv4 | IPv6 |
+|---|---|---|
+| Bits de la dirección | 32 | **128** |
+| Notación | Decimal con puntos | **Hexadecimal con dos puntos** (8 grupos) |
+| Direcciones privadas | RFC 1918 (192.168…, 172.16…, 10…) | **ULA `FC00::/7`** (privada/organización) |
+| Broadcast | Sí (envía a todos) | **No existe**: solo multicast (`FF02::1` ≈ todos los nodos) |
+| Resolución IP → MAC | ARP | **NDP** (NS/NA vía ICMPv6, multicast) |
+| Multicast de listeners | IGMP | **MLD** (Multicast Listener Discovery) |
+| Configuración automática | DHCP | **SLAAC + DHCPv6** (stateless/stateful, flags M/O) |
+| Loopback | 127.0.0.1 | **`::1`** |
+| Fragmentación | La hacen cualquier router intermedio | **Solo la hace el origen** (Path MTU Discovery) |
+| Seguridad / NAT | NAT compartido para las privadas | **Sin NAT**: extremo a extremo; firewall y (opcional) IPsec |
+
+> 💡 La fila de *fragmentación* y la de *NAT* suelen ser las que más sorprende: en IPv6 los routers ya no fragmentan (lo hace el origen), y el NAT, además de feo, era una falsa sensación de seguridad. Se acabó el escondite.

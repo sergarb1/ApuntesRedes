@@ -1,9 +1,9 @@
 ---
-title: Boletín U05 — Simple (Resuelto)
+title: Boletín U05 — Inicial (Resuelto)
 description: Soluciones ejercicios básicos de IPv6 y Transición
 ---
 
-# ✅ Boletín U05 — Simple (Resuelto)
+# ✅ Boletín U05 — Inicial (Resuelto)
 
 ---
 
@@ -50,3 +50,25 @@ e) **Verdadero.** Dual Stack ejecuta ambas pilas de protocolos simultáneamente.
 1 → b (Dual Stack: ambos protocolos a la vez)
 2 → c (Túnel 6to4: encapsula IPv6 en IPv4)
 3 → a (NAT64: traduce IPv6→IPv4)
+
+## 7. Expande direcciones
+
+a) `2001:DB8::1` → **`2001:0DB8:0000:0000:0000:0000:0000:0001`**
+   (el `::` oculta 5 grupos de ceros entre `DB8` y el `1`).
+
+b) `FE80::2AA:FF:FE9A:4CA2` → **`FE80:0000:0000:0000:02AA:00FF:FE9A:4CA2`**
+   (el `::` oculta 4 grupos de ceros; al expandir, `2AA` → `02AA` y `FF` → `00FF`).
+
+c) `::1` → **`0000:0000:0000:0000:0000:0000:0000:0001`**
+   (siete grupos de ceros + el `1`).
+
+## 8. Clasifica tipo y ámbito
+
+| Dirección | Tipo | Ámbito |
+|---|---|---|
+| a) `2001:DB8::1` | **Global Unicast** (GUA, 2000::/3) | **Global** (Internet) |
+| b) `FE80::1` | **Link-Local** (LLA, FE80::/10) | **Enlace local** (misma LAN) |
+| c) `FC00::1` | **Unique Local** (ULA, FC00::/7) | **Privado/organización** |
+| d) `::1` | **Loopback** | **Este nodo** (local) |
+| e) `FF02::1` | **Multicast** (todos los nodos) | **Enlace local** (el `02` en FF02) |
+| f) `2001:DB8:1:2:21A:2BFF:FE3C:4D5E` | **Global Unicast** (2000::/3) | **Global** (Internet) |

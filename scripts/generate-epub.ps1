@@ -2,7 +2,8 @@ param($OutDir = "public/epub")
 
 $ErrorActionPreference = "Stop"
 
-$units = @(
+$unitSlugs = @(
+  "00-introduccion",
   "01-fundamentos-redes",
   "02-modelos-osi-analisis",
   "03-infraestructura-fisica",
@@ -17,11 +18,17 @@ $units = @(
   "12-cloud-virtualizacion-futuro"
 )
 
-$boletinFiles = @(
-  "boletines/boletin-U{0}-inicial-resuelto",
-  "boletines/boletin-U{0}-inicial",
-  "boletines/boletin-U{0}-avanzado-resuelto",
-  "boletines/boletin-U{0}-avanzado"
+$boletinesCodes = @(
+  "00",
+  "01", "02", "03", "04", "05", "06",
+  "07", "08", "09", "10", "11", "12"
+)
+
+$boletinSections = @(
+  "inicial-resuelto",
+  "inicial",
+  "avanzado-resuelto",
+  "avanzado"
 )
 
 $metaTitle = "Apuntes PAR - Planificacion y Administracion de Redes"
@@ -42,72 +49,77 @@ $null = $sb.AppendLine("language: $metaLang")
 $null = $sb.AppendLine("---")
 $null = $sb.AppendLine("")
 
-foreach ($u in $units) {
-  # --- Unit content ---
-  $file = "$srcDir/$u.md"
-  if (-not (Test-Path $file)) {
-    $file = "$srcDir/$u.mdx"
+function Get-FrontTitle {
+  param($Content, $Fallback)
+  if ($Content -match '(?ms)^---\s*\n(.+?)\n^---') {
+    $fm = $matches[1]
+    if ($fm -match '(?m)^title:\s*"?([^"\r\n]+)"?') {
+      return $matches[1].Trim()
+    }
   }
-  if (Test-Path $file) {
-    $content = Get-Content $file -Raw -Encoding UTF8
+  return $Fallback
+}
 
-    $title = ""
-    if ($content -match '(?ms)^---\s*\n(.+?)\n^---') {
-      $frontmatter = $matches[1]
-      if ($frontmatter -match '^title:\s*"(.+?)"') {
-        $title = $matches[1]
-      }
-    }
-    if (-not $title) {
-      $title = ($u -replace '^\d+-', '' -replace '-', ' ')
-    }
+function Add-MdFile {
+  param($Path, [int]$HeadingLevel)
 
-    $content = $content -replace '(?ms)^---.*?^---\s*', ''
-    $content = $content.Trim()
-    $content = $content -replace '/ApuntesRedes/cc-by-sa\.png', 'public/cc-by-sa.png'
-    $content = $content -replace '/diagrams/', 'public/diagrams/'
+  $content = Get-Content $Path -Raw -Encoding UTF8
+  $title = Get-FrontTitle -Content $content -Fallback ([System.IO.Path]::GetFileNameWithoutExtension($Path))
 
-    $null = $sb.AppendLine("# $title")
+  $content = $content -replace '(?ms)^---.*?^---\s*', ''
+  $content = $content.Trim()
+  $content = $content -replace '/ApuntesRedes/cc-by-sa\.png', 'public/cc-by-sa.png'
+  $content = $content -replace '/ApuntesRedes/diagrams/', 'public/diagrams/'
+
+  $level = '#' * $HeadingLevel
+  $null = $sb.AppendLine("$level $title")
+  $null = $sb.AppendLine("")
+  if ($content) {
+    $null = $sb.AppendLine($content)
     $null = $sb.AppendLine("")
-    if ($content) {
-      $null = $sb.AppendLine($content)
-      $null = $sb.AppendLine("")
+  }
+}
+
+foreach ($u in $unitSlugs) {
+  # --- Unit index (root file, e.g. 01-fundamentos-redes.md / 00-introduccion.md) ---
+  $indexFile = "$srcDir/$u.md"
+  if (-not (Test-Path $indexFile)) { $indexFile = "$srcDir/$u.mdx" }
+  if (Test-Path $indexFile) {
+    Add-MdFile -Path $indexFile -HeadingLevel 1
+  }
+
+  # --- Unit puntos (subcarpeta, e.g. 00-introduccion/01-*.md) ---
+  $unitDir = "$srcDir/$u"
+  if (Test-Path $unitDir) {
+    $puntos = Get-ChildItem -Path $unitDir -Filter "*.md" -File | Sort-Object Name
+    foreach ($p in $puntos) {
+      Add-MdFile -Path $p.FullName -HeadingLevel 1
     }
   }
 
-  # --- Boletines ---
-  $nn = ($u -split '-')[0]
-  foreach ($bf in $boletinFiles) {
-    $bfName = $bf -f $nn
-    $bfFile = "$srcDir/$bfName.md"
-    if (-not (Test-Path $bfFile)) {
-      $bfFile = "$srcDir/$bfName.mdx"
-    }
-    if (Test-Path $bfFile) {
-      $eContent = Get-Content $bfFile -Raw -Encoding UTF8
+  # --- Boletines de la unidad ---
+  $code = ($u -split '-')[0]
+  if ($boletinesCodes -contains $code) {
+    foreach ($sec in $boletinSections) {
+      $bfName = "boletin-U$code-$sec"
+      $bfFile = "$srcDir/boletines/$bfName.md"
+      if (-not (Test-Path $bfFile)) { $bfFile = "$srcDir/boletines/$bfName.mdx" }
+      if (Test-Path $bfFile) {
+        $eContent = Get-Content $bfFile -Raw -Encoding UTF8
+        $eTitle = Get-FrontTitle -Content $eContent -Fallback $bfName
 
-      $eTitle = ""
-      if ($eContent -match '(?ms)^---\s*\n(.+?)\n^---') {
-        $efront = $matches[1]
-        if ($efront -match '^title:\s*"(.+?)"') {
-          $eTitle = $matches[1]
-        }
-      }
+        $eContent = $eContent -replace '(?ms)^---.*?^---\s*', ''
+        $eContent = $eContent.Trim()
+        $eContent = $eContent -replace '/ApuntesRedes/cc-by-sa\.png', 'public/cc-by-sa.png'
+        $eContent = $eContent -replace '/ApuntesRedes/diagrams/', 'public/diagrams/'
+        $eContent = $eContent -replace '(?m)^(#+)', '##$1'
 
-      $eContent = $eContent -replace '(?ms)^---.*?^---\s*', ''
-      $eContent = $eContent.Trim()
-      $eContent = $eContent -replace '/ApuntesRedes/cc-by-sa\.png', 'public/cc-by-sa.png'
-      $eContent = $eContent -replace '/diagrams/', 'public/diagrams/'
-
-      $eContent = $eContent -replace '(?m)^(#+)', '#$1'
-
-      if ($eTitle) {
         $null = $sb.AppendLine("## $eTitle")
         $null = $sb.AppendLine("")
-      }
-      if ($eContent) {
-        $null = $sb.AppendLine($eContent)
-        $null = $sb.AppendLine("")
+        if ($eContent) {
+          $null = $sb.AppendLine($eContent)
+          $null = $sb.AppendLine("")
+        }
       }
     }
   }

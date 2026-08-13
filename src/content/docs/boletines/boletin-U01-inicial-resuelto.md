@@ -1,6 +1,6 @@
 ---
 title: Boletín U01 — Inicial (Resuelto)
-description: Soluciones ejercicios básicos de Fundamentos de Redes
+description: Soluciones de los ejercicios básicos de Fundamentos de Redes
 ---
 
 # ✅ Boletín U01 — Inicial (Resuelto)
@@ -9,35 +9,52 @@ description: Soluciones ejercicios básicos de Fundamentos de Redes
 
 ## 1. Clasifica estas redes
 
-a) **LAN** — Red de área local
-b) **LAN** — Sigue siendo local aunque tenga 200 PCs
-c) **WAN** — Conecta dos ubicaciones geográficamente separadas
-d) **MAN** — Cubre una ciudad (Metropolitan Area Network)
+a) **LAN** — Todo dentro del mismo hogar.
+b) **LAN** — Sigue siendo local aunque tenga 200 PCs: un solo edificio.
+c) **WAN** — Une dos ubicaciones geográficamente separadas (Madrid y Barcelona).
+d) **MAN** — Cubre una ciudad (Metropolitan Area Network).
 
 ## 2. Verdadero o falso
 
-a) **Falso.** El hub NO segmenta dominios de colisión. Todos los puertos están en el mismo dominio.
-b) **Verdadero.** El switch construye la tabla MAC dinámicamente.
-c) **Falso.** El router trabaja en capa 3 (Red). Capa 2 es switch/puente.
-d) **Verdadero.** 48 bits en hexadecimal (ej. AA:BB:CC:DD:EE:FF).
-e) **Verdadero.** Si están en la misma VLAN y mismo switch, se comunican directamente.
+a) **Falso.** El hub NO segmenta: todos sus puertos comparten un único dominio de colisión.
+b) **Verdadero.** El switch construye su tabla MAC dinámicamente según el tráfico que ve.
+c) **Falso.** El router trabaja en la capa 3 (Red). La capa 2 es cosa del switch/puente.
+d) **Verdadero.** 48 bits representados en hexadecimal (ej. `AA:BB:CC:DD:EE:FF`).
+e) **Falso.** La MAC va grabada de fábrica y es permanente; la que cambia con el reinicio o el DHCP es la IP.
 
 ## 3. Dibuja la topología
 
-**Descripción:** Topología en estrella extendida (o árbol).
-- Router conectado a Switch1 y Switch2 (un cable a cada uno).
+**Descripción:** topología en estrella extendida (o árbol).
+
+- Router conectado a Switch1 y a Switch2 (un cable a cada uno).
 - Switch1 conectado a PC1 y PC2.
 - Switch2 conectado a PC3 y PC4.
-- El router da salida a Internet.
+- El router da la salida a Internet.
 
-## 4. Calcula
+## 4. Empaca tu memoria: une cada PDU con su capa
 
-Red /24 = 256 direcciones totales.
-- 1 dirección de red (la primera, .0)
-- 1 dirección de broadcast (la última, .255)
-- **254 direcciones utilizables para hosts.**
+1 → b (Bits · Física)
+2 → c (Trama · Enlace)
+3 → d (Paquete · Red)
+4 → a (Segmento · Transporte)
 
-## 5. Sopa de letras conceptual
+>Truco: a medida que bajas capas, la PDU gana cabeceras (segmento → paquete → trama → bit).
+
+## 5. ¿TCP o UDP?
+
+a) **TCP** — El PDF debe llegar completo y en orden.
+b) **UDP** — Prefiere fluidez; se tolera perder algún fotograma.
+c) **TCP** — La web se apoya en una conexión fiable.
+d) **UDP** — Una consulta puntual no necesita asegurar conexión.
+
+## 6. Calcula: una red /24
+
+a) **256** direcciones totales (2^8 = 256 porque 8 bits de host).
+b) **254** utilizables (256 - la de red - la de broadcast).
+c) La dirección de la red es **`192.168.1.0`** (hosts a 0).
+d) La de broadcast es **`192.168.1.255`** (hosts a 1). Ninguna de las dos se asigna a equipos.
+
+## 7. Sopa de letras conceptual
 
 1 → b (Hub)
 2 → e (Switch)
@@ -46,16 +63,16 @@ Red /24 = 256 direcciones totales.
 5 → d (Protocolo)
 6 → f (IP)
 
-## 6. Ping paso a paso
+## 8. Ping mental guiado
 
-1. PC-A consulta la tabla ARP para ver si tiene la MAC de PC-B.
-2. No la tiene → lanza un **ARP Request** broadcast ("¿quién tiene 192.168.1.20?").
-3. El switch recibe la trama, la inunda por todos los puertos (excepto el de origen).
-4. PC-B recibe el ARP, ve que es para él, responde con **ARP Reply** (unicast) dando su MAC.
-5. El switch aprende: "PC-B está en el puerto X" y añade entrada a la tabla MAC.
-6. PC-A recibe el ARP Reply, guarda la MAC en su tabla ARP.
-7. PC-A ya puede construir la trama Ethernet con MAC destino = MAC de PC-B.
-8. PC-A envía el **ICMP Echo Request** (ping).
-9. El switch lo reenvía solo al puerto de PC-B (ya sabe dónde está).
+1. PC-A consulta la tabla ARP: no tiene la MAC de `192.168.1.20`.
+2. Lanza un **ARP Request** de difusión: "¿Quién tiene 192.168.1.20?" (MAC destino `FF:FF:FF:FF:FF:FF`).
+3. El switch recibe la trama y la inunda por todos los puertos menos el de origen.
+4. PC-B ve que el ARP pide su IP y responde con **ARP Reply** (unicast) dando su MAC.
+5. El switch aprende que PC-B está en ese puerto y lo anota en su tabla MAC.
+6. PC-A guarda la MAC de PC-B en su tabla ARP.
+7. PC-A construye la trama Ethernet con MAC destino = MAC de PC-B e IP destino `192.168.1.20`.
+8. Envía el **ICMP Echo Request** (el ping).
+9. El switch lo reenvía solo por el puerto de PC-B (ya sabe dónde está).
 10. PC-B responde con **ICMP Echo Reply**.
-11. PC-A recibe el reply. **Ping exitoso.**
+11. PC-A recibe la respuesta: **ping exitoso**.

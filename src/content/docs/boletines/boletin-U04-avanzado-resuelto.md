@@ -115,3 +115,40 @@ Red base: 10.0.0.0/22 (1024 direcciones, 1022 hosts útiles)
 **Sobran:** 10.0.2.52 - 10.0.3.255 → **~460 IPs**
 
 **Problemas si crece al doble:** Si cada departamento duplica sus hosts, Administración necesitaría /23 (510 hosts), lo que rompe el plan VLSM actual. Habría que rediseñar usando una red base más grande (ej. /20) desde el principio.
+
+## 7. VLSM con requisitos mínimos
+
+Red base: 192.168.1.0/24 (256 direcciones, 254 hosts útiles)
+
+**Ordenando de mayor a menor:** Producción (50) → Comercial (25) → Soporte (10) → Enlace WAN (2)
+
+| Subred | Resolviendo | CIDR | Red | Rango | Broadcast |
+|---|---|---|---|---|---|
+| Producción | 2ʰ−2 ≥ 50 → h=6 (62) | /26 | 192.168.1.0 | .1 - .62 | .63 |
+| Comercial | 2ʰ−2 ≥ 25 → h=5 (30) | /27 | 192.168.1.64 | .65 - .94 | .95 |
+| Soporte | 2ʰ−2 ≥ 10 → h=4 (14) | /28 | 192.168.1.96 | .97 - .110 | .111 |
+| Enlace WAN | 2ʰ−2 ≥ 2 → h=2 (2) | /30 | 192.168.1.112 | .113 - .114 | .115 |
+
+b) **Queda libre** desde 192.168.1.116 hasta 192.168.1.255 = **140 direcciones** (138 hosts útiles en /24).
+
+**Comprobación del encadenado:** Ventas acaba en .63 → Comercial arranca en .64. Comercial acaba en .95 → Soporte arranca en .96. Soporte acaba en .111 → el enlace WAN arranca en .112.
+
+## 8. Conflicto de IP
+
+a) **Qué ocurre:** cuando el PC pide IP por DHCP recibe 192.168.1.20, pero la impresora ya la tiene en uso. Hay **duplicado de dirección**: uno de los dos (o ambos, según el momento) pierde conectividad, aparecen errores de "duplicate address", y el tráfico hacia esa IP puede ir a uno o a otro. El servidor DHCP puede detectarlo *antes* de conceder la IP haciendo un ping/ARProbe a la dirección; si hay respuesta, la descarta y la registra en la tabla de conflictos.
+
+b) **Cómo lo detecta:** en el router, el comando:
+
+```
+show ip dhcp conflict
+```
+
+Muestra las direcciones que el servidor DHCP encontró en conflicto (con el método de detección y la fecha). Si la impresora estática sigue borrada del pool, verás la entrada y podrás actuar.
+
+c) **Cómo prevenirlo:** desde el diseño, **excluir las IPs estáticas** del pool DHCP antes de que reparta nada:
+
+```
+ip dhcp excluded-address 192.168.1.1 192.168.1.30
+```
+
+Así el router nunca concede las direcciones fijas (impresoras, servidores, el propio gateway). Alternativa: usar **reservas DHCP** por MAC para los equipos que quieras fijos sin configurarlos a mano.

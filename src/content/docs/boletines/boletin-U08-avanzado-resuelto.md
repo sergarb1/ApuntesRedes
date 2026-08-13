@@ -65,7 +65,7 @@ ip access-list extended BLOQUEAR_YT
 
 b) **Aplicar:** Outbound en G0/1 (hacia Internet), para filtrar tráfico saliente.
 
-c) **Alternativa sin time-range:** Configurar dos ACLs y cambiar la aplicación manualmente cada día (no recomendado) o usar un script externo.
+c) **Alternativa sin time-range:** no se puede definir "9 a 18" con la ACL pura; habría que cambiar manualmente la ACL cada mañana y cada tarde (desastrosamente manual) o gestionarlo con un script/programación externa que alterne las versiones de política. Por eso `time-range` existe.
 
 ## 3. Diagnóstico de ACL
 
@@ -117,3 +117,31 @@ interface g0/1
  no shutdown
 ```
 Y verificar que el enlace esté físicamente conectado.
+
+## 7. Longest prefix match
+
+a) **192.168.1.30 → via 10.0.0.10** (la /28 cubre de .16 a .31: es la coincidencia más larga).
+
+b) **192.168.1.200 → via 10.0.0.6** (cae en la /24; la /28 no la cubre y pesa más que la /16).
+
+c) **192.168.3.44 → via 10.0.0.2** (solo la /16 la abarca: ni la /24 ni la /28 llegan a .3.x).
+
+d) **192.168.1.15 → via 10.0.0.6** (está en la /24 pero fuera de la /28, que empieza en .16).
+
+**Regla:** a mayor máscara (28 > 24 > 16), coincidencia más específica y elegida primero.
+
+## 8. ACL nombrada para horario
+
+```bash
+time-range LABORAL_DIARIO
+ periodic daily 9:00 to 18:00
+
+ip access-list extended BLOQUEAR_STREAMING
+ deny tcp 192.168.1.0 0.0.0.255 any eq 443 time-range LABORAL_DIARIO
+ permit ip any any
+
+interface g0/1
+ ip access-group BLOQUEAR_STREAMING out
+```
+
+**Lectura:** de 9 a 18 todos los días, el tráfico HTTPS originado en la red interna se deniega; el resto de horario (y el resto de tráfico, como el puerto 80) pasa. El `permit ip any any` + el deny implícito se encargan del resto.

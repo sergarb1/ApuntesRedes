@@ -79,3 +79,36 @@ SitioA (192.168.1.0/24) ─── RouterA ─── Internet ─── RouterB �
 - Desde SedeCentral, se puede acceder al servidor web localmente.
 
 ¿Cuál es el problema probable? ¿Qué comandos usarías para confirmarlo?
+
+## 7. Análisis de una captura con retransmisiones
+
+Te entregan esta captura Wireshark de una conexión web (filtrada):
+
+```
+1: 192.168.1.10:50000 → 93.184.216.34:80  [SYN]                       Seq=0
+2: 93.184.216.34:80 → 192.168.1.10:50000  [SYN, ACK]                  Seq=0 Ack=1
+3: 192.168.1.10:50000 → 93.184.216.34:80  [ACK]                       Seq=1 Ack=1
+4: 192.168.1.10:50000 → 93.184.216.34:80  [PSH, ACK] (GET /)          Seq=1 Ack=1
+5: 192.168.1.10:50000 → 93.184.216.34:80  [TCP Retransmission] (GET /)  Seq=1
+6: 192.168.1.10:50000 → 93.184.216.34:80  [TCP Retransmission] (GET /)  Seq=1
+7: 93.184.216.34:80 → 192.168.1.10:50000  [TCP Window Update] Window=0
+```
+
+a) ¿El three-way handshake se completó correctamente? Justifícalo con los paquetes.
+b) ¿Qué significa que los paquetes 5 y 6 sean retransmisiones del 4?
+c) ¿Qué indica el paquete 7 (`Window=0`)? ¿Qué conclusión global sacas de la conexión?
+
+**Pista:** piensa en las dos señales que viste en el punto de Wireshark: las retransmisiones indican pérdida o congestión, y `Window=0` indica saturación del receptor. ¿Qué secuencia de eventos explica que primero se pierda la petición y luego el servidor pida pausa?
+
+## 8. Plan de monitorización SNMP + syslog
+
+Debes monitorizar una red de 10 dispositivos (5 switches, 3 routers, 1 firewall, 1 servidor) y montar un sistema que te avise antes de que un fallo afecte a los usuarios.
+
+Diseña el plan completo:
+
+a) Elige 4 OIDs clave que monitorizarías en los switches y routers (una de ellas para tráfico de una interfaz).
+b) Elige la herramienta de monitorización (entre Zabbix, PRTG, Nagios o LibreNMS) y justifica por qué.
+c) Diseña la configuración SNMP y syslog para los dispositivos: comunidad, umbral de severidad de logs y destino.
+d) Define 3 alarmas concretas con sus umbrales (ej. "CPU > 80% durante 5 minutos").
+
+**Pista:** recuerda que los contadores de tráfico (`ifInOctets`, `ifOutOctets`) necesitan dos lecturas separadas en el tiempo para calcular velocidad, que SNMP v3 es lo seguro y que el nivel de syslog 7 (debug) llenaría el disco.

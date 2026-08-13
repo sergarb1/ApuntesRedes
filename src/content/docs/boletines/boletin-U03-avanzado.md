@@ -5,7 +5,7 @@ description: Ejercicios avanzados de Infraestructura Física de Red
 
 # 📝 Boletín U03 — Avanzado
 
-> Ejercicios que requieren aplicar los conceptos de cableado y medios físicos de forma más profunda.
+> Ejercicios que requieren aplicar los conceptos de cableado, medios físicos y WiFi de forma combinada. En los difíciles tienes pista.
 
 ---
 
@@ -78,3 +78,25 @@ a) Herramientas necesarias
 b) Longitud recomendada de pelado de funda
 c) Orden exacto de los hilos (de izquierda a derecha, con el clip hacia abajo)
 d) Cómo saber si el crimpado ha sido correcto
+
+## 7. Caso WiFi: oficina con zonas muertas
+
+En una oficina de 25 puestos separados por tabiques de cartón-yeso, un único AP wifi en el pasillo central da "zonas muertas" y una velocidad general decepcionante. Los empleados se quejan cada tarde.
+
+a) ¿Qué causas físicas explicarían la lentitud (nombra al menos 3)?
+b) ¿Qué herramientas usarías para confirmarlas?
+c) Propón 3 soluciones realistas ordenadas de más barata a más cara.
+
+**Pista:** piensa en canales (1, 6, 11), interferencia de vecinos, obstáculos y el número de clientes compartiendo el mismo AP. Recuerda que la velocidad real WiFi es del 30-50%.
+
+## 8. Elección de medio a escala
+
+Decide qué medio de transmisión usarías para cada escenario y justifícalo:
+
+a) **Mini-oficina** de 8 puestos en un local de 60 m².
+b) **Planta** de 40 puestos en un edificio de oficinas con el rack en la misma planta.
+c) **Campus** de 3 edificios separados por 100, 500 y 2000 metros.
+
+En cada caso indica: medio (cobre/fibra/WiFi), categoría/estándar aproximado y, si usas fibra, monomodo o multimodo.
+
+**Pista:** decide primero por distancia y presupuesto; luego por movilidad y rendimiento. 100 m es el límite del cobre, la multimodo cubre hasta ~550 m y la monomodo el resto.

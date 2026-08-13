@@ -1,11 +1,11 @@
 ---
-title: Boletín U03 — Simple
+title: Boletín U03 — Inicial
 description: Ejercicios básicos de Infraestructura Física de Red
 ---
 
-# 📝 Boletín U03 — Simple
+# 📝 Boletín U03 — Inicial
 
-> Ejercicios básicos para afianzar los conceptos de cableado y medios físicos.
+> Ejercicios básicos para afianzar los conceptos de medios físicos, cableado, crimpado y WiFi.
 
 ---
 
@@ -62,3 +62,24 @@ Nombra estos conectores y el medio en el que se usan:
 a) RJ45
 b) LC
 c) SC
+
+## 7. Cableado estructurado
+
+Relaciona cada elemento del cableado estructurado con su función:
+
+| Elemento | Función |
+|---|---|
+| 1. Latiguillo | a) Concentra los cables horizontales en el rack |
+| 2. Keystone | b) Cable flexible que une el PC con la roseta (o el patch panel con el switch) |
+| 3. Patch panel | c) Conector hembra RJ45 en la roseta de pared |
+| 4. Cable horizontal | d) Cable sólido empotrado que va del patch panel al keystone |
+
+## 8. Medios y estándares: verdadero o falso
+
+Indica si cada afirmación es verdadera (V) o falsa (F) y corrige las falsas:
+
+a) La fibra óptica se ve afectada por las interferencias electromagnéticas.
+b) El estándar 802.11ax se conoce comercialmente como WiFi 6.
+c) El WiFi transmite por ondas electromagnéticas en el aire, sin cable.
+d) La fibra multimodo llega a distancias de más de 40 km.
+e) La velocidad real del WiFi suele estar entre el 30% y el 50% de la teórica.

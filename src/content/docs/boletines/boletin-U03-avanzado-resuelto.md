@@ -1,6 +1,6 @@
 ---
 title: Boletín U03 — Avanzado (Resuelto)
-description: Soluciones ejercicios avanzados de Infraestructura Física de Red
+description: Soluciones de los ejercicios avanzados de Infraestructura Física de Red
 ---
 
 # ✅ Boletín U03 — Avanzado (Resuelto)
@@ -91,3 +91,31 @@ c) **Funcionará parcialmente.** 100Base-TX solo necesita los pares 1-2 y 3-6. C
 6. **Comprobar:** Usa el tester para verificar continuidad en todos los pines (1-8 en orden). Si algún LED no se enciende o el orden es incorrecto, corta y repite.
 
 **Señal de crimpado correcto:** Todos los contactos dorados están hundidos uniformemente, la funda está sujeta por el pasador, y el tester muestra LEDs 1-8 en secuencia correcta.
+
+## 7. Caso WiFi: oficina con zonas muertas
+
+a) **Causas físicas posibles:**
+   - **Interferencia de vecinos:** los APs de las oficinas colindantes comparten el canal 1, 6 u 11, y todos se pisan.
+   - **Obstrucciones:** los tabiques de cartón-yeso y el mobiliario atenúan la señal (atenuación).
+   - **Covertura insuficiente:** un solo AP para 25 puestos reparte un canal compartido entre muchos clientes; las zonas más alejadas quedan al límite.
+   - **Canal saturado:** todos los clientes compiten por el mismo canal, y en horas punta (la tarde) la contienda se dispara.
+
+b) **Herramientas:** analizador WiFi (para ver canales, señal RSSI y APs vecinos), aplicación de escaneo de red para comprobar número de clientes, y medición de velocidad en distintos puntos de la oficina.
+
+c) **Soluciones ordenadas de más barata a más cara:**
+   1. **Elegir canales no solapados** (1, 6, 11 en 2.4 GHz) y configurar el AP en 5 GHz (y, si soporta, activar band-steering).
+   2. **Reubicar el AP** en una posición más central o elevado, lejos de metal y fuentes de interferencia.
+   3. **Añadir APs adicionales** (o un mesh) para cubrir las zonas muertas, con canales distintos entre APs adyacentes.
+
+## 8. Elección de medio a escala
+
+a) **Mini-oficina (8 puestos, 60 m²):** **Cobre Cat6 para los puestos fijos** + **1 AP WiFi** para visitas y movilidad. Distancias cortas (< 100 m), presupuesto ajustado: el WiFi por sí solo puede bastar, pero los puestos fijos con cobre garantizan rendimiento y estabilidad.
+
+b) **Planta de 40 puestos (rack en la misma planta):** **Cobre Cat6 a todos los puestos** (distancias dentro de los 100 m, 1 Gbps) con cableado estructurado (patch panels + latiguillos). El uplink del rack si se extiende a otra sala más lejana: fibra multimodo. WiFi como complemento para salas de reuniones.
+
+c) **Campus de 3 edificios:**
+   - **100 m:** Cobre Cat6a (límite exacto del cobre; correcto y barato) o fibra multimodo si se prefiere backbone.
+   - **500 m:** **Fibra multimodo OM3/OM4** (el cobre no llega a 500 m; la multimodo cubre hasta ~550 m a 10 Gbps).
+   - **2000 m:** **Fibra monomodo OS2** (obligatoria: solo la monomodo cubre distancias de kilómetros).
+
+> 💡 **Regla resumen:** distancia decide el medio (cobre ≤ 100 m, multimodo ≤ ~550 m, monomodo el resto); movilidad decide el WiFi; presupuesto decide las categorías.

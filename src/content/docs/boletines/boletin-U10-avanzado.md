@@ -70,3 +70,34 @@ Una empresa tiene:
 Quieren que el web sea accesible por 83.45.12.78 y el correo por 83.45.12.79. Los PCs internos deben salir por PAT con la IP 83.45.12.78.
 
 Configura todo.
+
+## 7. Multi-NAT: servidores duales + PAT simultáneo
+
+Una empresa tiene:
+- Red interna 192.168.50.0/24, servidor web DMZ en 192.168.50.10 (puertos 80 y 443).
+- Dos IPs públicas: 83.45.12.78 y 83.45.12.79.
+- Los usuarios internos deben salir a Internet por **PAT** con la IP 83.45.12.78.
+- El servidor web debe ser accesible desde fuera como **83.45.12.78:8080 → 192.168.50.10:80** y **83.45.12.78:8443 → 192.168.50.10:443**.
+- Además, la IP pública 83.45.12.79 se reserva para un servidor de correo (192.168.50.20) con **NAT estático 1:1** para los puertos 25, 587 y 993.
+
+Configura todo el NAT en el router (interfaces: g0/0 LAN inside, g0/1 WAN outside).
+
+**Pista:** puedes combinar PAT overload y `ip nat inside source static tcp` en el mismo router. Revisa que el tráfico saliente de los usuarios no colisione con las traducciones estáticas reservadas.
+
+## 8. Diagnóstico: "no salimos a Internet"
+
+En el instituto no sale Internet. Configuración actual de R1:
+
+- g0/0: 192.168.1.1/24 (inside LAN)
+- g0/1: 203.0.113.2/30 (outside, hacia el ISP con ruta por defecto)
+- `ip nat inside source list 1 interface g0/1 overload`
+- `access-list 1 permit 192.168.1.0 0.0.0.255`
+
+Síntoma: los PCs hacen ping al gateway (192.168.1.1) y a 203.0.113.2, pero **no** a 8.8.8.8.
+
+a) Ordena las comprobaciones de diagnóstico que harías, de la más básica a la más específica.
+b) ¿Qué comando confirma que NAT está traduciendo? ¿Qué esperas ver?
+c) Tras revisar, ves que `show ip nat translations` está vacío aunque hay tráfico. ¿Qué comprobarías a continuación? Da al menos 3 causas probables.
+d) Encuentra el fallo real: las interfaces g0/0 y g0/1 **no tienen** `ip nat inside` / `ip nat outside`. Explica por qué sin esas marcas no hay traducción, aunque el resto de comandos sean correctos.
+
+**Pista:** NAT se diagnostica en progresión: primero conectividad, luego traducción, luego ruta. Sin `ip nat inside/outside`, el router no sabe qué tráfico traducir: los paquetes salen sin traducir (o se descartan) y la tabla NAT queda vacía.

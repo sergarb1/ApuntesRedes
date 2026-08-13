@@ -85,3 +85,30 @@ c) En producción: **nivel 5 (notifications)** o **nivel 6 (informational)**. Ni
 - `telnet 10.0.0.100 443` desde RouterA (no desde un PC) — para ver si el problema está en la ACL de salida
 - `show ip interface` en RouterB — verificar si hay ACL aplicada en la interfaz hacia SedeCentral
 - En el servidor web: `netstat -an | find ":443"` (Windows) o `ss -tlnp | grep 443` (Linux) — verificar que el servicio escucha
+
+## 7. Análisis de una captura con retransmisiones
+
+a) **Sí, el handshake se completó correctamente.** Los paquetes 1 (SYN), 2 (SYN-ACK) y 3 (ACK) forman el three-way handshake completo: la conexión quedó establecida y el cliente pudo enviar la petición GET en el paquete 4.
+
+b) Los paquetes 5 y 6 son **reenvíos del paquete 4** porque el cliente no recibió su ACK a tiempo. Es la señal clásica de **pérdida de paquetes o congestión**: la petición GET (o su ACK) se perdió en el camino, así que el emisor la reenvía tras el temporizador de retransmisión (RTO).
+
+c) El paquete 7 (`Window=0`) indica que el **receptor está saturado** (su buffer TCP está lleno) y pide al emisor que deje de enviar datos. Conclusión global: hay una red con **pérdidas** (las retransmisiones del 4) y un **servidor ahogado** (ventana a cero). El síntoma combinado apunta a congestión del enlace o saturación del servidor web, más que a un fallo de configuración pura.
+
+## 8. Plan de monitorización SNMP + syslog
+
+a) **OIDs clave:**
+   - `1.3.6.1.2.1.1.3.0` — sysUpTime: detectar reinicios inesperados de equipos
+   - `1.3.6.1.2.1.2.2.1.10.X` — ifInOctets de la interfaz de uplink (dos lecturas separadas para velocidad)
+   - `1.3.6.1.2.1.2.2.1.16.X` — ifOutOctets de la interfaz de uplink
+   - `1.3.6.1.2.1.25.3.3.1.2` — hrProcessorLoad: carga de CPU de los equipos
+
+b) **Herramienta:** **Zabbix** (o LibreNMS). Justificación: es de las más modernas y populares, soporta SNMP + syslog + NetFlow, tiene auto-descubrimiento para los 10 dispositivos (los detecta solos) y es open source. PRTG también valdría, pero la licencia gratuita de 100 sensores es más justa con 10 dispositivos × varias métricas.
+
+c) **Configuración:**
+   - SNMP en cada dispositivo: comunidad de solo lectura `monitor ro` (sin `rw`), `snmp-server location` y `snmp-server contact` identificando cada equipo, y `snmp-server host <IP-NMS> traps version 2c monitor`. Para producción real: **SNMP v3** con SHA + AES.
+   - Syslog: `logging host <IP-servidor-logs>`, `logging trap notifications` (nivel 5), `logging source-interface loopback 0` y `service timestamps log datetime msec`; en el servidor, rsyslog escuchando en UDP/514 con un archivo por dispositivo.
+
+d) **3 alarmas con umbral:**
+   1. **CPU > 80% durante 5 minutos** en switches y routers → posible sobrecarga o ataque.
+   2. **Tráfico de uplink > 85% del enlace durante 10 minutos** → saturación inminente (complementar con NetFlow para ver quién consume).
+   3. **sysUpTime que decrece** (equipo reiniciado) fuera de la ventana de mantenimiento → reinicio no planificado.

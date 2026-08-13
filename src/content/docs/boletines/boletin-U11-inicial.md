@@ -75,3 +75,31 @@ Un administrador ejecuta `tracert google.com` y ve:
 a) ¿Cuántos saltos hay hasta el destino?
 b) ¿Qué significa el salto 3 con asteriscos?
 c) ¿El destino final es accesible?
+
+## 7. Filtros de Wireshark
+
+Relaciona cada filtro con lo que muestra:
+
+| Filtro | Qué muestra |
+|---|---|
+| a) `tcp.flags.syn == 1` | 1. Tráfico DNS |
+| b) `ip.addr == 192.168.1.10` | 2. Retransmisiones TCP |
+| c) `tcp.analysis.retransmission` | 3. Paquetes SYN (inicio de conexión) |
+| d) `dns` | 4. Tráfico de/a esa IP |
+| e) `http.request` | 5. Solo peticiones HTTP |
+
+**Pista:** recuerda que los filtros de Wireshark usan la sintaxis `protocolo.campo == valor`. El de retransmisiones es el único que empieza por `tcp.analysis`.
+
+## 8. Niveles de syslog
+
+Ordena estos niveles de severidad de MENOS a MÁS grave:
+
+a) Critical
+b) Debug
+c) Warning
+d) Informational
+e) Emergency
+
+Después responde: para un servidor de logs en producción que no debe llenar el disco, ¿qué nivel de logging elegirías y por qué?
+
+**Pista:** recuerda que en syslog el número menor es el más grave (0 = Emergency, 7 = Debug).

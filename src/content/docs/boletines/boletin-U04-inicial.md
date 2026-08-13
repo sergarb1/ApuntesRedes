@@ -1,9 +1,9 @@
 ---
-title: Boletín U04 — Simple
+title: Boletín U04 — Inicial
 description: Ejercicios básicos de IPv4 y Subnetting
 ---
 
-# 📝 Boletín U04 — Simple
+# 📝 Boletín U04 — Inicial
 
 > Ejercicios básicos para afianzar los conceptos de direccionamiento IPv4 y máscaras.
 
@@ -65,3 +65,23 @@ c) 192.168.1.1
 d) 127.0.0.1
 e) 172.16.0.100
 f) 169.254.1.1
+
+## 7. Calcula la dirección de red
+
+Para cada par de IP y máscara, haz el **AND** bit a bit y di cuál es la **dirección de red**:
+
+a) IP: 192.168.1.37 · Máscara: 255.255.255.0
+b) IP: 10.0.0.150 · Máscara: 255.0.0.0
+c) IP: 172.16.0.200 · Máscara: 255.255.255.128
+d) IP: 192.168.1.66 · Máscara: 255.255.255.192
+
+**Pista:** pasa el octeto "mágico" (el último de la máscara que no es 255) a binario y haz el AND con el octeto correspondiente de la IP. El resto de octetos se copian tal cual (si la máscara es 255) o se ponen a 0 (si la máscara es 0).
+
+## 8. Subredes iguales
+
+Divide la red **192.168.5.0/24** en **4 subredes del mismo tamaño**.
+
+a) ¿Cuántos bits debes prestar a la máscara?
+b) ¿Cuál es la nueva máscara (CIDR y decimal)?
+c) ¿Cuántos hosts útiles tiene cada subred?
+d) Enumera las 4 direcciones de red con su rango de hosts.

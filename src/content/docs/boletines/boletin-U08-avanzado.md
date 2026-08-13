@@ -5,7 +5,7 @@ description: Ejercicios avanzados de Routing y ACLs
 
 # 📝 Boletín U08 — Avanzado
 
-> Ejercicios que requieren aplicar routing estático y ACLs de forma más profunda.
+> Ejercicios que requieren aplicar routing estático y ACLs de forma más profunda. En los difíciles tienes pista.
 
 ---
 
@@ -90,3 +90,28 @@ ip route 0.0.0.0 0.0.0.0 10.0.0.2
 a) ¿Funciona la ruta por defecto? ¿Por qué?
 b) ¿Qué comando muestra el problema?
 c) ¿Qué cambiarías para que funcione?
+
+## 7. Longest prefix match
+
+Un router tiene estas rutas en su tabla:
+
+```
+192.168.0.0/16  via 10.0.0.2
+192.168.1.0/24  via 10.0.0.6
+192.168.1.16/28 via 10.0.0.10
+```
+
+Decide por cuál de los tres next-hops enviará el router cada paquete destinado a:
+
+a) 192.168.1.30
+b) 192.168.1.200
+c) 192.168.3.44
+d) 192.168.1.15
+
+**Pista:** el *longest prefix match* manda: gana la ruta con la máscara más larga que coincida con la IP destino. La /28 solo cubre de 192.168.1.16 a 192.168.1.31.
+
+## 8. ACL nombrada para horario
+
+Escribe una ACL nombrada `BLOQUEAR_STREAMING` que bloquee el puerto **443** (HTTPS) **cualquier día de 9:00 a 18:00** para la red interna 192.168.1.0/24, permitiendo el resto del tráfico. Incluye el `time-range`, la ACL y su aplicación en la interfaz hacia Internet (G0/1).
+
+**Pista:** usa `time-range` con `periodic daily`, referencia la regla con `time-range`, acaba con `permit ip any any` (recuerda el deny any implícito) y aplica la ACL outbound en G0/1.

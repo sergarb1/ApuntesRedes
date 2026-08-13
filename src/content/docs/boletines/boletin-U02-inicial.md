@@ -1,11 +1,11 @@
 ---
-title: Boletín U02 — Simple
+title: Boletín U02 — Inicial
 description: Ejercicios básicos de Modelos OSI y Análisis de Tráfico
 ---
 
-# 📝 Boletín U02 — Simple
+# 📝 Boletín U02 — Inicial
 
-> Ejercicios básicos para afianzar los conceptos de capas OSI, TCP/IP y Wireshark.
+> Ejercicios básicos para afianzar los conceptos de capas OSI, TCP/IP, encapsulación y Wireshark.
 
 ---
 
@@ -25,7 +25,7 @@ g) Presentación
 
 Relaciona cada función con la capa OSI correspondiente:
 
-| Función | Capa (número) |
+| Función | Capa |
 |---|---|
 | a) Direccionamiento IP y enrutamiento | |
 | b) Transmisión de bits por el cable | |
@@ -39,7 +39,7 @@ a) El modelo TCP/IP tiene 7 capas como el OSI.
 b) La PDU de la capa de Red se llama "paquete".
 c) UDP garantiza que los datos lleguen en orden.
 d) El three-way handshake es propio de TCP.
-e) Wireshark puede capturar tráfico de otros dispositivos en un switch sin configuración especial.
+e) Wireshark puede capturar el tráfico unicast de otros equipos en un switch sin configuración especial.
 
 ## 4. Identifica el puerto
 
@@ -72,3 +72,22 @@ Relaciona cada capa con su PDU:
 | 3. Red | b) Trama |
 | 2. Enlace | c) Paquete |
 | 1. Física | d) Segmento/Datagrama |
+
+## 7. El campo TTL
+
+a) ¿Para qué sirve el campo **TTL** de la cabecera IPv4?
+b) Un paquete sale con TTL = 64 y llega a su destino con TTL = 57. ¿Cuántos routers (saltos) ha cruzado?
+c) ¿Qué EtherType esperas en la cabecera Ethernet de una trama que contiene un paquete IPv4?
+
+## 8. Origen y destino
+
+Observa esta conexión:
+
+```
+Origen:  192.168.1.10:54321
+Destino: 142.250.184.4:443
+```
+
+a) ¿Cuál de los dos puertos es *efímero*? ¿En qué rango está?
+b) ¿Qué servicio reconoce el puerto 443?
+c) ¿Qué identifica exactamente un *socket*?

@@ -3,3 +3,7 @@ dist/
 .astro/
 .env
 
+# Tooling local del agente (no va al repo)
+.opencode/
+.serena/
+
