@@ -118,4 +118,4 @@ No son alternativas excluyentes entre sí: una Internet futura podría, en teor�
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/12-cloud-virtualizacion-futuro) · **Anterior:** [07 · IoT, 5G y edge computing](/ApuntesRedes/12-cloud-virtualizacion-futuro/07-iot-5g-y-edge) · **Siguiente:** [09 · Head First (cierre)](/ApuntesRedes/12-cloud-virtualizacion-futuro/09-head-first)
+📚 [Volver al índice de la unidad](/ApuntesRedes/12-cloud-virtualizacion-futuro) · **Anterior:** [07 · IoT, 5G y edge computing](/ApuntesRedes/12-cloud-virtualizacion-futuro/07-iot-5g-y-edge) · **Siguiente:** [09 · Cierre](/ApuntesRedes/12-cloud-virtualizacion-futuro/09-cierre)

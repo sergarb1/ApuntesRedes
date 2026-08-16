@@ -11,7 +11,7 @@ La U11 (`11-diagnostico-monitorizacion.md`) sigue el patrón antiguo: un único 
 ## Propuesta
 
 - Transformar `11-diagnostico-monitorizacion.md` en **índice de unidad** con tabla de CEs (RA2/Transversal: h, i, j, k).
-- Crear `11-diagnostico-monitorizacion/` con **8 puntos de teoría ampliados** + **1 cierre Head First**, reutilizando el contenido factual (metodología OSI, comandos esenciales, Wireshark, SNMP, Syslog, NetFlow, monitorización).
+- Crear `11-diagnostico-monitorizacion/` con **8 puntos de teoría ampliados** + **1 cierre de unidad**, reutilizando el contenido factual (metodología OSI, comandos esenciales, Wireshark, SNMP, Syslog, NetFlow, monitorización).
 - Continuidad encadenada: PRÓXIMAMENTE EN U12.
 - Sin diagramas D2 nuevos.
 - Sidebar: clave `11-diagnostico-monitorizacion` (ya añadida).

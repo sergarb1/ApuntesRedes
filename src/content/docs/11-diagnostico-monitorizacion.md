@@ -44,7 +44,7 @@ Al terminar, serás capaz de:
 | [06 · NetFlow e IPFIX](/ApuntesRedes/11-diagnostico-monitorizacion/06-netflow-y-ipfix) | Análisis de tráfico y diferencia con SNMP | Todos |
 | [07 · Herramientas de monitorización](/ApuntesRedes/11-diagnostico-monitorizacion/07-herramientas-de-monitorizacion) | Zabbix, PRTG, Nagios, LibreNMS | Todos |
 | [08 · Caso práctico de diagnóstico](/ApuntesRedes/11-diagnostico-monitorizacion/08-caso-practico-de-diagnostico) | Troubleshooting real con las 5 capas | Todos |
-| [09 · Head First (cierre)](/ApuntesRedes/11-diagnostico-monitorizacion/09-head-first) | Sé el Diagnóstico, Fireside, Laboratorio, Crucigrama… | Todos |
+| [09 · Cierre](/ApuntesRedes/11-diagnostico-monitorizacion/09-cierre) | Sé el Diagnóstico, Fireside, Laboratorio, Crucigrama… | Todos |
 
 > 📖 **Flujo de lectura:** los 8 primeros puntos son teoría en progresión. El 9º es el aterrizaje práctico: léelo justo después del 8º y antes de abrir los boletines.
 
@@ -80,7 +80,7 @@ Al terminar, serás capaz de:
 
 ¿Acabas de terminar la U10 de NAT y buscas aplicar lo aprendido? → Empieza por el [punto 1](/ApuntesRedes/11-diagnostico-monitorizacion/01-metodologia-de-diagnostico): la metodología te da el mapa mental, y el resto de capítulos lo llenan de herramientas. Si prefieres un enfoque más práctico, salta directamente al [punto 8](/ApuntesRedes/11-diagnostico-monitorizacion/08-caso-practico-de-diagnostico), ataca el caso real y vuelve a los puntos de teoría cuando necesites refrescar un comando o una configuración.
 
-¿Ya dominas ping y Wireshark? → Repasa el [punto 4 de SNMP](/ApuntesRedes/11-diagnostico-monitorizacion/04-snmp) y el [punto 5 de syslog](/ApuntesRedes/11-diagnostico-monitorizacion/05-syslog-y-logging), que son la base de cualquier monitorización seria, y luego ponte a prueba con el [cierre Head First](/ApuntesRedes/11-diagnostico-monitorizacion/09-head-first) y sus boletines.
+¿Ya dominas ping y Wireshark? → Repasa el [punto 4 de SNMP](/ApuntesRedes/11-diagnostico-monitorizacion/04-snmp) y el [punto 5 de syslog](/ApuntesRedes/11-diagnostico-monitorizacion/05-syslog-y-logging), que son la base de cualquier monitorización seria, y luego ponte a prueba con el [cierre](/ApuntesRedes/11-diagnostico-monitorizacion/09-cierre) y sus boletines.
 
 **📍 Primer punto:** [01 · Metodología de diagnóstico](/ApuntesRedes/11-diagnostico-monitorizacion/01-metodologia-de-diagnostico)  
 **⏭️ Al acabar la unidad, continúa en [U12 · Cloud, virtualización y futuro](/ApuntesRedes/12-cloud-virtualizacion-futuro).

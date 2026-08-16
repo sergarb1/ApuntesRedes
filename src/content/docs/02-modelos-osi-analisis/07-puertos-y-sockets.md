@@ -82,7 +82,7 @@ Estos puertos los verás una y otra vez en laboratorios, Wireshark y boletines:
 | 67/68/UDP | DHCP | Configuración automática de IPs |
 | 21/TCP | FTP | Transferencia de archivos |
 
-Para *dónde se usa cada uno*, mira el [punto 6 de U01](/ApuntesRedes/01-fundamentos-redes/06-protocolos) y el lab del [cierre de unidad](/ApuntesRedes/02-modelos-osi-analisis/09-head-first): ahí capturarás varias de estas puertas de verdad.
+Para *dónde se usa cada uno*, mira el [punto 6 de U01](/ApuntesRedes/01-fundamentos-redes/06-protocolos) y el lab del [cierre de unidad](/ApuntesRedes/02-modelos-osi-analisis/09-cierre): ahí capturarás varias de estas puertas de verdad.
 
 ---
 

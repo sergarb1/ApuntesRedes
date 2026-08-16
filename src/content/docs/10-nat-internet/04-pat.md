@@ -88,7 +88,7 @@ Conexiones reales en un router doméstico:  unos pocos miles
 
 En la práctica, los routers domésticos se saturan con unos pocos miles de conexiones: cada entrada de la tabla consume memoria, y el procesador tiene que traducir paquete a paquete. Las empresas con mucha carga usan **varias IPs públicas con PAT** (un overload por IP) o balancean entre ellas.
 
-> ⚠️ **Límite realista:** el número teórico de ~65000 conexiones es solo eso: teórico. En el [Fireside del cierre](/ApuntesRedes/10-nat-internet/09-head-first) y en las [No Hay Preguntas Tontas](/ApuntesRedes/10-nat-internet/09-head-first) lo matizamos.
+> ⚠️ **Límite realista:** el número teórico de ~65000 conexiones es solo eso: teórico. En el [Fireside del cierre](/ApuntesRedes/10-nat-internet/09-cierre) y en las [No Hay Preguntas Tontas](/ApuntesRedes/10-nat-internet/09-cierre) lo matizamos.
 
 ---
 

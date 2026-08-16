@@ -11,7 +11,7 @@ La U10 (`10-nat-internet.md`) sigue el patrón antiguo: un único archivo compri
 ## Propuesta
 
 - Transformar `10-nat-internet.md` en **índice de unidad** con tabla de CEs (RA7: a-e).
-- Crear `10-nat-internet/` con **8 puntos de teoría ampliados** + **1 cierre Head First**, reutilizando el contenido factual (concepto/motivación de NAT, NAT estático, dinámico, PAT, NAT destino/port forwarding, tabla NAT, ALGs, problemas y soluciones, configuración Cisco).
+- Crear `10-nat-internet/` con **8 puntos de teoría ampliados** + **1 cierre de unidad**, reutilizando el contenido factual (concepto/motivación de NAT, NAT estático, dinámico, PAT, NAT destino/port forwarding, tabla NAT, ALGs, problemas y soluciones, configuración Cisco).
 - Continuidad encadenada: PRÓXIMAMENTE EN U11.
 - Sin diagramas D2 nuevos.
 - Sidebar: clave `10-nat-internet` (ya añadida).

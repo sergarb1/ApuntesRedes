@@ -53,7 +53,7 @@ Las OIDs se escriben como números separados por puntos y forman un **árbol jer
 1.3.6.1.2.1.25.3.3.1.2   → hrProcessorLoad (carga de CPU)
 ```
 
-Fíjate en el detalle de las dos de tráfico: `ifInOctets` y `ifOutOctets` son **contadores** (octetos acumulados desde que el equipo arrancó). El gestor los lee dos veces, resta y divide entre el tiempo para obtener la **velocidad**: leer una vez a secas no sirve para medir tráfico. Es el clásico error de principiante que verás en el [Crucigrama del cierre](/ApuntesRedes/11-diagnostico-monitorizacion/09-head-first).
+Fíjate en el detalle de las dos de tráfico: `ifInOctets` y `ifOutOctets` son **contadores** (octetos acumulados desde que el equipo arrancó). El gestor los lee dos veces, resta y divide entre el tiempo para obtener la **velocidad**: leer una vez a secas no sirve para medir tráfico. Es el clásico error de principiante que verás en el [Crucigrama del cierre](/ApuntesRedes/11-diagnostico-monitorizacion/09-cierre).
 
 ---
 

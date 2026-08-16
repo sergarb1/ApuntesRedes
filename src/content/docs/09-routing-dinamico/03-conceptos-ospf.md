@@ -77,7 +77,7 @@ El Hello es el "¿hay alguien ahí?" de OSPF. Se envía periódicamente para **d
 - **Intervalo Hello:** 10 segundos en redes broadcast.
 - **Intervalo Dead:** 40 segundos (4 × Hello). Si un vecino no oye Hello en 40s, lo declara muerto.
 
-> ⚠️ **Los timers deben coincidir** entre los dos lados del enlace. Si un router manda Hello cada 10s y el otro cada 30s, nunca formarán vecindad. Es la causa clásica de "OSPF no levanta" que verás en el [punto 8](/ApuntesRedes/09-routing-dinamico/08-ruta-por-defecto-y-diagnostico) y en el laboratorio del [cierre](/ApuntesRedes/09-routing-dinamico/09-head-first).
+> ⚠️ **Los timers deben coincidir** entre los dos lados del enlace. Si un router manda Hello cada 10s y el otro cada 30s, nunca formarán vecindad. Es la causa clásica de "OSPF no levanta" que verás en el [punto 8](/ApuntesRedes/09-routing-dinamico/08-ruta-por-defecto-y-diagnostico) y en el laboratorio del [cierre](/ApuntesRedes/09-routing-dinamico/09-cierre).
 
 ---
 

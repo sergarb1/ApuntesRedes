@@ -75,7 +75,7 @@ NAT rompe ese principio, y hay que ser consciente de ello:
 | Las aplicaciones hablan sin intermediarios | FTP, VoIP, juegos y VPN necesitan ayudas extra |
 | Sin tablas, sin traducciones | El router mantiene y gestiona la tabla NAT |
 
-Estas consecuencias no son "defectos": son el precio de compartir una IP pública entre cientos de equipos. Y de ellas salen los problemas que verás en el [punto 7](/ApuntesRedes/10-nat-internet/07-problemas-y-soluciones) y la discusión del [Fireside Chat del cierre](/ApuntesRedes/10-nat-internet/09-head-first).
+Estas consecuencias no son "defectos": son el precio de compartir una IP pública entre cientos de equipos. Y de ellas salen los problemas que verás en el [punto 7](/ApuntesRedes/10-nat-internet/07-problemas-y-soluciones) y la discusión del [Fireside Chat del cierre](/ApuntesRedes/10-nat-internet/09-cierre).
 
 ---
 

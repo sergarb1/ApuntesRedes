@@ -45,7 +45,7 @@ Al terminar, serás capaz de:
 | [06 · Cloud networking](/ApuntesRedes/12-cloud-virtualizacion-futuro/06-cloud-networking) | VPC, subnets, security groups, NAT (AWS) | Todos |
 | [07 · IoT, 5G y edge computing](/ApuntesRedes/12-cloud-virtualizacion-futuro/07-iot-5g-y-edge) | Dispositivos masivos, latencia y datos en el borde | Todos |
 | [08 · El futuro de Internet](/ApuntesRedes/12-cloud-virtualizacion-futuro/08-el-futuro-de-internet) | IPv8, RINA, NDN y los límites de IP | Todos |
-| [09 · Head First (cierre)](/ApuntesRedes/12-cloud-virtualizacion-futuro/09-head-first) | Sé la Nube, Fireside, Laboratorio Docker, Crucigrama… | Todos |
+| [09 · Cierre](/ApuntesRedes/12-cloud-virtualizacion-futuro/09-cierre) | Sé la Nube, Fireside, Laboratorio Docker, Crucigrama… | Todos |
 
 > 📖 **Flujo de lectura:** los 8 primeros puntos son teoría en progresión: primero "qué comprar" (modelos cloud), luego "dónde corre" (virtualización), después "cómo se conecta" (Docker, SDN, NFV, cloud), y por último "qué viene" (IoT, 5G, futuro). El 9º es el aterrizaje práctico: léelo justo después del 8º y antes de abrir los boletines.
 
@@ -78,9 +78,9 @@ Al terminar, serás capaz de:
 
 ## 🚪 ¿Por dónde empiezo?
 
-¿Llegas con dudas de los conceptos clásicos? Antes de entrar en la nube conviene tener frescos el [routing dinámico](/ApuntesRedes/09-routing-dinamico) y la [monitorización y diagnóstico](/ApuntesRedes/11-diagnostico-monitorizacion): aquí damos por sabido cómo se encamina un paquete y cómo se diagnostica un fallo. Un repaso rápido por el [Fireside de la U10](/ApuntesRedes/10-nat-internet/09-head-first) también te ayuda a entender qué es NAT y por qué en cloud aparece "reinventado" como Internet Gateway.
+¿Llegas con dudas de los conceptos clásicos? Antes de entrar en la nube conviene tener frescos el [routing dinámico](/ApuntesRedes/09-routing-dinamico) y la [monitorización y diagnóstico](/ApuntesRedes/11-diagnostico-monitorizacion): aquí damos por sabido cómo se encamina un paquete y cómo se diagnostica un fallo. Un repaso rápido por el [Fireside de la U10](/ApuntesRedes/10-nat-internet/09-cierre) también te ayuda a entender qué es NAT y por qué en cloud aparece "reinventado" como Internet Gateway.
 
-¿Ya dominas la base? Entonces arranca directamente en el [punto 1 · Modelos cloud](/ApuntesRedes/12-cloud-virtualizacion-futuro/01-modelos-cloud) y avanza en orden: cada capítulo enlaza con el siguiente. Si quieres el resumen visual de todo lo que vas a ver, échale un ojo al mapa de arriba y al [cierre de la unidad](/ApuntesRedes/12-cloud-virtualizacion-futuro/09-head-first), que es el broche final del curso.
+¿Ya dominas la base? Entonces arranca directamente en el [punto 1 · Modelos cloud](/ApuntesRedes/12-cloud-virtualizacion-futuro/01-modelos-cloud) y avanza en orden: cada capítulo enlaza con el siguiente. Si quieres el resumen visual de todo lo que vas a ver, échale un ojo al mapa de arriba y al [cierre de la unidad](/ApuntesRedes/12-cloud-virtualizacion-futuro/09-cierre), que es el broche final del curso.
 
 **📍 Primer punto:** [01 · Modelos cloud](/ApuntesRedes/12-cloud-virtualizacion-futuro/01-modelos-cloud)  
 **🏁 ¡Fin del viaje!** Completa los 9 capítulos, resuelve los boletines y reclama el logro de **Network Master**. Esta unidad cierra la asignatura... pero el aprendizaje de redes no termina aquí.

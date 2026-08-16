@@ -14,7 +14,7 @@ La U04 se organiza como un **libro de 9 capítulos**, replicando el patrón de U
 | 6 | `06-subnetting-paso-a-paso` | Prestar bits, fórmulas 2ⁿ y 2ʰ-2, ejemplo /24→4 subredes |
 | 7 | `07-vlsm` | Máscaras variables, ejemplo 4 departamentos con cálculo por paso |
 | 8 | `08-dhcp` | DORA, configuración router Cisco, Packet Tracer, exclusions |
-| 9 | `09-head-first` | ⭐ 🔥 🕵️ 🤬 ⚡ 🏆 🧠 🧩 💬 🤷 🎬 + ✅ CEs |
+| 9 | `09-cierre` | ⭐ 🔥 🕵️ 🤬 ⚡ 🏆 🧠 🧩 💬 🤷 🎬 + ✅ CEs |
 
 ## Convenciones por punto
 

@@ -56,7 +56,7 @@ ping 8.8.8.8 ✓ → ping google.com ✗    → DNS mal configurado (capa 7)
 ping google.com ✓ pero web no carga   → HTTP/HTTPS, proxy o servidor (capa 7)
 ```
 
-Cada línea de esta tabla es un mini-diagnóstico completo. Si lo memorizas, ya no vuelves a decir "no me va Internet" sin saber por dónde empezar. Y ojo: esta progresión es la misma que verás aplicada de forma interactiva en el [Sé el Diagnóstico del cierre](/ApuntesRedes/11-diagnostico-monitorizacion/09-head-first).
+Cada línea de esta tabla es un mini-diagnóstico completo. Si lo memorizas, ya no vuelves a decir "no me va Internet" sin saber por dónde empezar. Y ojo: esta progresión es la misma que verás aplicada de forma interactiva en el [Sé el Diagnóstico del cierre](/ApuntesRedes/11-diagnostico-monitorizacion/09-cierre).
 
 ---
 

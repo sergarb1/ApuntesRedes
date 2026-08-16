@@ -1,11 +1,11 @@
 ---
-title: "09 — Head First: consolida lo aprendido"
+title: "09 — Cierre: consolida lo aprendido"
 description: El cierre práctico de la unidad, con chicha y diagnóstico real 🔧
 ---
 
 <p><small>El cierre práctico de la unidad, con chicha y diagnóstico real 🔧</small></p>
 
-> 🗺️ **Estás en:** 🌐 **U01 · Fundamentos de redes** → 09 · Head First
+> 🗺️ **Estás en:** 🌐 **U01 · Fundamentos de redes** → 09 · Cierre
 
 ---
 

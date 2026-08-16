@@ -13,9 +13,9 @@
 - [x] 2.7 `07-seguridad-en-vlans.md`
 - [x] 2.8 `08-configuracion-y-verificacion.md`
 
-## 3. Cierre Head First
+## 3. Cierre de unidad
 
-- [x] 3.1 `09-head-first.md` (⭐ 🔥 🕵️ 🤬 ⚡ con fallo, 🏆 🧠 🧩 💬 🤷 🎬 con "PRÓXIMAMENTE EN U08" y ✅ CEs)
+- [x] 3.1 `09-cierre.md` (⭐ 🔥 🕵️ 🤬 ⚡ con fallo, 🏆 🧠 🧩 💬 🤷 🎬 con "PRÓXIMAMENTE EN U08" y ✅ CEs)
 
 ## 4. Boletines
 

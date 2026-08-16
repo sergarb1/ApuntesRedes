@@ -1,11 +1,11 @@
 ---
-title: "09 — Head First: consolida lo aprendido"
+title: "09 — Cierre: consolida lo aprendido"
 description: El cierre práctico con direcciones, túnel y laboratorio IPv6 🧠
 ---
 
 <p><small>El cierre práctico con direcciones, túnel y laboratorio IPv6 🧠</small></p>
 
-> 🗺️ **Estás en:** 🚀 **U05 · IPv6 y transición** → 09 · Head First
+> 🗺️ **Estás en:** 🚀 **U05 · IPv6 y transición** → 09 · Cierre
 
 ---
 

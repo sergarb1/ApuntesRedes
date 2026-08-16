@@ -43,7 +43,7 @@ Al terminar, serás capaz de:
 | [06 · ACLs: concepto y tipos](/ApuntesRedes/08-routing-acls/06-acls-conceptos) | Qué es una ACL, tipos, dónde aplicarla | Todos |
 | [07 · ACL estándar](/ApuntesRedes/08-routing-acls/07-acl-estandar) | Wildcards, colocación y verificación | Todos |
 | [08 · ACL extendida y nombrada](/ApuntesRedes/08-routing-acls/08-acl-extendida-y-nombrada) | `eq puerto`, `time-range`, `established` y named ACLs | Avanzado |
-| [09 · Head First (cierre)](/ApuntesRedes/08-routing-acls/09-head-first) | Be the Packet, Fireside, Laboratorio, Crucigrama… | Todos |
+| [09 · Cierre](/ApuntesRedes/08-routing-acls/09-cierre) | Be the Packet, Fireside, Laboratorio, Crucigrama… | Todos |
 
 > 📖 **Flujo de lectura:** los 8 primeros puntos son teoría en progresión. El 9º es el aterrizaje práctico: léelo justo después del 8º y antes de abrir los boletines.
 

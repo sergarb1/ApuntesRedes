@@ -1,11 +1,11 @@
 ---
-title: "09 — Head First: consolida lo aprendido"
+title: "09 — Cierre: consolida lo aprendido"
 description: El cierre práctico de OSPF, con laboratorio y diagnóstico real 🧠
 ---
 
 <p><small>El cierre práctico de OSPF, con laboratorio y diagnóstico real 🧠</small></p>
 
-> 🗺️ **Estás en:** 🗣️ **U09 · Routing dinámico OSPF** → 09 · Head First
+> 🗺️ **Estás en:** 🗣️ **U09 · Routing dinámico OSPF** → 09 · Cierre
 
 ---
 

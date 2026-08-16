@@ -163,4 +163,4 @@ Cuando la tabla está vacía con tráfico circulando, el sospechoso número uno 
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/10-nat-internet) · **Anterior:** [07 · Problemas y soluciones](/ApuntesRedes/10-nat-internet/07-problemas-y-soluciones) · **Siguiente:** [09 · Head First (cierre)](/ApuntesRedes/10-nat-internet/09-head-first)
+📚 [Volver al índice de la unidad](/ApuntesRedes/10-nat-internet) · **Anterior:** [07 · Problemas y soluciones](/ApuntesRedes/10-nat-internet/07-problemas-y-soluciones) · **Siguiente:** [09 · Cierre](/ApuntesRedes/10-nat-internet/09-cierre)

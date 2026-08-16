@@ -45,7 +45,7 @@ Al terminar, serás capaz de:
 | [06 · Subnetting paso a paso](/ApuntesRedes/04-ipv4-subnetting/06-subnetting-paso-a-paso) | Prestar bits, fórmulas, ejemplo completo | Todos |
 | [07 · VLSM](/ApuntesRedes/04-ipv4-subnetting/07-vlsm) | Máscara de longitud variable, ejemplo resuelto | Todos |
 | [08 · DHCP](/ApuntesRedes/04-ipv4-subnetting/08-dhcp) | DORA, configuración Cisco, Packet Tracer | Todos |
-| [09 · Head First (cierre)](/ApuntesRedes/04-ipv4-subnetting/09-head-first) | Be the Packet, Fireside, Laboratorio, Crucigrama… | Todos |
+| [09 · Cierre](/ApuntesRedes/04-ipv4-subnetting/09-cierre) | Be the Packet, Fireside, Laboratorio, Crucigrama… | Todos |
 
 > 📖 **Flujo de lectura:** los puntos 1 a 5 son teoría en progresión. En el 6 y el 7 se hacen los cálculos de verdad: subnetting clásico y VLSM. El 8 es DHCP, el repartidor automático de IPs. El 9º es el aterrizaje práctico: léelo justo después del 8º y antes de abrir los boletines.
 

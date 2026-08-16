@@ -121,4 +121,4 @@ Con `ip dhcp excluded-address 192.168.1.1 192.168.1.10` apartas, por ejemplo, el
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/04-ipv4-subnetting) · **Anterior:** [07 · VLSM](/ApuntesRedes/04-ipv4-subnetting/07-vlsm) · **Siguiente:** [09 · Head First](/ApuntesRedes/04-ipv4-subnetting/09-head-first)
+📚 [Volver al índice de la unidad](/ApuntesRedes/04-ipv4-subnetting) · **Anterior:** [07 · VLSM](/ApuntesRedes/04-ipv4-subnetting/07-vlsm) · **Siguiente:** [09 · Cierre](/ApuntesRedes/04-ipv4-subnetting/09-cierre)

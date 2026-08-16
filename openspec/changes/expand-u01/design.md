@@ -7,7 +7,7 @@ La U01 es la primera unidad del curso y, tras la llegada del Tema 0 (`add-tema0`
 **Goals:**
 - Dividir la U01 en un índice + 9 puntos navegables, cada uno ≈120–200 líneas.
 - Nivel de entrada cero: definir todo término (MAC, OSI, PDU, gateway…) en su primer uso, con analogías.
-- Mantener (y ampliar) las secciones Head First en el punto 9 con fallo intencionado en el laboratorio.
+- Mantener (y ampliar) las secciones de consolidación en el punto 9 con fallo intencionado en el laboratorio.
 - Tabla de CEs (RA1) en el índice de la unidad con estado de cobertura.
 - Encadenado correcto "anterior/siguiente" entre puntos y hacia la U02.
 
@@ -20,7 +20,7 @@ La U01 es la primera unidad del curso y, tras la llegada del Tema 0 (`add-tema0`
 
 ### D1: Estructura de archivos
 - Índice: `src/content/docs/01-fundamentos-redes.md` (tabla de CEs, contenidos, enlaces a boletines).
-- Puntos: `src/content/docs/01-fundamentos-redes/01-…md` … `09-head-first.md`.
+- Puntos: `src/content/docs/01-fundamentos-redes/01-…md` … `09-cierre.md`.
 - **Razón:** mismo patrón que `add-tema0`; slugs cortos estables ya conocidos por el PDF y la portada.
 
 ### D2: División en 9 puntos
@@ -32,7 +32,7 @@ La U01 es la primera unidad del curso y, tras la llegada del Tema 0 (`add-tema0`
 6. `06-protocolos` — qué son, puertos (well-known/registrados/dinámicos), TCP vs UDP, tabla de protocolos.
 7. `07-direcciones-mac-ip` — MAC (OUI), IPv4, máscara, direcciones especiales, pública vs privada, analogía completa.
 8. `08-conectividad-basica` — gateway, ping/ipconfig/arp/tracert, escenario completo, método en 6 pasos + diagrama ARP.
-9. `09-head-first` — cierre pedagógico: Be the Packet, Fireside, Quién Soy, CONRAD, Laboratorio, Logros, Atrévete, Crucigrama, Entrevista, FAQ, Post-Créditos.
+9. `09-cierre` — cierre pedagógico: Be the Packet, Fireside, Quién Soy, CONRAD, Laboratorio, Logros, Atrévete, Crucigrama, Entrevista, FAQ, Post-Créditos.
 - **Razón:** cada punto alcanza ~120–200 líneas sin hinchar el índice; el cierre pedagógico queda autoconsistente en un solo archivo.
 
 ### D3: Nivel de entrada cero

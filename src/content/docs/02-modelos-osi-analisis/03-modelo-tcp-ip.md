@@ -21,7 +21,7 @@ Surgió del proyecto **ARPANET** en los años 70, antes que OSI, y por eso ganó
 
 En 1984 la ISO publicó el modelo OSI como marco de referencia. Pero mientras tanto, los investigadores de ARPANET (el antepasado de Internet) ya habían construido una red que funcionaba con un modelo más simple, nacido de las cabeceras reales de sus protocolos: TCP (transporte) e IP (red).
 
-La lección histórica: **el que funciona se queda, aunque el académico sea más bonito**. El Fireside Chat del [cierre de la unidad](/ApuntesRedes/02-modelos-osi-analisis/09-head-first) dramatiza justo esta tensión.
+La lección histórica: **el que funciona se queda, aunque el académico sea más bonito**. El Fireside Chat del [cierre de la unidad](/ApuntesRedes/02-modelos-osi-analisis/09-cierre) dramatiza justo esta tensión.
 
 ---
 

@@ -136,4 +136,4 @@ Switch# show mac address-table secure
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/06-switching-stp) · **Anterior:** [07 · RSTP y PortFast](/ApuntesRedes/06-switching-stp/07-rstp-y-portfast) · **Siguiente:** [09 · Head First (cierre)](/ApuntesRedes/06-switching-stp/09-head-first)
+📚 [Volver al índice de la unidad](/ApuntesRedes/06-switching-stp) · **Anterior:** [07 · RSTP y PortFast](/ApuntesRedes/06-switching-stp/07-rstp-y-portfast) · **Siguiente:** [09 · Cierre](/ApuntesRedes/06-switching-stp/09-cierre)

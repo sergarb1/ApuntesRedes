@@ -89,7 +89,7 @@ SDN tiene un talón de Aquiles: **el controlador es un punto único**. Si se cae
 - Los switches guardan reglas de **fallback** para los flujos críticos.
 - Se combina con routing tradicional donde la resiliencia distribuida importa más que la centralización.
 
-En resumen: SDN no es "mejor" o "peor" que la red tradicional — es **otra forma de operar**, más programable y observable, con un coste: la disponibilidad del controlador. El [Fireside del cierre](/ApuntesRedes/12-cloud-virtualizacion-futuro/09-head-first) debate exactamente esta tensión.
+En resumen: SDN no es "mejor" o "peor" que la red tradicional — es **otra forma de operar**, más programable y observable, con un coste: la disponibilidad del controlador. El [Fireside del cierre](/ApuntesRedes/12-cloud-virtualizacion-futuro/09-cierre) debate exactamente esta tensión.
 
 ---
 

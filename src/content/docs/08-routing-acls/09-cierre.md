@@ -1,11 +1,11 @@
 ---
-title: "09 — Head First: consolida lo aprendido"
+title: "09 — Cierre: consolida lo aprendido"
 description: El cierre práctico de la unidad, con router, laboratorio y entrevista 🧭
 ---
 
 <p><small>El cierre práctico de la unidad, con router, laboratorio y entrevista 🧭</small></p>
 
-> 🗺️ **Estás en:** 🧭 **U08 · Routing y ACLs** → 09 · Head First
+> 🗺️ **Estás en:** 🧭 **U08 · Routing y ACLs** → 09 · Cierre
 
 ---
 

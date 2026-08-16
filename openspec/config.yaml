@@ -15,7 +15,7 @@ context: |
   Contenido: Tema 0 de introducción (sin boletín) + 12 unidades didácticas (U01-U12),
     cada unidad ampliada como "libro": un fichero Markdown por punto de teoría
     (src/content/docs/<unidad>/<nn>-<punto>.md) más una página índice de unidad.
-    Secciones obligatorias Head First: Sé el Paquete, Fireside Chat, ¿Quién Soy?,
+    Secciones obligatorias del cierre: Sé el Paquete, Fireside Chat, ¿Quién Soy?,
     CONRAD VS EL MUNDO, Laboratorio de Tortura (con fallo intencionado), Atrévete a Pensar,
     Crucigrama de Bits, Entrevista de trabajo, No hay preguntas tontas, Post-Créditos.
     Soluciones SIEMPRE en <details>. Boletines en src/content/docs/boletines/ con patrón

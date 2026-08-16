@@ -14,7 +14,7 @@ La U07 se organiza como un **libro de 9 capítulos**, replicando el patrón de U
 | 6 | `06-vtp-y-dtp` | VTP server/client/transparent, revision number y riesgo, DTP y `nonegotiate` |
 | 7 | `07-seguridad-en-vlans` | VACL, PVLAN, VLAN hopping, mitigaciones |
 | 8 | `08-configuracion-y-verificacion` | Packet Tracer paso a paso, `show vlan brief`, `show interface trunk`, troubleshooting |
-| 9 | `09-head-first` | ⭐ 🔥 🕵️ 🤬 ⚡ 🏆 🧠 🧩 💬 🤷 🎬 + ✅ CEs |
+| 9 | `09-cierre` | ⭐ 🔥 🕵️ 🤬 ⚡ 🏆 🧠 🧩 💬 🤷 🎬 + ✅ CEs |
 
 ## Convenciones por punto
 

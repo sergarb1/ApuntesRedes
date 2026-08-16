@@ -6,15 +6,15 @@ feature: contenido-unidad
 
 ## Contexto
 
-Tras la ampliación de U01 (`expand-u01`), la U02 (`02-modelos-osi-analisis.md`) es la segunda unidad del curso y sigue el patrón antiguo: un único archivo de ~590 líneas que comprime la teoría en un bloque y coloca las secciones Head First al final del mismo archivo. Incumple el estándar `contenido-unidad` (puntos de teoría en profundidad ≈120–200 líneas, cierre Head First obligatorio, tablas de CEs en el índice, flujo encadenado) y el estándar `contenido-boletin` (boletines con ≥8 ejercicios y pistas).
+Tras la ampliación de U01 (`expand-u01`), la U02 (`02-modelos-osi-analisis.md`) es la segunda unidad del curso y sigue el patrón antiguo: un único archivo de ~590 líneas que comprime la teoría en un bloque y coloca las secciones de consolidación al final del mismo archivo. Incumple el estándar `contenido-unidad` (puntos de teoría en profundidad ≈120–200 líneas, cierre de unidad obligatorio, tablas de CEs en el índice, flujo encadenado) y el estándar `contenido-boletin` (boletines con ≥8 ejercicios y pistas).
 
-El mismo patrón que se replicó en U01 debe aplicarse a U02: índice + subcarpeta de puntos en formato libro + cierre Head First separado + boletines ampliados.
+El mismo patrón que se replicó en U01 debe aplicarse a U02: índice + subcarpeta de puntos en formato libro + cierre de unidad separado + boletines ampliados.
 
 ## Propuesta
 
 - Se transforma `02-modelos-osi-analisis.md` en un **índice de la unidad**: ruta del paquete, objetivo, mapa de los 9 puntos, enlace a los 4 boletines y **tabla de CEs** (RA1: d, e, f, g) con estado de cobertura.
-- Se crea la subcarpeta `02-modelos-osi-analisis/` con **8 puntos de teoría ampliados** en formato "libro" + **1 cierre Head First** (`09-head-first.md`), reutilizando el contenido factual actual (OSI, TCP/IP, encapsulación, TCP/UDP, IP/Ethernet, puertos, Wireshark) y expandiéndolo con contexto, analogías, tablas, ejemplos resueltos y referencias cruzadas.
-- Se añade el cierre Head First con todas las secciones de consolidación, laboratorio con fallo intencionado y Post-Créditos coherente con U03.
+- Se crea la subcarpeta `02-modelos-osi-analisis/` con **8 puntos de teoría ampliados** en formato "libro" + **1 cierre de unidad** (`09-cierre.md`), reutilizando el contenido factual actual (OSI, TCP/IP, encapsulación, TCP/UDP, IP/Ethernet, puertos, Wireshark) y expandiéndolo con contexto, analogías, tablas, ejemplos resueltos y referencias cruzadas.
+- Se añade el cierre de unidad con todas las secciones de consolidación, laboratorio con fallo intencionado y Post-Créditos coherente con U03.
 - Los 3 diagramas D2 ya existentes aplicables (`modelo-osi-capas`, `dispositivos-osi`, `flujo-encapsulacion`) se reutilizan por referencia.
 - Sidebar: la unidad pasa a grupo desplegable con Índice + 9 puntos (patrón `u01Puntos`).
 - Boletines: inicial y avanzado se amplían a **8 ejercicios** con pistas en los por-resolver y soluciones desarrolladas 1:1 en los resueltos.

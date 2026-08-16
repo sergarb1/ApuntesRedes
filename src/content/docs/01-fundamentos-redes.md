@@ -41,7 +41,7 @@ Al terminar, serás capaz de:
 | [06 · Protocolos, el idioma](/ApuntesRedes/01-fundamentos-redes/06-protocolos) | Qué son, puertos, TCP vs UDP | Todos |
 | [07 · Direcciones MAC e IP](/ApuntesRedes/01-fundamentos-redes/07-direcciones-mac-ip) | MAC, IPv4 y máscara, especiales, públicas vs privadas | Todos |
 | [08 · Conectividad básica](/ApuntesRedes/01-fundamentos-redes/08-conectividad-basica) | Gateway, ping, arp, tracert y método de diagnóstico | Todos |
-| [09 · Head First (cierre)](/ApuntesRedes/01-fundamentos-redes/09-head-first) | Be the Packet, Fireside, Quién Soy, Laboratorio, Crucigrama… | Todos |
+| [09 · Cierre](/ApuntesRedes/01-fundamentos-redes/09-cierre) | Be the Packet, Fireside, Quién Soy, Laboratorio, Crucigrama… | Todos |
 
 > 📖 **Flujo de lectura:** los 8 primeros puntos son teoría en progresión. El 9º es el aterrizaje práctico: léelo justo después del 8º y antes de abrir los boletines.
 

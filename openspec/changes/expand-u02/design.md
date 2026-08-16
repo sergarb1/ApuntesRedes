@@ -14,7 +14,7 @@ La U02 se organiza como un **libro de 9 capítulos**, replicando el patrón de U
 | 6 | `06-ip-ethernet` | Cabecera IPv4, TTL, protocolo, MTU/fragmentación, trama Ethernet, ARP | — |
 | 7 | `07-puertos-y-sockets` | Puertos, socket, rangos, ejemplo de navegación | — |
 | 8 | `08-wireshark` | Interfaz, filtros, filtros por capa, colores, follow TCP stream | — |
-| 9 | `09-head-first` | ⭐ 🔥 🕵️ 🤬 ⚡ 🏆 🧠 🧩 💬 🤷 🎬 + ✅ CEs | — |
+| 9 | `09-cierre` | ⭐ 🔥 🕵️ 🤬 ⚡ 🏆 🧠 🧩 💬 🤷 🎬 + ✅ CEs | — |
 
 ## Convenciones por punto
 

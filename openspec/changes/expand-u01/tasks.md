@@ -14,9 +14,9 @@
 - [x] 2.7 `07-direcciones-mac-ip.md`
 - [x] 2.8 `08-conectividad-basica.md`
 
-## 3. Cierre Head First
+## 3. Cierre de unidad
 
-- [x] 3.1 `09-head-first.md` (â­ Zeal, ðŸ”¥ Fireside, ðŸ•µï¸ QuiÃ©n Soy, ðŸ¤¬ CONRAD, âš¡ Laboratorio con fallo, ðŸ§  AtrÃ©vete, ðŸ§© Crucigrama, ðŸ’¬ Entrevista, ðŸ¤· FAQ, ðŸŽ¬ Post-CrÃ©ditos con "PRÃ“XIMAMENTE EN U02")
+- [x] 3.1 `09-cierre.md` (â­ Zeal, ðŸ”¥ Fireside, ðŸ•µï¸ QuiÃ©n Soy, ðŸ¤¬ CONRAD, âš¡ Laboratorio con fallo, ðŸ§  AtrÃ©vete, ðŸ§© Crucigrama, ðŸ’¬ Entrevista, ðŸ¤· FAQ, ðŸŽ¬ Post-CrÃ©ditos con "PRÃ“XIMAMENTE EN U02")
 
 ## 4. VerificaciÃ³n
 

@@ -44,7 +44,7 @@ Al terminar, serás capaz de:
 | [06 · ICMPv6 y NDP](/ApuntesRedes/05-ipv6-transicion/06-icmpv6-y-ndp) | NS/NA, RS/RA, multicast en lugar de broadcast | Todos |
 | [07 · Mecanismos de transición](/ApuntesRedes/05-ipv6-transicion/07-mecanismos-de-transicion) | Dual Stack, túneles, NAT64/DNS64 | Todos |
 | [08 · Configuración IPv6](/ApuntesRedes/05-ipv6-transicion/08-configuracion-ipv6) | Estática en PC y router, verificación, Packet Tracer | Todos |
-| [09 · Head First (cierre)](/ApuntesRedes/05-ipv6-transicion/09-head-first) | Be the Packet, Fireside, Laboratorio, Crucigrama… | Todos |
+| [09 · Cierre](/ApuntesRedes/05-ipv6-transicion/09-cierre) | Be the Packet, Fireside, Laboratorio, Crucigrama… | Todos |
 
 > 📖 **Flujo de lectura:** los 8 primeros puntos son teoría en progresión. El 9º es el aterrizaje práctico: léelo justo después del 8º y antes de abrir los boletines.
 

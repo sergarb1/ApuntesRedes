@@ -14,7 +14,7 @@ La U11 se organiza como un **libro de 9 capítulos** (patrón U01/U02):
 | 6 | `06-netflow-y-ipfix` | Análisis de tráfico, exportación, casos de uso |
 | 7 | `07-herramientas-de-monitorizacion` | Zabbix, PRTG, Nagios, LibreNMS |
 | 8 | `08-caso-practico-de-diagnostico` | Caso completo de troubleshooting en Packet Tracer |
-| 9 | `09-head-first` | ⭐ 🔥 🕵️ 🤬 ⚡ 🏆 🧠 🧩 💬 🤷 🎬 + ✅ CEs |
+| 9 | `09-cierre` | ⭐ 🔥 🕵️ 🤬 ⚡ 🏆 🧠 🧩 💬 🤷 🎬 + ✅ CEs |
 
 ## Convenciones por punto
 

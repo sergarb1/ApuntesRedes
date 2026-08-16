@@ -34,7 +34,7 @@ PC con Dual Stack:
 - ✅ **Ventaja:** funciona con todo, sin encapsulación ni traducción extra; si una pila falla, la otra sigue.
 - ❌ **Desventaja:** hay que configurar y mantener el doble (routing, DNS, firewalls); más overhead en el plano de control.
 
-> 💡 **Regla de oro:** ante cualquier proyecto de migración, "Dual Stack si hay IPv6 nativo" es la respuesta que espera el entrevistador (lo verás en el Head First).
+> 💡 **Regla de oro:** ante cualquier proyecto de migración, "Dual Stack si hay IPv6 nativo" es la respuesta que espera el entrevistador (lo verás en el cierre).
 
 ---
 

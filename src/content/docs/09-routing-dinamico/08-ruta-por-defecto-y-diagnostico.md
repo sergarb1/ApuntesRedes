@@ -71,7 +71,7 @@ R1# debug ip ospf events           → Depurar eventos OSPF (¡con cuidado!)
 R1# show ip ospf interface         → Coste, timers y estado por interfaz
 ```
 
-> 💡 **Un truco de diagnóstico:** `show ip ospf neighbor` vacío pero el enlace con ping OK → el problema está en el **plano OSPF** (área, wildcard, timers, ACL). En cambio, si el ping ya falla, ni te molestes en mirar OSPF: el fallo está más abajo. El laboratorio del [cierre](/ApuntesRedes/09-routing-dinamico/09-head-first) y el boletín avanzado te harán practicar esta escalera.
+> 💡 **Un truco de diagnóstico:** `show ip ospf neighbor` vacío pero el enlace con ping OK → el problema está en el **plano OSPF** (área, wildcard, timers, ACL). En cambio, si el ping ya falla, ni te molestes en mirar OSPF: el fallo está más abajo. El laboratorio del [cierre](/ApuntesRedes/09-routing-dinamico/09-cierre) y el boletín avanzado te harán practicar esta escalera.
 
 ---
 
@@ -135,4 +135,4 @@ O*E2 0.0.0.0/0   [110/1] via 10.0.1.2, 00:05:12, Serial0/1/0
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/09-routing-dinamico) · **Anterior:** [07 · Configuración OSPF](/ApuntesRedes/09-routing-dinamico/07-configuracion-ospf) · **Siguiente:** [09 · Head First (cierre)](/ApuntesRedes/09-routing-dinamico/09-head-first)
+📚 [Volver al índice de la unidad](/ApuntesRedes/09-routing-dinamico) · **Anterior:** [07 · Configuración OSPF](/ApuntesRedes/09-routing-dinamico/07-configuracion-ospf) · **Siguiente:** [09 · Cierre](/ApuntesRedes/09-routing-dinamico/09-cierre)

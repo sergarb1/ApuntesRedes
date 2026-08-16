@@ -87,7 +87,7 @@ Ping a IP OK, pero nombres no resuelven → 7 Aplicación (DNS)
 La web carga lenta, con reenvíos → 4 Transporte (pérdidas TCP)
 ```
 
-Siempre se diagnostica **de abajo hacia arriba**: primero física, luego red, y al final aplicación. Es la metodología que verás aplicada en el [cierre de la unidad](/ApuntesRedes/02-modelos-osi-analisis/09-head-first) y en la U11 de diagnóstico.
+Siempre se diagnostica **de abajo hacia arriba**: primero física, luego red, y al final aplicación. Es la metodología que verás aplicada en el [cierre de la unidad](/ApuntesRedes/02-modelos-osi-analisis/09-cierre) y en la U11 de diagnóstico.
 
 ---
 

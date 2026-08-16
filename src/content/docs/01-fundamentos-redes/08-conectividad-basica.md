@@ -182,4 +182,4 @@ Qué concluimos con una mirada:
 > | Loopback | 127.0.0.1, tu propia máquina |
 > | TTL | Contador que evita bucles infinitos |
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/01-fundamentos-redes) · **Anterior:** [07 · Direcciones MAC e IP](/ApuntesRedes/01-fundamentos-redes/07-direcciones-mac-ip) · **Siguiente:** [09 · Head First](/ApuntesRedes/01-fundamentos-redes/09-head-first)
+📚 [Volver al índice de la unidad](/ApuntesRedes/01-fundamentos-redes) · **Anterior:** [07 · Direcciones MAC e IP](/ApuntesRedes/01-fundamentos-redes/07-direcciones-mac-ip) · **Siguiente:** [09 · Cierre](/ApuntesRedes/01-fundamentos-redes/09-cierre)

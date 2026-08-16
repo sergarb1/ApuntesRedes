@@ -45,7 +45,7 @@ Al terminar, serás capaz de:
 | [06 · El coste OSPF](/ApuntesRedes/09-routing-dinamico/06-coste-ospf) | Cómo OSPF convierte ancho de banda en coste | Todos |
 | [07 · Configuración OSPF](/ApuntesRedes/09-routing-dinamico/07-configuracion-ospf) | Configuración básica, multiárea y verificación inicial | Todos |
 | [08 · Ruta por defecto y diagnóstico](/ApuntesRedes/09-routing-dinamico/08-ruta-por-defecto-y-diagnostico) | `default-information originate` y comandos de diagnóstico | Todos |
-| [09 · Head First (cierre)](/ApuntesRedes/09-routing-dinamico/09-head-first) | Be the Router, Fireside, Laboratorio, Crucigrama… | Todos |
+| [09 · Cierre](/ApuntesRedes/09-routing-dinamico/09-cierre) | Be the Router, Fireside, Laboratorio, Crucigrama… | Todos |
 
 > 📖 **Flujo de lectura:** los 8 primeros puntos son teoría en progresión. El 9º es el aterrizaje práctico: léelo justo después del 8º y antes de abrir los boletines.
 

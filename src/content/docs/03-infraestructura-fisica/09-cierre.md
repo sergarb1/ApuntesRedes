@@ -1,11 +1,11 @@
 ---
-title: "09 — Head First: consolida lo aprendido"
+title: "09 — Cierre: consolida lo aprendido"
 description: El cierre práctico de la U03, con cables, luz y caos controlado 🔌
 ---
 
 <p><small>El cierre práctico de la U03, con cables, luz y caos controlado 🔌</small></p>
 
-> 🗺️ **Estás en:** 🔌 **U03 · Infraestructura física** → 09 · Head First
+> 🗺️ **Estás en:** 🔌 **U03 · Infraestructura física** → 09 · Cierre
 
 ---
 

@@ -56,7 +56,7 @@ const unidadesExpandidas = {
     { slug: '01-fundamentos-redes/06-protocolos', label: '6 · Protocolos' },
     { slug: '01-fundamentos-redes/07-direcciones-mac-ip', label: '7 · MAC e IP' },
     { slug: '01-fundamentos-redes/08-conectividad-basica', label: '8 · Conectividad básica' },
-    { slug: '01-fundamentos-redes/09-head-first', label: '9 · Head First' },
+    { slug: '01-fundamentos-redes/09-cierre', label: '9 · Cierre' },
   ],
   '02-modelos-osi-analisis': [
     { slug: '02-modelos-osi-analisis/01-modelo-osi', label: '1 · El modelo OSI' },
@@ -67,7 +67,7 @@ const unidadesExpandidas = {
     { slug: '02-modelos-osi-analisis/06-ip-ethernet', label: '6 · IP y Ethernet' },
     { slug: '02-modelos-osi-analisis/07-puertos-y-sockets', label: '7 · Puertos y sockets' },
     { slug: '02-modelos-osi-analisis/08-wireshark', label: '8 · Wireshark' },
-    { slug: '02-modelos-osi-analisis/09-head-first', label: '9 · Head First' },
+    { slug: '02-modelos-osi-analisis/09-cierre', label: '9 · Cierre' },
   ],
   '07-vlans': [
     { slug: '07-vlans/01-que-es-una-vlan', label: '1 · ¿Qué es una VLAN?' },
@@ -78,7 +78,7 @@ const unidadesExpandidas = {
     { slug: '07-vlans/06-vtp-y-dtp', label: '6 · VTP y DTP' },
     { slug: '07-vlans/07-seguridad-en-vlans', label: '7 · Seguridad en VLANs' },
     { slug: '07-vlans/08-configuracion-y-verificacion', label: '8 · Configuración y verificación' },
-    { slug: '07-vlans/09-head-first', label: '9 · Head First' },
+    { slug: '07-vlans/09-cierre', label: '9 · Cierre' },
   ],
   '08-routing-acls': [
     { slug: '08-routing-acls/01-componentes-del-router', label: '1 · Componentes del router' },
@@ -89,7 +89,7 @@ const unidadesExpandidas = {
     { slug: '08-routing-acls/06-acls-conceptos', label: '6 · ACLs: concepto y tipos' },
     { slug: '08-routing-acls/07-acl-estandar', label: '7 · ACL estándar' },
     { slug: '08-routing-acls/08-acl-extendida-y-nombrada', label: '8 · ACL extendida y nombrada' },
-    { slug: '08-routing-acls/09-head-first', label: '9 · Head First' },
+    { slug: '08-routing-acls/09-cierre', label: '9 · Cierre' },
   ],
   '03-infraestructura-fisica': [
     { slug: '03-infraestructura-fisica/01-medios-de-transmision', label: '1 · Medios de transmisión' },
@@ -100,7 +100,7 @@ const unidadesExpandidas = {
     { slug: '03-infraestructura-fisica/06-wifi', label: '6 · WiFi' },
     { slug: '03-infraestructura-fisica/07-conceptos-fisicos', label: '7 · Conceptos físicos clave' },
     { slug: '03-infraestructura-fisica/08-cableado-estructurado', label: '8 · Cableado estructurado' },
-    { slug: '03-infraestructura-fisica/09-head-first', label: '9 · Head First' },
+    { slug: '03-infraestructura-fisica/09-cierre', label: '9 · Cierre' },
   ],
   '04-ipv4-subnetting': [
     { slug: '04-ipv4-subnetting/01-estructura-ipv4', label: '1 · Estructura de IPv4' },
@@ -111,7 +111,7 @@ const unidadesExpandidas = {
     { slug: '04-ipv4-subnetting/06-subnetting-paso-a-paso', label: '6 · Subnetting paso a paso' },
     { slug: '04-ipv4-subnetting/07-vlsm', label: '7 · VLSM' },
     { slug: '04-ipv4-subnetting/08-dhcp', label: '8 · DHCP' },
-    { slug: '04-ipv4-subnetting/09-head-first', label: '9 · Head First' },
+    { slug: '04-ipv4-subnetting/09-cierre', label: '9 · Cierre' },
   ],
   '05-ipv6-transicion': [
     { slug: '05-ipv6-transicion/01-estructura-ipv6', label: '1 · Estructura de IPv6' },
@@ -122,7 +122,7 @@ const unidadesExpandidas = {
     { slug: '05-ipv6-transicion/06-icmpv6-y-ndp', label: '6 · ICMPv6 y NDP' },
     { slug: '05-ipv6-transicion/07-mecanismos-de-transicion', label: '7 · Mecanismos de transición' },
     { slug: '05-ipv6-transicion/08-configuracion-ipv6', label: '8 · Configuración IPv6' },
-    { slug: '05-ipv6-transicion/09-head-first', label: '9 · Head First' },
+    { slug: '05-ipv6-transicion/09-cierre', label: '9 · Cierre' },
   ],
   '06-switching-stp': [
     { slug: '06-switching-stp/01-que-es-un-switch', label: '1 · ¿Qué es un switch?' },
@@ -133,7 +133,7 @@ const unidadesExpandidas = {
     { slug: '06-switching-stp/06-puertos-y-estados-stp', label: '6 · Puertos y estados STP' },
     { slug: '06-switching-stp/07-rstp-y-portfast', label: '7 · RSTP y PortFast' },
     { slug: '06-switching-stp/08-port-security', label: '8 · Port Security' },
-    { slug: '06-switching-stp/09-head-first', label: '9 · Head First' },
+    { slug: '06-switching-stp/09-cierre', label: '9 · Cierre' },
   ],
   '09-routing-dinamico': [
     { slug: '09-routing-dinamico/01-de-estatico-a-dinamico', label: '1 · De estático a dinámico' },
@@ -144,7 +144,7 @@ const unidadesExpandidas = {
     { slug: '09-routing-dinamico/06-coste-ospf', label: '6 · El coste OSPF' },
     { slug: '09-routing-dinamico/07-configuracion-ospf', label: '7 · Configuración OSPF' },
     { slug: '09-routing-dinamico/08-ruta-por-defecto-y-diagnostico', label: '8 · Ruta por defecto y diagnóstico' },
-    { slug: '09-routing-dinamico/09-head-first', label: '9 · Head First' },
+    { slug: '09-routing-dinamico/09-cierre', label: '9 · Cierre' },
   ],
   '10-nat-internet': [
     { slug: '10-nat-internet/01-que-es-nat', label: '1 · ¿Qué es NAT?' },
@@ -155,7 +155,7 @@ const unidadesExpandidas = {
     { slug: '10-nat-internet/06-tabla-nat-y-verificacion', label: '6 · Tabla NAT y verificación' },
     { slug: '10-nat-internet/07-problemas-y-soluciones', label: '7 · Problemas y soluciones' },
     { slug: '10-nat-internet/08-configuracion-completa', label: '8 · Configuración completa' },
-    { slug: '10-nat-internet/09-head-first', label: '9 · Head First' },
+    { slug: '10-nat-internet/09-cierre', label: '9 · Cierre' },
   ],
   '11-diagnostico-monitorizacion': [
     { slug: '11-diagnostico-monitorizacion/01-metodologia-de-diagnostico', label: '1 · Metodología de diagnóstico' },
@@ -166,7 +166,7 @@ const unidadesExpandidas = {
     { slug: '11-diagnostico-monitorizacion/06-netflow-y-ipfix', label: '6 · NetFlow e IPFIX' },
     { slug: '11-diagnostico-monitorizacion/07-herramientas-de-monitorizacion', label: '7 · Herramientas de monitorización' },
     { slug: '11-diagnostico-monitorizacion/08-caso-practico-de-diagnostico', label: '8 · Caso práctico de diagnóstico' },
-    { slug: '11-diagnostico-monitorizacion/09-head-first', label: '9 · Head First' },
+    { slug: '11-diagnostico-monitorizacion/09-cierre', label: '9 · Cierre' },
   ],
   '12-cloud-virtualizacion-futuro': [
     { slug: '12-cloud-virtualizacion-futuro/01-modelos-cloud', label: '1 · Modelos cloud' },
@@ -177,7 +177,7 @@ const unidadesExpandidas = {
     { slug: '12-cloud-virtualizacion-futuro/06-cloud-networking', label: '6 · Cloud networking' },
     { slug: '12-cloud-virtualizacion-futuro/07-iot-5g-y-edge', label: '7 · IoT, 5G y edge computing' },
     { slug: '12-cloud-virtualizacion-futuro/08-el-futuro-de-internet', label: '8 · El futuro de Internet' },
-    { slug: '12-cloud-virtualizacion-futuro/09-head-first', label: '9 · Head First' },
+    { slug: '12-cloud-virtualizacion-futuro/09-cierre', label: '9 · Cierre' },
   ],
 };
 

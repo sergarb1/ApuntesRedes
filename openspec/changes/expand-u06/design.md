@@ -14,7 +14,7 @@ La U06 se organiza como un **libro de 9 capítulos** (patrón U01/U02):
 | 6 | `06-puertos-y-estados-stp` | RP/DP/AP/BP, estados y tiempos de convergencia |
 | 7 | `07-rstp-y-portfast` | 802.1w, convergencia rápida, PortFast, BPDUGuard |
 | 8 | `08-port-security` | maximum, sticky, violaciones, errdisable |
-| 9 | `09-head-first` | ⭐ 🔥 🕵️ 🤬 ⚡ 🏆 🧠 🧩 💬 🤷 🎬 + ✅ CEs |
+| 9 | `09-cierre` | ⭐ 🔥 🕵️ 🤬 ⚡ 🏆 🧠 🧩 💬 🤷 🎬 + ✅ CEs |
 
 ## Convenciones por punto
 

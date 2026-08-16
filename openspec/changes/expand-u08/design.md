@@ -14,7 +14,7 @@ La U08 se organiza como un **libro de 9 capítulos**, replicando el patrón de U
 | 6 | `06-acls-conceptos` | Qué son, deny any implícito, tipos, in/out, colocación |
 | 7 | `07-acl-estandar` | Sintaxis, wildcard, aplicación, verificación `show access-lists` |
 | 8 | `08-acl-extendida-y-nombrada` | Extendida (puertos/protocolos), named, `time-range`, `established`, troubleshooting |
-| 9 | `09-head-first` | ⭐ 🔥 🕵️ 🤬 ⚡ 🏆 🧠 🧩 💬 🤷 🎬 + ✅ CEs |
+| 9 | `09-cierre` | ⭐ 🔥 🕵️ 🤬 ⚡ 🏆 🧠 🧩 💬 🤷 🎬 + ✅ CEs |
 
 ## Convenciones por punto
 

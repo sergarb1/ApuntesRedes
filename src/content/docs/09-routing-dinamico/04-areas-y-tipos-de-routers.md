@@ -48,7 +48,7 @@ Es el **núcleo** del sistema OSPF. Reglas de oro:
 - Los **ABR** conectan áreas periféricas al Área 0.
 - Si un área no puede conectarse físicamente al Área 0, se necesita un **túnel virtual** (vlink).
 
-> ⚠️ **Por qué esta regla:** OSPF usa el Área 0 como punto de no retorno para evitar **bucles de routing inter-área**. Es la misma lógica de "todas las rutas pasan por el centro": con un único punto de entrada/salida, no hay caminos cruzados que se pisen. El fallo intencionado del [laboratorio de la unidad](/ApuntesRedes/09-routing-dinamico/09-head-first) explota exactamente esto: dos áreas conectadas entre sí sin pasar por el Área 0 **no se comunican**.
+> ⚠️ **Por qué esta regla:** OSPF usa el Área 0 como punto de no retorno para evitar **bucles de routing inter-área**. Es la misma lógica de "todas las rutas pasan por el centro": con un único punto de entrada/salida, no hay caminos cruzados que se pisen. El fallo intencionado del [laboratorio de la unidad](/ApuntesRedes/09-routing-dinamico/09-cierre) explota exactamente esto: dos áreas conectadas entre sí sin pasar por el Área 0 **no se comunican**.
 
 ---
 

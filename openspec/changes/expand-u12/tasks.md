@@ -13,9 +13,9 @@
 - [x] 2.7 `07-iot-5g-y-edge.md`
 - [x] 2.8 `08-el-futuro-de-internet.md`
 
-## 3. Cierre Head First
+## 3. Cierre de unidad
 
-- [x] 3.1 `09-head-first.md` (⭐ 🔥 🕵️ 🤬 ⚡ con fallo, 🏆 🧠 🧩 💬 🤷 🎬 + CEs; fin de la asignatura, sin PRÓXIMAMENTE EN U13)
+- [x] 3.1 `09-cierre.md` (⭐ 🔥 🕵️ 🤬 ⚡ con fallo, 🏆 🧠 🧩 💬 🤷 🎬 + CEs; fin de la asignatura, sin PRÓXIMAMENTE EN U13)
 
 ## 4. Boletines
 

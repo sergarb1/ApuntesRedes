@@ -28,9 +28,9 @@ Cada punto debe tratarse en profundidad, no como resumen.
 - **WHEN** el punto trata una sección temática (topologías, dispositivos, protocolos, direccionamiento...)
 - **THEN** cada elemento de esa sección (cada topología, cada dispositivo, cada protocolo) tiene su propia explicación desarrollada y no una mera enumeración
 
-### Requirement: Cierre Head First obligatorio
+### Requirement: Cierre de unidad obligatorio
 
-La unidad conserva las secciones de estilo Head First del proyecto.
+La unidad conserva las secciones de consolidación del proyecto.
 
 #### Scenario: Secciones de consolidación presentes
 - **WHEN** termina la lectura de la unidad

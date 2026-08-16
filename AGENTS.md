@@ -6,7 +6,7 @@ Este archivo ayuda a cualquier agente LLM (como opencode, Claude, ChatGPT, etc.)
 
 ## 📋 Descripción del proyecto
 
-Apuntes del módulo **PAR** (Planificación y Administración de Redes) para CFGS de Administración de Sistemas Informáticos en Red. 13 secciones didácticas (Tema 0 + 12 unidades) con enfoque 80% práctico, estilo _Head First_. Publicado como web estática con Astro + Starlight + GitHub Pages.
+Apuntes del módulo **PAR** (Planificación y Administración de Redes) para CFGS de Administración de Sistemas Informáticos en Red. 13 secciones didácticas (Tema 0 + 12 unidades) con enfoque 80% práctico y un estilo conversacional con humor. Publicado como web estática con Astro + Starlight + GitHub Pages.
 
 ---
 
@@ -26,7 +26,7 @@ Apuntes del módulo **PAR** (Planificación y Administración de Redes) para CFG
 
 ```
 src/content/docs/            → Secciones en Markdown (raíz, índice)
-src/content/docs/00-introduccion/… → 9 puntos por sección (01-…, 09-head-first)
+src/content/docs/00-introduccion/… → 9 puntos por sección (01-…, 09-cierre)
 src/content/docs/boletines/  → Ejercicios (inicial, avanzado + resueltos)
 src/styles/custom.css        → CSS del tema (azul #2563eb + teal #4ecdc4, Geist Sans, glassmorphism)
 src/assets/logo.svg          → Logo
@@ -140,7 +140,7 @@ npm run diagrams  # Generar diagramas con D2 (Terrastruct)
 
 1. **NO crear versiones en valenciano** — Solo castellano.
 2. **NO modificar `astro.config.mjs`** a menos que sea necesario para nuevas secciones.
-3. **Siempre mantener las secciones Head First** — cada unidad debe tener todas las secciones enumeradas arriba.
+3. **Siempre mantener las secciones obligatorias** — cada unidad debe tener todas las secciones enumeradas arriba.
 4. **Los ejercicios SIEMPRE con solución** en `<details>`.
 5. **Laboratorios SIEMPRE con fallo intencionado** — el 80% práctico es obligatorio.
 6. **Los boletines siguen el patrón:** `inicial` (fácil) y `avanzado` (difícil), cada uno con su `-resuelto`, en `src/content/docs/boletines/` con nombre `boletin-UXX-inicial(-resuelto).md` / `boletin-UXX-avanzado(-resuelto).md`.

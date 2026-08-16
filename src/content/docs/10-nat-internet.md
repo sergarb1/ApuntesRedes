@@ -44,7 +44,7 @@ Al terminar, serás capaz de:
 | [06 · Tabla NAT y verificación](/ApuntesRedes/10-nat-internet/06-tabla-nat-y-verificacion) | Campos de la tabla, timeouts y comandos show | Todos |
 | [07 · Problemas y soluciones](/ApuntesRedes/10-nat-internet/07-problemas-y-soluciones) | ALGs, UPnP, NAT-T y WiFi vs WiMax | Todos |
 | [08 · Configuración completa](/ApuntesRedes/10-nat-internet/08-configuracion-completa) | El laboratorio Packet Tracer de principio a fin | Todos |
-| [09 · Head First (cierre)](/ApuntesRedes/10-nat-internet/09-head-first) | Sé el NAT, Fireside, Laboratorio de Tortura, Crucigrama… | Todos |
+| [09 · Cierre](/ApuntesRedes/10-nat-internet/09-cierre) | Sé el NAT, Fireside, Laboratorio de Tortura, Crucigrama… | Todos |
 
 > 📖 **Flujo de lectura:** los 8 primeros puntos son teoría en progresión. El 9º es el aterrizaje práctico: léelo justo después del 8º y antes de abrir los boletines.
 

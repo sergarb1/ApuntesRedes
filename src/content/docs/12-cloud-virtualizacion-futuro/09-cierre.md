@@ -1,11 +1,11 @@
 ---
-title: "09 — Head First (cierre)"
+title: "09 — Cierre: consolida lo aprendido"
 description: El broche final de la asignatura, con nube y futuro 🎬
 ---
 
 <p><small>El broche final de la asignatura, con nube y futuro 🎬</small></p>
 
-> 🗺️ **Estás en:** ☁️ U12 → 09 · Head First (cierre)
+> 🗺️ **Estás en:** ☁️ U12 → 09 · Cierre
 
 ---
 

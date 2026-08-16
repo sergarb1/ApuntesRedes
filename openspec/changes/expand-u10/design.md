@@ -14,7 +14,7 @@ La U10 se organiza como un **libro de 9 capítulos** (patrón U01/U02):
 | 6 | `06-tabla-nat-y-verificacion` | Tabla NAT, campos, show/clear/debug, timeouts |
 | 7 | `07-problemas-y-soluciones` | ALGs FTP/VoIP, UPnP, NAT-T, extremo a extremo |
 | 8 | `08-configuracion-completa` | Caso completo en Packet Tracer |
-| 9 | `09-head-first` | ⭐ 🔥 🕵️ 🤬 ⚡ 🏆 🧠 🧩 💬 🤷 🎬 + ✅ CEs |
+| 9 | `09-cierre` | ⭐ 🔥 🕵️ 🤬 ⚡ 🏆 🧠 🧩 💬 🤷 🎬 + ✅ CEs |
 
 ## Convenciones por punto
 

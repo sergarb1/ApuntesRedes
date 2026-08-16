@@ -43,7 +43,7 @@ Al terminar, serás capaz de:
 | [06 · IP y Ethernet](/ApuntesRedes/02-modelos-osi-analisis/06-ip-ethernet) | Cabecera IPv4, TTL, MTU, trama, ARP | Todos |
 | [07 · Puertos y sockets](/ApuntesRedes/02-modelos-osi-analisis/07-puertos-y-sockets) | Puertos, socket, rangos, ejemplo navegación | Todos |
 | [08 · Wireshark](/ApuntesRedes/02-modelos-osi-analisis/08-wireshark) | Interfaz, filtros, colores, seguimiento de flujo TCP | Todos |
-| [09 · Head First (cierre)](/ApuntesRedes/02-modelos-osi-analisis/09-head-first) | Be the Packet, Fireside, Laboratorio, Crucigrama… | Todos |
+| [09 · Cierre](/ApuntesRedes/02-modelos-osi-analisis/09-cierre) | Be the Packet, Fireside, Laboratorio, Crucigrama… | Todos |
 
 > 📖 **Flujo de lectura:** los 8 primeros puntos son teoría en progresión. El 9º es el aterrizaje práctico: léelo justo después del 8º y antes de abrir los boletines.
 

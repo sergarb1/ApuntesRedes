@@ -1,11 +1,11 @@
 ---
-title: "09 — Head First: consolida lo aprendido"
+title: "09 — Cierre: consolida lo aprendido"
 description: El cierre práctico de la unidad, con subnetting, VLSM, DHCP y diagnóstico real 🧮
 ---
 
 <p><small>El cierre práctico de la unidad, con subnetting, VLSM, DHCP y diagnóstico real 🧮</small></p>
 
-> 🗺️ **Estás en:** 🧮 **U04 · IPv4 y subnetting** → 09 · Head First
+> 🗺️ **Estás en:** 🧮 **U04 · IPv4 y subnetting** → 09 · Cierre
 
 ---
 

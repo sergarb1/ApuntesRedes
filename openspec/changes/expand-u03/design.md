@@ -12,7 +12,7 @@
 | 6 | `06-wifi` | Estándares 802.11 (n/ac/ax/be), consideraciones prácticas |
 | 7 | `07-conceptos-fisicos` | Ancho de banda, throughput, latencia, atenuación, diafonía (NEXT/FEXT) |
 | 8 | `08-cableado-estructurado` | TIA/EIA-568, latiguillo, keystone, patch panel, cable horizontal |
-| 9 | `09-head-first` | ⭐ 🔥 🕵️ 🤬 ⚡ 🏆 🧠 🧩 💬 🤷 🎬 + ✅ CEs |
+| 9 | `09-cierre` | ⭐ 🔥 🕵️ 🤬 ⚡ 🏆 🧠 🧩 💬 🤷 🎬 + ✅ CEs |
 
 ## Sidebar
 

@@ -14,7 +14,7 @@ La U05 se organiza como un **libro de 9 capítulos**, replicando el patrón de U
 | 6 | `06-icmpv6-y-ndp` | NS/NA, RS/RA, tabla IPv4↔IPv6 |
 | 7 | `07-mecanismos-de-transicion` | Dual Stack, túneles, NAT64/DNS64 |
 | 8 | `08-configuracion-ipv6` | Estática en PC y router, `ipv6 unicast-routing`, Packet Tracer |
-| 9 | `09-head-first` | ⭐ 🔥 🕵️ 🤬 ⚡ 🏆 🧠 🧩 💬 🤷 🎬 + ✅ CEs |
+| 9 | `09-cierre` | ⭐ 🔥 🕵️ 🤬 ⚡ 🏆 🧠 🧩 💬 🤷 🎬 + ✅ CEs |
 
 ## Convenciones por punto
 

@@ -1,7 +1,7 @@
 # Apuntes PAR — Planificación y Administración de Redes
 
 > **Aprende redes como si la red se fuera a caer mañana.**  
-> Tema 0 + 12 unidades didácticas · 80% práctico · Estilo _Head First_
+> Tema 0 + 12 unidades didácticas · 80% práctico · Estilo conversacional
 
 **CC BY-SA 4.0** — [Sergi Garcia Barea](https://github.com/sergarb1)
 
@@ -110,7 +110,7 @@ src/
 │   ├── docs/                     → Tema 0 + 12 unidades en Markdown
 │   │   ├── index.md              → Portada con hero + cards
 │   │   ├── 00-introduccion.md …  → Índice de cada sección
-│   │   ├── 00-introduccion/      → 9 puntos por sección (01-…, 09-head-first)
+│   │   ├── 00-introduccion/      → 9 puntos por sección (01-…, 09-cierre)
 │   │   └── boletines/            → Ejercicios (inicial, avanzado + resueltos)
 │   └── config.ts                 → Colecciones de contenido
 ├── styles/

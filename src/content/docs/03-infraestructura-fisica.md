@@ -43,7 +43,7 @@ Al terminar, serás capaz de:
 | [06 · WiFi](/ApuntesRedes/03-infraestructura-fisica/06-wifi) | Estándares 802.11 y las 4 mentiras de la velocidad WiFi | Todos |
 | [07 · Conceptos físicos clave](/ApuntesRedes/03-infraestructura-fisica/07-conceptos-fisicos) | Ancho de banda, throughput, latencia, atenuación, diafonía | Todos |
 | [08 · Cableado estructurado](/ApuntesRedes/03-infraestructura-fisica/08-cableado-estructurado) | TIA/EIA-568, latiguillos, keystones, patch panels y ventajas | Todos |
-| [09 · Head First (cierre)](/ApuntesRedes/03-infraestructura-fisica/09-head-first) | Be the Bit, Fireside, Laboratorio de crimpado, Crucigrama… | Todos |
+| [09 · Cierre](/ApuntesRedes/03-infraestructura-fisica/09-cierre) | Be the Bit, Fireside, Laboratorio de crimpado, Crucigrama… | Todos |
 
 > 📖 **Flujo de lectura:** los 8 primeros puntos son teoría en progresión. El 9º es el aterrizaje práctico: léelo justo después del 8º y antes de abrir los boletines.
 

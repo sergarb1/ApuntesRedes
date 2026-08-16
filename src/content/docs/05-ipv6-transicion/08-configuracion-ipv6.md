@@ -86,7 +86,7 @@ Success rate is 100 percent (5/5)
 
 En un **PC**, equivalentes: `ipconfig /all` (Windows, dirección IPv6 + gateway LLA) o `ip -6 addr` y `ip -6 route` (Linux). El `ping` IPv6 se llama `ping -6` en Windows y `ping6` en algunos Linux.
 
-> 💡 **Regla de diagnóstico:** si `show ipv6 interface brief` no muestra la dirección que configuraste en una interfaz, es que la config no "entró" o la interfaz está shutdown. Es exactamente el fallo del ⚡ Laboratorio del [punto 9](/ApuntesRedes/05-ipv6-transicion/09-head-first).
+> 💡 **Regla de diagnóstico:** si `show ipv6 interface brief` no muestra la dirección que configuraste en una interfaz, es que la config no "entró" o la interfaz está shutdown. Es exactamente el fallo del ⚡ Laboratorio del [punto 9](/ApuntesRedes/05-ipv6-transicion/09-cierre).
 
 ---
 
@@ -133,4 +133,4 @@ En un **PC**, equivalentes: `ipconfig /all` (Windows, dirección IPv6 + gateway 
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/05-ipv6-transicion) · **Anterior:** [07 · Mecanismos de transición](/ApuntesRedes/05-ipv6-transicion/07-mecanismos-de-transicion) · **Siguiente:** [09 · Head First (cierre)](/ApuntesRedes/05-ipv6-transicion/09-head-first)
+📚 [Volver al índice de la unidad](/ApuntesRedes/05-ipv6-transicion) · **Anterior:** [07 · Mecanismos de transición](/ApuntesRedes/05-ipv6-transicion/07-mecanismos-de-transicion) · **Siguiente:** [09 · Cierre](/ApuntesRedes/05-ipv6-transicion/09-cierre)

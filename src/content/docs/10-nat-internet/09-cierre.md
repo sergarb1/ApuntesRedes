@@ -1,11 +1,11 @@
 ---
-title: "09 — Head First (cierre)"
+title: "09 — Cierre: consolida lo aprendido"
 description: "El cierre práctico de NAT: sé el router, laboratorio y entrevista 🧠"
 ---
 
 <p><small>El cierre práctico de NAT: sé el router, laboratorio y entrevista 🧠</small></p>
 
-> 🗺️ **Estás en:** 🌐 U10 → 09 · Head First (cierre)
+> 🗺️ **Estás en:** 🌐 U10 → 09 · Cierre
 
 ---
 

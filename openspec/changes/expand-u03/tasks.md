@@ -13,9 +13,9 @@
 - [x] 2.7 `07-conceptos-fisicos.md`
 - [x] 2.8 `08-cableado-estructurado.md`
 
-## 3. Cierre Head First
+## 3. Cierre de unidad
 
-- [x] 3.1 `09-head-first.md` (con ⚡ laboratorio de crimpado, fallos intencionados y "PRÓXIMAMENTE EN U04")
+- [x] 3.1 `09-cierre.md` (con ⚡ laboratorio de crimpado, fallos intencionados y "PRÓXIMAMENTE EN U04")
 
 ## 4. Boletines
 

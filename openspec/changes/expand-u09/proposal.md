@@ -11,7 +11,7 @@ La U09 (`09-routing-dinamico.md`) sigue el patrón antiguo: un único archivo co
 ## Propuesta
 
 - Transformar `09-routing-dinamico.md` en **índice de unidad** con tabla de CEs (RA6: g, h, i).
-- Crear `09-routing-dinamico/` con **8 puntos de teoría ampliados** + **1 cierre Head First**, reutilizando el contenido factual (IGP vs EGP, RIP vs OSPF, LSA/LSDB/SPF/Dijkstra, áreas y tipos de router, DR/BDR, coste, configuración OSPF, ruta por defecto, diagnóstico).
+- Crear `09-routing-dinamico/` con **8 puntos de teoría ampliados** + **1 cierre de unidad**, reutilizando el contenido factual (IGP vs EGP, RIP vs OSPF, LSA/LSDB/SPF/Dijkstra, áreas y tipos de router, DR/BDR, coste, configuración OSPF, ruta por defecto, diagnóstico).
 - Continuidad encadenada: PRÓXIMAMENTE EN U10.
 - Sin diagramas D2 nuevos.
 - Sidebar: clave `09-routing-dinamico` (ya añadida).

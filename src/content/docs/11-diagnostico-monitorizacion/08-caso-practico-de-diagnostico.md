@@ -21,7 +21,7 @@ Ningún fallo real se presenta con un cartel luminoso. Se presenta como "no pued
 
 > **Usuario:** "No puedo acceder a intranet.empresa.com". Ni el navegador ni la aplicación interna cargan.
 
-Antes de tocar nada, anota el método: **OSI de abajo arriba**. El [punto 1](/ApuntesRedes/11-diagnostico-monitorizacion/01-metodologia-de-diagnostico) te dio la tabla de capas. Ahora la aplicamos paso a paso, como si fuera el ⭐ Sé el Diagnóstico que te espera en el [cierre](/ApuntesRedes/11-diagnostico-monitorizacion/09-head-first).
+Antes de tocar nada, anota el método: **OSI de abajo arriba**. El [punto 1](/ApuntesRedes/11-diagnostico-monitorizacion/01-metodologia-de-diagnostico) te dio la tabla de capas. Ahora la aplicamos paso a paso, como si fuera el ⭐ Sé el Diagnóstico que te espera en el [cierre](/ApuntesRedes/11-diagnostico-monitorizacion/09-cierre).
 
 ---
 
@@ -116,4 +116,4 @@ La regla que te salva en todos: **el síntoma delata la capa, pero la prueba fin
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/11-diagnostico-monitorizacion) · **Anterior:** [07 · Herramientas de monitorización](/ApuntesRedes/11-diagnostico-monitorizacion/07-herramientas-de-monitorizacion) · **Siguiente:** [09 · Head First (cierre)](/ApuntesRedes/11-diagnostico-monitorizacion/09-head-first)
+📚 [Volver al índice de la unidad](/ApuntesRedes/11-diagnostico-monitorizacion) · **Anterior:** [07 · Herramientas de monitorización](/ApuntesRedes/11-diagnostico-monitorizacion/07-herramientas-de-monitorizacion) · **Siguiente:** [09 · Cierre](/ApuntesRedes/11-diagnostico-monitorizacion/09-cierre)

@@ -188,4 +188,4 @@ Este plan es el que usarás en el **Laboratorio de Tortura** del punto 9: el fal
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/07-vlans) · **Anterior:** [07 · Seguridad en VLANs](/ApuntesRedes/07-vlans/07-seguridad-en-vlans) · **Siguiente:** [09 · Head First: consolida lo aprendido](/ApuntesRedes/07-vlans/09-head-first)
+📚 [Volver al índice de la unidad](/ApuntesRedes/07-vlans) · **Anterior:** [07 · Seguridad en VLANs](/ApuntesRedes/07-vlans/07-seguridad-en-vlans) · **Siguiente:** [09 · Cierre: consolida lo aprendido](/ApuntesRedes/07-vlans/09-cierre)

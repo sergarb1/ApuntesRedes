@@ -13,9 +13,9 @@
 - [x] 2.7 `07-configuracion-ospf.md`
 - [x] 2.8 `08-ruta-por-defecto-y-diagnostico.md`
 
-## 3. Cierre Head First
+## 3. Cierre de unidad
 
-- [x] 3.1 `09-head-first.md` (⭐ 🔥 🕵️ 🤬 ⚡ con fallo, 🏆 🧠 🧩 💬 🤷 🎬 con "PRÓXIMAMENTE EN U10" y ✅ CEs)
+- [x] 3.1 `09-cierre.md` (⭐ 🔥 🕵️ 🤬 ⚡ con fallo, 🏆 🧠 🧩 💬 🤷 🎬 con "PRÓXIMAMENTE EN U10" y ✅ CEs)
 
 ## 4. Boletines
 

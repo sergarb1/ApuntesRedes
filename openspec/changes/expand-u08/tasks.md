@@ -13,9 +13,9 @@
 - [x] 2.7 `07-acl-estandar.md`
 - [x] 2.8 `08-acl-extendida-y-nombrada.md`
 
-## 3. Cierre Head First
+## 3. Cierre de unidad
 
-- [x] 3.1 `09-head-first.md` (⭐ 🔥 🕵️ 🤬 ⚡ con fallo, 🏆 🧠 🧩 💬 🤷 🎬 con "PRÓXIMAMENTE EN U09" y ✅ CEs)
+- [x] 3.1 `09-cierre.md` (⭐ 🔥 🕵️ 🤬 ⚡ con fallo, 🏆 🧠 🧩 💬 🤷 🎬 con "PRÓXIMAMENTE EN U09" y ✅ CEs)
 
 ## 4. Boletines
 

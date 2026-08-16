@@ -14,7 +14,7 @@ La U09 se organiza como un **libro de 9 capítulos** (patrón U01/U02):
 | 6 | `06-coste-ospf` | Cálculo 10⁸/bandwidth, cambio de coste |
 | 7 | `07-configuracion-ospf` | Config básica y multiárea, verificación |
 | 8 | `08-ruta-por-defecto-y-diagnostico` | default-information originate, show/debug |
-| 9 | `09-head-first` | ⭐ 🔥 🕵️ 🤬 ⚡ 🏆 🧠 🧩 💬 🤷 🎬 + ✅ CEs |
+| 9 | `09-cierre` | ⭐ 🔥 🕵️ 🤬 ⚡ 🏆 🧠 🧩 💬 🤷 🎬 + ✅ CEs |
 
 ## Convenciones por punto
 

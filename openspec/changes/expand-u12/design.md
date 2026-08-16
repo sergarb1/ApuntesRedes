@@ -14,7 +14,7 @@ La U12 se organiza como un **libro de 9 capítulos** (patrón U01/U02):
 | 6 | `06-cloud-networking` | AWS VPC, subnets, security groups, NAT Gateway |
 | 7 | `07-iot-5g-y-edge` | IoT, 5G, edge computing, implicaciones |
 | 8 | `08-el-futuro-de-internet` | IPv8, RINA, NDN, más allá de IP |
-| 9 | `09-head-first` | ⭐ 🔥 🕵️ 🤬 ⚡ 🏆 🧠 🧩 💬 🤷 🎬 + ✅ CEs |
+| 9 | `09-cierre` | ⭐ 🔥 🕵️ 🤬 ⚡ 🏆 🧠 🧩 💬 🤷 🎬 + ✅ CEs |
 
 ## Convenciones por punto
 

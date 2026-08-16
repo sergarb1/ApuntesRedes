@@ -43,7 +43,7 @@ Al terminar, serás capaz de:
 | [06 · VTP y DTP](/ApuntesRedes/07-vlans/06-vtp-y-dtp) | Modos VTP, revision number, riesgos de DTP | Medio |
 | [07 · Seguridad en VLANs](/ApuntesRedes/07-vlans/07-seguridad-en-vlans) | VACL, PVLAN, VLAN hopping y hardening | Medio |
 | [08 · Configuración y verificación](/ApuntesRedes/07-vlans/08-configuracion-y-verificacion) | Escenario departamental paso a paso + troubleshooting | Medio |
-| [09 · Head First (cierre)](/ApuntesRedes/07-vlans/09-head-first) | Be the Packet, Fireside, Laboratorio, Crucigrama… | Todos |
+| [09 · Cierre](/ApuntesRedes/07-vlans/09-cierre) | Be the Packet, Fireside, Laboratorio, Crucigrama… | Todos |
 
 > 📖 **Flujo de lectura:** los 8 primeros puntos son teoría y configuración en progresión. El 9º es el aterrizaje práctico: léelo justo después del 8º y antes de abrir los boletines.
 

@@ -73,7 +73,7 @@ Ver paquetes sueltos es leer palabras; seguir el flujo es leer la conversación.
 
 Wireshark reconstruye **toda la conversación** entre el cliente y el servidor: cada byte enviado y recibido, ordenado y legible. Es la forma más rápida de leer una petición HTTP completa, ver si el servidor responde `200 OK` o un `404`, o confirmar que el contenido viaja cifrado (si es HTTPS verás un galimatías ininteligible, y eso ya es información: la capa 4 funciona y la 7 está cifrada).
 
-El detalle de la captura —que se hace en el equipo o, con [port mirroring](/ApuntesRedes/11-diagnostico-monitorizacion/09-head-first), en el switch— es lo que convierte a Wireshark en la herramienta de diagnóstico definitiva.
+El detalle de la captura —que se hace en el equipo o, con [port mirroring](/ApuntesRedes/11-diagnostico-monitorizacion/09-cierre), en el switch— es lo que convierte a Wireshark en la herramienta de diagnóstico definitiva.
 
 ---
 
