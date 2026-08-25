@@ -39,7 +39,7 @@ El orden importa: **de lo físico a lo lógico**. Cada paso descarta un nivel y 
 
 ```
 Paso 1  ping / show ip interface brief   → ¿hay conectividad capa 3?
-Paso 2  show ip protocols                → ¿OSPF corre y declara las redes?
+Paso 2  show ip protocols                → ¿OSPF arranca y declara las redes?
 Paso 3  show ip ospf neighbor            → ¿hay vecinos? ¿están en FULL?
 Paso 4  show ip ospf database            → ¿la LSDB tiene los LSAs de todos?
 Paso 5  show ip route ospf               → ¿aparecen las rutas (prefijo O)?

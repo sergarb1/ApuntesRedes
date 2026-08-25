@@ -23,9 +23,9 @@ La **IANA** reservó estos tres rangos para uso interno. **No son enrutables en 
 
 | Rango | Máscara CIDR | Nº de IPs | Uso típico |
 |---|---|---|---|
-| **10.0.0.0 - 10.255.255.255** | /8 | 16,777,216 | Grandes empresas |
-| **172.16.0.0 - 172.31.255.255** | /12 | 1,048,576 | Empresas medianas |
-| **192.168.0.0 - 192.168.255.255** | /16 | 65,536 | Hogar y pequeña oficina |
+| **10.0.0.0 - 10.255.255.255** | /8 | 16.777.216 | Grandes empresas |
+| **172.16.0.0 - 172.31.255.255** | /12 | 1.048.576 | Empresas medianas |
+| **192.168.0.0 - 192.168.255.255** | /16 | 65.536 | Hogar y pequeña oficina |
 
 > ⚠️ **Ojo con el rango B:** el bloque privado **172.16.0.0/12** NO es todo el 172.x.x.x: solo va de `172.16.0.0` a `172.31.255.255`. `172.32.0.1` ya es una IP normalmente pública y válida.
 

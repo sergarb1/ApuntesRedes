@@ -91,7 +91,7 @@ Casos típicos de UDP — diles en una entrevista con seguridad:
 | Control de flujo | Sí (ventana deslizante) | No |
 | Cabecera | 20-60 bytes | 8 bytes fijos |
 | Velocidad | Más lento | Más rápido |
-| Uso típico | Web (HTTP), email, FTP, SSH | Streaming, VoIP, DNS, gaming, DHCP |
+| Uso típico | Web (HTTP), correo, FTP, SSH | Streaming, VoIP, DNS, gaming, DHCP |
 
 > **Regla práctica:** si los datos deben llegar sí o sí y en orden → **TCP**. Si la velocidad importa y toleras perder un paquete → **UDP**.
 
@@ -118,7 +118,7 @@ Por eso el audio y vídeo en vivo usan UDP: la conversación en tiempo real tole
 <summary>🔄 Respuestas</summary>
 
 1. **SYN** (cliente) → **SYN-ACK** (servidor) → **ACK** (cliente).
-2. Porque es una conversación breve: manda una pregunta y espera una respuesta; abrir conexión TCP sería armar todo un papeleo para dos mensajes.
+2. Porque es una conversación breve: manda una pregunta y espera una respuesta; abrir conexión TCP sería montar todo un papeleo para dos mensajes.
 3. Con **TCP**: el PDF debe llegar completo, sin corruptos y en orden; la fiabilidad compensa la lentitud.
 </details>
 

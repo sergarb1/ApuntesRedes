@@ -113,6 +113,45 @@ description: Descripción corta 😵
 
 ---
 
+## 🗣️ Requisito lingüístico (es-ES)
+
+**Todo el contenido generado o modificado debe estar escrito en español de España (es-ES)**: apuntes, boletines, OpenSpec, documentación, títulos, ejemplos y comentarios. Español natural de profesor de FP de informática en España — no español latinoamericano ni traducción literal del inglés.
+
+### Equivalencias obligatorias
+
+| Evitar (LatAM / anglicismo) | Usar (es-ES) |
+|---|---|
+| computadora / computación | ordenador / informática |
+| prender / prendida | encender / encendida |
+| celular | móvil |
+| laptop / notebook | portátil |
+| manejar (gestionar/controlar) | gestionar, dominar, administrar |
+| armar (montar algo) | montar |
+| correr (servicio/proceso/paquete) | ejecutarse, arrancar, recorrer |
+| bajar (una descarga) | descargar |
+| chequear | comprobar, revisar |
+| driver (en prosa) | controlador |
+| email (en prosa) | correo / correo electrónico |
+| monitorear / monitoreo | monitorizar / monitorización |
+| ~4.3 mil millones (calco de *billion*) | unos 4.300 millones |
+| Separadores miles US `16,777,216` | formato es-ES `16.777.216` |
+
+No es sustitución mecánica: detecta también giros y construcciones que suenen a LatAm o a traducción automática y reformúlalos con naturalidad.
+
+### Terminología técnica que se mantiene en inglés
+
+`router`, `switch`, `firewall`, `gateway`, `socket`, `hostname`, `software`, `hardware`, `backup`… No traducir artificialmente términos asentados en la documentación profesional que leerá el alumnado.
+
+### Reglas de estilo
+
+- Claro, didáctico, directo y profesional, adecuado para alumnado de FP de informática.
+- Sin coloquialismos excesivos ni formalidad burocrática ("se procederá a", "cabe destacar").
+- Trato al alumno: tú / vosotros (nunca usted/ustedes).
+- Formato numérico español: punto o espacio para millares (`65.536`), coma decimal.
+- **Antes de dar por terminado cualquier contenido:** comprobación lingüística final — ¿suena a profesor español escribiendo en su idioma o a una traducción?
+
+---
+
 ## 🚀 Comandos
 
 ```bash
@@ -151,6 +190,7 @@ npm run diagrams  # Generar diagramas con D2 (Terrastruct)
 11. **El build ejecuta `npm run build` que genera diagramas automáticamente** (prependido en el script).
 12. **PDF** se genera con `starlight-to-pdf` — un único PDF con todas las unidades y portada. Ver `scripts/pdf-*.html`.
 13. **EPUB** se genera con Pandoc — `scripts/generate-epub.ps1` + `scripts/epub.css`. El script reescribe las rutas `/ApuntesRedes/diagrams/` → `public/diagrams/` para que Pandoc encuentre los SVGs.
+14. **Lenguaje es-ES obligatorio** — todo texto nuevo o editado cumple la sección 🗣️ Requisito lingüístico; hacer la comprobación lingüística antes de cerrar.
 
 ---
 

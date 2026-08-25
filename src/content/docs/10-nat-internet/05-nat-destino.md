@@ -98,7 +98,7 @@ El error más repetido en soporte técnico. Abriste el puerto en NAT y desde fue
 |---|---|---|
 | 1 | ¿El firewall del router permite el puerto? | Revisa ACLs/reglas de seguridad |
 | 2 | ¿El firewall del equipo interno lo permite? | Windows Firewall / ufw / firewalld |
-| 3 | ¿El servicio corre en la IP destino correcta? | `netstat -tulpn` en el servidor |
+| 3 | ¿El servicio se ejecuta en la IP destino correcta? | `netstat -tulpn` en el servidor |
 | 4 | ¿La IP privada destino cambió por DHCP? | Reserva DHCP o IP estática al servidor |
 | 5 | ¿El ISP bloquea el puerto? | Prueba con otro puerto >1024 |
 

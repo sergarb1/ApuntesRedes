@@ -91,7 +91,7 @@ En una entrevista te preguntarán esto. Responde con el árbol:
 
 | Necesidad | Protocolo |
 |---|---|
-| Bajar un PDF de 2 GB | TCP |
+| Descargar un PDF de 2 GB | TCP |
 | Videollamada con la familia | UDP |
 | Enviar un correo | TCP |
 | Contestar una única consulta DNS | UDP |

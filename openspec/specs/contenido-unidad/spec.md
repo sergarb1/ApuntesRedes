@@ -79,3 +79,15 @@ Cuando la unidad se amplía a varios archivos, el flujo de lectura entre puntos 
 #### Scenario: Referencias cruzadas
 - **WHEN** un punto menciona contenido de otra unidad o de otro punto
 - **THEN** hay un enlace cruzado al punto correspondiente o una indicación clara ("se verá en U07")
+
+### Requirement: Lenguaje es-ES obligatorio
+
+Todo el texto de la unidad está escrito en español de España natural, sin latinamericanismos ni calcos del inglés.
+
+#### Scenario: Vocabulario peninsular
+- **WHEN** se redacta o revisa cualquier párrafo, tabla o ejercicio de la unidad
+- **THEN** no aparecen formas como computadora, prender/prendida, celular, laptop, armar (por montar), manejar (por gestionar), monitorear, email/driver en prosa ni separadores de miles en formato US
+
+#### Scenario: Terminología técnica razonable
+- **WHEN** el texto nombra conceptos técnicos con término inglés asentado en España (router, switch, firewall, gateway...)
+- **THEN** se mantiene el término inglés sin traducciones artificiales, y los anglicismos evitables en prosa usan su forma española (driver → controlador, email → correo)

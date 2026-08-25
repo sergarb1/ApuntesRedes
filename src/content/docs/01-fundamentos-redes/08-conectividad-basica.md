@@ -158,7 +158,7 @@ Qué concluimos con una mirada:
 <details>
 <summary>🔄 Respuestas</summary>
 
-1. Que **tu propia tarjeta de red no funciona** (capa física o driver); nada que ver con la red todavía.
+1. Que **tu propia tarjeta de red no funciona** (capa física o controlador); nada que ver con la red todavía.
 2. En el paso 5 (`ping google.com`): si por IP (paso 4) funciona y por nombre no, el **DNS** es el sospechoso.
 
 </details>

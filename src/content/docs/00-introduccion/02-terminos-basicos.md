@@ -39,7 +39,7 @@ Toda profesión tiene su jerga, y la de redes empieza con unas cuantas palabras 
 
 Antes de hablar de redes necesitamos saber de qué están hechos los datos. Vamos con la abstracción más simple que existe:
 
-- Un **bit** es una decisión binaria: **0 o 1**. Piensa en una sola bombilla: está *prendida* (1) o *apagada* (0). No hay tercera opción, no vale "medio encendida".
+- Un **bit** es una decisión binaria: **0 o 1**. Piensa en una sola bombilla: está *encendida* (1) o *apagada* (0). No hay tercera opción, no vale "medio encendida".
 - Un **byte** es un grupo de **8 bits**. ¿Por qué en grupos de 8? Porque con 8 interruptores caben 256 combinaciones distintas (2⁸ = 256), exactamente lo que se necesita para representar una letra, un número o un símbolo.
 
 | Medida | Cuántos bits son | Qué cabe dentro (más o menos) |

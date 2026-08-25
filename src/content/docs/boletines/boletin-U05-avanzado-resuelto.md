@@ -11,7 +11,7 @@ description: Soluciones ejercicios avanzados de IPv6 y Transición
 
 a) **Máscara para sedes:** /48 → para 5 sedes necesitas 3 bits extra (2³ = 8). Cada sede tendría /51. Pero en IPv6 lo estándar es dar /48 a cada sede (todas son /48 independientes). Si solo tienes un /48 global, entonces usas /52 para 16 subredes (2⁴ = 16).
 
-b) **Subredes /64 dentro de /48:** 64 - 48 = 16 bits → 2¹⁶ = **65,536 subredes** /64.
+b) **Subredes /64 dentro de /48:** 64 - 48 = 16 bits → 2¹⁶ = **65.536 subredes** /64.
 
 c) **Primeras 3 subredes /64:**
    - 2001:DB8:CAFE:0000::/64

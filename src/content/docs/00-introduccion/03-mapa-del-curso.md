@@ -26,7 +26,7 @@ Antes de escribir una sola línea de configuración, vas a ver el plano completo
 | 2 | 📦 **U02 · Modelos OSI y análisis de tráfico** | Explicar las capas de la comunicación y leer capturas reales con Wireshark | Qué es un paquete y qué es una dirección (Tema 0) |
 | 3 | 🔌 **U03 · Infraestructura física** | Elegir entre cobre y fibra, y cablear un armario de comunicaciones | Las capas de la U02 |
 | 4 | 🧮 **U04 · IPv4 y subnetting** | Calcular subredes a mano y explicar por qué dos IPs se entienden | IPs del Tema 0 y paquetes de la U02 |
-| 5 | 🚀 **U05 · IPv6 y transición** | Manejar direcciones IPv6 y hacer que convivan con IPv4 | Direccionamiento IPv4 (U04) |
+| 5 | 🚀 **U05 · IPv6 y transición** | Dominar el direccionamiento IPv6 y hacer que conviva con IPv4 | Direccionamiento IPv4 (U04) |
 | 6 | 🔀 **U06 · Switching y STP** | Configurar switches y evitar que los bucles hundan la red | Qué hace un switch (U01) y las capas (U02) |
 | 7 | 🏢 **U07 · VLANs** | Segmentar una red física en redes lógicas aisladas | Switching (U06) |
 | 8 | 🧭 **U08 · Routing y ACLs** | Encaminar paquetes entre redes y filtrar el tráfico con listas de control | IP y subredes (U04) |
@@ -119,7 +119,7 @@ Para terminar el mapa, la misma historia que dará forma a todo el curso, contad
 | Tramo del viaje del paquete | Lo estudiarás en |
 |---|---|
 | El paquete se construye y se etiqueta | U02 · Modelos OSI y análisis con Wireshark |
-| El paquete corre por tu edificio | U06 · Switching y U07 · VLANs |
+| El paquete recorre tu edificio | U06 · Switching y U07 · VLANs |
 | El paquete cruza fronteras entre redes | U08 · Routing y ACLs |
 | El paquete sale al ancho mundo | U10 · NAT (y DHCP reparte las IPs) |
 | Alguien sigue el rastro del paquete | U11 · Diagnóstico y monitorización |

@@ -47,3 +47,11 @@ Los boletines deben tener suficiente recorrido (≥8 ejercicios por boletín) y 
 #### Scenario: Hints (pistas)
 - **WHEN** un ejercicio es complejo o admite varias aproximaciones
 - **THEN** incluye una nota de pista en el boletín por resolver (no en el resuelto) que orienta sin regalar la solución
+
+### Requirement: Lenguaje es-ES obligatorio
+
+Los enunciados, pistas y soluciones están escritos en español de España natural.
+
+#### Scenario: Redacción peninsular
+- **WHEN** se redacta cualquier enunciado, pista o solución del boletín
+- **THEN** se usan las formas peninsulares (ordenador, móvil, encender/encendida, portátil, descargar, comprobar...) y el formato numérico español (punto para millares, como 65.536), sin latinamericanismos ni calcos del inglés

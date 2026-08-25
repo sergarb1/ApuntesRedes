@@ -127,7 +127,7 @@ d) **No cambia.** La elección de DR/BDR solo ocurre al arrancar OSPF o al reini
 a) Al funcionar el ping, queda **descartado el plano físico/enlace y la capa 3** del enlace: las IPs se alcanzan. El problema está en el **plano OSPF** (configuración lógica del protocolo), no en la conectividad.
 
 b) **Orden de diagnóstico:**
-1. `show ip protocols` → comprobar que OSPF corre en ambos, que el **Router ID** no está duplicado y que las redes declaradas incluyen el enlace Serial.
+1. `show ip protocols` → comprobar que OSPF arranca en ambos, que el **Router ID** no está duplicado y que las redes declaradas incluyen el enlace Serial.
 2. `show ip ospf interface` → confirmar en ambos routers que la interfaz **participa** en OSPF, y comparar **área**, **wildcard** y **timers** (Hello/Dead). Si no aparece, la red no está declarada o la wildcard está mal.
 3. Verificar que el **área** coincide en los dos lados del enlace (revisar el `network ... area X`).
 4. Comparar los **timers Hello/Dead** en ambos lados con `show ip ospf interface`: deben coincidir (en punto a punto Serial suelen ser 30/120; si uno quedó en 10/40, no forman vecindad).

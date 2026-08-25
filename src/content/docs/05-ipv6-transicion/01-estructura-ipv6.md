@@ -19,15 +19,15 @@ Frente a los 32 bits de IPv4, 128 bits significan *muchísimas* más direcciones
 
 ## 🌍 ¿Por qué existe IPv6? El agotamiento
 
-IPv4 tiene **32 bits**, lo que da exactamente **2³² = 4.294.967.296** direcciones posibles (~4.3 mil millones). Cuando se diseñó, parecían infinitas. El problema es que el mundo conecta mucho más que ordenadores:
+IPv4 tiene **32 bits**, lo que da exactamente **2³² = 4.294.967.296** direcciones posibles (unos 4.300 millones). Cuando se diseñó, parecían infinitas. El problema es que el mundo conecta mucho más que ordenadores:
 
 - Teléfonos, tablets, relojes, bombillas, cámaras, coches… cada dispositivo quiere su IP.
-- Los bloques se repartieron de forma desigual desde el principio (intervención de EEUU y Europa recibió la parte del león).
+- Los bloques se repartieron de forma desigual desde el principio (por la intervención de EE. UU.; Europa recibió la parte del león).
 - **2011:** la IANA repartió los últimos bloques grandes. **2019:** Europa (RIPE NCC) agotó su stock. Hoy el agotamiento es un hecho completado.
 
 Por eso se diseñó **IPv6**: no es un parche ni una mejora de rendimiento, es la solución estructural a quedarse sin direcciones.
 
-> 💡 **Guarda esta cifra:** IPv4 = 32 bits = 4.3 mil millones. IPv6 = 128 bits = 3.4 × 10³⁸. Es la primera pregunta de cualquier entrevista y la más fácil de responder.
+> 💡 **Guarda esta cifra:** IPv4 = 32 bits = 4.300 millones. IPv6 = 128 bits = 3.4 × 10³⁸. Es la primera pregunta de cualquier entrevista y la más fácil de responder.
 
 ---
 

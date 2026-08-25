@@ -76,7 +76,7 @@ Dispositivos (routers/switches/servidores)
 └──────────────────────────────────────────────────────────────────┘
    │                                          │
    ▼                                          ▼
-Dashboard (pantalla del admin)         Alarmas (email, telegram, SMS)
+Dashboard (pantalla del admin)         Alarmas (correo, telegram, SMS)
 ```
 
 El ciclo se repite cada pocos minutos: la herramienta pregunta (polling), almacena, pinta la gráfica y, si una métrica cruza un umbral definido por ti (por ejemplo, CPU > 90% o enlace > 85%), dispara una **alarma**. Ese es el objetivo final: que el administrador se entere del problema **antes** de que el usuario lo note. Es la diferencia entre el [punto 8](/ApuntesRedes/11-diagnostico-monitorizacion/08-caso-practico-de-diagnostico) (reaccionar) y esta unidad de monitorización (prevenir).
