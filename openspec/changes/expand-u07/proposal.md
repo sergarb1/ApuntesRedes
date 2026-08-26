@@ -14,7 +14,7 @@ El mismo patrón de U01/U02 debe aplicarse a U07: índice + subcarpeta de puntos
 
 - Se transforma `07-vlans.md` en un **índice de la unidad**: ruta del paquete, objetivo, mapa de los 9 puntos, enlace a los 4 boletines y **tabla de CEs** (RA5: a–f) con estado de cobertura.
 - Se crea la subcarpeta `07-vlans/` con **8 puntos de teoría ampliados** en formato libro + **1 cierre de unidad** (`09-cierre.md`), reutilizando el contenido factual actual (qué es una VLAN, tipos, 802.1Q, trunks, inter-VLAN routing, VTP, DTP, seguridad, configuración en Packet Tracer) y expandiéndolo con contexto, analogías, tablas y referencias cruzadas.
-- Cierre de unidad con todas las secciones de consolidación, laboratorio con fallo intencionado (native VLAN) y Post-Créditos con "PRÓXIMAMENTE EN U08".
+- Cierre de unidad con todas las secciones de consolidación, laboratorio con fallo intencionado (native VLAN) y Poscréditos con "PRÓXIMAMENTE EN U08".
 - Sin diagramas D2 nuevos (decisión de proyecto: reutilizar los 9 existentes, ninguno aplicable a VLANs).
 - Sidebar: U07 pasa a grupo desplegable con Índice + 9 puntos.
 - Boletines: inicial y avanzado se amplían a **8 ejercicios** (conservando los 6 actuales), con pistas y soluciones desarrolladas 1:1.

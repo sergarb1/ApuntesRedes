@@ -14,7 +14,7 @@ El mismo patrón que se replicó en U01 debe aplicarse a U02: índice + subcarpe
 
 - Se transforma `02-modelos-osi-analisis.md` en un **índice de la unidad**: ruta del paquete, objetivo, mapa de los 9 puntos, enlace a los 4 boletines y **tabla de CEs** (RA1: d, e, f, g) con estado de cobertura.
 - Se crea la subcarpeta `02-modelos-osi-analisis/` con **8 puntos de teoría ampliados** en formato "libro" + **1 cierre de unidad** (`09-cierre.md`), reutilizando el contenido factual actual (OSI, TCP/IP, encapsulación, TCP/UDP, IP/Ethernet, puertos, Wireshark) y expandiéndolo con contexto, analogías, tablas, ejemplos resueltos y referencias cruzadas.
-- Se añade el cierre de unidad con todas las secciones de consolidación, laboratorio con fallo intencionado y Post-Créditos coherente con U03.
+- Se añade el cierre de unidad con todas las secciones de consolidación, laboratorio con fallo intencionado y Poscréditos coherente con U03.
 - Los 3 diagramas D2 ya existentes aplicables (`modelo-osi-capas`, `dispositivos-osi`, `flujo-encapsulacion`) se reutilizan por referencia.
 - Sidebar: la unidad pasa a grupo desplegable con Índice + 9 puntos (patrón `u01Puntos`).
 - Boletines: inicial y avanzado se amplían a **8 ejercicios** con pistas en los por-resolver y soluciones desarrolladas 1:1 en los resueltos.

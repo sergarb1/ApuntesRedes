@@ -14,7 +14,7 @@ El mismo patrón de U01/U02 debe aplicarse a U08: índice + subcarpeta de puntos
 
 - Se transforma `08-routing-acls.md` en un **índice de la unidad**: ruta del paquete, objetivo, mapa de los 9 puntos, enlace a los 4 boletines y **tabla de CEs** (RA4: a, b, c, d, f, i, j) con estado de cobertura.
 - Se crea la subcarpeta `08-routing-acls/` con **8 puntos de teoría ampliados** en formato libro + **1 cierre de unidad** (`09-cierre.md`), reutilizando el contenido factual actual (componentes y arranque del router, configuración básica, rutas estáticas, ruta por defecto, ACLs estándar/extendida/nombrada, dónde aplicar, verificación) y expandiéndolo con contexto, analogías, tablas, ejemplos resueltos y referencias cruzadas.
-- Cierre de unidad con todas las secciones de consolidación, laboratorio con fallo intencionado y Post-Créditos con "PRÓXIMAMENTE EN U09".
+- Cierre de unidad con todas las secciones de consolidación, laboratorio con fallo intencionado y Poscréditos con "PRÓXIMAMENTE EN U09".
 - Sin diagramas D2 nuevos (decisión de proyecto: reutilizar los 9 existentes, ninguno aplicable a routing/ACLs).
 - Sidebar: U08 pasa a grupo desplegable con Índice + 9 puntos.
 - Boletines: inicial y avanzado se amplían a **8 ejercicios** (conservando los 6 actuales), con pistas y soluciones desarrolladas 1:1.

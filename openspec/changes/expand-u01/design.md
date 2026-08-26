@@ -32,7 +32,7 @@ La U01 es la primera unidad del curso y, tras la llegada del Tema 0 (`add-tema0`
 6. `06-protocolos` — qué son, puertos (well-known/registrados/dinámicos), TCP vs UDP, tabla de protocolos.
 7. `07-direcciones-mac-ip` — MAC (OUI), IPv4, máscara, direcciones especiales, pública vs privada, analogía completa.
 8. `08-conectividad-basica` — gateway, ping/ipconfig/arp/tracert, escenario completo, método en 6 pasos + diagrama ARP.
-9. `09-cierre` — cierre pedagógico: Be the Packet, Fireside, Quién Soy, CONRAD, Laboratorio, Logros, Atrévete, Crucigrama, Entrevista, FAQ, Post-Créditos.
+9. `09-cierre` — cierre pedagógico: Be the Packet, Fireside, Quién Soy, CONRAD, Laboratorio, Logros, Atrévete, Crucigrama, Entrevista, FAQ, Poscréditos.
 - **Razón:** cada punto alcanza ~120–200 líneas sin hinchar el índice; el cierre pedagógico queda autoconsistente en un solo archivo.
 
 ### D3: Nivel de entrada cero
@@ -47,7 +47,7 @@ Todos los acrónimos se expanden y definen en su primer uso dentro de cada punto
 - **Razón:** no requieren regeneración de D2 y siguen siendo correctos.
 
 ### D5: Cierre y continuidad
-- Post-Créditos en punto 9 con "PRÓXIMAMENTE EN U02: Modelos OSI y análisis de tráfico".
+- Poscréditos en punto 9 con "PRÓXIMAMENTE EN U02: Modelos OSI y análisis de tráfico".
 - Índice: tabla de CEs del RA1 con estado ✅/apartado, y enlace a los 4 boletines (trayectoria al cambio de boletines posterior).
 
 ## Risks / Trade-offs
