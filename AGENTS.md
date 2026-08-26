@@ -211,5 +211,6 @@ npm run diagrams  # Generar diagramas con D2 (Terrastruct)
 - [ ] 🎬 Post-Créditos (con PRÓXIMAMENTE)
 - [ ] ✅ CEs cubiertos (tabla)
 - [ ] Sidebar actualizado en `astro.config.mjs`
+- [ ] 🗣️ Comprobación lingüística es-ES superada (sección Requisito lingüístico)
 - [ ] `npm run build` exitoso
 - [ ] Boletín creado (inicial + avanzado + resueltos)
