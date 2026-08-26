@@ -81,7 +81,7 @@ Has terminado la teoría. Este cierre es el aterrizaje: recorre lo aprendido con
 
 ---
 
-## ⚡ Laboratorio de Tortura: Red averiada
+## ⚡ Laboratorio de tortura: Red averiada
 
 > **Duración:** 1,5 horas
 > **Herramienta:** Packet Tracer, Wireshark
@@ -126,7 +126,7 @@ Has terminado la teoría. Este cierre es el aterrizaje: recorre lo aprendido con
 
 ---
 
-## 🧠 Atrévete a Pensar
+## 🧠 Atrévete a pensar
 
 1. ¿Qué comando usarías para ver la ruta completa hasta un destino?
 2. ¿Cómo detectarías un bucle de routing con traceroute?
@@ -146,7 +146,7 @@ Has terminado la teoría. Este cierre es el aterrizaje: recorre lo aprendido con
 
 ---
 
-## 🧩 Crucigrama de Bits
+## 🧩 Crucigrama de bits
 
 ```
 Horizontal:
@@ -172,7 +172,7 @@ Vertical:
 
 ---
 
-## 💬 Preguntas de Entrevista de Trabajo
+## 💬 Preguntas de entrevista de trabajo
 
 1. **"Un usuario no puede navegar. Descríbeme tu proceso de diagnóstico paso a paso."**
 2. **"¿Qué diferencia ves entre SNMP v2c y v3?"**
@@ -200,7 +200,7 @@ Depende de la versión. SNMP v1 y v2c envían la comunidad (contraseña) en text
 
 ---
 
-## 🎬 Post-Créditos
+## 🎬 Poscréditos
 
 > *La red es un organismo vivo: a veces se cae, a veces se recupera. La clave está en tener una metodología de diagnóstico sólida.*
 

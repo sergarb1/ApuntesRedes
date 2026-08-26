@@ -83,7 +83,7 @@ Adivina qué dispositivo de red soy:
 
 ---
 
-## ⚡ Laboratorio de Tortura: Monta tu primera red (con fallo)
+## ⚡ Laboratorio de tortura: Monta tu primera red (con fallo)
 
 > **Duración estimada:** 30 minutos
 > **Herramienta:** Packet Tracer o hardware real
@@ -120,7 +120,7 @@ Adivina qué dispositivo de red soy:
 
 ---
 
-## 🧠 Atrévete a Pensar
+## 🧠 Atrévete a pensar
 
 1. **Tienes 5 PCs y un switch.** Dibuja la topología. ¿Cuántos cables necesitas como mínimo?
 2. **¿Qué pasa si conectas 2 switches entre sí, cada uno con 2 PCs?** ¿Cuántos dominios de colisión hay?
@@ -139,7 +139,7 @@ Adivina qué dispositivo de red soy:
 
 ---
 
-## 🧩 Crucigrama de Bits
+## 🧩 Crucigrama de bits
 
 ```
 Horizontal:
@@ -162,7 +162,7 @@ Vertical:
 
 ---
 
-## 💬 Preguntas de Entrevista de Trabajo
+## 💬 Preguntas de entrevista de trabajo
 
 > Preguntas reales que te harían para administrador de redes junior.
 
@@ -194,7 +194,7 @@ Puedes teclear lo que quieras, pero si no pertenece a la **misma subred** que tu
 
 ---
 
-## 🎬 Post-Créditos
+## 🎬 Poscréditos
 
 Un paquete de 1500 bytes completa su viaje desde tu navegador hasta el servidor DNS `8.8.8.8`: pasa por el gateway, varios switches y routers, y cada salto decrementa su TTL. En el último tramo, el TTL llega a cero y un router lo descarta, devolviéndote un mensaje ICMP *Time Exceeded*. Espera... ¿eso significa que no ha llegado? La respuesta, y el viaje por las capas a fondo, en la próxima unidad.
 

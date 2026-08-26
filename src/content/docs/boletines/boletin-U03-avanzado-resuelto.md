@@ -48,7 +48,7 @@ c) A 120 metros: atenuación proporcional = 21,3 × (120/100) = 25,56 dB
    Potencia recibida = 2 - 25,56 = **-23,56 dBm**
    **No funciona.** -23,56 dBm está por debajo del umbral de -20 dBm.
 
-## 4. Fibra vs Cobre: caso real
+## 4. Fibra vs cobre: caso real
 
 a) **200 m:** Cobre Cat6a (funciona a 10 Gbps hasta 100 m) o fibra multimodo
    **500 m:** Fibra multimodo (el cobre no llega a 500 m)

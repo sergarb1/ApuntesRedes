@@ -13,7 +13,7 @@ description: "El microscopio de redes: captura, filtra y sigue el flujo 🔬"
 
 > **Wireshark** captura todos los paquetes que pasan por una interfaz y te permite inspeccionarlos **capa por capa**: la herramienta que convierte la teoría OSI en evidencia visible.
 
-Es la navaja suiza del diagnóstico de red y el protagonista del [Laboratorio de Tortura](/ApuntesRedes/02-modelos-osi-analisis/09-cierre) de esta unidad.
+Es la navaja suiza del diagnóstico de red y el protagonista del [Laboratorio de tortura](/ApuntesRedes/02-modelos-osi-analisis/09-cierre) de esta unidad.
 
 ---
 

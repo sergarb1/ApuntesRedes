@@ -70,7 +70,7 @@ Al terminar, serás capaz de:
 | CE | Criterio | Dónde se cubre |
 |---|---|---|
 | h) | Mapa físico y lógico | ✅ Puntos 1 y 2 + ⚡ Laboratorio (punto 9) |
-| i) | Monitorización SNMP | ✅ Punto 4 + 🧠 Atrévete a Pensar (punto 9) |
+| i) | Monitorización SNMP | ✅ Punto 4 + 🧠 Atrévete a pensar (punto 9) |
 | j) | Herramientas de diagnóstico | ✅ Puntos 2, 3 y 7 + 🔥 Fireside (punto 9) |
 | k) | Syslog y logging | ✅ Punto 5 + 💬 Entrevista (punto 9) |
 

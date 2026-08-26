@@ -36,7 +36,7 @@ c) **Lo ignoras y sigues con tu vida** → También, porque la NIC filtra por MA
 
 ---
 
-## 🔥 Fireside Chat: IP Pública vs IP Privada
+## 🔥 Fireside Chat: IP pública vs IP privada
 
 > *Dos IPs charlan en un café. Una es 192.168.1.10, la otra es 83.45.12.78.*
 
@@ -97,7 +97,7 @@ c) **Lo ignoras y sigues con tu vida** → También, porque la NIC filtra por MA
 
 ---
 
-## ⚡ Laboratorio de Tortura: Diseño de direccionamiento
+## ⚡ Laboratorio de tortura: Diseño de direccionamiento
 
 > **Duración:** 1 hora
 > **Herramienta:** Packet Tracer, calculadora
@@ -145,7 +145,7 @@ Te dan la red **10.0.0.0/24**. ¿Cabe todo? **No.** Te dan **172.16.0.0/16**. Ah
 
 ---
 
-## 🧠 Atrévete a Pensar
+## 🧠 Atrévete a pensar
 
 1. ¿Cuántas IPs útiles tiene una red /27? ¿Y /30?
 2. ¿Qué dirección es la de broadcast de 192.168.1.128/25?
@@ -172,7 +172,7 @@ Te dan la red **10.0.0.0/24**. ¿Cabe todo? **No.** Te dan **172.16.0.0/16**. Ah
 
 ---
 
-## 🧩 Crucigrama de Bits
+## 🧩 Crucigrama de bits
 
 ```
 Horizontal:
@@ -198,7 +198,7 @@ Vertical:
 
 ---
 
-## 💬 Preguntas de Entrevista de Trabajo
+## 💬 Preguntas de entrevista de trabajo
 
 1. **"Te damos la red 192.168.1.0/24. Necesitas 3 subredes de 50 hosts cada una. ¿Cómo lo haces?"**
 2. **"¿Qué es una máscara de subred? Explica para qué sirve con un ejemplo."**
@@ -231,7 +231,7 @@ Ya se agotaron. La IANA asignó el último bloque de direcciones IPv4 en 2011. D
 
 ---
 
-## 🎬 Post-Créditos
+## 🎬 Poscréditos
 
 Un host recibe la IP 10.0.1.10 mediante DHCP en una red privada. El tráfico viaja hacia Internet atravesando un router NAT, que traduce la IP privada a la IP pública del borde de red. En otra red corporativa, otro host tiene exactamente la misma IP privada 10.0.1.10, pero ambos conviven sin conflicto gracias a que el NAT aísla sus ámbitos. El direccionamiento privado (RFC 1918) permite la reutilización de direcciones a escala global y, sobre las subredes bien calculadas con VLSM, se levantan redes de cientos de oficinas sin desperdiciar ni una dirección.
 

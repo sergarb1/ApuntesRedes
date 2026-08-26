@@ -60,12 +60,12 @@ description: Descripción corta 😵
 4. **🔥 Fireside Chat** — debate entre dos conceptos
 5. **🕵️ ¿Quién Soy?** — adivinanzas con `<details>` para solución
 6. **🤬 CONRAD VS EL MUNDO** — error típico explicado con humor
-7. **⚡ Laboratorio de Tortura** — práctica Packet Tracer con fallos intencionados
-8. **🧠 Atrévete a Pensar** — ejercicios con `<details>` solución
-9. **🧩 Crucigrama de Bits** — con `<details>` solución
+7. **⚡ Laboratorio de tortura** — práctica Packet Tracer con fallos intencionados
+8. **🧠 Atrévete a pensar** — ejercicios con `<details>` solución
+9. **🧩 Crucigrama de bits** — con `<details>` solución
 10. **💬 Entrevista de trabajo** — preguntas reales
-11. **🤷 No Hay Preguntas Tontas** — FAQ (con CONRAD)
-12. **🎬 Post-Créditos** — escena cómica con "PRÓXIMAMENTE EN U0X"
+11. **🤷 No hay preguntas tontas** — FAQ (con CONRAD)
+12. **🎬 Poscréditos** — escena cómica con "PRÓXIMAMENTE EN U0X"
 13. **✅ CEs cubiertos** — tabla de criterios de evaluación
 
 ### Secciones opcionales
@@ -79,7 +79,7 @@ description: Descripción corta 😵
 - **Personajes fijos:**
   - **CONRAD** — switch cascarrabias, responde con sarcasmo pero correcto
   - **Fireside Chat** — personificar tecnologías (Switch vs Hub, IPv4 vs IPv6, etc.)
-- **Nota:** El personaje P4QU3T3 (mascota paquete IP) se ha eliminado del contenido. Las secciones que lo usaban (Sé el Paquete, No Hay Preguntas Tontas, Post-Créditos) se mantienen con un tono más profesional, sin personificación del paquete.
+- **Nota:** El personaje P4QU3T3 (mascota paquete IP) se ha eliminado del contenido. Las secciones que lo usaban (Sé el Paquete, No hay preguntas tontas, Poscréditos) se mantienen con un tono más profesional, sin personificación del paquete.
 - **Formato:** Markdown con emojis, `>` blockquotes para secciones especiales
 - **Código:** Usar bloques de código con lenguaje especificado
 - **Soluciones:** Siempre dentro de `<details>` para no spoilear
@@ -147,6 +147,7 @@ No es sustitución mecánica: detecta también giros y construcciones que suenen
 - Claro, didáctico, directo y profesional, adecuado para alumnado de FP de informática.
 - Sin coloquialismos excesivos ni formalidad burocrática ("se procederá a", "cabe destacar").
 - Trato al alumno: tú / vosotros (nunca usted/ustedes).
+- **Mayúsculas:** estilo oracional en títulos y secciones ("Laboratorio de tortura", "Atrévete a pensar", "Crucigrama de bits", "No hay preguntas tontas", "Poscréditos") — nada de Title Case ni TODO MAYÚSCULAS; las siglas técnicas (STP, VLAN, NAT…) conservan su forma.
 - Formato numérico español: punto o espacio para millares (`65.536`), coma decimal.
 - **Antes de dar por terminado cualquier contenido:** comprobación lingüística final — ¿suena a profesor español escribiendo en su idioma o a una traducción?
 
@@ -203,12 +204,12 @@ npm run diagrams  # Generar diagramas con D2 (Terrastruct)
 - [ ] 🔥 Fireside Chat entre dos conceptos
 - [ ] 🕵️ ¿Quién Soy? (3-4 adivinanzas)
 - [ ] 🤬 CONRAD VS EL MUNDO
-- [ ] ⚡ Laboratorio de Tortura (con fallo intencionado)
-- [ ] 🧠 Atrévete a Pensar (3-4 ejercicios)
-- [ ] 🧩 Crucigrama de Bits
+- [ ] ⚡ Laboratorio de tortura (con fallo intencionado)
+- [ ] 🧠 Atrévete a pensar (3-4 ejercicios)
+- [ ] 🧩 Crucigrama de bits
 - [ ] 💬 Entrevista de trabajo (3-5 preguntas)
-- [ ] 🤷 No Hay Preguntas Tontas (2-3 preguntas)
-- [ ] 🎬 Post-Créditos (con PRÓXIMAMENTE)
+- [ ] 🤷 No hay preguntas tontas (2-3 preguntas)
+- [ ] 🎬 Poscréditos (con PRÓXIMAMENTE)
 - [ ] ✅ CEs cubiertos (tabla)
 - [ ] Sidebar actualizado en `astro.config.mjs`
 - [ ] 🗣️ Comprobación lingüística es-ES superada (sección Requisito lingüístico)

@@ -16,8 +16,8 @@ context: |
     cada unidad ampliada como "libro": un fichero Markdown por punto de teoría
     (src/content/docs/<unidad>/<nn>-<punto>.md) más una página índice de unidad.
     Secciones obligatorias del cierre: Sé el Paquete, Fireside Chat, ¿Quién Soy?,
-    CONRAD VS EL MUNDO, Laboratorio de Tortura (con fallo intencionado), Atrévete a Pensar,
-    Crucigrama de Bits, Entrevista de trabajo, No hay preguntas tontas, Post-Créditos.
+    CONRAD VS EL MUNDO, Laboratorio de tortura (con fallo intencionado), Atrévete a pensar,
+    Crucigrama de bits, Entrevista de trabajo, No hay preguntas tontas, Poscréditos.
     Soluciones SIEMPRE en <details>. Boletines en src/content/docs/boletines/ con patrón
     inicial/avanzado + -resuelto. PDF por starlight-to-pdf, EPUB por Pandoc.
   Norma de contenido: nivel de entrada cero, explicaciones con analogías cotidianas,

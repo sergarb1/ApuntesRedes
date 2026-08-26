@@ -13,7 +13,7 @@ description: El escenario departamental paso a paso y cómo diagnosticarlo 🔧
 
 > Aquí montas el escenario estrella de la unidad —**dos switches con trunk y un router-on-a-stick** segmentando Ventas y RRHH— con los comandos exactos de Cisco IOS y el set de verificación (`show vlan brief`, `show interface trunk`, `show ip interface brief`) que convierte un "no funciona" en un "esto es lo que falla".
 
-Este punto es el punto 8 porque condensa todo lo anterior en un solo montaje: VLANs (puntos 1-2), trunks (3), router (4) y hardening (7). Es también la base del ⚡ Laboratorio de Tortura del punto 9.
+Este punto es el punto 8 porque condensa todo lo anterior en un solo montaje: VLANs (puntos 1-2), trunks (3), router (4) y hardening (7). Es también la base del ⚡ Laboratorio de tortura del punto 9.
 
 ---
 
@@ -76,7 +76,7 @@ Switch1(config-if)# switchport trunk native vlan 99
 Switch1(config-if)# switchport trunk allowed vlan 10,20
 ```
 
-#### EL FALLO INTENCIONADO DE ESTA UNIDAD
+#### El fallo intencionado de esta unidad
 
 Configura ahora la **native VLAN distinta** en cada extremo (Switch1 native 99, Switch2 native 1), exactamente como lo hará el Laboratorio del punto 9. El resultado:
 
@@ -149,7 +149,7 @@ Router(config-subif)# ip address 192.168.20.1 255.255.255.0
 | Un puerto de repente se vuelve trunk | **DTP** negociando solo | `switchport mode access` + `nonegotiate` |
 | Un PC "cambia de VLAN" al mover el cable | Asignación por puerto (estática) y una MAC nueva | `show mac address-table` |
 
-Este plan es el que usarás en el **Laboratorio de Tortura** del punto 9: el fallo intencionado de native VLAN se diagnostica exactamente con la fila 3.
+Este plan es el que usarás en el **Laboratorio de tortura** del punto 9: el fallo intencionado de native VLAN se diagnostica exactamente con la fila 3.
 
 ---
 

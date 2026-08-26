@@ -86,7 +86,7 @@ Has terminado la teoría. Este cierre es el aterrizaje: recorre lo aprendido con
 
 ---
 
-## ⚡ Laboratorio de Tortura: OSPF multisede
+## ⚡ Laboratorio de tortura: OSPF multisede
 
 > **Duración:** 1,5 horas
 > **Herramienta:** Packet Tracer
@@ -130,7 +130,7 @@ Has terminado la teoría. Este cierre es el aterrizaje: recorre lo aprendido con
 
 ---
 
-## 🧠 Atrévete a Pensar
+## 🧠 Atrévete a pensar
 
 1. ¿Por qué OSPF necesita un área backbone (Área 0)?
 2. ¿Qué diferencia hay entre router ABR y ASBR?
@@ -150,7 +150,7 @@ Has terminado la teoría. Este cierre es el aterrizaje: recorre lo aprendido con
 
 ---
 
-## 🧩 Crucigrama de Bits
+## 🧩 Crucigrama de bits
 
 ```
 Horizontal:
@@ -204,7 +204,7 @@ Sí, mientras no se reinicie el proceso. La elección de DR/BDR solo ocurre **al
 
 ---
 
-## 🎬 Post-Créditos
+## 🎬 Poscréditos
 
 > *OSPF ha convergido. Todos los routers conocen la topología de red.*
 

@@ -91,7 +91,7 @@ R1(config-if)# interface gigabitethernet 0/0
 R1(config-if)# ip ospf cost 50          ; Camino A pasa a coste 50+1 = 51 > 20
 ```
 
-Con el coste tocado, OSPF recorre su SPF, ve 51 frente a 20 y **redirige el tráfico a R4**. Ese mismo mecanismo es el que usarás en el [Laboratorio de Tortura](/ApuntesRedes/09-routing-dinamico/09-cierre) para "forzar una ruta alternativa".
+Con el coste tocado, OSPF recorre su SPF, ve 51 frente a 20 y **redirige el tráfico a R4**. Ese mismo mecanismo es el que usarás en el [Laboratorio de tortura](/ApuntesRedes/09-routing-dinamico/09-cierre) para "forzar una ruta alternativa".
 
 ---
 

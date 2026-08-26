@@ -13,7 +13,7 @@
 
 ---
 
-## 🗺️ El Viaje del Paquete
+## 🗺️ El viaje del paquete
 
 Un paquete IP viaja desde que nace en un navegador hasta la nube. Cada unidad avanza con él.
 
@@ -53,13 +53,13 @@ U08: 🧭 Router      → U09: 🗣️ OSPF        → U10: 🌐 NAT         →
 | 🔥 **Fireside Chat** | Dos tecnologías discutiendo junto a la chimenea de datos |
 | 🕵️ **¿Quién Soy?** | Adivina el concepto de red por su descripción |
 | 🤬 **CONRAD VS EL MUNDO** | CONRAD (el switch cascarrabias) se queja de errores típicos |
-| ⚡ **Laboratorio de Tortura** | Prácticas en Packet Tracer con fallos intencionados |
-| 🧠 **Atrévete a Pensar** | Ejercicios teórico-prácticos con soluciones |
-| 🧩 **Crucigrama de Bits** | Términos de red en formato puzzle |
+| ⚡ **Laboratorio de tortura** | Prácticas en Packet Tracer con fallos intencionados |
+| 🧠 **Atrévete a pensar** | Ejercicios teórico-prácticos con soluciones |
+| 🧩 **Crucigrama de bits** | Términos de red en formato puzzle |
 | 💬 **Entrevista de trabajo** | Preguntas reales de procesos de selección |
-| 🤷 **No Hay Preguntas Tontas** | FAQ con CONRAD |
+| 🤷 **No hay preguntas tontas** | FAQ con CONRAD |
 | 🏆 **Logros** | Gamificación: consigue todos los achievements |
-| 🎬 **Post-Créditos** | Escenas cómicas con continuidad narrativa |
+| 🎬 **Poscréditos** | Escenas cómicas con continuidad narrativa |
 
 ---
 

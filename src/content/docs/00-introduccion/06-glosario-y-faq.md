@@ -106,7 +106,7 @@ En el equipo afectado, `ipconfig` o `ip addr` mostrará el aviso de conflicto de
 
 ---
 
-## 🎬 Post-Créditos del Tema 0
+## 🎬 Poscréditos del Tema 0
 
 **Escena de después de los créditos. No hay nadie en la sala: solo el parpadeo de un switch y la caja de la compañía, que se enciende sola.**
 

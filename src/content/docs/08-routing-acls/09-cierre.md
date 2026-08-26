@@ -32,7 +32,7 @@ Has terminado la teoría: ya sabes qué es un router, cómo se configura, cómo 
 
 ---
 
-## 🔥 Fireside Chat: Ruta Estática vs Ruta Dinámica
+## 🔥 Fireside Chat: ruta estática vs ruta dinámica
 
 > *Dos rutas discuten en el sofá de la tabla de routing mientras una OSPF vecina de al lado las mira con superioridad.*
 
@@ -90,7 +90,7 @@ Has terminado la teoría: ya sabes qué es un router, cómo se configura, cómo 
 
 ---
 
-## ⚡ Laboratorio de Tortura: Rutas y ACLs
+## ⚡ Laboratorio de tortura: Rutas y ACLs
 
 > **Duración:** 1,5 horas
 > **Herramienta:** Packet Tracer
@@ -122,7 +122,7 @@ Has terminado la teoría: ya sabes qué es un router, cómo se configura, cómo 
 
 ---
 
-## 🧠 Atrévete a Pensar
+## 🧠 Atrévete a pensar
 
 1. ¿Cuántas rutas estáticas necesitas para conectar 3 routers en línea (cada uno con su LAN)?
 2. ¿Qué orden se evalúan las ACLs? ¿Qué implica eso?
@@ -142,7 +142,7 @@ Has terminado la teoría: ya sabes qué es un router, cómo se configura, cómo 
 
 ---
 
-## 🧩 Crucigrama de Bits
+## 🧩 Crucigrama de bits
 
 ```
 Horizontal:
@@ -168,7 +168,7 @@ Vertical:
 
 ---
 
-## 💬 Preguntas de Entrevista de Trabajo
+## 💬 Preguntas de entrevista de trabajo
 
 1. **"Configure un router con 2 interfaces, 2 rutas estáticas y una ruta por defecto."** (pregunta práctica: te dan una pizarra o un simulador, no respuestas de memoria)
 2. **"¿Cuál es la diferencia entre una ACL estándar y una extendida?"**
@@ -200,7 +200,7 @@ Sí. Cada paquete se evalúa contra las líneas de la ACL hasta encontrar una co
 
 ---
 
-## 🎬 Post-Créditos
+## 🎬 Poscréditos
 
 El router consulta su tabla de rutas y encuentra la ruta hacia el destino: una estática hacia la LAN vecina y la por defecto hacia el mundo. Antes de reenviar el paquete, las ACLs aplicadas en la interfaz evalúan el tráfico línea por línea. Si la IP origen no está autorizada según las reglas configuradas, el paquete se descarta en silencio: nadie recibe una notificación, solo el contador de la ACL sube una unidad. Las ACLs dan ese control granular sobre qué tráfico entra y sale de una red. El paquete permitido continúa su viaje, un *hop* más hacia 8.8.8.8, sin saber que detrás de sí ha dejado un router que ha decidido, en microsegundos, que merecía seguir.
 

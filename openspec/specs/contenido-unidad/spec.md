@@ -34,7 +34,7 @@ La unidad conserva las secciones de consolidación del proyecto.
 
 #### Scenario: Secciones de consolidación presentes
 - **WHEN** termina la lectura de la unidad
-- **THEN** existen páginas o apartados con: ⭐ Be the Packet / Sé el Paquete, 🔥 Fireside Chat, 🕵️ ¿Quién Soy?, 🤬 CONRAD VS EL MUNDO, ⚡ Laboratorio de Tortura, 🧠 Atrévete a Pensar, 🧩 Crucigrama de Bits, 💬 Entrevista de trabajo, 🤷 No hay preguntas tontas y 🎬 Post-Créditos
+- **THEN** existen páginas o apartados con: ⭐ Be the Packet / Sé el Paquete, 🔥 Fireside Chat, 🕵️ ¿Quién Soy?, 🤬 CONRAD VS EL MUNDO, ⚡ Laboratorio de tortura, 🧠 Atrévete a pensar, 🧩 Crucigrama de bits, 💬 Entrevista de trabajo, 🤷 No hay preguntas tontas y 🎬 Poscréditos
 
 #### Scenario: Laboratorio con fallo intencionado
 - **WHEN** se ejecuta el laboratorio de la unidad
@@ -56,9 +56,9 @@ El contenido es consistente con el resto del curso.
 - **WHEN** se usan conceptos compartidos con otras unidades (MAC, IP, puerto, gateway, PDU, VLAN...)
 - **THEN** el término se usa con idéntico significado y ejemplos coherentes con el resto del curso
 
-#### Scenario: Post-Créditos con continuidad
+#### Scenario: Poscréditos con continuidad
 - **WHEN** se cierra la unidad
-- **THEN** la escena de Post-Créditos enlaza de forma coherente con la siguiente unidad ("PRÓXIMAMENTE EN U0X") y ambas se corresponden
+- **THEN** la escena de Poscréditos enlaza de forma coherente con la siguiente unidad ("PRÓXIMAMENTE EN U0X") y ambas se corresponden
 
 ### Requirement: Cobertura de criterios de evaluación
 
@@ -91,3 +91,7 @@ Todo el texto de la unidad está escrito en español de España natural, sin lat
 #### Scenario: Terminología técnica razonable
 - **WHEN** el texto nombra conceptos técnicos con término inglés asentado en España (router, switch, firewall, gateway...)
 - **THEN** se mantiene el término inglés sin traducciones artificiales, y los anglicismos evitables en prosa usan su forma española (driver → controlador, email → correo)
+
+#### Scenario: Mayúsculas en títulos y secciones
+- **WHEN** se redacta cualquier título, encabezado o nombre de sección en español
+- **THEN** se usa estilo oracional (solo la primera palabra y nombres propios: "Laboratorio de tortura", "Atrévete a pensar", "Crucigrama de bits", "No hay preguntas tontas", "Poscréditos"), sin capitalizar sustantivos y adjetivos intermedios ni usar TODO MAYÚSCULAS; las siglas técnicas (STP, VLAN, NAT...) conservan su forma

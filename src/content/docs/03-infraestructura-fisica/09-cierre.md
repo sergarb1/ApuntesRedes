@@ -113,7 +113,7 @@ Has terminado la teoría: sabes por qué se trenza el cobre, cómo se crimpa un 
 
 ---
 
-## ⚡ Laboratorio de Tortura: Crimpado y diagnóstico de cables
+## ⚡ Laboratorio de tortura: Crimpado y diagnóstico de cables
 
 > **Duración:** 1 hora
 > **Material:** Cable UTP, conectores RJ45, crimpadora, comprobador de cables
@@ -151,7 +151,7 @@ Has terminado la teoría: sabes por qué se trenza el cobre, cómo se crimpa un 
 
 ---
 
-## 🧠 Atrévete a Pensar
+## 🧠 Atrévete a pensar
 
 1. ¿Por qué los pares están trenzados en un cable UTP? ¿Qué problema físico soluciona el trenzado?
 2. ¿Qué categoría de cable necesitas para soportar 10 Gbps a 100 metros?
@@ -174,7 +174,7 @@ Has terminado la teoría: sabes por qué se trenza el cobre, cómo se crimpa un 
 
 ---
 
-## 🧩 Crucigrama de Bits
+## 🧩 Crucigrama de bits
 
 ```
 Horizontal:
@@ -201,7 +201,7 @@ Vertical:
 
 ---
 
-## 💬 Preguntas de Entrevista de Trabajo
+## 💬 Preguntas de entrevista de trabajo
 
 1. **"¿Me crimpas un cable directo? Explícame qué haces paso a paso."**
 2. **"¿Cuándo usarías fibra óptica y cuándo cobre?"**
@@ -233,7 +233,7 @@ El hub opera en capa 1 (física): repite la señal por todos los puertos sin nin
 
 ---
 
-## 🎬 Post-Créditos
+## 🎬 Poscréditos
 
 Un cable Cat6 transporta 1 Gbps sin problemas hasta que una silla pasa por encima. El impacto físico daña el par 3-6, provocando errores CRC y retransmisiones continuas. El comprobador de cables revela una falta de continuidad en el pin 3. El cable debe ser reemplazado. Lección aprendida: la capa física es la base de todo; si falla, nada funciona. Y CONRAD, desde el fondo del rack, añade: *"El cable lo dice todo. Cuando el paquete se rompe, mirad los pines antes que el router."*
 

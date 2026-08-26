@@ -30,7 +30,7 @@ Has terminado la teoría. Este cierre es el aterrizaje: recorre todo lo aprendid
 
 ---
 
-## 🔥 Fireside Chat: Red Tradicional vs SDN
+## 🔥 Fireside Chat: red tradicional vs SDN
 
 > *Un router tradicional y un controlador SDN debaten en un datacenter.*
 
@@ -80,7 +80,7 @@ Has terminado la teoría. Este cierre es el aterrizaje: recorre todo lo aprendid
 
 ---
 
-## ⚡ Laboratorio de Tortura: Docker Networking
+## ⚡ Laboratorio de tortura: Docker Networking
 
 > **Duración:** 1 hora
 > **Herramientas:** Docker Desktop, terminal
@@ -124,7 +124,7 @@ d) Ejecuta `docker network connect mired c3`. Ahora, ¿c1 y c3 se ven?
 
 ---
 
-## 🧠 Atrévete a Pensar
+## 🧠 Atrévete a pensar
 
 1. ¿Qué diferencia hay entre virtualización (VMware) y contenedores (Docker) en términos de red?
 2. ¿Qué es un hypervisor? ¿Cómo afecta a la red?
@@ -144,7 +144,7 @@ d) Ejecuta `docker network connect mired c3`. Ahora, ¿c1 y c3 se ven?
 
 ---
 
-## 🧩 Crucigrama de Bits
+## 🧩 Crucigrama de bits
 
 ```
 Horizontal:
@@ -170,7 +170,7 @@ Vertical:
 
 ---
 
-## 💬 Preguntas de Entrevista de Trabajo
+## 💬 Preguntas de entrevista de trabajo
 
 1. **"¿Cómo diseñarías la red para una aplicación cloud-native con microservicios?"**
 2. **"¿Qué es SDN? Explica la diferencia entre plano de control y plano de datos."**
@@ -198,7 +198,7 @@ Técnicamente sí, pero no lo hagas. Sin entender routing, subredes, DNS y firew
 
 ---
 
-## 🎬 Post-Créditos Finales
+## 🎬 Poscréditos Finales
 
 > *El paquete ha completado su recorrido. Ha atravesado cables, switches, routers, NAT y cloud. Pero el aprendizaje continúa.*
 

@@ -90,7 +90,7 @@ Eres una **Link-Local**: solo funcionas en el enlace local (la misma red física
 
 ---
 
-## ⚡ Laboratorio de Tortura: Configuración IPv6
+## ⚡ Laboratorio de tortura: Configuración IPv6
 
 > **Duración:** 45 minutos
 > **Herramienta:** Packet Tracer
@@ -140,7 +140,7 @@ interface GigabitEthernet0/1
 
 ---
 
-## 🧠 Atrévete a Pensar
+## 🧠 Atrévete a pensar
 
 1. Comprime esta dirección IPv6: `FE80:0000:0000:0000:02AA:00FF:FE9A:4CA2`
 2. ¿Cuántas direcciones IPv6 hay en total? Escríbelo en notación científica.
@@ -162,7 +162,7 @@ interface GigabitEthernet0/1
 
 ---
 
-## 🧩 Crucigrama de Bits
+## 🧩 Crucigrama de bits
 
 ```
 Horizontal:
@@ -187,7 +187,7 @@ Vertical:
 
 ---
 
-## 💬 Preguntas de Entrevista de Trabajo
+## 💬 Preguntas de entrevista de trabajo
 
 1. **"¿Cómo migrarías una empresa de 500 empleados de IPv4 a IPv6?"**
 2. **"¿Qué ventajas tiene IPv6 sobre IPv4 además de más direcciones?"**
@@ -223,7 +223,7 @@ No intrínsecamente: no hay mecanismos de seguridad "gratis" (IPsec está integr
 
 ---
 
-## 🎬 Post-Créditos
+## 🎬 Poscréditos
 
 La transición a IPv6 no es inmediata ni absoluta. Aunque una dirección IPv6 como `2001:DB8:CAFE::1` ofrece conectividad extremo a extremo sin las limitaciones de NAT, la mayoría de servicios en Internet aún operan sobre IPv4. La coexistencia mediante Dual Stack, túneles y NAT64 es esencial durante esta migración; y detrás de cada PC que "solo se enciende y ya tiene IP" late la mano invisible de SLAAC, NDP y… un router en el armario de tu centro.
 

@@ -32,7 +32,7 @@ Has terminado la teoría. Este cierre es el aterrizaje: recorre lo aprendido con
 
 ---
 
-## 🔥 Fireside Chat: VLAN Estática vs VLAN Dinámica
+## 🔥 Fireside Chat: VLAN estática vs VLAN dinámica
 
 > *Dos VLANs discuten en la sala de servidores mientras las luces del rack parpadean.*
 
@@ -89,7 +89,7 @@ Has terminado la teoría. Este cierre es el aterrizaje: recorre lo aprendido con
 
 ---
 
-## ⚡ Laboratorio de Tortura: Segmentación por departamentos
+## ⚡ Laboratorio de tortura: Segmentación por departamentos
 
 > **Duración:** 1 hora
 > **Herramienta:** Packet Tracer
@@ -127,7 +127,7 @@ Has terminado la teoría. Este cierre es el aterrizaje: recorre lo aprendido con
 
 ---
 
-## 🧠 Atrévete a Pensar
+## 🧠 Atrévete a pensar
 
 1. ¿Cuántas VLANs puedes crear en un switch estándar? ¿Y cuántas pueden estar activas simultáneamente?
 2. ¿Qué pasa si dos switches tienen la misma VLAN pero no hay trunk entre ellos?
@@ -148,7 +148,7 @@ Has terminado la teoría. Este cierre es el aterrizaje: recorre lo aprendido con
 
 ---
 
-## 🧩 Crucigrama de Bits
+## 🧩 Crucigrama de bits
 
 ```
 Horizontal:
@@ -174,7 +174,7 @@ Vertical:
 
 ---
 
-## 💬 Preguntas de Entrevista de Trabajo
+## 💬 Preguntas de entrevista de trabajo
 
 1. **"¿Cómo separarías el tráfico de dos departamentos que comparten el mismo switch?"**
 2. **"Explica qué es un trunk y por qué es necesario."**
@@ -206,7 +206,7 @@ Número mágico: el estándar 802.1Q permite hasta **4094 VLANs** (IDs 1-4094, r
 
 ---
 
-## 🎬 Post-Créditos
+## 🎬 Poscréditos
 
 Las VLANs segmentan la red de forma efectiva: el tráfico de Ventas no es visible para RRHH, y el departamento de IT permanece aislado de Dirección. Sin embargo, la segmentación lógica no es una solución de seguridad completa: la conexión de dispositivos externos o no autorizados puede introducir riesgos (VLAN hopping, native VLAN mal puesta, VTP desbocado) que las VLANs por sí solas no mitigan. Por eso el administrador moderno configura el switch "de entrada": puertos access, DTP apagado, native VLAN alta y VTP en *off*.
 

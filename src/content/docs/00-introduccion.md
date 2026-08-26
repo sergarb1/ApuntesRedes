@@ -39,7 +39,7 @@ Estos apuntes funcionan como un **libro de aventuras técnicas**:
 1. **Avanza en orden.** Cada unidad enlaza con la siguiente. El Tema 0 va antes de la U01 a propósito.
 2. **No memorices, entiende.** Cada concepto se explica con analogías del día a día (el cartero, las calles de una ciudad, el correo postal). Si captas la idea, los detalles luego se recuerdan solos.
 3. **Practícalo todo.** El curso es 80% práctico. Todo lo que se lee se puede montar en Packet Tracer o probar en tu propio equipo.
-4. **No te saltes los ejercicios.** Al final de cada unidad hay "Atrévete a Pensar", un crucigrama y un boletín. Hacerlos es lo que convierte "creo que lo sé" en "lo sé de verdad".
+4. **No te saltes los ejercicios.** Al final de cada unidad hay "Atrévete a pensar", un crucigrama y un boletín. Hacerlos es lo que convierte "creo que lo sé" en "lo sé de verdad".
 5. **Las soluciones están, pero escondidas.** Todo ejercicio tiene su solución en un desplegable (`<details>`). Inténtalo primero; rendirse antes de intentar no cuenta.
 
 > 💡 **Regla de oro del curso:** *"First do it, then understand it, then explain it"*. Primero hazlo, luego entiéndelo y por último explícalo. Si consigues explicárselo a un compañero y que te entienda, lo dominas.

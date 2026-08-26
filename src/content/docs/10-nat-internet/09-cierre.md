@@ -82,7 +82,7 @@ Has terminado la teoría. Este cierre es el aterrizaje: recorres lo aprendido co
 
 ---
 
-## ⚡ Laboratorio de Tortura: Configuración NAT
+## ⚡ Laboratorio de tortura: Configuración NAT
 
 > **Duración:** 1 hora
 > **Herramienta:** Packet Tracer
@@ -143,7 +143,7 @@ Has terminado la teoría. Este cierre es el aterrizaje: recorres lo aprendido co
 
 ---
 
-## 🧠 Atrévete a Pensar
+## 🧠 Atrévete a pensar
 
 1. ¿Cuántas IPs públicas necesitas para que 500 empleados salgan a Internet con PAT?
 2. ¿Qué problema tiene NAT con aplicaciones que usan IPs en los datos (como FTP o VoIP)?
@@ -163,7 +163,7 @@ Has terminado la teoría. Este cierre es el aterrizaje: recorres lo aprendido co
 
 ---
 
-## 🧩 Crucigrama de Bits
+## 🧩 Crucigrama de bits
 
 ```
 Horizontal:
@@ -189,7 +189,7 @@ Vertical:
 
 ---
 
-## 💬 Preguntas de Entrevista de Trabajo
+## 💬 Preguntas de entrevista de trabajo
 
 1. **"Explica cómo NAT permite que 500 empleados salgan a Internet con una sola IP pública."**
 2. **"Configura PAT en un router Cisco."**
@@ -217,7 +217,7 @@ Depende del router y del tiempo de expiración. Teóricamente, con 65535 puertos
 
 ---
 
-## 🎬 Post-Créditos
+## 🎬 Poscréditos
 
 > *Un paquete con IP privada sale a Internet. Atraviesa NAT, cruza routers, pasa por múltiples sistemas autónomos.*
 

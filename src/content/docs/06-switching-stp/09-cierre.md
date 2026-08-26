@@ -77,7 +77,7 @@ Has terminado la teoría. Este cierre es el aterrizaje: recorres lo aprendido co
 
 ---
 
-## ⚡ Laboratorio de Tortura: Bucles y STP
+## ⚡ Laboratorio de tortura: Bucles y STP
 
 > **Duración:** 1 hora
 > **Herramienta:** Packet Tracer
@@ -122,7 +122,7 @@ e) Verifica con `show spanning-tree` el cambio.
 
 ---
 
-## 🧠 Atrévete a Pensar
+## 🧠 Atrévete a pensar
 
 1. ¿Cuánto tarda STP en converger por defecto? ¿Y RSTP?
 2. ¿Qué es el Bridge ID? ¿Cómo se calcula?
@@ -142,7 +142,7 @@ e) Verifica con `show spanning-tree` el cambio.
 
 ---
 
-## 🧩 Crucigrama de Bits
+## 🧩 Crucigrama de bits
 
 ```
 Horizontal:
@@ -179,7 +179,7 @@ Vertical:
 
 ---
 
-## 🤷 No Hay Preguntas Tontas
+## 🤷 No hay preguntas tontas
 
 > ❓ **¿Puedo deshabilitar STP para que la red vaya más rápido?**
 
@@ -195,7 +195,7 @@ Sí, un switch Cisco sin configurar funciona "out of the box": todos los puertos
 
 ---
 
-## 🎬 Post-Créditos
+## 🎬 Poscréditos
 
 Con STP activo, la red elige un Root Bridge y los switches restantes bloquean los puertos redundantes para prevenir bucles. La red permanece estable incluso con enlaces redundantes. Sin embargo, si un administrador conecta un cable adicional entre dos switches ya enlazados, STP detecta el bucle potencial y bloquea el puerto correspondiente, evitando la temida tormenta de broadcast.
 
@@ -209,7 +209,7 @@ Con STP activo, la red elige un Root Bridge y los switches restantes bloquean lo
 
 | CE | Criterio | Cubierto |
 |---|---|---|
-| a) | Conexión de conmutadores | ✅ ⚡ Laboratorio de Tortura |
+| a) | Conexión de conmutadores | ✅ ⚡ Laboratorio de tortura |
 | e) | Tabla de direcciones MAC | ✅ ⭐ Sé el Switch + puntos 1-2 |
 | i) | Spanning Tree Protocol | ✅ 🔥 Fireside + 🕵️ ¿Quién Soy? + ⚡ Laboratorio |
 | j) | Parámetros de selección del puente raíz | ✅ ⚡ Laboratorio (prioridad 4096) |

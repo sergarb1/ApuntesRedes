@@ -90,7 +90,7 @@ Has terminado la teoría. Este cierre es el aterrizaje: recorre lo aprendido con
 
 ---
 
-## ⚡ Laboratorio de Tortura: Captura con Wireshark
+## ⚡ Laboratorio de tortura: Captura con Wireshark
 
 > **Duración:** 45 minutos
 > **Herramientas:** Wireshark, navegador, terminal
@@ -128,7 +128,7 @@ f) Sigue el flujo TCP de la conexión HTTP. ¿Qué ves?
 
 ---
 
-## 🧠 Atrévete a Pensar
+## 🧠 Atrévete a pensar
 
 1. Dibuja cómo se encapsula un mensaje HTTP "HOLA" desde la capa 7 hasta la capa 1 (nombra cada PDU).
 2. ¿Cuántas cabeceras tiene un paquete HTTP que viaja por Ethernet? Nómbralas de fuera a dentro.
@@ -150,7 +150,7 @@ f) Sigue el flujo TCP de la conexión HTTP. ¿Qué ves?
 
 ---
 
-## 🧩 Crucigrama de Bits
+## 🧩 Crucigrama de bits
 
 ```
 Horizontal:
@@ -178,7 +178,7 @@ Vertical:
 
 ---
 
-## 💬 Preguntas de Entrevista de Trabajo
+## 💬 Preguntas de entrevista de trabajo
 
 1. **"Explícame el modelo OSI como si fuera una cadena de montaje de una fábrica."**
 2. **"¿Cuál es la diferencia entre TCP y UDP? Dame 3 casos de uso para cada uno."**
@@ -212,7 +212,7 @@ Un **puerto** es un número (0-65535) que identifica un servicio. Un **socket** 
 
 ---
 
-## 🎬 Post-Créditos
+## 🎬 Poscréditos
 
 Un paquete viaja encapsulado con cuatro niveles de cabeceras: Ethernet, IP, TCP y HTTP. Al llegar a un switch, este examina la dirección MAC destino en la cabecera Ethernet. Si la MAC no corresponde a ningún puerto conocido, el switch inunda la trama por todos los puertos excepto el de origen. Cuando el destinatario responde, el switch aprende la MAC y actualiza su tabla. El paquete continúa su camino capa por capa hasta llegar a la aplicación destino.
 

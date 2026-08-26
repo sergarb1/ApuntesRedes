@@ -44,7 +44,7 @@ c) ¿Qué pasa si el cable mide 120 metros?
 
 **Pista:** Potencia recibida = Potencia transmitida - Atenuación. La atenuación es proporcional a la distancia.
 
-## 4. Fibra vs Cobre: caso real
+## 4. Fibra vs cobre: caso real
 
 Eres el administrador de un campus universitario con 3 edificios separados por 200, 500 y 2000 metros respectivamente.
 

@@ -101,7 +101,7 @@ Orden mental para confirmar que tu NAT está vivo:
 5. R1# debug ip nat              → ves la traducción ocurrir en directo.
 ```
 
-> ⚠️ **Síntoma clásico:** la tabla NAT vacía a pesar del tráfico. Suele significar que falta `ip nat inside` / `ip nat outside` en las interfaces, o que la access-list no coincide con la red. Es el fallo que protagoniza el [⚡ Laboratorio de Tortura del cierre](/ApuntesRedes/10-nat-internet/09-cierre) y el boletín avanzado.
+> ⚠️ **Síntoma clásico:** la tabla NAT vacía a pesar del tráfico. Suele significar que falta `ip nat inside` / `ip nat outside` en las interfaces, o que la access-list no coincide con la red. Es el fallo que protagoniza el [⚡ Laboratorio de tortura del cierre](/ApuntesRedes/10-nat-internet/09-cierre) y el boletín avanzado.
 
 ---
 
