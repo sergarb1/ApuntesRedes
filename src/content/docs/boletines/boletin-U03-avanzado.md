@@ -36,7 +36,7 @@ d) Cómo conectas las dos plantas
 
 ## 3. Cálculo de atenuación
 
-Un cable UTP Cat6 tiene una atenuación máxima de 21.3 dB a 100 MHz para 100 metros. La señal del transmisor tiene una potencia de 2 dBm.
+Un cable UTP Cat6 tiene una atenuación máxima de 21,3 dB a 100 MHz para 100 metros. La señal del transmisor tiene una potencia de 2 dBm.
 
 a) ¿Qué potencia llega al receptor después de 100 m?
 b) Si el receptor necesita al menos -20 dBm para interpretar la señal, ¿funciona?

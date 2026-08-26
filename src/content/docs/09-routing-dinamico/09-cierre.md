@@ -88,7 +88,7 @@ Has terminado la teoría. Este cierre es el aterrizaje: recorre lo aprendido con
 
 ## ⚡ Laboratorio de Tortura: OSPF multisede
 
-> **Duración:** 1.5 horas
+> **Duración:** 1,5 horas
 > **Herramienta:** Packet Tracer
 
 **Escenario:** 4 routers en red con 3 áreas: Área 0 (backbone), Área 1 y Área 2.

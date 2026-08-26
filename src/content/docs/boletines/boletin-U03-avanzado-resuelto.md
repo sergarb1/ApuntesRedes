@@ -40,13 +40,13 @@ d) **Conexión entre plantas:** Fibra multimodo desde cada switch de planta hast
 
 ## 3. Cálculo de atenuación
 
-a) Potencia recibida = 2 dBm - 21.3 dB = **-19.3 dBm**
+a) Potencia recibida = 2 dBm - 21,3 dB = **-19,3 dBm**
 
-b) **Sí funciona.** -19.3 dBm > -20 dBm (el umbral del receptor). La señal es válida.
+b) **Sí funciona.** -19,3 dBm > -20 dBm (el umbral del receptor). La señal es válida.
 
-c) A 120 metros: atenuación proporcional = 21.3 × (120/100) = 25.56 dB
-   Potencia recibida = 2 - 25.56 = **-23.56 dBm**
-   **No funciona.** -23.56 dBm está por debajo del umbral de -20 dBm.
+c) A 120 metros: atenuación proporcional = 21,3 × (120/100) = 25,56 dB
+   Potencia recibida = 2 - 25,56 = **-23,56 dBm**
+   **No funciona.** -23,56 dBm está por debajo del umbral de -20 dBm.
 
 ## 4. Fibra vs Cobre: caso real
 
@@ -103,7 +103,7 @@ a) **Causas físicas posibles:**
 b) **Herramientas:** analizador WiFi (para ver canales, señal RSSI y APs vecinos), aplicación de escaneo de red para comprobar número de clientes, y medición de velocidad en distintos puntos de la oficina.
 
 c) **Soluciones ordenadas de más barata a más cara:**
-   1. **Elegir canales no solapados** (1, 6, 11 en 2.4 GHz) y configurar el AP en 5 GHz (y, si soporta, activar band-steering).
+   1. **Elegir canales no solapados** (1, 6, 11 en 2,4 GHz) y configurar el AP en 5 GHz (y, si soporta, activar band-steering).
    2. **Reubicar el AP** en una posición más central o elevado, lejos de metal y fuentes de interferencia.
    3. **Añadir APs adicionales** (o un mesh) para cubrir las zonas muertas, con canales distintos entre APs adyacentes.
 

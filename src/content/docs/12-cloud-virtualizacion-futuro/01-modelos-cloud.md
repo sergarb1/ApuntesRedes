@@ -11,7 +11,7 @@ description: IaaS, PaaS y SaaS, y los tres tipos de nube 🏗️
 
 ## 📬 La idea en una frase
 
-> La nube no es "un sitio donde guardas cosas": es **alquilar capacidad de cómputo, almacenamiento y red por Internet bajo demanda**. Y según cuánto gestiones tú, hablas de **IaaS, PaaS o SaaS**.
+> La nube no es "un sitio donde guardas cosas": es **alquilar capacidad de procesamiento, almacenamiento y red por Internet bajo demanda**. Y según cuánto gestiones tú, hablas de **IaaS, PaaS o SaaS**.
 
 Es el mismo principio que alquilar un piso en lugar de comprarlo: pagas por lo que usas, lo amplías cuando lo necesitas y no te preocupas de la fontanería... salvo que decidas encargarte tú de la fontanería (IaaS), que te la dejen a medio montar (PaaS) o que te entreguen las llaves de un hotel (SaaS).
 
@@ -25,7 +25,7 @@ Cuando un proveedor te vende "nube", te está vendiendo **tres recursos básicos
 
 | Recurso | Qué alquilas | Ejemplo real |
 |---|---|---|
-| **Cómputo** | Procesadores y memoria (VMs o contenedores) | AWS EC2, Azure VMs |
+| **Procesamiento** | Procesadores y memoria (VMs o contenedores) | AWS EC2, Azure VMs |
 | **Almacenamiento** | Discos virtuales, bases de datos, objetos | AWS S3, Google Drive |
 | **Red** | VPC, subredes, balanceadores, firewalls | AWS VPC, Azure VNet |
 
@@ -97,7 +97,7 @@ Y en cuanto al tipo: ¿datos que no pueden salir de tu edificio? **Privada**. ¿
 
 ## ✅ Resumen en 3 frases
 
-- La nube alquila cómputo, almacenamiento y red por Internet: **IaaS** (tú lo gestionas todo), **PaaS** (solo tu código) y **SaaS** (nada que gestionar).
+- La nube alquila procesamiento, almacenamiento y red por Internet: **IaaS** (tú lo gestionas todo), **PaaS** (solo tu código) y **SaaS** (nada que gestionar).
 - El tipo de cloud se elige según control y sensibilidad de los datos: **pública, privada o híbrida**.
 - La nube es física de verdad: todo lo aprendido en la asignatura sigue ahí, operado por software.
 

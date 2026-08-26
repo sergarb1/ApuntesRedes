@@ -83,7 +83,7 @@ Has terminado la teoría. Este cierre es el aterrizaje: recorre lo aprendido con
 
 ## ⚡ Laboratorio de Tortura: Red averiada
 
-> **Duración:** 1.5 horas
+> **Duración:** 1,5 horas
 > **Herramienta:** Packet Tracer, Wireshark
 
 **Escenario:** Te dan una red preconfigurada con 5 fallos ocultos:

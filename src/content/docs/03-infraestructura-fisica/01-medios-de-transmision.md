@@ -25,7 +25,7 @@ Antes de entrar en detalle, quédate con la tabla que resume toda la unidad:
 |---|---|---|---|---|
 | **Cobre** (UTP/STP) | Hilos de cobre trenzados | 1-10 Gbps | 100 m | Bajo |
 | **Fibra óptica** | Vidrio o plástico | 10-400 Gbps | 40+ km | Alto |
-| **Aire** (WiFi, radio) | Ondas electromagnéticas | 0.1-9.6 Gbps | Variable (10-100 m) | Medio |
+| **Aire** (WiFi, radio) | Ondas electromagnéticas | 0,1-9,6 Gbps | Variable (10-100 m) | Medio |
 
 Observa el patrón: **el cobre es barato y corto, la fibra es cara y kilométrica, el aire es flexible pero impredecible.** En los puntos siguientes vas a desmontar cada uno y ver sus tripas.
 

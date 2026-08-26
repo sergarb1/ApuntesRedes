@@ -59,7 +59,7 @@ b) ¿Qué capa elimina la cabecera IP y qué PDU queda?
 c) ¿Qué capa elimina la cabecera TCP y qué PDU queda?
 d) ¿Dónde acaba el contenido?
 
-**Pista:** anda hacia atrás y cada capa "desempaca" la PDU de la capa superior.
+**Pista:** anda hacia atrás y cada capa "desempaqueta" la PDU de la capa superior.
 
 ## 6. Diferencia práctica: hub, switch y router
 

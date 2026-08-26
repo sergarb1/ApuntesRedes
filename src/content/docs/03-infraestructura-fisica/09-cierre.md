@@ -40,7 +40,7 @@ Has terminado la teoría: sabes por qué se trenza el cobre, cómo se crimpa un 
 
 **Fibra:** — 100 metros, dices. Yo llego a 40 KILÓMETROS sin repetidor. 100 Gbps. Y no me afectan las interferencias electromagnéticas.
 
-**Cobre:** — Vale, pero mis conectores RJ45 cuestan 0.50€. Los tuyos cuestan 20€ y necesitas un fusion splicer.
+**Cobre:** — Vale, pero mis conectores RJ45 cuestan 0,50 €. Los tuyos cuestan 20 € y necesitas un fusion splicer.
 
 **Fibra:** — Calidad, amigo. Calidad. En los datacenters no se juega. Y no me electrocutas cuando hay una tormenta.
 
@@ -181,7 +181,7 @@ Horizontal:
 1. Conector de 8 pines para UTP (4 letras + número)
 4. Herramienta que verifica la continuidad del cable (8 letras)
 5. Tipo de cable trenzado sin apantallar (3 letras)
-7. Estándar WiFi de 5 GHz con 3.5 Gbps (9 letras)
+7. Estándar WiFi de 5 GHz con 3,5 Gbps (9 letras)
 8. Módulo intercambiable para puertos de switch (3 letras)
 
 Vertical:

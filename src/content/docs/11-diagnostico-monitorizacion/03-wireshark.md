@@ -69,7 +69,7 @@ Ese patrón —handshake OK, luego retransmisiones y ventana a cero— es el ret
 
 Ver paquetes sueltos es leer palabras; seguir el flujo es leer la conversación. En Wireshark:
 
-> Wireshark → Click derecho en un paquete TCP → **Follow → TCP Stream**
+> Wireshark → Clic derecho en un paquete TCP → **Follow → TCP Stream**
 
 Wireshark reconstruye **toda la conversación** entre el cliente y el servidor: cada byte enviado y recibido, ordenado y legible. Es la forma más rápida de leer una petición HTTP completa, ver si el servidor responde `200 OK` o un `404`, o confirmar que el contenido viaja cifrado (si es HTTPS verás un galimatías ininteligible, y eso ya es información: la capa 4 funciona y la 7 está cifrada).
 

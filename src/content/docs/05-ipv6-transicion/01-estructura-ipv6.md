@@ -27,7 +27,7 @@ IPv4 tiene **32 bits**, lo que da exactamente **2³² = 4.294.967.296** direccio
 
 Por eso se diseñó **IPv6**: no es un parche ni una mejora de rendimiento, es la solución estructural a quedarse sin direcciones.
 
-> 💡 **Guarda esta cifra:** IPv4 = 32 bits = 4.300 millones. IPv6 = 128 bits = 3.4 × 10³⁸. Es la primera pregunta de cualquier entrevista y la más fácil de responder.
+> 💡 **Guarda esta cifra:** IPv4 = 32 bits = 4.300 millones. IPv6 = 128 bits = 3,4 × 10³⁸. Es la primera pregunta de cualquier entrevista y la más fácil de responder.
 
 ---
 
@@ -48,7 +48,7 @@ El rango total de direcciones es:
 
 ```
 2¹²⁸ = 340.282.366.920.938.463.463.374.607.431.768.211.456
-     ≈ 3.4 × 10³⁸  →  más de 300 sextillones
+     ≈ 3,4 × 10³⁸  →  más de 300 sextillones
 ```
 
 ### 🚦 La notación en práctica
@@ -98,7 +98,7 @@ Piensa en las tres consecuencias prácticas de quedarte con 128 bits:
 <summary>🔄 Respuestas</summary>
 
 1. Cada grupo son **16 bits** (4 dígitos hexadecimales × 4 bits). Hay **8 grupos**, así que una dirección completa son 8 × 16 = **128 bits**.
-2. **128 bits** → **2¹²⁸ ≈ 3.4 × 10³⁸** direcciones (340 sextillones).
+2. **128 bits** → **2¹²⁸ ≈ 3,4 × 10³⁸** direcciones (340 sextillones).
 3. La notación: IPv6 usa **8 grupos hexadecimales separados por dos puntos** (`2001:DB8::…`), mientras que IPv4 usa **4 octetos decimales separados por puntos** (`192.168.1.1`). Además, IPv6 solo contiene los dígitos `0-9` y `A-F`.
 </details>
 
@@ -108,7 +108,7 @@ Piensa en las tres consecuencias prácticas de quedarte con 128 bits:
 
 - IPv6 nace del agotamiento de IPv4 (32 bits): pasa a direcciones de **128 bits** escritas en hexadecimal.
 - Una dirección se organiza en **8 grupos de 4 dígitos hexadecimales** = 8 × 16 = 128 bits.
-- Con 3.4 × 10³⁸ direcciones, termina el racionamiento: cada dispositivo puede tener la suya, pública y única.
+- Con 3,4 × 10³⁸ direcciones, termina el racionamiento: cada dispositivo puede tener la suya, pública y única.
 
 ## 🐛 Vocabulario rápido
 
@@ -118,7 +118,7 @@ Piensa en las tres consecuencias prácticas de quedarte con 128 bits:
 | Grupo (hexteto) | Bloque de 4 dígitos hexadecimales = 16 bits |
 | Nibble | 4 bits = 1 dígito hexadecimal |
 | Hexagonal | Base 16: dígitos 0-9 y letras A-F |
-| 2¹²⁸ | ≈ 3.4 × 10³⁸ direcciones distintas |
+| 2¹²⁸ | ≈ 3,4 × 10³⁸ direcciones distintas |
 
 ---
 

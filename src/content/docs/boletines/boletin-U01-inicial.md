@@ -35,7 +35,7 @@ Tienes:
 
 Dibuja (o describe con palabras) la topología en estrella extendida que los conecta todos a Internet.
 
-## 4. Empaca tu memoria: une cada PDU con su capa
+## 4. Empaqueta tu memoria: une cada PDU con su capa
 
 | PDU | Capa |
 |---|---|

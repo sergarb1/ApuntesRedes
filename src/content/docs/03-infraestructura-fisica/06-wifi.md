@@ -23,14 +23,14 @@ Los estándares se fueron sobreponiendo, cada uno más rápido, más banda o con
 
 | Estándar | Nombre comercial | Banda | Velocidad máxima teórica | Año |
 |---|---|---|---|---|
-| **802.11n** | WiFi 4 | 2.4 + 5 GHz | 600 Mbps | 2009 |
-| **802.11ac** | WiFi 5 | 5 GHz | 3.5 Gbps | 2014 |
-| **802.11ax** | WiFi 6 | 2.4 + 5 GHz | 9.6 Gbps | 2019 |
-| **802.11be** | WiFi 7 | 2.4 + 5 + 6 GHz | 46 Gbps | 2024 |
+| **802.11n** | WiFi 4 | 2,4 + 5 GHz | 600 Mbps | 2009 |
+| **802.11ac** | WiFi 5 | 5 GHz | 3,5 Gbps | 2014 |
+| **802.11ax** | WiFi 6 | 2,4 + 5 GHz | 9,6 Gbps | 2019 |
+| **802.11be** | WiFi 7 | 2,4 + 5 + 6 GHz | 46 Gbps | 2024 |
 
 Dos bandas y sus caracteres:
 
-- **2.4 GHz**: llega más lejos y atraviesa mejor las paredes, pero es la banda saturada (microondas, Bluetooth, los routers de los vecinos). Más alcance, más interferencia.
+- **2,4 GHz**: llega más lejos y atraviesa mejor las paredes, pero es la banda saturada (microondas, Bluetooth, los routers de los vecinos). Más alcance, más interferencia.
 - **5 GHz** (y 6 GHz en WiFi 7): más veloz y limpia, pero se atenúa más con las paredes. Menor alcance, mejor calidad.
 
 > 💡 **El nombre comercial es tu amigo:** "WiFi 6" o "WiFi 7" vende más que "802.11ax". En cualquier producto real fíjate en ambos: el estándar y la generación.
@@ -47,7 +47,7 @@ La velocidad de la pegatina es ficticia. Estas son las razones:
 
 **3. El canal es compartido.** Todos los dispositivos de un AP se reparten el mismo ancho de banda (con *time division* y acceso por contienda). 20 portátiles = 20 trocitos del mismo pastel. Los puestos fijos que necesitan caudal no deberían vivir en WiFi.
 
-**4. La interferencia de los vecinos.** Radiadores, microondas, y sobre todo las redes WiFi del piso de al lado, pisando el mismo canal. Cuantos más APs en el canal, peor para todos (los canales 1, 6 y 11 son los que no se solapan en 2.4 GHz).
+**4. La interferencia de los vecinos.** Radiadores, microondas, y sobre todo las redes WiFi del piso de al lado, pisando el mismo canal. Cuantos más APs en el canal, peor para todos (los canales 1, 6 y 11 son los que no se solapan en 2,4 GHz).
 
 ---
 
@@ -67,7 +67,7 @@ La velocidad de la pegatina es ficticia. Estas son las razones:
 
 ## 🗺️ Canales: el mapa de la contaminación
 
-En la banda de 2.4 GHz hay 14 canales (en Europa, del 1 al 13), pero no son independientes: cada uno ocupa 22 MHz, con solapamiento. La consecuencia práctica es que **solo 3 canales no se estorban entre sí: el 1, el 6 y el 11**.
+En la banda de 2,4 GHz hay 14 canales (en Europa, del 1 al 13), pero no son independientes: cada uno ocupa 22 MHz, con solapamiento. La consecuencia práctica es que **solo 3 canales no se estorban entre sí: el 1, el 6 y el 11**.
 
 ```
 Canal 1:  ▓▓▓░░░░░░░░░░░░░░░░░░░░░
@@ -85,14 +85,14 @@ Canal 11: ░░░░░░░░░░▓▓▓░░░░░░░░░
 
 ## 🧠 Mini-chequeo
 
-1. ¿Qué diferencia práctica hay entre la banda de 2.4 GHz y la de 5 GHz?
-2. Un AP anuncia 9.6 Gbps (WiFi 6). ¿Qué velocidad real esperas para un cliente y por qué?
+1. ¿Qué diferencia práctica hay entre la banda de 2,4 GHz y la de 5 GHz?
+2. Un AP anuncia 9,6 Gbps (WiFi 6). ¿Qué velocidad real esperas para un cliente y por qué?
 3. ¿Por qué "más dispositivos conectados" degrada la velocidad de todos?
 
 <details>
 <summary>🔄 Respuestas</summary>
 
-1. **2.4 GHz** llega más lejos y atraviesa mejor las paredes pero está saturada (más interferencias). **5 GHz** es más rápida y limpia pero se atenúa más con las obstrucciones. 6 GHz (WiFi 7) va un paso más allá en velocidad y limpieza.
+1. **2,4 GHz** llega más lejos y atraviesa mejor las paredes pero está saturada (más interferencias). **5 GHz** es más rápida y limpia pero se atenúa más con las obstrucciones. 6 GHz (WiFi 7) va un paso más allá en velocidad y limpieza.
 2. **En torno a 1/3 o la mitad, ~3-5 Gbps de sobra en condiciones normales** (e incluso menos con muchos clientes): el 30-50% de la teórica es la regla por overhead, obstrucciones y canal compartido.
 3. Porque en WiFi el **canal es un recurso compartido**: todos los clientes de un AP se reparten el mismo ancho de banda por contienda y multiplexación temporal. Más clientes = porciones más pequeñas.
 </details>
@@ -111,8 +111,8 @@ Canal 11: ░░░░░░░░░░▓▓▓░░░░░░░░░
 |---|---|
 | 802.11 | Familia de estándares WiFi (n/ac/ax/be) |
 | AP / Router WiFi | Punto de acceso que reparte la señal inalámbrica |
-| Canal | Frecuencia concreta donde opera la red (1, 6, 11 no solapan en 2.4 GHz) |
-| Banda | Rango de frecuencia (2.4 GHz, 5 GHz, 6 GHz) |
+| Canal | Frecuencia concreta donde opera la red (1, 6, 11 no solapan en 2,4 GHz) |
+| Banda | Rango de frecuencia (2,4 GHz, 5 GHz, 6 GHz) |
 | Rendimiento real | El 30-50% de la teórica en condiciones reales |
 | Band-steering | Llevar al cliente a la banda (y al AP) con mejor señal |
 

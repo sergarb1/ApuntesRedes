@@ -53,7 +53,7 @@ Es la combinación exacta de [punto 4 (SDN)](/ApuntesRedes/12-cloud-virtualizaci
 
 ## 🖥️ Edge computing: no todo viaja al centro
 
-Si cada dispositivo enviara sus datos al datacenter central, las líneas se saturarían y la latencia dispararía. **Edge computing** acerca el cómputo al borde de la red: micro-datacenters en las ciudades, cerca de las antenas.
+Si cada dispositivo enviara sus datos al datacenter central, las líneas se saturarían y la latencia dispararía. **Edge computing** acerca el procesamiento al borde de la red: micro-datacenters en las ciudades, cerca de las antenas.
 
 ```
   Sensores / coches / cámaras
@@ -78,7 +78,7 @@ El edge reduce el tráfico hacia el cloud central y permite aplicaciones donde *
 |---|---|---|
 | Latencia | Decenas/cientos de ms | **< 10 ms** (milisegundos) |
 | Distancia al dato | Lejos (datacenter regional) | Cerca (antena, micro-datacenter) |
-| Capacidad de cómputo | Enorme, escalable | Limitada pero suficiente |
+| Capacidad de procesamiento | Enorme, escalable | Limitada pero suficiente |
 | Uso ideal | Big data, backup, análisis masivo | Reacción inmediata, sensores, vehículos |
 
 No compiten: **se complementan**. El edge decide y reacciona; el cloud central acumula y analiza en profundidad. Un semáforo inteligente decide localmente (edge) y sube resúmenes al datacenter (cloud). Lo que cambia es **qué se envía**: en vez de todo el dato crudo, solo lo relevante.
@@ -105,7 +105,7 @@ No compiten: **se complementan**. El edge decide y reacciona; el cloud central a
 
 - IoT multiplica los dispositivos y **obliga a IPv6** y a una gestión masiva.
 - El **core de 5G se construye sobre SDN + NFV** y permite network slicing.
-- **Edge computing** acerca el cómputo al origen para recortar latencia y descargar el cloud central.
+- **Edge computing** acerca el procesamiento al origen para recortar latencia y descargar el cloud central.
 
 ## 🐛 Vocabulario rápido
 
@@ -113,7 +113,7 @@ No compiten: **se complementan**. El edge decide y reacciona; el cloud central a
 |---|---|
 | IoT | Internet de las cosas: dispositivos conectados masivos |
 | 5G | Red móvil de baja latencia (<1 ms) con core SDN/NFV |
-| Edge computing | Cómputo en el borde, cerca de los datos |
+| Edge computing | Procesamiento en el borde, cerca de los datos |
 | Network slicing | Porciones lógicas de la red con garantías distintas |
 | SLAAC | Autoconfiguración de direcciones IPv6 |
 

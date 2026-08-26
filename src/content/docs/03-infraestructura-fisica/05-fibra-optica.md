@@ -37,7 +37,7 @@ La pregunta estrella de la fibra: ¿qué fibra necesito?
 
 | Característica | Monomodo (SMF) | Multimodo (MMF) |
 |---|---|---|
-| Núcleo | 9 µm (muy fino) | 50-62.5 µm (más grueso) |
+| Núcleo | 9 µm (muy fino) | 50-62,5 µm (más grueso) |
 | Fuente de luz | Láser | LED |
 | Distancia máx | 40+ km | 550 m (a 10 Gbps) |
 | Coste | Más caro (láser + conectores de precisión) | Más barato |
@@ -81,7 +81,7 @@ En las cajas de bobinas verás tres letras: **OM** (*Optical Multimode*) u **OS*
 
 | Clase | Tipo | Caudal y distancia típicos |
 |---|---|---|
-| OM1 / OM2 | Multimodo antiguo | 62.5 / 50 µm, 1 Gbps hasta 200-550 m según la clase |
+| OM1 / OM2 | Multimodo antiguo | 62,5 / 50 µm, 1 Gbps hasta 200-550 m según la clase |
 | OM3 | Multimodo (láser optimizado) | 10 Gbps hasta 300 m (el estándar de los campus modernos) |
 | OM4 | Multimodo (láser optimizado) | 10 Gbps hasta 550 m (datacenter y campus) |
 | OS1 / OS2 | Monomodo | 10-400 Gbps, distancias de kilómetros (WAN, ISP) |
@@ -99,7 +99,7 @@ En las cajas de bobinas verás tres letras: **OM** (*Optical Multimode*) u **OS*
 <details>
 <summary>🔄 Respuestas</summary>
 
-1. **Monomodo** tiene núcleo fino (9 µm), usa láser y llega a 40+ km (WAN, ISP). **Multimodo** tiene núcleo grueso (50-62.5 µm), usa LED y llega a 550 m a 10 Gbps (LAN, datacenter, campus).
+1. **Monomodo** tiene núcleo fino (9 µm), usa láser y llega a 40+ km (WAN, ISP). **Multimodo** tiene núcleo grueso (50-62,5 µm), usa LED y llega a 550 m a 10 Gbps (LAN, datacenter, campus).
 2. **Fibra monomodo (OS2)**, porque 2 km superan con creces los 550 m de la multimodo. El conector estándar sería **LC** (el habitual para módulos SFP).
 3. Sin cambiar de switch, un puerto SFP puede servir **1000Base-T** (cobre, RJ45, 100 m) o **1000Base-LX** (fibra, LC, kilómetros): solo cambias el módulo según el medio que necesites.
 </details>
@@ -116,7 +116,7 @@ En las cajas de bobinas verás tres letras: **OM** (*Optical Multimode*) u **OS*
 
 | Término | Idea general |
 |---|---|
-| Fibra SMF / MMF | Monomodo (9 µm, láser, km) / Multimodo (50-62.5 µm, LED, 550 m) |
+| Fibra SMF / MMF | Monomodo (9 µm, láser, km) / Multimodo (50-62,5 µm, LED, 550 m) |
 | Fusion splicer | Máquina que empalma fibras fundiendo el vidrio |
 | Conector LC | Pequeño, push-pull, estándar en SFP |
 | SFP | Módulo intercambiable que fija el medio del puerto |

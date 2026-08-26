@@ -56,7 +56,7 @@ Has terminado la teoría. Este cierre es el aterrizaje: recorres lo aprendido co
 1. Traduzco una IP privada a una IP pública. Todos los PC comparten la misma IP pública con diferentes puertos.
 2. Traduzco siempre la misma IP privada a la misma IP pública. Útil para servidores.
 3. Traduzco tráfico entrante de un puerto público a un servidor interno.
-4. Soy el estándar WiFi más común hoy en día. 2.4 GHz, 5 GHz, hasta 1.3 Gbps.
+4. Soy el estándar WiFi más común hoy en día. 2,4 GHz, 5 GHz, hasta 1,3 Gbps.
 5. Soy el protocolo que abre puertos automáticamente en el router. Cómodo pero inseguro.
 
 <details>

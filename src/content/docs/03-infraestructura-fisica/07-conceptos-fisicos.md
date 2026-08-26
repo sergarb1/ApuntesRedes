@@ -28,7 +28,7 @@ Capacidad máxima de transmisión de un medio, medida en **bps** (bits por segun
 10 Gbps = 10¹⁰ bps
 ```
 
-> ⚠️ **No confundir con el ancho de banda en Hz.** El ancho de banda en Hertz mide el *rango de frecuencias* que puede transmitir un medio. Ambos se relacionan por el **teorema de Nyquist**: capacidad = 2 × ancho_de_banda × log₂(niveles). Pero en la práctica, cuando un admin dice "ancho de banda", habla de **velocidad máxima de transmisión**. Y una trampa recurrente: 100 Mbps = 12.5 MB/s (el byte son 8 bits).
+> ⚠️ **No confundir con el ancho de banda en Hz.** El ancho de banda en Hertz mide el *rango de frecuencias* que puede transmitir un medio. Ambos se relacionan por el **teorema de Nyquist**: capacidad = 2 × ancho_de_banda × log₂(niveles). Pero en la práctica, cuando un admin dice "ancho de banda", habla de **velocidad máxima de transmisión**. Y una trampa recurrente: 100 Mbps = 12,5 MB/s (el byte son 8 bits).
 
 ---
 
@@ -103,14 +103,14 @@ Dos conceptos más completan el cuadro de la capa física:
 
 ## 🧠 Mini-chequeo
 
-1. Un enlace anuncia 100 Mbps. ¿Cuánto tardaría en descargar 12.5 MB (asumiendo throughput perfecto)?
+1. Un enlace anuncia 100 Mbps. ¿Cuánto tardaría en descargar 12,5 MB (asumiendo throughput perfecto)?
 2. ¿Por qué la atenuación limita el cable UTP a 100 metros? ¿Y por qué no limita a la fibra?
 3. Explica la diferencia entre NEXT, FEXT y PS NEXT con palabras simples.
 
 <details>
 <summary>🔄 Respuestas</summary>
 
-1. **1 segundo** (o poco más con overhead): 12.5 MB × 8 = 100 Mbit, y 100 Mbps los cruza en 1 s con eficiencia perfecta. En la práctica, más (throughput < ancho de banda).
+1. **1 segundo** (o poco más con overhead): 12,5 MB × 8 = 100 Mbit, y 100 Mbps los cruza en 1 s con eficiencia perfecta. En la práctica, más (throughput < ancho de banda).
 2. Porque en **cobre la señal eléctrica se atenúa con la distancia**, y a partir de 100 m cae por debajo del umbral del receptor. La **fibra transmite luz**, que se atenúa muchísimo menos, aguantando kilómetros sin repetidor.
 3. **NEXT** mide la interferencia de un par sobre otro en el extremo cercano (el mismo lado que transmite); **FEXT**, en el extremo lejano; **PS NEXT** suma todas las interferencias que un par recibe de todos los demás a la vez.
 </details>

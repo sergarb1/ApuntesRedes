@@ -153,7 +153,7 @@ interface GigabitEthernet0/1
 <summary>💡 Soluciones</summary>
 
 1. **`FE80::2AA:FF:FE9A:4CA2`** (la cadena de ceros se sustituye por `::`; `02AA` → `2AA`).
-2. **3.4 × 10³⁸** direcciones (340 sextillones) = 2¹²⁸.
+2. **3,4 × 10³⁸** direcciones (340 sextillones) = 2¹²⁸.
 3. SLAAC no necesita servidor central: el router anuncia el prefijo (RA) y cada dispositivo genera su propia IP (prefijo + EUI-64). Cero configuración y supervivencia a caídas. Su desventaja: no asigna DNS ni controla qué IP coge cada uno (para eso existe DHCPv6 stateless/stateful).
 4. **NAT64** traduce tráfico IPv6 → IPv4. Con **DNS64** (que fabrica direcciones IPv6 sintéticas) permite que una red solo-IPv6 acceda a recursos solo-IPv4. Puente entre ambos mundos.
 5. /64 deja los 64 bits inferiores para el **identificador de interfaz**, condición de SLAAC y EUI-64. Con **/72** (más largo) se rompería SLAAC estándar. Con **/56** tienes 256 subredes /64 de sobra (más flexible, común en hogares/ISP).

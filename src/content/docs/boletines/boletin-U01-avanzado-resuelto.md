@@ -54,7 +54,7 @@ b) La capa **3 (Red)** elimina la cabecera IP y queda el **segmento** TCP.
 c) La capa **4 (Transporte)** elimina la cabecera TCP y queda la **petición** `GET /index.html`.
 d) El contenido sube a la capa 7 (Aplicación), donde el servidor web lo procesa y responde.
 
->Truco: es el mismo "empacado" del envío pero al revés — cada capa quita su cabecera.
+>Truco: es el mismo "empaquetado" del envío pero al revés — cada capa quita su cabecera.
 
 ## 6. Diferencia práctica: hub, switch y router
 

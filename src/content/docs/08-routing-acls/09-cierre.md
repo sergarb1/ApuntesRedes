@@ -92,7 +92,7 @@ Has terminado la teoría: ya sabes qué es un router, cómo se configura, cómo 
 
 ## ⚡ Laboratorio de Tortura: Rutas y ACLs
 
-> **Duración:** 1.5 horas
+> **Duración:** 1,5 horas
 > **Herramienta:** Packet Tracer
 
 **Escenario:**

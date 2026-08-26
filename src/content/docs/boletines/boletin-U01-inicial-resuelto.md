@@ -31,7 +31,7 @@ e) **Falso.** La MAC va grabada de fábrica y es permanente; la que cambia con e
 - Switch2 conectado a PC3 y PC4.
 - El router da la salida a Internet.
 
-## 4. Empaca tu memoria: une cada PDU con su capa
+## 4. Empaqueta tu memoria: une cada PDU con su capa
 
 1 → b (Bits · Física)
 2 → c (Trama · Enlace)
