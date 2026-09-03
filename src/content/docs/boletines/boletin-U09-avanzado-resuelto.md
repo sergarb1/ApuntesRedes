@@ -1,137 +1,147 @@
 ---
 title: Boletín U09 — Avanzado (Resuelto)
-description: Soluciones de los ejercicios avanzados de Routing Dinámico
+description: Soluciones ejercicios avanzados de Routing y ACLs
 ---
 
 # ✅ Boletín U09 — Avanzado (Resuelto)
 
 ---
 
-## 1. Configuración OSPF multiárea
+## 1. Configuración multi-routing
 
 **R1:**
 ```bash
-interface loopback 0
- ip address 1.1.1.1 255.255.255.255
 interface g0/0
  ip address 192.168.1.1 255.255.255.0
+ no shutdown
 interface g0/1
- ip address 192.168.2.1 255.255.255.0
-interface g0/2
  ip address 10.0.0.1 255.255.255.252
-router ospf 1
- router-id 1.1.1.1
- network 192.168.1.0 0.0.0.255 area 0
- network 192.168.2.0 0.0.0.255 area 0
- network 10.0.0.0 0.0.0.3 area 0
+ no shutdown
+ip route 192.168.2.0 255.255.255.0 10.0.0.2
+ip route 192.168.3.0 255.255.255.0 10.0.0.2
+ip route 0.0.0.0 0.0.0.0 10.0.0.2
 ```
 
-**R2 (ABR):**
+**R2:**
 ```bash
-interface loopback 0
- ip address 2.2.2.2 255.255.255.255
 interface g0/0
  ip address 10.0.0.2 255.255.255.252
+ no shutdown
 interface g0/1
  ip address 10.0.0.5 255.255.255.252
-router ospf 1
- router-id 2.2.2.2
- network 10.0.0.0 0.0.0.3 area 0
- network 10.0.0.4 0.0.0.3 area 1
+ no shutdown
+interface g0/2
+ ip address 192.168.2.1 255.255.255.0
+ no shutdown
+ip route 192.168.1.0 255.255.255.0 10.0.0.1
+ip route 192.168.3.0 255.255.255.0 10.0.0.6
 ```
 
 **R3:**
 ```bash
-interface loopback 0
- ip address 3.3.3.3 255.255.255.255
 interface g0/0
- ip address 192.168.3.1 255.255.255.0
-interface g0/1
  ip address 10.0.0.6 255.255.255.252
-router ospf 1
- router-id 3.3.3.3
- network 192.168.3.0 0.0.0.255 area 1
- network 10.0.0.4 0.0.0.3 area 1
+ no shutdown
+interface g0/1
+ ip address 192.168.3.1 255.255.255.0
+ no shutdown
+ip route 192.168.1.0 255.255.255.0 10.0.0.5
+ip route 192.168.2.0 255.255.255.0 10.0.0.5
+ip route 0.0.0.0 0.0.0.0 10.0.0.5
 ```
 
-## 2. Diagnóstico OSPF
+## 2. ACL extendida: YouTube blocker
 
-a) **FULL/DR:** El vecino 3.3.3.3 es el DR y la adyacencia está completa (FULL). Es normal en Ethernet.
+a) **ACL con time-range:**
+```bash
+time-range LABORAL
+ periodic weekdays 9:00 to 18:00
 
-b) **2WAY/DROTHER:** El vecino 4.4.4.4 no es DR ni BDR (DROTHER). La adyacencia está en 2WAY, que es el estado normal entre DROTHERS (no intercambian LSAs directamente, solo con el DR).
+ip access-list extended BLOQUEAR_YT
+ deny tcp any 173.194.0.0 0.0.255.255 eq 80 time-range LABORAL
+ deny tcp any 173.194.0.0 0.0.255.255 eq 443 time-range LABORAL
+ permit ip any any
+```
 
-c) **Porque no es necesario.** En redes multiacceso, los DROTHERS solo forman adyacencia FULL con el DR y BDR. Entre DROTHERS se quedan en 2WAY.
+b) **Aplicar:** Outbound en G0/1 (hacia Internet), para filtrar tráfico saliente.
 
-d) **No se ve directamente.** Pero por contexto, si este router tiene vecinos en G0/0 y G0/1, su Router ID podría ser otro (el más alto de sus loopbacks o interfaces físicas).
+c) **Alternativa sin time-range:** no se puede definir "9 a 18" con la ACL pura; habría que cambiar manualmente la ACL cada mañana y cada tarde (desastrosamente manual) o gestionarlo con un script/programación externa que alterne las versiones de política. Por eso `time-range` existe.
 
-## 3. Redistribución OSPF
+## 3. Diagnóstico de ACL
 
-a) `redistribute static subnets` inyecta las rutas estáticas configuradas en el router al proceso OSPF, para que otros routers OSPF aprendan esas rutas.
+a) **Sí, es normal.** La línea 1 deniega explícitamente 192.168.1.10. La línea 2 permite al resto de la red. El deny any implícito está al final.
 
-b) **Dos rutas:** la ruta por defecto (0.0.0.0/0) y la ruta estática 10.100.0.0/16.
+b) **Sí, 192.168.1.20 puede** porque coincide con la línea 2 (permit 192.168.1.0/24).
 
-c) **Sí.** La redistribución + `default-information originate` propaga ambas rutas a todos los routers OSPF en todos los áreas.
+c) `show access-lists 10` — Muestra los contadores de hits de cada línea.
 
-## 4. Cambio de coste OSPF
+d) **No afecta.** La ACL está en G0/1 (outbound). El tráfico entre PCs de la misma LAN no pasa por el router, solo por el switch. Las ACLs en interfaces del router solo afectan al tráfico que pasa por el router.
 
-a) **Camino A** (coste 1+1+1 = 3) aunque tenga más routers en FastEthernet (cada enlace tiene coste 1). OSPF elige el camino con menor coste total. Los dos caminos tienen el mismo coste si todos los enlaces son del mismo tipo. Si ambos tienen coste 1+1+1 vs 1+1+1+1, gana el de 3 saltos (menos coste).
+## 4. Rutas flotantes
 
-b) Para forzar el Camino B, aumentar el coste en los enlaces de A:
-   ```bash
-   R1(config-if)# ip ospf cost 10
-   ```
+a) **Comandos:**
+```bash
+ip route 0.0.0.0 0.0.0.0 10.0.0.2        # AD=1 (por defecto)
+ip route 0.0.0.0 0.0.0.0 10.0.1.2 5      # AD=5 (respaldo)
+ip route 192.168.100.0 255.255.255.0 10.0.0.2
+```
 
-c) `show ip ospf interface` o `show ip route` muestra el coste de cada ruta.
+b) **Cuándo se activa:** Cuando la ruta primaria (10.0.0.2) desaparece de la tabla (el siguiente salto deja de ser accesible). Entonces la ruta con AD=5 aparece en la tabla.
 
-## 5. DR/BDR election
+c) **Verificación:** `show ip route 0.0.0.0` muestra qué ruta por defecto está activa. Si aparece la de 10.0.1.2, la primaria ha fallado.
 
-a) **DR: R3** (prioridad 10, la más alta). **BDR: R4** (prioridad 5, segunda más alta).
+## 5. ACL de firewall básico
 
-b) Prioridad **0** significa que el router **no participa** en la elección de DR/BDR. Nunca será DR ni BDR.
+```bash
+ip access-list extended FIREWALL_INTERNO
+ permit tcp 192.168.1.0 0.0.0.255 any eq 80
+ permit tcp 192.168.1.0 0.0.0.255 any eq 443
+ permit udp 192.168.1.0 0.0.0.255 any eq 53
+ deny tcp 192.168.1.0 0.0.0.255 any eq 22
+ permit tcp any 192.168.1.0 0.0.0.255 established
+ deny ip any any
 
-c) Cambiar la **prioridad** de R1 a un valor más alto que 10:
-   ```bash
-   R1(config-if)# ip ospf priority 20
-   ```
-   (Nota: la elección solo ocurre al iniciar OSPF o al reiniciar el proceso)
+interface g0/1
+ ip access-group FIREWALL_INTERNO out
+```
 
-## 6. Troubleshooting OSPF
+## 6. Resolución de problemas de rutas
 
-**Paso 1:** Verificar conectividad capa 3 → `ping` entre routers vecinos. Si no hay ping, el problema está en capa 1 o 2.
+a) **No funciona.** La interfaz G0/1 está `shutdown` (administratively down). La ruta por defecto apunta a 10.0.0.2, que está en G0/1. Si la interfaz está caída, la ruta no se instala en la tabla.
 
-**Paso 2:** Verificar que las interfaces están activas → `show ip interface brief`. Buscar "up/up".
+b) `show ip route` — 0.0.0.0/0 no aparecerá. `show ip interface brief` — G0/1 aparece como "administratively down".
 
-**Paso 3:** Verificar que OSPF está configurado → `show ip protocols`. Debe mostrar OSPF con Router ID y redes declaradas.
+c) **Cambiar:**
+```bash
+interface g0/1
+ no shutdown
+```
+Y verificar que el enlace esté físicamente conectado.
 
-**Paso 4:** Verificar vecinos → `show ip ospf neighbor`. Si no hay vecinos, comprobar:
-- `network` declarada correctamente (wildcard, área)
-- Hello/Dead timers coinciden (por defecto 10/40 en broadcast)
-- No hay ACL bloqueando protocolo 89 (OSPF)
+## 7. Longest prefix match
 
-**Paso 5:** Verificar LSDB → `show ip ospf database`. Debe haber LSAs de todos los routers.
+a) **192.168.1.30 → via 10.0.0.10** (la /28 cubre de .16 a .31: es la coincidencia más larga).
 
-**Paso 6:** Verificar tabla de rutas → `show ip route ospf`. Las rutas deben aparecer con prefijo O (OSPF).
+b) **192.168.1.200 → via 10.0.0.6** (cae en la /24; la /28 no la cubre y pesa más que la /16).
 
-## 7. Elección DR/BDR en otro segmento
+c) **192.168.3.44 → via 10.0.0.2** (solo la /16 la abarca: ni la /24 ni la /28 llegan a .3.x).
 
-a) **DR: R-B** (prioridad 200, la más alta). **BDR: R-C** (prioridad 150, segunda más alta).
+d) **192.168.1.15 → via 10.0.0.6** (está en la /24 pero fuera de la /28, que empieza en .16).
 
-b) **R-D** tiene prioridad **0**: no participa en la elección. Solo actuará como **DROTHER**, sincronizándose con el DR y el BDR sin poder ser elegido.
+**Regla:** a mayor máscara (28 > 24 > 16), coincidencia más específica y elegida primero.
 
-c) **R-B** — con prioridades empatadas (1 = 1), el desempate lo hace el **Router ID más alto** (10.0.0.2 > 10.0.0.1). La prioridad manda primero; el Router ID solo decide empates.
+## 8. ACL nombrada para horario
 
-d) **No cambia.** La elección de DR/BDR solo ocurre al arrancar OSPF o al reiniciar el proceso; subir la prioridad de R-C a 255 no destrona al DR ya elegido (R-B). Para que cambie tendrías que **reiniciar el proceso OSPF** (o el router) en los routers del segmento, y entonces R-C (prioridad 255) ganaría.
+```bash
+time-range LABORAL_DIARIO
+ periodic daily 9:00 to 18:00
 
-## 8. La adyacencia que no levanta
+ip access-list extended BLOQUEAR_STREAMING
+ deny tcp 192.168.1.0 0.0.0.255 any eq 443 time-range LABORAL_DIARIO
+ permit ip any any
 
-a) Al funcionar el ping, queda **descartado el plano físico/enlace y la capa 3** del enlace: las IPs se alcanzan. El problema está en el **plano OSPF** (configuración lógica del protocolo), no en la conectividad.
+interface g0/1
+ ip access-group BLOQUEAR_STREAMING out
+```
 
-b) **Orden de diagnóstico:**
-1. `show ip protocols` → comprobar que OSPF arranca en ambos, que el **Router ID** no está duplicado y que las redes declaradas incluyen el enlace Serial.
-2. `show ip ospf interface` → confirmar en ambos routers que la interfaz **participa** en OSPF, y comparar **área**, **wildcard** y **timers** (Hello/Dead). Si no aparece, la red no está declarada o la wildcard está mal.
-3. Verificar que el **área** coincide en los dos lados del enlace (revisar el `network ... area X`).
-4. Comparar los **timers Hello/Dead** en ambos lados con `show ip ospf interface`: deben coincidir (en punto a punto Serial suelen ser 30/120; si uno quedó en 10/40, no forman vecindad).
-5. `show access-lists` (y contadores en la interfaz) → descartar una **ACL** que bloquee el **protocolo 89 (OSPF)** en el sentido de entrada/salida.
-6. Solo si todo lo anterior está bien, subir un nivel: `debug ip ospf events` (con cuidado) para ver por qué se rechaza el Hello.
-
-c) `show ip ospf interface <interfaz>`: si la interfaz aparece listada con su área y sus timers, está **participando en OSPF sin ambigüedad**. Si no sale, OSPF no la tiene declarada (falta `network` o wildcard incorrecta).
+**Lectura:** de 9 a 18 todos los días, el tráfico HTTPS originado en la red interna se deniega; el resto de horario (y el resto de tráfico, como el puerto 80) pasa. El `permit ip any any` + el deny implícito se encargan del resto.

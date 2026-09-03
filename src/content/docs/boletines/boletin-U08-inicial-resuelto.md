@@ -1,65 +1,61 @@
 ---
 title: Boletín U08 — Inicial (Resuelto)
-description: Soluciones ejercicios básicos de Routing y ACLs
+description: Soluciones ejercicios básicos de VLANs
 ---
 
 # ✅ Boletín U08 — Inicial (Resuelto)
 
 ---
 
-## 1. Componentes del router
+## 1. ¿Qué VLAN soy?
 
-1 → b (RAM: configuración activa, tabla de rutas)
-2 → c (NVRAM: startup-config)
-3 → a (Flash: IOS)
-4 → d (ROM: ROMMON)
+1 → c (VLAN de datos: tráfico normal de usuario)
+2 → a (VLAN de voz: teléfonos IP, QoS 802.1p)
+3 → d (VLAN nativa: sin etiquetar en el trunk)
+4 → b (VLAN de gestión: administración del switch, SSH/SNMP)
 
 ## 2. Verdadero o falso
 
-a) **Verdadero.** Las rutas estáticas se configuran con `ip route`.
-b) **Verdadero.** 0.0.0.0/0 es la ruta de último recurso.
-c) **Falso.** Las ACLs estándar filtran solo por IP origen.
-d) **Falso.** Al final hay un **deny any** implícito, no permit.
-e) **Verdadero.** `show ip route` muestra las rutas del router.
+a) **Verdadero.** Cada VLAN es un dominio de broadcast independiente: un broadcast de VLAN 10 no llega a la VLAN 20.
+b) **Verdadero.** IEEE 802.1Q es el estándar de etiquetado VLAN (TPID 0x8100, 4 bytes).
+c) **Falso.** Las VLANs aíslan en capa 2. Necesitan un router (o un switch capa 3) para hacer inter-VLAN routing.
+d) **Verdadero.** Un trunk transporta todas las VLANs permitidas, etiquetadas con 802.1Q (salvo la native).
+e) **Verdadero.** VLAN 1 es la native y la VLAN por defecto del switch. Por seguridad conviene cambiarla.
 
-## 3. ¿Qué comando?
+## 3. Identifica
 
-1 → c (`ip route 0.0.0.0 0.0.0.0` = ruta por defecto)
-2 → d (`show ip route` = tabla de rutas)
-3 → b (`ip access-group` = aplicar ACL)
-4 → a (`ip route` con red específica = ruta estática)
+a) **Puerto access** — Solo una VLAN, tráfico sin etiquetar.
+b) **Puerto trunk** — Múltiples VLANs etiquetadas con 802.1Q (y la native sin etiquetar).
 
-## 4. Números de ACL
+## 4. Números
 
-| Tipo | Rango |
-|---|---|
-| Estándar | **1-99, 1300-1999** |
-| Extendida | **100-199, 2000-2699** |
+a) **12 bits** para el VLAN ID.
+b) **4094 VLANs** (12 bits = 4096, reservadas 0 y 4095).
+c) **4 bytes** insertados entre la MAC de origen y el EtherType: TPID (2 bytes) + PRI (3 bits) + VLAN ID (12 bits).
 
-## 5. Modos del router
+## 5. Relaciona
 
-1. b) Usuario (`Router>`)
-2. d) Privilegiado (`Router#`)
-3. a) Configuración global (`Router(config)#`)
-4. c) Configuración de interfaz (`Router(config-if)#`)
+1 → b (`switchport mode trunk` configura el puerto como trunk)
+2 → a (`vlan 10` crea la VLAN 10)
+3 → c (`show vlan brief` muestra las VLANs y sus puertos)
+4 → d (`encapsulation dot1Q 10` etiqueta la subinterfaz con la VLAN 10)
 
-## 6. ACL básica
+## 6. ¿Qué necesito?
 
-a) `access-list 10 permit 192.168.1.0 0.0.0.255`
-b) `interface g0/1` → `ip access-group 10 out`
+**b) Un router o switch capa 3.** Las VLANs aíslan en capa 2. Para comunicarse entre VLANs se necesita routing (inter-VLAN routing): router-on-a-stick con subinterfaces o un switch multicapa con SVIs.
 
-## 7. Wildcard masks
+## 7. Comandos de resolución
 
-La wildcard es el **inverso** de la máscara de subred (restando cada octeto a 255):
+1 → c (`show vlan brief` → VLANs y puertos access)
+2 → a (`show interfaces trunk` → native VLAN, allowed y mismatches)
+3 → b (`show running-config` → configuración completa actual)
 
-| Máscara de subred | Wildcard | ¿Qué representa? |
-|---|---|---|
-| 255.255.255.0 | `0.0.0.255` | Los 24 primeros bits fijos: una red /24 |
-| 255.255.255.255 | `0.0.0.0` | Todos los bits fijos: **solo esa IP** (host exacto) |
-| 255.255.0.0 | `0.0.255.255` | Los 16 primeros bits fijos: una red /16 |
+d) **`show ip interface brief`** — en el router-on-a-stick, te muestra las subinterfaces (Fa0/0.10, Fa0/0.20…) con su estado **Up/Up** y sus IPs. Si una subinterfaz está *down/down*, el problema suele ser la interfaz física sin `no shutdown`, o que la VLAN no exista en el switch.
 
-## 8. Comandos de verificación
+## 8. V/F inter-VLAN
 
-1 → c (`show ip route` muestra la tabla de rutas)
-2 → a (`show access-lists` muestra las ACLs y sus contadores)
-3 → b (`show ip interface brief` resume IP, estado y protocolo de cada interfaz)
+a) **Verdadero.** Cada VLAN necesita su subinterfaz (`interface fa0/0.10`) con `encapsulation dot1Q 10` y su IP de gateway.
+b) **Verdadero.** Un switch capa 3 enruta entre VLANs con SVIs (`interface vlan X`) + `ip routing`, sin router externo.
+c) **Verdadero.** El router-on-a-stick enruta todo por la única interfaz física: es el cuello de botella del diseño.
+d) **Verdadero.** Sin `ip routing`, los SVIs están Up/Up pero NO enrutan entre VLANs. Es el fallo nº1 al probar.
+e) **Verdadero.** Todo el tráfico inter-VLAN atraviesa la misma interfaz: si las VLANs generan más de su ancho de banda, se satura (por eso se usa Gigabit o un switch capa 3).

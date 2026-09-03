@@ -1,103 +1,116 @@
 ---
 title: Boletín U10 — Avanzado
-description: Ejercicios avanzados de NAT
+description: Ejercicios avanzados de Routing Dinámico
 ---
 
 # 📝 Boletín U10 — Avanzado
 
-> Ejercicios que requieren comprender NAT en profundidad.
+> Ejercicios que requieren aplicar conceptos de OSPF de forma más profunda.
 
 ---
 
-## 1. Traducción manual
+## 1. Configuración OSPF multiárea
 
-Dado el siguiente escenario:
+Configura OSPF para esta topología:
 
-- PC1: 192.168.1.10, accede a 8.8.8.8:80 (HTTP)
-- PC2: 192.168.1.20, accede a 8.8.8.8:53 (DNS)
-- Router NAT IP pública: 83.45.12.78
+```
+R1 (Área 0) ──── R2 (ABR) ──── R3 (Área 1)
+  │                             │
+LAN1 (192.168.1.0/24)      LAN3 (192.168.3.0/24)
+LAN2 (192.168.2.0/24)
+```
 
-El PC1 usa puerto origen 50000 y PC2 puerto 50000 también. Completa la tabla NAT:
+**Enlaces:**
+- R1-R2: 10.0.0.0/30
+- R2-R3: 10.0.0.4/30
 
-| Pro | Inside global | Inside local | Outside local | Outside global |
-|---|---|---|---|---|
-| tcp | 83.45.12.78:___ | 192.168.1.10:50000 | 8.8.8.8:80 | 8.8.8.8:80 |
-| udp | ___ | 192.168.1.20:50000 | 8.8.8.8:53 | 8.8.8.8:53 |
+Escribe la configuración completa de OSPF en los 3 routers.
 
-## 2. Problema con FTP
+## 2. Diagnóstico OSPF
 
-Un usuario interno (192.168.1.10) intenta usar FTP activo para enviar un archivo a un servidor externo (200.100.50.1). El protocolo FTP activo funciona así:
+Un router muestra esto en `show ip ospf neighbor`:
 
-- El cliente abre puerto 1025 para datos.
-- El cliente envía el comando PORT 192,168,1,10,4,1 (puerto 4×256+1=1025).
-- El servidor intenta conectar a 192.168.1.10:1025.
+```
+Neighbor ID     Pri   State           Dead Time   Address         Interface
+3.3.3.3         1    FULL/DR         00:00:35    10.0.0.2        GigabitEthernet0/0
+4.4.4.4         1    2WAY/DROTHER    00:00:37    10.0.0.6        GigabitEthernet0/1
+```
 
-¿Por qué falla? ¿Cómo lo solucionas?
+a) ¿Qué significa FULL/DR?
+b) ¿Qué significa 2WAY/DROTHER?
+c) ¿Por qué el vecino 4.4.4.4 no está FULL?
+d) ¿Cuál es el Router ID de este router? (pista: no se muestra)
 
-## 3. Configuración multi-NAT
+## 3. Redistribución OSPF
 
-Una empresa tiene dos servidores internos:
-- Servidor web en 192.168.1.10:80 y 192.168.1.10:443
-- Servidor SSH en 192.168.1.20:22
-- IP pública: 83.45.12.78
+Un router tiene esta configuración:
 
-Quieren:
-- Web accesible desde fuera como 83.45.12.78:8080 → 192.168.1.10:80
-- HTTPS accesible como 83.45.12.78:8443 → 192.168.1.10:443
-- SSH accesible como 83.45.12.78:2222 → 192.168.1.20:22
+```
+router ospf 1
+ redistribute static subnets
+ default-information originate
+!
+ip route 0.0.0.0 0.0.0.0 serial 0/0/0
+ip route 10.100.0.0 255.255.0.0 10.0.0.2
+```
 
-Configura el NAT destino necesario.
+a) ¿Qué hace `redistribute static subnets`?
+b) ¿Qué rutas estáticas se redistribuyen a OSPF?
+c) ¿Todos los routers OSPF recibirán la ruta 10.100.0.0/16?
 
-## 4. NAT + VPN
+## 4. Cambio de coste OSPF
 
-Un empleado necesita conectar por VPN (IPsec) a la oficina. El router de la oficina hace NAT.
+Tienes 2 caminos de R1 a R3:
+- Camino A: R1 → R2 → R3 (todos GigabitEthernet, coste 1 cada enlace)
+- Camino B: R1 → R4 → R5 → R3 (todos FastEthernet, coste 1 cada enlace)
 
-Pero IPsec no funciona a través de NAT. ¿Por qué? ¿Qué solución existe?
+a) ¿Qué camino elige OSPF? ¿Por qué?
+b) ¿Cómo forzarías OSPF a usar el Camino B?
+c) ¿Qué comando usarías para verificar el coste de cada ruta?
 
-## 5. Análisis de timeouts
+## 5. DR/BDR election
 
-Un usuario se queja de que su conexión SSH se corta después de 5 minutos de inactividad. La tabla NAT tiene un timeout de 24 horas para UDP y configurable para TCP.
+En una red con 4 routers OSPF en el mismo segmento Ethernet:
 
-¿Por qué se corta la conexión aunque el timeout NAT no haya expirado? ¿Dónde está el verdadero problema?
+| Router | Prioridad | Router ID |
+|---|---|---|
+| R1 | 1 | 1.1.1.1 |
+| R2 | 0 | 2.2.2.2 |
+| R3 | 10 | 3.3.3.3 |
+| R4 | 5 | 4.4.4.4 |
 
-## 6. NAT y servidores duales
+a) ¿Quién es el DR? ¿Quién el BDR?
+b) ¿Por qué R2 (prioridad 0) no puede ser DR/BDR?
+c) ¿Cómo forzarías a R1 como DR sin cambiar Router ID?
 
-Una empresa tiene:
-- 2 IPs públicas: 83.45.12.78 y 83.45.12.79
-- Servidor web interno: 192.168.10.10
-- Servidor de correo interno: 192.168.10.20
+## 6. Troubleshooting OSPF
 
-Quieren que el web sea accesible por 83.45.12.78 y el correo por 83.45.12.79. Los PCs internos deben salir por PAT con la IP 83.45.12.78.
+Un administrador reporta que OSPF no funciona entre dos routers. Escribe el orden de diagnóstico que seguirías, incluyendo qué comandos usarías y qué esperarías ver en cada paso.
 
-Configura todo.
+## 7. Elección DR/BDR en otro segmento
 
-## 7. Multi-NAT: servidores duales + PAT simultáneo
+En un segmento Ethernet nuevo compiten 4 routers OSPF:
 
-Una empresa tiene:
-- Red interna 192.168.50.0/24, servidor web DMZ en 192.168.50.10 (puertos 80 y 443).
-- Dos IPs públicas: 83.45.12.78 y 83.45.12.79.
-- Los usuarios internos deben salir a Internet por **PAT** con la IP 83.45.12.78.
-- El servidor web debe ser accesible desde fuera como **83.45.12.78:8080 → 192.168.50.10:80** y **83.45.12.78:8443 → 192.168.50.10:443**.
-- Además, la IP pública 83.45.12.79 se reserva para un servidor de correo (192.168.50.20) con **NAT estático 1:1** para los puertos 25, 587 y 993.
+| Router | Prioridad | Router ID |
+|---|---|---|
+| R-A | 1 | 10.0.0.1 |
+| R-B | 200 | 10.0.0.2 |
+| R-C | 150 | 10.0.0.3 |
+| R-D | 0 | 10.0.0.4 |
 
-Configura todo el NAT en el router (interfaces: g0/0 LAN inside, g0/1 WAN outside).
+a) ¿Quién es el DR y quién el BDR?
+b) ¿Qué papel juega R-D y por qué?
+c) R-A y R-B empiezan con la misma prioridad (1) pero R-B tiene el Router ID más alto. ¿Quién ganaría en ese caso, y por qué?
+d) La elección ya ha ocurrido y el DR es R-B. Si ahora subes la prioridad de R-C a 255, ¿cambia el DR? ¿Qué tendrías que hacer para que cambie?
 
-**Pista:** puedes combinar PAT overload y `ip nat inside source static tcp` en el mismo router. Revisa que el tráfico saliente de los usuarios no colisione con las traducciones estáticas reservadas.
+**Pista:** la elección se decide por prioridad y, en empate, por el Router ID más alto. Prioridad 0 queda fuera. La elección solo ocurre al arrancar o reiniciar el proceso OSPF.
 
-## 8. Diagnóstico: "no salimos a Internet"
+## 8. La adyacencia que no levanta
 
-En el instituto no sale Internet. Configuración actual de R1:
+R1 y R2 están conectados por un enlace Serial, ambos con OSPF configurado, pero `show ip ospf neighbor` sale vacío en los dos. El ping entre las IPs del enlace **sí funciona**.
 
-- g0/0: 192.168.1.1/24 (inside LAN)
-- g0/1: 203.0.113.2/30 (outside, hacia el ISP con ruta por defecto)
-- `ip nat inside source list 1 interface g0/1 overload`
-- `access-list 1 permit 192.168.1.0 0.0.0.255`
+a) Como el ping funciona, ¿qué nivel queda descartado? ¿Por qué?
+b) Escribe el orden de diagnóstico completo que seguirías, con los comandos y qué esperarías ver en cada paso, para descartar, en orden: red no declarada o wildcard mal, área incorrecta, timers Hello/Dead distintos, y ACL que bloquea OSPF (protocolo 89).
+c) ¿Qué comando te confirmaría, sin ambigüedad, que una interfaz está participando en OSPF y con qué área?
 
-Síntoma: los PCs hacen ping al gateway (192.168.1.1) y a 203.0.113.2, pero **no** a 8.8.8.8.
-
-a) Ordena las comprobaciones de diagnóstico que harías, de la más básica a la más específica.
-b) ¿Qué comando confirma que NAT está traduciendo? ¿Qué esperas ver?
-c) Tras revisar, ves que `show ip nat translations` está vacío aunque hay tráfico. ¿Qué comprobarías a continuación? Da al menos 3 causas probables.
-d) Encuentra el fallo real: las interfaces g0/0 y g0/1 **no tienen** `ip nat inside` / `ip nat outside`. Explica por qué sin esas marcas no hay traducción, aunque el resto de comandos sean correctos.
-
-**Pista:** NAT se diagnostica en progresión: primero conectividad, luego traducción, luego ruta. Sin `ip nat inside/outside`, el router no sabe qué tráfico traducir: los paquetes salen sin traducir (o se descartan) y la tabla NAT queda vacía.
+**Pista:** sigue la escalera de diagnóstico del punto 8 de la unidad: `show ip protocols`, `show ip ospf interface`, `show access-lists`. Los timers de Hello/Dead por defecto son 10/40 en broadcast, pero en enlaces punto a punto Serial suelen ser 30/120.

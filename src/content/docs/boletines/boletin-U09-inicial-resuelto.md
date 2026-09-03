@@ -1,75 +1,65 @@
 ---
 title: Boletín U09 — Inicial (Resuelto)
-description: Soluciones de los ejercicios básicos de Routing Dinámico
+description: Soluciones ejercicios básicos de Routing y ACLs
 ---
 
 # ✅ Boletín U09 — Inicial (Resuelto)
 
 ---
 
-## 1. IGP vs EGP
+## 1. Componentes del router
 
-a) OSPF → **IGP**
-b) BGP → **EGP**
-c) RIP → **IGP**
-d) EIGRP → **IGP** (propietario Cisco, pero interior)
+1 → b (RAM: configuración activa, tabla de rutas)
+2 → c (NVRAM: startup-config)
+3 → a (Flash: IOS)
+4 → d (ROM: ROMMON)
 
 ## 2. Verdadero o falso
 
-a) **Verdadero.** OSPF usa SPF (Dijkstra) para calcular la ruta más corta.
-b) **Verdadero.** RIP máximo 15 saltos. 16 = inalcanzable.
-c) **Verdadero.** Todas las áreas deben conectarse al Área 0.
-d) **Verdadero.** El Router ID debe ser único o las adyacencias fallan.
-e) **Falso.** OSPF converge en segundos, RIP tarda minutos.
+a) **Verdadero.** Las rutas estáticas se configuran con `ip route`.
+b) **Verdadero.** 0.0.0.0/0 es la ruta de último recurso.
+c) **Falso.** Las ACLs estándar filtran solo por IP origen.
+d) **Falso.** Al final hay un **deny any** implícito, no permit.
+e) **Verdadero.** `show ip route` muestra las rutas del router.
 
-## 3. Relaciona
+## 3. ¿Qué comando?
 
-1 → b (LSA = Link State Advertisement)
-2 → c (LSDB = Link State Database)
-3 → a (ABR = Area Border Router)
-4 → d (SPF = Shortest Path First)
+1 → c (`ip route 0.0.0.0 0.0.0.0` = ruta por defecto)
+2 → d (`show ip route` = tabla de rutas)
+3 → b (`ip access-group` = aplicar ACL)
+4 → a (`ip route` con red específica = ruta estática)
 
-## 4. Coste OSPF
+## 4. Números de ACL
 
-a) 100 Mbps → **1** (10⁸ / 100×10⁶ = 1)
-b) 1 Gbps → **1** (el coste mínimo es 1)
-c) 1.544 Mbps → **64** (10⁸ / 1.544×10⁶ ≈ 64)
+| Tipo | Rango |
+|---|---|
+| Estándar | **1-99, 1300-1999** |
+| Extendida | **100-199, 2000-2699** |
 
-## 5. Completa
+## 5. Modos del router
 
-a) `router ospf 1`
-b) `network 192.168.1.0 0.0.0.255 area 0`
-c) `default-information originate`
-d) `show ip ospf neighbor`
+1. b) Usuario (`Router>`)
+2. d) Privilegiado (`Router#`)
+3. a) Configuración global (`Router(config)#`)
+4. c) Configuración de interfaz (`Router(config-if)#`)
 
-## 6. Tipos de routers
+## 6. ACL básica
 
-1 → c (Internal Router: misma área)
-2 → b (ABR: conecta áreas)
-3 → a (ASBR: rutas externas)
+a) `access-list 10 permit 192.168.1.0 0.0.0.255`
+b) `interface g0/1` → `ip access-group 10 out`
 
-## 7. Dinámico vs estático
+## 7. Wildcard masks
 
-a)
-- **OSPF → IGP**
-- **RIP → IGP**
-- **BGP → EGP**
-- **EIGRP → IGP** (interior, aunque propietario de Cisco)
+La wildcard es el **inverso** de la máscara de subred (restando cada octeto a 255):
 
-b) **Ventajas del dinámico:**
-1. **Autoaprendizaje:** las redes nuevas se comparten solas, sin ir router por router.
-2. **Convergencia automática:** si cae un enlace, la red recalcula y se reencamina sin intervención.
-3. **Menos error humano:** la tabla de rutas la calcula el protocolo, no un administrador tecleando.
-
-**Caso para estático:** redes muy pequeñas (2-3 routers), un enlace **stub** con una única salida, o una ruta de respaldo a mano (`floating static`): ahí el dinámico solo añadiría tráfico y complejidad.
-
-## 8. Coste OSPF: tabla de velocidades
-
-| Velocidad | Cálculo | Coste OSPF |
+| Máscara de subred | Wildcard | ¿Qué representa? |
 |---|---|---|
-| 10 Mbps | 10⁸ / 10⁷ | **10** |
-| 100 Mbps | 10⁸ / 10⁸ | **1** |
-| 1 Gbps | 10⁸ / 10⁹ = 0,1 | **1** (mínimo) |
-| 1.544 Mbps (T1) | 10⁸ / 1.544.000 ≈ 64,8 | **64** |
+| 255.255.255.0 | `0.0.0.255` | Los 24 primeros bits fijos: una red /24 |
+| 255.255.255.255 | `0.0.0.0` | Todos los bits fijos: **solo esa IP** (host exacto) |
+| 255.255.0.0 | `0.0.255.255` | Los 16 primeros bits fijos: una red /16 |
 
-> El coste mínimo es **1**: todos los enlaces de 100 Mbps en adelante valen lo mismo por defecto, salvo que subas el `auto-cost reference-bandwidth`.
+## 8. Comandos de verificación
+
+1 → c (`show ip route` muestra la tabla de rutas)
+2 → a (`show access-lists` muestra las ACLs y sus contadores)
+3 → b (`show ip interface brief` resume IP, estado y protocolo de cada interfaz)

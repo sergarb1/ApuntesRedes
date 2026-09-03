@@ -1,94 +1,77 @@
 ---
 title: Boletín U02 — Avanzado (Resuelto)
-description: Soluciones de los ejercicios avanzados de Modelos OSI y Análisis de Tráfico
+description: Soluciones de los ejercicios avanzados de Fundamentos de Redes
 ---
 
 # ✅ Boletín U02 — Avanzado (Resuelto)
 
 ---
 
-## 1. Análisis de captura Wireshark
+## 1. Diagnóstico de red
 
-a) **Paquetes 1-3:** three-way handshake TCP entre el PC (192.168.1.10) y el gateway (192.168.1.1). El PC abre una conexión desde el puerto efímero 54321 hacia el 443 (HTTPS) del gateway.
+PC-A ve a PC-B (misma red) pero no llega a `8.8.8.8` (Internet).
 
-b) **Paquete 4:** el PC inicia un **nuevo** three-way handshake, ahora hacia 142.250.184.4 (un servidor real de Google). Sugiere que el primer handshake fue local (una validación o proxy del gateway) y ahora procede con el destino real.
+**Causas probables (por orden de probabilidad):**
+1. El **gateway por defecto** de PC-A no está configurado o es incorrecto. PC-A no sabe dónde dejar los paquetes para salir de su red.
+2. El **router** no tiene ruta a Internet o carece de NAT.
+3. El router no tiene conexión con el ISP (corte del operador).
 
-c) **Lo que falta:** la respuesta al paquete 4 (el SYN-ACK del servidor). Es probable que la captura se detuviera antes, o que el destino aún no responda. En HTTPS, además, el contenido viaja cifrado y no aparecería como HTTP.
+**Más probable:** el gateway por defecto de PC-A. Es la causa clásica de "me veo contigo, pero no con el mundo".
 
-## 2. Diseña la encapsulación
+## 2. Diseño de red mínima
 
-a) **Ethernet:**
-   - MAC destino: la del **gateway** (192.168.1.1).
-   - MAC origen: la del PC.
-   - EtherType: `0x0800` (IPv4).
+a) **Dispositivos:** 1 switch (los puertos sobran si eliges bien) + 1 router para Internet.
+   - Puertos consumidos: 15 PCs + 2 impresoras + 1 servidor + 1 enlace al router = 19. Un switch de **24 puertos** deja márgen ante fallos.
+   - Cables: 19 UTP.
 
-b) **IP:**
-   - IP origen: `192.168.1.10`.
-   - IP destino: `8.8.8.8`.
-   - Protocol: **17 (UDP)**, porque la consulta DNS va sobre UDP.
-   - TTL: 64 (típico en Linux).
+b) **Direccionamiento privado:**
+   - Red: `192.168.0.0/24` (máscara `255.255.255.0`).
+   - Router (gateway): `192.168.0.1`.
+   - Servidor: `192.168.0.2`.
+   - Impresoras: `192.168.0.3` y `192.168.0.4`.
+   - PCs: rango DHCP `192.168.0.10 → 192.168.0.24`.
 
-c) **UDP:**
-   - Puerto origen: **efímero** (ej. 34567).
-   - Puerto destino: **53** (DNS).
+## 3. ¿Cuántos dominios?
 
-d) **DNS:** la consulta pide la dirección A (IPv4) de "google.com": `¿Quién es google.com?`.
+a) **Dominios de colisión:** cada puerto de switch es un dominio de colisión propio.
+   - 3 PCs → 3 dominios.
+   - 2 enlaces entre switches → 2 dominios más (uno en cada lado del enlace, 2 por dirección al final del segmento, pero se cuentan los del medio como 2 dominios separados).
+   - Total: **5 dominios de colisión**.
 
-## 3. Diagnóstico por capas
+b) **Dominios de broadcast:** los switches NO segmentan broadcast y los enlaces no añaden ninguno. Toda la red comparte un único dominio de broadcast (el router lo segmentaría si hubiera otra red detrás). Total: **1 dominio de broadcast**.
 
-a) **Capa 7 (Aplicación)** — concretamente el servicio **DNS**. El ping a 8.8.8.8 (ICMP, capa 3) funciona, pero los nombres no se resuelven.
-b) `nslookup google.com` o `dig google.com`.
-c) **Causa más probable:** el servidor DNS configurado no responde o es inaccesible (IP inventada o caído).
+## 4. ARP en acción
 
-## 4. Three-way handshake
+a) Lanza un **ARP Request** de tipo **broadcast** (lo escuchan todos).
+b) MAC destino **`FF:FF:FF:FF:FF:FF`** (dirección de difusión).
+c) PC-B responde con un **ARP Reply** de tipo **unicast**, direccionado directamente a PC-A.
+d) La respuesta contiene la resolución: "La IP `10.0.0.2` pertenece a la MAC `BB:BB:BB:BB:BB:BB`".
 
-a) **SYN perdido:** el cliente no recibe SYN-ACK, espera el RTO y **reenvía el SYN**. La conexión se establece una vez que el SYN llega y el servidor responde.
-b) **SYN-ACK perdido:** el cliente tampoco recibe respuesta y reenvía su SYN; el servidor, al recibir el segundo SYN, reenvía su SYN-ACK. La conexión se establece cuando el SYN-ACK llega.
-c) **ACK final perdido:** el servidor queda en estado **SYN-RECEIVED** y reenvía el SYN-ACK tras su RTO. El cliente, que ya cree tener la conexión, puede incluso mandar datos que el servidor aceptará. Si tras varios reintentos no llega el ACK, el servidor cierra.
+## 5. Desencapsulación: el viaje inverso
 
-**Resumen:** en a) y b) la conexión acaba estableciéndose tras la retransmisión. En c) puede quedar "a medias": el cliente cree que sí y el servidor no está seguro.
+a) La capa **2 (Enlace)** elimina la cabecera Ethernet y queda el **paquete** IP.
+b) La capa **3 (Red)** elimina la cabecera IP y queda el **segmento** TCP.
+c) La capa **4 (Transporte)** elimina la cabecera TCP y queda la **petición** `GET /index.html`.
+d) El contenido sube a la capa 7 (Aplicación), donde el servidor web lo procesa y responde.
 
-## 5. TTL y fragmentación
+>Truco: es el mismo "empaquetado" del envío pero al revés — cada capa quita su cabecera.
 
-Datos: paquete IP de 2500 bytes, MTU Ethernet = 1500.
+## 6. Diferencia práctica: hub, switch y router
 
-a) **Fragmentos generados:**
-   - Cabecera IP: 20 bytes.
-   - Datos a fragmentar: 2500 - 20 = 2480 bytes.
-   - Fragmento 1: 20 (cabecera) + 1480 (datos) = **1500 bytes** (MF=1).
-   - Fragmento 2: 20 (cabecera) + 1000 (datos restantes) = **1020 bytes** (MF=0).
+a) **Hub.** Red pequeña de los 90: barato y suficiente, aunque todo el tráfico colisiona en un solo dominio. Hoy nadie lo usaría.
+b) **Switch.** Cada PC tiene puerto dedicado: ancho de banda íntegro y sin colisiones por equipo.
+c) **Router.** Une dos redes diferentes (`192.168.1.0/24` y `10.0.0.0/16`) y decide por dónde enviar cada paquete.
 
-   **Total: 2 fragmentos** (no 3: hay que contar la cabecera de cada fragmento).
+## 7. Verdadero o falso
 
-b) **Campos que cambian:**
-   - Flags: **MF=1** en el primero, **MF=0** en el último.
-   - **Fragment Offset:** 0 en el primero, 185 (1480/8) en el segundo.
-   - **Total Length:** 1500 y 1020.
-   - **Identification:** el mismo en ambos (para que el destino los asocie).
-   - **Header Checksum:** se recalcula en cada fragmento.
+a) **Verdadero.** Es la función principal del router: encaminar entre redes distintas.
+b) **Falso.** El switch no entiende de IP. Trabaja solo con MACs dentro de la misma red.
+c) **Verdadero.** En bus, una rotura del cable central parte la red en dos segmentos aislados.
+d) **Verdadero.** En estrella todo pasa por el punto central; sin él, nadie se comunica.
+e) **Falso.** La IP la asigna DHCP y cambia con la red a la que te conectas; la que permanece fija es la MAC. En casa y en el trabajo tienes la misma MAC, pero IP distinta.
 
-c) **TTL al llegar:** 64 - 15 = **49**.
+## 8. Puertos bien conocidos en acción
 
-## 6. Wireshark: filtros combinados
-
-a) `http && ip.src == 192.168.1.10`
-b) `tcp.dstport == 22 || tcp.dstport == 443`
-c) `dns && !(dns.qry.name == "google.com")`
-d) `tcp.analysis.flags`
-
-## 7. La conexión que no se cierra
-
-a) **Capa 4 (Transporte)**, protocolo **TCP**: el estado `TIME_WAIT` es propio del cierre de conexiones TCP.
-b) El cierre **FIN → ACK → FIN → ACK**. Cuando ambos lados terminan, la conexión pasa a `TIME_WAIT` durante **2 × MSL** (el doble del tiempo máximo de vida de un segmento, ~2 minutos) para asegurar que los ACKs finales no se pierdan.
-
-c) **Recomendaciones:** aumentar el rango de puertos efímeros (o activar *time-wait reuse*), reducir el rango de conexiones en espera, o mejorar la liberación del stack (`tcp_tw_reuse` en Linux). La clave es entender que el estado NO se queda para siempre: es un periodo de seguridad de TCP.
-
-## 8. Del nombre a la trama, al revés
-
-a) La **capa 2 (Enlace)** elimina la cabecera Ethernet y queda el **paquete IP**.
-
-b) En `0x0800` = **IPv4** (capa 3); con Protocol = 6, el contenido es **TCP** (capa 4). Es una trama que lleva tráfico TCP sobre IPv4 → perfecta para `https://example.com`.
-
-c) TCP **ordena los segmentos por su número de secuencia** en el receptor y los reensambla para reconstruir la página antes de entregarla a la aplicación.
-
-d) La capa 2 comprueba el **FCS (CRC)**: si no coincide, la trama se **descarta** sin entregarla a la capa 3.
+a) El puerto **80/HTTP** o **443/HTTPS** está bloqueado en el router. Sin ellos no hay navegación web.
+b) El puerto **22 (SSH)**. Es administración cifrada; reenviar el **21 (FTP)** sería un riesgo porque las credenciales viajan en texto claro.
+c) El puerto **53 (DNS)** traduce nombres a IPs. Bloqueado, el navegador no sabrá qué dirección hay detrás de una URL y **no resolverá ningún dominio** (indicaría "servidor no encontrado").

@@ -1,107 +1,154 @@
 ---
 title: Boletín U05 — Avanzado (Resuelto)
-description: Soluciones ejercicios avanzados de IPv6 y Transición
+description: Soluciones ejercicios avanzados de IPv4 y Subnetting
 ---
 
 # ✅ Boletín U05 — Avanzado (Resuelto)
 
 ---
 
-## 1. Subnetting IPv6
+## 1. Diseño VLSM
 
-a) **Máscara para sedes:** /48 → para 5 sedes necesitas 3 bits extra (2³ = 8). Cada sede tendría /51. Pero en IPv6 lo estándar es dar /48 a cada sede (todas son /48 independientes). Si solo tienes un /48 global, entonces usas /52 para 16 subredes (2⁴ = 16).
+Red base: 172.16.0.0/24 (256 direcciones totales)
 
-b) **Subredes /64 dentro de /48:** 64 - 48 = 16 bits → 2¹⁶ = **65.536 subredes** /64.
+**Ordenando de mayor a menor:** Producción (60) → Desarrollo (30) → Testing (10) → 3 enlaces WAN (2 c/u)
 
-c) **Primeras 3 subredes /64:**
-   - 2001:DB8:CAFE:0000::/64
-   - 2001:DB8:CAFE:0001::/64
-   - 2001:DB8:CAFE:0002::/64
+| Subred | Hosts | CIDR | Red | Rango | Broadcast |
+|---|---|---|---|---|---|
+| Producción | 60 (62) | /26 | 172.16.0.0 | .1 - .62 | .63 |
+| Desarrollo | 30 (30) | /27 | 172.16.0.64 | .65 - .94 | .95 |
+| Testing | 10 (14) | /28 | 172.16.0.96 | .97 - .110 | .111 |
+| WAN 1 | 2 (2) | /30 | 172.16.0.112 | .113 - .114 | .115 |
+| WAN 2 | 2 (2) | /30 | 172.16.0.116 | .117 - .118 | .119 |
+| WAN 3 | 2 (2) | /30 | 172.16.0.120 | .121 - .122 | .123 |
 
-## 2. EUI-64
+**Sobran:** 172.16.0.124 - 172.16.0.255 = **132 direcciones** (132 - 2 = 130 hosts útiles).
 
-a) **EUI-64:** 021A:2BFF:FE3C:4D5E
-   (Invertir bit 7 del primer byte: 00 → 02, insertar FF:FE entre las mitades)
+## 2. Diagnóstico DHCP
 
-b) **IPv6 completa:** 2001:DB8:1:2:021A:2BFF:FE3C:4D5E/64
+a) Es una **dirección APIPA** (Automatic Private IP Addressing), rango 169.254.0.0/16.
 
-c) **Problema de privacidad:** La IP es siempre la misma para una MAC dada. Esto permite rastrear un dispositivo físico a través de redes. Las Privacy Extensions (RFC 4941) generan direcciones temporales que cambian periódicamente.
+b) Windows asigna automáticamente una IP APIPA cuando el **servidor DHCP no responde** o no está disponible.
 
-## 3. Diagnóstico IPv6
+c) **Soluciones:**
+   1. Verificar que el servidor DHCP esté encendido y funcionando
+   2. Comprobar la conectividad con el servidor DHCP (¿está en la misma red? ¿hay switches funcionando?)
+   3. Hacer `ipconfig /release` y `ipconfig /renew` para forzar una nueva solicitud DHCP
+   4. Asignar una IP estática si el DHCP no es recuperable
 
-a) **Dos direcciones:** Una es Link-Local (fe80::...) necesaria para comunicación local, y otra es Global Unicast (2001:db8:...) para comunicación global. Es normal tener ambas.
+## 3. Subnetting binario
 
-b) **%12 (Zone ID):** Identifica la interfaz de red (en este caso, la número 12). Es necesario en Link-Local porque la misma dirección FE80 podría existir en múltiples interfaces.
+a) **IP en binario:** 200.100.50.30 = 11001000.01100100.00110010.00011110
+   **Máscara en binario:** 255.255.255.224 = 11111111.11111111.11111111.11100000
 
-c) **Sí puede acceder a Internet.** Tiene una Global Unicast (2001:db8::) que es enrutable, y un gateway configurado.
+b) **AND → Dirección de red:** 11001000.01100100.00110010.00000000 = **200.100.50.0/27**
 
-d) **Comando:** `ipconfig /all` en Windows, `ip addr` en Linux, `ifconfig -a` en macOS.
+c) **Broadcast:** 200.100.50.31 (todos los bits de host a 1: 00011111)
 
-## 4. Diseño de transición
+d) **Hosts útiles:** 2⁵ - 2 = 32 - 2 = **30 hosts**
 
-a) **Dual Stack en las LANs.** El ISP ofrece IPv6 nativo, así que ambas sedes pueden tener IPv4 e IPv6 simultáneamente. Es la opción más limpia y sin encapsulación extra.
+e) **200.100.50.62 → binario:** 11001000.01100100.00110010.00111110
+   Red de .62 con /27: 200.100.50.32/27 (bits de red fijos, 00100000)
+   **NO está en la misma subred.** .30 está en 200.100.50.0/27, .62 está en 200.100.50.32/27.
 
-b) **Conexión entre sedes:** Usando IPv6 nativo (el ISP ya lo ofrece). Cada sede tiene un rango /48 asignado. El enrutamiento IPv6 se hace con OSPFv3 o rutas estáticas.
+## 4. Resumen de subredes
 
-c) **Acceso al servicio cloud solo-IPv4:** NAT64 + DNS64. El router de la sede central traduce el tráfico IPv6 de los clientes a IPv4 hacia el servidor cloud.
+a) **Bits a pedir:** 2ⁿ = 8 → n = 3 bits
 
-d) **Configuración en routers:**
-   - Habilitar `ipv6 unicast-routing`
-   - Configurar interfaz WAN con IPv6 del ISP
-   - Configurar interfaz LAN con prefijo /64 de la sede
-   - Configurar rutas IPv6 estáticas o dinámicas
-   - Configurar NAT64 para el servicio cloud legacy
+b) Máscara original: /16. Nuevos bits: 16 + 3 = **/19** (255.255.224.0)
 
-## 5. Análisis de Router Advertisement
+c) **Hosts por subred:** 32 - 19 = 13 bits de host → 2¹³ - 2 = **8190 hosts**
 
-a) **Método:** DHCPv6 Stateless (O Flag = 1, M Flag = 0). SLAAC da la IP, DHCPv6 da configuración adicional.
+d) **Subredes:**
+   - 10.0.0.0/19
+   - 10.0.32.0/19
+   - 10.0.64.0/19
+   - 10.0.96.0/19
+   - 10.0.128.0/19
+   - 10.0.160.0/19
+   - 10.0.192.0/19
+   - 10.0.224.0/19
 
-b) **La IP la da SLAAC** (el router anuncia el prefijo con RA, el cliente genera su IP). **El DNS lo da DHCPv6** (el cliente consulta al servidor DHCPv6 para obtener DNS y otros parámetros).
+(El incremento entre subredes es 32 en el tercer octeto: 2¹⁹⁻¹⁶ = 2³ = 32)
 
-c) **No.** SLAAC puro no da DNS. Si el cliente solo soporta SLAAC, necesitaría DHCPv6 para DNS. Pero los clientes modernos suelen soportar RDNSS (DNS en RA), que permite al router anunciar DNS directamente en los RA sin DHCPv6.
+## 5. Sumarización de rutas
 
-d) **Si M Flag = 1:** DHCPv6 Stateful. El servidor DHCPv6 da tanto la IP como el DNS. SLAAC no se usa para la IP. Esto es más parecido al DHCP de IPv4.
+a) **Ruta resumida:** 192.168.0.0/22
 
-## 6. NDP en acción
+**Razonamiento:**
+- 192.168.0.0/24: bits 22-23 = 00
+- 192.168.1.0/24: bits 22-23 = 01
+- 192.168.2.0/24: bits 22-23 = 10
+- 192.168.3.0/24: bits 22-23 = 11
 
-a) **Neighbor Solicitation (NS):** "¿Quién tiene 2001:DB8::20?"
+Los primeros 22 bits son idénticos. La ruta /22 engloba las 4 subredes.
 
-b) **Dirección MAC destino:** Multicast Ethernet (01:80:C2:00:00:00 o 33:33:xx:xx:xx:xx). Concretamente, la dirección multicast derivada de la IP destino (solicited-node multicast).
+b) **Máscara:** /22 (255.255.252.0)
 
-c) **Dirección IPv6 destino:** **Multicast** (FF02::1:FF00:20 — la solicited-node multicast address). NO usa broadcast como ARP en IPv4.
+c) **IPs totales:** 2^(32-22) - 2 = 2¹⁰ - 2 = **1022 hosts** (1024 direcciones totales)
 
-d) **PC-B responde con un Neighbor Advertisement (NA)** unicast dirigido a PC-A, indicando su MAC.
+## 6. Plan de direccionamiento para una empresa
 
-e) **Este proceso se llama NDP** (Neighbor Discovery Protocol). Es parte de ICMPv6 y reemplaza a ARP. Es más eficiente que ARP porque usa multicast en lugar de broadcast, y solo los dispositivos interesados procesan el mensaje.
+Red base: 10.0.0.0/22 (1024 direcciones, 1022 hosts útiles)
 
-## 7. Diagnóstico ping6
+**Ordenando de mayor a menor:**
+- Administración: 200 → /24 (254 hosts)
+- Producción: 100 → /25 (126 hosts)
+- IT: 50 → /26 (62 hosts)
+- Ventas: 50 → /26 (62 hosts)
+- Almacén: 20 → /27 (30 hosts)
+- Dirección: 10 → /28 (14 hosts)
+- Enlace /30
 
-Contexto: `ping fe80::1` (la Link-Local del gateway) funciona, así que el enlace, la MAC y NDP básico están OK. El fallo es exclusivo del destino *global* `2001:DB8:1::10`. Tres causas posibles:
+**Plan VLSM:**
 
-a) **Firewall del PC destino (o del propio PC-A) bloqueando ICMPv6 hacia la GUA.** Muchos sistemas abren por defecto el tráfico a Link-Local y al descubrimiento de vecinos, pero responden peor (o no responden) a pings a su dirección global.
-   - *Verificación:* intenta ping desde un tercer equipo; o desactiva temporalmente el firewall del PC destino y repite el ping. Si entonces funciona, es el firewall.
+| Subred | CIDR | Red | Rango | Broadcast |
+|---|---|---|---|---|
+| Administración | /24 | 10.0.0.0 | .1 - .254 | .255 |
+| Producción | /25 | 10.0.1.0 | .1 - .126 | .127 |
+| IT | /26 | 10.0.1.128 | .129 - .190 | .191 |
+| Ventas | /26 | 10.0.1.192 | .193 - .254 | .255 |
+| Almacén | /27 | 10.0.2.0 | .1 - .30 | .31 |
+| Dirección | /28 | 10.0.2.32 | .33 - .46 | .47 |
+| Enlace | /30 | 10.0.2.48 | .49 - .50 | .51 |
 
-b) **La GUA destino está duplicada o no es la activa.** Si el PC destino tiene varios adaptadores, o SLAAC le dio un prefijo distinto, la dirección que pingueas puede estar asignada en otra interfaz o marcada como *tentative* (durante DAD). El host simplemente no responde en esa dirección en la interfaz que esperas.
-   - *Verificación:* en el destino ejecuta `ipconfig /all` (Windows) o `ip -6 addr show` (Linux) y comprueba que `2001:DB8:1::10` exista y esté marcada como activa en esa interfaz (estado *preferred*). Prueba también `ping -6 2001:DB8:1::10%<id-interfaz>`.
+**Sobran:** 10.0.2.52 - 10.0.3.255 → **~460 IPs**
 
-c) **Prefijo/ámbito fuera de la subred (on-link).** Para un *origen* con un prefijo distinto o sin ruta hacia `2001:DB8:1::/64`, esa GUA NO es *on-link*: el tráfico saldría al router (gateway), no resolvería la MAC por NDP local. Si la LAN es realmente `2001:DB8:1::/64` pero el PC-A o el switch han sido configurados con otro prefijo, el ping "no tiene a quién preguntar".
-   - *Verificación:* revisa que el prefijo del origen (`2001:db8:1:...`) y el destino compartan el mismo /64, y que el gateway `fe80::1` enrute correctamente. Un `pathping`/`tracert` IPv6 te dice si el salto intenta salir por el router o se queda en el enlace.
+**Problemas si crece al doble:** Si cada departamento duplica sus hosts, Administración necesitaría /23 (510 hosts), lo que rompe el plan VLSM actual. Habría que rediseñar usando una red base más grande (ej. /20) desde el principio.
 
-> ✅ Resumen rápido: misma LAN + ping a LLA OK → el fallo al ping a GUA casi siempre es **firewall**, **dirección no activa** (tentative/duplicada) o **prefijo mal / fuera de enlace**.
+## 7. VLSM con requisitos mínimos
 
-## 8. Tabla IPv4 vs IPv6
+Red base: 192.168.1.0/24 (256 direcciones, 254 hosts útiles)
 
-| Concepto | IPv4 | IPv6 |
-|---|---|---|
-| Bits de la dirección | 32 | **128** |
-| Notación | Decimal con puntos | **Hexadecimal con dos puntos** (8 grupos) |
-| Direcciones privadas | RFC 1918 (192.168…, 172.16…, 10…) | **ULA `FC00::/7`** (privada/organización) |
-| Broadcast | Sí (envía a todos) | **No existe**: solo multicast (`FF02::1` ≈ todos los nodos) |
-| Resolución IP → MAC | ARP | **NDP** (NS/NA vía ICMPv6, multicast) |
-| Multicast de listeners | IGMP | **MLD** (Multicast Listener Discovery) |
-| Configuración automática | DHCP | **SLAAC + DHCPv6** (stateless/stateful, flags M/O) |
-| Loopback | 127.0.0.1 | **`::1`** |
-| Fragmentación | La hacen cualquier router intermedio | **Solo la hace el origen** (Path MTU Discovery) |
-| Seguridad / NAT | NAT compartido para las privadas | **Sin NAT**: extremo a extremo; firewall y (opcional) IPsec |
+**Ordenando de mayor a menor:** Producción (50) → Comercial (25) → Soporte (10) → Enlace WAN (2)
 
-> 💡 La fila de *fragmentación* y la de *NAT* suelen ser las que más sorprende: en IPv6 los routers ya no fragmentan (lo hace el origen), y el NAT, además de feo, era una falsa sensación de seguridad. Se acabó el escondite.
+| Subred | Resolviendo | CIDR | Red | Rango | Broadcast |
+|---|---|---|---|---|---|
+| Producción | 2ʰ−2 ≥ 50 → h=6 (62) | /26 | 192.168.1.0 | .1 - .62 | .63 |
+| Comercial | 2ʰ−2 ≥ 25 → h=5 (30) | /27 | 192.168.1.64 | .65 - .94 | .95 |
+| Soporte | 2ʰ−2 ≥ 10 → h=4 (14) | /28 | 192.168.1.96 | .97 - .110 | .111 |
+| Enlace WAN | 2ʰ−2 ≥ 2 → h=2 (2) | /30 | 192.168.1.112 | .113 - .114 | .115 |
+
+b) **Queda libre** desde 192.168.1.116 hasta 192.168.1.255 = **140 direcciones** (138 hosts útiles en /24).
+
+**Comprobación del encadenado:** Ventas acaba en .63 → Comercial arranca en .64. Comercial acaba en .95 → Soporte arranca en .96. Soporte acaba en .111 → el enlace WAN arranca en .112.
+
+## 8. Conflicto de IP
+
+a) **Qué ocurre:** cuando el PC pide IP por DHCP recibe 192.168.1.20, pero la impresora ya la tiene en uso. Hay **duplicado de dirección**: uno de los dos (o ambos, según el momento) pierde conectividad, aparecen errores de "duplicate address", y el tráfico hacia esa IP puede ir a uno o a otro. El servidor DHCP puede detectarlo *antes* de conceder la IP haciendo un ping/ARProbe a la dirección; si hay respuesta, la descarta y la registra en la tabla de conflictos.
+
+b) **Cómo lo detecta:** en el router, el comando:
+
+```
+show ip dhcp conflict
+```
+
+Muestra las direcciones que el servidor DHCP encontró en conflicto (con el método de detección y la fecha). Si la impresora estática sigue borrada del pool, verás la entrada y podrás actuar.
+
+c) **Cómo prevenirlo:** desde el diseño, **excluir las IPs estáticas** del pool DHCP antes de que reparta nada:
+
+```
+ip dhcp excluded-address 192.168.1.1 192.168.1.30
+```
+
+Así el router nunca concede las direcciones fijas (impresoras, servidores, el propio gateway). Alternativa: usar **reservas DHCP** por MAC para los equipos que quieras fijos sin configurarlos a mano.

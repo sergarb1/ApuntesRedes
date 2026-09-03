@@ -1,87 +1,85 @@
 ---
 title: Boletín U04 — Inicial
-description: Ejercicios básicos de IPv4 y Subnetting
+description: Ejercicios básicos de Infraestructura Física de Red
 ---
 
 # 📝 Boletín U04 — Inicial
 
-> Ejercicios básicos para afianzar los conceptos de direccionamiento IPv4 y máscaras.
+> Ejercicios básicos para afianzar los conceptos de medios físicos, cableado, crimpado y WiFi.
 
 ---
 
-## 1. Conversión binario
+## 1. Identifica el cable
 
-Convierte a binario (8 bits):
+Relaciona cada tipo de cable con su uso:
 
-a) 192
-b) 10
-c) 255
-d) 0
-
-## 2. Conversión a decimal
-
-Convierte a decimal:
-
-a) 11000000
-b) 10101000
-c) 00001010
-d) 11111111
-
-## 3. ¿Qué máscara es?
-
-Relaciona la notación CIDR con la máscara decimal:
-
-| CIDR | Máscara |
+| Cable | Uso |
 |---|---|
-| /24 | a) 255.255.255.252 |
-| /16 | b) 255.255.255.0 |
-| /30 | c) 255.255.0.0 |
-| /8 | d) 255.0.0.0 |
+| 1. Directo | a) PC a PC |
+| 2. Cruzado | b) PC a switch |
+| 3. Consola | c) Configuración inicial de un switch Cisco |
 
-## 4. Verdadero o falso
+## 2. ¿Qué categoría?
 
-a) Una dirección IPv4 tiene 48 bits.
-b) 192.168.1.256 es una IP válida.
-c) La dirección de broadcast de 192.168.1.0/24 es 192.168.1.255.
-d) DHCP asigna IPs automáticamente.
-e) Las IPs privadas pueden viajar por Internet.
+Indica qué categoría de cable UTP necesitas para cada situación:
 
-## 5. Calcula hosts
+a) Red de oficina a 1 Gbps
+b) Datacenter con 10 Gbps a 100 metros
+c) Cableado económico para una pequeña empresa
 
-¿Cuántos hosts útiles tiene cada subred?
+## 3. Verdadero o falso
 
-a) /24
-b) /27
-c) /30
-d) /29
+a) La fibra óptica usa pulsos eléctricos para transmitir datos.
+b) El estándar T568B pone el par naranja en los pines 1 y 2.
+c) Un cable UTP tiene 4 pares de hilos (8 hilos en total).
+d) El Auto MDI-X permite usar cables directos entre switches.
+e) La diafonía es la pérdida de señal con la distancia.
 
-## 6. Identifica el tipo
+## 4. Ordena el crimpado
 
-Indica si cada IP es pública, privada o especial:
+Ordena los pasos para crimpar un cable RJ45 (del 1 al 6):
 
-a) 10.0.0.15
-b) 8.8.8.8
-c) 192.168.1.1
-d) 127.0.0.1
-e) 172.16.0.100
-f) 169.254.1.1
+a) Insertar los hilos en el conector RJ45
+b) Pelar la funda exterior del cable
+c) Comprobar el cable con un tester
+d) Ordenar los hilos según T568B
+e) Cortar los hilos rectos
+f) Crimpar con la crimpadora
 
-## 7. Calcula la dirección de red
+## 5. Relaciona concepto y definición
 
-Para cada par de IP y máscara, haz el **AND** bit a bit y di cuál es la **dirección de red**:
+| Concepto | Definición |
+|---|---|
+| 1. Atenuación | a) Interferencia entre pares de hilos adyacentes |
+| 2. Diafonía | b) Capacidad máxima de transmisión de un medio |
+| 3. Ancho de banda | c) Tiempo de ida y vuelta de un paquete |
+| 4. Latencia | d) Pérdida de intensidad de la señal con la distancia |
 
-a) IP: 192.168.1.37 · Máscara: 255.255.255.0
-b) IP: 10.0.0.150 · Máscara: 255.0.0.0
-c) IP: 172.16.0.200 · Máscara: 255.255.255.128
-d) IP: 192.168.1.66 · Máscara: 255.255.255.192
+## 6. Sopa de letras de conectores
 
-**Pista:** pasa el octeto "mágico" (el último de la máscara que no es 255) a binario y haz el AND con el octeto correspondiente de la IP. El resto de octetos se copian tal cual (si la máscara es 255) o se ponen a 0 (si la máscara es 0).
+Nombra estos conectores y el medio en el que se usan:
 
-## 8. Subredes iguales
+a) RJ45
+b) LC
+c) SC
 
-Divide la red **192.168.5.0/24** en **4 subredes del mismo tamaño**.
+## 7. Cableado estructurado
 
-a) ¿Cuántos bits debes prestar a la máscara?
-b) ¿Cuál es la nueva máscara (CIDR y decimal)?
-c) ¿Cuántos hosts útiles tiene cada subred?
-d) Enumera las 4 direcciones de red con su rango de hosts.
+Relaciona cada elemento del cableado estructurado con su función:
+
+| Elemento | Función |
+|---|---|
+| 1. Latiguillo | a) Concentra los cables horizontales en el rack |
+| 2. Keystone | b) Cable flexible que une el PC con la roseta (o el patch panel con el switch) |
+| 3. Patch panel | c) Conector hembra RJ45 en la roseta de pared |
+| 4. Cable horizontal | d) Cable sólido empotrado que va del patch panel al keystone |
+
+## 8. Medios y estándares: verdadero o falso
+
+Indica si cada afirmación es verdadera (V) o falsa (F) y corrige las falsas:
+
+a) La fibra óptica se ve afectada por las interferencias electromagnéticas.
+b) El estándar 802.11ax se conoce comercialmente como WiFi 6.
+c) El WiFi transmite por ondas electromagnéticas en el aire, sin cable.
+d) La fibra multimodo llega a distancias de más de 40 km.
+e) La velocidad real del WiFi suele estar entre el 30% y el 50% de la teórica.

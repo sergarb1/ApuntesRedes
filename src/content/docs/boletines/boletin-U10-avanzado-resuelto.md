@@ -1,114 +1,137 @@
 ---
 title: Boletín U10 — Avanzado (Resuelto)
-description: Soluciones ejercicios avanzados de NAT
+description: Soluciones de los ejercicios avanzados de Routing Dinámico
 ---
 
 # ✅ Boletín U10 — Avanzado (Resuelto)
 
 ---
 
-## 1. Traducción manual
+## 1. Configuración OSPF multiárea
 
-| Pro | Inside global | Inside local | Outside local | Outside global |
-|---|---|---|---|---|
-| tcp | 83.45.12.78:**60001** | 192.168.1.10:50000 | 8.8.8.8:80 | 8.8.8.8:80 |
-| udp | **83.45.12.78:60002** | 192.168.1.20:50000 | 8.8.8.8:53 | 8.8.8.8:53 |
-
-NAT asigna puertos únicos (60001, 60002) aunque los puertos origen sean iguales (50000).
-
-## 2. Problema con FTP activo
-
-**Falla porque el servidor FTP externo intenta conectar directamente a 192.168.1.10:1025, pero esa IP es privada y no es accesible desde fuera.** Además, NAT no traduce IPs dentro del payload del protocolo FTP (comando PORT).
-
-**Soluciones:**
-- Usar **FTP pasivo**: el cliente inicia ambas conexiones.
-- Activar **ALG FTP** en el router para que inspeccione y traduzca las IPs en el comando PORT.
-- Usar FTP sobre TLS/SSH.
-
-## 3. Configuración multi-NAT
-
+**R1:**
 ```bash
-R1(config)# ip nat inside source static tcp 192.168.1.10 80 83.45.12.78 8080
-R1(config)# ip nat inside source static tcp 192.168.1.10 443 83.45.12.78 8443
-R1(config)# ip nat inside source static tcp 192.168.1.20 22 83.45.12.78 2222
+interface loopback 0
+ ip address 1.1.1.1 255.255.255.255
+interface g0/0
+ ip address 192.168.1.1 255.255.255.0
+interface g0/1
+ ip address 192.168.2.1 255.255.255.0
+interface g0/2
+ ip address 10.0.0.1 255.255.255.252
+router ospf 1
+ router-id 1.1.1.1
+ network 192.168.1.0 0.0.0.255 area 0
+ network 192.168.2.0 0.0.0.255 area 0
+ network 10.0.0.0 0.0.0.3 area 0
 ```
 
-## 4. NAT + VPN
-
-**IPsec no pasa NAT porque NAT modifica la cabecera IP, y los protocolos AH y ESP usan hashes que verifican la integridad de la cabecera IP.** Al cambiar la IP, el hash no coincide y el paquete se rechaza.
-
-**Solución:** **NAT-T (NAT Traversal)** — encapsula paquetes IPsec dentro de UDP (puerto 4500). NAT puede traducir UDP sin problemas, y IPsec viaja encapsulado.
-
-## 5. Análisis de timeouts
-
-**El problema no es NAT, es el firewall o el propio router que tiene un timeout de sesión TCP menor que el de NAT.** Muchos firewalls cierran conexiones TCP inactivas después de unos minutos. También puede ser el **keepalive TCP** del cliente o servidor SSH.
-
-**Solución:** Configurar keepalive SSH en el cliente (`ServerAliveInterval 60`), o ajustar el timeout de sesión TCP en el router.
-
-## 6. NAT y servidores duales
-
+**R2 (ABR):**
 ```bash
-! PAT para todos los internos
-R1(config)# access-list 1 permit 192.168.10.0 0.0.0.255
-R1(config)# ip nat inside source list 1 interface g0/1 overload
-
-! NAT destino para servidor web (IP pública 83.45.12.78)
-R1(config)# ip nat inside source static tcp 192.168.10.10 80 83.45.12.78 80
-R1(config)# ip nat inside source static tcp 192.168.10.10 443 83.45.12.78 443
-
-! NAT destino para servidor correo (IP pública 83.45.12.79)
-R1(config)# ip nat inside source static tcp 192.168.10.20 25 83.45.12.79 25
-R1(config)# ip nat inside source static tcp 192.168.10.20 587 83.45.12.79 587
-R1(config)# ip nat inside source static tcp 192.168.10.20 993 83.45.12.79 993
-
-! Interfaces
-R1(config)# interface g0/0
-R1(config-if)# ip nat inside
-R1(config)# interface g0/1
-R1(config-if)# ip nat outside
+interface loopback 0
+ ip address 2.2.2.2 255.255.255.255
+interface g0/0
+ ip address 10.0.0.2 255.255.255.252
+interface g0/1
+ ip address 10.0.0.5 255.255.255.252
+router ospf 1
+ router-id 2.2.2.2
+ network 10.0.0.0 0.0.0.3 area 0
+ network 10.0.0.4 0.0.0.3 area 1
 ```
 
-## 7. Multi-NAT: servidores duales + PAT simultáneo
-
+**R3:**
 ```bash
-! PAT para los usuarios internos (83.45.12.78)
-R1(config)# access-list 1 permit 192.168.50.0 0.0.0.255
-R1(config)# ip nat inside source list 1 interface g0/1 overload
-
-! NAT destino para el servidor web (puertos públicos en 83.45.12.78)
-R1(config)# ip nat inside source static tcp 192.168.50.10 80 83.45.12.78 8080
-R1(config)# ip nat inside source static tcp 192.168.50.10 443 83.45.12.78 8443
-
-! NAT estático 1:1 para el servidor de correo (83.45.12.79)
-R1(config)# ip nat inside source static tcp 192.168.50.20 25 83.45.12.79 25
-R1(config)# ip nat inside source static tcp 192.168.50.20 587 83.45.12.79 587
-R1(config)# ip nat inside source static tcp 192.168.50.20 993 83.45.12.79 993
-
-! Interfaces
-R1(config)# interface g0/0
-R1(config-if)# ip nat inside
-R1(config)# interface g0/1
-R1(config-if)# ip nat outside
+interface loopback 0
+ ip address 3.3.3.3 255.255.255.255
+interface g0/0
+ ip address 192.168.3.1 255.255.255.0
+interface g0/1
+ ip address 10.0.0.6 255.255.255.252
+router ospf 1
+ router-id 3.3.3.3
+ network 192.168.3.0 0.0.0.255 area 1
+ network 10.0.0.4 0.0.0.3 area 1
 ```
 
-**Nota:** las traducciones estáticas y el PAT conviven sin problema. El tráfico de los usuarios usa el overload con puertos efímeros; las reglas estáticas tienen prioridad sobre sus puertos concretos (8080, 8443, 25, 587, 993).
+## 2. Diagnóstico OSPF
 
-## 8. Diagnóstico: "no salimos a Internet"
+a) **FULL/DR:** El vecino 3.3.3.3 es el DR y la adyacencia está completa (FULL). Es normal en Ethernet.
 
-a) **Orden de comprobaciones (de básico a específico):**
-   1. `ping 192.168.1.1` desde un PC → ¿la LAN está viva?
-   2. `ping 203.0.113.2` desde un PC → ¿el paquete llega hasta la WAN del router?
-   3. `ping 8.8.8.8` desde el propio R1 → ¿tiene el router salida real?
-   4. `show ip nat translations` → ¿hay traducciones activas?
-   5. Revisar la access-list (¿permite la red correcta?) y el `overload` (¿está puesto?).
-   6. Verificar las marcas `ip nat inside/outside` en las interfaces.
+b) **2WAY/DROTHER:** El vecino 4.4.4.4 no es DR ni BDR (DROTHER). La adyacencia está en 2WAY, que es el estado normal entre DROTHERS (no intercambian LSAs directamente, solo con el DR).
 
-b) **`show ip nat translations`.** Esperas ver entradas del tipo `tcp 83.45.12.78:puerto ... 192.168.1.X:puerto ...` en cuanto los PCs generen tráfico hacia fuera.
+c) **Porque no es necesario.** En redes multiacceso, los DROTHERS solo forman adyacencia FULL con el DR y BDR. Entre DROTHERS se quedan en 2WAY.
 
-c) Si la tabla está **vacía** con tráfico circulando:
-   - La access-list no coincide con la red interna (red mal escrita o wildcard incorrecto).
-   - Falta la palabra `overload` en el comando PAT.
-   - Faltan `ip nat inside`/`ip nat outside` en las interfaces.
-   - El tráfico que se prueba no atraviesa las interfaces inside/outside (p. ej. se prueba desde el propio router).
+d) **No se ve directamente.** Pero por contexto, si este router tiene vecinos en G0/0 y G0/1, su Router ID podría ser otro (el más alto de sus loopbacks o interfaces físicas).
 
-d) **Fallo real:** sin `ip nat inside` en g0/0 ni `ip nat outside` en g0/1, NAT no tiene "puertas" de traducción. La regla `ip nat inside source list 1 interface g0/1 overload` dice QUÉ traducir y A DÓNDE, pero NAT necesita saber qué tráfico es interno y cuál externo. Sin esas marcas de interfaz, los paquetes de la LAN se reenvían tal cual (o se descartan) y la tabla NAT permanece vacía: exactamente el síntoma observado.
+## 3. Redistribución OSPF
+
+a) `redistribute static subnets` inyecta las rutas estáticas configuradas en el router al proceso OSPF, para que otros routers OSPF aprendan esas rutas.
+
+b) **Dos rutas:** la ruta por defecto (0.0.0.0/0) y la ruta estática 10.100.0.0/16.
+
+c) **Sí.** La redistribución + `default-information originate` propaga ambas rutas a todos los routers OSPF en todos los áreas.
+
+## 4. Cambio de coste OSPF
+
+a) **Camino A** (coste 1+1+1 = 3) aunque tenga más routers en FastEthernet (cada enlace tiene coste 1). OSPF elige el camino con menor coste total. Los dos caminos tienen el mismo coste si todos los enlaces son del mismo tipo. Si ambos tienen coste 1+1+1 vs 1+1+1+1, gana el de 3 saltos (menos coste).
+
+b) Para forzar el Camino B, aumentar el coste en los enlaces de A:
+   ```bash
+   R1(config-if)# ip ospf cost 10
+   ```
+
+c) `show ip ospf interface` o `show ip route` muestra el coste de cada ruta.
+
+## 5. DR/BDR election
+
+a) **DR: R3** (prioridad 10, la más alta). **BDR: R4** (prioridad 5, segunda más alta).
+
+b) Prioridad **0** significa que el router **no participa** en la elección de DR/BDR. Nunca será DR ni BDR.
+
+c) Cambiar la **prioridad** de R1 a un valor más alto que 10:
+   ```bash
+   R1(config-if)# ip ospf priority 20
+   ```
+   (Nota: la elección solo ocurre al iniciar OSPF o al reiniciar el proceso)
+
+## 6. Troubleshooting OSPF
+
+**Paso 1:** Verificar conectividad capa 3 → `ping` entre routers vecinos. Si no hay ping, el problema está en capa 1 o 2.
+
+**Paso 2:** Verificar que las interfaces están activas → `show ip interface brief`. Buscar "up/up".
+
+**Paso 3:** Verificar que OSPF está configurado → `show ip protocols`. Debe mostrar OSPF con Router ID y redes declaradas.
+
+**Paso 4:** Verificar vecinos → `show ip ospf neighbor`. Si no hay vecinos, comprobar:
+- `network` declarada correctamente (wildcard, área)
+- Hello/Dead timers coinciden (por defecto 10/40 en broadcast)
+- No hay ACL bloqueando protocolo 89 (OSPF)
+
+**Paso 5:** Verificar LSDB → `show ip ospf database`. Debe haber LSAs de todos los routers.
+
+**Paso 6:** Verificar tabla de rutas → `show ip route ospf`. Las rutas deben aparecer con prefijo O (OSPF).
+
+## 7. Elección DR/BDR en otro segmento
+
+a) **DR: R-B** (prioridad 200, la más alta). **BDR: R-C** (prioridad 150, segunda más alta).
+
+b) **R-D** tiene prioridad **0**: no participa en la elección. Solo actuará como **DROTHER**, sincronizándose con el DR y el BDR sin poder ser elegido.
+
+c) **R-B** — con prioridades empatadas (1 = 1), el desempate lo hace el **Router ID más alto** (10.0.0.2 > 10.0.0.1). La prioridad manda primero; el Router ID solo decide empates.
+
+d) **No cambia.** La elección de DR/BDR solo ocurre al arrancar OSPF o al reiniciar el proceso; subir la prioridad de R-C a 255 no destrona al DR ya elegido (R-B). Para que cambie tendrías que **reiniciar el proceso OSPF** (o el router) en los routers del segmento, y entonces R-C (prioridad 255) ganaría.
+
+## 8. La adyacencia que no levanta
+
+a) Al funcionar el ping, queda **descartado el plano físico/enlace y la capa 3** del enlace: las IPs se alcanzan. El problema está en el **plano OSPF** (configuración lógica del protocolo), no en la conectividad.
+
+b) **Orden de diagnóstico:**
+1. `show ip protocols` → comprobar que OSPF arranca en ambos, que el **Router ID** no está duplicado y que las redes declaradas incluyen el enlace Serial.
+2. `show ip ospf interface` → confirmar en ambos routers que la interfaz **participa** en OSPF, y comparar **área**, **wildcard** y **timers** (Hello/Dead). Si no aparece, la red no está declarada o la wildcard está mal.
+3. Verificar que el **área** coincide en los dos lados del enlace (revisar el `network ... area X`).
+4. Comparar los **timers Hello/Dead** en ambos lados con `show ip ospf interface`: deben coincidir (en punto a punto Serial suelen ser 30/120; si uno quedó en 10/40, no forman vecindad).
+5. `show access-lists` (y contadores en la interfaz) → descartar una **ACL** que bloquee el **protocolo 89 (OSPF)** en el sentido de entrada/salida.
+6. Solo si todo lo anterior está bien, subir un nivel: `debug ip ospf events` (con cuidado) para ver por qué se rechaza el Hello.
+
+c) `show ip ospf interface <interfaz>`: si la interfaz aparece listada con su área y sus timers, está **participando en OSPF sin ambigüedad**. Si no sale, OSPF no la tiene declarada (falta `network` o wildcard incorrecta).

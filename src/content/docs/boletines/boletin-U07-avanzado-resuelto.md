@@ -1,170 +1,149 @@
 ---
 title: Boletín U07 — Avanzado (Resuelto)
-description: Soluciones ejercicios avanzados de VLANs
+description: Soluciones de los ejercicios avanzados de Switching y STP
 ---
 
 # ✅ Boletín U07 — Avanzado (Resuelto)
 
 ---
 
-## 1. Configuración completa de VLANs
+## 1. Configuración básica de switch
 
-**Switch1:**
 ```bash
-Switch1(config)# vlan 10
-Switch1(config-vlan)# name Ventas
-Switch1(config)# vlan 20
-Switch1(config-vlan)# name RRHH
-Switch1(config)# interface range fa0/1-5
-Switch1(config-if-range)# switchport mode access
-Switch1(config-if-range)# switchport access vlan 10
-Switch1(config)# interface range fa0/6-10
-Switch1(config-if-range)# switchport mode access
-Switch1(config-if-range)# switchport access vlan 20
-Switch1(config)# interface fa0/24
-Switch1(config-if)# switchport mode trunk
-Switch1(config-if)# switchport trunk native vlan 99
-Switch1(config-if)# switchport trunk allowed vlan 10,20
+Switch> enable
+Switch# configure terminal
+Switch(config)# hostname SW-OFICINA-01
+SW-OFICINA-01(config)# interface vlan 1
+SW-OFICINA-01(config-if)# ip address 192.168.1.10 255.255.255.0
+SW-OFICINA-01(config-if)# no shutdown
+SW-OFICINA-01(config-if)# exit
+SW-OFICINA-01(config)# ip default-gateway 192.168.1.1
+
+SW-OFICINA-01(config)# interface range fa0/1-10
+SW-OFICINA-01(config-if-range)# switchport mode access
+SW-OFICINA-01(config-if-range)# switchport port-security
+SW-OFICINA-01(config-if-range)# switchport port-security maximum 2
+SW-OFICINA-01(config-if-range)# switchport port-security mac-address sticky
+SW-OFICINA-01(config-if-range)# switchport port-security violation shutdown
+SW-OFICINA-01(config-if-range)# exit
+
+SW-OFICINA-01(config)# interface range fa0/11-12
+SW-OFICINA-01(config-if-range)# switchport mode trunk
+SW-OFICINA-01(config-if-range)# exit
 ```
 
-**Switch2:** (configuración similar: mismas VLANs, mismos puertos access 1-5 → 10 y 6-10 → 20, y el mismo trunk en Fa0/24 con native 99 y `allowed vlan 10,20`).
+## 2. Análisis de topología STP
 
-**Router:**
-```bash
-Router(config)# interface fa0/0
-Router(config-if)# no shutdown
-Router(config)# interface fa0/0.10
-Router(config-subif)# encapsulation dot1Q 10
-Router(config-subif)# ip address 192.168.10.1 255.255.255.0
-Router(config)# interface fa0/0.20
-Router(config-subif)# encapsulation dot1Q 20
-Router(config-subif)# ip address 192.168.20.1 255.255.255.0
-```
+a) **Root Bridge: Switch C.** Prioridad 4096 (la más baja). Aunque Switch A y B tienen MACs más bajas, la prioridad de Switch C (4096) es mucho menor que 32768.
 
-## 2. Diagnóstico de native VLAN
+b) **Root Ports:** Cada switch no-root tiene 1 Root Port. Como hay 3 switches y Switch C es Root, Switches A y B tienen 1 Root Port cada uno = **2 Root Ports** total.
 
-a) **Problemas:** las tramas sin etiquetar (de la VLAN nativa, incluyendo tráfico de control CDP/VTP/DTP y datos de esa VLAN) se interpretan en la VLAN equivocada en el otro extremo.
-   - Tráfico de control (CDP, VTP) no funciona correctamente entre switches.
-   - Posibles problemas de conectividad en la native VLAN (va y viene a ratos).
-   - Mensajes de error en el log de ambos switches: *"Native VLAN mismatch discovered on Fa0/24"*.
+c) **Designated Ports:** 1 por segmento. Hay 3 segmentos (A-B, B-C, C-A) → **3 Designated Ports** (todos los puertos del Root Bridge y el puerto del segmento con mejor coste hacia el Root).
 
-b) **Diagnóstico:** `show interfaces trunk` en ambos switches. Muestra la native VLAN de cada extremo y reporta directamente el mismatch.
+d) Si **Switch C falla**:
+   - Switches A y B pierden su Root Bridge
+   - Se inicia una nueva elección. Con la misma prioridad (32768), gana Switch A (MAC más baja)
+   - Todos los puertos pasan por los estados STP (blocking → listening → learning → forwarding)
+   - Convergencia: ~50 segundos con STP, ~3 segundos con RSTP
 
-c) **Arreglo sin pérdida:** configurar la **misma native VLAN en ambos extremos** — elegir un número (ej. 99) y ponerlo en ambos:
+## 3. Diagnóstico de port security
+
+a) **Ocurrió porque** el usuario conectó un switch no administrado. Los PCs de ambos usuarios tienen MACs diferentes, y el switch de red ve más de 1 MAC en el puerto, superando el límite (maximum 1).
+
+b) **Dos cambios:**
+   1. Aumentar `maximum` a un valor razonable (ej. 5-10) si es un puerto compartido
+   2. Cambiar `violation` a `restrict` (descarta tráfico extra pero no deshabilita el puerto) o `protect` (descarta silenciosamente)
+
+c) **Recuperar el puerto:**
    ```bash
-   Switch2(config-if)# switchport trunk native vlan 99
+   SW-OFICINA-01(config)# interface fa0/1
+   SW-OFICINA-01(config-if)# shutdown
+   SW-OFICINA-01(config-if)# no shutdown
    ```
-   El cambio es **inmediato**: la native VLAN solo afecta a tramas sin etiquetar. Las VLANs etiquetadas (10, 20, 30) no sufren interrupción durante el cambio.
+   O configurar `errdisable recovery cause psecure-violation` para recuperación automática.
 
-## 3. Diseño de VLANs corporativas
+## 4. Diseño de red redundante
 
-a) **Tabla de VLANs:**
-   | VLAN | Nombre | Puertos |
-   |------|--------|---------|
-   | 10 | Recepción | Planta baja 1-5 |
-   | 20 | Servidores | Planta baja 6-15 |
-   | 30 | Ventas | Planta 1, puertos 1-30 |
-   | 40 | Marketing | Planta 1, puertos 31-45 |
-   | 50 | IT | Planta 2, puertos 1-20 |
-   | 60 | Dirección | Planta 2, puertos 21-25 |
+a) **Topología conceptual:** Malla parcial. SW1 (core) conectado a SW2, SW3, SW4. SW2 conectado a SW3 y SW4. Sin bucles directos SW3-SW4 para limitar redundancia.
 
-b) **Router-on-a-stick:** en la planta baja, cerca de los servidores, conectado por un trunk a un puerto del core (puede enrutar todas las VLANs con subinterfaces). **Alternativa:** switch capa 3 como core en la sala de servidores, haciendo routing entre VLANs internamente con SVIs (se elimina el cuello de botella del router).
+b) **Puertos bloqueados:** Depende del Root Bridge. Si SW1 es Root, sus puertos son Designated. Los switches no-root tendrán Root Ports y Alternate Ports bloqueados. Con 3 conexiones alternativas por switch, aproximadamente 3 puertos bloqueados.
 
-c) **VLANs en trunks:** todas (10, 20, 30, 40, 50, 60) en los trunks del core, con **native VLAN cambiada** (ej. 999) y **`allowed vlan`** cubriendo todas. IT necesita acceso a todas las VLANs para administrar.
+c) **Prioridad para SW1 como Root:** `spanning-tree vlan 1 priority 4096` (o 0 para forzarlo absolutamente).
 
-d) **ACLs para limitar Dirección** (se aplican en la subinterfaz del router de la VLAN 60):
-   ```bash
-   access-list 101 permit ip 192.168.60.0 0.0.0.255 192.168.20.0 0.0.0.255
-   access-list 101 deny ip 192.168.60.0 0.0.0.255 any
-   ```
-   Aplicar con `ip access-group 101 in` en la subinterfaz `Fa0/0.60`. (Detalles finos de ACLs en la U08.)
+d) **Si SW1 falla:**
+   - Se elige un nuevo Root Bridge (el de menor Bridge ID entre SW2, SW3, SW4)
+   - **Con STP:** ~50 segundos de convergencia
+   - **Con RSTP:** ~1-3 segundos
 
-## 4. VTP disaster recovery
+## 5. CAM table analysis
 
-a) **Por qué:** VTP propaga la base de datos del switch con mayor **revision number**. El switch nuevo (rev 500) tiene número más alto que el server actual (rev 100). Al propagar su base de datos (posiblemente vacía), todas las VLANs se borran en la red. Basta un trunk para que el anuncio llegue a todos.
+a) **Dos dispositivos** en Fa0/4: 00D0.BC96.1A01 y 00D0.BC96.1A02. La tabla muestra ambas MACs en el mismo puerto.
 
-b) **Recuperación:**
-   1. **Desconectar el switch problemático inmediatamente** (cable del trunk) para frenar la propagación.
-   2. Reconfigurar las VLANs manualmente en cada switch (o restaurar un backup de la config).
-   3. Cambiar los switches a **VTP transparent** (o VTPv3 mode off) para que ningún switch pueda volver a hacer esto.
+b) **4 puertos** con dispositivos: Fa0/1, Fa0/2, Fa0/3, Fa0/4.
 
-c) **Medidas preventivas:**
-   - Usar **VTP transparent** o **VTPv3 mode off** (no propaga ni procesa anuncios).
-   - Verificar el **revision number** (`show vtp status`) de todo switch antes de enchufarlo.
-   - **Resetear** la base de datos de cualquier equipo usado: `delete flash:vlan.dat` y reiniciar, antes de conectarlo.
-   - Documentar la base de datos de VLANs (la config es tu backup).
+c) **FFFF.FFFF.FFFF en CPU:** Es la dirección MAC de broadcast. Está en la CPU porque el switch procesa los broadcasts internamente (además de reenviarlos).
 
-## 5. Router-on-a-stick: cuello de botella
+d) **Si llega una trama con destino 00D0.BC96.1A03:** Es una MAC desconocida (no está en la tabla). El switch **inunda** la trama por todos los puertos excepto el de origen.
 
-a) **Cálculo:** 4 VLANs × 30 Mbps = **120 Mbps**. La interfaz FastEthernet (100 Mbps) NO puede manejar 120 Mbps. **Sí hay cuello de botella** (pérdidas y saturación).
+## 6. STP: cálculo de costes
 
-b) **Alternativas:**
-   - **Interfaz GigabitEthernet** (1000 Mbps) → 120 Mbps es apenas el 12 % de capacidad.
-   - **Switch capa 3 con SVIs** → routing en hardware interno, sin interfaz única de salida.
-   - Dividir las VLANs entre **dos interfaces físicas** del router (proporcional al tráfico).
+a) **Root Port de Switch C:** Depende del coste acumulado hacia el Root Bridge.
 
-c) **Con GigabitEthernet:** 120 Mbps sobre 1000 Mbps = **12 % de uso**, sin cuello de botella. Si el tráfico se duplica (240 Mbps), seguimos al 24 %: holgado.
+   **Camino A → C directo (Fa0/3):** coste = 19
+   **Camino A → B → C (Fa0/1 → Fa0/2):** coste = 19 + 19 = 38
 
-## 6. Seguridad en VLANs
+   Fa0/3 tiene **menor coste total** (19 < 38), así que **Fa0/3 es el Root Port**.
 
-| Riesgo | Mitigación |
-|---|---|
-| 1. **VLAN Hopping por DTP**: el atacante negocia un trunk (`dynamic desirable`) y recibe todas las VLANs | `switchport mode access` + `switchport nonegotiate`; puertos libres con `shutdown` |
-| 2. **Double tagging en la native VLAN**: el atacante manda una trama con doble etiqueta 802.1Q y la segunda etiqueta llega a otra VLAN | Native VLAN **≠ 1** y **sin datos en la native**; segmentar físicamente zonas sensibles |
-| 3. **VTP como arma**: un switch con revision number mayor anuncia su base de datos (vacía) y borra VLANs | VTP transparent / VTPv3 off, verificar `show vtp status` antes de conectar equipo |
+b) **Costes:** A→C directo = 19. A→B→C = 38.
 
-## 7. VLAN hopping y hardening
+c) **Alternate Port:** Fa0/2 (el puerto del camino más caro que queda en discarding como respaldo).
 
-a) **Tres vectores de ataque:**
-   1. **Negociación de trunk por DTP:** un portátil conectado a un puerto en modo `dynamic desirable` (o `dynamic auto` si el portátil pide) tramita el protocolo DTP y consigue que el puerto se convierta en **trunk**. A partir de ahí, todas las VLANs que cruzan el trunk quedan a su alcance.
-   2. **Double tagging:** el atacante envía una trama con **dos etiquetas 802.1Q** (a menudo con la native VLAN). El primer switch elimina la primera etiqueta (la trata como native) y la reenvía por el trunk; el segundo switch ve la segunda etiqueta y la entrega en la **VLAN objetivo**. El atacante nunca llega a ser trunk ni a hablar directamente: salta a la VLAN objetivo de forma encubierta.
-   3. **Tráfico mislabeled / native VLAN vulnerable:** si la native VLAN transporta datos y es la VLAN 1, todo el tráfico sin etiquetar (o mal etiquetado) acaba en la VLAN por defecto, donde pueden mezclarse con otras VLANs mal configuradas (o con el double tagging del vector anterior gratuitamente).
+d) **Si el coste de Fa0/3 se cambia a 4:** El coste total por Fa0/3 baja a 4, reforzando aún más que Fa0/3 sea el Root Port. Si en cambio el coste de Fa0/3 subiera a 100, entonces el Root Port pasaría a ser por el camino A→B→C (coste 38 < 100).
 
-b) **Tres mitigaciones concretas:**
-   1. **Apagar DTP en puertos de usuario:** `switchport mode access` + `switchport nonegotiate` (y `shutdown` en los puertos no usados) → el atacante no puede negociar un trunk.
-   2. **Cambiar la native VLAN y no usarla para datos:** `switchport trunk native vlan 99` (o 999) en TODOS los trunks, y usar VLANs de datos distintas de la native → el double tagging pierde su puerta de entrada.
-   3. **Limitar y segmentar:** `switchport trunk allowed vlan 10,20,30` para restringir qué VLANs cruzan cada trunk, y **VTP transparent / VTPv3 off** para que un switch rogue no arrase la base de datos.
+## 7. Topología STP/RSTP bajo análisis
 
-## 8. Inter-VLAN con SVI paso a paso
+a) **Root Bridge: SW1.** Prioridad 4096, muy por debajo de los 32768 de los demás. No hace falta desempate por MAC.
 
-**(Se asume que los puertos access de las VLANs 10/20/30 ya están asignados.)**
+b) **Puerto en estado Discarding:** el enlace redundante **SW2-SW3**. Concretamente, el puerto de SW3 hacia SW2 (el extremo con mayor coste acumulado hacia el Root, que queda como **Alternate Port**). Los enlaces directos SW1-SW2, SW1-SW3 y SW1-SW4 son Designated (todos los puertos del Root).
 
-a) **Creación de VLANs:**
+c) **3 Root Ports**: SW2, SW3 y SW4 son switches no-root, cada uno con su Root Port hacia SW1 (por su enlace directo de coste 19).
+
+d) **Con RSTP:** la red converge en **1-3 segundos** (handshake propuesta/acuerdo). **Con STP clásico:** **30-50 segundos** (esperando temporizadores).
+
+e) Los puertos del Root Bridge son todos **Designated**: son el "punto de referencia" del árbol y nunca se bloquean.
+
+## 8. Laboratorio: Port Security en la sala de profesores
+
+a) y b) Configuración completa:
+
 ```bash
-Switch(config)# vlan 10
-Switch(config-vlan)# name Ventas
-Switch(config)# vlan 20
-Switch(config-vlan)# name RRHH
-Switch(config)# vlan 30
-Switch(config-vlan)# name IT
+Switch(config)# interface fa0/24
+Switch(config-if)# switchport mode access
+Switch(config-if)# switchport port-security
+Switch(config-if)# switchport port-security maximum 1
+Switch(config-if)# switchport port-security mac-address sticky
+Switch(config-if)# switchport port-security violation shutdown
 ```
 
-b) **Activar el routing global:**
+c) Verificación: `Switch# show port-security interface fa0/24` (muestra el máximo, las MACs seguras y el estado del puerto).
+
+d) La violación ocurre porque la **MAC sticky del PC original NO caduca**: aunque el PC se desenchufe, su MAC permanece aprendida como permanente. Al conectar el portátil, su MAC nueva hace un total de 2 MACs en el puerto y se supera el máximo (1) → violación shutdown → errdisable.
+
+e) Recuperar el puerto:
+
 ```bash
-Switch(config)# ip routing
-```
-
-c) **SVIs (uno por VLAN):**
-```bash
-Switch(config)# interface vlan 10
-Switch(config-if)# ip address 192.168.10.1 255.255.255.0
-Switch(config-if)# no shutdown
-
-Switch(config)# interface vlan 20
-Switch(config-if)# ip address 192.168.20.1 255.255.255.0
-Switch(config-if)# no shutdown
-
-Switch(config)# interface vlan 30
-Switch(config-if)# ip address 192.168.30.1 255.255.255.0
+Switch(config)# interface fa0/24
+Switch(config-if)# shutdown
 Switch(config-if)# no shutdown
 ```
 
-d) **Gateway de cada PC:**
+(O configurar `errdisable recovery cause psecure-violation`.)
 
-| VLAN | Subred | Gateway (IP del SVI) |
-|---|---|---|
-| 10 Ventas | 192.168.10.0/24 | 192.168.10.1 |
-| 20 RRHH | 192.168.20.0/24 | 192.168.20.1 |
-| 30 IT | 192.168.30.0/24 | 192.168.30.1 |
-
-**Verificación:** comprueba que el SVI esté Up/Up (`show ip interface brief`), revisa que las VLANs existan en `show vlan brief` y prueba la conectividad con `ping` entre SVIs (ej. desde el SVI 10 contra 192.168.20.1). Si los SVIs están Up/Up pero no enrutan, el culpable es el comando `ip routing` olvidado.
+f) Sin perder seguridad, puedes:
+   - Aumentar `maximum` a 2 si es un puerto compartido.
+   - Configurar el **envejecimiento de la port security** para que la MAC sticky expire si el dispositivo se desenchufa:
+     ```bash
+     Switch(config-if)# switchport port-security aging time 5
+     Switch(config-if)# switchport port-security aging type inactivity
+     ```
+   - O usar `violation restrict` (descarta el tráfico extra sin deshabilitar el puerto), aunque es menos estricto.

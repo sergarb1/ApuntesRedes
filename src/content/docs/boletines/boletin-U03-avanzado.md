@@ -1,102 +1,104 @@
 ---
 title: Boletín U03 — Avanzado
-description: Ejercicios avanzados de Infraestructura Física de Red
+description: Ejercicios avanzados de Modelos OSI y Análisis de Tráfico
 ---
 
 # 📝 Boletín U03 — Avanzado
 
-> Ejercicios que requieren aplicar los conceptos de cableado, medios físicos y WiFi de forma combinada. En los difíciles tienes pista.
+> Ejercicios que requieren aplicar los conceptos de capas OSI, protocolos y Wireshark de forma combinada. En los difíciles tienes pista.
 
 ---
 
-## 1. Diagnóstico de cableado
+## 1. Análisis de captura Wireshark
 
-Un usuario reporta que su PC solo alcanza 100 Mbps en lugar de 1 Gbps. El switch es Gigabit, el cable es Cat5e y el PC tiene una tarjeta Gigabit.
-
-a) ¿Cuáles pueden ser las causas?
-b) ¿Qué herramienta usarías para diagnosticar?
-c) ¿Cómo probarías si el problema es el cable, el PC o el switch?
-
-**Pista:** Gigabit Ethernet requiere los 4 pares. Si solo 2 pares están conectados, la negociación cae a 100 Mbps.
-
-## 2. Diseño de cableado estructurado
-
-Diseña el cableado para una oficina de 2 plantas:
-
-**Planta 1:** 40 puestos de trabajo + sala de servidores
-**Planta 2:** 30 puestos de trabajo
-
-Especifica:
-a) Cuántos switches necesitas y de qué tipo
-b) Qué categoría de cable usas para puestos y para uplinks
-c) Dónde colocas los patch panels
-d) Cómo conectas las dos plantas
-
-**Pista:** Piensa en términos de cable horizontal, patch panels, y uplinks entre plantas. La fibra para uplinks entre plantas es una buena práctica.
-
-## 3. Cálculo de atenuación
-
-Un cable UTP Cat6 tiene una atenuación máxima de 21,3 dB a 100 MHz para 100 metros. La señal del transmisor tiene una potencia de 2 dBm.
-
-a) ¿Qué potencia llega al receptor después de 100 m?
-b) Si el receptor necesita al menos -20 dBm para interpretar la señal, ¿funciona?
-c) ¿Qué pasa si el cable mide 120 metros?
-
-**Pista:** Potencia recibida = Potencia transmitida - Atenuación. La atenuación es proporcional a la distancia.
-
-## 4. Fibra vs cobre: caso real
-
-Eres el administrador de un campus universitario con 3 edificios separados por 200, 500 y 2000 metros respectivamente.
-
-a) ¿Qué medio usarías para conectar cada edificio? ¿Por qué?
-b) Si usas fibra, ¿monomodo o multimodo? ¿Para cada distancia?
-c) ¿Qué conectores y módulos SFP elegirías?
-
-**Pista:** 200 m → multimodo (barato). 2000 m → monomodo (necesario por distancia).
-
-## 5. Pinout y solución de problemas
-
-Tienes un cable que no funciona. Usas un comprobador y ves esta secuencia de LEDs:
+Observa esta captura simplificada:
 
 ```
-Extremo A: 1 2 3 4 5 6 7 8
-Extremo B: 1 2 3 4 5 6 7 8
-           ✓ ✓ ✗ ✓ ✓ ✓ ✓ ✓
+No.  Time     Source          Destination       Protocol   Info
+1    0.000    192.168.1.10    192.168.1.1       TCP        54321 → 443 [SYN] Seq=0
+2    0.002    192.168.1.1     192.168.1.10      TCP        443 → 54321 [SYN, ACK] Seq=0 Ack=1
+3    0.003    192.168.1.10    192.168.1.1       TCP        54321 → 443 [ACK] Seq=1 Ack=1
+4    0.010    192.168.1.10    142.250.184.4     TCP        54321 → 443 [SYN] Seq=0
 ```
 
-a) ¿Qué pin falla?
-b) ¿Qué par de hilos está afectado?
-c) ¿El cable funcionará parcialmente? ¿A qué velocidad?
+**Preguntas:**
+a) ¿Qué está ocurriendo en los paquetes 1-3?
+b) ¿Por qué el paquete 4 tiene IP destino diferente?
+c) ¿Qué falta entre los paquetes 3 y 4? ¿Por qué?
 
-**Pista:** Localiza qué par (1-2, 3-6, 4-5, 7-8) corresponde al pin que falla.
+**Pista:** fíjate en las IPs. ¿`192.168.1.1` y `142.250.184.4` están en la misma red?
 
-## 6. Diseña el latiguillo perfecto
+## 2. Diseña la encapsulación
 
-Describe paso a paso cómo crimpar un cable directo T568B, incluyendo:
+Eres un paquete DNS que viaja desde tu PC (192.168.1.10) al servidor DNS (8.8.8.8). Describe el contenido de cada cabecera:
 
-a) Herramientas necesarias
-b) Longitud recomendada de pelado de funda
-c) Orden exacto de los hilos (de izquierda a derecha, con el clip hacia abajo)
-d) Cómo saber si el crimpado ha sido correcto
+a) **Ethernet:** ¿MAC destino? (sabes que el gateway es 192.168.1.1)
+b) **IP:** ¿IP origen? ¿IP destino? ¿Valor del campo Protocol?
+c) **UDP:** ¿Puerto origen? ¿Puerto destino?
+d) **DNS:** ¿Qué contiene la consulta?
 
-## 7. Caso WiFi: oficina con zonas muertas
+**Pista:** DNS usa UDP por defecto en las consultas. El puerto origen será un puerto efímero (>1024).
 
-En una oficina de 25 puestos separados por tabiques de cartón-yeso, un único AP wifi en el pasillo central da "zonas muertas" y una velocidad general decepcionante. Los empleados se quejan cada tarde.
+## 3. Diagnóstico por capas
 
-a) ¿Qué causas físicas explicarían la lentitud (nombra al menos 3)?
-b) ¿Qué herramientas usarías para confirmarlas?
-c) Propón 3 soluciones realistas ordenadas de más barata a más cara.
+Un usuario reporta: "No puedo acceder a google.com, pero sí a 8.8.8.8".
 
-**Pista:** piensa en canales (1, 6, 11), interferencia de vecinos, obstáculos y el número de clientes compartiendo el mismo AP. Recuerda que la velocidad real WiFi es del 30-50%.
+a) ¿En qué capa(s) OSI está el problema?
+b) ¿Qué herramienta usarías para confirmarlo?
+c) ¿Cuál es la causa más probable?
 
-## 8. Elección de medio a escala
+**Pista:** si el ping a una IP funciona pero el navegador no carga, el problema está en la resolución de nombres.
 
-Decide qué medio de transmisión usarías para cada escenario y justifícalo:
+## 4. Three-way handshake
 
-a) **Mini-oficina** de 8 puestos en un local de 60 m².
-b) **Planta** de 40 puestos en un edificio de oficinas con el rack en la misma planta.
-c) **Campus** de 3 edificios separados por 100, 500 y 2000 metros.
+Explica paso a paso qué ocurre si durante un three-way handshake:
 
-En cada caso indica: medio (cobre/fibra/WiFi), categoría/estándar aproximado y, si usas fibra, monomodo o multimodo.
+a) El SYN del cliente se pierde
+b) El SYN-ACK del servidor se pierde
+c) El ACK final del cliente se pierde
 
-**Pista:** decide primero por distancia y presupuesto; luego por movilidad y rendimiento. 100 m es el límite del cobre, la multimodo cubre hasta ~550 m y la monomodo el resto.
+¿En qué casos se establece la conexión? ¿En cuáles no?
+
+**Pista:** TCP es robusto pero tiene límites. Investiga el temporizador de retransmisión (RTO).
+
+## 5. TTL y fragmentación
+
+Un paquete IP de 2500 bytes debe viajar por una red Ethernet (MTU=1500).
+
+a) ¿Cuántos fragmentos se generan?
+b) ¿Qué campos del header IP cambian en cada fragmento?
+c) Si el TTL inicial es 64 y el destino está a 15 saltos, ¿cuál será el TTL al llegar?
+
+**Pista:** la fragmentación divide el paquete en trozos que no superen el MTU. No olvides contar la cabecera IP de cada fragmento.
+
+## 6. Wireshark: filtros combinados
+
+Escribe el filtro de Wireshark para cada situación:
+
+a) Todo el tráfico HTTP desde la IP 192.168.1.10
+b) Paquetes TCP con puerto destino 22 o 443
+c) Tráfico DNS que no sea de google.com
+d) Paquetes con errores (retransmisiones o duplicados)
+
+**Pista:** usa operadores lógicos como `&&`, `||`, `!` y la sintaxis `ip.src`, `tcp.port`, etc.
+
+## 7. La conexión que no se cierra
+
+Tras un test de carga, el servidor web muestra cientos de conexiones en estado `TIME_WAIT` en `netstat` y "se queda sin puertos".
+
+a) ¿Qué capa OSI gestiona ese estado y qué protocolo lo crea?
+b) ¿Qué mecanismo de cierre TCP deja una conexión en `TIME_WAIT`?
+c) ¿Qué recomendación concreta darías a un administrador para mitigarlo?
+
+**Pista:** el cierre limpio de TCP es FIN → ACK → FIN → ACK. Busca qué pasa si ambos lados cierran a la vez y cuánto dura el `TIME_WAIT` (2 × MSL).
+
+## 8. Del nombre a la trama, al revés
+
+Tu navegador solicitó `https://example.com` y el servidor ha recibido la trama de respuesta. El EtherType de la trama es `0x0800` y el campo Protocol de IP vale 6.
+
+a) ¿Qué capa elimina primero la cabecera Ethernet y qué PDU queda dentro?
+b) Según el EtherType y el campo Protocol, ¿de qué protocolos se trata y en qué capas viven?
+c) ¿Qué hace TCP con los segmentos para reconstruir la página, y dónde se reordenan?
+d) ¿Qué comprobación hace la capa 2 antes de entregar la trama a la capa 3?
+
+**Pista:** reutiliza el diagrama de encapsulación del punto 4 pero en orden inverso; el campo Protocol vale 6 = TCP, 17 = UDP y 1 = ICMP.

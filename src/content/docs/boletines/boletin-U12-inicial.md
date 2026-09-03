@@ -1,87 +1,105 @@
 ---
 title: Boletín U12 — Inicial
-description: Ejercicios básicos de Cloud, virtualización y futuro
+description: Ejercicios básicos de Diagnóstico y monitorización
 ---
 
 # 📝 Boletín U12 — Inicial
 
-> Ejercicios para practicar los fundamentos de cloud y virtualización.
+> Ejercicios para practicar los fundamentos de diagnóstico de redes.
 
 ---
 
-## 1. Modelos cloud
+## 1. Metodología de troubleshooting
 
-Relaciona cada modelo con su descripción:
+Ordena los siguientes pasos de diagnóstico siguiendo el modelo OSI de abajo arriba:
 
-| Modelo | Descripción |
+- ( ) Hacer ping a 8.8.8.8
+- ( ) Comprobar que el cable está conectado
+- ( ) Hacer nslookup del dominio
+- ( ) Hacer ping al gateway
+- ( ) Comprobar la tabla MAC del switch
+
+## 2. Comandos de diagnóstico
+
+Relaciona cada comando con su función:
+
+| Comando | Función |
 |---|---|
-| IaaS | A. Aplicación completa accesible por Internet |
-| PaaS | B. VMs, redes virtuales, almacenamiento bajo demanda |
-| SaaS | C. Plataforma de desarrollo sin gestionar servidores |
+| ping | A. Muestra la ruta hasta un destino |
+| traceroute | B. Prueba conectividad básica |
+| nslookup | C. Captura paquetes en tiempo real |
+| Wireshark | D. Resuelve nombres DNS |
+| netstat | E. Muestra conexiones activas |
 
-## 2. Tipos de cloud
+## 3. Interpreta un ping
 
-Define cada tipo:
+Un usuario ejecuta `ping 8.8.8.8` y obtiene:
 
-a) Cloud pública
-b) Cloud privada
-c) Cloud híbrida
-
-## 3. Virtualización
-
-¿Cuál es la diferencia entre un hypervisor Tipo 1 y Tipo 2? Pon ejemplos de cada uno.
-
-## 4. Docker networking
-
-Ejecutas estos comandos:
-
-```bash
-docker network create --driver bridge red1
-docker run -d --name cont1 --network red1 alpine sleep 3600
-docker run -d --name cont2 alpine sleep 3600
+```
+Reply from 8.8.8.8: bytes=32 time=15ms TTL=117
+Reply from 8.8.8.8: bytes=32 time=14ms TTL=117
+Reply from 8.8.8.8: bytes=32 time=16ms TTL=117
+Reply from 8.8.8.8: bytes=32 time=15ms TTL=117
 ```
 
-a) ¿Cont1 y cont2 pueden comunicarse? ¿Por qué?
-b) ¿En qué red está cont2?
+a) ¿Hay conectividad con 8.8.8.8?
+b) ¿La latencia es buena o mala?
+c) ¿Qué significa TTL=117?
+
+## 4. Configura SNMP
+
+Un router Cisco debe ser monitorizado por SNMP. Escribe los comandos para:
+- Configurar comunidad de solo lectura "monitor"
+- Configurar comunidad de lectura-escritura "admin"
+- Especificar ubicación "SalaServidores"
+- Enviar traps al gestor 192.168.1.100
 
 ## 5. Verdadero o falso
 
-a) En SDN, el plano de control está centralizado.
-b) NFV reemplaza hardware de red por software virtualizado.
-c) En AWS, un Security Group es stateless.
-d) IPv8 es un estándar oficial de Internet.
+a) SNMP v3 cifra la comunicación.
+b) Wireshark solo funciona en Windows.
+c) Si ping al gateway funciona pero ping a 8.8.8.8 no, el problema está en la LAN.
+d) syslog nivel 0 es el menos grave.
 
-## 6. Conceptos cloud
+## 6. Análisis de traceroute
 
-Explica brevemente qué es:
+Un administrador ejecuta `tracert google.com` y ve:
 
-a) VPC
-b) Security Group
-c) Internet Gateway
-d) Subnet pública vs privada
+```
+1   1ms    1ms    1ms   192.168.1.1
+2   10ms   10ms   10ms  10.0.0.1
+3   *      *      *     Request timed out.
+4   20ms   20ms   20ms  216.58.214.14
+```
 
-## 7. ¿Qué modelo cloud es cada servicio?
+a) ¿Cuántos saltos hay hasta el destino?
+b) ¿Qué significa el salto 3 con asteriscos?
+c) ¿El destino final es accesible?
 
-Clasifica cada servicio real según el modelo cloud (IaaS, PaaS o SaaS):
+## 7. Filtros de Wireshark
 
-a) Lanzas una VM EC2 en AWS y configuras tú el SO Linux y la red virtual.
-b) El departamento comercial usa Salesforce desde el navegador.
-c) Despliegas tu código en Heroku sin gestionar el servidor.
-d) Subes fotos a Google Drive para compartirlas con la familia.
-e) Montas una base de datos MySQL en una VM de Azure Virtual Machines.
-f) Una startup usa Google App Engine para publicar su app sin administrar infraestructura.
+Relaciona cada filtro con lo que muestra:
 
-**Pista:** piensa en quién gestiona cada capa. Si gestionas tú el SO y la red → IaaS. Si solo subes tu código y el proveedor gestiona la plataforma → PaaS. Si abres el navegador y usas la aplicación → SaaS.
-
-## 8. Completa la tabla de redes Docker
-
-Rellena los huecos con el modo de red correcto (bridge, host, none o overlay):
-
-| Afirmación | Modo |
+| Filtro | Qué muestra |
 |---|---|
-| a) Red NAT local por defecto. Los contenedores se ven por IP dentro de la misma red | |
-| b) El contenedor comparte la pila de red del host. Sin NAT | |
-| c) Sin red. Solo loopback | |
-| d) Red distribuida entre múltiples hosts (Docker Swarm) | |
+| a) `tcp.flags.syn == 1` | 1. Tráfico DNS |
+| b) `ip.addr == 192.168.1.10` | 2. Retransmisiones TCP |
+| c) `tcp.analysis.retransmission` | 3. Paquetes SYN (inicio de conexión) |
+| d) `dns` | 4. Tráfico de/a esa IP |
+| e) `http.request` | 5. Solo peticiones HTTP |
 
-**Pista:** recuerda el nivel de aislamiento de cada modo: medio, bajo, total o medio (multi-host). El único que no necesita NAT y usa la interfaz del host es el de menor aislamiento.
+**Pista:** recuerda que los filtros de Wireshark usan la sintaxis `protocolo.campo == valor`. El de retransmisiones es el único que empieza por `tcp.analysis`.
+
+## 8. Niveles de syslog
+
+Ordena estos niveles de severidad de MENOS a MÁS grave:
+
+a) Critical
+b) Debug
+c) Warning
+d) Informational
+e) Emergency
+
+Después responde: para un servidor de logs en producción que no debe llenar el disco, ¿qué nivel de logging elegirías y por qué?
+
+**Pista:** recuerda que en syslog el número menor es el más grave (0 = Emergency, 7 = Debug).

@@ -1,92 +1,84 @@
 ---
 title: Boletín U10 — Inicial
-description: Ejercicios básicos de NAT
+description: Ejercicios básicos de Routing Dinámico
 ---
 
 # 📝 Boletín U10 — Inicial
 
-> Ejercicios para practicar los fundamentos de NAT.
+> Ejercicios básicos para afianzar los conceptos de OSPF y routing dinámico.
 
 ---
 
-## 1. ¿Qué es NAT?
+## 1. IGP vs EGP
 
-Define qué es NAT y por qué es necesario en las redes IPv4 actuales.
+Clasifica cada protocolo como IGP o EGP:
 
-<details>
-<summary>💡 Pista</summary>
-Piensa en la escasez de direcciones IPv4 públicas y cómo una LAN privada accede a Internet.
-</details>
+a) OSPF
+b) BGP
+c) RIP
+d) EIGRP
 
-## 2. Tipos de NAT
+## 2. Verdadero o falso
 
-Relaciona cada tipo de NAT con su descripción:
+a) OSPF usa el algoritmo de Dijkstra (SPF).
+b) RIP tiene un límite de 15 saltos.
+c) OSPF necesita un área backbone (Área 0).
+d) El Router ID de OSPF debe ser único en la red.
+e) RIP converge más rápido que OSPF.
 
-| Tipo | Descripción |
+## 3. Relaciona
+
+| Término | Descripción |
 |---|---|
-| NAT estático | A. Muchas IPs privadas comparten una IP pública variando puertos |
-| NAT dinámico | B. Una IP privada fija se traduce a una IP pública fija |
-| PAT | C. Se asigna una IP pública de un pool disponible |
+| 1. LSA | a) Router que conecta áreas |
+| 2. LSDB | b) Anuncio de estado de enlace |
+| 3. ABR | c) Base de datos de la topología |
+| 4. SPF | d) Algoritmo de cálculo de rutas |
 
-## 3. Configura PAT
+## 4. Coste OSPF
 
-Escribe los comandos necesarios para configurar PAT en un router Cisco donde:
-- Interfaz LAN: GigabitEthernet 0/0 (192.168.1.1/24)
-- Interfaz WAN: GigabitEthernet 0/1 (83.45.12.78/30)
-- Red interna: 192.168.1.0/24
+Calcula el coste OSPF para estas interfaces:
 
-## 4. Tabla NAT
+a) FastEthernet (100 Mbps)
+b) GigabitEthernet (1 Gbps)
+c) Serial (1.544 Mbps)
 
-Un router NAT muestra la siguiente tabla:
+## 5. Completa
 
-```
-Pro Inside global      Inside local       Outside local      Outside global
-tcp 83.45.12.78:50001  192.168.1.10:54321  8.8.8.8:53         8.8.8.8:53
-tcp 83.45.12.78:50002  192.168.1.20:54321  8.8.8.8:53         8.8.8.8:53
-```
+Completa los comandos OSPF:
 
-a) ¿Cuántos dispositivos están haciendo peticiones DNS?
-b) ¿Cuál es la IP pública del router?
-c) ¿Qué puerto ha asignado NAT al PC 192.168.1.10?
+a) `router ___ 1` (inicia el proceso OSPF)
+b) `network 192.168.1.0 0.0.0.255 area ___` (área backbone)
+c) `default-information ___` (propagar ruta por defecto)
+d) `show ip ospf ___` (ver vecinos)
 
-## 5. Verdadero o falso
+## 6. Tipos de routers
 
-a) NAT estático permite que múltiples PCs compartan una IP pública.
-b) PAT necesita configurar `ip nat inside` y `ip nat outside`.
-c) NAT dinámico traduce siempre la misma IP privada a la misma IP pública.
-d) `show ip nat translations` muestra las traducciones activas.
+Relaciona el tipo de router OSPF con su función:
 
-## 6. NAT destino (port forwarding)
-
-Quieres que un servidor web interno (192.168.1.10:80) sea accesible desde Internet en la IP pública 83.45.12.78:80. Escribe los comandos necesarios.
-
-## 7. ¿Qué tipo de NAT es?
-
-Identifica el tipo de NAT que se aplica en cada escenario:
-
-| Escenario | Tipo de NAT |
+| Tipo | Función |
 |---|---|
-| a) El servidor web de la empresa (192.168.1.10) siempre sale a Internet como 83.45.12.78 | |
-| b) La oficina tiene un pool de 4 IPs públicas (83.45.12.78-81) y cada usuario toma una al salir | |
-| c) 300 alumnos de un instituto salen todos por la misma IP pública del router | |
-| d) Un cliente de Internet visita 83.45.12.78:8080 y llega al servidor interno 192.168.1.10:80 | |
+| 1. Internal Router | a) Introduce rutas externas |
+| 2. ABR | b) Conecta Área 0 con otras áreas |
+| 3. ASBR | c) Todas sus interfaces en la misma área |
 
-**Pista:** recuerda la tabla de tipos del punto 2 de la unidad: estático (1:1 fijo), dinámico (pool), PAT (muchos:1 con puertos) y destino (puerto público → IP:puerto interno).
+## 7. Dinámico vs estático
 
-## 8. Lee la tabla NAT
+a) Clasifica cada protocolo como IGP o EGP: **OSPF**, **RIP**, **BGP**, **EIGRP**.
 
-El router muestra esta tabla:
+b) Enumera **3 ventajas** del routing dinámico frente al estático y pon un caso donde convenga usar estático.
 
-```
-Pro Inside global      Inside local       Outside local      Outside global
-tcp 83.45.12.78:60001  192.168.1.10:54321  8.8.8.8:53         8.8.8.8:53
-tcp 83.45.12.78:60002  192.168.1.20:54321  8.8.8.8:53         8.8.8.8:53
-tcp 83.45.12.78:60003  192.168.1.30:49152  142.250.184.4:443  142.250.184.4:443
-```
+**Pista:** IGP enruta dentro de un AS y EGP entre AS (BGP). Dinámico = autoaprendizaje, convergencia automática y menos error humano; estático = determinista, útil en enlaces stub o redes muy pequeñas.
 
-a) ¿Cuántas conexiones hay activas y de qué tipo de tráfico?
-b) ¿Qué puerto efímero original usaba el PC 192.168.1.30?
-c) ¿Por qué dos PCs pueden usar el mismo puerto origen (54321) sin conflicto?
-d) ¿A qué servicio destino van las dos primeras conexiones? ¿Y la tercera?
+## 8. Coste OSPF: tabla de velocidades
 
-**Pista:** los puertos efímeros (49152-65535) los elige cada PC; NAT añade un puerto global único por conexión (60001, 60002…) para desambiguar. Fíjate en la columna *Outside local* para saber el destino.
+Completa la tabla con el coste OSPF de cada velocidad usando la fórmula `coste = 10^8 / ancho_de_banda`:
+
+| Velocidad | Cálculo | Coste OSPF |
+|---|---|---|
+| 10 Mbps | 10⁸ / 10⁷ | |
+| 100 Mbps | 10⁸ / 10⁸ | |
+| 1 Gbps | 10⁸ / 10⁹ | |
+| 1.544 Mbps (T1) | 10⁸ / 1.544.000 | |
+
+**Pista:** el coste mínimo es 1: los enlaces a partir de 100 Mbps valen lo mismo por defecto. Los decimales se redondean hacia abajo.

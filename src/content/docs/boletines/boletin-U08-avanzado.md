@@ -1,117 +1,106 @@
 ---
 title: Boletín U08 — Avanzado
-description: Ejercicios avanzados de Routing y ACLs
+description: Ejercicios avanzados de VLANs
 ---
 
 # 📝 Boletín U08 — Avanzado
 
-> Ejercicios que requieren aplicar routing estático y ACLs de forma más profunda. En los difíciles tienes pista.
+> Ejercicios que requieren aplicar los conceptos de VLANs, trunks y routing de forma más profunda. En los difíciles tienes pista.
 
 ---
 
-## 1. Configuración multi-routing
+## 1. Configuración completa de VLANs
 
-Diseña la configuración para 3 routers en línea:
+Configura este escenario en Packet Tracer (o describe los comandos):
 
-```
-R1 (192.168.1.0/24) ──── R2 ──── R3 (192.168.3.0/24)
-                          │
-                     (192.168.2.0/24)
-```
+- **Switch1:** VLAN 10 (Ventas) puertos 1-5, VLAN 20 (RRHH) puertos 6-10
+- **Switch2:** VLAN 10 puertos 1-5, VLAN 20 puertos 6-10
+- **Trunk:** Switch1 Fa0/24 ↔ Switch2 Fa0/24
+- **Router:** Fa0/0 conectado a Switch1 Fa0/23, subinterfaces para VLAN 10 y 20
 
-**Enlaces:**
-- R1-R2: 10.0.0.0/30
-- R2-R3: 10.0.0.4/30
+Escribe la configuración completa del router y ambos switches.
 
-Escribe la **configuración completa** de R1, R2 y R3 (interfaces, rutas estáticas, rutas por defecto).
+## 2. Diagnóstico de native VLAN
 
-## 2. ACL extendida: YouTube blocker
-
-El jefe quiere bloquear YouTube (173.194.0.0/16) en horario laboral (9:00-18:00). El resto del tráfico debe permitirse.
-
-a) Escribe la ACL extendida (con time-range)
-b) ¿Dónde la aplicas (inbound/outbound, qué interfaz)?
-c) ¿Qué pasa si el router no soporta time-range? ¿Alternativa?
-
-**Pista:** `time-range` y `absolute` o `periodic` para horarios.
-
-## 3. Diagnóstico de ACL
-
-Un administrador aplica esta ACL en G0/0 de un router (LAN 192.168.1.0/24):
+Un administrador configura un trunk entre dos switches:
 
 ```
-access-list 10 deny 192.168.1.10
-access-list 10 permit 192.168.1.0 0.0.0.255
+Switch1: native VLAN 99, allowed VLANs 10,20,30
+Switch2: native VLAN 1,  allowed VLANs 10,20,30
 ```
 
-a) El PC 192.168.1.10 no puede acceder a Internet. ¿Es normal?
-b) ¿Y el PC 192.168.1.20? ¿Puede acceder a Internet?
-c) ¿Qué comando usarías para ver si la ACL está funcionando?
-d) Si la ACL se aplica outbound en G0/1 (hacia Internet), ¿cómo afecta al tráfico entre PCs de la misma LAN?
+a) ¿Qué problemas puede causar esta discrepancia?
+b) ¿Qué comando usarías para diagnosticarlo?
+c) ¿Cómo arreglarlo sin perder conectividad?
 
-## 4. Rutas flotantes
+**Pista:** `show interface trunk` muestra la native VLAN de cada extremo.
 
-Configura un router con:
-- Ruta por defecto primaria hacia 10.0.0.2 (AD=1)
-- Ruta por defecto de respaldo hacia 10.0.1.2 (AD=5)
-- Ruta estática hacia 192.168.100.0/24 vía 10.0.0.2
+## 3. Diseño de VLANs corporativas
 
-a) Escribe los comandos
-b) ¿Cuándo se activa la ruta de respaldo?
-c) ¿Cómo verificarías que la ruta de respaldo está activa?
+Diseña la segmentación VLAN para una empresa con:
 
-## 5. ACL de firewall básico
+- **3 plantas:**
+  - Planta baja: Recepción (5 PCs) + Sala servidores (10 servidores)
+  - Planta 1: Ventas (30 PCs) + Marketing (15 PCs)
+  - Planta 2: IT (20 PCs) + Dirección (5 PCs)
 
-Diseña una ACL para un router de borde que protege una red interna (192.168.1.0/24):
+- **Requisitos:**
+  - Cada departamento debe estar en VLAN separada
+  - Los servidores están en VLAN propia
+  - IT debe poder acceder a todas las VLANs (administración)
+  - Dirección solo accede a su VLAN y a servidores
 
-**Reglas:**
-1. Permitir HTTP/HTTPS saliente (cualquier destino)
-2. Permitir DNS saliente (UDP 53)
-3. Bloquear SSH saliente (TCP 22)
-4. Permitir todo el tráfico entrante de conexiones establecidas (tráfico de retorno)
-5. Denegar el resto
+a) Propón una tabla de VLANs (ID, nombre, puertos)
+b) ¿Dónde pones el router-on-a-stick? ¿Y si usas switch capa 3?
+c) ¿Qué VLANs permites en cada trunk?
+d) ¿Con qué ACLs limitas el acceso de Dirección?
 
-**Pista:** Usa `established` para permitir tráfico de retorno de conexiones iniciadas internamente.
+## 4. VTP disaster recovery
 
-## 6. Resolución de problemas de rutas
+Un administrador conecta un switch con VTP server y revision number 500 a una red donde el server actual tiene revision 100. En 2 segundos, todas las VLANs de la red desaparecen.
 
-Un router tiene esta configuración:
+a) ¿Por qué ocurrió?
+b) ¿Cómo recuperas la red?
+c) ¿Qué medidas preventivas tomarías para evitar que vuelva a ocurrir?
 
-```
-interface g0/0
- ip address 192.168.1.1 255.255.255.0
- no shutdown
-interface g0/1
- ip address 10.0.0.1 255.255.255.252
- shutdown
-ip route 0.0.0.0 0.0.0.0 10.0.0.2
-```
+**Pista:** VTP propaga la base de datos del switch con mayor revision number.
 
-a) ¿Funciona la ruta por defecto? ¿Por qué?
-b) ¿Qué comando muestra el problema?
-c) ¿Qué cambiarías para que funcione?
+## 5. Router-on-a-stick: cuello de botella
 
-## 7. Longest prefix match
+Un router-on-a-stick con interfaz FastEthernet (100 Mbps) atiende 4 VLANs. Cada VLAN genera 30 Mbps de tráfico.
 
-Un router tiene estas rutas en su tabla:
+a) ¿Hay cuello de botella? Calcula el tráfico total.
+b) ¿Qué alternativa propones si el tráfico crece al doble?
+c) ¿Cómo cambia el escenario con una interfaz GigabitEthernet?
 
-```
-192.168.0.0/16  via 10.0.0.2
-192.168.1.0/24  via 10.0.0.6
-192.168.1.16/28 via 10.0.0.10
-```
+## 6. Seguridad en VLANs
 
-Decide por cuál de los tres next-hops enviará el router cada paquete destinado a:
+Enumera 3 riesgos de seguridad específicos de VLANs y cómo mitigarlos:
 
-a) 192.168.1.30
-b) 192.168.1.200
-c) 192.168.3.44
-d) 192.168.1.15
+| Riesgo | Mitigación |
+|---|---|
+| 1. | |
+| 2. | |
+| 3. | |
 
-**Pista:** el *longest prefix match* manda: gana la ruta con la máscara más larga que coincida con la IP destino. La /28 solo cubre de 192.168.1.16 a 192.168.1.31.
+**Pista:** Piensa en DTP, native VLAN, VTP, VLAN hopping, etc.
 
-## 8. ACL nombrada para horario
+## 7. VLAN hopping y hardening
 
-Escribe una ACL nombrada `BLOQUEAR_STREAMING` que bloquee el puerto **443** (HTTPS) **cualquier día de 9:00 a 18:00** para la red interna 192.168.1.0/24, permitiendo el resto del tráfico. Incluye el `time-range`, la ACL y su aplicación en la interfaz hacia Internet (G0/1).
+a) Describe **3 vectores de ataque** que permiten a un atacante salirse de su VLAN (VLAN hopping), explicando cómo funciona cada uno.
+b) Propón **3 mitigaciones concretas** de hardening con sus comandos.
 
-**Pista:** usa `time-range` con `periodic daily`, referencia la regla con `time-range`, acaba con `permit ip any any` (recuerda el deny any implícito) y aplica la ACL outbound en G0/1.
+**Pista:** piensa en DTP/negociación de trunks, en el double tagging sobre la native VLAN y en el etiquetado 802.1Q aplicado a tramas que no deberían llevarlo. Las mitigaciones están en el punto 7 de seguridad: `switchport nonegotiate`, native VLAN ≠ 1, `allowed vlan`, VTP.
+
+## 8. Inter-VLAN con SVI paso a paso
+
+Escribe la configuración completa que necesita un **switch capa 3** (por ejemplo un 3560) para enrutar entre 3 VLANs (10 Ventas → 192.168.10.0/24, 20 RRHH → 192.168.20.0/24, 30 IT → 192.168.30.0/24), asumiendo que los puertos access ya están asignados.
+
+Incluye:
+
+a) La creación de las VLANs con nombre.
+b) El comando que activa el routing global.
+c) Los tres SVIs con su IP y `no shutdown`.
+d) El gateway que debe tener cada PC de cada VLAN.
+
+**Pista:** el orden de los comandos importa: primero `ip routing`, después cada `interface vlan X`. Sin `ip routing`, los SVIs existen pero no enrutan. El gateway de cada VLAN es la IP del SVI de esa VLAN.

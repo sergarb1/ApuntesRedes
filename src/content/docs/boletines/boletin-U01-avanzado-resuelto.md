@@ -1,77 +1,89 @@
 ---
-title: Boletín U01 — Avanzado (Resuelto)
-description: Soluciones de los ejercicios avanzados de Fundamentos de Redes
+title: "Boletín U01 — Avanzado (Resuelto)"
+description: Soluciones de los ejercicios avanzados de la Unidad 01
 ---
 
-# ✅ Boletín U01 — Avanzado (Resuelto)
+# 💪 Boletín U01 — Avanzado (Resuelto)
 
 ---
 
-## 1. Diagnóstico de red
+## 1. Cliente y servidor en acción
 
-PC-A ve a PC-B (misma red) pero no llega a `8.8.8.8` (Internet).
+1. El navegador de Marta actúa de **cliente**: envía la petición de la página `www.google.es` al servidor de Google.
+2. El servidor de Google actúa de **servidor**: busca la página y prepara la respuesta.
+3. El navegador la recibe y la muestra: el ciclo pide-entrega se completa.
 
-**Causas probables (por orden de probabilidad):**
-1. El **gateway por defecto** de PC-A no está configurado o es incorrecto. PC-A no sabe dónde dejar los paquetes para salir de su red.
-2. El **router** no tiene ruta a Internet o carece de NAT.
-3. El router no tiene conexión con el ISP (corte del operador).
+Todo gira alrededor de la pareja **cliente-servidor**: el cliente pide y el servidor entrega.
 
-**Más probable:** el gateway por defecto de PC-A. Es la causa clásica de "me veo contigo, pero no con el mundo".
+## 2. Diagnosticar para no adivinar
 
-## 2. Diseño de red mínima
+Pasos en orden, de lo más físico a lo más lógico:
 
-a) **Dispositivos:** 1 switch (los puertos sobran si eliges bien) + 1 router para Internet.
-   - Puertos consumidos: 15 PCs + 2 impresoras + 1 servidor + 1 enlace al router = 19. Un switch de **24 puertos** deja márgen ante fallos.
-   - Cables: 19 UTP.
+1. **Enlace físico:** comprueba que el WiFi del portátil está activado (no esté en "modo avión") y que ve la señal de tu red.
+2. **Enlace de datos:** si el móvil navega bien, el AP emite correctamente; el problema no está en el punto de acceso.
+3. **Capa de red:** comprueba que el portátil recibe una dirección IP correcta (DHCP) y que tiene un gateway; a veces queda una IP fija errónea de otra red.
+4. **Servicios:** revisa el DNS o el navegador; si el paso 3 era correcto, prueba a abrir una página por su dirección IP.
 
-b) **Direccionamiento privado:**
-   - Red: `192.168.0.0/24` (máscara `255.255.255.0`).
-   - Router (gateway): `192.168.0.1`.
-   - Servidor: `192.168.0.2`.
-   - Impresoras: `192.168.0.3` y `192.168.0.4`.
-   - PCs: rango DHCP `192.168.0.10 → 192.168.0.24`.
+## 3. ¿Qué significan estos dos casos?
 
-## 3. ¿Cuántos dominios?
+**Caso A** es una **LAN**: cuatro equipos en la misma zona local comparten recursos y el **switch** los interconecta.
 
-a) **Dominios de colisión:** cada puerto de switch es un dominio de colisión propio.
-   - 3 PCs → 3 dominios.
-   - 2 enlaces entre switches → 2 dominios más (uno en cada lado del enlace, 2 por dirección al final del segmento, pero se cuentan los del medio como 2 dominios separados).
-   - Total: **5 dominios de colisión**.
+**Caso B** es una **WAN**: dos oficinas separadas por kilómetros se comunican y los **routers** de cada sede unen ambas redes.
 
-b) **Dominios de broadcast:** los switches NO segmentan broadcast y los enlaces no añaden ninguno. Toda la red comparte un único dominio de broadcast (el router lo segmentaría si hubiera otra red detrás). Total: **1 dominio de broadcast**.
+El switch trabaja solo "dentro" de una red; para unir dos redes distintas hace falta un router.
 
-## 4. ARP en acción
+## 4. El orden del montaje doméstico
 
-a) Lanza un **ARP Request** de tipo **broadcast** (lo escuchan todos).
-b) MAC destino **`FF:FF:FF:FF:FF:FF`** (dirección de difusión).
-c) PC-B responde con un **ARP Reply** de tipo **unicast**, direccionado directamente a PC-A.
-d) La respuesta contiene la resolución: "La IP `10.0.0.2` pertenece a la MAC `BB:BB:BB:BB:BB:BB`".
+1. **Módem del operador** — convierte la señal del ISP (fibra o cable) al idioma de tu red (Ethernet).
+2. **Router WiFi** — da salida y crea la red privada doméstica.
+3. **Switch** — amplía los equipos por cable dentro de la LAN.
+4. **AP (punto de acceso)** — extiende la señal WiFi donde no llega el router.
+5. **Dispositivos finales** — PC, móvil e impresora: los que usan la red.
 
-## 5. Desencapsulación: el viaje inverso
+El orden sigue el camino de la señal: operador → módem → router → reparto (switch/AP) → equipos.
 
-a) La capa **2 (Enlace)** elimina la cabecera Ethernet y queda el **paquete** IP.
-b) La capa **3 (Red)** elimina la cabecera IP y queda el **segmento** TCP.
-c) La capa **4 (Transporte)** elimina la cabecera TCP y queda la **petición** `GET /index.html`.
-d) El contenido sube a la capa 7 (Aplicación), donde el servidor web lo procesa y responde.
+## 5. Forma parejas: término y característica
 
->Truco: es el mismo "empaquetado" del envío pero al revés — cada capa quita su cabecera.
+| Término | Característica |
+|---|---|
+| 1. Bit | e) Unidad mínima de información: vale 0 o 1 |
+| 2. Byte | a) Son 8 bits juntos |
+| 3. LAN | b) Ámbito local: una casa o un edificio |
+| 4. WAN | c) Ámbito de país o del mundo |
+| 5. IP | f) Dirección lógica de un equipo dentro de una red |
+| 6. MAC | g) Dirección física, fija, del hardware |
+| 7. Paquete | d) Los datos se trocean en bultitos para viajar |
+| 8. Router | h) Decide el camino de los datos entre redes |
 
-## 6. Diferencia práctica: hub, switch y router
+**Resultado:** 1 → e, 2 → a, 3 → b, 4 → c, 5 → f, 6 → g, 7 → d, 8 → h.
 
-a) **Hub.** Red pequeña de los 90: barato y suficiente, aunque todo el tráfico colisiona en un solo dominio. Hoy nadie lo usaría.
-b) **Switch.** Cada PC tiene puerto dedicado: ancho de banda íntegro y sin colisiones por equipo.
-c) **Router.** Une dos redes diferentes (`192.168.1.0/24` y `10.0.0.0/16`) y decide por dónde enviar cada paquete.
+## 6. Convence a tu compañero
 
-## 7. Verdadero o falso
+1. Una red funciona sin Internet: dos PCs conectados a un switch que se hacen ping forman red perfectamente válida y no usan Internet en absoluto.
+2. Tu WiFi doméstico es solo una LAN; Internet es "la red de redes", la unión de millones de LAN, WAN y demás.
+3. Hay servicios de red local: la impresora compartida siga funcionando aunque se caiga Internet, porque el tráfico se queda en tu LAN.
 
-a) **Verdadero.** Es la función principal del router: encaminar entre redes distintas.
-b) **Falso.** El switch no entiende de IP. Trabaja solo con MACs dentro de la misma red.
-c) **Verdadero.** En bus, una rotura del cable central parte la red en dos segmentos aislados.
-d) **Verdadero.** En estrella todo pasa por el punto central; sin él, nadie se comunica.
-e) **Falso.** La IP la asigna DHCP y cambia con la red a la que te conectas; la que permanece fija es la MAC. En casa y en el trabajo tienes la misma MAC, pero IP distinta.
+## 7. "Si este equipo...": identifica el protagonista
 
-## 8. Puertos bien conocidos en acción
+a) **Router** — separa tu red del resto del mundo y decide por dónde salen los paquetes.
+b) **Switch** — conecta los equipos de la misma LAN y reparte sus datos.
+c) **AP** — transmite los datos por el aire para los equipos sin cable.
+d) **Servidor** — atiende las peticiones de muchos clientes y responde a todas.
+e) **Módem** — convierte la señal del operador en una señal que entiende el router.
 
-a) El puerto **80/HTTP** o **443/HTTPS** está bloqueado en el router. Sin ellos no hay navegación web.
-b) El puerto **22 (SSH)**. Es administración cifrada; reenviar el **21 (FTP)** sería un riesgo porque las credenciales viajan en texto claro.
-c) El puerto **53 (DNS)** traduce nombres a IPs. Bloqueado, el navegador no sabrá qué dirección hay detrás de una URL y **no resolverá ningún dominio** (indicaría "servidor no encontrado").
+## 8. Mente binaria
+
+a) 4 bytes × 8 bits = **32 bits**.
+b) 320 bits ÷ 8 = **40 bytes**.
+c) 4 letras = 4 bytes; 4 × 8 = **32 bits**.
+
+## 9. El mapa del curso
+
+1. Primero se aprenden los conceptos para entender el "qué" y el "porqué" de cada aparato; sin saber qué es una red, configurar un switch o un router no tendría sentido.
+2. El método de diagnóstico en capas acompaña todos los laboratorios del curso: con él aprendes a localizar los fallos siguiendo siempre el mismo orden, de lo físico a lo lógico.
+
+## 10. Elegir herramienta
+
+- a) **Packet Tracer** — es un simulador para diseñar y probar redes sin necesitar hardware.
+- b) **Wireshark** — captura y deja ver los paquetes que circulan de verdad por la red.
+- c) **ping** — comprueba si otro equipo responde; la primera herramienta del diagnóstico.

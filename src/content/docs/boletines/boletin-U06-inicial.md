@@ -1,103 +1,91 @@
 ---
 title: Boletín U06 — Inicial
-description: Ejercicios básicos de Switching y STP
+description: Ejercicios básicos de IPv6 y Transición
 ---
 
 # 📝 Boletín U06 — Inicial
 
-> Ejercicios básicos para afianzar los conceptos de switching y STP.
+> Ejercicios básicos para afianzar los conceptos de direccionamiento IPv6.
 
 ---
 
-## 1. ¿Qué hace el switch?
+## 1. Compresión de direcciones
 
-Relaciona la situación con la acción del switch:
+Comprime estas direcciones IPv6 al máximo:
 
-| Situación | Acción |
+a) `2001:0DB8:0000:0000:0000:0000:0000:0001`
+b) `FE80:0000:0000:0000:02AA:00FF:FE9A:4CA2`
+c) `0000:0000:0000:0000:0000:0000:0000:0001`
+d) `2001:0DB8:0000:0000:ABCD:0000:0000:1234`
+
+## 2. Identifica el tipo
+
+Indica qué tipo de dirección IPv6 es cada una:
+
+a) `2001:DB8::1`
+b) `FE80::1`
+c) `::1`
+d) `FC00::1`
+e) `FF02::1`
+
+## 3. Completa
+
+Completa las equivalencias:
+
+a) IPv4 tiene __ bits, IPv6 tiene __ bits.
+b) IPv4 se representa en decimal, IPv6 en __.
+c) El prefijo de Link-Local es __.
+d) El prefijo de Global Unicast es __.
+e) __ reemplaza a ARP en IPv6.
+
+## 4. Verdadero o falso
+
+a) Las direcciones Link-Local son enrutables en Internet.
+b) SLAAC no necesita un servidor central.
+c) :: se puede usar varias veces en la misma dirección IPv6.
+d) DHCPv6 funciona igual que DHCP en IPv4.
+e) Dual Stack significa tener IPv4 e IPv6 simultáneamente.
+
+## 5. NDP
+
+Relaciona cada mensaje ICMPv6 con su función:
+
+| Mensaje | Función |
 |---|---|
-| 1. Llega una trama con MAC destino conocida | a) Inunda por todos los puertos menos el origen |
-| 2. Llega una trama con MAC destino desconocida | b) Reenvía solo por el puerto correspondiente |
-| 3. Llega una trama broadcast | c) Inunda por todos los puertos |
+| 1. Neighbor Solicitation | a) El router anuncia su prefijo |
+| 2. Neighbor Advertisement | b) El dispositivo busca routers |
+| 3. Router Solicitation | c) "¿Quién tiene esta IP?" |
+| 4. Router Advertisement | d) "Yo tengo esa IP, aquí está mi MAC" |
 
-## 2. Verdadero o falso
+## 6. Mecanismos de transición
 
-a) Un switch segmenta los dominios de colisión.
-b) Un switch segmenta los dominios de broadcast.
-c) STP evita bucles en redes conmutadas.
-d) RSTP converge más rápido que STP.
-e) La tabla MAC de un switch se llama tabla ARP.
+Relaciona cada mecanismo con su descripción:
 
-## 3. Estados STP
-
-Ordena los estados STP por los que pasa un puerto desde que se activa hasta que reenvía tráfico:
-
-a) Learning
-b) Forwarding
-c) Blocking
-d) Listening
-
-## 4. Identifica el rol
-
-Indica qué rol STP tiene cada puerto:
-
-a) Puerto del Root Bridge hacia un switch no-root
-b) Puerto que mira hacia el Root Bridge (en un switch no-root)
-c) Puerto bloqueado que proporciona un camino alternativo
-
-## 5. ¿Qué comando?
-
-Relaciona el comando con su función:
-
-| Comando | Función |
+| Mecanismo | Descripción |
 |---|---|
-| 1. `show mac address-table` | a) Ver estado STP |
-| 2. `show spanning-tree` | b) Configurar PortFast |
-| 3. `spanning-tree portfast` | c) Ver tabla MAC del switch |
-| 4. `switchport port-security` | d) Activar seguridad de puerto |
+| 1. Dual Stack | a) Traduce IPv6 a IPv4 para acceder a servidores antiguos |
+| 2. Túnel 6to4 | b) IPv4 e IPv6 funcionando a la vez |
+| 3. NAT64 | c) Encapsula IPv6 dentro de IPv4 |
 
-## 6. Tormenta de broadcast
+## 7. Expande direcciones
 
-¿Qué es necesario para que ocurra una tormenta de broadcast?
+Descomprime estas direcciones a su forma **completa de 8 grupos**:
 
-a) Un solo switch con muchos PCs
-b) Un bucle en la red (switches conectados formando un círculo)
-c) Un cable defectuoso
-d) Un router mal configurado
+a) `2001:DB8::1`
+b) `FE80::2AA:FF:FE9A:4CA2`
+c) `::1`
 
-## 7. Reenvío de tramas y la tabla CAM
+Recuerda: el `::` oculta tantos grupos de ceros como falten para completar 8.
 
-Observa la tabla CAM de un switch:
+## 8. Clasifica tipo y ámbito
 
-```
-Vlan    Mac Address       Type        Ports
-----    -----------       --------    -----
-   1    0050.7966.6800    DYNAMIC     Fa0/1
-   1    0050.7966.6801    DYNAMIC     Fa0/2
-   1    00D0.BC96.1A01    DYNAMIC     Fa0/3
-```
+Indica para cada dirección su **tipo** (GUA, LLA, ULA, Loopback, Multicast) y su **ámbito** (global, enlace local, privado, este nodo):
 
-Indica qué hace el switch en cada caso:
-
-a) Llega una trama por Fa0/2 con MAC origen `0050.7966.6801` y destino `00D0.BC96.1A01`.
-b) Llega una trama por Fa0/1 con MAC origen `0050.7966.6800` y destino `0050.7966.6802` (desconocida).
-c) Llega una trama por Fa0/3 con destino `FFFF.FFFF.FFFF` (broadcast).
-d) Llega una trama por Fa0/4 con MAC origen `0050.7966.6801`, una MAC que ya estaba aprendida en Fa0/2. ¿Qué hace el switch con la tabla CAM?
-
-**Pista:** si la MAC destino está en la tabla, reenvío selectivo; si no está, inundo. Y si la misma MAC origen aparece por un puerto distinto, la tabla se actualiza con el puerto más reciente.
-
-## 8. Estados STP
-
-Completa la tabla de estados STP:
-
-| Estado | ¿Reenvía tráfico? | ¿Aprende MACs? | Tiempo |
-|---|---|---|---|
-| Blocking | No | ... | ... |
-| Listening | ... | No | 15 s |
-| Learning | No | ... | ... |
-| Forwarding | ... | Sí | Indefinido |
-
-a) ¿Cuál es el orden exacto de los estados desde que se activa el puerto?
-b) ¿Cuánto tarda un puerto STP en pasar de blocking a forwarding si no hay fallos?
-c) ¿En qué estado está un puerto que ya reenvía tráfico y aprende MACs?
-
-**Pista:** solo Learning aprende sin reenviar, y solo Forwarding reenvía. Suma los tiempos de los estados intermedios.
+| Dirección | Tipo | Ámbito |
+|---|---|---|
+| a) `2001:DB8::1` | | |
+| b) `FE80::1` | | |
+| c) `FC00::1` | | |
+| d) `::1` | | |
+| e) `FF02::1` | | |
+| f) `2001:DB8:1:2:21A:2BFF:FE3C:4D5E` | | |

@@ -3,25 +3,25 @@ param($OutDir = "public/epub")
 $ErrorActionPreference = "Stop"
 
 $unitSlugs = @(
-  "00-introduccion",
-  "01-fundamentos-redes",
-  "02-modelos-osi-analisis",
-  "03-infraestructura-fisica",
-  "04-ipv4-subnetting",
-  "05-ipv6-transicion",
-  "06-switching-stp",
-  "07-vlans",
-  "08-routing-acls",
-  "09-routing-dinamico",
-  "10-nat-internet",
-  "11-diagnostico-monitorizacion",
-  "12-cloud-virtualizacion-futuro"
+  "01-introduccion",
+  "02-fundamentos-redes",
+  "03-modelos-osi-analisis",
+  "04-infraestructura-fisica",
+  "05-ipv4-subnetting",
+  "06-ipv6-transicion",
+  "07-switching-stp",
+  "08-vlans",
+  "09-routing-acls",
+  "10-routing-dinamico",
+  "11-nat-internet",
+  "12-diagnostico-monitorizacion",
+  "13-cloud-virtualizacion-futuro"
 )
 
 $boletinesCodes = @(
-  "00",
-  "01", "02", "03", "04", "05", "06",
-  "07", "08", "09", "10", "11", "12"
+  "01",
+  "02", "03", "04", "05", "06", "07",
+  "08", "09", "10", "11", "12", "13"
 )
 
 $boletinSections = @(
@@ -81,14 +81,14 @@ function Add-MdFile {
 }
 
 foreach ($u in $unitSlugs) {
-  # --- Unit index (root file, e.g. 01-fundamentos-redes.md / 00-introduccion.md) ---
+  # --- Unit index (root file, e.g. 02-fundamentos-redes.md / 01-introduccion.md) ---
   $indexFile = "$srcDir/$u.md"
   if (-not (Test-Path $indexFile)) { $indexFile = "$srcDir/$u.mdx" }
   if (Test-Path $indexFile) {
     Add-MdFile -Path $indexFile -HeadingLevel 1
   }
 
-  # --- Unit puntos (subcarpeta, e.g. 00-introduccion/01-*.md) ---
+  # --- Unit puntos (subcarpeta, e.g. 01-introduccion/01-*.md) ---
   $unitDir = "$srcDir/$u"
   if (Test-Path $unitDir) {
     $puntos = Get-ChildItem -Path $unitDir -Filter "*.md" -File | Sort-Object Name
@@ -132,7 +132,7 @@ $cssPath = Join-Path $PSScriptRoot "epub.css"
 $pandoc = Get-ChildItem -Recurse -Filter "pandoc.exe" -Path "$env:LOCALAPPDATA\Microsoft\WinGet\Packages" -ErrorAction SilentlyContinue | Select-Object -First 1 -ExpandProperty FullName
 if (-not $pandoc) { $pandoc = "pandoc" }
 try {
-  & $pandoc $tempMd --from markdown --to epub3 --toc --toc-depth=3 --epub-cover-image="$coverPath" --syntax-highlighting pygments --css $cssPath -o $outPath
+  & $pandoc $tempMd --from markdown --to epub3 --toc --toc-depth=3 --epub-cover-image="$coverPath" --highlight-style=pygments --css $cssPath -o $outPath
   if ($LASTEXITCODE -eq 0) { Write-Host "OK: $outPath" } else { Write-Host "FAIL" }
 } finally {
   Remove-Item $tempMd -Force -ErrorAction SilentlyContinue

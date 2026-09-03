@@ -6,7 +6,7 @@ Este archivo ayuda a cualquier agente LLM (como opencode, Claude, ChatGPT, etc.)
 
 ## 📋 Descripción del proyecto
 
-Apuntes del módulo **PAR** (Planificación y Administración de Redes) para CFGS de Administración de Sistemas Informáticos en Red. 13 secciones didácticas (Tema 0 + 12 unidades) con enfoque 80% práctico y un estilo conversacional con humor. Publicado como web estática con Astro + Starlight + GitHub Pages.
+Apuntes del módulo **PAR** (Planificación y Administración de Redes) para CFGS de Administración de Sistemas Informáticos en Red. 13 secciones didácticas (Unidad 01 de introducción + 12 unidades) con enfoque 80% práctico y un estilo conversacional con humor. Publicado como web estática con Astro + Starlight + GitHub Pages.
 
 ---
 
@@ -26,7 +26,7 @@ Apuntes del módulo **PAR** (Planificación y Administración de Redes) para CFG
 
 ```
 src/content/docs/            → Secciones en Markdown (raíz, índice)
-src/content/docs/00-introduccion/… → 9 puntos por sección (01-…, 09-cierre)
+src/content/docs/01-introduccion/… → 9 puntos por sección (01-…, 09-cierre)
 src/content/docs/boletines/  → Ejercicios (inicial, avanzado + resueltos)
 src/styles/custom.css        → CSS del tema (azul #2563eb + teal #4ecdc4, Geist Sans, glassmorphism)
 src/assets/logo.svg          → Logo

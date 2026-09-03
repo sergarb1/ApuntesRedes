@@ -1,112 +1,114 @@
 ---
 title: Boletín U12 — Avanzado
-description: Ejercicios avanzados de Cloud, virtualización y futuro
+description: Ejercicios avanzados de Diagnóstico y monitorización
 ---
 
 # 📝 Boletín U12 — Avanzado
 
-> Ejercicios que requieren comprensión profunda de cloud y redes modernas. En los difíciles tienes pista.
+> Ejercicios que requieren comprensión profunda de diagnóstico y SNMP.
 
 ---
 
-## 1. Arquitectura cloud
+## 1. Análisis Wireshark
 
-Diseña una arquitectura en AWS para una aplicación web con:
-- 2 servidores web en subred pública (auto scaling)
-- 1 base de datos en subred privada
-- Balanceador de carga
-- NAT Gateway para salida a Internet de los servidores privados
+Has capturado una comunicación TCP. Ves estos paquetes en orden:
 
-Dibuja el esquema e indica qué componentes de red se necesitan.
+```
+1: 192.168.1.10:50000 → 93.184.216.34:80  [SYN]
+2: 93.184.216.34:80 → 192.168.1.10:50000  [SYN, ACK]
+3: 192.168.1.10:50000 → 93.184.216.34:80  [ACK]
+4: 192.168.1.10:50000 → 93.184.216.34:80  [PSH, ACK]  (GET / HTTP/1.1)
+5: 93.184.216.34:80 → 192.168.1.10:50000  [PSH, ACK]  (HTTP 200 OK)
+...
+```
 
-## 2. SDN vs Tradicional
+a) Identifica las 3 fases del handshake TCP.
+b) ¿Qué significa PSH?
+c) Si ves 10 paquetes [TCP Retransmission] después del paquete 4, ¿qué está pasando?
+
+## 2. Monitorización SNMP avanzada
+
+Un administrador quiere monitorizar estos parámetros de un router:
+- Nombre del dispositivo
+- Tiempo activo (uptime)
+- Tráfico entrante y saliente de la interfaz G0/0
+- CPU load
+
+a) Investiga y escribe las OIDs de cada parámetro.
+b) ¿Cómo harías una consulta SNMP desde línea de comandos para leer el uptime?
+c) ¿Qué herramienta usarías para graficar estas métricas a lo largo del tiempo?
+
+## 3. Diagnóstico de problema real
+
+Un usuario reporta: *"Internet va muy lento desde las 9 de la mañana. Antes de las 9 iba bien."*
+
+Desarrolla un plan de diagnóstico completo. Incluye:
+- Qué comandos usarías en cada paso
+- Qué herramientas usarías
+- Qué métricas compararías
+
+## 4. Configura Syslog centralizado
+
+Tienes 5 routers Cisco que deben enviar logs a un servidor Linux (192.168.100.50).
+
+a) Configura el logging en los routers.
+b) ¿Qué configuración necesitas en el servidor Linux para recibir logs?
+c) ¿Qué nivel de logging es adecuado para producción sin llenar el disco?
+
+## 5. Comparativa de herramientas
 
 Completa la tabla comparativa:
 
-| Aspecto | Red Tradicional | SDN |
-|---|---|---|
-| Plano de control | | |
-| Plano de datos | | |
-| Escalabilidad | | |
-| Coste | | |
-| Recuperación de fallos | | |
+| Herramienta | Tipo | Puerto(s) | Cifrado | ¿Activa o pasiva? |
+|---|---|---|---|---|
+| SNMP v2c | | | No | Activa (polling) |
+| Syslog | | | | |
+| NetFlow | | | | |
+| Wireshark | | N/A | | |
 
-## 3. Docker multi-host
+## 6. Troubleshooting complejo
 
-Tienes 2 servidores Docker (host1 y host2) y quieres que contenedores en diferentes hosts se comuniquen de forma transparente.
-
-a) ¿Qué tipo de red Docker usarías?
-b) ¿Qué requisitos necesita la red subyacente?
-c) ¿Qué alternativa usarías en Kubernetes?
-
-## 4. Security Groups vs Network ACLs
-
-Completa la tabla:
-
-| Aspecto | Security Group | Network ACL |
-|---|---|---|
-| Nivel | Instancia | |
-| Stateful/Stateless | | |
-| Reglas por defecto | | |
-| Orden de evaluación | | |
-| Soporta deny explícito | | |
-
-## 5. Estrategia de migración a cloud
-
-Una empresa tiene 100 servidores físicos en su datacenter. Quiere migrar a AWS.
-
-Propón una estrategia:
-a) ¿Qué modelo de cloud usarías?
-b) ¿Qué servicios de red necesitarías?
-c) ¿Cómo conectarías el datacenter on-premise con AWS?
-d) ¿Qué riesgos identificas?
-
-## 6. El futuro de Internet
-
-Lee sobre las siguientes propuestas y compáralas:
-
-| Propuesta | Descripción | Problema que resuelve |
-|---|---|---|
-| **IPv6** | | |
-| **IPv8** (draft-thain-ipv8) | | |
-| **RINA** | | |
-| **NDN** (Named Data Networking) | | |
-
-Investiga brevemente cada una y completa la tabla.
-
-## 7. Diseño de red cloud completo
-
-Diseña la red de una aplicación web escalable en AWS con los siguientes requisitos:
-
-- Un **frontend web** accesible desde Internet (2 instancias EC2).
-- Un **backend de API** que NO debe tener IP pública.
-- Una **base de datos** que solo debe aceptar tráfico del backend.
-- Todo el tráfico entrante del frontend pasa por un balanceador de carga.
-
-**Tareas:**
-a) Dibuja el diagrama completo: VPC, subnets (pública/privada), IGW, NAT Gateway, balanceador y las instancias.
-b) Indica en qué subnet colocas cada componente y por qué.
-c) Diseña los **Security Groups**: qué reglas de entrada permite cada uno (origen, protocolo, puerto) y para qué sirve cada regla.
-d) Explica cómo llega el tráfico de un usuario hasta la base de datos: paso a paso y nombrando cada componente de red que atraviesa.
-e) ¿Qué pasa si el NAT Gateway deja de funcionar? ¿Qué servicios siguen accesibles y cuáles no?
-
-**Pista:** el backend y la BD van en subnets privadas (sin IGW); el backend sale a Internet por NAT si lo necesita. La BD solo recibe del Security Group del backend (origen = SG del backend), nunca de la subred entera. Para el apartado e) piensa en qué dirección del tráfico depende del NAT: las respuestas de salida, no las entradas por el balanceador.
-
-## 8. Seguridad en cloud: SG vs NACL y NAT Gateway
-
-Una empresa ha desplegado esta arquitectura:
+Un sitio remoto no puede acceder a la sede central. La topología es:
 
 ```
-Internet → ALB → [SG-web: 80/443 desde 0.0.0.0/0] → EC2 web (subnet pública)
-EC2 web → API privada (subnet privada) → RDS MySQL (subnet privada)
+SitioA (192.168.1.0/24) ─── RouterA ─── Internet ─── RouterB ─── SedeCentral (10.0.0.0/24)
 ```
 
-Se produce un incidente: "la API privada recibe tráfico entrante desde fuera de la VPC aunque el Security Group solo permite al EC2 web". Además, la base de datos RDS se ve expuesta a Internet.
+- Desde SitioA, `ping 10.0.0.1` (RouterB) funciona.
+- Desde SitioA, `telnet 10.0.0.100 443` (servidor web en SedeCentral) no funciona.
+- Desde SedeCentral, se puede acceder al servidor web localmente.
 
-**Tareas:**
-a) Explica cómo es posible que el tráfico llegue a la API privada y a la RDS si los Security Groups deberían bloquearlo. ¿Qué capa de defensa ha fallado y cuál no se configuró?
-b) Compara en un caso concreto: si el incidente lo detectas porque alguien escribió una regla "deny" en el Security Group y no funcionó, ¿qué está ocurriendo? ¿Los Security Groups soportan deny explícito?
-c) Diseña la corrección completa usando Network ACLs y Security Groups: qué reglas (dirección, puerto, origen) pondrías en la NACL de la subnet privada y en los SGs de la API y de la RDS.
-d) La API necesita salir a Internet para consumir un servicio externo, pero no debe tener IP pública. ¿Qué componente añades y dónde se coloca? Describe cómo se traduce la dirección al salir (explica el NAT en ambas direcciones: respuesta incluida).
+¿Cuál es el problema probable? ¿Qué comandos usarías para confirmarlo?
 
-**Pista:** recuerda que un Security Group es **stateful** y no soporta deny; una **Network ACL** es **stateless** y se evalúa en orden numérico, pero hay que permitir tanto la entrada como la respuesta. Si solo configuraste SGs, el tráfico que "no debería existir" puede colarse si la NACL por defecto lo permite todo. Para la salida de la API, el **NAT Gateway** hace PAT: la API sale con la IP elástica del NAT y la respuesta vuelve porque el NAT mantiene la tabla de traducción (estado).
+## 7. Análisis de una captura con retransmisiones
+
+Te entregan esta captura Wireshark de una conexión web (filtrada):
+
+```
+1: 192.168.1.10:50000 → 93.184.216.34:80  [SYN]                       Seq=0
+2: 93.184.216.34:80 → 192.168.1.10:50000  [SYN, ACK]                  Seq=0 Ack=1
+3: 192.168.1.10:50000 → 93.184.216.34:80  [ACK]                       Seq=1 Ack=1
+4: 192.168.1.10:50000 → 93.184.216.34:80  [PSH, ACK] (GET /)          Seq=1 Ack=1
+5: 192.168.1.10:50000 → 93.184.216.34:80  [TCP Retransmission] (GET /)  Seq=1
+6: 192.168.1.10:50000 → 93.184.216.34:80  [TCP Retransmission] (GET /)  Seq=1
+7: 93.184.216.34:80 → 192.168.1.10:50000  [TCP Window Update] Window=0
+```
+
+a) ¿El three-way handshake se completó correctamente? Justifícalo con los paquetes.
+b) ¿Qué significa que los paquetes 5 y 6 sean retransmisiones del 4?
+c) ¿Qué indica el paquete 7 (`Window=0`)? ¿Qué conclusión global sacas de la conexión?
+
+**Pista:** piensa en las dos señales que viste en el punto de Wireshark: las retransmisiones indican pérdida o congestión, y `Window=0` indica saturación del receptor. ¿Qué secuencia de eventos explica que primero se pierda la petición y luego el servidor pida pausa?
+
+## 8. Plan de monitorización SNMP + syslog
+
+Debes monitorizar una red de 10 dispositivos (5 switches, 3 routers, 1 firewall, 1 servidor) y montar un sistema que te avise antes de que un fallo afecte a los usuarios.
+
+Diseña el plan completo:
+
+a) Elige 4 OIDs clave que monitorizarías en los switches y routers (una de ellas para tráfico de una interfaz).
+b) Elige la herramienta de monitorización (entre Zabbix, PRTG, Nagios o LibreNMS) y justifica por qué.
+c) Diseña la configuración SNMP y syslog para los dispositivos: comunidad, umbral de severidad de logs y destino.
+d) Define 3 alarmas concretas con sus umbrales (ej. "CPU > 80% durante 5 minutos").
+
+**Pista:** recuerda que los contadores de tráfico (`ifInOctets`, `ifOutOctets`) necesitan dos lecturas separadas en el tiempo para calcular velocidad, que SNMP v3 es lo seguro y que el nivel de syslog 7 (debug) llenaría el disco.

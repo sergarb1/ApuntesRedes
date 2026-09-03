@@ -1,147 +1,170 @@
 ---
 title: Boletín U08 — Avanzado (Resuelto)
-description: Soluciones ejercicios avanzados de Routing y ACLs
+description: Soluciones ejercicios avanzados de VLANs
 ---
 
 # ✅ Boletín U08 — Avanzado (Resuelto)
 
 ---
 
-## 1. Configuración multi-routing
+## 1. Configuración completa de VLANs
 
-**R1:**
+**Switch1:**
 ```bash
-interface g0/0
- ip address 192.168.1.1 255.255.255.0
- no shutdown
-interface g0/1
- ip address 10.0.0.1 255.255.255.252
- no shutdown
-ip route 192.168.2.0 255.255.255.0 10.0.0.2
-ip route 192.168.3.0 255.255.255.0 10.0.0.2
-ip route 0.0.0.0 0.0.0.0 10.0.0.2
+Switch1(config)# vlan 10
+Switch1(config-vlan)# name Ventas
+Switch1(config)# vlan 20
+Switch1(config-vlan)# name RRHH
+Switch1(config)# interface range fa0/1-5
+Switch1(config-if-range)# switchport mode access
+Switch1(config-if-range)# switchport access vlan 10
+Switch1(config)# interface range fa0/6-10
+Switch1(config-if-range)# switchport mode access
+Switch1(config-if-range)# switchport access vlan 20
+Switch1(config)# interface fa0/24
+Switch1(config-if)# switchport mode trunk
+Switch1(config-if)# switchport trunk native vlan 99
+Switch1(config-if)# switchport trunk allowed vlan 10,20
 ```
 
-**R2:**
+**Switch2:** (configuración similar: mismas VLANs, mismos puertos access 1-5 → 10 y 6-10 → 20, y el mismo trunk en Fa0/24 con native 99 y `allowed vlan 10,20`).
+
+**Router:**
 ```bash
-interface g0/0
- ip address 10.0.0.2 255.255.255.252
- no shutdown
-interface g0/1
- ip address 10.0.0.5 255.255.255.252
- no shutdown
-interface g0/2
- ip address 192.168.2.1 255.255.255.0
- no shutdown
-ip route 192.168.1.0 255.255.255.0 10.0.0.1
-ip route 192.168.3.0 255.255.255.0 10.0.0.6
+Router(config)# interface fa0/0
+Router(config-if)# no shutdown
+Router(config)# interface fa0/0.10
+Router(config-subif)# encapsulation dot1Q 10
+Router(config-subif)# ip address 192.168.10.1 255.255.255.0
+Router(config)# interface fa0/0.20
+Router(config-subif)# encapsulation dot1Q 20
+Router(config-subif)# ip address 192.168.20.1 255.255.255.0
 ```
 
-**R3:**
+## 2. Diagnóstico de native VLAN
+
+a) **Problemas:** las tramas sin etiquetar (de la VLAN nativa, incluyendo tráfico de control CDP/VTP/DTP y datos de esa VLAN) se interpretan en la VLAN equivocada en el otro extremo.
+   - Tráfico de control (CDP, VTP) no funciona correctamente entre switches.
+   - Posibles problemas de conectividad en la native VLAN (va y viene a ratos).
+   - Mensajes de error en el log de ambos switches: *"Native VLAN mismatch discovered on Fa0/24"*.
+
+b) **Diagnóstico:** `show interfaces trunk` en ambos switches. Muestra la native VLAN de cada extremo y reporta directamente el mismatch.
+
+c) **Arreglo sin pérdida:** configurar la **misma native VLAN en ambos extremos** — elegir un número (ej. 99) y ponerlo en ambos:
+   ```bash
+   Switch2(config-if)# switchport trunk native vlan 99
+   ```
+   El cambio es **inmediato**: la native VLAN solo afecta a tramas sin etiquetar. Las VLANs etiquetadas (10, 20, 30) no sufren interrupción durante el cambio.
+
+## 3. Diseño de VLANs corporativas
+
+a) **Tabla de VLANs:**
+   | VLAN | Nombre | Puertos |
+   |------|--------|---------|
+   | 10 | Recepción | Planta baja 1-5 |
+   | 20 | Servidores | Planta baja 6-15 |
+   | 30 | Ventas | Planta 1, puertos 1-30 |
+   | 40 | Marketing | Planta 1, puertos 31-45 |
+   | 50 | IT | Planta 2, puertos 1-20 |
+   | 60 | Dirección | Planta 2, puertos 21-25 |
+
+b) **Router-on-a-stick:** en la planta baja, cerca de los servidores, conectado por un trunk a un puerto del core (puede enrutar todas las VLANs con subinterfaces). **Alternativa:** switch capa 3 como core en la sala de servidores, haciendo routing entre VLANs internamente con SVIs (se elimina el cuello de botella del router).
+
+c) **VLANs en trunks:** todas (10, 20, 30, 40, 50, 60) en los trunks del core, con **native VLAN cambiada** (ej. 999) y **`allowed vlan`** cubriendo todas. IT necesita acceso a todas las VLANs para administrar.
+
+d) **ACLs para limitar Dirección** (se aplican en la subinterfaz del router de la VLAN 60):
+   ```bash
+   access-list 101 permit ip 192.168.60.0 0.0.0.255 192.168.20.0 0.0.0.255
+   access-list 101 deny ip 192.168.60.0 0.0.0.255 any
+   ```
+   Aplicar con `ip access-group 101 in` en la subinterfaz `Fa0/0.60`. (Detalles finos de ACLs en la U09.)
+
+## 4. VTP disaster recovery
+
+a) **Por qué:** VTP propaga la base de datos del switch con mayor **revision number**. El switch nuevo (rev 500) tiene número más alto que el server actual (rev 100). Al propagar su base de datos (posiblemente vacía), todas las VLANs se borran en la red. Basta un trunk para que el anuncio llegue a todos.
+
+b) **Recuperación:**
+   1. **Desconectar el switch problemático inmediatamente** (cable del trunk) para frenar la propagación.
+   2. Reconfigurar las VLANs manualmente en cada switch (o restaurar un backup de la config).
+   3. Cambiar los switches a **VTP transparent** (o VTPv3 mode off) para que ningún switch pueda volver a hacer esto.
+
+c) **Medidas preventivas:**
+   - Usar **VTP transparent** o **VTPv3 mode off** (no propaga ni procesa anuncios).
+   - Verificar el **revision number** (`show vtp status`) de todo switch antes de enchufarlo.
+   - **Resetear** la base de datos de cualquier equipo usado: `delete flash:vlan.dat` y reiniciar, antes de conectarlo.
+   - Documentar la base de datos de VLANs (la config es tu backup).
+
+## 5. Router-on-a-stick: cuello de botella
+
+a) **Cálculo:** 4 VLANs × 30 Mbps = **120 Mbps**. La interfaz FastEthernet (100 Mbps) NO puede manejar 120 Mbps. **Sí hay cuello de botella** (pérdidas y saturación).
+
+b) **Alternativas:**
+   - **Interfaz GigabitEthernet** (1000 Mbps) → 120 Mbps es apenas el 12 % de capacidad.
+   - **Switch capa 3 con SVIs** → routing en hardware interno, sin interfaz única de salida.
+   - Dividir las VLANs entre **dos interfaces físicas** del router (proporcional al tráfico).
+
+c) **Con GigabitEthernet:** 120 Mbps sobre 1000 Mbps = **12 % de uso**, sin cuello de botella. Si el tráfico se duplica (240 Mbps), seguimos al 24 %: holgado.
+
+## 6. Seguridad en VLANs
+
+| Riesgo | Mitigación |
+|---|---|
+| 1. **VLAN Hopping por DTP**: el atacante negocia un trunk (`dynamic desirable`) y recibe todas las VLANs | `switchport mode access` + `switchport nonegotiate`; puertos libres con `shutdown` |
+| 2. **Double tagging en la native VLAN**: el atacante manda una trama con doble etiqueta 802.1Q y la segunda etiqueta llega a otra VLAN | Native VLAN **≠ 1** y **sin datos en la native**; segmentar físicamente zonas sensibles |
+| 3. **VTP como arma**: un switch con revision number mayor anuncia su base de datos (vacía) y borra VLANs | VTP transparent / VTPv3 off, verificar `show vtp status` antes de conectar equipo |
+
+## 7. VLAN hopping y hardening
+
+a) **Tres vectores de ataque:**
+   1. **Negociación de trunk por DTP:** un portátil conectado a un puerto en modo `dynamic desirable` (o `dynamic auto` si el portátil pide) tramita el protocolo DTP y consigue que el puerto se convierta en **trunk**. A partir de ahí, todas las VLANs que cruzan el trunk quedan a su alcance.
+   2. **Double tagging:** el atacante envía una trama con **dos etiquetas 802.1Q** (a menudo con la native VLAN). El primer switch elimina la primera etiqueta (la trata como native) y la reenvía por el trunk; el segundo switch ve la segunda etiqueta y la entrega en la **VLAN objetivo**. El atacante nunca llega a ser trunk ni a hablar directamente: salta a la VLAN objetivo de forma encubierta.
+   3. **Tráfico mislabeled / native VLAN vulnerable:** si la native VLAN transporta datos y es la VLAN 1, todo el tráfico sin etiquetar (o mal etiquetado) acaba en la VLAN por defecto, donde pueden mezclarse con otras VLANs mal configuradas (o con el double tagging del vector anterior gratuitamente).
+
+b) **Tres mitigaciones concretas:**
+   1. **Apagar DTP en puertos de usuario:** `switchport mode access` + `switchport nonegotiate` (y `shutdown` en los puertos no usados) → el atacante no puede negociar un trunk.
+   2. **Cambiar la native VLAN y no usarla para datos:** `switchport trunk native vlan 99` (o 999) en TODOS los trunks, y usar VLANs de datos distintas de la native → el double tagging pierde su puerta de entrada.
+   3. **Limitar y segmentar:** `switchport trunk allowed vlan 10,20,30` para restringir qué VLANs cruzan cada trunk, y **VTP transparent / VTPv3 off** para que un switch rogue no arrase la base de datos.
+
+## 8. Inter-VLAN con SVI paso a paso
+
+**(Se asume que los puertos access de las VLANs 10/20/30 ya están asignados.)**
+
+a) **Creación de VLANs:**
 ```bash
-interface g0/0
- ip address 10.0.0.6 255.255.255.252
- no shutdown
-interface g0/1
- ip address 192.168.3.1 255.255.255.0
- no shutdown
-ip route 192.168.1.0 255.255.255.0 10.0.0.5
-ip route 192.168.2.0 255.255.255.0 10.0.0.5
-ip route 0.0.0.0 0.0.0.0 10.0.0.5
+Switch(config)# vlan 10
+Switch(config-vlan)# name Ventas
+Switch(config)# vlan 20
+Switch(config-vlan)# name RRHH
+Switch(config)# vlan 30
+Switch(config-vlan)# name IT
 ```
 
-## 2. ACL extendida: YouTube blocker
-
-a) **ACL con time-range:**
+b) **Activar el routing global:**
 ```bash
-time-range LABORAL
- periodic weekdays 9:00 to 18:00
-
-ip access-list extended BLOQUEAR_YT
- deny tcp any 173.194.0.0 0.0.255.255 eq 80 time-range LABORAL
- deny tcp any 173.194.0.0 0.0.255.255 eq 443 time-range LABORAL
- permit ip any any
+Switch(config)# ip routing
 ```
 
-b) **Aplicar:** Outbound en G0/1 (hacia Internet), para filtrar tráfico saliente.
-
-c) **Alternativa sin time-range:** no se puede definir "9 a 18" con la ACL pura; habría que cambiar manualmente la ACL cada mañana y cada tarde (desastrosamente manual) o gestionarlo con un script/programación externa que alterne las versiones de política. Por eso `time-range` existe.
-
-## 3. Diagnóstico de ACL
-
-a) **Sí, es normal.** La línea 1 deniega explícitamente 192.168.1.10. La línea 2 permite al resto de la red. El deny any implícito está al final.
-
-b) **Sí, 192.168.1.20 puede** porque coincide con la línea 2 (permit 192.168.1.0/24).
-
-c) `show access-lists 10` — Muestra los contadores de hits de cada línea.
-
-d) **No afecta.** La ACL está en G0/1 (outbound). El tráfico entre PCs de la misma LAN no pasa por el router, solo por el switch. Las ACLs en interfaces del router solo afectan al tráfico que pasa por el router.
-
-## 4. Rutas flotantes
-
-a) **Comandos:**
+c) **SVIs (uno por VLAN):**
 ```bash
-ip route 0.0.0.0 0.0.0.0 10.0.0.2        # AD=1 (por defecto)
-ip route 0.0.0.0 0.0.0.0 10.0.1.2 5      # AD=5 (respaldo)
-ip route 192.168.100.0 255.255.255.0 10.0.0.2
+Switch(config)# interface vlan 10
+Switch(config-if)# ip address 192.168.10.1 255.255.255.0
+Switch(config-if)# no shutdown
+
+Switch(config)# interface vlan 20
+Switch(config-if)# ip address 192.168.20.1 255.255.255.0
+Switch(config-if)# no shutdown
+
+Switch(config)# interface vlan 30
+Switch(config-if)# ip address 192.168.30.1 255.255.255.0
+Switch(config-if)# no shutdown
 ```
 
-b) **Cuándo se activa:** Cuando la ruta primaria (10.0.0.2) desaparece de la tabla (el siguiente salto deja de ser accesible). Entonces la ruta con AD=5 aparece en la tabla.
+d) **Gateway de cada PC:**
 
-c) **Verificación:** `show ip route 0.0.0.0` muestra qué ruta por defecto está activa. Si aparece la de 10.0.1.2, la primaria ha fallado.
+| VLAN | Subred | Gateway (IP del SVI) |
+|---|---|---|
+| 10 Ventas | 192.168.10.0/24 | 192.168.10.1 |
+| 20 RRHH | 192.168.20.0/24 | 192.168.20.1 |
+| 30 IT | 192.168.30.0/24 | 192.168.30.1 |
 
-## 5. ACL de firewall básico
-
-```bash
-ip access-list extended FIREWALL_INTERNO
- permit tcp 192.168.1.0 0.0.0.255 any eq 80
- permit tcp 192.168.1.0 0.0.0.255 any eq 443
- permit udp 192.168.1.0 0.0.0.255 any eq 53
- deny tcp 192.168.1.0 0.0.0.255 any eq 22
- permit tcp any 192.168.1.0 0.0.0.255 established
- deny ip any any
-
-interface g0/1
- ip access-group FIREWALL_INTERNO out
-```
-
-## 6. Resolución de problemas de rutas
-
-a) **No funciona.** La interfaz G0/1 está `shutdown` (administratively down). La ruta por defecto apunta a 10.0.0.2, que está en G0/1. Si la interfaz está caída, la ruta no se instala en la tabla.
-
-b) `show ip route` — 0.0.0.0/0 no aparecerá. `show ip interface brief` — G0/1 aparece como "administratively down".
-
-c) **Cambiar:**
-```bash
-interface g0/1
- no shutdown
-```
-Y verificar que el enlace esté físicamente conectado.
-
-## 7. Longest prefix match
-
-a) **192.168.1.30 → via 10.0.0.10** (la /28 cubre de .16 a .31: es la coincidencia más larga).
-
-b) **192.168.1.200 → via 10.0.0.6** (cae en la /24; la /28 no la cubre y pesa más que la /16).
-
-c) **192.168.3.44 → via 10.0.0.2** (solo la /16 la abarca: ni la /24 ni la /28 llegan a .3.x).
-
-d) **192.168.1.15 → via 10.0.0.6** (está en la /24 pero fuera de la /28, que empieza en .16).
-
-**Regla:** a mayor máscara (28 > 24 > 16), coincidencia más específica y elegida primero.
-
-## 8. ACL nombrada para horario
-
-```bash
-time-range LABORAL_DIARIO
- periodic daily 9:00 to 18:00
-
-ip access-list extended BLOQUEAR_STREAMING
- deny tcp 192.168.1.0 0.0.0.255 any eq 443 time-range LABORAL_DIARIO
- permit ip any any
-
-interface g0/1
- ip access-group BLOQUEAR_STREAMING out
-```
-
-**Lectura:** de 9 a 18 todos los días, el tráfico HTTPS originado en la red interna se deniega; el resto de horario (y el resto de tráfico, como el puerto 80) pasa. El `permit ip any any` + el deny implícito se encargan del resto.
+**Verificación:** comprueba que el SVI esté Up/Up (`show ip interface brief`), revisa que las VLANs existan en `show vlan brief` y prueba la conectividad con `ping` entre SVIs (ej. desde el SVI 10 contra 192.168.20.1). Si los SVIs están Up/Up pero no enrutan, el culpable es el comando `ip routing` olvidado.

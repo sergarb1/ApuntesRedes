@@ -1,74 +1,105 @@
 ---
 title: Boletín U05 — Inicial (Resuelto)
-description: Soluciones ejercicios básicos de IPv6 y Transición
+description: Soluciones ejercicios básicos de IPv4 y Subnetting
 ---
 
 # ✅ Boletín U05 — Inicial (Resuelto)
 
 ---
 
-## 1. Compresión de direcciones
+## 1. Conversión binario
 
-a) `2001:DB8::1`
-b) `FE80::2AA:FF:FE9A:4CA2`
-c) `::1`
-d) `2001:DB8::ABCD:0:0:1234` (solo un ::, la secuencia de ceros más larga)
+a) 192 → **11000000**
+b) 10 → **00001010**
+c) 255 → **11111111**
+d) 0 → **00000000**
 
-## 2. Identifica el tipo
+## 2. Conversión a decimal
 
-a) `2001:DB8::1` → **Global Unicast** (2000::/3)
-b) `FE80::1` → **Link-Local** (FE80::/10)
-c) `::1` → **Loopback**
-d) `FC00::1` → **Unique Local** (FC00::/7)
-e) `FF02::1` → **Multicast** (todos los nodos)
+a) 11000000 → **192**
+b) 10101000 → **168**
+c) 00001010 → **10**
+d) 11111111 → **255**
 
-## 3. Completa
+## 3. ¿Qué máscara es?
 
-a) IPv4 tiene **32** bits, IPv6 tiene **128** bits.
-b) IPv4 se representa en decimal, IPv6 en **hexadecimal**.
-c) El prefijo de Link-Local es **FE80::/10**.
-d) El prefijo de Global Unicast es **2000::/3**.
-e) **NDP** (Neighbor Discovery Protocol) reemplaza a ARP en IPv6.
+/24 → b) 255.255.255.0
+/16 → c) 255.255.0.0
+/30 → a) 255.255.255.252
+/8 → d) 255.0.0.0
 
 ## 4. Verdadero o falso
 
-a) **Falso.** Las Link-Local solo funcionan en el mismo enlace. No son enrutables.
-b) **Verdadero.** SLAAC se basa en Router Advertisements del router. Sin servidor central.
-c) **Falso.** :: solo puede usarse UNA vez por dirección. Si no, el router no sabe cuántos grupos cero hay.
-d) **Verdadero básicamente**, pero DHCPv6 tiene dos modos (stateless y stateful) que no existen en IPv4.
-e) **Verdadero.** Dual Stack ejecuta ambas pilas de protocolos simultáneamente.
+a) **Falso.** IPv4 tiene 32 bits (4 octetos).
+b) **Falso.** Cada octeto va de 0 a 255. 256 no existe en un octeto de 8 bits.
+c) **Verdadero.** La última dirección del rango es el broadcast.
+d) **Verdadero.** Dynamic Host Configuration Protocol.
+e) **Falso.** Las IPs privadas (RFC 1918) no son enrutables en Internet. Necesitan NAT.
 
-## 5. NDP
+## 5. Calcula hosts
 
-1 → c (Neighbor Solicitation: "¿Quién tiene esta IP?")
-2 → d (Neighbor Advertisement: "Yo, aquí está mi MAC")
-3 → b (Router Solicitation: dispositivo busca routers)
-4 → a (Router Advertisement: router anuncia su prefijo)
+a) /24 → 256 - 2 = **254 hosts**
+b) /27 → 32 - 2 = **30 hosts**
+c) /30 → 4 - 2 = **2 hosts**
+d) /29 → 8 - 2 = **6 hosts**
 
-## 6. Mecanismos de transición
+## 6. Identifica el tipo
 
-1 → b (Dual Stack: ambos protocolos a la vez)
-2 → c (Túnel 6to4: encapsula IPv6 en IPv4)
-3 → a (NAT64: traduce IPv6→IPv4)
+a) 10.0.0.15 → **Privada** (clase A, RFC 1918)
+b) 8.8.8.8 → **Pública** (DNS de Google)
+c) 192.168.1.1 → **Privada** (clase C, RFC 1918)
+d) 127.0.0.1 → **Especial** (loopback/localhost)
+e) 172.16.0.100 → **Privada** (clase B, RFC 1918)
+f) 169.254.1.1 → **Especial** (APIPA, cuando DHCP no responde)
 
-## 7. Expande direcciones
+## 7. Calcula la dirección de red
 
-a) `2001:DB8::1` → **`2001:0DB8:0000:0000:0000:0000:0000:0001`**
-   (el `::` oculta 5 grupos de ceros entre `DB8` y el `1`).
+a) `192.168.1.37` & `255.255.255.0` → la máscara deja pasar los 3 primeros octetos y borra el último → **192.168.1.0/24**
 
-b) `FE80::2AA:FF:FE9A:4CA2` → **`FE80:0000:0000:0000:02AA:00FF:FE9A:4CA2`**
-   (el `::` oculta 4 grupos de ceros; al expandir, `2AA` → `02AA` y `FF` → `00FF`).
+```
+IP:      192.168.1.37  → 11000000.10101000.00000001.00100101
+Máscara: 255.255.255.0 → 11111111.11111111.11111111.00000000
+AND:                   → 11000000.10101000.00000001.00000000
+Red:     192.168.1.0
+```
 
-c) `::1` → **`0000:0000:0000:0000:0000:0000:0000:0001`**
-   (siete grupos de ceros + el `1`).
+b) `10.0.0.150` & `255.0.0.0` → **10.0.0.0/8**
 
-## 8. Clasifica tipo y ámbito
+```
+IP:      10.0.0.150  → 00001010.00000000.00000000.10010110
+Máscara: 255.0.0.0   → 11111111.00000000.00000000.00000000
+AND:                 → 00001010.00000000.00000000.00000000
+Red:     10.0.0.0
+```
 
-| Dirección | Tipo | Ámbito |
-|---|---|---|
-| a) `2001:DB8::1` | **Global Unicast** (GUA, 2000::/3) | **Global** (Internet) |
-| b) `FE80::1` | **Link-Local** (LLA, FE80::/10) | **Enlace local** (misma LAN) |
-| c) `FC00::1` | **Unique Local** (ULA, FC00::/7) | **Privado/organización** |
-| d) `::1` | **Loopback** | **Este nodo** (local) |
-| e) `FF02::1` | **Multicast** (todos los nodos) | **Enlace local** (el `02` en FF02) |
-| f) `2001:DB8:1:2:21A:2BFF:FE3C:4D5E` | **Global Unicast** (2000::/3) | **Global** (Internet) |
+c) `172.16.0.200` & `255.255.255.128` → el octeto mágico es el último: `200 = 11001000`, `128 = 10000000` → AND = `10000000` = 128 → **172.16.0.128/25**
+
+```
+IP:      172.16.0.200  → 10101100.00010000.00000000.11001000
+Máscara: 255.255.255.128 → 11111111.11111111.11111111.10000000
+AND:                    → 10101100.00010000.00000000.10000000
+Red:     172.16.0.128
+```
+
+d) `192.168.1.66` & `255.255.255.192` → octeto mágico el último: `66 = 01000010`, `192 = 11000000` → AND = `01000000` = 64 → **192.168.1.64/26**
+
+```
+IP:      192.168.1.66  → 11000000.10101000.00000001.01000010
+Máscara: 255.255.255.192 → 11111111.11111111.11111111.11000000
+AND:                    → 11000000.10101000.00000001.01000000
+Red:     192.168.1.64
+```
+
+## 8. Subredes iguales
+
+a) **2 bits:** `2ⁿ ≥ 4` → n = 2 (2² = 4).
+b) Nueva máscara: **/26 = 255.255.255.192** (`11111111.11111111.11111111.11000000`).
+c) Hosts=(32 − 26 = 6 bits) → 2⁶ − 2 = **62 hosts útiles** por subred.
+d) Incremento = 2⁶ = 64:
+
+| Subred | Red | Primer host | Último host | Broadcast |
+|---|---|---|---|---|
+| 1 | 192.168.5.0/26 | 192.168.5.1 | 192.168.5.62 | 192.168.5.63 |
+| 2 | 192.168.5.64/26 | 192.168.5.65 | 192.168.5.126 | 192.168.5.127 |
+| 3 | 192.168.5.128/26 | 192.168.5.129 | 192.168.5.190 | 192.168.5.191 |
+| 4 | 192.168.5.192/26 | 192.168.5.193 | 192.168.5.254 | 192.168.5.255 |

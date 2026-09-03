@@ -1,149 +1,107 @@
 ---
 title: Boletín U06 — Avanzado (Resuelto)
-description: Soluciones de los ejercicios avanzados de Switching y STP
+description: Soluciones ejercicios avanzados de IPv6 y Transición
 ---
 
 # ✅ Boletín U06 — Avanzado (Resuelto)
 
 ---
 
-## 1. Configuración básica de switch
+## 1. Subnetting IPv6
 
-```bash
-Switch> enable
-Switch# configure terminal
-Switch(config)# hostname SW-OFICINA-01
-SW-OFICINA-01(config)# interface vlan 1
-SW-OFICINA-01(config-if)# ip address 192.168.1.10 255.255.255.0
-SW-OFICINA-01(config-if)# no shutdown
-SW-OFICINA-01(config-if)# exit
-SW-OFICINA-01(config)# ip default-gateway 192.168.1.1
+a) **Máscara para sedes:** /48 → para 5 sedes necesitas 3 bits extra (2³ = 8). Cada sede tendría /51. Pero en IPv6 lo estándar es dar /48 a cada sede (todas son /48 independientes). Si solo tienes un /48 global, entonces usas /52 para 16 subredes (2⁴ = 16).
 
-SW-OFICINA-01(config)# interface range fa0/1-10
-SW-OFICINA-01(config-if-range)# switchport mode access
-SW-OFICINA-01(config-if-range)# switchport port-security
-SW-OFICINA-01(config-if-range)# switchport port-security maximum 2
-SW-OFICINA-01(config-if-range)# switchport port-security mac-address sticky
-SW-OFICINA-01(config-if-range)# switchport port-security violation shutdown
-SW-OFICINA-01(config-if-range)# exit
+b) **Subredes /64 dentro de /48:** 64 - 48 = 16 bits → 2¹⁶ = **65.536 subredes** /64.
 
-SW-OFICINA-01(config)# interface range fa0/11-12
-SW-OFICINA-01(config-if-range)# switchport mode trunk
-SW-OFICINA-01(config-if-range)# exit
-```
+c) **Primeras 3 subredes /64:**
+   - 2001:DB8:CAFE:0000::/64
+   - 2001:DB8:CAFE:0001::/64
+   - 2001:DB8:CAFE:0002::/64
 
-## 2. Análisis de topología STP
+## 2. EUI-64
 
-a) **Root Bridge: Switch C.** Prioridad 4096 (la más baja). Aunque Switch A y B tienen MACs más bajas, la prioridad de Switch C (4096) es mucho menor que 32768.
+a) **EUI-64:** 021A:2BFF:FE3C:4D5E
+   (Invertir bit 7 del primer byte: 00 → 02, insertar FF:FE entre las mitades)
 
-b) **Root Ports:** Cada switch no-root tiene 1 Root Port. Como hay 3 switches y Switch C es Root, Switches A y B tienen 1 Root Port cada uno = **2 Root Ports** total.
+b) **IPv6 completa:** 2001:DB8:1:2:021A:2BFF:FE3C:4D5E/64
 
-c) **Designated Ports:** 1 por segmento. Hay 3 segmentos (A-B, B-C, C-A) → **3 Designated Ports** (todos los puertos del Root Bridge y el puerto del segmento con mejor coste hacia el Root).
+c) **Problema de privacidad:** La IP es siempre la misma para una MAC dada. Esto permite rastrear un dispositivo físico a través de redes. Las Privacy Extensions (RFC 4941) generan direcciones temporales que cambian periódicamente.
 
-d) Si **Switch C falla**:
-   - Switches A y B pierden su Root Bridge
-   - Se inicia una nueva elección. Con la misma prioridad (32768), gana Switch A (MAC más baja)
-   - Todos los puertos pasan por los estados STP (blocking → listening → learning → forwarding)
-   - Convergencia: ~50 segundos con STP, ~3 segundos con RSTP
+## 3. Diagnóstico IPv6
 
-## 3. Diagnóstico de port security
+a) **Dos direcciones:** Una es Link-Local (fe80::...) necesaria para comunicación local, y otra es Global Unicast (2001:db8:...) para comunicación global. Es normal tener ambas.
 
-a) **Ocurrió porque** el usuario conectó un switch no administrado. Los PCs de ambos usuarios tienen MACs diferentes, y el switch de red ve más de 1 MAC en el puerto, superando el límite (maximum 1).
+b) **%12 (Zone ID):** Identifica la interfaz de red (en este caso, la número 12). Es necesario en Link-Local porque la misma dirección FE80 podría existir en múltiples interfaces.
 
-b) **Dos cambios:**
-   1. Aumentar `maximum` a un valor razonable (ej. 5-10) si es un puerto compartido
-   2. Cambiar `violation` a `restrict` (descarta tráfico extra pero no deshabilita el puerto) o `protect` (descarta silenciosamente)
+c) **Sí puede acceder a Internet.** Tiene una Global Unicast (2001:db8::) que es enrutable, y un gateway configurado.
 
-c) **Recuperar el puerto:**
-   ```bash
-   SW-OFICINA-01(config)# interface fa0/1
-   SW-OFICINA-01(config-if)# shutdown
-   SW-OFICINA-01(config-if)# no shutdown
-   ```
-   O configurar `errdisable recovery cause psecure-violation` para recuperación automática.
+d) **Comando:** `ipconfig /all` en Windows, `ip addr` en Linux, `ifconfig -a` en macOS.
 
-## 4. Diseño de red redundante
+## 4. Diseño de transición
 
-a) **Topología conceptual:** Malla parcial. SW1 (core) conectado a SW2, SW3, SW4. SW2 conectado a SW3 y SW4. Sin bucles directos SW3-SW4 para limitar redundancia.
+a) **Dual Stack en las LANs.** El ISP ofrece IPv6 nativo, así que ambas sedes pueden tener IPv4 e IPv6 simultáneamente. Es la opción más limpia y sin encapsulación extra.
 
-b) **Puertos bloqueados:** Depende del Root Bridge. Si SW1 es Root, sus puertos son Designated. Los switches no-root tendrán Root Ports y Alternate Ports bloqueados. Con 3 conexiones alternativas por switch, aproximadamente 3 puertos bloqueados.
+b) **Conexión entre sedes:** Usando IPv6 nativo (el ISP ya lo ofrece). Cada sede tiene un rango /48 asignado. El enrutamiento IPv6 se hace con OSPFv3 o rutas estáticas.
 
-c) **Prioridad para SW1 como Root:** `spanning-tree vlan 1 priority 4096` (o 0 para forzarlo absolutamente).
+c) **Acceso al servicio cloud solo-IPv4:** NAT64 + DNS64. El router de la sede central traduce el tráfico IPv6 de los clientes a IPv4 hacia el servidor cloud.
 
-d) **Si SW1 falla:**
-   - Se elige un nuevo Root Bridge (el de menor Bridge ID entre SW2, SW3, SW4)
-   - **Con STP:** ~50 segundos de convergencia
-   - **Con RSTP:** ~1-3 segundos
+d) **Configuración en routers:**
+   - Habilitar `ipv6 unicast-routing`
+   - Configurar interfaz WAN con IPv6 del ISP
+   - Configurar interfaz LAN con prefijo /64 de la sede
+   - Configurar rutas IPv6 estáticas o dinámicas
+   - Configurar NAT64 para el servicio cloud legacy
 
-## 5. CAM table analysis
+## 5. Análisis de Router Advertisement
 
-a) **Dos dispositivos** en Fa0/4: 00D0.BC96.1A01 y 00D0.BC96.1A02. La tabla muestra ambas MACs en el mismo puerto.
+a) **Método:** DHCPv6 Stateless (O Flag = 1, M Flag = 0). SLAAC da la IP, DHCPv6 da configuración adicional.
 
-b) **4 puertos** con dispositivos: Fa0/1, Fa0/2, Fa0/3, Fa0/4.
+b) **La IP la da SLAAC** (el router anuncia el prefijo con RA, el cliente genera su IP). **El DNS lo da DHCPv6** (el cliente consulta al servidor DHCPv6 para obtener DNS y otros parámetros).
 
-c) **FFFF.FFFF.FFFF en CPU:** Es la dirección MAC de broadcast. Está en la CPU porque el switch procesa los broadcasts internamente (además de reenviarlos).
+c) **No.** SLAAC puro no da DNS. Si el cliente solo soporta SLAAC, necesitaría DHCPv6 para DNS. Pero los clientes modernos suelen soportar RDNSS (DNS en RA), que permite al router anunciar DNS directamente en los RA sin DHCPv6.
 
-d) **Si llega una trama con destino 00D0.BC96.1A03:** Es una MAC desconocida (no está en la tabla). El switch **inunda** la trama por todos los puertos excepto el de origen.
+d) **Si M Flag = 1:** DHCPv6 Stateful. El servidor DHCPv6 da tanto la IP como el DNS. SLAAC no se usa para la IP. Esto es más parecido al DHCP de IPv4.
 
-## 6. STP: cálculo de costes
+## 6. NDP en acción
 
-a) **Root Port de Switch C:** Depende del coste acumulado hacia el Root Bridge.
+a) **Neighbor Solicitation (NS):** "¿Quién tiene 2001:DB8::20?"
 
-   **Camino A → C directo (Fa0/3):** coste = 19
-   **Camino A → B → C (Fa0/1 → Fa0/2):** coste = 19 + 19 = 38
+b) **Dirección MAC destino:** Multicast Ethernet (01:80:C2:00:00:00 o 33:33:xx:xx:xx:xx). Concretamente, la dirección multicast derivada de la IP destino (solicited-node multicast).
 
-   Fa0/3 tiene **menor coste total** (19 < 38), así que **Fa0/3 es el Root Port**.
+c) **Dirección IPv6 destino:** **Multicast** (FF02::1:FF00:20 — la solicited-node multicast address). NO usa broadcast como ARP en IPv4.
 
-b) **Costes:** A→C directo = 19. A→B→C = 38.
+d) **PC-B responde con un Neighbor Advertisement (NA)** unicast dirigido a PC-A, indicando su MAC.
 
-c) **Alternate Port:** Fa0/2 (el puerto del camino más caro que queda en discarding como respaldo).
+e) **Este proceso se llama NDP** (Neighbor Discovery Protocol). Es parte de ICMPv6 y reemplaza a ARP. Es más eficiente que ARP porque usa multicast en lugar de broadcast, y solo los dispositivos interesados procesan el mensaje.
 
-d) **Si el coste de Fa0/3 se cambia a 4:** El coste total por Fa0/3 baja a 4, reforzando aún más que Fa0/3 sea el Root Port. Si en cambio el coste de Fa0/3 subiera a 100, entonces el Root Port pasaría a ser por el camino A→B→C (coste 38 < 100).
+## 7. Diagnóstico ping6
 
-## 7. Topología STP/RSTP bajo análisis
+Contexto: `ping fe80::1` (la Link-Local del gateway) funciona, así que el enlace, la MAC y NDP básico están OK. El fallo es exclusivo del destino *global* `2001:DB8:1::10`. Tres causas posibles:
 
-a) **Root Bridge: SW1.** Prioridad 4096, muy por debajo de los 32768 de los demás. No hace falta desempate por MAC.
+a) **Firewall del PC destino (o del propio PC-A) bloqueando ICMPv6 hacia la GUA.** Muchos sistemas abren por defecto el tráfico a Link-Local y al descubrimiento de vecinos, pero responden peor (o no responden) a pings a su dirección global.
+   - *Verificación:* intenta ping desde un tercer equipo; o desactiva temporalmente el firewall del PC destino y repite el ping. Si entonces funciona, es el firewall.
 
-b) **Puerto en estado Discarding:** el enlace redundante **SW2-SW3**. Concretamente, el puerto de SW3 hacia SW2 (el extremo con mayor coste acumulado hacia el Root, que queda como **Alternate Port**). Los enlaces directos SW1-SW2, SW1-SW3 y SW1-SW4 son Designated (todos los puertos del Root).
+b) **La GUA destino está duplicada o no es la activa.** Si el PC destino tiene varios adaptadores, o SLAAC le dio un prefijo distinto, la dirección que pingueas puede estar asignada en otra interfaz o marcada como *tentative* (durante DAD). El host simplemente no responde en esa dirección en la interfaz que esperas.
+   - *Verificación:* en el destino ejecuta `ipconfig /all` (Windows) o `ip -6 addr show` (Linux) y comprueba que `2001:DB8:1::10` exista y esté marcada como activa en esa interfaz (estado *preferred*). Prueba también `ping -6 2001:DB8:1::10%<id-interfaz>`.
 
-c) **3 Root Ports**: SW2, SW3 y SW4 son switches no-root, cada uno con su Root Port hacia SW1 (por su enlace directo de coste 19).
+c) **Prefijo/ámbito fuera de la subred (on-link).** Para un *origen* con un prefijo distinto o sin ruta hacia `2001:DB8:1::/64`, esa GUA NO es *on-link*: el tráfico saldría al router (gateway), no resolvería la MAC por NDP local. Si la LAN es realmente `2001:DB8:1::/64` pero el PC-A o el switch han sido configurados con otro prefijo, el ping "no tiene a quién preguntar".
+   - *Verificación:* revisa que el prefijo del origen (`2001:db8:1:...`) y el destino compartan el mismo /64, y que el gateway `fe80::1` enrute correctamente. Un `pathping`/`tracert` IPv6 te dice si el salto intenta salir por el router o se queda en el enlace.
 
-d) **Con RSTP:** la red converge en **1-3 segundos** (handshake propuesta/acuerdo). **Con STP clásico:** **30-50 segundos** (esperando temporizadores).
+> ✅ Resumen rápido: misma LAN + ping a LLA OK → el fallo al ping a GUA casi siempre es **firewall**, **dirección no activa** (tentative/duplicada) o **prefijo mal / fuera de enlace**.
 
-e) Los puertos del Root Bridge son todos **Designated**: son el "punto de referencia" del árbol y nunca se bloquean.
+## 8. Tabla IPv4 vs IPv6
 
-## 8. Laboratorio: Port Security en la sala de profesores
+| Concepto | IPv4 | IPv6 |
+|---|---|---|
+| Bits de la dirección | 32 | **128** |
+| Notación | Decimal con puntos | **Hexadecimal con dos puntos** (8 grupos) |
+| Direcciones privadas | RFC 1918 (192.168…, 172.16…, 10…) | **ULA `FC00::/7`** (privada/organización) |
+| Broadcast | Sí (envía a todos) | **No existe**: solo multicast (`FF02::1` ≈ todos los nodos) |
+| Resolución IP → MAC | ARP | **NDP** (NS/NA vía ICMPv6, multicast) |
+| Multicast de listeners | IGMP | **MLD** (Multicast Listener Discovery) |
+| Configuración automática | DHCP | **SLAAC + DHCPv6** (stateless/stateful, flags M/O) |
+| Loopback | 127.0.0.1 | **`::1`** |
+| Fragmentación | La hacen cualquier router intermedio | **Solo la hace el origen** (Path MTU Discovery) |
+| Seguridad / NAT | NAT compartido para las privadas | **Sin NAT**: extremo a extremo; firewall y (opcional) IPsec |
 
-a) y b) Configuración completa:
-
-```bash
-Switch(config)# interface fa0/24
-Switch(config-if)# switchport mode access
-Switch(config-if)# switchport port-security
-Switch(config-if)# switchport port-security maximum 1
-Switch(config-if)# switchport port-security mac-address sticky
-Switch(config-if)# switchport port-security violation shutdown
-```
-
-c) Verificación: `Switch# show port-security interface fa0/24` (muestra el máximo, las MACs seguras y el estado del puerto).
-
-d) La violación ocurre porque la **MAC sticky del PC original NO caduca**: aunque el PC se desenchufe, su MAC permanece aprendida como permanente. Al conectar el portátil, su MAC nueva hace un total de 2 MACs en el puerto y se supera el máximo (1) → violación shutdown → errdisable.
-
-e) Recuperar el puerto:
-
-```bash
-Switch(config)# interface fa0/24
-Switch(config-if)# shutdown
-Switch(config-if)# no shutdown
-```
-
-(O configurar `errdisable recovery cause psecure-violation`.)
-
-f) Sin perder seguridad, puedes:
-   - Aumentar `maximum` a 2 si es un puerto compartido.
-   - Configurar el **envejecimiento de la port security** para que la MAC sticky expire si el dispositivo se desenchufa:
-     ```bash
-     Switch(config-if)# switchport port-security aging time 5
-     Switch(config-if)# switchport port-security aging type inactivity
-     ```
-   - O usar `violation restrict` (descarta el tráfico extra sin deshabilitar el puerto), aunque es menos estricto.
+> 💡 La fila de *fragmentación* y la de *NAT* suelen ser las que más sorprende: en IPv6 los routers ya no fragmentan (lo hace el origen), y el NAT, además de feo, era una falsa sensación de seguridad. Se acabó el escondite.

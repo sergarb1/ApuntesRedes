@@ -1,114 +1,114 @@
 ---
 title: Boletín U11 — Avanzado (Resuelto)
-description: Soluciones ejercicios avanzados de Diagnóstico y monitorización
+description: Soluciones ejercicios avanzados de NAT
 ---
 
 # ✅ Boletín U11 — Avanzado (Resuelto)
 
 ---
 
-## 1. Análisis Wireshark
+## 1. Traducción manual
 
-a) **Handshake TCP (3 pasos):**
-   - Paquete 1: **SYN** — Cliente inicia conexión
-   - Paquete 2: **SYN-ACK** — Servidor acepta
-   - Paquete 3: **ACK** — Cliente confirma → conexión establecida
-
-b) **PSH** (Push) indica que los datos deben ser entregados inmediatamente a la aplicación, sin esperar a llenar el buffer TCP.
-
-c) **El servidor no está recibiendo la petición HTTP o no puede responder.** Las retransmisiones indican pérdida de paquetes: el cliente no recibe ACK del paquete 4 y lo reenvía una y otra vez. Causas probables: cortafuegos bloqueando, congestión, o servidor caído.
-
-## 2. Monitorización SNMP avanzada
-
-a) OIDs:
-   - Nombre del dispositivo: `1.3.6.1.2.1.1.5.0`
-   - Uptime: `1.3.6.1.2.1.1.3.0`
-   - Tráfico entrante G0/0: `1.3.6.1.2.1.2.2.1.10.X` (X = índice de interfaz)
-   - Tráfico saliente G0/0: `1.3.6.1.2.1.2.2.1.16.X`
-   - CPU load: `1.3.6.1.2.1.25.3.3.1.2`
-
-b) Comando:
-   ```bash
-   snmpget -v2c -c publicia 192.168.1.1 1.3.6.1.2.1.1.3.0
-   ```
-
-c) **Zabbix, PRTG, LibreNMS, Cacti** — todas grafican métricas SNMP.
-
-## 3. Diagnóstico de problema real
-
-**Plan de diagnóstico:**
-
-1. **Verificar línea base:** ¿Qué velocidad se tenía antes de las 9? Comparar con mediciones actuales.
-2. **Verificar uso de ancho de banda:** `show interface` en el router de salida. Ver si el tráfico está saturado.
-3. **Identificar qué consume el ancho de banda:** NetFlow o `show ip cache flow` para ver qué IPs y puertos usan más tráfico.
-4. **Verificar errores de capa 1/2:** `show interface` para CRC errors, collisions, runts.
-5. **Verificar logs del router:** `show logging` para ver errores o cambios de configuración.
-6. **Analizar hora:** ¿A las 9 empieza algún backup, actualización, o llegan más empleados?
-
-**Herramientas:** Wireshark, NetFlow, SNMP (Zabbix), `iperf3` para pruebas de throughput.
-
-## 4. Configura Syslog centralizado
-
-a) En cada router:
-   ```bash
-   R1(config)# logging host 192.168.100.50
-   R1(config)# logging trap notifications
-   R1(config)# logging source-interface loopback 0
-   R1(config)# service timestamps log datetime msec
-   ```
-
-b) En el servidor Linux:
-   ```bash
-   # Configurar rsyslog para recibir logs UDP en puerto 514
-   sudo sed -i 's/^#module(load="imudp")/module(load="imudp")/' /etc/rsyslog.conf
-   sudo sed -i 's/^#input(type="imudp" port="514")/input(type="imudp" port="514")/' /etc/rsyslog.conf
-   sudo systemctl restart rsyslog
-   ```
-
-c) En producción: **nivel 5 (notifications)** o **nivel 6 (informational)**. Nivel 7 (debug) llenaría el disco muy rápido.
-
-## 5. Comparativa de herramientas
-
-| Herramienta | Tipo | Puerto(s) | Cifrado | Activa o pasiva |
+| Pro | Inside global | Inside local | Outside local | Outside global |
 |---|---|---|---|---|
-| SNMP v2c | Monitorización | 161/162 | No | Activa (polling) |
-| Syslog | Logging | 514 | No (TCP/UDP) | Pasiva (envío desde dispositivos) |
-| NetFlow | Análisis tráfico | 2055/9995 | No | Pasiva (envío desde routers) |
-| Wireshark | Captura paquetes | N/A | N/A | Pasiva (solo captura) |
+| tcp | 83.45.12.78:**60001** | 192.168.1.10:50000 | 8.8.8.8:80 | 8.8.8.8:80 |
+| udp | **83.45.12.78:60002** | 192.168.1.20:50000 | 8.8.8.8:53 | 8.8.8.8:53 |
 
-## 6. Troubleshooting complejo
+NAT asigna puertos únicos (60001, 60002) aunque los puertos origen sean iguales (50000).
 
-**Problema probable:** Una **ACL** en RouterA o RouterB bloquea el puerto 443 (HTTPS) pero permite ICMP. O el **firewall** en el servidor web bloquea conexiones desde 192.168.1.0/24.
+## 2. Problema con FTP activo
 
-**Comandos para confirmar:**
-- `show access-lists` en RouterA y RouterB — buscar reglas que bloqueen tcp/443
-- `telnet 10.0.0.100 443` desde RouterA (no desde un PC) — para ver si el problema está en la ACL de salida
-- `show ip interface` en RouterB — verificar si hay ACL aplicada en la interfaz hacia SedeCentral
-- En el servidor web: `netstat -an | find ":443"` (Windows) o `ss -tlnp | grep 443` (Linux) — verificar que el servicio escucha
+**Falla porque el servidor FTP externo intenta conectar directamente a 192.168.1.10:1025, pero esa IP es privada y no es accesible desde fuera.** Además, NAT no traduce IPs dentro del payload del protocolo FTP (comando PORT).
 
-## 7. Análisis de una captura con retransmisiones
+**Soluciones:**
+- Usar **FTP pasivo**: el cliente inicia ambas conexiones.
+- Activar **ALG FTP** en el router para que inspeccione y traduzca las IPs en el comando PORT.
+- Usar FTP sobre TLS/SSH.
 
-a) **Sí, el handshake se completó correctamente.** Los paquetes 1 (SYN), 2 (SYN-ACK) y 3 (ACK) forman el three-way handshake completo: la conexión quedó establecida y el cliente pudo enviar la petición GET en el paquete 4.
+## 3. Configuración multi-NAT
 
-b) Los paquetes 5 y 6 son **reenvíos del paquete 4** porque el cliente no recibió su ACK a tiempo. Es la señal clásica de **pérdida de paquetes o congestión**: la petición GET (o su ACK) se perdió en el camino, así que el emisor la reenvía tras el temporizador de retransmisión (RTO).
+```bash
+R1(config)# ip nat inside source static tcp 192.168.1.10 80 83.45.12.78 8080
+R1(config)# ip nat inside source static tcp 192.168.1.10 443 83.45.12.78 8443
+R1(config)# ip nat inside source static tcp 192.168.1.20 22 83.45.12.78 2222
+```
 
-c) El paquete 7 (`Window=0`) indica que el **receptor está saturado** (su buffer TCP está lleno) y pide al emisor que deje de enviar datos. Conclusión global: hay una red con **pérdidas** (las retransmisiones del 4) y un **servidor ahogado** (ventana a cero). El síntoma combinado apunta a congestión del enlace o saturación del servidor web, más que a un fallo de configuración pura.
+## 4. NAT + VPN
 
-## 8. Plan de monitorización SNMP + syslog
+**IPsec no pasa NAT porque NAT modifica la cabecera IP, y los protocolos AH y ESP usan hashes que verifican la integridad de la cabecera IP.** Al cambiar la IP, el hash no coincide y el paquete se rechaza.
 
-a) **OIDs clave:**
-   - `1.3.6.1.2.1.1.3.0` — sysUpTime: detectar reinicios inesperados de equipos
-   - `1.3.6.1.2.1.2.2.1.10.X` — ifInOctets de la interfaz de uplink (dos lecturas separadas para velocidad)
-   - `1.3.6.1.2.1.2.2.1.16.X` — ifOutOctets de la interfaz de uplink
-   - `1.3.6.1.2.1.25.3.3.1.2` — hrProcessorLoad: carga de CPU de los equipos
+**Solución:** **NAT-T (NAT Traversal)** — encapsula paquetes IPsec dentro de UDP (puerto 4500). NAT puede traducir UDP sin problemas, y IPsec viaja encapsulado.
 
-b) **Herramienta:** **Zabbix** (o LibreNMS). Justificación: es de las más modernas y populares, soporta SNMP + syslog + NetFlow, tiene auto-descubrimiento para los 10 dispositivos (los detecta solos) y es open source. PRTG también valdría, pero la licencia gratuita de 100 sensores es más justa con 10 dispositivos × varias métricas.
+## 5. Análisis de timeouts
 
-c) **Configuración:**
-   - SNMP en cada dispositivo: comunidad de solo lectura `monitor ro` (sin `rw`), `snmp-server location` y `snmp-server contact` identificando cada equipo, y `snmp-server host <IP-NMS> traps version 2c monitor`. Para producción real: **SNMP v3** con SHA + AES.
-   - Syslog: `logging host <IP-servidor-logs>`, `logging trap notifications` (nivel 5), `logging source-interface loopback 0` y `service timestamps log datetime msec`; en el servidor, rsyslog escuchando en UDP/514 con un archivo por dispositivo.
+**El problema no es NAT, es el firewall o el propio router que tiene un timeout de sesión TCP menor que el de NAT.** Muchos firewalls cierran conexiones TCP inactivas después de unos minutos. También puede ser el **keepalive TCP** del cliente o servidor SSH.
 
-d) **3 alarmas con umbral:**
-   1. **CPU > 80% durante 5 minutos** en switches y routers → posible sobrecarga o ataque.
-   2. **Tráfico de uplink > 85% del enlace durante 10 minutos** → saturación inminente (complementar con NetFlow para ver quién consume).
-   3. **sysUpTime que decrece** (equipo reiniciado) fuera de la ventana de mantenimiento → reinicio no planificado.
+**Solución:** Configurar keepalive SSH en el cliente (`ServerAliveInterval 60`), o ajustar el timeout de sesión TCP en el router.
+
+## 6. NAT y servidores duales
+
+```bash
+! PAT para todos los internos
+R1(config)# access-list 1 permit 192.168.10.0 0.0.0.255
+R1(config)# ip nat inside source list 1 interface g0/1 overload
+
+! NAT destino para servidor web (IP pública 83.45.12.78)
+R1(config)# ip nat inside source static tcp 192.168.10.10 80 83.45.12.78 80
+R1(config)# ip nat inside source static tcp 192.168.10.10 443 83.45.12.78 443
+
+! NAT destino para servidor correo (IP pública 83.45.12.79)
+R1(config)# ip nat inside source static tcp 192.168.10.20 25 83.45.12.79 25
+R1(config)# ip nat inside source static tcp 192.168.10.20 587 83.45.12.79 587
+R1(config)# ip nat inside source static tcp 192.168.10.20 993 83.45.12.79 993
+
+! Interfaces
+R1(config)# interface g0/0
+R1(config-if)# ip nat inside
+R1(config)# interface g0/1
+R1(config-if)# ip nat outside
+```
+
+## 7. Multi-NAT: servidores duales + PAT simultáneo
+
+```bash
+! PAT para los usuarios internos (83.45.12.78)
+R1(config)# access-list 1 permit 192.168.50.0 0.0.0.255
+R1(config)# ip nat inside source list 1 interface g0/1 overload
+
+! NAT destino para el servidor web (puertos públicos en 83.45.12.78)
+R1(config)# ip nat inside source static tcp 192.168.50.10 80 83.45.12.78 8080
+R1(config)# ip nat inside source static tcp 192.168.50.10 443 83.45.12.78 8443
+
+! NAT estático 1:1 para el servidor de correo (83.45.12.79)
+R1(config)# ip nat inside source static tcp 192.168.50.20 25 83.45.12.79 25
+R1(config)# ip nat inside source static tcp 192.168.50.20 587 83.45.12.79 587
+R1(config)# ip nat inside source static tcp 192.168.50.20 993 83.45.12.79 993
+
+! Interfaces
+R1(config)# interface g0/0
+R1(config-if)# ip nat inside
+R1(config)# interface g0/1
+R1(config-if)# ip nat outside
+```
+
+**Nota:** las traducciones estáticas y el PAT conviven sin problema. El tráfico de los usuarios usa el overload con puertos efímeros; las reglas estáticas tienen prioridad sobre sus puertos concretos (8080, 8443, 25, 587, 993).
+
+## 8. Diagnóstico: "no salimos a Internet"
+
+a) **Orden de comprobaciones (de básico a específico):**
+   1. `ping 192.168.1.1` desde un PC → ¿la LAN está viva?
+   2. `ping 203.0.113.2` desde un PC → ¿el paquete llega hasta la WAN del router?
+   3. `ping 8.8.8.8` desde el propio R1 → ¿tiene el router salida real?
+   4. `show ip nat translations` → ¿hay traducciones activas?
+   5. Revisar la access-list (¿permite la red correcta?) y el `overload` (¿está puesto?).
+   6. Verificar las marcas `ip nat inside/outside` en las interfaces.
+
+b) **`show ip nat translations`.** Esperas ver entradas del tipo `tcp 83.45.12.78:puerto ... 192.168.1.X:puerto ...` en cuanto los PCs generen tráfico hacia fuera.
+
+c) Si la tabla está **vacía** con tráfico circulando:
+   - La access-list no coincide con la red interna (red mal escrita o wildcard incorrecto).
+   - Falta la palabra `overload` en el comando PAT.
+   - Faltan `ip nat inside`/`ip nat outside` en las interfaces.
+   - El tráfico que se prueba no atraviesa las interfaces inside/outside (p. ej. se prueba desde el propio router).
+
+d) **Fallo real:** sin `ip nat inside` en g0/0 ni `ip nat outside` en g0/1, NAT no tiene "puertas" de traducción. La regla `ip nat inside source list 1 interface g0/1 overload` dice QUÉ traducir y A DÓNDE, pero NAT necesita saber qué tráfico es interno y cuál externo. Sin esas marcas de interfaz, los paquetes de la LAN se reenvían tal cual (o se descartan) y la tabla NAT permanece vacía: exactamente el síntoma observado.

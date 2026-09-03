@@ -1,85 +1,93 @@
 ---
 title: Boletín U03 — Inicial
-description: Ejercicios básicos de Infraestructura Física de Red
+description: Ejercicios básicos de Modelos OSI y Análisis de Tráfico
 ---
 
 # 📝 Boletín U03 — Inicial
 
-> Ejercicios básicos para afianzar los conceptos de medios físicos, cableado, crimpado y WiFi.
+> Ejercicios básicos para afianzar los conceptos de capas OSI, TCP/IP, encapsulación y Wireshark.
 
 ---
 
-## 1. Identifica el cable
+## 1. Ordena las capas OSI
 
-Relaciona cada tipo de cable con su uso:
+Ordena de menor a mayor (de capa 1 a capa 7):
 
-| Cable | Uso |
+a) Transporte
+b) Aplicación
+c) Red
+d) Enlace
+e) Sesión
+f) Física
+g) Presentación
+
+## 2. ¿Qué capa soy?
+
+Relaciona cada función con la capa OSI correspondiente:
+
+| Función | Capa |
 |---|---|
-| 1. Directo | a) PC a PC |
-| 2. Cruzado | b) PC a switch |
-| 3. Consola | c) Configuración inicial de un switch Cisco |
-
-## 2. ¿Qué categoría?
-
-Indica qué categoría de cable UTP necesitas para cada situación:
-
-a) Red de oficina a 1 Gbps
-b) Datacenter con 10 Gbps a 100 metros
-c) Cableado económico para una pequeña empresa
+| a) Direccionamiento IP y enrutamiento | |
+| b) Transmisión de bits por el cable | |
+| c) Segmentación y control de flujo | |
+| d) Interfaz con el usuario/aplicación | |
+| e) Direccionamiento MAC y detección de errores | |
 
 ## 3. Verdadero o falso
 
-a) La fibra óptica usa pulsos eléctricos para transmitir datos.
-b) El estándar T568B pone el par naranja en los pines 1 y 2.
-c) Un cable UTP tiene 4 pares de hilos (8 hilos en total).
-d) El Auto MDI-X permite usar cables directos entre switches.
-e) La diafonía es la pérdida de señal con la distancia.
+a) El modelo TCP/IP tiene 7 capas como el OSI.
+b) La PDU de la capa de Red se llama "paquete".
+c) UDP garantiza que los datos lleguen en orden.
+d) El three-way handshake es propio de TCP.
+e) Wireshark puede capturar el tráfico unicast de otros equipos en un switch sin configuración especial.
 
-## 4. Ordena el crimpado
+## 4. Identifica el puerto
 
-Ordena los pasos para crimpar un cable RJ45 (del 1 al 6):
+Indica qué puerto y protocolo (TCP/UDP) usa cada servicio:
 
-a) Insertar los hilos en el conector RJ45
-b) Pelar la funda exterior del cable
-c) Comprobar el cable con un tester
-d) Ordenar los hilos según T568B
-e) Cortar los hilos rectos
-f) Crimpar con la crimpadora
+a) HTTP
+b) HTTPS
+c) DNS
+d) SSH
+e) DHCP
 
-## 5. Relaciona concepto y definición
+## 5. Tamaños de cabeceras
 
-| Concepto | Definición |
+Completa la tabla:
+
+| Cabecera | Tamaño mínimo (bytes) |
 |---|---|
-| 1. Atenuación | a) Interferencia entre pares de hilos adyacentes |
-| 2. Diafonía | b) Capacidad máxima de transmisión de un medio |
-| 3. Ancho de banda | c) Tiempo de ida y vuelta de un paquete |
-| 4. Latencia | d) Pérdida de intensidad de la señal con la distancia |
+| Ethernet | |
+| IPv4 | |
+| TCP | |
+| UDP | |
 
-## 6. Sopa de letras de conectores
+## 6. ¿Qué PDU es?
 
-Nombra estos conectores y el medio en el que se usan:
+Relaciona cada capa con su PDU:
 
-a) RJ45
-b) LC
-c) SC
-
-## 7. Cableado estructurado
-
-Relaciona cada elemento del cableado estructurado con su función:
-
-| Elemento | Función |
+| Capa | PDU |
 |---|---|
-| 1. Latiguillo | a) Concentra los cables horizontales en el rack |
-| 2. Keystone | b) Cable flexible que une el PC con la roseta (o el patch panel con el switch) |
-| 3. Patch panel | c) Conector hembra RJ45 en la roseta de pared |
-| 4. Cable horizontal | d) Cable sólido empotrado que va del patch panel al keystone |
+| 4. Transporte | a) Bits |
+| 3. Red | b) Trama |
+| 2. Enlace | c) Paquete |
+| 1. Física | d) Segmento/Datagrama |
 
-## 8. Medios y estándares: verdadero o falso
+## 7. El campo TTL
 
-Indica si cada afirmación es verdadera (V) o falsa (F) y corrige las falsas:
+a) ¿Para qué sirve el campo **TTL** de la cabecera IPv4?
+b) Un paquete sale con TTL = 64 y llega a su destino con TTL = 57. ¿Cuántos routers (saltos) ha cruzado?
+c) ¿Qué EtherType esperas en la cabecera Ethernet de una trama que contiene un paquete IPv4?
 
-a) La fibra óptica se ve afectada por las interferencias electromagnéticas.
-b) El estándar 802.11ax se conoce comercialmente como WiFi 6.
-c) El WiFi transmite por ondas electromagnéticas en el aire, sin cable.
-d) La fibra multimodo llega a distancias de más de 40 km.
-e) La velocidad real del WiFi suele estar entre el 30% y el 50% de la teórica.
+## 8. Origen y destino
+
+Observa esta conexión:
+
+```
+Origen:  192.168.1.10:54321
+Destino: 142.250.184.4:443
+```
+
+a) ¿Cuál de los dos puertos es *efímero*? ¿En qué rango está?
+b) ¿Qué servicio reconoce el puerto 443?
+c) ¿Qué identifica exactamente un *socket*?

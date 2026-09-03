@@ -1,78 +1,72 @@
 ---
 title: Boletín U11 — Inicial (Resuelto)
-description: Soluciones ejercicios básicos de Diagnóstico y monitorización
+description: Soluciones ejercicios básicos de NAT
 ---
 
 # ✅ Boletín U11 — Inicial (Resuelto)
 
 ---
 
-## 1. Metodología de troubleshooting
+## 1. ¿Qué es NAT?
 
-Orden correcto (OSI de abajo arriba):
-1. (2) Comprobar que el cable está conectado (Capa 1)
-2. (3) Comprobar la tabla MAC del switch (Capa 2)
-3. (1) Hacer ping al gateway (Capa 3)
-4. (4) Hacer ping a 8.8.8.8 (Capa 3)
-5. (5) Hacer nslookup del dominio (Capa 7)
+**NAT** (Network Address Translation) traduce direcciones IP privadas (no enrutables en Internet) a direcciones IP públicas (enrutables). Es necesario porque:
+- Las IPv4 públicas son limitadas.
+- Una LAN completa puede compartir una o pocas IPs públicas.
 
-## 2. Comandos de diagnóstico
+## 2. Tipos de NAT
 
-| Comando | Función |
+| Tipo | Descripción |
 |---|---|
-| ping | **B** — Prueba conectividad básica |
-| traceroute | **A** — Muestra la ruta hasta un destino |
-| nslookup | **D** — Resuelve nombres DNS |
-| Wireshark | **C** — Captura paquetes en tiempo real |
-| netstat | **E** — Muestra conexiones activas |
+| NAT estático | **B** — Una IP privada fija se traduce a una IP pública fija |
+| NAT dinámico | **C** — Se asigna una IP pública de un pool disponible |
+| PAT | **A** — Muchas IPs privadas comparten una IP pública variando puertos |
 
-## 3. Interpreta un ping
-
-a) **Sí.** Hay conectividad completa.
-b) **Buena.** 14-16 ms es latencia excelente para Internet.
-c) **TTL=117** significa que el paquete ha pasado por varios routers (TTL inicial típico 128 - 11 routers = 117).
-
-## 4. Configura SNMP
+## 3. Configura PAT
 
 ```bash
-R1(config)# snmp-server community monitor ro
-R1(config)# snmp-server community admin rw
-R1(config)# snmp-server location SalaServidores
-R1(config)# snmp-server enable traps
-R1(config)# snmp-server host 192.168.1.100 traps version 2c monitor
+R1(config)# access-list 1 permit 192.168.1.0 0.0.0.255
+R1(config)# ip nat inside source list 1 interface g0/1 overload
+R1(config)# interface g0/0
+R1(config-if)# ip nat inside
+R1(config)# interface g0/1
+R1(config-if)# ip nat outside
 ```
+
+## 4. Tabla NAT
+
+a) **2 dispositivos** (192.168.1.10 y 192.168.1.20).
+b) **83.45.12.78**.
+c) **50001**.
 
 ## 5. Verdadero o falso
 
-a) **Verdadero.** SNMP v3 usa cifrado AES y autenticación SHA.
-b) **Falso.** Wireshark funciona en Windows, Linux, macOS.
-c) **Falso.** Si ping al gateway funciona, la LAN está bien. Si ping a 8.8.8.8 falla, el problema está más allá del gateway (WAN, ISP).
-d) **Falso.** Nivel 0 (Emergency) es el más grave. Nivel 7 (Debug) es el menos grave.
+a) **Falso.** NAT estático es 1 a 1. PAT permite compartir una IP.
+b) **Verdadero.** NAT necesita saber qué interfaz es inside y cuál outside.
+c) **Falso.** NAT estático hace eso. NAT dinámico asigna de un pool, no es fijo.
+d) **Verdadero.**
 
-## 6. Análisis de traceroute
+## 6. NAT destino (port forwarding)
 
-a) **4 saltos** (el destino está en el salto 4).
-b) **El router en el salto 3 no responde a ICMP.** Puede ser un firewall que bloquea ICMP, pero eso no significa que no esté funcionando (el salto 4 responde).
-c) **Sí**, el destino final responde en el salto 4.
+```bash
+R1(config)# ip nat inside source static tcp 192.168.1.10 80 83.45.12.78 80
+R1(config)# interface g0/0
+R1(config-if)# ip nat inside
+R1(config)# interface g0/1
+R1(config-if)# ip nat outside
+```
 
-## 7. Filtros de Wireshark
+## 7. ¿Qué tipo de NAT es?
 
-| Filtro | Qué muestra |
+| Escenario | Tipo |
 |---|---|
-| a) `tcp.flags.syn == 1` → **3** | Paquetes SYN (inicio de conexión) |
-| b) `ip.addr == 192.168.1.10` → **4** | Tráfico de/a esa IP |
-| c) `tcp.analysis.retransmission` → **2** | Retransmisiones TCP |
-| d) `dns` → **1** | Tráfico DNS |
-| e) `http.request` → **5** | Solo peticiones HTTP |
+| a) Servidor web 192.168.1.10 ↔ 83.45.12.78 fijo | **NAT estático** (1:1) |
+| b) Pool de 4 IPs públicas asignadas al vuelo | **NAT dinámico** (pool) |
+| c) 300 alumnos saliendo por una IP pública | **PAT** (sobrecarga) |
+| d) Puerto público 8080 → 192.168.1.10:80 | **NAT destino** (port forwarding) |
 
-## 8. Niveles de syslog
+## 8. Lee la tabla NAT
 
-De menos a más grave:
-
-1. **Debug** (7) — Depuración
-2. **Informational** (6) — Informativo
-3. **Warning** (4) — Advertencia
-4. **Critical** (2) — Crítica
-5. **Emergency** (0) — El más grave, sistema inusable
-
-**Nivel para producción:** **5 (notifications)** o **6 (informational)**. Dan suficiente detalle (caídas de interfaz, errores, eventos significativos) sin el torrente de mensajes del nivel 7 (debug), que llenaría el disco del servidor en pocas horas. Nivel 0-4, en cambio, filtraría demasiado y perderías avisos valiosos.
+a) **3 conexiones activas:** dos consultas DNS (8.8.8.8:53) y una sesión HTTPS (142.250.184.4:443).
+b) **49152** — es el puerto efímero original del PC 192.168.1.30 (columna *Inside local*).
+c) Porque **NAT asigna un puerto global distinto** a cada conexión (60001, 60002, 60003): los puertos efímeros duplicados no chocan porque el *Inside global* los desambigua.
+d) Las dos primeras van a **8.8.8.8:53 (DNS)**; la tercera a **142.250.184.4:443 (HTTPS)**.

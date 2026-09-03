@@ -1,86 +1,103 @@
 ---
 title: Boletín U07 — Inicial
-description: Ejercicios básicos de VLANs
+description: Ejercicios básicos de Switching y STP
 ---
 
 # 📝 Boletín U07 — Inicial
 
-> Ejercicios básicos para afianzar los conceptos de VLANs: tipos, 802.1Q, trunks e inter-VLAN routing.
+> Ejercicios básicos para afianzar los conceptos de switching y STP.
 
 ---
 
-## 1. ¿Qué VLAN soy?
+## 1. ¿Qué hace el switch?
 
-Relaciona el tipo de VLAN con su descripción:
+Relaciona la situación con la acción del switch:
 
-| Tipo | Descripción |
+| Situación | Acción |
 |---|---|
-| 1. VLAN de datos | a) Para teléfonos IP, con prioridad QoS |
-| 2. VLAN de voz | b) Para administrar el switch |
-| 3. VLAN nativa | c) Tráfico normal de usuario |
-| 4. VLAN de gestión | d) Sin etiquetar en el trunk |
+| 1. Llega una trama con MAC destino conocida | a) Inunda por todos los puertos menos el origen |
+| 2. Llega una trama con MAC destino desconocida | b) Reenvía solo por el puerto correspondiente |
+| 3. Llega una trama broadcast | c) Inunda por todos los puertos |
 
 ## 2. Verdadero o falso
 
-a) Una VLAN segmenta el dominio de broadcast.
-b) El estándar de etiquetado VLAN es 802.1Q.
-c) Dos PCs en diferentes VLANs pueden comunicarse directamente sin router.
-d) Un trunk transporta tráfico de múltiples VLANs.
-e) La native VLAN por defecto es VLAN 1.
+a) Un switch segmenta los dominios de colisión.
+b) Un switch segmenta los dominios de broadcast.
+c) STP evita bucles en redes conmutadas.
+d) RSTP converge más rápido que STP.
+e) La tabla MAC de un switch se llama tabla ARP.
 
-## 3. Identifica
+## 3. Estados STP
 
-¿Qué tipo de puerto es cada uno?
+Ordena los estados STP por los que pasa un puerto desde que se activa hasta que reenvía tráfico:
 
-a) Puerto que conecta un PC (solo una VLAN)
-b) Puerto que conecta dos switches (múltiples VLANs)
+a) Learning
+b) Forwarding
+c) Blocking
+d) Listening
 
-## 4. Números
+## 4. Identifica el rol
 
-Completa:
+Indica qué rol STP tiene cada puerto:
 
-a) ¿Cuántos bits tiene el VLAN ID en 802.1Q? ___
-b) ¿Cuántas VLANs permite el estándar? ___
-c) ¿Cuántos bytes añade 802.1Q a la trama? ___
+a) Puerto del Root Bridge hacia un switch no-root
+b) Puerto que mira hacia el Root Bridge (en un switch no-root)
+c) Puerto bloqueado que proporciona un camino alternativo
 
-## 5. Relaciona
+## 5. ¿Qué comando?
+
+Relaciona el comando con su función:
 
 | Comando | Función |
 |---|---|
-| 1. `switchport mode trunk` | a) Crear una VLAN |
-| 2. `vlan 10` | b) Configurar puerto como trunk |
-| 3. `show vlan brief` | c) Ver todas las VLANs |
-| 4. `encapsulation dot1Q 10` | d) Configurar subinterfaz para VLAN 10 |
+| 1. `show mac address-table` | a) Ver estado STP |
+| 2. `show spanning-tree` | b) Configurar PortFast |
+| 3. `spanning-tree portfast` | c) Ver tabla MAC del switch |
+| 4. `switchport port-security` | d) Activar seguridad de puerto |
 
-## 6. ¿Qué necesito?
+## 6. Tormenta de broadcast
 
-Para que PCs de VLAN 10 y VLAN 20 se comuniquen, necesito:
+¿Qué es necesario para que ocurra una tormenta de broadcast?
 
-a) Un trunk entre switches
-b) Un router o switch capa 3
-c) Un cable cruzado
-d) STP activado
+a) Un solo switch con muchos PCs
+b) Un bucle en la red (switches conectados formando un círculo)
+c) Un cable defectuoso
+d) Un router mal configurado
 
-## 7. Comandos de resolución
+## 7. Reenvío de tramas y la tabla CAM
 
-Relaciona cada comando de verificación con su utilidad:
+Observa la tabla CAM de un switch:
 
-| Comando | Utilidad |
-|---|---|
-| 1. `show vlan brief` | a) Ver la native VLAN, VLANs permitidas y mismatches del trunk |
-| 2. `show interfaces trunk` | b) Ver la configuración completa actual del dispositivo |
-| 3. `show running-config` | c) Ver qué VLANs existen y qué puertos access tiene cada una |
+```
+Vlan    Mac Address       Type        Ports
+----    -----------       --------    -----
+   1    0050.7966.6800    DYNAMIC     Fa0/1
+   1    0050.7966.6801    DYNAMIC     Fa0/2
+   1    00D0.BC96.1A01    DYNAMIC     Fa0/3
+```
 
-Además, responde:
+Indica qué hace el switch en cada caso:
 
-d) ¿Qué comando usarías para comprobar si las subinterfaces del router están Up/Up?
+a) Llega una trama por Fa0/2 con MAC origen `0050.7966.6801` y destino `00D0.BC96.1A01`.
+b) Llega una trama por Fa0/1 con MAC origen `0050.7966.6800` y destino `0050.7966.6802` (desconocida).
+c) Llega una trama por Fa0/3 con destino `FFFF.FFFF.FFFF` (broadcast).
+d) Llega una trama por Fa0/4 con MAC origen `0050.7966.6801`, una MAC que ya estaba aprendida en Fa0/2. ¿Qué hace el switch con la tabla CAM?
 
-## 8. V/F inter-VLAN
+**Pista:** si la MAC destino está en la tabla, reenvío selectivo; si no está, inundo. Y si la misma MAC origen aparece por un puerto distinto, la tabla se actualiza con el puerto más reciente.
 
-Verdadero o falso sobre router-on-a-stick y SVIs:
+## 8. Estados STP
 
-a) En router-on-a-stick, cada VLAN necesita su propia subinterfaz con `encapsulation dot1Q`.
-b) Un switch capa 3 enruta entre VLANs sin necesidad de router externo.
-c) El cuello de botella del router-on-a-stick es la única interfaz física que comparten todas las VLANs.
-d) Sin el comando `ip routing`, los SVIs de un switch capa 3 no enrutan entre VLANs.
-e) En router-on-a-stick, el tráfico de todas las VLANs pasa por la misma interfaz y por tanto se puede saturar con mucho tráfico.
+Completa la tabla de estados STP:
+
+| Estado | ¿Reenvía tráfico? | ¿Aprende MACs? | Tiempo |
+|---|---|---|---|
+| Blocking | No | ... | ... |
+| Listening | ... | No | 15 s |
+| Learning | No | ... | ... |
+| Forwarding | ... | Sí | Indefinido |
+
+a) ¿Cuál es el orden exacto de los estados desde que se activa el puerto?
+b) ¿Cuánto tarda un puerto STP en pasar de blocking a forwarding si no hay fallos?
+c) ¿En qué estado está un puerto que ya reenvía tráfico y aprende MACs?
+
+**Pista:** solo Learning aprende sin reenviar, y solo Forwarding reenvía. Suma los tiempos de los estados intermedios.

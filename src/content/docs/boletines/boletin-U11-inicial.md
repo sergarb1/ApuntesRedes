@@ -1,105 +1,92 @@
 ---
 title: Boletín U11 — Inicial
-description: Ejercicios básicos de Diagnóstico y monitorización
+description: Ejercicios básicos de NAT
 ---
 
 # 📝 Boletín U11 — Inicial
 
-> Ejercicios para practicar los fundamentos de diagnóstico de redes.
+> Ejercicios para practicar los fundamentos de NAT.
 
 ---
 
-## 1. Metodología de troubleshooting
+## 1. ¿Qué es NAT?
 
-Ordena los siguientes pasos de diagnóstico siguiendo el modelo OSI de abajo arriba:
+Define qué es NAT y por qué es necesario en las redes IPv4 actuales.
 
-- ( ) Hacer ping a 8.8.8.8
-- ( ) Comprobar que el cable está conectado
-- ( ) Hacer nslookup del dominio
-- ( ) Hacer ping al gateway
-- ( ) Comprobar la tabla MAC del switch
+<details>
+<summary>💡 Pista</summary>
+Piensa en la escasez de direcciones IPv4 públicas y cómo una LAN privada accede a Internet.
+</details>
 
-## 2. Comandos de diagnóstico
+## 2. Tipos de NAT
 
-Relaciona cada comando con su función:
+Relaciona cada tipo de NAT con su descripción:
 
-| Comando | Función |
+| Tipo | Descripción |
 |---|---|
-| ping | A. Muestra la ruta hasta un destino |
-| traceroute | B. Prueba conectividad básica |
-| nslookup | C. Captura paquetes en tiempo real |
-| Wireshark | D. Resuelve nombres DNS |
-| netstat | E. Muestra conexiones activas |
+| NAT estático | A. Muchas IPs privadas comparten una IP pública variando puertos |
+| NAT dinámico | B. Una IP privada fija se traduce a una IP pública fija |
+| PAT | C. Se asigna una IP pública de un pool disponible |
 
-## 3. Interpreta un ping
+## 3. Configura PAT
 
-Un usuario ejecuta `ping 8.8.8.8` y obtiene:
+Escribe los comandos necesarios para configurar PAT en un router Cisco donde:
+- Interfaz LAN: GigabitEthernet 0/0 (192.168.1.1/24)
+- Interfaz WAN: GigabitEthernet 0/1 (83.45.12.78/30)
+- Red interna: 192.168.1.0/24
+
+## 4. Tabla NAT
+
+Un router NAT muestra la siguiente tabla:
 
 ```
-Reply from 8.8.8.8: bytes=32 time=15ms TTL=117
-Reply from 8.8.8.8: bytes=32 time=14ms TTL=117
-Reply from 8.8.8.8: bytes=32 time=16ms TTL=117
-Reply from 8.8.8.8: bytes=32 time=15ms TTL=117
+Pro Inside global      Inside local       Outside local      Outside global
+tcp 83.45.12.78:50001  192.168.1.10:54321  8.8.8.8:53         8.8.8.8:53
+tcp 83.45.12.78:50002  192.168.1.20:54321  8.8.8.8:53         8.8.8.8:53
 ```
 
-a) ¿Hay conectividad con 8.8.8.8?
-b) ¿La latencia es buena o mala?
-c) ¿Qué significa TTL=117?
-
-## 4. Configura SNMP
-
-Un router Cisco debe ser monitorizado por SNMP. Escribe los comandos para:
-- Configurar comunidad de solo lectura "monitor"
-- Configurar comunidad de lectura-escritura "admin"
-- Especificar ubicación "SalaServidores"
-- Enviar traps al gestor 192.168.1.100
+a) ¿Cuántos dispositivos están haciendo peticiones DNS?
+b) ¿Cuál es la IP pública del router?
+c) ¿Qué puerto ha asignado NAT al PC 192.168.1.10?
 
 ## 5. Verdadero o falso
 
-a) SNMP v3 cifra la comunicación.
-b) Wireshark solo funciona en Windows.
-c) Si ping al gateway funciona pero ping a 8.8.8.8 no, el problema está en la LAN.
-d) syslog nivel 0 es el menos grave.
+a) NAT estático permite que múltiples PCs compartan una IP pública.
+b) PAT necesita configurar `ip nat inside` y `ip nat outside`.
+c) NAT dinámico traduce siempre la misma IP privada a la misma IP pública.
+d) `show ip nat translations` muestra las traducciones activas.
 
-## 6. Análisis de traceroute
+## 6. NAT destino (port forwarding)
 
-Un administrador ejecuta `tracert google.com` y ve:
+Quieres que un servidor web interno (192.168.1.10:80) sea accesible desde Internet en la IP pública 83.45.12.78:80. Escribe los comandos necesarios.
 
-```
-1   1ms    1ms    1ms   192.168.1.1
-2   10ms   10ms   10ms  10.0.0.1
-3   *      *      *     Request timed out.
-4   20ms   20ms   20ms  216.58.214.14
-```
+## 7. ¿Qué tipo de NAT es?
 
-a) ¿Cuántos saltos hay hasta el destino?
-b) ¿Qué significa el salto 3 con asteriscos?
-c) ¿El destino final es accesible?
+Identifica el tipo de NAT que se aplica en cada escenario:
 
-## 7. Filtros de Wireshark
-
-Relaciona cada filtro con lo que muestra:
-
-| Filtro | Qué muestra |
+| Escenario | Tipo de NAT |
 |---|---|
-| a) `tcp.flags.syn == 1` | 1. Tráfico DNS |
-| b) `ip.addr == 192.168.1.10` | 2. Retransmisiones TCP |
-| c) `tcp.analysis.retransmission` | 3. Paquetes SYN (inicio de conexión) |
-| d) `dns` | 4. Tráfico de/a esa IP |
-| e) `http.request` | 5. Solo peticiones HTTP |
+| a) El servidor web de la empresa (192.168.1.10) siempre sale a Internet como 83.45.12.78 | |
+| b) La oficina tiene un pool de 4 IPs públicas (83.45.12.78-81) y cada usuario toma una al salir | |
+| c) 300 alumnos de un instituto salen todos por la misma IP pública del router | |
+| d) Un cliente de Internet visita 83.45.12.78:8080 y llega al servidor interno 192.168.1.10:80 | |
 
-**Pista:** recuerda que los filtros de Wireshark usan la sintaxis `protocolo.campo == valor`. El de retransmisiones es el único que empieza por `tcp.analysis`.
+**Pista:** recuerda la tabla de tipos del punto 2 de la unidad: estático (1:1 fijo), dinámico (pool), PAT (muchos:1 con puertos) y destino (puerto público → IP:puerto interno).
 
-## 8. Niveles de syslog
+## 8. Lee la tabla NAT
 
-Ordena estos niveles de severidad de MENOS a MÁS grave:
+El router muestra esta tabla:
 
-a) Critical
-b) Debug
-c) Warning
-d) Informational
-e) Emergency
+```
+Pro Inside global      Inside local       Outside local      Outside global
+tcp 83.45.12.78:60001  192.168.1.10:54321  8.8.8.8:53         8.8.8.8:53
+tcp 83.45.12.78:60002  192.168.1.20:54321  8.8.8.8:53         8.8.8.8:53
+tcp 83.45.12.78:60003  192.168.1.30:49152  142.250.184.4:443  142.250.184.4:443
+```
 
-Después responde: para un servidor de logs en producción que no debe llenar el disco, ¿qué nivel de logging elegirías y por qué?
+a) ¿Cuántas conexiones hay activas y de qué tipo de tráfico?
+b) ¿Qué puerto efímero original usaba el PC 192.168.1.30?
+c) ¿Por qué dos PCs pueden usar el mismo puerto origen (54321) sin conflicto?
+d) ¿A qué servicio destino van las dos primeras conexiones? ¿Y la tercera?
 
-**Pista:** recuerda que en syslog el número menor es el más grave (0 = Emergency, 7 = Debug).
+**Pista:** los puertos efímeros (49152-65535) los elige cada PC; NAT añade un puerto global único por conexión (60001, 60002…) para desambiguar. Fíjate en la columna *Outside local* para saber el destino.

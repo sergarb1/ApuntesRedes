@@ -1,67 +1,74 @@
 ---
 title: Boletín U03 — Inicial (Resuelto)
-description: Soluciones de los ejercicios básicos de Infraestructura Física de Red
+description: Soluciones de los ejercicios básicos de Modelos OSI y Análisis de Tráfico
 ---
 
 # ✅ Boletín U03 — Inicial (Resuelto)
 
 ---
 
-## 1. Identifica el cable
+## 1. Ordena las capas OSI
 
-1 → b (Directo: PC a switch)
-2 → a (Cruzado: PC a PC)
-3 → c (Consola: configuración switch)
+1. **Física** — Capa 1
+2. **Enlace** — Capa 2
+3. **Red** — Capa 3
+4. **Transporte** — Capa 4
+5. **Sesión** — Capa 5
+6. **Presentación** — Capa 6
+7. **Aplicación** — Capa 7
 
-## 2. ¿Qué categoría?
+## 2. ¿Qué capa soy?
 
-a) **Cat6** — 1 Gbps a 100 m, estándar actual en oficinas
-b) **Cat6a o superior** — 10 Gbps a 100 m
-c) **Cat5e** — 1 Gbps a 100 m, más barato que Cat6
+a) Direccionamiento IP y enrutamiento → **Capa 3 (Red)**
+b) Transmisión de bits por el cable → **Capa 1 (Física)**
+c) Segmentación y control de flujo → **Capa 4 (Transporte)**
+d) Interfaz con el usuario/aplicación → **Capa 7 (Aplicación)**
+e) Direccionamiento MAC y detección de errores → **Capa 2 (Enlace)**
 
 ## 3. Verdadero o falso
 
-a) **Falso.** La fibra usa pulsos de LUZ (fotones), no electricidad.
-b) **Verdadero.** T568B: pin 1 = Blanco/Naranja, pin 2 = Naranja.
-c) **Verdadero.** 4 pares trenzados = 8 hilos.
-d) **Verdadero.** Auto MDI-X detecta el tipo de cable y ajusta la interfaz.
-e) **Falso.** La diafonía (crosstalk) es la interferencia entre pares. La pérdida con la distancia es atenuación.
+a) **Falso.** TCP/IP tiene 4 capas: Aplicación, Transporte, Internet y Acceso a Red.
+b) **Verdadero.** En la capa de Red la PDU se llama paquete (datagrama en UDP).
+c) **Falso.** UDP no garantiza orden ni fiabilidad: eso es TCP.
+d) **Verdadero.** SYN, SYN-ACK, ACK: el three-way handshake es la esencia de TCP.
+e) **Falso.** Con un switch solo ves tu tráfico unicast; el de otros necesita un hub, puerto espejo o ARP spoofing.
 
-## 4. Ordena el crimpado
+## 4. Identifica el puerto
 
-1. b) Pelar la funda exterior del cable
-2. d) Ordenar los hilos según T568B
-3. e) Cortar los hilos rectos
-4. a) Insertar los hilos en el conector RJ45
-5. f) Crimpar con la crimpadora
-6. c) Comprobar el cable con un tester
+a) HTTP → **80/TCP**
+b) HTTPS → **443/TCP**
+c) DNS → **53/UDP** (y TCP para transferencias de zona)
+d) SSH → **22/TCP**
+e) DHCP → **67-68/UDP**
 
-## 5. Relaciona concepto y definición
+## 5. Tamaños de cabeceras
 
-1 → d (Atenuación)
-2 → a (Diafonía)
-3 → b (Ancho de banda)
-4 → c (Latencia)
+| Cabecera | Tamaño mínimo (bytes) |
+|---|---|
+| Ethernet | 14 (+ 4 FCS) |
+| IPv4 | 20 |
+| TCP | 20 |
+| UDP | 8 |
 
-## 6. Sopa de letras de conectores
+## 6. ¿Qué PDU es?
 
-a) **RJ45** — Conector de 8 pines para cable UTP (cobre)
-b) **LC** — Conector de fibra óptica, pequeño, tipo push-pull
-c) **SC** — Conector de fibra óptica, cuadrado, push-pull
+| Capa | PDU |
+|---|---|
+| 4. Transporte → d) | Segmento/Datagrama |
+| 3. Red → c) | Paquete |
+| 2. Enlace → b) | Trama |
+| 1. Física → a) | Bits |
 
-## 7. Cableado estructurado
+## 7. El campo TTL
 
-1 → b (Latiguillo: flexible, une PC con roseta o patch panel con switch)
-2 → c (Keystone: conector hembra RJ45 en la roseta de pared)
-3 → a (Patch panel: concentra los cables horizontales en el rack)
-4 → d (Cable horizontal: sólido, empotrado, del patch panel al keystone)
+a) **Evitar bucles infinitos:** cada router lo decrementa en 1 y, si llega a 0, el paquete se descarta.
+b) **64 - 57 = 7 saltos**.
+c) **0x0800** — el EtherType de IPv4 (0x86DD es IPv6 y 0x0806 es ARP).
 
-> 💡 **La idea:** el latiguillo es la parte flexible y desechable; el cable horizontal es la parte fija que no se toca nunca. El keystone es donde termina en la pared y el patch panel donde concentra el rack.
+## 8. Origen y destino
 
-## 8. Medios y estándares: verdadero o falso
+a) El **54321** es el efímero: está en el rango **49152-65535**.
+b) El **443** es **HTTPS** (web cifrada), un puerto *well-known* (0-1023).
+c) Un **socket** es la combinación `IP:puerto` que identifica un extremo completo de la conversación (aquí `192.168.1.10:54321` y `142.250.184.4:443`).
 
-a) **Falso.** La fibra es INMUNE a las interferencias electromagnéticas: transmite luz, no electricidad, y los campos externos no afectan a los fotones.
-b) **Verdadero.** 802.11ax = WiFi 6 (2019, bandas de 2.4 y 5 GHz).
-c) **Verdadero.** El WiFi envía ondas electromagnéticas por el aire, sin medio conductor.
-d) **Falso.** Es la fibra **monomodo** la que llega a 40+ km. La **multimodo** se queda en unos 550 m a 10 Gbps.
-e) **Verdadero.** La velocidad real WiFi suele ser el 30-50% de la teórica por overhead, obstrucciones e interferencias.
+>La conexión se define por DOS sockets: el de origen y el de destino.

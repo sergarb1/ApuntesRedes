@@ -1,121 +1,94 @@
 ---
 title: Boletín U03 — Avanzado (Resuelto)
-description: Soluciones de los ejercicios avanzados de Infraestructura Física de Red
+description: Soluciones de los ejercicios avanzados de Modelos OSI y Análisis de Tráfico
 ---
 
 # ✅ Boletín U03 — Avanzado (Resuelto)
 
 ---
 
-## 1. Diagnóstico de cableado
+## 1. Análisis de captura Wireshark
 
-a) **Causas posibles:**
-   - Solo 2 pares conectados (mal crimpado) → negociación a 100 Mbps
-   - Cable Cat5e dañado o de mala calidad
-   - El switch o PC tienen el puerto configurado manualmente a 100 Mbps
-   - Cable demasiado largo (>100 m)
+a) **Paquetes 1-3:** three-way handshake TCP entre el PC (192.168.1.10) y el gateway (192.168.1.1). El PC abre una conexión desde el puerto efímero 54321 hacia el 443 (HTTPS) del gateway.
 
-b) **Herramientas:** Comprobador de cables (para verificar continuidad de los 4 pares), y la configuración de red del PC/switch (para ver velocidad negociada).
+b) **Paquete 4:** el PC inicia un **nuevo** three-way handshake, ahora hacia 142.250.184.4 (un servidor real de Google). Sugiere que el primer handshake fue local (una validación o proxy del gateway) y ahora procede con el destino real.
 
-c) **Prueba de diagnóstico:**
-   - Probar el mismo cable con otro PC y otro puerto del switch
-   - Probar otro cable conocido bueno en el mismo PC y puerto
-   - Si el cable nuevo funciona a 1 Gbps → el cable original está dañado
-   - Si ningún cable funciona a 1 Gbps → problema en PC o switch
+c) **Lo que falta:** la respuesta al paquete 4 (el SYN-ACK del servidor). Es probable que la captura se detuviera antes, o que el destino aún no responda. En HTTPS, además, el contenido viaja cifrado y no aparecería como HTTP.
 
-## 2. Diseño de cableado estructurado
+## 2. Diseña la encapsulación
 
-a) **Switches:**
-   - Planta 1: 1 switch de 48 puertos (para 40 puestos + servidores)
-   - Planta 2: 1 switch de 48 puertos (para 30 puestos)
-   - Switch de core en la sala de servidores
+a) **Ethernet:**
+   - MAC destino: la del **gateway** (192.168.1.1).
+   - MAC origen: la del PC.
+   - EtherType: `0x0800` (IPv4).
 
-b) **Cable:**
-   - Puestos: Cat6 (estándar para 1 Gbps)
-   - Uplinks entre plantas: fibra multimodo (OM3/OM4, 10 Gbps)
+b) **IP:**
+   - IP origen: `192.168.1.10`.
+   - IP destino: `8.8.8.8`.
+   - Protocol: **17 (UDP)**, porque la consulta DNS va sobre UDP.
+   - TTL: 64 (típico en Linux).
 
-c) **Patch panels:** 1 panel de 48 puertos por planta, cerca del switch correspondiente.
+c) **UDP:**
+   - Puerto origen: **efímero** (ej. 34567).
+   - Puerto destino: **53** (DNS).
 
-d) **Conexión entre plantas:** Fibra multimodo desde cada switch de planta hasta el switch de core en la sala de servidores, usando módulos SFP+.
+d) **DNS:** la consulta pide la dirección A (IPv4) de "google.com": `¿Quién es google.com?`.
 
-## 3. Cálculo de atenuación
+## 3. Diagnóstico por capas
 
-a) Potencia recibida = 2 dBm - 21,3 dB = **-19,3 dBm**
+a) **Capa 7 (Aplicación)** — concretamente el servicio **DNS**. El ping a 8.8.8.8 (ICMP, capa 3) funciona, pero los nombres no se resuelven.
+b) `nslookup google.com` o `dig google.com`.
+c) **Causa más probable:** el servidor DNS configurado no responde o es inaccesible (IP inventada o caído).
 
-b) **Sí funciona.** -19,3 dBm > -20 dBm (el umbral del receptor). La señal es válida.
+## 4. Three-way handshake
 
-c) A 120 metros: atenuación proporcional = 21,3 × (120/100) = 25,56 dB
-   Potencia recibida = 2 - 25,56 = **-23,56 dBm**
-   **No funciona.** -23,56 dBm está por debajo del umbral de -20 dBm.
+a) **SYN perdido:** el cliente no recibe SYN-ACK, espera el RTO y **reenvía el SYN**. La conexión se establece una vez que el SYN llega y el servidor responde.
+b) **SYN-ACK perdido:** el cliente tampoco recibe respuesta y reenvía su SYN; el servidor, al recibir el segundo SYN, reenvía su SYN-ACK. La conexión se establece cuando el SYN-ACK llega.
+c) **ACK final perdido:** el servidor queda en estado **SYN-RECEIVED** y reenvía el SYN-ACK tras su RTO. El cliente, que ya cree tener la conexión, puede incluso mandar datos que el servidor aceptará. Si tras varios reintentos no llega el ACK, el servidor cierra.
 
-## 4. Fibra vs cobre: caso real
+**Resumen:** en a) y b) la conexión acaba estableciéndose tras la retransmisión. En c) puede quedar "a medias": el cliente cree que sí y el servidor no está seguro.
 
-a) **200 m:** Cobre Cat6a (funciona a 10 Gbps hasta 100 m) o fibra multimodo
-   **500 m:** Fibra multimodo (el cobre no llega a 500 m)
-   **2000 m:** Fibra monomodo (obligatorio para 2 km)
+## 5. TTL y fragmentación
 
-b) **200-500 m:** Fibra multimodo OM3/OM4 (10 Gbps, hasta 550 m)
-   **2000 m:** Fibra monomodo OS2 (10 Gbps, hasta 40 km)
+Datos: paquete IP de 2500 bytes, MTU Ethernet = 1500.
 
-c) **Conectores:** LC (estándar en SFP)
-   **Módulos SFP:**
-   - 200-500 m: SFP+ 10GBASE-SR (multimodo, 850 nm)
-   - 2000 m: SFP+ 10GBASE-LR (monomodo, 1310 nm)
+a) **Fragmentos generados:**
+   - Cabecera IP: 20 bytes.
+   - Datos a fragmentar: 2500 - 20 = 2480 bytes.
+   - Fragmento 1: 20 (cabecera) + 1480 (datos) = **1500 bytes** (MF=1).
+   - Fragmento 2: 20 (cabecera) + 1000 (datos restantes) = **1020 bytes** (MF=0).
 
-## 5. Pinout y solución de problemas
+   **Total: 2 fragmentos** (no 3: hay que contar la cabecera de cada fragmento).
 
-a) **Falla el pin 3** (el cuarto LED no se enciende: posición 3 de 8).
+b) **Campos que cambian:**
+   - Flags: **MF=1** en el primero, **MF=0** en el último.
+   - **Fragment Offset:** 0 en el primero, 185 (1480/8) en el segundo.
+   - **Total Length:** 1500 y 1020.
+   - **Identification:** el mismo en ambos (para que el destino los asocie).
+   - **Header Checksum:** se recalcula en cada fragmento.
 
-b) **Par 3-6** (blanco/verde y verde en T568B, o blanco/naranja y naranja en T568A). El pin 3 forma parte del par transmisión/recepción junto con el pin 6.
+c) **TTL al llegar:** 64 - 15 = **49**.
 
-c) **Funcionará parcialmente.** 100Base-TX solo necesita los pares 1-2 y 3-6. Como falla el par 3-6, el cable **no funcionará ni a 100 Mbps**. Para Gigabit (que necesita los 4 pares), tampoco funcionará.
+## 6. Wireshark: filtros combinados
 
-## 6. Diseña el latiguillo perfecto
+a) `http && ip.src == 192.168.1.10`
+b) `tcp.dstport == 22 || tcp.dstport == 443`
+c) `dns && !(dns.qry.name == "google.com")`
+d) `tcp.analysis.flags`
 
-**Herramientas:** Crimpadora RJ45, pelacables, cortador, comprobador de cables.
+## 7. La conexión que no se cierra
 
-**Pasos:**
-1. **Pelar:** Con el pelacables, retira unos 2 cm de la funda exterior. Con cuidado de no dañar los hilos internos.
-2. **Ordenar (T568B, clip hacia abajo, mirando el conector de frente):**
-   - Pin 1: Blanco/Naranja
-   - Pin 2: Naranja
-   - Pin 3: Blanco/Verde
-   - Pin 4: Azul
-   - Pin 5: Blanco/Azul
-   - Pin 6: Verde
-   - Pin 7: Blanco/Marrón
-   - Pin 8: Marrón
-3. **Cortar:** Con la crimpadora, corta los hilos rectos dejando aproximadamente 1 cm desde la funda.
-4. **Insertar:** Mete los hilos en el conector RJ45, empujando hasta que los veas asomar por el frente (por los contactos dorados). La funda debe quedar dentro del conector (el pasador de sujeción la agarra).
-5. **Crimpar:** Introduce el conector en la crimpadora y aprieta firmemente hasta oír un clic.
-6. **Comprobar:** Usa el tester para verificar continuidad en todos los pines (1-8 en orden). Si algún LED no se enciende o el orden es incorrecto, corta y repite.
+a) **Capa 4 (Transporte)**, protocolo **TCP**: el estado `TIME_WAIT` es propio del cierre de conexiones TCP.
+b) El cierre **FIN → ACK → FIN → ACK**. Cuando ambos lados terminan, la conexión pasa a `TIME_WAIT` durante **2 × MSL** (el doble del tiempo máximo de vida de un segmento, ~2 minutos) para asegurar que los ACKs finales no se pierdan.
 
-**Señal de crimpado correcto:** Todos los contactos dorados están hundidos uniformemente, la funda está sujeta por el pasador, y el tester muestra LEDs 1-8 en secuencia correcta.
+c) **Recomendaciones:** aumentar el rango de puertos efímeros (o activar *time-wait reuse*), reducir el rango de conexiones en espera, o mejorar la liberación del stack (`tcp_tw_reuse` en Linux). La clave es entender que el estado NO se queda para siempre: es un periodo de seguridad de TCP.
 
-## 7. Caso WiFi: oficina con zonas muertas
+## 8. Del nombre a la trama, al revés
 
-a) **Causas físicas posibles:**
-   - **Interferencia de vecinos:** los APs de las oficinas colindantes comparten el canal 1, 6 u 11, y todos se pisan.
-   - **Obstrucciones:** los tabiques de cartón-yeso y el mobiliario atenúan la señal (atenuación).
-   - **Covertura insuficiente:** un solo AP para 25 puestos reparte un canal compartido entre muchos clientes; las zonas más alejadas quedan al límite.
-   - **Canal saturado:** todos los clientes compiten por el mismo canal, y en horas punta (la tarde) la contienda se dispara.
+a) La **capa 2 (Enlace)** elimina la cabecera Ethernet y queda el **paquete IP**.
 
-b) **Herramientas:** analizador WiFi (para ver canales, señal RSSI y APs vecinos), aplicación de escaneo de red para comprobar número de clientes, y medición de velocidad en distintos puntos de la oficina.
+b) En `0x0800` = **IPv4** (capa 3); con Protocol = 6, el contenido es **TCP** (capa 4). Es una trama que lleva tráfico TCP sobre IPv4 → perfecta para `https://example.com`.
 
-c) **Soluciones ordenadas de más barata a más cara:**
-   1. **Elegir canales no solapados** (1, 6, 11 en 2,4 GHz) y configurar el AP en 5 GHz (y, si soporta, activar band-steering).
-   2. **Reubicar el AP** en una posición más central o elevado, lejos de metal y fuentes de interferencia.
-   3. **Añadir APs adicionales** (o un mesh) para cubrir las zonas muertas, con canales distintos entre APs adyacentes.
+c) TCP **ordena los segmentos por su número de secuencia** en el receptor y los reensambla para reconstruir la página antes de entregarla a la aplicación.
 
-## 8. Elección de medio a escala
-
-a) **Mini-oficina (8 puestos, 60 m²):** **Cobre Cat6 para los puestos fijos** + **1 AP WiFi** para visitas y movilidad. Distancias cortas (< 100 m), presupuesto ajustado: el WiFi por sí solo puede bastar, pero los puestos fijos con cobre garantizan rendimiento y estabilidad.
-
-b) **Planta de 40 puestos (rack en la misma planta):** **Cobre Cat6 a todos los puestos** (distancias dentro de los 100 m, 1 Gbps) con cableado estructurado (patch panels + latiguillos). El uplink del rack si se extiende a otra sala más lejana: fibra multimodo. WiFi como complemento para salas de reuniones.
-
-c) **Campus de 3 edificios:**
-   - **100 m:** Cobre Cat6a (límite exacto del cobre; correcto y barato) o fibra multimodo si se prefiere backbone.
-   - **500 m:** **Fibra multimodo OM3/OM4** (el cobre no llega a 500 m; la multimodo cubre hasta ~550 m a 10 Gbps).
-   - **2000 m:** **Fibra monomodo OS2** (obligatoria: solo la monomodo cubre distancias de kilómetros).
-
-> 💡 **Regla resumen:** distancia decide el medio (cobre ≤ 100 m, multimodo ≤ ~550 m, monomodo el resto); movilidad decide el WiFi; presupuesto decide las categorías.
+d) La capa 2 comprueba el **FCS (CRC)**: si no coincide, la trama se **descarta** sin entregarla a la capa 3.

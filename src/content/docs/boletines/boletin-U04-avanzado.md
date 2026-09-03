@@ -1,122 +1,102 @@
 ---
 title: Boletín U04 — Avanzado
-description: Ejercicios avanzados de IPv4 y Subnetting
+description: Ejercicios avanzados de Infraestructura Física de Red
 ---
 
 # 📝 Boletín U04 — Avanzado
 
-> Ejercicios que requieren aplicar subnetting, VLSM y DHCP de forma más profunda.
+> Ejercicios que requieren aplicar los conceptos de cableado, medios físicos y WiFi de forma combinada. En los difíciles tienes pista.
 
 ---
 
-## 1. Diseño VLSM
+## 1. Diagnóstico de cableado
 
-Te dan la red **172.16.0.0/24**. Debes diseñar el direccionamiento para:
+Un usuario reporta que su PC solo alcanza 100 Mbps en lugar de 1 Gbps. El switch es Gigabit, el cable es Cat5e y el PC tiene una tarjeta Gigabit.
 
-- **Producción:** 60 hosts
-- **Desarrollo:** 30 hosts
-- **Testing:** 10 hosts
-- **Enlaces WAN:** 3 enlaces punto a punto (2 IPs cada uno)
+a) ¿Cuáles pueden ser las causas?
+b) ¿Qué herramienta usarías para diagnosticar?
+c) ¿Cómo probarías si el problema es el cable, el PC o el switch?
 
-a) Diseña el VLSM con el mínimo desperdicio de direcciones.
-b) Indica la red, máscara, rango de hosts y broadcast para cada subred.
-c) ¿Cuántas IPs sobran?
+**Pista:** Gigabit Ethernet requiere los 4 pares. Si solo 2 pares están conectados, la negociación cae a 100 Mbps.
 
-**Pista:** Ordena de mayor a menor necesidad. Recuerda que los enlaces /30 solo necesitan 2 hosts.
+## 2. Diseño de cableado estructurado
 
-## 2. Diagnóstico DHCP
+Diseña el cableado para una oficina de 2 plantas:
 
-Un usuario no puede conectarse a Internet. Su configuración IP es:
+**Planta 1:** 40 puestos de trabajo + sala de servidores
+**Planta 2:** 30 puestos de trabajo
+
+Especifica:
+a) Cuántos switches necesitas y de qué tipo
+b) Qué categoría de cable usas para puestos y para uplinks
+c) Dónde colocas los patch panels
+d) Cómo conectas las dos plantas
+
+**Pista:** Piensa en términos de cable horizontal, patch panels, y uplinks entre plantas. La fibra para uplinks entre plantas es una buena práctica.
+
+## 3. Cálculo de atenuación
+
+Un cable UTP Cat6 tiene una atenuación máxima de 21,3 dB a 100 MHz para 100 metros. La señal del transmisor tiene una potencia de 2 dBm.
+
+a) ¿Qué potencia llega al receptor después de 100 m?
+b) Si el receptor necesita al menos -20 dBm para interpretar la señal, ¿funciona?
+c) ¿Qué pasa si el cable mide 120 metros?
+
+**Pista:** Potencia recibida = Potencia transmitida - Atenuación. La atenuación es proporcional a la distancia.
+
+## 4. Fibra vs cobre: caso real
+
+Eres el administrador de un campus universitario con 3 edificios separados por 200, 500 y 2000 metros respectivamente.
+
+a) ¿Qué medio usarías para conectar cada edificio? ¿Por qué?
+b) Si usas fibra, ¿monomodo o multimodo? ¿Para cada distancia?
+c) ¿Qué conectores y módulos SFP elegirías?
+
+**Pista:** 200 m → multimodo (barato). 2000 m → monomodo (necesario por distancia).
+
+## 5. Pinout y solución de problemas
+
+Tienes un cable que no funciona. Usas un comprobador y ves esta secuencia de LEDs:
 
 ```
-IPv4: 169.254.15.33
-Máscara: 255.255.0.0
-Gateway: (vacío)
-DNS: (vacío)
+Extremo A: 1 2 3 4 5 6 7 8
+Extremo B: 1 2 3 4 5 6 7 8
+           ✓ ✓ ✗ ✓ ✓ ✓ ✓ ✓
 ```
 
-a) ¿Qué tipo de dirección es 169.254.15.33?
-b) ¿Por qué tiene esa IP?
-c) ¿Qué solución propones?
+a) ¿Qué pin falla?
+b) ¿Qué par de hilos está afectado?
+c) ¿El cable funcionará parcialmente? ¿A qué velocidad?
 
-**Pista:** 169.254.0.0/16 es APIPA (Automatic Private IP Addressing). Windows asigna esta IP cuando el servidor DHCP no responde.
+**Pista:** Localiza qué par (1-2, 3-6, 4-5, 7-8) corresponde al pin que falla.
 
-## 3. Subnetting binario
+## 6. Diseña el latiguillo perfecto
 
-Dada la IP 200.100.50.30 con máscara 255.255.255.224 (/27):
+Describe paso a paso cómo crimpar un cable directo T568B, incluyendo:
 
-a) Escribe la IP y la máscara en binario
-b) Calcula la dirección de red (AND)
-c) ¿Cuál es la dirección de broadcast?
-d) ¿Cuántos hosts útiles tiene esta subred?
-e) ¿La IP 200.100.50.62 está en la misma subred? ¿Por qué?
+a) Herramientas necesarias
+b) Longitud recomendada de pelado de funda
+c) Orden exacto de los hilos (de izquierda a derecha, con el clip hacia abajo)
+d) Cómo saber si el crimpado ha sido correcto
 
-## 4. Resumen de subredes
+## 7. Caso WiFi: oficina con zonas muertas
 
-Tienes 10.0.0.0/16. Necesitas crear 8 subredes del mismo tamaño.
+En una oficina de 25 puestos separados por tabiques de cartón-yeso, un único AP wifi en el pasillo central da "zonas muertas" y una velocidad general decepcionante. Los empleados se quejan cada tarde.
 
-a) ¿Cuántos bits debes pedir prestados?
-b) ¿Cuál es la nueva máscara?
-c) ¿Cuántos hosts por subred?
-d) Enumera las 8 direcciones de red resultantes
+a) ¿Qué causas físicas explicarían la lentitud (nombra al menos 3)?
+b) ¿Qué herramientas usarías para confirmarlas?
+c) Propón 3 soluciones realistas ordenadas de más barata a más cara.
 
-## 5. Sumarización de rutas
+**Pista:** piensa en canales (1, 6, 11), interferencia de vecinos, obstáculos y el número de clientes compartiendo el mismo AP. Recuerda que la velocidad real WiFi es del 30-50%.
 
-Tienes estas 4 subredes:
-- 192.168.0.0/24
-- 192.168.1.0/24
-- 192.168.2.0/24
-- 192.168.3.0/24
+## 8. Elección de medio a escala
 
-a) ¿Puedes resumirlas en una sola ruta? ¿Cuál?
-b) ¿Qué máscara tendría la ruta resumida?
-c) ¿Cuántas IPs totales abarca la ruta resumida?
+Decide qué medio de transmisión usarías para cada escenario y justifícalo:
 
-**Pista:** Mira los bits en común. Las 4 redes comparten los primeros 22 bits.
+a) **Mini-oficina** de 8 puestos en un local de 60 m².
+b) **Planta** de 40 puestos en un edificio de oficinas con el rack en la misma planta.
+c) **Campus** de 3 edificios separados por 100, 500 y 2000 metros.
 
-## 6. Plan de direccionamiento para una empresa
+En cada caso indica: medio (cobre/fibra/WiFi), categoría/estándar aproximado y, si usas fibra, monomodo o multimodo.
 
-Diseña un plan completo para una empresa con:
-
-**Sede central:**
-- 200 hosts en Administración
-- 100 hosts en Producción
-- 50 hosts en IT
-- 10 hosts en Dirección
-
-**Sucursal:**
-- 50 hosts en Ventas
-- 20 hosts en Almacén
-
-**Enlaces:**
-- 1 enlace /30 entre sede y sucursal
-
-Te dan la red **10.0.0.0/22**.
-
-a) Diseña el VLSM completo
-b) ¿Cuántas IPs sobran?
-c) ¿Qué problemas podrías encontrar si la empresa crece al doble?
-
-## 7. VLSM con requisitos mínimos
-
-Tienes la red **192.168.1.0/24** y necesitas estas subredes:
-
-- **Producción:** 50 hosts
-- **Comercial:** 25 hosts
-- **Soporte:** 10 hosts
-- **Enlace WAN:** 2 hosts
-
-a) Diseña el **VLSM mínimo** (sin desperdiciar IPs): indica red, máscara, rango y broadcast de cada subred.
-b) ¿Qué bloque queda libre al final y de qué tamaño?
-
-**Pista:** Ordena de mayor a menor necesidad y elige para cada subred la máscara más pequeña que cumpla `2ʰ − 2 ≥ hosts`. Recuerda que cada subred empieza donde terminó la anterior.
-
-## 8. Conflicto de IP
-
-El administrador de una empresa configura **manual (estática)** la IP `192.168.1.20` en una impresora. Lamentablemente, esa IP está dentro del **pool DHCP** que reparte el router (`network 192.168.1.0 255.255.255.0`).
-
-a) Explica qué ocurre cuando un PC pide IP por DHCP y recibe `192.168.1.20`, que ya tiene la impresora.
-b) ¿Cómo detectaría el administrador el conflicto? ¿Qué comando usaría en el router?
-c) ¿Cómo se **previene** este problema desde el diseño?
-
-**Pista:** Antes de conceder una IP, el servidor DHCP suele comprobar (el RFC lo llama "ping") si la dirección ya está en uso. En Cisco el resultado se registra en una tabla concreta que se consulta con `show`. Y la solución de fondo ya la viste en el punto 8 de la unidad: `ip dhcp excluded-address`.
+**Pista:** decide primero por distancia y presupuesto; luego por movilidad y rendimiento. 100 m es el límite del cobre, la multimodo cubre hasta ~550 m y la monomodo el resto.

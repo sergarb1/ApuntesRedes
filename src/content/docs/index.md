@@ -8,7 +8,7 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
 </div>
 
 <div align="center" style="margin-bottom:2rem;">
-  <a href="/ApuntesRedes/00-introduccion" style="display:inline-block;padding:0.75rem 2rem;background:linear-gradient(135deg,#2563eb,#1a4060);color:#fff;border-radius:8px;text-decoration:none;font-weight:600;margin:0 0.5rem;">🚪 Empezar por el Tema 0</a>
+  <a href="/ApuntesRedes/01-introduccion" style="display:inline-block;padding:0.75rem 2rem;background:linear-gradient(135deg,#2563eb,#1a4060);color:#fff;border-radius:8px;text-decoration:none;font-weight:600;margin:0 0.5rem;">🚪 Empezar por la Unidad 01</a>
   <a href="https://github.com/sergarb1/ApuntesRedes" style="display:inline-block;padding:0.75rem 2rem;background:var(--sl-color-gray-5);color:var(--sl-color-white);border-radius:8px;text-decoration:none;font-weight:600;margin:0 0.5rem;">🐙 Ver en GitHub</a>
 </div>
 
@@ -29,17 +29,17 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
   </div>
 </div>
 
-## 🚪 Tema 0 — Introducción
+## 🚪 Unidad 01 — Introducción
 
 <div class="unit-grid">
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Tema 0</span>
+    <span class="num">Unidad 01</span>
   </div>
-  <a href="/ApuntesRedes/00-introduccion" class="title-link">Introducción a las redes</a>
+  <a href="/ApuntesRedes/01-introduccion" class="title-link">Introducción a las redes</a>
   <p class="desc">¿Empiezas de cero? 🚀 — Qué es una red, vocabulario básico, mapa del curso, herramientas y el método de diagnóstico.</p>
-  <a href="/ApuntesRedes/00-introduccion" class="unit-link">👉 Empezar por aquí 👈</a>
+  <a href="/ApuntesRedes/01-introduccion" class="unit-link">👉 Empezar por aquí 👈</a>
 </div>
 
 </div>
@@ -50,122 +50,122 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Unidad 1</span>
+    <span class="num">Unidad 02</span>
     <span class="ra">RA1</span>
   </div>
-  <a href="/ApuntesRedes/01-fundamentos-redes" class="title-link">Fundamentos de redes</a>
+  <a href="/ApuntesRedes/02-fundamentos-redes" class="title-link">Fundamentos de redes</a>
   <p class="desc">La red mágica que no funciona 😵‍💫 — Topologías, medios de transmisión, estándares,<code> modelo OSI</code> vs TCP/IP.</p>
-  <a href="/ApuntesRedes/01-fundamentos-redes" class="unit-link">👉 Ver unidad 👈</a>
+  <a href="/ApuntesRedes/02-fundamentos-redes" class="unit-link">👉 Ver unidad 👈</a>
 </div>
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Unidad 2</span>
+    <span class="num">Unidad 03</span>
     <span class="ra">RA1</span>
   </div>
-  <a href="/ApuntesRedes/02-modelos-osi-analisis" class="title-link">Modelos OSI y análisis de tráfico</a>
+  <a href="/ApuntesRedes/03-modelos-osi-analisis" class="title-link">Modelos OSI y análisis de tráfico</a>
   <p class="desc">El paquete perdido 🧳 — Encapsulación, PDU, Wireshark,<code> análisis</code> de tramas.</p>
-  <a href="/ApuntesRedes/02-modelos-osi-analisis" class="unit-link">👉 Ver unidad 👈</a>
+  <a href="/ApuntesRedes/03-modelos-osi-analisis" class="unit-link">👉 Ver unidad 👈</a>
 </div>
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Unidad 3</span>
+    <span class="num">Unidad 04</span>
     <span class="ra">RA2</span>
   </div>
-  <a href="/ApuntesRedes/03-infraestructura-fisica" class="title-link">Infraestructura física</a>
+  <a href="/ApuntesRedes/04-infraestructura-fisica" class="title-link">Infraestructura física</a>
   <p class="desc">El cable traicionero 🔌 — Cableado estructurado, fibra óptica,<code> crimpado</code>, armarios de comunicaciones.</p>
-  <a href="/ApuntesRedes/03-infraestructura-fisica" class="unit-link">👉 Ver unidad 👈</a>
+  <a href="/ApuntesRedes/04-infraestructura-fisica" class="unit-link">👉 Ver unidad 👈</a>
 </div>
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Unidad 4</span>
+    <span class="num">Unidad 05</span>
     <span class="ra">RA2</span>
   </div>
-  <a href="/ApuntesRedes/04-ipv4-subnetting" class="title-link">IPv4 y subnetting</a>
+  <a href="/ApuntesRedes/05-ipv4-subnetting" class="title-link">IPv4 y subnetting</a>
   <p class="desc">La calculadora maldita 🧮 — Direccionamiento,<code> clases</code>, VLSM, CIDR, cálculo de subredes.</p>
-  <a href="/ApuntesRedes/04-ipv4-subnetting" class="unit-link">👉 Ver unidad 👈</a>
+  <a href="/ApuntesRedes/05-ipv4-subnetting" class="unit-link">👉 Ver unidad 👈</a>
 </div>
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Unidad 5</span>
+    <span class="num">Unidad 06</span>
     <span class="ra">RA2/RA7</span>
   </div>
-  <a href="/ApuntesRedes/05-ipv6-transicion" class="title-link">IPv6 y transición</a>
+  <a href="/ApuntesRedes/06-ipv6-transicion" class="title-link">IPv6 y transición</a>
   <p class="desc">El futuro que ya llegó 🚀 — Direccionamiento IPv6,<code> SLAAC</code>, túneles, coexistencia.</p>
-  <a href="/ApuntesRedes/05-ipv6-transicion" class="unit-link">👉 Ver unidad 👈</a>
+  <a href="/ApuntesRedes/06-ipv6-transicion" class="unit-link">👉 Ver unidad 👈</a>
 </div>
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Unidad 6</span>
+    <span class="num">Unidad 07</span>
     <span class="ra">RA3</span>
   </div>
-  <a href="/ApuntesRedes/06-switching-stp" class="title-link">Switching y STP</a>
+  <a href="/ApuntesRedes/07-switching-stp" class="title-link">Switching y STP</a>
   <p class="desc">El switch enfadado 😡 — Conmutación,<code> STP</code>, RSTP, tormentas de broadcast.</p>
-  <a href="/ApuntesRedes/06-switching-stp" class="unit-link">👉 Ver unidad 👈</a>
+  <a href="/ApuntesRedes/07-switching-stp" class="unit-link">👉 Ver unidad 👈</a>
 </div>
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Unidad 7</span>
+    <span class="num">Unidad 08</span>
     <span class="ra">RA5</span>
   </div>
-  <a href="/ApuntesRedes/07-vlans" class="title-link">VLANs</a>
+  <a href="/ApuntesRedes/08-vlans" class="title-link">VLANs</a>
   <p class="desc">La oficina dividida 🏢 — Segmentación,<code> 802.1Q</code>, VTP, routing entre VLANs.</p>
-  <a href="/ApuntesRedes/07-vlans" class="unit-link">👉 Ver unidad 👈</a>
+  <a href="/ApuntesRedes/08-vlans" class="unit-link">👉 Ver unidad 👈</a>
 </div>
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Unidad 8</span>
+    <span class="num">Unidad 09</span>
     <span class="ra">RA4</span>
   </div>
-  <a href="/ApuntesRedes/08-routing-acls" class="title-link">Routing y ACLs</a>
+  <a href="/ApuntesRedes/09-routing-acls" class="title-link">Routing y ACLs</a>
   <p class="desc">El GPS perdido 🧭 — Enrutamiento estático,<code> ACLs</code>, rutas por defecto.</p>
-  <a href="/ApuntesRedes/08-routing-acls" class="unit-link">👉 Ver unidad 👈</a>
-</div>
-
-<div class="unit-card">
-  <div class="unit-card-header">
-    <span class="num">Unidad 9</span>
-    <span class="ra">RA6</span>
-  </div>
-  <a href="/ApuntesRedes/09-routing-dinamico" class="title-link">Routing dinámico</a>
-  <p class="desc">El router que habla solo 🗣️ — RIP, OSPF,<code> métricas</code>, redistribución, convergencia.</p>
-  <a href="/ApuntesRedes/09-routing-dinamico" class="unit-link">👉 Ver unidad 👈</a>
+  <a href="/ApuntesRedes/09-routing-acls" class="unit-link">👉 Ver unidad 👈</a>
 </div>
 
 <div class="unit-card">
   <div class="unit-card-header">
     <span class="num">Unidad 10</span>
-    <span class="ra">RA7</span>
+    <span class="ra">RA6</span>
   </div>
-  <a href="/ApuntesRedes/10-nat-internet" class="title-link">NAT y acceso a Internet</a>
-  <p class="desc">Internet no funciona otra vez 🌐 — NAT, PAT,<code> port forwarding</code>, DHCP.</p>
-  <a href="/ApuntesRedes/10-nat-internet" class="unit-link">👉 Ver unidad 👈</a>
+  <a href="/ApuntesRedes/10-routing-dinamico" class="title-link">Routing dinámico</a>
+  <p class="desc">El router que habla solo 🗣️ — RIP, OSPF,<code> métricas</code>, redistribución, convergencia.</p>
+  <a href="/ApuntesRedes/10-routing-dinamico" class="unit-link">👉 Ver unidad 👈</a>
 </div>
 
 <div class="unit-card">
   <div class="unit-card-header">
     <span class="num">Unidad 11</span>
-    <span class="ra">Transv.</span>
+    <span class="ra">RA7</span>
   </div>
-  <a href="/ApuntesRedes/11-diagnostico-monitorizacion" class="title-link">Diagnóstico y monitorización</a>
-  <p class="desc">Apágalo y vuelve a encenderlo 🧠 — Ping, traceroute,<code> SNMP</code>, syslog, NOC.</p>
-  <a href="/ApuntesRedes/11-diagnostico-monitorizacion" class="unit-link">👉 Ver unidad 👈</a>
+  <a href="/ApuntesRedes/11-nat-internet" class="title-link">NAT y acceso a Internet</a>
+  <p class="desc">Internet no funciona otra vez 🌐 — NAT, PAT,<code> port forwarding</code>, DHCP.</p>
+  <a href="/ApuntesRedes/11-nat-internet" class="unit-link">👉 Ver unidad 👈</a>
 </div>
 
 <div class="unit-card">
   <div class="unit-card-header">
     <span class="num">Unidad 12</span>
+    <span class="ra">Transv.</span>
+  </div>
+  <a href="/ApuntesRedes/12-diagnostico-monitorizacion" class="title-link">Diagnóstico y monitorización</a>
+  <p class="desc">Apágalo y vuelve a encenderlo 🧠 — Ping, traceroute,<code> SNMP</code>, syslog, NOC.</p>
+  <a href="/ApuntesRedes/12-diagnostico-monitorizacion" class="unit-link">👉 Ver unidad 👈</a>
+</div>
+
+<div class="unit-card">
+  <div class="unit-card-header">
+    <span class="num">Unidad 13</span>
     <span class="ra">Ampl.</span>
   </div>
-  <a href="/ApuntesRedes/12-cloud-virtualizacion-futuro" class="title-link">Cloud, virtualización y futuro</a>
+  <a href="/ApuntesRedes/13-cloud-virtualizacion-futuro" class="title-link">Cloud, virtualización y futuro</a>
   <p class="desc">La nube que no es vapor ☁️ — SDN, NFV,<code> cloud</code>, virtualización, automatización.</p>
-  <a href="/ApuntesRedes/12-cloud-virtualizacion-futuro" class="unit-link">👉 Ver unidad 👈</a>
+  <a href="/ApuntesRedes/13-cloud-virtualizacion-futuro" class="unit-link">👉 Ver unidad 👈</a>
 </div>
 
 </div>
@@ -173,18 +173,6 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
 ## 📝 Boletines
 
 <div class="unit-grid">
-
-<div class="unit-card">
-  <div class="unit-card-header">
-    <span class="num">Tema 0</span>
-  </div>
-  <div class="ejercicio-links">
-    <a href="/ApuntesRedes/boletines/boletin-u00-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
-    <a href="/ApuntesRedes/boletines/boletin-u00-inicial" class="elink">🟢 Inicial por resolver</a>
-    <a href="/ApuntesRedes/boletines/boletin-u00-avanzado-resuelto" class="elink">💪 Avanzado resuelto</a>
-    <a href="/ApuntesRedes/boletines/boletin-u00-avanzado" class="elink">⭐ Avanzado por resolver</a>
-  </div>
-</div>
 
 <div class="unit-card">
   <div class="unit-card-header">
@@ -327,6 +315,18 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
     <a href="/ApuntesRedes/boletines/boletin-u12-inicial" class="elink">🟢 Inicial por resolver</a>
     <a href="/ApuntesRedes/boletines/boletin-u12-avanzado-resuelto" class="elink">💪 Avanzado resuelto</a>
     <a href="/ApuntesRedes/boletines/boletin-u12-avanzado" class="elink">⭐ Avanzado por resolver</a>
+  </div>
+</div>
+
+<div class="unit-card">
+  <div class="unit-card-header">
+    <span class="num">Unidad 13</span>
+  </div>
+  <div class="ejercicio-links">
+    <a href="/ApuntesRedes/boletines/boletin-u13-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
+    <a href="/ApuntesRedes/boletines/boletin-u13-inicial" class="elink">🟢 Inicial por resolver</a>
+    <a href="/ApuntesRedes/boletines/boletin-u13-avanzado-resuelto" class="elink">💪 Avanzado resuelto</a>
+    <a href="/ApuntesRedes/boletines/boletin-u13-avanzado" class="elink">⭐ Avanzado por resolver</a>
   </div>
 </div>
 

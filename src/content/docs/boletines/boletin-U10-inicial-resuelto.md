@@ -1,72 +1,75 @@
 ---
 title: Boletín U10 — Inicial (Resuelto)
-description: Soluciones ejercicios básicos de NAT
+description: Soluciones de los ejercicios básicos de Routing Dinámico
 ---
 
 # ✅ Boletín U10 — Inicial (Resuelto)
 
 ---
 
-## 1. ¿Qué es NAT?
+## 1. IGP vs EGP
 
-**NAT** (Network Address Translation) traduce direcciones IP privadas (no enrutables en Internet) a direcciones IP públicas (enrutables). Es necesario porque:
-- Las IPv4 públicas son limitadas.
-- Una LAN completa puede compartir una o pocas IPs públicas.
+a) OSPF → **IGP**
+b) BGP → **EGP**
+c) RIP → **IGP**
+d) EIGRP → **IGP** (propietario Cisco, pero interior)
 
-## 2. Tipos de NAT
+## 2. Verdadero o falso
 
-| Tipo | Descripción |
-|---|---|
-| NAT estático | **B** — Una IP privada fija se traduce a una IP pública fija |
-| NAT dinámico | **C** — Se asigna una IP pública de un pool disponible |
-| PAT | **A** — Muchas IPs privadas comparten una IP pública variando puertos |
+a) **Verdadero.** OSPF usa SPF (Dijkstra) para calcular la ruta más corta.
+b) **Verdadero.** RIP máximo 15 saltos. 16 = inalcanzable.
+c) **Verdadero.** Todas las áreas deben conectarse al Área 0.
+d) **Verdadero.** El Router ID debe ser único o las adyacencias fallan.
+e) **Falso.** OSPF converge en segundos, RIP tarda minutos.
 
-## 3. Configura PAT
+## 3. Relaciona
 
-```bash
-R1(config)# access-list 1 permit 192.168.1.0 0.0.0.255
-R1(config)# ip nat inside source list 1 interface g0/1 overload
-R1(config)# interface g0/0
-R1(config-if)# ip nat inside
-R1(config)# interface g0/1
-R1(config-if)# ip nat outside
-```
+1 → b (LSA = Link State Advertisement)
+2 → c (LSDB = Link State Database)
+3 → a (ABR = Area Border Router)
+4 → d (SPF = Shortest Path First)
 
-## 4. Tabla NAT
+## 4. Coste OSPF
 
-a) **2 dispositivos** (192.168.1.10 y 192.168.1.20).
-b) **83.45.12.78**.
-c) **50001**.
+a) 100 Mbps → **1** (10⁸ / 100×10⁶ = 1)
+b) 1 Gbps → **1** (el coste mínimo es 1)
+c) 1.544 Mbps → **64** (10⁸ / 1.544×10⁶ ≈ 64)
 
-## 5. Verdadero o falso
+## 5. Completa
 
-a) **Falso.** NAT estático es 1 a 1. PAT permite compartir una IP.
-b) **Verdadero.** NAT necesita saber qué interfaz es inside y cuál outside.
-c) **Falso.** NAT estático hace eso. NAT dinámico asigna de un pool, no es fijo.
-d) **Verdadero.**
+a) `router ospf 1`
+b) `network 192.168.1.0 0.0.0.255 area 0`
+c) `default-information originate`
+d) `show ip ospf neighbor`
 
-## 6. NAT destino (port forwarding)
+## 6. Tipos de routers
 
-```bash
-R1(config)# ip nat inside source static tcp 192.168.1.10 80 83.45.12.78 80
-R1(config)# interface g0/0
-R1(config-if)# ip nat inside
-R1(config)# interface g0/1
-R1(config-if)# ip nat outside
-```
+1 → c (Internal Router: misma área)
+2 → b (ABR: conecta áreas)
+3 → a (ASBR: rutas externas)
 
-## 7. ¿Qué tipo de NAT es?
+## 7. Dinámico vs estático
 
-| Escenario | Tipo |
-|---|---|
-| a) Servidor web 192.168.1.10 ↔ 83.45.12.78 fijo | **NAT estático** (1:1) |
-| b) Pool de 4 IPs públicas asignadas al vuelo | **NAT dinámico** (pool) |
-| c) 300 alumnos saliendo por una IP pública | **PAT** (sobrecarga) |
-| d) Puerto público 8080 → 192.168.1.10:80 | **NAT destino** (port forwarding) |
+a)
+- **OSPF → IGP**
+- **RIP → IGP**
+- **BGP → EGP**
+- **EIGRP → IGP** (interior, aunque propietario de Cisco)
 
-## 8. Lee la tabla NAT
+b) **Ventajas del dinámico:**
+1. **Autoaprendizaje:** las redes nuevas se comparten solas, sin ir router por router.
+2. **Convergencia automática:** si cae un enlace, la red recalcula y se reencamina sin intervención.
+3. **Menos error humano:** la tabla de rutas la calcula el protocolo, no un administrador tecleando.
 
-a) **3 conexiones activas:** dos consultas DNS (8.8.8.8:53) y una sesión HTTPS (142.250.184.4:443).
-b) **49152** — es el puerto efímero original del PC 192.168.1.30 (columna *Inside local*).
-c) Porque **NAT asigna un puerto global distinto** a cada conexión (60001, 60002, 60003): los puertos efímeros duplicados no chocan porque el *Inside global* los desambigua.
-d) Las dos primeras van a **8.8.8.8:53 (DNS)**; la tercera a **142.250.184.4:443 (HTTPS)**.
+**Caso para estático:** redes muy pequeñas (2-3 routers), un enlace **stub** con una única salida, o una ruta de respaldo a mano (`floating static`): ahí el dinámico solo añadiría tráfico y complejidad.
+
+## 8. Coste OSPF: tabla de velocidades
+
+| Velocidad | Cálculo | Coste OSPF |
+|---|---|---|
+| 10 Mbps | 10⁸ / 10⁷ | **10** |
+| 100 Mbps | 10⁸ / 10⁸ | **1** |
+| 1 Gbps | 10⁸ / 10⁹ = 0,1 | **1** (mínimo) |
+| 1.544 Mbps (T1) | 10⁸ / 1.544.000 ≈ 64,8 | **64** |
+
+> El coste mínimo es **1**: todos los enlaces de 100 Mbps en adelante valen lo mismo por defecto, salvo que subas el `auto-cost reference-bandwidth`.

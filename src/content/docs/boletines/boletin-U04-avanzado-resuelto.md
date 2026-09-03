@@ -1,154 +1,121 @@
 ---
 title: Boletín U04 — Avanzado (Resuelto)
-description: Soluciones ejercicios avanzados de IPv4 y Subnetting
+description: Soluciones de los ejercicios avanzados de Infraestructura Física de Red
 ---
 
 # ✅ Boletín U04 — Avanzado (Resuelto)
 
 ---
 
-## 1. Diseño VLSM
+## 1. Diagnóstico de cableado
 
-Red base: 172.16.0.0/24 (256 direcciones totales)
+a) **Causas posibles:**
+   - Solo 2 pares conectados (mal crimpado) → negociación a 100 Mbps
+   - Cable Cat5e dañado o de mala calidad
+   - El switch o PC tienen el puerto configurado manualmente a 100 Mbps
+   - Cable demasiado largo (>100 m)
 
-**Ordenando de mayor a menor:** Producción (60) → Desarrollo (30) → Testing (10) → 3 enlaces WAN (2 c/u)
+b) **Herramientas:** Comprobador de cables (para verificar continuidad de los 4 pares), y la configuración de red del PC/switch (para ver velocidad negociada).
 
-| Subred | Hosts | CIDR | Red | Rango | Broadcast |
-|---|---|---|---|---|---|
-| Producción | 60 (62) | /26 | 172.16.0.0 | .1 - .62 | .63 |
-| Desarrollo | 30 (30) | /27 | 172.16.0.64 | .65 - .94 | .95 |
-| Testing | 10 (14) | /28 | 172.16.0.96 | .97 - .110 | .111 |
-| WAN 1 | 2 (2) | /30 | 172.16.0.112 | .113 - .114 | .115 |
-| WAN 2 | 2 (2) | /30 | 172.16.0.116 | .117 - .118 | .119 |
-| WAN 3 | 2 (2) | /30 | 172.16.0.120 | .121 - .122 | .123 |
+c) **Prueba de diagnóstico:**
+   - Probar el mismo cable con otro PC y otro puerto del switch
+   - Probar otro cable conocido bueno en el mismo PC y puerto
+   - Si el cable nuevo funciona a 1 Gbps → el cable original está dañado
+   - Si ningún cable funciona a 1 Gbps → problema en PC o switch
 
-**Sobran:** 172.16.0.124 - 172.16.0.255 = **132 direcciones** (132 - 2 = 130 hosts útiles).
+## 2. Diseño de cableado estructurado
 
-## 2. Diagnóstico DHCP
+a) **Switches:**
+   - Planta 1: 1 switch de 48 puertos (para 40 puestos + servidores)
+   - Planta 2: 1 switch de 48 puertos (para 30 puestos)
+   - Switch de core en la sala de servidores
 
-a) Es una **dirección APIPA** (Automatic Private IP Addressing), rango 169.254.0.0/16.
+b) **Cable:**
+   - Puestos: Cat6 (estándar para 1 Gbps)
+   - Uplinks entre plantas: fibra multimodo (OM3/OM4, 10 Gbps)
 
-b) Windows asigna automáticamente una IP APIPA cuando el **servidor DHCP no responde** o no está disponible.
+c) **Patch panels:** 1 panel de 48 puertos por planta, cerca del switch correspondiente.
 
-c) **Soluciones:**
-   1. Verificar que el servidor DHCP esté encendido y funcionando
-   2. Comprobar la conectividad con el servidor DHCP (¿está en la misma red? ¿hay switches funcionando?)
-   3. Hacer `ipconfig /release` y `ipconfig /renew` para forzar una nueva solicitud DHCP
-   4. Asignar una IP estática si el DHCP no es recuperable
+d) **Conexión entre plantas:** Fibra multimodo desde cada switch de planta hasta el switch de core en la sala de servidores, usando módulos SFP+.
 
-## 3. Subnetting binario
+## 3. Cálculo de atenuación
 
-a) **IP en binario:** 200.100.50.30 = 11001000.01100100.00110010.00011110
-   **Máscara en binario:** 255.255.255.224 = 11111111.11111111.11111111.11100000
+a) Potencia recibida = 2 dBm - 21,3 dB = **-19,3 dBm**
 
-b) **AND → Dirección de red:** 11001000.01100100.00110010.00000000 = **200.100.50.0/27**
+b) **Sí funciona.** -19,3 dBm > -20 dBm (el umbral del receptor). La señal es válida.
 
-c) **Broadcast:** 200.100.50.31 (todos los bits de host a 1: 00011111)
+c) A 120 metros: atenuación proporcional = 21,3 × (120/100) = 25,56 dB
+   Potencia recibida = 2 - 25,56 = **-23,56 dBm**
+   **No funciona.** -23,56 dBm está por debajo del umbral de -20 dBm.
 
-d) **Hosts útiles:** 2⁵ - 2 = 32 - 2 = **30 hosts**
+## 4. Fibra vs cobre: caso real
 
-e) **200.100.50.62 → binario:** 11001000.01100100.00110010.00111110
-   Red de .62 con /27: 200.100.50.32/27 (bits de red fijos, 00100000)
-   **NO está en la misma subred.** .30 está en 200.100.50.0/27, .62 está en 200.100.50.32/27.
+a) **200 m:** Cobre Cat6a (funciona a 10 Gbps hasta 100 m) o fibra multimodo
+   **500 m:** Fibra multimodo (el cobre no llega a 500 m)
+   **2000 m:** Fibra monomodo (obligatorio para 2 km)
 
-## 4. Resumen de subredes
+b) **200-500 m:** Fibra multimodo OM3/OM4 (10 Gbps, hasta 550 m)
+   **2000 m:** Fibra monomodo OS2 (10 Gbps, hasta 40 km)
 
-a) **Bits a pedir:** 2ⁿ = 8 → n = 3 bits
+c) **Conectores:** LC (estándar en SFP)
+   **Módulos SFP:**
+   - 200-500 m: SFP+ 10GBASE-SR (multimodo, 850 nm)
+   - 2000 m: SFP+ 10GBASE-LR (monomodo, 1310 nm)
 
-b) Máscara original: /16. Nuevos bits: 16 + 3 = **/19** (255.255.224.0)
+## 5. Pinout y solución de problemas
 
-c) **Hosts por subred:** 32 - 19 = 13 bits de host → 2¹³ - 2 = **8190 hosts**
+a) **Falla el pin 3** (el cuarto LED no se enciende: posición 3 de 8).
 
-d) **Subredes:**
-   - 10.0.0.0/19
-   - 10.0.32.0/19
-   - 10.0.64.0/19
-   - 10.0.96.0/19
-   - 10.0.128.0/19
-   - 10.0.160.0/19
-   - 10.0.192.0/19
-   - 10.0.224.0/19
+b) **Par 3-6** (blanco/verde y verde en T568B, o blanco/naranja y naranja en T568A). El pin 3 forma parte del par transmisión/recepción junto con el pin 6.
 
-(El incremento entre subredes es 32 en el tercer octeto: 2¹⁹⁻¹⁶ = 2³ = 32)
+c) **Funcionará parcialmente.** 100Base-TX solo necesita los pares 1-2 y 3-6. Como falla el par 3-6, el cable **no funcionará ni a 100 Mbps**. Para Gigabit (que necesita los 4 pares), tampoco funcionará.
 
-## 5. Sumarización de rutas
+## 6. Diseña el latiguillo perfecto
 
-a) **Ruta resumida:** 192.168.0.0/22
+**Herramientas:** Crimpadora RJ45, pelacables, cortador, comprobador de cables.
 
-**Razonamiento:**
-- 192.168.0.0/24: bits 22-23 = 00
-- 192.168.1.0/24: bits 22-23 = 01
-- 192.168.2.0/24: bits 22-23 = 10
-- 192.168.3.0/24: bits 22-23 = 11
+**Pasos:**
+1. **Pelar:** Con el pelacables, retira unos 2 cm de la funda exterior. Con cuidado de no dañar los hilos internos.
+2. **Ordenar (T568B, clip hacia abajo, mirando el conector de frente):**
+   - Pin 1: Blanco/Naranja
+   - Pin 2: Naranja
+   - Pin 3: Blanco/Verde
+   - Pin 4: Azul
+   - Pin 5: Blanco/Azul
+   - Pin 6: Verde
+   - Pin 7: Blanco/Marrón
+   - Pin 8: Marrón
+3. **Cortar:** Con la crimpadora, corta los hilos rectos dejando aproximadamente 1 cm desde la funda.
+4. **Insertar:** Mete los hilos en el conector RJ45, empujando hasta que los veas asomar por el frente (por los contactos dorados). La funda debe quedar dentro del conector (el pasador de sujeción la agarra).
+5. **Crimpar:** Introduce el conector en la crimpadora y aprieta firmemente hasta oír un clic.
+6. **Comprobar:** Usa el tester para verificar continuidad en todos los pines (1-8 en orden). Si algún LED no se enciende o el orden es incorrecto, corta y repite.
 
-Los primeros 22 bits son idénticos. La ruta /22 engloba las 4 subredes.
+**Señal de crimpado correcto:** Todos los contactos dorados están hundidos uniformemente, la funda está sujeta por el pasador, y el tester muestra LEDs 1-8 en secuencia correcta.
 
-b) **Máscara:** /22 (255.255.252.0)
+## 7. Caso WiFi: oficina con zonas muertas
 
-c) **IPs totales:** 2^(32-22) - 2 = 2¹⁰ - 2 = **1022 hosts** (1024 direcciones totales)
+a) **Causas físicas posibles:**
+   - **Interferencia de vecinos:** los APs de las oficinas colindantes comparten el canal 1, 6 u 11, y todos se pisan.
+   - **Obstrucciones:** los tabiques de cartón-yeso y el mobiliario atenúan la señal (atenuación).
+   - **Covertura insuficiente:** un solo AP para 25 puestos reparte un canal compartido entre muchos clientes; las zonas más alejadas quedan al límite.
+   - **Canal saturado:** todos los clientes compiten por el mismo canal, y en horas punta (la tarde) la contienda se dispara.
 
-## 6. Plan de direccionamiento para una empresa
+b) **Herramientas:** analizador WiFi (para ver canales, señal RSSI y APs vecinos), aplicación de escaneo de red para comprobar número de clientes, y medición de velocidad en distintos puntos de la oficina.
 
-Red base: 10.0.0.0/22 (1024 direcciones, 1022 hosts útiles)
+c) **Soluciones ordenadas de más barata a más cara:**
+   1. **Elegir canales no solapados** (1, 6, 11 en 2,4 GHz) y configurar el AP en 5 GHz (y, si soporta, activar band-steering).
+   2. **Reubicar el AP** en una posición más central o elevado, lejos de metal y fuentes de interferencia.
+   3. **Añadir APs adicionales** (o un mesh) para cubrir las zonas muertas, con canales distintos entre APs adyacentes.
 
-**Ordenando de mayor a menor:**
-- Administración: 200 → /24 (254 hosts)
-- Producción: 100 → /25 (126 hosts)
-- IT: 50 → /26 (62 hosts)
-- Ventas: 50 → /26 (62 hosts)
-- Almacén: 20 → /27 (30 hosts)
-- Dirección: 10 → /28 (14 hosts)
-- Enlace /30
+## 8. Elección de medio a escala
 
-**Plan VLSM:**
+a) **Mini-oficina (8 puestos, 60 m²):** **Cobre Cat6 para los puestos fijos** + **1 AP WiFi** para visitas y movilidad. Distancias cortas (< 100 m), presupuesto ajustado: el WiFi por sí solo puede bastar, pero los puestos fijos con cobre garantizan rendimiento y estabilidad.
 
-| Subred | CIDR | Red | Rango | Broadcast |
-|---|---|---|---|---|
-| Administración | /24 | 10.0.0.0 | .1 - .254 | .255 |
-| Producción | /25 | 10.0.1.0 | .1 - .126 | .127 |
-| IT | /26 | 10.0.1.128 | .129 - .190 | .191 |
-| Ventas | /26 | 10.0.1.192 | .193 - .254 | .255 |
-| Almacén | /27 | 10.0.2.0 | .1 - .30 | .31 |
-| Dirección | /28 | 10.0.2.32 | .33 - .46 | .47 |
-| Enlace | /30 | 10.0.2.48 | .49 - .50 | .51 |
+b) **Planta de 40 puestos (rack en la misma planta):** **Cobre Cat6 a todos los puestos** (distancias dentro de los 100 m, 1 Gbps) con cableado estructurado (patch panels + latiguillos). El uplink del rack si se extiende a otra sala más lejana: fibra multimodo. WiFi como complemento para salas de reuniones.
 
-**Sobran:** 10.0.2.52 - 10.0.3.255 → **~460 IPs**
+c) **Campus de 3 edificios:**
+   - **100 m:** Cobre Cat6a (límite exacto del cobre; correcto y barato) o fibra multimodo si se prefiere backbone.
+   - **500 m:** **Fibra multimodo OM3/OM4** (el cobre no llega a 500 m; la multimodo cubre hasta ~550 m a 10 Gbps).
+   - **2000 m:** **Fibra monomodo OS2** (obligatoria: solo la monomodo cubre distancias de kilómetros).
 
-**Problemas si crece al doble:** Si cada departamento duplica sus hosts, Administración necesitaría /23 (510 hosts), lo que rompe el plan VLSM actual. Habría que rediseñar usando una red base más grande (ej. /20) desde el principio.
-
-## 7. VLSM con requisitos mínimos
-
-Red base: 192.168.1.0/24 (256 direcciones, 254 hosts útiles)
-
-**Ordenando de mayor a menor:** Producción (50) → Comercial (25) → Soporte (10) → Enlace WAN (2)
-
-| Subred | Resolviendo | CIDR | Red | Rango | Broadcast |
-|---|---|---|---|---|---|
-| Producción | 2ʰ−2 ≥ 50 → h=6 (62) | /26 | 192.168.1.0 | .1 - .62 | .63 |
-| Comercial | 2ʰ−2 ≥ 25 → h=5 (30) | /27 | 192.168.1.64 | .65 - .94 | .95 |
-| Soporte | 2ʰ−2 ≥ 10 → h=4 (14) | /28 | 192.168.1.96 | .97 - .110 | .111 |
-| Enlace WAN | 2ʰ−2 ≥ 2 → h=2 (2) | /30 | 192.168.1.112 | .113 - .114 | .115 |
-
-b) **Queda libre** desde 192.168.1.116 hasta 192.168.1.255 = **140 direcciones** (138 hosts útiles en /24).
-
-**Comprobación del encadenado:** Ventas acaba en .63 → Comercial arranca en .64. Comercial acaba en .95 → Soporte arranca en .96. Soporte acaba en .111 → el enlace WAN arranca en .112.
-
-## 8. Conflicto de IP
-
-a) **Qué ocurre:** cuando el PC pide IP por DHCP recibe 192.168.1.20, pero la impresora ya la tiene en uso. Hay **duplicado de dirección**: uno de los dos (o ambos, según el momento) pierde conectividad, aparecen errores de "duplicate address", y el tráfico hacia esa IP puede ir a uno o a otro. El servidor DHCP puede detectarlo *antes* de conceder la IP haciendo un ping/ARProbe a la dirección; si hay respuesta, la descarta y la registra en la tabla de conflictos.
-
-b) **Cómo lo detecta:** en el router, el comando:
-
-```
-show ip dhcp conflict
-```
-
-Muestra las direcciones que el servidor DHCP encontró en conflicto (con el método de detección y la fecha). Si la impresora estática sigue borrada del pool, verás la entrada y podrás actuar.
-
-c) **Cómo prevenirlo:** desde el diseño, **excluir las IPs estáticas** del pool DHCP antes de que reparta nada:
-
-```
-ip dhcp excluded-address 192.168.1.1 192.168.1.30
-```
-
-Así el router nunca concede las direcciones fijas (impresoras, servidores, el propio gateway). Alternativa: usar **reservas DHCP** por MAC para los equipos que quieras fijos sin configurarlos a mano.
+> 💡 **Regla resumen:** distancia decide el medio (cobre ≤ 100 m, multimodo ≤ ~550 m, monomodo el resto); movilidad decide el WiFi; presupuesto decide las categorías.

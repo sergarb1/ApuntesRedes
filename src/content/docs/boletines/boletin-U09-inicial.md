@@ -1,84 +1,85 @@
 ---
 title: Boletín U09 — Inicial
-description: Ejercicios básicos de Routing Dinámico
+description: Ejercicios básicos de Routing y ACLs
 ---
 
 # 📝 Boletín U09 — Inicial
 
-> Ejercicios básicos para afianzar los conceptos de OSPF y routing dinámico.
+> Ejercicios básicos para afianzar los conceptos de routing y ACLs.
 
 ---
 
-## 1. IGP vs EGP
+## 1. Componentes del router
 
-Clasifica cada protocolo como IGP o EGP:
+Relaciona cada componente con su función:
 
-a) OSPF
-b) BGP
-c) RIP
-d) EIGRP
+| Componente | Función |
+|---|---|
+| 1. RAM | a) Almacena el IOS |
+| 2. NVRAM | b) Configuración en ejecución |
+| 3. Flash | c) Startup-config |
+| 4. ROM | d) Monitor de recuperación |
 
 ## 2. Verdadero o falso
 
-a) OSPF usa el algoritmo de Dijkstra (SPF).
-b) RIP tiene un límite de 15 saltos.
-c) OSPF necesita un área backbone (Área 0).
-d) El Router ID de OSPF debe ser único en la red.
-e) RIP converge más rápido que OSPF.
+a) Una ruta estática se configura manualmente.
+b) La ruta por defecto es 0.0.0.0/0.
+c) Las ACLs estándar filtran por IP origen y destino.
+d) Al final de toda ACL hay un permit any implícito.
+e) `show ip route` muestra la tabla de rutas.
 
-## 3. Relaciona
+## 3. ¿Qué comando?
 
-| Término | Descripción |
+Relaciona el comando con su función:
+
+| Comando | Función |
 |---|---|
-| 1. LSA | a) Router que conecta áreas |
-| 2. LSDB | b) Anuncio de estado de enlace |
-| 3. ABR | c) Base de datos de la topología |
-| 4. SPF | d) Algoritmo de cálculo de rutas |
+| 1. `ip route 0.0.0.0 0.0.0.0 10.0.0.2` | a) Configurar ruta estática |
+| 2. `show ip route` | b) Aplicar ACL a interfaz |
+| 3. `ip access-group 10 out` | c) Configurar ruta por defecto |
+| 4. `ip route 192.168.2.0 255.255.255.0 10.0.0.2` | d) Mostrar tabla de rutas |
 
-## 4. Coste OSPF
+## 4. Números de ACL
 
-Calcula el coste OSPF para estas interfaces:
+¿Qué rango de números usan las ACLs estándar y extendidas?
 
-a) FastEthernet (100 Mbps)
-b) GigabitEthernet (1 Gbps)
-c) Serial (1.544 Mbps)
-
-## 5. Completa
-
-Completa los comandos OSPF:
-
-a) `router ___ 1` (inicia el proceso OSPF)
-b) `network 192.168.1.0 0.0.0.255 area ___` (área backbone)
-c) `default-information ___` (propagar ruta por defecto)
-d) `show ip ospf ___` (ver vecinos)
-
-## 6. Tipos de routers
-
-Relaciona el tipo de router OSPF con su función:
-
-| Tipo | Función |
+| Tipo | Rango |
 |---|---|
-| 1. Internal Router | a) Introduce rutas externas |
-| 2. ABR | b) Conecta Área 0 con otras áreas |
-| 3. ASBR | c) Todas sus interfaces en la misma área |
+| Estándar | |
+| Extendida | |
 
-## 7. Dinámico vs estático
+## 5. Modos del router
 
-a) Clasifica cada protocolo como IGP o EGP: **OSPF**, **RIP**, **BGP**, **EIGRP**.
+Ordena los modos de configuración del router (de menor a mayor privilegio):
 
-b) Enumera **3 ventajas** del routing dinámico frente al estático y pon un caso donde convenga usar estático.
+a) Configuración global (`Router(config)#`)
+b) Usuario (`Router>`)
+c) Configuración de interfaz (`Router(config-if)#`)
+d) Privilegiado (`Router#`)
 
-**Pista:** IGP enruta dentro de un AS y EGP entre AS (BGP). Dinámico = autoaprendizaje, convergencia automática y menos error humano; estático = determinista, útil en enlaces stub o redes muy pequeñas.
+## 6. ACL básica
 
-## 8. Coste OSPF: tabla de velocidades
+Escribe los comandos para:
 
-Completa la tabla con el coste OSPF de cada velocidad usando la fórmula `coste = 10^8 / ancho_de_banda`:
+a) Crear una ACL estándar que permita la red 192.168.1.0/24
+b) Aplicarla a la interfaz G0/1 en sentido outbound
 
-| Velocidad | Cálculo | Coste OSPF |
+## 7. Wildcard masks
+
+Las ACLs usan *wildcard masks*, el inverso de la máscara de subred. Para cada máscara de subred, escribe su wildcard y qué representa (qué bits quedan libres para cualquier valor):
+
+| Máscara de subred | Wildcard | ¿Qué representa? |
 |---|---|---|
-| 10 Mbps | 10⁸ / 10⁷ | |
-| 100 Mbps | 10⁸ / 10⁸ | |
-| 1 Gbps | 10⁸ / 10⁹ | |
-| 1.544 Mbps (T1) | 10⁸ / 1.544.000 | |
+| 255.255.255.0 | | |
+| 255.255.255.255 | | |
+| 255.255.0.0 | | |
 
-**Pista:** el coste mínimo es 1: los enlaces a partir de 100 Mbps valen lo mismo por defecto. Los decimales se redondean hacia abajo.
+## 8. Comandos de verificación
+
+Relaciona cada comando de verificación con su utilidad:
+
+| Comando | Utilidad |
+|---|---|
+| 1. `show ip route` | a) Ver qué ACLs están aplicadas y sus contadores |
+| 2. `show access-lists` | b) Resumen de interfaces: IP, estado y protocolo |
+| 3. `show ip interface brief` | c) Ver la tabla de rutas del router |

@@ -12,7 +12,7 @@ schema: spec-driven
 context: |
   Proyecto: Apuntes PAR (Planificación y Administración de Redes). CFGS ASIR.
   Stack: Astro 7 + Starlight 0.41, castellano, GitHub Pages, base path /ApuntesRedes.
-  Contenido: Tema 0 de introducción (sin boletín) + 12 unidades didácticas (U01-U12),
+  Contenido: Unidad 01 de introducción + 12 unidades didácticas (U02-U13),
     cada unidad ampliada como "libro": un fichero Markdown por punto de teoría
     (src/content/docs/<unidad>/<nn>-<punto>.md) más una página índice de unidad.
     Secciones obligatorias del cierre: Sé el Paquete, Fireside Chat, ¿Quién Soy?,

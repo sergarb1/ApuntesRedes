@@ -1,73 +1,78 @@
 ---
 title: Boletín U12 — Inicial (Resuelto)
-description: Soluciones ejercicios básicos de Cloud, virtualización y futuro
+description: Soluciones ejercicios básicos de Diagnóstico y monitorización
 ---
 
 # ✅ Boletín U12 — Inicial (Resuelto)
 
 ---
 
-## 1. Modelos cloud
+## 1. Metodología de troubleshooting
 
-| Modelo | Descripción |
+Orden correcto (OSI de abajo arriba):
+1. (2) Comprobar que el cable está conectado (Capa 1)
+2. (3) Comprobar la tabla MAC del switch (Capa 2)
+3. (1) Hacer ping al gateway (Capa 3)
+4. (4) Hacer ping a 8.8.8.8 (Capa 3)
+5. (5) Hacer nslookup del dominio (Capa 7)
+
+## 2. Comandos de diagnóstico
+
+| Comando | Función |
 |---|---|
-| IaaS | **B** — VMs, redes virtuales, almacenamiento bajo demanda |
-| PaaS | **C** — Plataforma de desarrollo sin gestionar servidores |
-| SaaS | **A** — Aplicación completa accesible por Internet |
+| ping | **B** — Prueba conectividad básica |
+| traceroute | **A** — Muestra la ruta hasta un destino |
+| nslookup | **D** — Resuelve nombres DNS |
+| Wireshark | **C** — Captura paquetes en tiempo real |
+| netstat | **E** — Muestra conexiones activas |
 
-## 2. Tipos de cloud
+## 3. Interpreta un ping
 
-a) **Cloud pública:** Recursos compartidos ofrecidos por un proveedor (AWS, Azure) a través de Internet. Multitenant.
+a) **Sí.** Hay conectividad completa.
+b) **Buena.** 14-16 ms es latencia excelente para Internet.
+c) **TTL=117** significa que el paquete ha pasado por varios routers (TTL inicial típico 128 - 11 routers = 117).
 
-b) **Cloud privada:** Infraestructura dedicada a una sola organización. Puede estar on-premise o en un datacenter dedicado.
+## 4. Configura SNMP
 
-c) **Cloud híbrida:** Combinación de pública y privada, con interconexión entre ambas (VPN o conexión dedicada).
-
-## 3. Virtualización
-
-**Tipo 1 (bare-metal):** Corre directamente sobre el hardware. Ej: VMware ESXi, Microsoft Hyper-V, KVM.
-
-**Tipo 2 (hosted):** Corre sobre un SO existente. Ej: VirtualBox, VMware Workstation.
-
-## 4. Docker networking
-
-a) **No** pueden comunicarse. cont1 está en la red `red1` (bridge personalizado), cont2 está en la red `bridge` por defecto. Redes diferentes = aislamiento.
-
-b) cont2 está en la red **bridge por defecto** (llamada `bridge` en Docker).
+```bash
+R1(config)# snmp-server community monitor ro
+R1(config)# snmp-server community admin rw
+R1(config)# snmp-server location SalaServidores
+R1(config)# snmp-server enable traps
+R1(config)# snmp-server host 192.168.1.100 traps version 2c monitor
+```
 
 ## 5. Verdadero o falso
 
-a) **Verdadero.** En SDN, el controlador centraliza el plano de control.
-b) **Verdadero.** NFV virtualiza funciones como firewalls, load balancers, routers.
-c) **Falso.** Los Security Groups en AWS son **stateful** (el tráfico de respuesta se permite automáticamente). Las Network ACLs son stateless.
-d) **Falso.** IPv8 es una propuesta experimental (draft), no un estándar oficial.
+a) **Verdadero.** SNMP v3 usa cifrado AES y autenticación SHA.
+b) **Falso.** Wireshark funciona en Windows, Linux, macOS.
+c) **Falso.** Si ping al gateway funciona, la LAN está bien. Si ping a 8.8.8.8 falla, el problema está más allá del gateway (WAN, ISP).
+d) **Falso.** Nivel 0 (Emergency) es el más grave. Nivel 7 (Debug) es el menos grave.
 
-## 6. Conceptos cloud
+## 6. Análisis de traceroute
 
-a) **VPC** (Virtual Private Cloud): Red virtual aislada en la nube donde lanzas recursos.
+a) **4 saltos** (el destino está en el salto 4).
+b) **El router en el salto 3 no responde a ICMP.** Puede ser un firewall que bloquea ICMP, pero eso no significa que no esté funcionando (el salto 4 responde).
+c) **Sí**, el destino final responde en el salto 4.
 
-b) **Security Group:** Firewall stateful a nivel de instancia (VM). Permite definir reglas de tráfico entrante y saliente.
+## 7. Filtros de Wireshark
 
-c) **Internet Gateway:** Puerta de enlace que permite a una VPC comunicarse con Internet.
-
-d) **Subnet pública:** Tiene ruta directa a Internet Gateway. **Subnet privada:** No tiene acceso directo a Internet (sale a través de NAT Gateway).
-
-## 7. ¿Qué modelo cloud es cada servicio?
-
-a) **IaaS** — gestionas tú el SO Linux y la red dentro de la VM EC2.
-b) **SaaS** — Salesforce es una aplicación completa accesible por Internet, sin gestionar nada.
-c) **PaaS** — despliegas tu código en Heroku y el proveedor gestiona la plataforma y el servidor.
-d) **SaaS** — Google Drive es una aplicación lista para usar (almacenamiento gestionado).
-e) **IaaS** — montas la base de datos en una VM de Azure y la gestionas tú.
-f) **PaaS** — Google App Engine ejecuta tu código sin que administres la infraestructura.
-
-**Regla:** en IaaS gestionas tú el SO y la red; en PaaS solo subes código; en SaaS todo está gestionado.
-
-## 8. Completa la tabla de redes Docker
-
-| Afirmación | Modo |
+| Filtro | Qué muestra |
 |---|---|
-| a) Red NAT local por defecto. Los contenedores se ven por IP dentro de la misma red | **bridge** |
-| b) El contenedor comparte la pila de red del host. Sin NAT | **host** |
-| c) Sin red. Solo loopback | **none** |
-| d) Red distribuida entre múltiples hosts (Docker Swarm) | **overlay** |
+| a) `tcp.flags.syn == 1` → **3** | Paquetes SYN (inicio de conexión) |
+| b) `ip.addr == 192.168.1.10` → **4** | Tráfico de/a esa IP |
+| c) `tcp.analysis.retransmission` → **2** | Retransmisiones TCP |
+| d) `dns` → **1** | Tráfico DNS |
+| e) `http.request` → **5** | Solo peticiones HTTP |
+
+## 8. Niveles de syslog
+
+De menos a más grave:
+
+1. **Debug** (7) — Depuración
+2. **Informational** (6) — Informativo
+3. **Warning** (4) — Advertencia
+4. **Critical** (2) — Crítica
+5. **Emergency** (0) — El más grave, sistema inusable
+
+**Nivel para producción:** **5 (notifications)** o **6 (informational)**. Dan suficiente detalle (caídas de interfaz, errores, eventos significativos) sin el torrente de mensajes del nivel 7 (debug), que llenaría el disco del servidor en pocas horas. Nivel 0-4, en cambio, filtraría demasiado y perderías avisos valiosos.

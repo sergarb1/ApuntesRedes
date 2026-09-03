@@ -1,156 +1,114 @@
 ---
 title: Boletín U12 — Avanzado (Resuelto)
-description: Soluciones ejercicios avanzados de Cloud, virtualización y futuro
+description: Soluciones ejercicios avanzados de Diagnóstico y monitorización
 ---
 
 # ✅ Boletín U12 — Avanzado (Resuelto)
 
 ---
 
-## 1. Arquitectura cloud
+## 1. Análisis Wireshark
 
-```
-                          Internet
-                             │
-                      ┌──────┴──────┐
-                      │  Internet   │
-                      │   Gateway   │
-                      └──────┬──────┘
-                             │
-                      ┌──────┴──────┐
-                      │ Route Table │
-                      │  (pública)  │
-                      └──────┬──────┘
-                             │
-              ┌──────────────┼──────────────┐
-              │              │              │
-     ┌────────┴────────┐    │    ┌──────────┴──────────┐
-     │   ALB (L7)      │    │    │   NAT Gateway       │
-     │ (balanceador)   │    │    │  (subred pública)    │
-     └────────┬────────┘    │    └──────────┬──────────┘
-              │              │              │
-     ┌────────┴────────┐    │    ┌──────────┴──────────┐
-     │   Web Server 1  │    │    │   Route Table       │
-     │ (subred pública) │    │    │   (privada)        │
-     ├─────────────────┤    │    └──────────┬──────────┘
-     │   Web Server 2  │    │               │
-     │ (subred pública) │    │    ┌──────────┴──────────┐
-     └─────────────────┘    │    │      Base de datos    │
-                             │    │    (subred privada)   │
-                             │    └─────────────────────┘
-```
+a) **Handshake TCP (3 pasos):**
+   - Paquete 1: **SYN** — Cliente inicia conexión
+   - Paquete 2: **SYN-ACK** — Servidor acepta
+   - Paquete 3: **ACK** — Cliente confirma → conexión establecida
 
-**Componentes:** VPC, Internet Gateway, Route Tables (pública y privada), subredes, Security Groups, ALB, NAT Gateway.
+b) **PSH** (Push) indica que los datos deben ser entregados inmediatamente a la aplicación, sin esperar a llenar el buffer TCP.
 
-## 2. SDN vs Tradicional
+c) **El servidor no está recibiendo la petición HTTP o no puede responder.** Las retransmisiones indican pérdida de paquetes: el cliente no recibe ACK del paquete 4 y lo reenvía una y otra vez. Causas probables: cortafuegos bloqueando, congestión, o servidor caído.
 
-| Aspecto | Red Tradicional | SDN |
-|---|---|---|
-| Plano de control | Distribuido (cada router) | Centralizado (controlador) |
-| Plano de datos | En cada router/switch | Switches siguen órdenes del controlador |
-| Escalabilidad | Limitada (configuración manual) | Alta (programática) |
-| Coste | Hardware caro, licencias | Hardware commodity, software |
-| Recuperación de fallos | Protocolos distribuidos (OSPF, BGP convergen) | Controlador recalcula y programa |
+## 2. Monitorización SNMP avanzada
 
-## 3. Docker multi-host
+a) OIDs:
+   - Nombre del dispositivo: `1.3.6.1.2.1.1.5.0`
+   - Uptime: `1.3.6.1.2.1.1.3.0`
+   - Tráfico entrante G0/0: `1.3.6.1.2.1.2.2.1.10.X` (X = índice de interfaz)
+   - Tráfico saliente G0/0: `1.3.6.1.2.1.2.2.1.16.X`
+   - CPU load: `1.3.6.1.2.1.25.3.3.1.2`
 
-a) Usarías **overlay network** de Docker Swarm o **Macvlan**.
+b) Comando:
+   ```bash
+   snmpget -v2c -c publicia 192.168.1.1 1.3.6.1.2.1.1.3.0
+   ```
 
-b) Los hosts deben poder comunicarse entre sí (red IP subyacente funcionando) y tener puertos 4789/7946 abiertos (VXLAN y gossip protocol).
+c) **Zabbix, PRTG, LibreNMS, Cacti** — todas grafican métricas SNMP.
 
-c) En Kubernetes se usa **CNI** (Container Network Interface) con plugins como **Calico** (BGP, políticas de red), **Flannel** (VXLAN), o **Weave**.
+## 3. Diagnóstico de problema real
 
-## 4. Security Groups vs Network ACLs
+**Plan de diagnóstico:**
 
-| Aspecto | Security Group | Network ACL |
-|---|---|---|
-| Nivel | Instancia (VM) | Subred |
-| Stateful/Stateless | **Stateful** | **Stateless** |
-| Reglas por defecto | Deny todo inbound, Allow todo outbound | Allow todo inbound y outbound |
-| Orden de evaluación | Todas las reglas se evalúan | Orden numérico (menor número primero) |
-| Soporta deny explícito | **No** (solo allow) | **Sí** |
+1. **Verificar línea base:** ¿Qué velocidad se tenía antes de las 9? Comparar con mediciones actuales.
+2. **Verificar uso de ancho de banda:** `show interface` en el router de salida. Ver si el tráfico está saturado.
+3. **Identificar qué consume el ancho de banda:** NetFlow o `show ip cache flow` para ver qué IPs y puertos usan más tráfico.
+4. **Verificar errores de capa 1/2:** `show interface` para CRC errors, collisions, runts.
+5. **Verificar logs del router:** `show logging` para ver errores o cambios de configuración.
+6. **Analizar hora:** ¿A las 9 empieza algún backup, actualización, o llegan más empleados?
 
-## 5. Estrategia de migración a cloud
+**Herramientas:** Wireshark, NetFlow, SNMP (Zabbix), `iperf3` para pruebas de throughput.
 
-a) **Cloud híbrida** durante la migración (Rehost/Lift-and-Shift). Larga plazo: reevaluar si toda la carga va a pública.
+## 4. Configura Syslog centralizado
 
-b) **Servicios de red necesarios:** AWS Direct Connect (o VPN), VPC, subredes, Security Groups, Route 53 (DNS), ELB, NAT Gateway.
+a) En cada router:
+   ```bash
+   R1(config)# logging host 192.168.100.50
+   R1(config)# logging trap notifications
+   R1(config)# logging source-interface loopback 0
+   R1(config)# service timestamps log datetime msec
+   ```
 
-c) **Conexión on-premise ↔ AWS:**
-   - **VPN over Internet** (rápido, barato, menos ancho de banda)
-   - **AWS Direct Connect** (conexión dedicada, más cara, más ancho de banda, baja latencia)
+b) En el servidor Linux:
+   ```bash
+   # Configurar rsyslog para recibir logs UDP en puerto 514
+   sudo sed -i 's/^#module(load="imudp")/module(load="imudp")/' /etc/rsyslog.conf
+   sudo sed -i 's/^#input(type="imudp" port="514")/input(type="imudp" port="514")/' /etc/rsyslog.conf
+   sudo systemctl restart rsyslog
+   ```
 
-d) **Riesgos:**
-   - Dependencia de conectividad WAN
-   - Costes de salida de datos (egress)
-   - Seguridad: exposición a Internet durante la migración
-   - Necesidad de reentrenar al equipo en cloud networking
+c) En producción: **nivel 5 (notifications)** o **nivel 6 (informational)**. Nivel 7 (debug) llenaría el disco muy rápido.
 
-## 6. El futuro de Internet
+## 5. Comparativa de herramientas
 
-| Propuesta | Descripción | Problema que resuelve |
-|---|---|---|
-| **IPv6** | 128 bits de direccionamiento, autoconfiguración, sin NAT | Agotamiento de IPv4 |
-| **IPv8** (draft-thain-ipv8) | Direcciones ASN:IPv4 (ej: AS13335:8.8.8.8) | Escalabilidad de BGP + agotamiento IPv4 |
-| **RINA** | Rediseño completo de la arquitectura de Internet basado en capas DIF | Complejidad de la pila TCP/IP actual |
-| **NDN** (Named Data Networking) | Enrutar por nombre de contenido, no por IP | Modelo host-centric vs content-centric |
+| Herramienta | Tipo | Puerto(s) | Cifrado | Activa o pasiva |
+|---|---|---|---|---|
+| SNMP v2c | Monitorización | 161/162 | No | Activa (polling) |
+| Syslog | Logging | 514 | No (TCP/UDP) | Pasiva (envío desde dispositivos) |
+| NetFlow | Análisis tráfico | 2055/9995 | No | Pasiva (envío desde routers) |
+| Wireshark | Captura paquetes | N/A | N/A | Pasiva (solo captura) |
 
-Ninguna ha reemplazado a IP. IPv6 es el estándar actual. Las demás son propuestas de investigación.
+## 6. Troubleshooting complejo
 
-## 7. Diseño de red cloud completo
+**Problema probable:** Una **ACL** en RouterA o RouterB bloquea el puerto 443 (HTTPS) pero permite ICMP. O el **firewall** en el servidor web bloquea conexiones desde 192.168.1.0/24.
 
-a) **Diagrama:**
+**Comandos para confirmar:**
+- `show access-lists` en RouterA y RouterB — buscar reglas que bloqueen tcp/443
+- `telnet 10.0.0.100 443` desde RouterA (no desde un PC) — para ver si el problema está en la ACL de salida
+- `show ip interface` en RouterB — verificar si hay ACL aplicada en la interfaz hacia SedeCentral
+- En el servidor web: `netstat -an | find ":443"` (Windows) o `ss -tlnp | grep 443` (Linux) — verificar que el servicio escucha
 
-```
-                    Internet
-                       │
-               ┌───────┴───────┐
-               │ Internet GW   │
-               └───────┬───────┘
-                       │
-        ┌──────────────┼──────────────┐
-        │   ALB        │              │
-        └──────┬───────┘   ┌──────────┴──────────┐
-               │           │   NAT Gateway       │
-   ┌───────────┴─────┐     └──────────┬──────────┘
-   │ EC2 web 1 (pub) │                │
-   │ EC2 web 2 (pub) │                │
-   └───────────┬─────┘     ┌──────────┴──────────┐
-               │           │ EC2 API (privada)   │
-               └──────────►│ RDS MySQL (privada) │
-                           └─────────────────────┘
-```
+## 7. Análisis de una captura con retransmisiones
 
-b) **Colocación:**
-   - **Frontend web (pública):** necesita recibir tráfico directo de Internet → subnet pública con ruta al IGW.
-   - **ALB (pública):** debe ser alcanzable desde Internet → subnet pública.
-   - **NAT Gateway (pública):** requiere IP elástica → subnet pública.
-   - **API y BD (privada):** sin IP pública → subnet privada; el frontend las alcanza por IP privada dentro de la VPC.
+a) **Sí, el handshake se completó correctamente.** Los paquetes 1 (SYN), 2 (SYN-ACK) y 3 (ACK) forman el three-way handshake completo: la conexión quedó establecida y el cliente pudo enviar la petición GET en el paquete 4.
 
-c) **Security Groups:**
-   - **SG-ALB:** Inbound `80`/`443` desde `0.0.0.0/0`; Outbound `80` hacia SG-web.
-   - **SG-web:** Inbound `80` desde SG-ALB (solo el balanceador puede entrar); Outbound `8080` hacia SG-api.
-   - **SG-api:** Inbound `8080` desde SG-web (solo el frontend); Outbound `3306` hacia SG-rds y `443` hacia el NAT.
-   - **SG-rds:** Inbound `3306` desde SG-api (solo la API). Nunca desde `0.0.0.0/0`.
+b) Los paquetes 5 y 6 son **reenvíos del paquete 4** porque el cliente no recibió su ACK a tiempo. Es la señal clásica de **pérdida de paquetes o congestión**: la petición GET (o su ACK) se perdió en el camino, así que el emisor la reenvía tras el temporizador de retransmisión (RTO).
 
-d) **Flujo del tráfico:**
-   1. Usuario → Internet → **Internet Gateway** → **ALB** (autorizado por SG-ALB).
-   2. ALB → **EC2 web** (subnet pública, autorizado por SG-web).
-   3. EC2 web → **EC2 API** (subnet privada, misma VPC, ruta por route table privada; autorizado por SG-api).
-   4. EC2 API → **RDS MySQL** (autorizado por SG-rds, solo puerto 3306).
+c) El paquete 7 (`Window=0`) indica que el **receptor está saturado** (su buffer TCP está lleno) y pide al emisor que deje de enviar datos. Conclusión global: hay una red con **pérdidas** (las retransmisiones del 4) y un **servidor ahogado** (ventana a cero). El síntoma combinado apunta a congestión del enlace o saturación del servidor web, más que a un fallo de configuración pura.
 
-e) **Si el NAT Gateway cae:** los servicios **entrantes** (web vía ALB/IGW) siguen funcionando; el tráfico que **sale a Internet desde la subnet privada** (la API hacia servicios externos, parches, actualizaciones) deja de funcionar, y las **respuestas entrantes de ese tráfico saliente** tampoco llegan. El backend puede perder integridad de datos si dependía de llamadas externas.
+## 8. Plan de monitorización SNMP + syslog
 
-## 8. Seguridad en cloud: SG vs NACL y NAT Gateway
+a) **OIDs clave:**
+   - `1.3.6.1.2.1.1.3.0` — sysUpTime: detectar reinicios inesperados de equipos
+   - `1.3.6.1.2.1.2.2.1.10.X` — ifInOctets de la interfaz de uplink (dos lecturas separadas para velocidad)
+   - `1.3.6.1.2.1.2.2.1.16.X` — ifOutOctets de la interfaz de uplink
+   - `1.3.6.1.2.1.25.3.3.1.2` — hrProcessorLoad: carga de CPU de los equipos
 
-a) **Cómo es posible:** los **Security Groups** son la única capa que se configuró, pero solo protegen a nivel de instancia. La **Network ACL** de la subnet privada quedó con la **regla por defecto "Allow todo"**. Si además alguien lanzó la API/RDS con IP pública (o en una subnet con IGW), el tráfico externo entra sin pasar por ningún SG que lo bloquee. La capa de defensa que ha fallado es la **subred (NACL)**: sin NACL restrictiva, el tráfico se decide solo por rutas y SG, y un SG mal aplicado (o una IP pública en la instancia) lo deja pasar.
+b) **Herramienta:** **Zabbix** (o LibreNMS). Justificación: es de las más modernas y populares, soporta SNMP + syslog + NetFlow, tiene auto-descubrimiento para los 10 dispositivos (los detecta solos) y es open source. PRTG también valdría, pero la licencia gratuita de 100 sensores es más justa con 10 dispositivos × varias métricas.
 
-b) **El deny que no funciona:** los Security Groups **no soportan deny explícito**; solo permiten (allow) reglas. No puedes "escribir un deny" en un SG: cualquier tráfico que no cumpla un allow se bloquea, pero no hay reglas de negación gestionables. Si intentaste bloquear con deny dentro de un SG, esa regla es ignorada/inválida. Para deny explícito se usa una **Network ACL**, que evalúa en **orden numérico** y sí soporta reglas de negación.
+c) **Configuración:**
+   - SNMP en cada dispositivo: comunidad de solo lectura `monitor ro` (sin `rw`), `snmp-server location` y `snmp-server contact` identificando cada equipo, y `snmp-server host <IP-NMS> traps version 2c monitor`. Para producción real: **SNMP v3** con SHA + AES.
+   - Syslog: `logging host <IP-servidor-logs>`, `logging trap notifications` (nivel 5), `logging source-interface loopback 0` y `service timestamps log datetime msec`; en el servidor, rsyslog escuchando en UDP/514 con un archivo por dispositivo.
 
-c) **Corrección:**
-   - **NACL subnet privada:** Inbound `3306` desde SG/red de la API y `8080` desde el frontend; Deny al resto (regla `*` al final). Outbound: respuesta de esos puertos permitida (stateless → reglas explícitas de vuelta).
-   - **SG-api:** solo Inbound `8080` desde SG-web; Outbound `3306` a SG-rds y `443` hacia el NAT (por IP privada del NAT).
-   - **SG-rds:** solo Inbound `3306` desde SG-api; **sin** IP pública en la RDS y sin ruta a IGW en la subnet.
-   - Añadir NACL en la subnet pública para el resto de la VPC.
-
-d) **Salida de la API a Internet:** se añade un **NAT Gateway** en la **subnet pública** y una ruta en la route table de la subnet privada que apunte el tráfico `0.0.0.0/0` hacia el **NAT Gateway**. Al salir, la API envía el paquete con su **IP privada**; el NAT Gateway traduce el origen a su **IP elástica pública** (PAT) y recuerda la traducción en su tabla de estado. La **respuesta** llega al NAT (destino = IP elástica), que consulta la tabla y reescribe el destino a la IP privada original de la API. Por eso la API puede consumir servicios externos sin tener IP pública y las respuestas vuelven de forma transparente.
+d) **3 alarmas con umbral:**
+   1. **CPU > 80% durante 5 minutos** en switches y routers → posible sobrecarga o ataque.
+   2. **Tráfico de uplink > 85% del enlace durante 10 minutos** → saturación inminente (complementar con NetFlow para ver quién consume).
+   3. **sysUpTime que decrece** (equipo reiniciado) fuera de la ventana de mantenimiento → reinicio no planificado.

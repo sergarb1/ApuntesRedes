@@ -1,114 +1,103 @@
 ---
 title: Boletín U11 — Avanzado
-description: Ejercicios avanzados de Diagnóstico y monitorización
+description: Ejercicios avanzados de NAT
 ---
 
 # 📝 Boletín U11 — Avanzado
 
-> Ejercicios que requieren comprensión profunda de diagnóstico y SNMP.
+> Ejercicios que requieren comprender NAT en profundidad.
 
 ---
 
-## 1. Análisis Wireshark
+## 1. Traducción manual
 
-Has capturado una comunicación TCP. Ves estos paquetes en orden:
+Dado el siguiente escenario:
 
-```
-1: 192.168.1.10:50000 → 93.184.216.34:80  [SYN]
-2: 93.184.216.34:80 → 192.168.1.10:50000  [SYN, ACK]
-3: 192.168.1.10:50000 → 93.184.216.34:80  [ACK]
-4: 192.168.1.10:50000 → 93.184.216.34:80  [PSH, ACK]  (GET / HTTP/1.1)
-5: 93.184.216.34:80 → 192.168.1.10:50000  [PSH, ACK]  (HTTP 200 OK)
-...
-```
+- PC1: 192.168.1.10, accede a 8.8.8.8:80 (HTTP)
+- PC2: 192.168.1.20, accede a 8.8.8.8:53 (DNS)
+- Router NAT IP pública: 83.45.12.78
 
-a) Identifica las 3 fases del handshake TCP.
-b) ¿Qué significa PSH?
-c) Si ves 10 paquetes [TCP Retransmission] después del paquete 4, ¿qué está pasando?
+El PC1 usa puerto origen 50000 y PC2 puerto 50000 también. Completa la tabla NAT:
 
-## 2. Monitorización SNMP avanzada
-
-Un administrador quiere monitorizar estos parámetros de un router:
-- Nombre del dispositivo
-- Tiempo activo (uptime)
-- Tráfico entrante y saliente de la interfaz G0/0
-- CPU load
-
-a) Investiga y escribe las OIDs de cada parámetro.
-b) ¿Cómo harías una consulta SNMP desde línea de comandos para leer el uptime?
-c) ¿Qué herramienta usarías para graficar estas métricas a lo largo del tiempo?
-
-## 3. Diagnóstico de problema real
-
-Un usuario reporta: *"Internet va muy lento desde las 9 de la mañana. Antes de las 9 iba bien."*
-
-Desarrolla un plan de diagnóstico completo. Incluye:
-- Qué comandos usarías en cada paso
-- Qué herramientas usarías
-- Qué métricas compararías
-
-## 4. Configura Syslog centralizado
-
-Tienes 5 routers Cisco que deben enviar logs a un servidor Linux (192.168.100.50).
-
-a) Configura el logging en los routers.
-b) ¿Qué configuración necesitas en el servidor Linux para recibir logs?
-c) ¿Qué nivel de logging es adecuado para producción sin llenar el disco?
-
-## 5. Comparativa de herramientas
-
-Completa la tabla comparativa:
-
-| Herramienta | Tipo | Puerto(s) | Cifrado | ¿Activa o pasiva? |
+| Pro | Inside global | Inside local | Outside local | Outside global |
 |---|---|---|---|---|
-| SNMP v2c | | | No | Activa (polling) |
-| Syslog | | | | |
-| NetFlow | | | | |
-| Wireshark | | N/A | | |
+| tcp | 83.45.12.78:___ | 192.168.1.10:50000 | 8.8.8.8:80 | 8.8.8.8:80 |
+| udp | ___ | 192.168.1.20:50000 | 8.8.8.8:53 | 8.8.8.8:53 |
 
-## 6. Troubleshooting complejo
+## 2. Problema con FTP
 
-Un sitio remoto no puede acceder a la sede central. La topología es:
+Un usuario interno (192.168.1.10) intenta usar FTP activo para enviar un archivo a un servidor externo (200.100.50.1). El protocolo FTP activo funciona así:
 
-```
-SitioA (192.168.1.0/24) ─── RouterA ─── Internet ─── RouterB ─── SedeCentral (10.0.0.0/24)
-```
+- El cliente abre puerto 1025 para datos.
+- El cliente envía el comando PORT 192,168,1,10,4,1 (puerto 4×256+1=1025).
+- El servidor intenta conectar a 192.168.1.10:1025.
 
-- Desde SitioA, `ping 10.0.0.1` (RouterB) funciona.
-- Desde SitioA, `telnet 10.0.0.100 443` (servidor web en SedeCentral) no funciona.
-- Desde SedeCentral, se puede acceder al servidor web localmente.
+¿Por qué falla? ¿Cómo lo solucionas?
 
-¿Cuál es el problema probable? ¿Qué comandos usarías para confirmarlo?
+## 3. Configuración multi-NAT
 
-## 7. Análisis de una captura con retransmisiones
+Una empresa tiene dos servidores internos:
+- Servidor web en 192.168.1.10:80 y 192.168.1.10:443
+- Servidor SSH en 192.168.1.20:22
+- IP pública: 83.45.12.78
 
-Te entregan esta captura Wireshark de una conexión web (filtrada):
+Quieren:
+- Web accesible desde fuera como 83.45.12.78:8080 → 192.168.1.10:80
+- HTTPS accesible como 83.45.12.78:8443 → 192.168.1.10:443
+- SSH accesible como 83.45.12.78:2222 → 192.168.1.20:22
 
-```
-1: 192.168.1.10:50000 → 93.184.216.34:80  [SYN]                       Seq=0
-2: 93.184.216.34:80 → 192.168.1.10:50000  [SYN, ACK]                  Seq=0 Ack=1
-3: 192.168.1.10:50000 → 93.184.216.34:80  [ACK]                       Seq=1 Ack=1
-4: 192.168.1.10:50000 → 93.184.216.34:80  [PSH, ACK] (GET /)          Seq=1 Ack=1
-5: 192.168.1.10:50000 → 93.184.216.34:80  [TCP Retransmission] (GET /)  Seq=1
-6: 192.168.1.10:50000 → 93.184.216.34:80  [TCP Retransmission] (GET /)  Seq=1
-7: 93.184.216.34:80 → 192.168.1.10:50000  [TCP Window Update] Window=0
-```
+Configura el NAT destino necesario.
 
-a) ¿El three-way handshake se completó correctamente? Justifícalo con los paquetes.
-b) ¿Qué significa que los paquetes 5 y 6 sean retransmisiones del 4?
-c) ¿Qué indica el paquete 7 (`Window=0`)? ¿Qué conclusión global sacas de la conexión?
+## 4. NAT + VPN
 
-**Pista:** piensa en las dos señales que viste en el punto de Wireshark: las retransmisiones indican pérdida o congestión, y `Window=0` indica saturación del receptor. ¿Qué secuencia de eventos explica que primero se pierda la petición y luego el servidor pida pausa?
+Un empleado necesita conectar por VPN (IPsec) a la oficina. El router de la oficina hace NAT.
 
-## 8. Plan de monitorización SNMP + syslog
+Pero IPsec no funciona a través de NAT. ¿Por qué? ¿Qué solución existe?
 
-Debes monitorizar una red de 10 dispositivos (5 switches, 3 routers, 1 firewall, 1 servidor) y montar un sistema que te avise antes de que un fallo afecte a los usuarios.
+## 5. Análisis de timeouts
 
-Diseña el plan completo:
+Un usuario se queja de que su conexión SSH se corta después de 5 minutos de inactividad. La tabla NAT tiene un timeout de 24 horas para UDP y configurable para TCP.
 
-a) Elige 4 OIDs clave que monitorizarías en los switches y routers (una de ellas para tráfico de una interfaz).
-b) Elige la herramienta de monitorización (entre Zabbix, PRTG, Nagios o LibreNMS) y justifica por qué.
-c) Diseña la configuración SNMP y syslog para los dispositivos: comunidad, umbral de severidad de logs y destino.
-d) Define 3 alarmas concretas con sus umbrales (ej. "CPU > 80% durante 5 minutos").
+¿Por qué se corta la conexión aunque el timeout NAT no haya expirado? ¿Dónde está el verdadero problema?
 
-**Pista:** recuerda que los contadores de tráfico (`ifInOctets`, `ifOutOctets`) necesitan dos lecturas separadas en el tiempo para calcular velocidad, que SNMP v3 es lo seguro y que el nivel de syslog 7 (debug) llenaría el disco.
+## 6. NAT y servidores duales
+
+Una empresa tiene:
+- 2 IPs públicas: 83.45.12.78 y 83.45.12.79
+- Servidor web interno: 192.168.10.10
+- Servidor de correo interno: 192.168.10.20
+
+Quieren que el web sea accesible por 83.45.12.78 y el correo por 83.45.12.79. Los PCs internos deben salir por PAT con la IP 83.45.12.78.
+
+Configura todo.
+
+## 7. Multi-NAT: servidores duales + PAT simultáneo
+
+Una empresa tiene:
+- Red interna 192.168.50.0/24, servidor web DMZ en 192.168.50.10 (puertos 80 y 443).
+- Dos IPs públicas: 83.45.12.78 y 83.45.12.79.
+- Los usuarios internos deben salir a Internet por **PAT** con la IP 83.45.12.78.
+- El servidor web debe ser accesible desde fuera como **83.45.12.78:8080 → 192.168.50.10:80** y **83.45.12.78:8443 → 192.168.50.10:443**.
+- Además, la IP pública 83.45.12.79 se reserva para un servidor de correo (192.168.50.20) con **NAT estático 1:1** para los puertos 25, 587 y 993.
+
+Configura todo el NAT en el router (interfaces: g0/0 LAN inside, g0/1 WAN outside).
+
+**Pista:** puedes combinar PAT overload y `ip nat inside source static tcp` en el mismo router. Revisa que el tráfico saliente de los usuarios no colisione con las traducciones estáticas reservadas.
+
+## 8. Diagnóstico: "no salimos a Internet"
+
+En el instituto no sale Internet. Configuración actual de R1:
+
+- g0/0: 192.168.1.1/24 (inside LAN)
+- g0/1: 203.0.113.2/30 (outside, hacia el ISP con ruta por defecto)
+- `ip nat inside source list 1 interface g0/1 overload`
+- `access-list 1 permit 192.168.1.0 0.0.0.255`
+
+Síntoma: los PCs hacen ping al gateway (192.168.1.1) y a 203.0.113.2, pero **no** a 8.8.8.8.
+
+a) Ordena las comprobaciones de diagnóstico que harías, de la más básica a la más específica.
+b) ¿Qué comando confirma que NAT está traduciendo? ¿Qué esperas ver?
+c) Tras revisar, ves que `show ip nat translations` está vacío aunque hay tráfico. ¿Qué comprobarías a continuación? Da al menos 3 causas probables.
+d) Encuentra el fallo real: las interfaces g0/0 y g0/1 **no tienen** `ip nat inside` / `ip nat outside`. Explica por qué sin esas marcas no hay traducción, aunque el resto de comandos sean correctos.
+
+**Pista:** NAT se diagnostica en progresión: primero conectividad, luego traducción, luego ruta. Sin `ip nat inside/outside`, el router no sabe qué tráfico traducir: los paquetes salen sin traducir (o se descartan) y la tabla NAT queda vacía.

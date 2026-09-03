@@ -1,7 +1,7 @@
 # Apuntes PAR — Planificación y Administración de Redes
 
 > **Aprende redes como si la red se fuera a caer mañana.**  
-> Tema 0 + 12 unidades didácticas · 80% práctico · Estilo conversacional
+> 13 unidades didácticas (Unidad 01 de introducción + 12 de contenido) · 80% práctico · Estilo conversacional
 
 **CC BY-SA 4.0** — [Sergi Garcia Barea](https://github.com/sergarb1)
 
@@ -18,9 +18,9 @@
 Un paquete IP viaja desde que nace en un navegador hasta la nube. Cada unidad avanza con él.
 
 ```
-U00: 🚪 Bienvenida  → U01: 🏠 Origen     → U02: 📦 Encapsulado → U03: 🔌 Cable
-U04: 🏷️ IP          → U05: 🌍 IPv6       → U06: 🔀 Switch      → U07: 🏢 VLAN
-U08: 🧭 Router      → U09: 🗣️ OSPF        → U10: 🌐 NAT         → U11: 🩺 Diagnóstico → U12: ☁️ Cloud
+U01: 🚪 Bienvenida  → U02: 🏠 Origen     → U03: 📦 Encapsulado → U04: 🔌 Cable
+U05: 🏷️ IP          → U06: 🌍 IPv6       → U07: 🔀 Switch      → U08: 🏢 VLAN
+U09: 🧭 Router      → U10: 🗣️ OSPF        → U11: 🌐 NAT         → U12: 🩺 Diagnóstico → U13: ☁️ Cloud
 ```
 
 ---
@@ -29,19 +29,19 @@ U08: 🧭 Router      → U09: 🗣️ OSPF        → U10: 🌐 NAT         →
 
 | # | Título | Nombre didáctico | RA | Proyecto |
 |---|---|---|---|---|
-| U00 | Tema 0 — Bienvenida | Tu punto de partida 🚪 | — | Ponerte al día |
-| U01 | Fundamentos de redes | La red mágica que no funciona 😵‍💫 | RA1 | Montar red desde cero |
-| U02 | Modelos y análisis de tráfico | El paquete perdido 🧳 | RA1 | Rastrear paquete con Wireshark |
-| U03 | Infraestructura física | El cable traicionero 🔌 | RA2 | Cableado oficina + crimpado |
-| U04 | IPv4 y subnetting | La calculadora maldita 🧮 | RA2 | Diseñar red IP empresarial |
-| U05 | IPv6 y transición | El futuro que ya llegó 🚀 | RA2/RA7 | Migrar red a IPv6 |
-| U06 | Switching y STP | El switch enfadado 😡 | RA3 | Red empresarial segmentada |
-| U07 | VLANs | La oficina dividida 🏢 | RA5 | Separar departamentos en red |
-| U08 | Routing y ACLs | El GPS perdido 🧭 | RA4 | Conectar sedes remotas |
-| U09 | Routing dinámico | El router que habla solo 🗣️ | RA6 | Red corporativa escalable |
-| U10 | NAT y acceso a Internet | Internet no funciona otra vez 🌐 | RA7 | Conectar empresa a Internet |
-| U11 | Diagnóstico y monitorización | Apágalo y vuelve a encenderlo 🧠 | Transv. | NOC + reparar averías |
-| U12 | Cloud, virtualización y futuro | La nube que no es vapor ☁️ | Ampliación | Infraestructura híbrida |
+| U01 | Introducción | Tu punto de partida 🚪 | — | Ponerte al día |
+| U02 | Fundamentos de redes | La red mágica que no funciona 😵‍💫 | RA1 | Montar red desde cero |
+| U03 | Modelos y análisis de tráfico | El paquete perdido 🧳 | RA1 | Rastrear paquete con Wireshark |
+| U04 | Infraestructura física | El cable traicionero 🔌 | RA2 | Cableado oficina + crimpado |
+| U05 | IPv4 y subnetting | La calculadora maldita 🧮 | RA2 | Diseñar red IP empresarial |
+| U06 | IPv6 y transición | El futuro que ya llegó 🚀 | RA2/RA7 | Migrar red a IPv6 |
+| U07 | Switching y STP | El switch enfadado 😡 | RA3 | Red empresarial segmentada |
+| U08 | VLANs | La oficina dividida 🏢 | RA5 | Separar departamentos en red |
+| U09 | Routing y ACLs | El GPS perdido 🧭 | RA4 | Conectar sedes remotas |
+| U10 | Routing dinámico | El router que habla solo 🗣️ | RA6 | Red corporativa escalable |
+| U11 | NAT y acceso a Internet | Internet no funciona otra vez 🌐 | RA7 | Conectar empresa a Internet |
+| U12 | Diagnóstico y monitorización | Apágalo y vuelve a encenderlo 🧠 | Transv. | NOC + reparar averías |
+| U13 | Cloud, virtualización y futuro | La nube que no es vapor ☁️ | Ampliación | Infraestructura híbrida |
 
 ---
 
@@ -107,10 +107,10 @@ npm run export    # PDF + EPUB (todo en uno)
 ```
 src/
 ├── content/
-│   ├── docs/                     → Tema 0 + 12 unidades en Markdown
+│   ├── docs/                     → 13 unidades en Markdown
 │   │   ├── index.md              → Portada con hero + cards
-│   │   ├── 00-introduccion.md …  → Índice de cada sección
-│   │   ├── 00-introduccion/      → 9 puntos por sección (01-…, 09-cierre)
+│   │   ├── 01-introduccion.md …  → Índice de cada sección
+│   │   ├── 01-introduccion/      → Puntos por sección (01-…, 09-cierre)
 │   │   └── boletines/            → Ejercicios (inicial, avanzado + resueltos)
 │   └── config.ts                 → Colecciones de contenido
 ├── styles/

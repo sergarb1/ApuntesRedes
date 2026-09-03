@@ -1,6 +1,6 @@
 ---
-title: Boletín U01 — Inicial (Resuelto)
-description: Soluciones de los ejercicios básicos de Fundamentos de Redes
+title: "Boletín U01 — Inicial (Resuelto)"
+description: Soluciones de los ejercicios básicos de la Unidad 01
 ---
 
 # ✅ Boletín U01 — Inicial (Resuelto)
@@ -9,70 +9,79 @@ description: Soluciones de los ejercicios básicos de Fundamentos de Redes
 
 ## 1. Clasifica estas redes
 
-a) **LAN** — Todo dentro del mismo hogar.
-b) **LAN** — Sigue siendo local aunque tenga 200 PCs: un solo edificio.
-c) **WAN** — Une dos ubicaciones geográficamente separadas (Madrid y Barcelona).
-d) **MAN** — Cubre una ciudad (Metropolitan Area Network).
+a) **PAN** — Red personal: lo que te rodea (Bluetooth).
+b) **LAN** — Red local de tu casa.
+c) **LAN** — Sigue siendo local aunque tenga varios laboratorios, si están en el mismo edificio.
+d) **WAN** — Une dos ubicaciones separadas (Madrid y Valencia).
+e) **MAN** — Cubre una ciudad entera (Metropolitan Area Network).
 
-## 2. Verdadero o falso
+## 2. Ordena los 4 componentes de una red
 
-a) **Falso.** El hub NO segmenta: todos sus puertos comparten un único dominio de colisión.
-b) **Verdadero.** El switch construye su tabla MAC dinámicamente según el tráfico que ve.
-c) **Falso.** El router trabaja en la capa 3 (Red). La capa 2 es cosa del switch/puente.
-d) **Verdadero.** 48 bits representados en hexadecimal (ej. `AA:BB:CC:DD:EE:FF`).
-e) **Falso.** La MAC va grabada de fábrica y es permanente; la que cambia con el reinicio o el DHCP es la IP.
+El orden lógico es:
 
-## 3. Dibuja la topología
+1. **Dispositivos finales** — los que usan las personas (PC, móvil, servidor).
+2. **Dispositivos de interconexión** — los que conectan y organizan (switch, router, AP).
+3. **Medio de transmisión** — el canal por donde viajan los datos (cable, fibra, WiFi).
+4. **Protocolos** — las reglas del idioma que todos respetan.
 
-**Descripción:** topología en estrella extendida (o árbol).
+## 3. Verdadero o falso
 
-- Router conectado a Switch1 y a Switch2 (un cable a cada uno).
-- Switch1 conectado a PC1 y PC2.
-- Switch2 conectado a PC3 y PC4.
-- El router da la salida a Internet.
+a) **Verdadero.** Internet es la red de redes que une millones de redes.
+b) **Falso.** El switch es un dispositivo de interconexión, no final.
+c) **Verdadero.** Los protocolos son las reglas para entenderse.
+d) **Falso.** La MAC es fija, está grabada en el hardware.
+e) **Verdadero.** La IP es lógica: cambia de red o se renueva por DHCP.
+f) **Verdadero.** LAN = misma zona local, sin importar el número de equipos.
+g) **Verdadero.** Dos PCs con un switch forman una red válida sin Internet.
+h) **Falso.** El router es un dispositivo; el WiFi es un medio de transmisión.
 
-## 4. Empaqueta tu memoria: une cada PDU con su capa
+## 4. Relaciona término con definición
 
-1 → b (Bits · Física)
-2 → c (Trama · Enlace)
-3 → d (Paquete · Red)
-4 → a (Segmento · Transporte)
+1 → h (Servidor)
+2 → f (Protocolo)
+3 → g (Switch)
+4 → e (Router)
+5 → d (AP)
+6 → a (Paquete)
+7 → b (MAC)
+8 → c (IP)
 
->Truco: a medida que bajas capas, la PDU gana cabeceras (segmento → paquete → trama → bit).
+## 5. IP o MAC: elige la opción correcta
 
-## 5. ¿TCP o UDP?
+**Opción c)** — La IP es lógica y puede cambiar; la MAC es física y viene grabada en el hardware.
 
-a) **TCP** — El PDF debe llegar completo y en orden.
-b) **UDP** — Prefiere fluidez; se tolera perder algún fotograma.
-c) **TCP** — La web se apoya en una conexión fiable.
-d) **UDP** — Una consulta puntual no necesita asegurar conexión.
+## 6. ¿Cliente o servidor?
 
-## 6. Calcula: una red /24
+a) **Cliente** — El navegador pide la página.
+b) **Servidor** — Atiende a muchos y reparte las notas.
+c) **Cliente** — El móvil pide el correo.
+d) **Servidor** — Atiende las peticiones de muchos clientes.
+e) **Cliente** — El alumno descarga (pide) el archivo.
 
-a) **256** direcciones totales (2^8 = 256 porque 8 bits de host).
-b) **254** utilizables (256 - la de red - la de broadcast).
-c) La dirección de la red es **`192.168.1.0`** (hosts a 0).
-d) La de broadcast es **`192.168.1.255`** (hosts a 1). Ninguna de las dos se asigna a equipos.
+## 7. Completa: una red no es Internet
 
-## 7. Sopa de letras conceptual
+a) ... forman **una red** válida.
+b) Internet es **la red de redes**...
+c) ... son **servicios** que se ofrecen sobre Internet.
+d) ... sigue siendo una **LAN**, pero ya forma parte del mundo.
 
-1 → b (Hub)
-2 → e (Switch)
-3 → a (Router)
-4 → c (MAC)
-5 → d (Protocolo)
-6 → f (IP)
+## 8. Mini test de vocabulario
 
-## 8. Ping mental guiado
+1) **a)** Un byte = 8 bits.
+2) **b)** Un bit solo vale 0 o 1.
+3) **a)** Packet Tracer simula redes sin hardware real.
+4) **a)** El WiFi es un método de transmisión sin cables.
+5) **b)** Un paquete es un trocito de datos que viaja por la red.
+6) **a)** El AP reparte la señal WiFi a los equipos sin cable.
 
-1. PC-A consulta la tabla ARP: no tiene la MAC de `192.168.1.20`.
-2. Lanza un **ARP Request** de difusión: "¿Quién tiene 192.168.1.20?" (MAC destino `FF:FF:FF:FF:FF:FF`).
-3. El switch recibe la trama y la inunda por todos los puertos menos el de origen.
-4. PC-B ve que el ARP pide su IP y responde con **ARP Reply** (unicast) dando su MAC.
-5. El switch aprende que PC-B está en ese puerto y lo anota en su tabla MAC.
-6. PC-A guarda la MAC de PC-B en su tabla ARP.
-7. PC-A construye la trama Ethernet con MAC destino = MAC de PC-B e IP destino `192.168.1.20`.
-8. Envía el **ICMP Echo Request** (el ping).
-9. El switch lo reenvía solo por el puerto de PC-B (ya sabe dónde está).
-10. PC-B responde con **ICMP Echo Reply**.
-11. PC-A recibe la respuesta: **ping exitoso**.
+## 9. El método de diagnóstico en capas
+
+a) Primero se comprueba **lo físico**: encendido, cables, luces y señal.
+b) Por ejemplo: comprobar que el cable de red está bien enchufado, que las luces del router parpadean o que el WiFi está activado en el portátil.
+c) Porque sin una capa física sana, nada de lo demás puede funcionar: si el "canal" falla, no viajan los datos. Se va de lo más básico a lo más complejo.
+
+## 10. Herramientas del oficio
+
+1 → b (Packet Tracer)
+2 → c (Wireshark)
+3 → a (ping)

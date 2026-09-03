@@ -1,91 +1,87 @@
 ---
 title: Boletín U05 — Inicial
-description: Ejercicios básicos de IPv6 y Transición
+description: Ejercicios básicos de IPv4 y Subnetting
 ---
 
 # 📝 Boletín U05 — Inicial
 
-> Ejercicios básicos para afianzar los conceptos de direccionamiento IPv6.
+> Ejercicios básicos para afianzar los conceptos de direccionamiento IPv4 y máscaras.
 
 ---
 
-## 1. Compresión de direcciones
+## 1. Conversión binario
 
-Comprime estas direcciones IPv6 al máximo:
+Convierte a binario (8 bits):
 
-a) `2001:0DB8:0000:0000:0000:0000:0000:0001`
-b) `FE80:0000:0000:0000:02AA:00FF:FE9A:4CA2`
-c) `0000:0000:0000:0000:0000:0000:0000:0001`
-d) `2001:0DB8:0000:0000:ABCD:0000:0000:1234`
+a) 192
+b) 10
+c) 255
+d) 0
 
-## 2. Identifica el tipo
+## 2. Conversión a decimal
 
-Indica qué tipo de dirección IPv6 es cada una:
+Convierte a decimal:
 
-a) `2001:DB8::1`
-b) `FE80::1`
-c) `::1`
-d) `FC00::1`
-e) `FF02::1`
+a) 11000000
+b) 10101000
+c) 00001010
+d) 11111111
 
-## 3. Completa
+## 3. ¿Qué máscara es?
 
-Completa las equivalencias:
+Relaciona la notación CIDR con la máscara decimal:
 
-a) IPv4 tiene __ bits, IPv6 tiene __ bits.
-b) IPv4 se representa en decimal, IPv6 en __.
-c) El prefijo de Link-Local es __.
-d) El prefijo de Global Unicast es __.
-e) __ reemplaza a ARP en IPv6.
+| CIDR | Máscara |
+|---|---|
+| /24 | a) 255.255.255.252 |
+| /16 | b) 255.255.255.0 |
+| /30 | c) 255.255.0.0 |
+| /8 | d) 255.0.0.0 |
 
 ## 4. Verdadero o falso
 
-a) Las direcciones Link-Local son enrutables en Internet.
-b) SLAAC no necesita un servidor central.
-c) :: se puede usar varias veces en la misma dirección IPv6.
-d) DHCPv6 funciona igual que DHCP en IPv4.
-e) Dual Stack significa tener IPv4 e IPv6 simultáneamente.
+a) Una dirección IPv4 tiene 48 bits.
+b) 192.168.1.256 es una IP válida.
+c) La dirección de broadcast de 192.168.1.0/24 es 192.168.1.255.
+d) DHCP asigna IPs automáticamente.
+e) Las IPs privadas pueden viajar por Internet.
 
-## 5. NDP
+## 5. Calcula hosts
 
-Relaciona cada mensaje ICMPv6 con su función:
+¿Cuántos hosts útiles tiene cada subred?
 
-| Mensaje | Función |
-|---|---|
-| 1. Neighbor Solicitation | a) El router anuncia su prefijo |
-| 2. Neighbor Advertisement | b) El dispositivo busca routers |
-| 3. Router Solicitation | c) "¿Quién tiene esta IP?" |
-| 4. Router Advertisement | d) "Yo tengo esa IP, aquí está mi MAC" |
+a) /24
+b) /27
+c) /30
+d) /29
 
-## 6. Mecanismos de transición
+## 6. Identifica el tipo
 
-Relaciona cada mecanismo con su descripción:
+Indica si cada IP es pública, privada o especial:
 
-| Mecanismo | Descripción |
-|---|---|
-| 1. Dual Stack | a) Traduce IPv6 a IPv4 para acceder a servidores antiguos |
-| 2. Túnel 6to4 | b) IPv4 e IPv6 funcionando a la vez |
-| 3. NAT64 | c) Encapsula IPv6 dentro de IPv4 |
+a) 10.0.0.15
+b) 8.8.8.8
+c) 192.168.1.1
+d) 127.0.0.1
+e) 172.16.0.100
+f) 169.254.1.1
 
-## 7. Expande direcciones
+## 7. Calcula la dirección de red
 
-Descomprime estas direcciones a su forma **completa de 8 grupos**:
+Para cada par de IP y máscara, haz el **AND** bit a bit y di cuál es la **dirección de red**:
 
-a) `2001:DB8::1`
-b) `FE80::2AA:FF:FE9A:4CA2`
-c) `::1`
+a) IP: 192.168.1.37 · Máscara: 255.255.255.0
+b) IP: 10.0.0.150 · Máscara: 255.0.0.0
+c) IP: 172.16.0.200 · Máscara: 255.255.255.128
+d) IP: 192.168.1.66 · Máscara: 255.255.255.192
 
-Recuerda: el `::` oculta tantos grupos de ceros como falten para completar 8.
+**Pista:** pasa el octeto "mágico" (el último de la máscara que no es 255) a binario y haz el AND con el octeto correspondiente de la IP. El resto de octetos se copian tal cual (si la máscara es 255) o se ponen a 0 (si la máscara es 0).
 
-## 8. Clasifica tipo y ámbito
+## 8. Subredes iguales
 
-Indica para cada dirección su **tipo** (GUA, LLA, ULA, Loopback, Multicast) y su **ámbito** (global, enlace local, privado, este nodo):
+Divide la red **192.168.5.0/24** en **4 subredes del mismo tamaño**.
 
-| Dirección | Tipo | Ámbito |
-|---|---|---|
-| a) `2001:DB8::1` | | |
-| b) `FE80::1` | | |
-| c) `FC00::1` | | |
-| d) `::1` | | |
-| e) `FF02::1` | | |
-| f) `2001:DB8:1:2:21A:2BFF:FE3C:4D5E` | | |
+a) ¿Cuántos bits debes prestar a la máscara?
+b) ¿Cuál es la nueva máscara (CIDR y decimal)?
+c) ¿Cuántos hosts útiles tiene cada subred?
+d) Enumera las 4 direcciones de red con su rango de hosts.

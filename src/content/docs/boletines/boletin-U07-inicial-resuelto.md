@@ -1,61 +1,75 @@
 ---
 title: Boletín U07 — Inicial (Resuelto)
-description: Soluciones ejercicios básicos de VLANs
+description: Soluciones de los ejercicios básicos de Switching y STP
 ---
 
 # ✅ Boletín U07 — Inicial (Resuelto)
 
 ---
 
-## 1. ¿Qué VLAN soy?
+## 1. ¿Qué hace el switch?
 
-1 → c (VLAN de datos: tráfico normal de usuario)
-2 → a (VLAN de voz: teléfonos IP, QoS 802.1p)
-3 → d (VLAN nativa: sin etiquetar en el trunk)
-4 → b (VLAN de gestión: administración del switch, SSH/SNMP)
+1 → b (MAC destino conocida → reenvío selectivo)
+2 → a (MAC destino desconocida → inunda)
+3 → c (Broadcast → inunda)
 
 ## 2. Verdadero o falso
 
-a) **Verdadero.** Cada VLAN es un dominio de broadcast independiente: un broadcast de VLAN 10 no llega a la VLAN 20.
-b) **Verdadero.** IEEE 802.1Q es el estándar de etiquetado VLAN (TPID 0x8100, 4 bytes).
-c) **Falso.** Las VLANs aíslan en capa 2. Necesitan un router (o un switch capa 3) para hacer inter-VLAN routing.
-d) **Verdadero.** Un trunk transporta todas las VLANs permitidas, etiquetadas con 802.1Q (salvo la native).
-e) **Verdadero.** VLAN 1 es la native y la VLAN por defecto del switch. Por seguridad conviene cambiarla.
+a) **Verdadero.** Cada puerto es un dominio de colisión independiente.
+b) **Falso.** Los switches no segmentan dominios de broadcast. Eso lo hacen los routers.
+c) **Verdadero.** STP bloquea puertos redundantes para romper bucles.
+d) **Verdadero.** RSTP (IEEE 802.1w) converge en 1-3 segundos frente a los 30-50 de STP.
+e) **Falso.** La tabla MAC se llama tabla MAC o CAM table. La tabla ARP está en los hosts, no en los switches.
 
-## 3. Identifica
+## 3. Estados STP
 
-a) **Puerto access** — Solo una VLAN, tráfico sin etiquetar.
-b) **Puerto trunk** — Múltiples VLANs etiquetadas con 802.1Q (y la native sin etiquetar).
+1. c) **Blocking** (20s escuchando BPDUs)
+2. d) **Listening** (15s, escucha pero no aprende MACs)
+3. a) **Learning** (15s, aprende MACs pero no reenvía)
+4. b) **Forwarding** (reenvía tráfico normalmente)
 
-## 4. Números
+Tiempo total: ~50 segundos.
 
-a) **12 bits** para el VLAN ID.
-b) **4094 VLANs** (12 bits = 4096, reservadas 0 y 4095).
-c) **4 bytes** insertados entre la MAC de origen y el EtherType: TPID (2 bytes) + PRI (3 bits) + VLAN ID (12 bits).
+## 4. Identifica el rol
 
-## 5. Relaciona
+a) **Designated Port** — El Root Bridge tiene todos sus puertos como Designated.
+b) **Root Port** — Cada switch no-root tiene un Root Port hacia el Root Bridge.
+c) **Alternate Port** — Puerto bloqueado como respaldo.
 
-1 → b (`switchport mode trunk` configura el puerto como trunk)
-2 → a (`vlan 10` crea la VLAN 10)
-3 → c (`show vlan brief` muestra las VLANs y sus puertos)
-4 → d (`encapsulation dot1Q 10` etiqueta la subinterfaz con la VLAN 10)
+## 5. ¿Qué comando?
 
-## 6. ¿Qué necesito?
+1 → c (`show mac address-table`)
+2 → a (`show spanning-tree`)
+3 → b (`spanning-tree portfast`)
+4 → d (`switchport port-security`)
 
-**b) Un router o switch capa 3.** Las VLANs aíslan en capa 2. Para comunicarse entre VLANs se necesita routing (inter-VLAN routing): router-on-a-stick con subinterfaces o un switch multicapa con SVIs.
+## 6. Tormenta de broadcast
 
-## 7. Comandos de resolución
+**b) Un bucle en la red.** Si hay caminos redundantes sin STP, los broadcasts rebotan infinitamente entre switches, saturando la red.
 
-1 → c (`show vlan brief` → VLANs y puertos access)
-2 → a (`show interfaces trunk` → native VLAN, allowed y mismatches)
-3 → b (`show running-config` → configuración completa actual)
+## 7. Reenvío de tramas y la tabla CAM
 
-d) **`show ip interface brief`** — en el router-on-a-stick, te muestra las subinterfaces (Fa0/0.10, Fa0/0.20…) con su estado **Up/Up** y sus IPs. Si una subinterfaz está *down/down*, el problema suele ser la interfaz física sin `no shutdown`, o que la VLAN no exista en el switch.
+a) MAC origen `0050.7966.6801` → **aprende/refresca Fa0/2**. MAC destino `00D0.BC96.1A01` conocida → **reenvía solo por Fa0/3**.
 
-## 8. V/F inter-VLAN
+b) MAC origen `0050.7966.6800` → aprende/refresca Fa0/1 (ya estaba). MAC destino `0050.7966.6802` **desconocida** → **inunda por todos los puertos excepto Fa0/1**.
 
-a) **Verdadero.** Cada VLAN necesita su subinterfaz (`interface fa0/0.10`) con `encapsulation dot1Q 10` y su IP de gateway.
-b) **Verdadero.** Un switch capa 3 enruta entre VLANs con SVIs (`interface vlan X`) + `ip routing`, sin router externo.
-c) **Verdadero.** El router-on-a-stick enruta todo por la única interfaz física: es el cuello de botella del diseño.
-d) **Verdadero.** Sin `ip routing`, los SVIs están Up/Up pero NO enrutan entre VLANs. Es el fallo nº1 al probar.
-e) **Verdadero.** Todo el tráfico inter-VLAN atraviesa la misma interfaz: si las VLANs generan más de su ancho de banda, se satura (por eso se usa Gigabit o un switch capa 3).
+c) Destino broadcast `FFFF.FFFF.FFFF` → **inunda por todos los puertos** excepto el de origen (Fa0/3).
+
+d) La MAC `0050.7966.6801` aparece por Fa0/4 cuando estaba aprendida en Fa0/2: el switch **actualiza la tabla CAM** y asocia la MAC a Fa0/4 (la entrada dinámica se mueve al puerto más reciente).
+
+## 8. Estados STP
+
+Tabla completada:
+
+| Estado | ¿Reenvía tráfico? | ¿Aprende MACs? | Tiempo |
+|---|---|---|---|
+| Blocking | No | No | 20 s (Max Age) |
+| Listening | No | No | 15 s |
+| Learning | No | Sí | 15 s |
+| Forwarding | Sí | Sí | Indefinido |
+
+a) **Blocking → Listening → Learning → Forwarding** (Disabled es un estado administrativo, no forma parte de la secuencia normal).
+
+b) Hasta **50 segundos**: 20 s (Blocking) + 15 s (Listening) + 15 s (Learning).
+
+c) **Forwarding**: es el único estado que reenvía tráfico (y además aprende MACs).

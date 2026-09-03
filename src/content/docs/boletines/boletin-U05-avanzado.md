@@ -1,129 +1,122 @@
 ---
 title: Boletín U05 — Avanzado
-description: Ejercicios avanzados de IPv6 y Transición
+description: Ejercicios avanzados de IPv4 y Subnetting
 ---
 
 # 📝 Boletín U05 — Avanzado
 
-> Ejercicios que requieren aplicar los conceptos de IPv6, SLAAC y transición de forma más profunda.
+> Ejercicios que requieren aplicar subnetting, VLSM y DHCP de forma más profunda.
 
 ---
 
-## 1. Subnetting IPv6
+## 1. Diseño VLSM
 
-Te asignan el prefijo **2001:DB8:CAFE::/48** para tu empresa. Necesitas crear subredes para:
+Te dan la red **172.16.0.0/24**. Debes diseñar el direccionamiento para:
 
-- Oficina central: /48 completa
-- 5 sedes regionales: subredes del mismo tamaño
+- **Producción:** 60 hosts
+- **Desarrollo:** 30 hosts
+- **Testing:** 10 hosts
+- **Enlaces WAN:** 3 enlaces punto a punto (2 IPs cada uno)
 
-a) ¿Qué máscara usarías para las sedes?
-b) ¿Cuántas subredes /64 puedes crear dentro de /48?
-c) Escribe las primeras 3 subredes /64 (con sus prefijos completos)
+a) Diseña el VLSM con el mínimo desperdicio de direcciones.
+b) Indica la red, máscara, rango de hosts y broadcast para cada subred.
+c) ¿Cuántas IPs sobran?
 
-**Pista:** /48 a /64 = 16 bits de subred = 65536 subredes. Cada subred /64 tiene 2⁶⁴ direcciones.
+**Pista:** Ordena de mayor a menor necesidad. Recuerda que los enlaces /30 solo necesitan 2 hosts.
 
-## 2. EUI-64
+## 2. Diagnóstico DHCP
 
-Dada la MAC **00:1A:2B:3C:4D:5E**:
-
-a) Genera la dirección EUI-64 correspondiente
-b) Si el prefijo es 2001:DB8:1:2::/64, ¿cuál es la dirección IPv6 completa?
-c) ¿Qué problema de privacidad tiene EUI-64?
-
-## 3. Diagnóstico IPv6
-
-Un PC tiene esta configuración IPv6:
+Un usuario no puede conectarse a Internet. Su configuración IP es:
 
 ```
-Ethernet adapter Ethernet:
-   IPv6 Address: fe80::21a:2bff:fe3c:4d5e%12
-   IPv6 Address: 2001:db8:1:2:21a:2bff:fe3c:4d5e
-   Default Gateway: fe80::1%12
+IPv4: 169.254.15.33
+Máscara: 255.255.0.0
+Gateway: (vacío)
+DNS: (vacío)
 ```
 
-a) ¿Por qué hay dos direcciones IPv6?
-b) ¿Qué significa el %12 al final de fe80::1?
-c) ¿Puede este PC acceder a Internet? ¿Por qué?
-d) ¿Qué comando usarías en Windows para ver esta configuración?
+a) ¿Qué tipo de dirección es 169.254.15.33?
+b) ¿Por qué tiene esa IP?
+c) ¿Qué solución propones?
 
-**Pista:** %12 es el Zone ID, identifica la interfaz de red (por si hay varias).
+**Pista:** 169.254.0.0/16 es APIPA (Automatic Private IP Addressing). Windows asigna esta IP cuando el servidor DHCP no responde.
 
-## 4. Diseño de transición
+## 3. Subnetting binario
 
-Una empresa tiene:
-- 250 empleados en sede central con IPv4 (192.168.0.0/24)
-- 50 empleados en sucursal con IPv4 (10.0.0.0/24)
-- El ISP ya ofrece IPv6 nativo en ambas ubicaciones
-- Necesitan acceder a un servicio cloud que solo tiene IPv4
+Dada la IP 200.100.50.30 con máscara 255.255.255.224 (/27):
 
-Diseña la estrategia de transición respondiendo:
+a) Escribe la IP y la máscara en binario
+b) Calcula la dirección de red (AND)
+c) ¿Cuál es la dirección de broadcast?
+d) ¿Cuántos hosts útiles tiene esta subred?
+e) ¿La IP 200.100.50.62 está en la misma subred? ¿Por qué?
 
-a) ¿Qué mecanismo usas en las LANs? ¿Por qué?
-b) ¿Cómo conectas ambas sedes?
-c) ¿Cómo acceden al servicio cloud solo-IPv4?
-d) ¿Qué configuración necesitas en los routers de cada sede?
+## 4. Resumen de subredes
 
-**Pista:** Dual Stack es la opción recomendada cuando el ISP ofrece IPv6 nativo.
+Tienes 10.0.0.0/16. Necesitas crear 8 subredes del mismo tamaño.
 
-## 5. Análisis de Router Advertisement
+a) ¿Cuántos bits debes pedir prestados?
+b) ¿Cuál es la nueva máscara?
+c) ¿Cuántos hosts por subred?
+d) Enumera las 8 direcciones de red resultantes
 
-Un router envía este RA:
+## 5. Sumarización de rutas
 
-```
-Prefix: 2001:DB8:1:2::/64
-M Flag: 0
-O Flag: 1
-```
+Tienes estas 4 subredes:
+- 192.168.0.0/24
+- 192.168.1.0/24
+- 192.168.2.0/24
+- 192.168.3.0/24
 
-a) ¿Qué método de asignación de IPs deben usar los clientes?
-b) ¿Quién da la IP? ¿Quién da el DNS?
-c) Si un cliente solo entiende SLAAC, ¿podrá obtener DNS?
-d) ¿Qué cambiaría si M Flag = 1?
+a) ¿Puedes resumirlas en una sola ruta? ¿Cuál?
+b) ¿Qué máscara tendría la ruta resumida?
+c) ¿Cuántas IPs totales abarca la ruta resumida?
 
-**Pista:** M Flag = Managed (DHCPv6 stateful), O Flag = Other (DHCPv6 stateless).
+**Pista:** Mira los bits en común. Las 4 redes comparten los primeros 22 bits.
 
-## 6. NDP en acción
+## 6. Plan de direccionamiento para una empresa
 
-Un PC con IPv6 2001:DB8::10/64 quiere comunicarse con 2001:DB8::20/64 en la misma red. La tabla de vecinos está vacía.
+Diseña un plan completo para una empresa con:
 
-a) ¿Qué mensaje ICMPv6 envía primero el PC?
-b) ¿A qué dirección MAC destino?
-c) ¿Qué dirección IPv6 destino usa? (unicast, multicast, broadcast)
-d) ¿Quién responde y con qué?
-e) ¿Cómo se llama este proceso en IPv6?
+**Sede central:**
+- 200 hosts en Administración
+- 100 hosts en Producción
+- 50 hosts en IT
+- 10 hosts en Dirección
 
-**Pista:** En IPv6 no hay ARP. El proceso equivalente es parte de NDP y usa una dirección multicast especial derivada de la IP destino (solicited-node multicast).
+**Sucursal:**
+- 50 hosts en Ventas
+- 20 hosts en Almacén
 
-## 7. Diagnóstico ping6
+**Enlaces:**
+- 1 enlace /30 entre sede y sucursal
 
-Un PC (PC-A) tiene esta configuración en Windows:
+Te dan la red **10.0.0.0/22**.
 
-```
-Ethernet adapter Ethernet:
-   IPv6 Address: fe80::21a:2bff:fe3c:4d5e%12
-   IPv6 Address: 2001:db8:1::10
-   Default Gateway: fe80::1%12
-```
+a) Diseña el VLSM completo
+b) ¿Cuántas IPs sobran?
+c) ¿Qué problemas podrías encontrar si la empresa crece al doble?
 
-PC-A hace `ping fe80::1` y **funciona**, pero `ping 2001:DB8:1::10` (una GUA en la misma LAN) **no responde**. Lista **3 causas posibles** y cómo verificarías cada una.
+## 7. VLSM con requisitos mínimos
 
-**Pista:** el `ping` a una Link-Local del router funciona, así que la capa de enlace está bien. La diferencia está en cómo se resuelve un destino *global* vs uno *link-local* dentro de la misma subred y en los servicios que se permiten por defecto.
+Tienes la red **192.168.1.0/24** y necesitas estas subredes:
 
-## 8. Tabla IPv4 vs IPv6
+- **Producción:** 50 hosts
+- **Comercial:** 25 hosts
+- **Soporte:** 10 hosts
+- **Enlace WAN:** 2 hosts
 
-Completa la tabla comparativa:
+a) Diseña el **VLSM mínimo** (sin desperdiciar IPs): indica red, máscara, rango y broadcast de cada subred.
+b) ¿Qué bloque queda libre al final y de qué tamaño?
 
-| Concepto | IPv4 | IPv6 |
-|---|---|---|
-| Bits de la dirección | 32 | |
-| Notación | Decimal con puntos | |
-| Direcciones privadas | RFC 1918 (192.168.0.0…, etc.) | |
-| Broadcast | Sí (envía a todos) | |
-| Resolución IP → MAC | ARP | |
-| Multicast de listeners | IGMP | |
-| Configuración automática | DHCP | |
-| Loopback | 127.0.0.1 | |
-| Fragmentación | La hacen cualquier router intermedio | |
-| Seguridad / NAT | NAT compartido para las privadas | |
+**Pista:** Ordena de mayor a menor necesidad y elige para cada subred la máscara más pequeña que cumpla `2ʰ − 2 ≥ hosts`. Recuerda que cada subred empieza donde terminó la anterior.
 
-**Pista:** piensa en *qué sustituye a qué* en cada fila. Y recuerda: NAT no es seguridad, solo un ocultador de direcciones.
+## 8. Conflicto de IP
+
+El administrador de una empresa configura **manual (estática)** la IP `192.168.1.20` en una impresora. Lamentablemente, esa IP está dentro del **pool DHCP** que reparte el router (`network 192.168.1.0 255.255.255.0`).
+
+a) Explica qué ocurre cuando un PC pide IP por DHCP y recibe `192.168.1.20`, que ya tiene la impresora.
+b) ¿Cómo detectaría el administrador el conflicto? ¿Qué comando usaría en el router?
+c) ¿Cómo se **previene** este problema desde el diseño?
+
+**Pista:** Antes de conceder una IP, el servidor DHCP suele comprobar (el RFC lo llama "ping") si la dirección ya está en uso. En Cisco el resultado se registra en una tabla concreta que se consulta con `show`. Y la solución de fondo ya la viste en el punto 8 de la unidad: `ip dhcp excluded-address`.

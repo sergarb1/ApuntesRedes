@@ -1,139 +1,129 @@
 ---
 title: Boletín U06 — Avanzado
-description: Ejercicios avanzados de Switching y STP
+description: Ejercicios avanzados de IPv6 y Transición
 ---
 
 # 📝 Boletín U06 — Avanzado
 
-> Ejercicios que requieren aplicar los conceptos de switching y STP de forma más profunda.
+> Ejercicios que requieren aplicar los conceptos de IPv6, SLAAC y transición de forma más profunda.
 
 ---
 
-## 1. Configuración básica de switch
+## 1. Subnetting IPv6
 
-Configura un switch Cisco desde cero con:
+Te asignan el prefijo **2001:DB8:CAFE::/48** para tu empresa. Necesitas crear subredes para:
 
-a) Hostname: SW-OFICINA-01
-b) IP de gestión en VLAN 1: 192.168.1.10/24, gateway 192.168.1.1
-c) Puertos Fa0/1-10 como access, seguridad de puerto con máximo 2 MACs
-d) Puertos Fa0/11-12 como trunk
+- Oficina central: /48 completa
+- 5 sedes regionales: subredes del mismo tamaño
 
-Escribe los comandos necesarios.
+a) ¿Qué máscara usarías para las sedes?
+b) ¿Cuántas subredes /64 puedes crear dentro de /48?
+c) Escribe las primeras 3 subredes /64 (con sus prefijos completos)
 
-## 2. Análisis de topología STP
+**Pista:** /48 a /64 = 16 bits de subred = 65536 subredes. Cada subred /64 tiene 2⁶⁴ direcciones.
 
-Tienes 3 switches con estas configuraciones:
+## 2. EUI-64
 
-| Switch | Prioridad | MAC |
+Dada la MAC **00:1A:2B:3C:4D:5E**:
+
+a) Genera la dirección EUI-64 correspondiente
+b) Si el prefijo es 2001:DB8:1:2::/64, ¿cuál es la dirección IPv6 completa?
+c) ¿Qué problema de privacidad tiene EUI-64?
+
+## 3. Diagnóstico IPv6
+
+Un PC tiene esta configuración IPv6:
+
+```
+Ethernet adapter Ethernet:
+   IPv6 Address: fe80::21a:2bff:fe3c:4d5e%12
+   IPv6 Address: 2001:db8:1:2:21a:2bff:fe3c:4d5e
+   Default Gateway: fe80::1%12
+```
+
+a) ¿Por qué hay dos direcciones IPv6?
+b) ¿Qué significa el %12 al final de fe80::1?
+c) ¿Puede este PC acceder a Internet? ¿Por qué?
+d) ¿Qué comando usarías en Windows para ver esta configuración?
+
+**Pista:** %12 es el Zone ID, identifica la interfaz de red (por si hay varias).
+
+## 4. Diseño de transición
+
+Una empresa tiene:
+- 250 empleados en sede central con IPv4 (192.168.0.0/24)
+- 50 empleados en sucursal con IPv4 (10.0.0.0/24)
+- El ISP ya ofrece IPv6 nativo en ambas ubicaciones
+- Necesitan acceder a un servicio cloud que solo tiene IPv4
+
+Diseña la estrategia de transición respondiendo:
+
+a) ¿Qué mecanismo usas en las LANs? ¿Por qué?
+b) ¿Cómo conectas ambas sedes?
+c) ¿Cómo acceden al servicio cloud solo-IPv4?
+d) ¿Qué configuración necesitas en los routers de cada sede?
+
+**Pista:** Dual Stack es la opción recomendada cuando el ISP ofrece IPv6 nativo.
+
+## 5. Análisis de Router Advertisement
+
+Un router envía este RA:
+
+```
+Prefix: 2001:DB8:1:2::/64
+M Flag: 0
+O Flag: 1
+```
+
+a) ¿Qué método de asignación de IPs deben usar los clientes?
+b) ¿Quién da la IP? ¿Quién da el DNS?
+c) Si un cliente solo entiende SLAAC, ¿podrá obtener DNS?
+d) ¿Qué cambiaría si M Flag = 1?
+
+**Pista:** M Flag = Managed (DHCPv6 stateful), O Flag = Other (DHCPv6 stateless).
+
+## 6. NDP en acción
+
+Un PC con IPv6 2001:DB8::10/64 quiere comunicarse con 2001:DB8::20/64 en la misma red. La tabla de vecinos está vacía.
+
+a) ¿Qué mensaje ICMPv6 envía primero el PC?
+b) ¿A qué dirección MAC destino?
+c) ¿Qué dirección IPv6 destino usa? (unicast, multicast, broadcast)
+d) ¿Quién responde y con qué?
+e) ¿Cómo se llama este proceso en IPv6?
+
+**Pista:** En IPv6 no hay ARP. El proceso equivalente es parte de NDP y usa una dirección multicast especial derivada de la IP destino (solicited-node multicast).
+
+## 7. Diagnóstico ping6
+
+Un PC (PC-A) tiene esta configuración en Windows:
+
+```
+Ethernet adapter Ethernet:
+   IPv6 Address: fe80::21a:2bff:fe3c:4d5e%12
+   IPv6 Address: 2001:db8:1::10
+   Default Gateway: fe80::1%12
+```
+
+PC-A hace `ping fe80::1` y **funciona**, pero `ping 2001:DB8:1::10` (una GUA en la misma LAN) **no responde**. Lista **3 causas posibles** y cómo verificarías cada una.
+
+**Pista:** el `ping` a una Link-Local del router funciona, así que la capa de enlace está bien. La diferencia está en cómo se resuelve un destino *global* vs uno *link-local* dentro de la misma subred y en los servicios que se permiten por defecto.
+
+## 8. Tabla IPv4 vs IPv6
+
+Completa la tabla comparativa:
+
+| Concepto | IPv4 | IPv6 |
 |---|---|---|
-| Switch A | 32768 | 0011.2233.4400 |
-| Switch B | 32768 | 0011.2233.4401 |
-| Switch C | 4096 | 0011.2233.4402 |
+| Bits de la dirección | 32 | |
+| Notación | Decimal con puntos | |
+| Direcciones privadas | RFC 1918 (192.168.0.0…, etc.) | |
+| Broadcast | Sí (envía a todos) | |
+| Resolución IP → MAC | ARP | |
+| Multicast de listeners | IGMP | |
+| Configuración automática | DHCP | |
+| Loopback | 127.0.0.1 | |
+| Fragmentación | La hacen cualquier router intermedio | |
+| Seguridad / NAT | NAT compartido para las privadas | |
 
-Los switches están conectados en triángulo (A-B, B-C, C-A).
-
-a) ¿Quién es el Root Bridge? ¿Por qué?
-b) ¿Cuántos Root Ports hay en total?
-c) ¿Cuántos Designated Ports hay?
-d) Si Switch C falla, ¿qué cambios ocurren en la topología?
-
-## 3. Diagnóstico de port security
-
-Un administrador configuró port security en un puerto:
-
-```
-Switch(config-if)# switchport port-security maximum 1
-Switch(config-if)# switchport port-security violation shutdown
-```
-
-Un usuario se conecta con su portátil y funciona. Luego conecta otro portátil (el suyo y el de un compañero) usando un switch no administrado. El puerto se deshabilita.
-
-a) ¿Por qué ocurrió?
-b) ¿Qué dos cambios harías en la configuración para permitir esta situación sin perder seguridad?
-c) ¿Cómo recuperas el puerto?
-
-## 4. Diseño de red redundante
-
-Diseña una red con 4 switches (SW1, SW2, SW3, SW4) y 2 enlaces redundantes entre cada par. Debe tener:
-
-- 50 PCs distribuidos
-- Redundancia: si cualquier switch o enlace individual falla, la red sigue funcionando
-- STP activo
-
-a) Dibuja la topología conceptual
-b) ¿Cuántos puertos quedarán bloqueados por STP?
-c) ¿Qué prioridad asignarías para forzar a SW1 como Root Bridge?
-d) ¿Qué pasa si SW1 falla? ¿Cuánto tarda la red en recuperarse con STP? ¿Y con RSTP?
-
-## 5. CAM table analysis
-
-Observa esta tabla MAC:
-
-```
-Vlan    Mac Address       Type        Ports
-----    -----------       --------    -----
-   1    0050.7966.6800    DYNAMIC     Fa0/1
-   1    0050.7966.6801    DYNAMIC     Fa0/2
-   1    0050.7966.6802    DYNAMIC     Fa0/3
-   1    00D0.BC96.1A01    DYNAMIC     Fa0/4
-   1    00D0.BC96.1A02    DYNAMIC     Fa0/4
-   1    FFFF.FFFF.FFFF    STATIC     CPU
-```
-
-a) ¿Cuántos dispositivos hay conectados al puerto Fa0/4? ¿Cómo lo sabes?
-b) ¿Cuántos puertos del switch tienen dispositivos conectados?
-c) La entrada FFFF.FFFF.FFFF en la CPU: ¿qué es?
-d) Si llega una trama con destino 00D0.BC96.1A03, ¿qué hace el switch?
-
-## 6. STP: cálculo de costes
-
-Tienes esta topología STP:
-
-- Switch A (Root Bridge)
-- Switch B conectado a A por Fa0/1 (coste 19)
-- Switch C conectado a B por Fa0/2 (coste 19)
-- Switch C también conectado a A por Fa0/3 (coste 19)
-
-a) ¿Cuál es el Root Port de Switch C?
-b) ¿Qué coste tiene cada camino hacia el Root?
-c) ¿Cuál es el Alternate Port de Switch C?
-d) Si el coste de Fa0/3 se cambia a 4, ¿qué cambia?
-
-## 7. Topología STP/RSTP bajo análisis
-
-Tienes 4 switches con estas configuraciones:
-
-| Switch | Prioridad | MAC |
-|---|---|---|
-| SW1 | 4096 | 0011.2233.4400 |
-| SW2 | 32768 | 0011.2233.4401 |
-| SW3 | 32768 | 0011.2233.4402 |
-| SW4 | 32768 | 0011.2233.4403 |
-
-Conexiones (todas de coste 19):
-- SW1-SW2, SW1-SW3 y SW1-SW4 (enlace directo al Root)
-- SW2-SW3 (enlace redundante que cierra el bucle)
-
-a) ¿Quién es el Root Bridge y por qué?
-b) ¿Qué puertos quedan en estado Blocking/Discarding?
-c) ¿Cuántos Root Ports hay en total?
-d) Con RSTP, ¿cuánto tardaría la red en converger si SW1 se cae? ¿Y con STP clásico?
-e) ¿Qué papel juegan los puertos del Root Bridge?
-
-**Pista:** el Root Bridge es el de menor Bridge ID; todos sus puertos son Designated. Los switches no-root tienen 1 Root Port cada uno, y el enlace redundante SW2-SW3 crea un Alternate Port en el extremo con mayor coste acumulado hacia el Root.
-
-## 8. Laboratorio: Port Security en la sala de profesores
-
-Configura el puerto Fa0/24 del switch (donde se enchufa el PC de la sala de profesores) para que:
-
-a) Solo permita 1 MAC aprendida automáticamente y permanente (sticky).
-b) Si aparece una segunda MAC, el puerto se deshabilite (violación shutdown).
-c) Escribe los comandos completos y verifica con el comando de comprobación adecuado.
-
-Después, un profe desenchufa su PC y conecta su portátil personal. El puerto entra en errdisable.
-
-d) ¿Por qué ha ocurrido la violación si solo hay UN dispositivo conectado?
-e) ¿Qué dos comandos ejecutarías para recuperar el puerto?
-f) ¿Cómo evitarías el problema sin perder seguridad (piensa en el envejecimiento de la MAC sticky)?
-
-**Pista:** la MAC sticky NO caduca aunque el PC se desenchufe; si cambias de equipo, hay dos MACs distintas "conocidas" en el puerto y se supera el máximo. Para recuperar errdisable: `shutdown` + `no shutdown`. Para expirar la sticky cuando el dispositivo se desenchufa, configura el envejecimiento de la port security (`switchport port-security aging`).
+**Pista:** piensa en *qué sustituye a qué* en cada fila. Y recuerda: NAT no es seguridad, solo un ocultador de direcciones.
