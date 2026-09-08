@@ -46,7 +46,7 @@ Hay un comando que repetirás más veces que ninguna otra palabra del curso: **p
 
 | Peldaño | Comando | ¿Qué estás comprobando? |
 |---|---|---|
-| 1 | `ping 127.0.0.1` | Que la propia tarjeta de red está viva (loopback) |
+| 1 | `ping 127.0.0.1` | Que el stack TCP/IP del sistema operativo está vivo (no depende de la tarjeta) |
 | 2 | `ping <IP de la puerta de enlace>` | Que sale de mi equipo hacia mi propia red |
 | 3 | `ping 8.8.8.8` | Que hay salida a Internet (sin depender de nombres) |
 | 4 | `ping www.google.com` | Que, además, el servicio de nombres (DNS) funciona |
@@ -66,7 +66,7 @@ Piensa en el clásico paciente de consulta: "me duele el pie". Un buen médico n
 
 Tu "no tengo Internet" es ese dolor. La escalera de ping es la batería de pruebas que descarta:
 
-- Primero le **miro los reflejos** al propio paciente (ping 127.0.0.1: ¿respira la tarjeta?).
+- Primero le **miro los reflejos** al propio paciente (ping 127.0.0.1: ¿responde el stack TCP/IP?).
 - Luego le pregunto si llega a la **puerta de salida** de su casa (gateway).
 - Luego si alcanza la **calle** (8.8.8.8, ya fuera de la LAN).
 - Y solo entonces compruebo si le funciona la **agenda de nombres** (DNS).
@@ -108,7 +108,7 @@ Es lunes, las 9:15, y un compañero te llama: **«Se me ha ido Internet»**. Con
 <details>
 <summary>🔄 La escalera resuelta, paso a paso</summary>
 
-1. `ping 127.0.0.1` — **responde**. La tarjeta del portátil está viva: descartamos el equipo.
+1. `ping 127.0.0.1` — **responde**. El stack TCP/IP del portátil está vivo: descartamos el equipo.
 2. `ping 192.168.1.1` — **responde**. Su puerta de enlace (el router) está sana: la red local va bien.
 3. `ping 8.8.8.8` — ❌ **se pierde**. La respuesta se pierde: la salida hacia Internet está rota.
 4. `ping www.google.com` — tampoco, pero ya da igual: el fallo está por debajo del DNS.

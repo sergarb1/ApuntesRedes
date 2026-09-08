@@ -155,7 +155,7 @@ f) Sigue el flujo TCP de la conexión HTTP. ¿Qué ves?
 ```
 Horizontal:
 1. Protocolo de transporte fiable (3 letras)
-4. Capa OSI que encapsula en tramas (5 letras, castellano)
+4. Capa OSI que encapsula en tramas (6 letras, castellano)
 5. Unidad de datos en capa de Red (7 letras)
 7. Herramienta de captura de paquetes (9 letras)
 9. Flag TCP que inicia una conexión (3 letras)

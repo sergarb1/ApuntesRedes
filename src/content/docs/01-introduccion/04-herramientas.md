@@ -70,7 +70,7 @@ No te asustes: es más corto que la lista de la compra de un lunes. Sigue estos 
 <summary>🐧 Instalación en Linux (apt, paso a paso)</summary>
 
 1. **Packet Tracer:** Cisco publica paquetes `.deb` y `.rpm`. Descarga el `.deb` desde la Net Academy y, en la terminal, instala con `sudo apt install ./PaquetePacketTracer.deb` (si el nombre es largo, escribe `./Paq` y pulsa **Tab** para autocompletar).
-2. **Wireshark:** en Ubuntu y derivados, `sudo apt install wireshark`. Durante la instalación te preguntará si los usuarios sin privilegios pueden capturar paquetes: responde **No** para poder iniciarlo desde cualquier terminal sin problemas.
+2. **Wireshark:** en Ubuntu y derivados, `sudo apt install wireshark`. Durante la instalación te preguntará si los usuarios sin privilegios pueden capturar paquetes: responde **Sí** para que se cree el grupo `wireshark` y puedas capturar como usuario normal.
 3. Para capturar siendo usuario normal sin `sudo`: `sudo usermod -aG wireshark $USER` y **cierra sesión o reinicia** para que el grupo se haga efectivo.
 4. Ya tenemos todo: comprueba que las dos aplicaciones aparecen en el menú y abre Packet Tracer.
 

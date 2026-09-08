@@ -71,4 +71,4 @@ a) El **54321** es el efímero: está en el rango **49152-65535**.
 b) El **443** es **HTTPS** (web cifrada), un puerto *well-known* (0-1023).
 c) Un **socket** es la combinación `IP:puerto` que identifica un extremo completo de la conversación (aquí `192.168.1.10:54321` y `142.250.184.4:443`).
 
->La conexión se define por DOS sockets: el de origen y el de destino.
+> La conexión se define por DOS sockets: el de origen y el de destino.

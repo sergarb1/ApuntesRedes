@@ -184,7 +184,7 @@ Horizontal:
 
 Vertical:
 1. Técnica de subdivisión de redes con máscaras variables (4 letras)
-2. Rango de IPs privadas 192.168.0.0/16 (4 letras)
+2. Clase de IP a la que pertenece 192.168.0.0/16 (5 letras)
 6. IP de bucle local (127.0.0._) (1 dígito)
 ```
 

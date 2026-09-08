@@ -46,7 +46,7 @@ Al terminar, serás capaz de:
 | [08 · Caso práctico de diagnóstico](/ApuntesRedes/12-diagnostico-monitorizacion/08-caso-practico-de-diagnostico) | Troubleshooting real con las 5 capas | Todos |
 | [09 · Cierre](/ApuntesRedes/12-diagnostico-monitorizacion/09-cierre) | Sé el Diagnóstico, Fireside, Laboratorio, Crucigrama… | Todos |
 
-> 📖 **Flujo de lectura:** los 8 primeros puntos son teoría en progresión. El 9º es el aterrizaje práctico: léelo justo después del 8º y antes de abrir los boletines.
+> 📖 **Flujo de lectura:** los 7 primeros puntos son teoría en progresión, el 8 es el caso práctico que la integra y el 9º el aterrizaje con laboratorio: léelo justo después del 8º y antes de abrir los boletines.
 
 ---
 
@@ -55,10 +55,10 @@ Al terminar, serás capaz de:
 > Practica con los pares del curso: empezar siempre el resuelto para ver el estilo y luego intentar el por-resolver.
 
 <div class="ejercicio-links">
-  <a href="/ApuntesRedes/boletines/u12-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
-  <a href="/ApuntesRedes/boletines/u12-inicial" class="elink">🟢 Inicial por resolver</a>
-  <a href="/ApuntesRedes/boletines/u12-avanzado-resuelto" class="elink">💪 Avanzado resuelto</a>
-  <a href="/ApuntesRedes/boletines/u12-avanzado" class="elink">⭐ Avanzado por resolver</a>
+  <a href="/ApuntesRedes/boletines/boletin-u12-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
+  <a href="/ApuntesRedes/boletines/boletin-u12-inicial" class="elink">🟢 Inicial por resolver</a>
+  <a href="/ApuntesRedes/boletines/boletin-u12-avanzado-resuelto" class="elink">💪 Avanzado resuelto</a>
+  <a href="/ApuntesRedes/boletines/boletin-u12-avanzado" class="elink">⭐ Avanzado por resolver</a>
 </div>
 
 ---

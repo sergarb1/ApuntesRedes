@@ -23,7 +23,7 @@ En un enlace **punto a punto** (dos routers cara a cara) solo hay una adyacencia
 
 ```
 Sin DR: N*(N-1)/2 adyacencias (cada router con cada uno)
-Con DR: N-1 adyacencias (todos con el DR)
+Con DR (contando solo las adyacencias con el DR): N-1 adyacencias. Si contamos también las del BDR, son 2N-3 (cada router se adyacenta con el DR y con el BDR).
 ```
 
 Con 5 routers:
@@ -104,7 +104,7 @@ Reset ALL OSPF processes? [no]: yes
 <details>
 <summary>🔄 Respuestas</summary>
 
-1. **5 adyacencias** (N-1): cada uno con el DR (y de paso con el BDR; la cuenta clásica es 5 con el DR, aunque en la práctica son con DR y BDR).
+1. **Con solo el DR, 5 adyacencias** (N-1); contando también el BDR, 2N-3 = 9 (cada router con el DR y con el BDR). La cuenta clásica de examen es 2N-3.ctica son con DR y BDR).
 2. Que **no participa**: prioridad 0 impide ser DR o BDR (solo actúa como DROTHER).
 3. **R3** — mayor prioridad (10 > 5).
 </details>

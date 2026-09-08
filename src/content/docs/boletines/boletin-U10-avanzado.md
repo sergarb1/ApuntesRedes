@@ -113,4 +113,4 @@ a) Como el ping funciona, ¿qué nivel queda descartado? ¿Por qué?
 b) Escribe el orden de diagnóstico completo que seguirías, con los comandos y qué esperarías ver en cada paso, para descartar, en orden: red no declarada o wildcard mal, área incorrecta, timers Hello/Dead distintos, y ACL que bloquea OSPF (protocolo 89).
 c) ¿Qué comando te confirmaría, sin ambigüedad, que una interfaz está participando en OSPF y con qué área?
 
-**Pista:** sigue la escalera de diagnóstico del punto 8 de la unidad: `show ip protocols`, `show ip ospf interface`, `show access-lists`. Los timers de Hello/Dead por defecto son 10/40 en broadcast, pero en enlaces punto a punto Serial suelen ser 30/120.
+**Pista:** sigue la escalera de diagnóstico del punto 8 de la unidad: `show ip protocols`, `show ip ospf interface`, `show access-lists`. Los timers de Hello/Dead por defecto son 10/40 en broadcast y en punto a punto Serial; solo en redes NBMA (Frame Relay) son 30/120.

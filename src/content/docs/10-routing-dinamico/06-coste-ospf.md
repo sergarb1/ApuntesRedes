@@ -75,8 +75,8 @@ Montemos una mini-red y calculemos qué decide OSPF. R1 quiere llegar a la LAN d
 ```
                     R2
               ┌──────────┐
-   LAN ── R1 ─┤ Gigabit  ├── R3 ── LAN
-              │  100Mbps │  100Mbps
+LAN ── R1 ─┤ FastEth ├── R3 ── LAN
+               │  100Mbps │  100Mbps
               └──────────┘
    R1 ─── R4 ─── R3     (todo el camino por 10 Mbps)
 ```

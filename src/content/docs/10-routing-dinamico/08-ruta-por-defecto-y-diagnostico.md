@@ -71,7 +71,7 @@ R1# debug ip ospf events           → Depurar eventos OSPF (¡con cuidado!)
 R1# show ip ospf interface         → Coste, timers y estado por interfaz
 ```
 
-> 💡 **Un truco de diagnóstico:** `show ip ospf neighbor` vacío pero el enlace con ping OK → el problema está en el **plano OSPF** (área, wildcard, timers, ACL). En cambio, si el ping ya falla, ni te molestes en mirar OSPF: el fallo está más abajo. El laboratorio del [cierre](/ApuntesRedes/10-routing-dinamico/09-cierre) y el boletín avanzado te harán practicar esta escalera.
+> 💡 **Un truco de diagnóstico:** `show ip ospf neighbor` vacío pero el enlace con ping OK → el problema está en el **plano OSPF** (área y timers, ACL). En cambio, si el ping ya falla, ni te molestes en mirar OSPF: el fallo está más abajo. El laboratorio del [cierre](/ApuntesRedes/10-routing-dinamico/09-cierre) y el boletín avanzado te harán practicar esta escalera.
 
 ---
 
@@ -110,7 +110,7 @@ O*E2 0.0.0.0/0   [110/1] via 10.0.1.2, 00:05:12, Serial0/1/0
 <summary>🔄 Respuestas</summary>
 
 1. `default-information originate` (dentro de `router ospf <id>`), en el router que tiene la salida a Internet.
-2. Al **plano OSPF**: `show ip ospf interface` (área, wildcard, timers), `show ip protocols` y revisar ACLs que bloqueen el protocolo 89.
+2. Al **plano OSPF**: `show ip ospf interface` (área y timers; la wildcard es local), `show ip protocols` y revisar ACLs que bloqueen el protocolo 89.
 3. Con `always`, la ruta por defecto se anuncia **siempre**; sin `always`, solo si la ruta por defecto existe localmente en la tabla de rutas.
 </details>
 
@@ -120,7 +120,7 @@ O*E2 0.0.0.0/0   [110/1] via 10.0.1.2, 00:05:12, Serial0/1/0
 
 - `default-information originate` propaga la ruta por defecto del ASBR a **toda** la red OSPF (con `always`, incondicionalmente).
 - El diagnóstico es una escalera **de abajo arriba**: ping → protocolos → vecinos → LSDB → rutas.
-- Cuando el proceso ID "no coincide"… no es el problema: mira área, wildcard, timers y ACLs.
+- Cuando el proceso ID "no coincide"… no es el problema: mira área, timers y ACLs (la wildcard es local).
 
 ## 🐛 Vocabulario rápido
 

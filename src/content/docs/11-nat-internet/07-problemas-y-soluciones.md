@@ -68,7 +68,7 @@ Cada ALG entiende un protocolo: hay ALG FTP, ALG SIP (VoIP), ALG TFTP... El prec
 
 ## 🛡️ NAT-T: el puente para IPsec
 
-**IPsec** protege la integridad de sus paquetes: si NAT modifica la cabecera IP (cambiando la IP origen), la verificación de integridad **falla** y el paquete se descarta. Solución: **NAT-T (NAT Traversal)** encapsula los paquetes IPsec dentro de **UDP** (puerto 4500):
+**IPsec** puede romperse con NAT por dos vías: **AH** autentica la cabecera IP completa (cambiarla rompe la verificación), mientras que **ESP** no autentica la cabecera IP pero cifra los puertos, de modo que con PAT no hay forma de multiplexar. NAT-T lo resuelve encapsulando en UDP:4500.ridad **falla** y el paquete se descarta. Solución: **NAT-T (NAT Traversal)** encapsula los paquetes IPsec dentro de **UDP** (puerto 4500):
 
 ```
 IPsec:  ESP | payload   →  falla al cambiar la IP

@@ -13,8 +13,8 @@ description: Ejercicios avanzados de IPv6 y Transición
 
 Te asignan el prefijo **2001:DB8:CAFE::/48** para tu empresa. Necesitas crear subredes para:
 
-- Oficina central: /48 completa
-- 5 sedes regionales: subredes del mismo tamaño
+- Oficina central: 1 subred /48 (la propia)
+- 5 sedes regionales: subredes del mismo tamaño dentro del /48
 
 a) ¿Qué máscara usarías para las sedes?
 b) ¿Cuántas subredes /64 puedes crear dentro de /48?

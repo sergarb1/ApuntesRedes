@@ -54,10 +54,10 @@ Al terminar, serás capaz de:
 > Practica con los pares del curso: empezar siempre el resuelto para ver el estilo y luego intentar el por-resolver.
 
 <div class="ejercicio-links">
-  <a href="/ApuntesRedes/boletines/u07-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
-  <a href="/ApuntesRedes/boletines/u07-inicial" class="elink">🟢 Inicial por resolver</a>
-  <a href="/ApuntesRedes/boletines/u07-avanzado-resuelto" class="elink">💪 Avanzado resuelto</a>
-  <a href="/ApuntesRedes/boletines/u07-avanzado" class="elink">⭐ Avanzado por resolver</a>
+  <a href="/ApuntesRedes/boletines/boletin-u07-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
+  <a href="/ApuntesRedes/boletines/boletin-u07-inicial" class="elink">🟢 Inicial por resolver</a>
+  <a href="/ApuntesRedes/boletines/boletin-u07-avanzado-resuelto" class="elink">💪 Avanzado resuelto</a>
+  <a href="/ApuntesRedes/boletines/boletin-u07-avanzado" class="elink">⭐ Avanzado por resolver</a>
 </div>
 
 ---
@@ -80,7 +80,7 @@ Al terminar, serás capaz de:
 
 ¿Llegas desde la [U06 de IPv6](/ApuntesRedes/06-ipv6-transicion) y quieres el plato fuerte directo? Arranca en el [punto 5 · STP](/ApuntesRedes/07-switching-stp/05-stp-fundamentos), donde está el corazón de la unidad: el protocolo que convierte los bucles en árbol. Si necesitas refrescar qué es una MAC o cómo reenvía el switch, pasa primero por el [punto 1](/ApuntesRedes/07-switching-stp/01-que-es-un-switch) y el [punto 2](/ApuntesRedes/07-switching-stp/02-aprendizaje-mac).
 
-¿Ya has recorrido los 8 puntos de teoría y quieres la prueba de fuego? Cierra con el [punto 9 · Cierre](/ApuntesRedes/07-switching-stp/09-cierre) y después ataca los [boletines de la unidad](/ApuntesRedes/boletines/u07-inicial-resuelto). Y si lo que te falta es reforzar la base de dispositivos y capas, repasa el [punto 4 de dispositivos de la U02](/ApuntesRedes/02-fundamentos-redes/04-dispositivos).
+¿Ya has recorrido los 8 puntos de teoría y quieres la prueba de fuego? Cierra con el [punto 9 · Cierre](/ApuntesRedes/07-switching-stp/09-cierre) y después ataca los [boletines de la unidad](/ApuntesRedes/boletines/boletin-u07-inicial-resuelto). Y si lo que te falta es reforzar la base de dispositivos y capas, repasa el [punto 4 de dispositivos de la U02](/ApuntesRedes/02-fundamentos-redes/04-dispositivos).
 
 **📍 Primer punto:** [01 · ¿Qué es un switch?](/ApuntesRedes/07-switching-stp/01-que-es-un-switch)  
 **⏭️ Al acabar la unidad, continúa en [U08 · VLANs](/ApuntesRedes/08-vlans).**

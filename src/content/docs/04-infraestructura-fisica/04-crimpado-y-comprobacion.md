@@ -51,7 +51,7 @@ El comprobador de cables tiene dos módulos conectados por los extremos del cabl
 | LEDs 1-8 en orden en ambos lados | Cable **correcto** |
 | Un LED de un pin no enciende (en uno o ambos lados) | **Hilo sin conectar** (no llegó a tocar el contacto) |
 | LEDs de dos pines intercambiados (ej. 1 y 2 cruzados) | **Pares invertidos** |
-| LEDs que solo encienden del 4 al 7 en el otro extremo | **Split pair**: el orden de hilos no respeta los pares cancelativos (ver abajo) |
+| Orden raro en los LEDs (en testers con detección de split) | **Split pair**: el orden de hilos no respeta los pares cancelativos (ver abajo) |
 | LEDs 1-8 en orden pero en el lateral destino el orden es 8-1 | **Cable de consola** (rollover) |
 | LEDs 1-6 pero no 7-8 | Solo 3 pares conectados: **negociación a 100 Mbps**, no a 1 Gbps |
 
@@ -69,7 +69,7 @@ El comprobador de cables tiene dos módulos conectados por los extremos del cabl
 
 **4. Funda sin entrar (roto de sujeción).** No lo ves en el tester: es el fallo mecánico. El cable funciona en el banco y falla en cuanto alguien toca el RJ45.
 
-> 💡 **Truco de diagnóstico:** si un cable "funciona a 100 en vez de a 1000", sospecha de **solo 2 pares conectados** (hilos 7-8 muertos) o de un **split pair**. El tester lo caza: repasa los LEDs 7-8 y el orden completo.
+> 💡 **Truco de diagnóstico:** si un cable "funciona a 100 en vez de a 1000", sospecha de **faltan pares** (hilos 7-8 muertos) o de un **split pair**. El tester lo caza: repasa los LEDs 7-8 y el orden completo.
 
 ---
 

@@ -72,7 +72,7 @@ Y el último recurso, la ruta hacia fuera:
 R1(config)# ip route 0.0.0.0 0.0.0.0 10.0.0.2   # Default (punto 4)
 
 # En R2: hacia el ISP, usando interfaz de salida
-R2(config)# ip route 0.0.0.0 0.0.0.0 serial 0/0/0
+R2(config)# ip route 0.0.0.0 0.0.0.0 10.0.0.2
 ```
 
 El `0.0.0.0 0.0.0.0` es la **ruta por defecto**: atrapa todo lo que no tenga un camino más específico. En el punto 4 la trituramos a fondo.

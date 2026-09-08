@@ -131,7 +131,7 @@ Red base: 192.168.1.0/24 (256 direcciones, 254 hosts útiles)
 
 b) **Queda libre** desde 192.168.1.116 hasta 192.168.1.255 = **140 direcciones** (138 hosts útiles en /24).
 
-**Comprobación del encadenado:** Ventas acaba en .63 → Comercial arranca en .64. Comercial acaba en .95 → Soporte arranca en .96. Soporte acaba en .111 → el enlace WAN arranca en .112.
+**Comprobación del encadenado:** Producción acaba en .63 → Comercial arranca en .64. Comercial acaba en .95 → Soporte arranca en .96. Soporte acaba en .111 → el enlace WAN arranca en .112.
 
 ## 8. Conflicto de IP
 

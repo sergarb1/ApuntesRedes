@@ -39,7 +39,7 @@ Los tres campos de la etiqueta, desglosados:
 |---|---|---|---|
 | **TPID** (*Tag Protocol ID*) | 2 bytes | `0x8100` | Marca que la trama está etiquetada 802.1Q |
 | **PRI** (*Priority*, 802.1p) | 3 bits | 0-7 | Prioridad QoS (voz suele llevar 5) |
-| **VLAN ID** | 12 bits | 1-4094 (0 y 4095 reservadas) | Identifica la VLAN a la que pertenece la trama |
+| **CFI/DEI** | 1 bit | 0 | Formato canónico (casi siempre 0 en Ethernet) || **VLAN ID** | 12 bits | 1-4094 (0 y 4095 reservadas) | Identifica la VLAN a la que pertenece la trama |
 
 > 💡 **Consecuencia del VLAN ID de 12 bits:** el estándar permite **4096** IDs (0 a 4095), pero 0 y 4095 están reservadas, así que el máximo usable es **4094** VLANs. Los switches baratos soportan muchas menos: échale un ojo a la hoja de especificaciones.
 
@@ -137,7 +137,7 @@ Switch# show running-config interface fa0/24   # la config exacta del puerto
 <details>
 <summary>🔄 Respuestas</summary>
 
-1. Añade **4 bytes** entre la MAC origen y el EtherType: **TPID** (0x8100), **PRI** (3 bits de QoS/802.1p) y **VLAN ID** (12 bits).
+1. Añade **4 bytes** entre la MAC origen y el EtherType: **TPID** (0x8100) + **TCI** (PRI 3 bits + CFI 1 bit + VLAN ID 12 bits), 802.1p) y **VLAN ID** (12 bits).
 2. El **access** pertenece a una sola VLAN, sin etiquetar; el **trunk** transporta varias VLANs, todas etiquetadas salvo la native.
 3. Aparece el mensaje *"Native VLAN mismatch"* y las tramas sin etiquetar caen en la VLAN equivocada en cada extremo. Se detecta con **`show interfaces trunk`**, que muestra la native de cada lado. Se arregla declarando la **misma** native en ambos.
 

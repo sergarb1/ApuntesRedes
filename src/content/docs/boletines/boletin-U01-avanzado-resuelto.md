@@ -61,7 +61,7 @@ El orden sigue el camino de la señal: operador → módem → router → repart
 
 1. Una red funciona sin Internet: dos PCs conectados a un switch que se hacen ping forman red perfectamente válida y no usan Internet en absoluto.
 2. Tu WiFi doméstico es solo una LAN; Internet es "la red de redes", la unión de millones de LAN, WAN y demás.
-3. Hay servicios de red local: la impresora compartida siga funcionando aunque se caiga Internet, porque el tráfico se queda en tu LAN.
+3. Hay servicios de red local: la impresora compartida sigue funcionando aunque se caiga Internet, porque el tráfico se queda en tu LAN.
 
 ## 7. "Si este equipo...": identifica el protagonista
 

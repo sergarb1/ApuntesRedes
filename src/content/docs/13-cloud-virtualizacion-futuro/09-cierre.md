@@ -214,7 +214,7 @@ Técnicamente sí, pero no lo hagas. Sin entender routing, subredes, DNS y firew
 |---|---|
 | d) Frame Relay, RDSI, ADSL | ✅ Mencionado en contexto histórico (punto 8) |
 | e) WiFi vs WiMax | ✅ En U11 |
-| f) UMTS y HSDPA | ✅ Mencionado en U11 |
+| f) UMTS y HSDPA | ❌ No cubierto |
 | **Ampliación:** Cloud, SDN, virtualización | ✅ Unidad completa |
 | **Ampliación:** IPv8 y futuro | ✅ Análisis y debate |
 

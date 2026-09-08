@@ -68,7 +68,7 @@ Cada vez que subes 1 en la /n, **pierdes la mitad** de las direcciones; cada vez
 
 ---
 
-## 📋 Tabla rápida completa de máscaras
+## 📋 Tabla rápida de máscaras
 
 Esta es la tabla que debes tener *grabada a fuego* (o al menos a mano). Desde las redes infinitesimales /30 hasta las enormes /8:
 
@@ -85,7 +85,7 @@ Esta es la tabla que debes tener *grabada a fuego* (o al menos a mano). Desde la
 | /22 | 255.255.252.0 | 1024 | **1022** | Edificio |
 | /21 | 255.255.248.0 | 2048 | **2046** | Edificio grande |
 | /16 | 255.255.0.0 | 65.536 | **65.534** | Empresa mediana |
-| /8 | 255.0.0.0 | 16M | **~16M** | Gran empresa |
+| /8 | 255.0.0.0 | 16.777.216 | **~16M** | Gran empresa |
 
 > ⚠️ **Por qué "hosts útiles" ≠ "IPs totales":** de cada red, la primera dirección es la de **red** y la última el **broadcast**. Ninguna se asigna a un equipo. Por eso se restan 2 (en detalle en el [punto 6](/ApuntesRedes/05-ipv4-subnetting/06-subnetting-paso-a-paso)).
 

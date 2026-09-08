@@ -23,7 +23,7 @@ Originalmente la dirección se *leía* en los primeros bits: según cómo empeza
 
 | Clase | Primeros bits | Rango | Máscara por defecto | Uso |
 |---|---|---|---|---|
-| **A** | 0 | 0.0.0.0 - 127.255.255.255 | /8 | Grandes redes (16M hosts) |
+| **A** | 0 | 0.0.0.0 - 127.255.255.255 | /8 | Grandes redes (16.777.216 hosts) |
 | **B** | 10 | 128.0.0.0 - 191.255.255.255 | /16 | Redes medianas (65K hosts) |
 | **C** | 110 | 192.0.0.0 - 223.255.255.255 | /24 | Redes pequeñas (254 hosts) |
 | **D** | 1110 | 224.0.0.0 - 239.255.255.255 | — | Multicast |

@@ -52,7 +52,7 @@ Como es una traducción fija, la entrada no caduca: estará ahí mientras la reg
 
 ## 🎡 NAT dinámico (pool)
 
-En lugar de una pareja fija, defines un **pool** de IPs públicas (ej. 83.45.12.78-83.45.12.81, un /29 con 6 IPs utilizables). Cuando un equipo interno quiere salir, el router le asigna una de esas IPs mientras dure su conexión; cuando termina, la devuelve al pool.
+En lugar de una pareja fija, defines un **pool** de IPs públicas dentro de un /29 (ej. 83.45.12.80-83.45.12.85, 6 IPs utilizables). Cuando un equipo interno quiere salir, el router le asigna una de esas IPs mientras dure su conexión; cuando termina, la devuelve al pool.
 
 ```
 Usuarios          Pool público disponible

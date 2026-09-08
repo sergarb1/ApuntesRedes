@@ -23,7 +23,7 @@ R1 (192.168.1.0/24) ──── R2 ──── R3 (192.168.3.0/24)
 - R1-R2: 10.0.0.0/30
 - R2-R3: 10.0.0.4/30
 
-Escribe la **configuración completa** de R1, R2 y R3 (interfaces, rutas estáticas, rutas por defecto).
+Escribe la **configuración completa** de R1, R2 y R3 (interfaces, rutas estáticas, rutas por defecto). Nota: R2 es el router central sin salida externa, así que **no lleva ruta por defecto** (solo rutas específicas hacia R1 y R3).
 
 ## 2. ACL extendida: YouTube blocker
 

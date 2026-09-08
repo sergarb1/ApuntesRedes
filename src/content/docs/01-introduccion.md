@@ -11,7 +11,7 @@ description: Tu punto de partida si no has tocado una red en tu vida 🚪
 
 ## 👋 ¿Empiezas aquí?
 
-Estos apuntes enseñan a **planificar y administrar redes de ordenadores**. Si acabas de llegar y piensas cosas como *"¿qué es una IP?"*, *"¿el router es la caja que me da la compañía de Internet?"* o *"¿por qué mi ordenador tiene una dirección?"*, esta Unidad 01 es para ti. En ocho páginas te pongo al día para que la **Unidad 02** no te suene a chino.
+Estos apuntes enseñan a **planificar y administrar redes de ordenadores**. Si acabas de llegar y piensas cosas como *"¿qué es una IP?"*, *"¿el router es la caja que me da la compañía de Internet?"* o *"¿por qué mi ordenador tiene una dirección?"*, esta Unidad 01 es para ti. En seis puntos te pongo al día para que la **Unidad 02** no te suene a chino.
 
 Y si ya sabes algo de redes, igualmente vale la pena una pasada rápida: aquí definimos el vocabulario común que usaremos en todo el curso, para que todos hablemos el mismo idioma desde el minuto uno.
 
@@ -71,6 +71,6 @@ Si una o las tres te han hecho dudar, **eras el público perfecto**. Resolvemos 
 
 ## 🎬 Última cosa antes de empezar
 
-La Unidad 01 es el vestíbulo de este curso. No tiene post-créditos (eso es cosa de las unidades grandes), pero tienes delante una puerta abierta: la primera página de verdad.
+La Unidad 01 es el vestíbulo de este curso. No tiene poscréditos propios: el vestíbulo no es una unidad con cierre, pero tienes delante una puerta abierta: la primera página de verdad.
 
 **📍 Siguiente punto:** [01 · ¿Qué es una red?](/ApuntesRedes/01-introduccion/01-que-es-una-red)

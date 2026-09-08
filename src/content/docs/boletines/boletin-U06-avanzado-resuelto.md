@@ -33,7 +33,7 @@ a) **Dos direcciones:** Una es Link-Local (fe80::...) necesaria para comunicaci�
 
 b) **%12 (Zone ID):** Identifica la interfaz de red (en este caso, la número 12). Es necesario en Link-Local porque la misma dirección FE80 podría existir en múltiples interfaces.
 
-c) **Sí puede acceder a Internet.** Tiene una Global Unicast (2001:db8::) que es enrutable, y un gateway configurado.
+c) **Sí puede acceder a Internet** (en el escenario del ejercicio). Tiene una Global Unicast (`2001:db8::`, prefijo de documentación que aquí hace de GUA) y un gateway configurado. En Internet real `2001:DB8::/32` no enruta: es el rango reservado por RFC 3849 para ejemplos.
 
 d) **Comando:** `ipconfig /all` en Windows, `ip addr` en Linux, `ifconfig -a` en macOS.
 

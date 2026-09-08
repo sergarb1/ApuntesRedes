@@ -72,7 +72,7 @@ Es el **DNI del router** dentro de OSPF. Cisco lo elige así, en este orden:
 
 ## 👋 El paquete Hello
 
-El Hello es el "¿hay alguien ahí?" de OSPF. Se envía periódicamente para **descubrir vecinos, verificar que siguen vivos y negociar parámetros** (área, timers, tipo de red, autenticación). Por defecto:
+El Hello es el "¿hay alguien ahí?" de OSPF. Se envía periódicamente para **descubrir vecinos y comprobar que siguen vivos y negociar parámetros** (área, timers, tipo de red, autenticación). Por defecto:
 
 - **Intervalo Hello:** 10 segundos en redes broadcast.
 - **Intervalo Dead:** 40 segundos (4 × Hello). Si un vecino no oye Hello en 40s, lo declara muerto.

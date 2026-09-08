@@ -24,7 +24,7 @@ El PC1 usa puerto origen 50000 y PC2 puerto 50000 también. Completa la tabla NA
 | tcp | 83.45.12.78:___ | 192.168.1.10:50000 | 8.8.8.8:80 | 8.8.8.8:80 |
 | udp | ___ | 192.168.1.20:50000 | 8.8.8.8:53 | 8.8.8.8:53 |
 
-## 2. Problema con FTP
+## 2. Problema con FTP activo
 
 Un usuario interno (192.168.1.10) intenta usar FTP activo para enviar un archivo a un servidor externo (200.100.50.1). El protocolo FTP activo funciona así:
 

@@ -29,7 +29,7 @@ Un auricular Bluetooth, un instituto, una ciudad y un continente son redes de ta
 
 ### Lectura fácil de la tabla
 
-- **PAN** (del latín *personal*): lo que alcanzas con el brazo. El Bluetooth de tus cascos es una PAN.
+- **PAN** (*Personal Area Network*): lo que alcanzas con el brazo. El Bluetooth de tus cascos es una PAN.
 - **LAN**: la red que administrarás en tu día a día: una clase, una oficina, un edificio. Rápida y barata.
 - **CAN**: une varias LAN cercanas, como los edificios de un campus universitario.
 - **MAN**: una red que cruza una ciudad. Normalmente la despliega el ayuntamiento o un operador con fibra óptica.
@@ -139,7 +139,7 @@ El único punto donde tu LAN toca el mundo es el **router**: ahí acabas tú y e
 <summary>🔄 Respuestas</summary>
 
 1. Una **PAN**: cubre unos metros alrededor de tu cuerpo.
-2. Una **MAN o una WAN de distrito**: cruza varios edificios (CAN) o una ciudad (MAN). No es una LAN porque no es un solo edificio; tampoco es un país entero.
+2. Una **CAN o una MAN**: cruza varios edificios de un campus (CAN) o una ciudad (MAN). No es una LAN porque no es un solo edificio; tampoco es un país entero.
 
 </details>
 

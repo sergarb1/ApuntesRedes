@@ -93,7 +93,7 @@ Regla práctica de contratación:
 <details>
 <summary>🔄 Respuestas</summary>
 
-1. **8 hilos en 4 pares**. Cada par usa pines adyacentes (1-2, 3-6, 4-5, 7-8) para que la cancelación del trenzado funcione.
+1. **8 hilos en 4 pares**. Cada par usa sus pines asignados (1-2, 3-6, 4-5, 7-8) para que la cancelación del trenzado funcione.
 2. **Cancelación electromagnética** (el ruido externo afecta igual a ambos hilos y se resta en el receptor) y **reducción de diafonía** (pasos de trenzado distintos entre pares).
 3. **Cat6a** (o Cat7). La Cat6 solo garantiza 10 Gbps hasta 55 metros; a 100 m se queda en 1 Gbps.
 </details>

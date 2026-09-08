@@ -132,13 +132,13 @@ PC-A (MAC `AA:AA:..:11`) envía su primera trama a PC-B (MAC `BB:BB:..:22`):
 ## 🧠 Mini-chequeo
 
 1. ¿En qué capa trabaja un hub? ¿Y un switch?
-2. Además de IP y máscara, ¿qué necesita configurarse en un PC para salir de su red local?
+2. ¿Por qué el router es el único dispositivo que sabe "salir" de la LAN?
 
 <details>
 <summary>🔄 Respuestas</summary>
 
 1. El **hub** en la capa 1 (repite señales); el **switch** en la capa 2 (aprende MACs y segmenta).
-2. Un **gateway** válido (la IP del router por donde debe salir) y, para usar nombres, un **DNS**.
+2. Porque el **router** trabaja en la capa 3 (IP): decide rutas entre redes, mientras el switch solo conoce su LAN. (En el [punto 8](/ApuntesRedes/02-fundamentos-redes/08-conectividad-basica) verás qué configurar en el PC para usar esa salida: gateway y DNS.)
 
 </details>
 

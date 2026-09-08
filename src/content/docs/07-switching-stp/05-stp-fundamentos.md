@@ -49,6 +49,17 @@ Los switches intercambian **BPDU** (*Bridge Protocol Data Unit*) cada **2 segund
 | **Coste del camino** | Coste acumulado desde el switch hasta el Root Bridge |
 | **Temporizadores** | Hello, Max Age y Forward Delay |
 
+El **coste de un enlace** se asigna por su velocidad (los valores clásicos IEEE 802.1D):
+
+| Velocidad | Coste |
+|---|---|
+| 10 Mbps | 100 |
+| 100 Mbps (FastEthernet) | 19 |
+| 1 Gbps (GigabitEthernet) | 4 |
+| 10 Gbps | 2 |
+
+Estos valores los usarás en el [boletín avanzado](/ApuntesRedes/boletines/boletin-u07-avanzado) para calcular qué camino elige STP.
+
 Con esa información, todos los switches construyen la misma foto de la red y llegan a un acuerdo democrático sobre quién manda.
 
 ---

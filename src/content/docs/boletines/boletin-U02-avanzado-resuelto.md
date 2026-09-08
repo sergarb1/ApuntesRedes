@@ -35,8 +35,8 @@ b) **Direccionamiento privado:**
 
 a) **Dominios de colisión:** cada puerto de switch es un dominio de colisión propio.
    - 3 PCs → 3 dominios.
-   - 2 enlaces entre switches → 2 dominios más (uno en cada lado del enlace, 2 por dirección al final del segmento, pero se cuentan los del medio como 2 dominios separados).
-   - Total: **5 dominios de colisión**.
+   - 2 enlaces entre switches → 2 dominios más (un extremo en cada switch).
+   - 1 enlace Switch3→router → 1 dominio más.   - Total: **3 + 2 + 1 = 6 dominios de colisión**.
 
 b) **Dominios de broadcast:** los switches NO segmentan broadcast y los enlaces no añaden ninguno. Toda la red comparte un único dominio de broadcast (el router lo segmentaría si hubiera otra red detrás). Total: **1 dominio de broadcast**.
 
@@ -62,7 +62,7 @@ a) **Hub.** Red pequeña de los 90: barato y suficiente, aunque todo el tráfico
 b) **Switch.** Cada PC tiene puerto dedicado: ancho de banda íntegro y sin colisiones por equipo.
 c) **Router.** Une dos redes diferentes (`192.168.1.0/24` y `10.0.0.0/16`) y decide por dónde enviar cada paquete.
 
-## 7. Verdadero o falso
+## 7. Verdadero o falso (justifica los falsos)
 
 a) **Verdadero.** Es la función principal del router: encaminar entre redes distintas.
 b) **Falso.** El switch no entiende de IP. Trabaja solo con MACs dentro de la misma red.

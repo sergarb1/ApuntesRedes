@@ -130,7 +130,7 @@ Has terminado la teoría: sabes por qué se trenza el cobre, cómo se crimpa un 
 
 **Pregunta extra:** ¿El cable cruzado funciona en switches modernos? Investiga **Auto MDI-X**.
 
-**Fallo intencionado:** Durante el crimpado del cable 3, "sin querer" metes el hilo blanco/naranja en el pin 3 en lugar del pin 1 en el extremo T568B. El comprobador mostrará unos pares incorrectosares incorrectos (split pair). El cable parecerá funcionar a baja velocidad pero generará errores intermitentes.
+**Fallo intencionado:** Durante el crimpado del cable 3, "sin querer" metes el hilo blanco/naranja en el pin 3 en lugar del pin 1 en el extremo T568B. El comprobador mostrará unos pares incorrectos (split pair). El cable parecerá funcionar a baja velocidad pero generará errores intermitentes.
 
 > **Pista 1 (split pair):** no te fíes de que "los 8 LEDs encienden". Comprueba que **las parejas reales coinciden**: en un directo los pares B deben conservar sus parejas 1-2, 3-6, 4-5 y 7-8 en AMBOS extremos. Si blanco/naranja acaba en un pin distinto del que corresponde a su pareja, es split pair.
 >
@@ -179,15 +179,15 @@ Has terminado la teoría: sabes por qué se trenza el cobre, cómo se crimpa un 
 ```
 Horizontal:
 1. Conector de 8 pines para UTP (4 letras + número)
-4. Herramienta que verifica la continuidad del cable (8 letras)
+4. Herramienta que verifica la continuidad del cable (6 letras)
 5. Tipo de cable trenzado sin apantallar (3 letras)
-7. Estándar WiFi de 5 GHz con 3,5 Gbps (9 letras)
+7. Estándar WiFi de 5 GHz con 3,5 Gbps (2 letras, sigla)
 8. Módulo intercambiable para puertos de switch (3 letras)
 
 Vertical:
 2. Fenómeno de pérdida de señal con la distancia (10 letras)
 3. Norma de crimpado con naranja primero (letra + número)
-6. Medida del tiempo de ida y vuelta de un paquete (7 letras)
+6. Medida del tiempo de ida y vuelta de un paquete (8 letras)
 ```
 
 <details>

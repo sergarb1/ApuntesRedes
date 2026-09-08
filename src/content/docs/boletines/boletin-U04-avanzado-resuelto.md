@@ -50,7 +50,7 @@ c) A 120 metros: atenuación proporcional = 21,3 × (120/100) = 25,56 dB
 
 ## 4. Fibra vs cobre: caso real
 
-a) **200 m:** Cobre Cat6a (funciona a 10 Gbps hasta 100 m) o fibra multimodo
+a) **200 m:** Fibra multimodo (el cobre Cat6a se queda en 100 m)
    **500 m:** Fibra multimodo (el cobre no llega a 500 m)
    **2000 m:** Fibra monomodo (obligatorio para 2 km)
 

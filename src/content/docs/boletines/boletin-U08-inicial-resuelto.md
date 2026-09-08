@@ -31,7 +31,7 @@ b) **Puerto trunk** — Múltiples VLANs etiquetadas con 802.1Q (y la native sin
 
 a) **12 bits** para el VLAN ID.
 b) **4094 VLANs** (12 bits = 4096, reservadas 0 y 4095).
-c) **4 bytes** insertados entre la MAC de origen y el EtherType: TPID (2 bytes) + PRI (3 bits) + VLAN ID (12 bits).
+c) **4 bytes** insertados entre la MAC de origen y el EtherType: TPID (2 bytes) + TCI (2 bytes) = PRI (3 bits) + CFI (1 bit) + VLAN ID (12 bits).
 
 ## 5. Relaciona
 
