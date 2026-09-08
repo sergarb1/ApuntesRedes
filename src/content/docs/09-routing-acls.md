@@ -43,7 +43,7 @@ Al terminar, serás capaz de:
 | [06 · ACLs: concepto y tipos](/ApuntesRedes/09-routing-acls/06-acls-conceptos) | Qué es una ACL, tipos, dónde aplicarla | Todos |
 | [07 · ACL estándar](/ApuntesRedes/09-routing-acls/07-acl-estandar) | Wildcards, colocación y verificación | Todos |
 | [08 · ACL extendida y nombrada](/ApuntesRedes/09-routing-acls/08-acl-extendida-y-nombrada) | `eq puerto`, `time-range`, `established` y named ACLs | Avanzado |
-| [09 · Cierre](/ApuntesRedes/09-routing-acls/09-cierre) | Be the Packet, Fireside, Laboratorio, Crucigrama… | Todos |
+| [09 · Cierre](/ApuntesRedes/09-routing-acls/09-cierre) | Sé el Paquete, Fireside, Laboratorio, Crucigrama… | Todos |
 
 > 📖 **Flujo de lectura:** los 8 primeros puntos son teoría en progresión. El 9º es el aterrizaje práctico: léelo justo después del 8º y antes de abrir los boletines.
 
@@ -54,10 +54,10 @@ Al terminar, serás capaz de:
 > Practica con los pares del curso: empezar siempre el resuelto para ver el estilo y luego intentar el por-resolver.
 
 <div class="ejercicio-links">
-  <a href="/ApuntesRedes/boletines/boletin-u10-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
-  <a href="/ApuntesRedes/boletines/boletin-u10-inicial" class="elink">🟢 Inicial por resolver</a>
-  <a href="/ApuntesRedes/boletines/boletin-u10-avanzado-resuelto" class="elink">💪 Avanzado resuelto</a>
-  <a href="/ApuntesRedes/boletines/boletin-u10-avanzado" class="elink">⭐ Avanzado por resolver</a>
+  <a href="/ApuntesRedes/boletines/u09-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
+  <a href="/ApuntesRedes/boletines/u09-inicial" class="elink">🟢 Inicial por resolver</a>
+  <a href="/ApuntesRedes/boletines/u09-avanzado-resuelto" class="elink">💪 Avanzado resuelto</a>
+  <a href="/ApuntesRedes/boletines/u09-avanzado" class="elink">⭐ Avanzado por resolver</a>
 </div>
 
 ---

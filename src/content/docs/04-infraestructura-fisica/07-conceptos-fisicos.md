@@ -92,7 +92,7 @@ Dos conceptos más completan el cuadro de la capa física:
 | Síntoma en la práctica | Concepto culpable |
 |---|---|
 | Descarga lenta aunque el enlace es "rápido" | Throughput < ancho de banda |
-| Ping alto y estable | Latencia alta (sacudir: también jitter) |
+| Ping alto y estable | Latencia alta (la variación, también llamada jitter) |
 | Ping que sube y baja sin control | **Jitter** |
 | El cable pasa el tester pero hay CRC | **Diafonía** / SNR pobre |
 | El cable funciona a 90 m y a 110 m no | **Atenuación** |
@@ -128,7 +128,7 @@ Dos conceptos más completan el cuadro de la capa física:
 | Término | Idea general |
 |---|---|
 | Ancho de banda | Capacidad máx de transmisión en bps |
-| Throughput | Capacidad real (11-byte, la realidad) |
+| Throughput | Capacidad real (la realidad medida en bytes) |
 | Latencia | Tiempo de viaje de un paquete (ms) |
 | Atenuación | Pérdida de señal con la distancia (dB) |
 | Diafonía / crosstalk | Interferencia entre pares (NEXT, FEXT, PS NEXT) |

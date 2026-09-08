@@ -58,7 +58,7 @@ router(config-if)# ipv6 address 2001:DB8:2::1/64
 router(config-if)# no shutdown
 ```
 
-Resultado: el router conoce la subred `2001:DB8:1::/64` por G0/0 y `2001:DB8:2::/64` por G0/1. Con eso ya puede encaminar entre ellas (y anunciar los prefijos si actuamos el SLAAC del punto 4).
+Resultado: el router conoce la subred `2001:DB8:1::/64` por G0/0 y `2001:DB8:2::/64` por G0/1. Con eso ya puede encaminar entre ellas (y anunciar los prefijos si activamos el SLAAC del punto 4).
 
 **Rutas estáticas IPv6 (si hubiera más saltos):**
 ```
@@ -71,9 +71,9 @@ router(config)# ipv6 route 2001:DB8:3::/64 2001:DB8:2::2
 
 ```
 router# show ipv6 interface brief
-GigabitEthernet0/0    [up/up]   FE80::200:FFF:FE00:1
+GigabitEthernet0/0    [up/up]   FE80::201:AAFF:FEBB:1
                                 2001:DB8:1::1
-GigabitEthernet0/1    [up/up]   FE80::200:FFF:FE00:1
+GigabitEthernet0/1    [up/up]   FE80::201:AAFF:FEBB:2
                                 2001:DB8:2::1
 
 router# show ipv6 route

@@ -35,7 +35,7 @@ PC                         Servidor DHCP
 3. **REQUEST:** el PC acepta formalmente esa IP y se la reserva.
 4. **ACK:** el servidor confirma. Configuración aplicada. 
 
-> 💡 **¿Qué pasa si el DHCP no responde?** El PC asigna él mismo una **APIPA (169.254.0.0/16)** y queda "huérfano": habla con la red local pero no sale a Internet. Ese es el dolor de cabeza más típico del punto 8 del [boletín inicial](/ApuntesRedes/boletines/boletin-u06-inicial).
+> 💡 **¿Qué pasa si el DHCP no responde?** El PC asigna él mismo una **APIPA (169.254.0.0/16)** y queda "huérfano": habla con la red local pero no sale a Internet. Ese es el dolor de cabeza más típico del ejercicio 6 del [boletín inicial](/ApuntesRedes/boletines/boletin-u05-inicial).
 
 ---
 
@@ -82,7 +82,7 @@ Regla de oro que todos los administradores pagan caro algún día:
 
 > 💡 **Siempre excluye las IPs estáticas** del rango DHCP (servidores, routers, impresoras de red). Si no, puede haber **conflictos de IP**.
 
-Con `ip dhcp excluded-address 192.168.1.1 192.168.1.10` apartas, por ejemplo, el router (.1), los servidores (.2-.9) y la impresora (.10) del reparto. Si DHCP entregara `192.168.1.1` —que ya es el gateway—, dos equipos acabarían con la misma IP y la semana sería muy larga. El [boletín avanzado](/ApuntesRedes/boletines/boletin-u06-avanzado) te propone precisamente ese escenario de conflicto.
+Con `ip dhcp excluded-address 192.168.1.1 192.168.1.10` apartas, por ejemplo, el router (.1), los servidores (.2-.9) y la impresora (.10) del reparto. Si DHCP entregara `192.168.1.1` —que ya es el gateway—, dos equipos acabarían con la misma IP y la semana sería muy larga. El [boletín avanzado](/ApuntesRedes/boletines/boletin-u05-avanzado) te propone precisamente ese escenario de conflicto.
 
 ---
 

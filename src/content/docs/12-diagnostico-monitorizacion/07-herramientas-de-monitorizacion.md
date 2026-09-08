@@ -21,7 +21,7 @@ Los protocolos son la materia prima; estas herramientas son el panel de instrume
 
 | Herramienta | Modelo | Puertos | Cifrado | Dato clave |
 |---|---|---|---|---|
-| **Zabbix** | Agente propio + SNMP | 10051 (agente) | TLS | Moderna, auto-descubrimiento, la más popular hoy |
+| **Zabbix** | Agente propio + SNMP | 10050 (agente) | TLS | Moderna, auto-descubrimiento, la más popular hoy |
 | **PRTG** | Sensor-based (SNMP/ping/HTTP) | 443 web | TLS | Comercial con licencia gratuita (100 sensores) |
 | **Nagios** | Plugins + agente | 5666 (NRPE) | TLS | El veterano, infinita extensibilidad por plugins |
 | **LibreNMS** | SNMP auto-discovery | 443 web | TLS | Open source, auto-descubrimiento, librerías PHP |
@@ -42,7 +42,7 @@ Zabbix combina tres modos de recogida en una sola herramienta:
 - **Agente Zabbix:** un programa ligero instalado en servidores que reporta métricas del sistema operativo (CPU, RAM, disco) con más detalle que SNMP.
 - **Traps y syslog:** recibe notificaciones activas de los dispositivos.
 
-Su punto fuerte es el **auto-descubrimiento**: escanea una red, detecta hosts con SNMP y crea los ítems automáticamente. Lo verás en el [boletín avanzado](/ApuntesRedes/boletines/boletin-u13-avanzado) diseñando un plan de monitorización.
+Su punto fuerte es el **auto-descubrimiento**: escanea una red, detecta hosts con SNMP y crea los ítems automáticamente. Lo verás en el [boletín avanzado](/ApuntesRedes/boletines/boletin-u12-avanzado) diseñando un plan de monitorización.
 
 > 💡 **Analogía del hospital:** cada herramienta es un tipo de vigilancia. Zabbix es la enfermera que pasa a mirar constantemente (polling); syslog es el historial clínico donde se apunta todo (logs); NetFlow es el portero que anota quién entra y sale (flujos). Ninguna sustituye a las otras: se complementan.
 

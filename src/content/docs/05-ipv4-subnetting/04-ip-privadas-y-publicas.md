@@ -64,7 +64,7 @@ Las direcciones **públicas** son las que viajan por Internet. Reglas del juego:
 
 ### ¿Cómo consigue una IP pública un ISP?
 
-El reparto es en pirámide: la **IANA** entrega bloques a los **RIR** (registros regionales: RIPE en Europa, ARIN en Norteámerica, LACNIC en Latinoamérica…), estos a los **ISP**, y el ISP te asigna a ti una parte. Nunca "compras" una IP: **la alquilas**. Por eso, si cambias de operador, tu dirección pública cambia y los servicios apuntados con DNS tardan en "enterrarse".
+El reparto es en pirámide: la **IANA** entrega bloques a los **RIR** (registros regionales: RIPE en Europa, ARIN en Norteamérica, LACNIC en Latinoamérica…), estos a los **ISP**, y el ISP te asigna a ti una parte. Nunca "compras" una IP: **la alquilas**. Por eso, si cambias de operador, tu dirección pública cambia y los servicios apuntados con DNS tardan en propagarse.
 
 ---
 

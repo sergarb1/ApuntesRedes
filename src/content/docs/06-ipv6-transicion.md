@@ -11,7 +11,7 @@ description: El futuro que ya llegó 🚀
 
 *El agotamiento de direcciones IPv4 ya no es una hipótesis: es historia. Repartimos los últimos bloques en 2011 y los registros regionales se fueron quedando vacíos uno a uno. Con cada teléfono, bombilla o coche conectado, las 4.300 millones de direcciones IPv4 se quedaron cortas. IPv6 no es el futuro: es la respuesta que la red ya está usando.*
 
-En la U05 hiciste subnetting y NAT con las direcciones privadas de la RFC 1918. Pues bien: aquello es un **apaño brillante**. Gracias a él millones de hogares comparten una única IP pública, pero es un apaño al fin y al cabo: NAT rompe la conectividad extremo a extremo, complica VoIP y juegos, y duplica la configuración. IPv6 llega para arreglar el problema de raíz: **128 bits**, direcciones de sobra para cada dispositivo del mundo, autoconfiguración plug-and-play y sin NAT por medio.
+En la U05 hiciste subnetting y en la U11 verás el NAT con las direcciones privadas de la RFC 1918. Pues bien: aquello es un **apaño brillante**. Gracias a él millones de hogares comparten una única IP pública, pero es un apaño al fin y al cabo: NAT rompe la conectividad extremo a extremo, complica VoIP y juegos, y duplica la configuración. IPv6 llega para arreglar el problema de raíz: **128 bits**, direcciones de sobra para cada dispositivo del mundo, autoconfiguración plug-and-play y sin NAT por medio.
 
 Esta unidad se lee como un **libro de 9 capítulos**: los 8 primeros son teoría en progresión —notación, compresión, tipos de direcciones, EUI-64, SLAAC, DHCPv6, NDP y transición— y el 9º es el cierre práctico con laboratorio en Packet Tracer.
 
@@ -44,7 +44,7 @@ Al terminar, serás capaz de:
 | [06 · ICMPv6 y NDP](/ApuntesRedes/06-ipv6-transicion/06-icmpv6-y-ndp) | NS/NA, RS/RA, multicast en lugar de broadcast | Todos |
 | [07 · Mecanismos de transición](/ApuntesRedes/06-ipv6-transicion/07-mecanismos-de-transicion) | Dual Stack, túneles, NAT64/DNS64 | Todos |
 | [08 · Configuración IPv6](/ApuntesRedes/06-ipv6-transicion/08-configuracion-ipv6) | Estática en PC y router, verificación, Packet Tracer | Todos |
-| [09 · Cierre](/ApuntesRedes/06-ipv6-transicion/09-cierre) | Be the Packet, Fireside, Laboratorio, Crucigrama… | Todos |
+| [09 · Cierre](/ApuntesRedes/06-ipv6-transicion/09-cierre) | Sé el Paquete, Fireside, Laboratorio, Crucigrama… | Todos |
 
 > 📖 **Flujo de lectura:** los 8 primeros puntos son teoría en progresión. El 9º es el aterrizaje práctico: léelo justo después del 8º y antes de abrir los boletines.
 
@@ -55,10 +55,10 @@ Al terminar, serás capaz de:
 > Practica con los pares del curso: empezar siempre el resuelto para ver el estilo y luego intentar el por-resolver.
 
 <div class="ejercicio-links">
-  <a href="/ApuntesRedes/boletines/boletin-u07-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
-  <a href="/ApuntesRedes/boletines/boletin-u07-inicial" class="elink">🟢 Inicial por resolver</a>
-  <a href="/ApuntesRedes/boletines/boletin-u07-avanzado-resuelto" class="elink">💪 Avanzado resuelto</a>
-  <a href="/ApuntesRedes/boletines/boletin-u07-avanzado" class="elink">⭐ Avanzado por resolver</a>
+  <a href="/ApuntesRedes/boletines/u06-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
+  <a href="/ApuntesRedes/boletines/u06-inicial" class="elink">🟢 Inicial por resolver</a>
+  <a href="/ApuntesRedes/boletines/u06-avanzado-resuelto" class="elink">💪 Avanzado resuelto</a>
+  <a href="/ApuntesRedes/boletines/u06-avanzado" class="elink">⭐ Avanzado por resolver</a>
 </div>
 
 ---

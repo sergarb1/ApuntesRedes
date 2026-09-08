@@ -25,7 +25,7 @@ a) OIDs:
    - Uptime: `1.3.6.1.2.1.1.3.0`
    - Tráfico entrante G0/0: `1.3.6.1.2.1.2.2.1.10.X` (X = índice de interfaz)
    - Tráfico saliente G0/0: `1.3.6.1.2.1.2.2.1.16.X`
-   - CPU load: `1.3.6.1.2.1.25.3.3.1.2`
+   - CPU load: `1.3.6.1.2.1.25.3.3.1.2.1` (instancia .1)
 
 b) Comando:
    ```bash
@@ -100,7 +100,7 @@ a) **OIDs clave:**
    - `1.3.6.1.2.1.1.3.0` — sysUpTime: detectar reinicios inesperados de equipos
    - `1.3.6.1.2.1.2.2.1.10.X` — ifInOctets de la interfaz de uplink (dos lecturas separadas para velocidad)
    - `1.3.6.1.2.1.2.2.1.16.X` — ifOutOctets de la interfaz de uplink
-   - `1.3.6.1.2.1.25.3.3.1.2` — hrProcessorLoad: carga de CPU de los equipos
+   - `1.3.6.1.2.1.25.3.3.1.2.1` — hrProcessorLoad: carga de CPU de los equipos (con instancia .1)
 
 b) **Herramienta:** **Zabbix** (o LibreNMS). Justificación: es de las más modernas y populares, soporta SNMP + syslog + NetFlow, tiene auto-descubrimiento para los 10 dispositivos (los detecta solos) y es open source. PRTG también valdría, pero la licencia gratuita de 100 sensores es más justa con 10 dispositivos × varias métricas.
 

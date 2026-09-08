@@ -43,7 +43,7 @@ Fíjate en el patrón: las capas 1 y 2 se comprueban en el switch y en el cable;
 
 Esta frase resume media unidad. Vamos a desgranarla:
 
-- **Ping al gateway (tu IP local).** Si falla, el problema está en tu LAN: cable, switch, VLAN o tu propia configuración IP. No tiene sentido mirar nada más.
+- **Ping al gateway (tu salto por defecto, p. ej. 192.168.1.1).** Si falla, el problema está en tu LAN: cable, switch, VLAN o tu propia configuración IP. No tiene sentido mirar nada más.
 - **Ping a 8.8.8.8 (fuera).** Si el gateway responde pero este falla, el problema está en la salida: router de borde, NAT, ACL de salida o el ISP.
 - **Ping a google.com (por nombre).** Si 8.8.8.8 responde pero google.com no, el problema es de **resolución DNS** (capa 7), no de red.
 
@@ -65,7 +65,7 @@ Cada línea de esta tabla es un mini-diagnóstico completo. Si lo memorizas, ya 
 Antes de diagnosticar hay que **saber qué hay montado**: ninguna metodología funciona a ciegas. Todo administrador maneja dos mapas:
 
 - **Mapa físico:** qué equipo está conectado a qué puerto del switch, en qué rack, por qué cable. Responde a "¿dónde está esto?". Se construye con `show cdp neighbors` (Cisco Discovery Protocol) y un plano de planta bien etiquetado.
-- **Mapa lógico:** IPs, VLANs, subredes, rutas, protocolos y servicios que corren *sobre* ese cableado. Responde a "¿cómo se hablan los equipos?". Sale de `show ip interface brief`, `show vlan brief`, `show ip route` y las configuraciones.
+- **Mapa lógico:** IPs, VLANs, subredes, rutas, protocolos y servicios que se ejecutan *sobre* ese cableado. Responde a "¿cómo se hablan los equipos?". Sale de `show ip interface brief`, `show vlan brief`, `show ip route` y las configuraciones.
 
 ```
 Mapa físico (dónde)                  Mapa lógico (cómo)
@@ -75,7 +75,7 @@ SW1   → puerto 24 → R1 G0/0         VLAN 10 = 192.168.10.0/24 · GW 192.168.
 R1    → G0/1 → ISP                  Ruta por defecto → ISP
 ```
 
-El CE **h)** de esta unidad ("mapa físico y lógico") se juega aquí: si tu mapa está desactualizado, estarás diagnosticiando contra un plano falso, y todo lo que descubras será contradictorio. Mantener ambos mapas al día **es** parte del trabajo, no una tarea extra.
+El CE **h)** de esta unidad ("mapa físico y lógico") se juega aquí: si tu mapa está desactualizado, estarás diagnosticando contra un plano falso, y todo lo que descubras será contradictorio. Mantener ambos mapas al día **es** parte del trabajo, no una tarea extra.
 
 ---
 

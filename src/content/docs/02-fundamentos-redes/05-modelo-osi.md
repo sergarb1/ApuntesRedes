@@ -49,7 +49,7 @@ El modelo **OSI** (*Open Systems Interconnection*) nació en 1984 de la mano de 
 | 6 | Presentación | Datos | Traducción, cifrado, compresión | TLS, JPEG, MPEG |
 | 5 | Sesión | Datos | Gestiona las sesiones | NetBIOS, RPC, SQL |
 | 4 | Transporte | **Segmento** | Segmentación, flujo, fiabilidad | TCP, UDP |
-| 3 | Red | **Paquete** | Direccionamiento lógico y rutas | IP, ICMP, ARP |
+| 3 | Red | **Paquete** | Direccionamiento lógico y rutas | IP, ICMP |
 | 2 | Enlace | **Trama** | Direccionamiento físico (MAC) | Ethernet, WiFi |
 | 1 | Física | **Bits** | Enviar bits por el medio | Cables, fibra, radio |
 

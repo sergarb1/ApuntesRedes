@@ -23,7 +23,7 @@ Antes de cortar, memoriza estas dos fórmulas. Son TODO el subnetting clásico:
 
 ```
 Nº de subredes     = 2ⁿ   (n = bits prestados a la máscara)
-Nº de hosts por    = 2ʰ − 2  (h = bits de host restantes)
+Nº de hosts por subred    = 2ʰ − 2  (h = bits de host restantes)
 ```
 
 - **n** = los bits que **prestas** de la porción de host y añades a la máscara.
@@ -75,7 +75,7 @@ El incremento entre subredes es `2ʰ = 2⁶ = 64` (o lo que es lo mismo: `256 �
 | 3 | 192.168.1.128/26 | 192.168.1.129 | 192.168.1.190 | 192.168.1.191 |
 | 4 | 192.168.1.192/26 | 192.168.1.193 | 192.168.1.254 | 192.168.1.255 |
 
-> 💡 **Comporbar a ojo:** cada subred empieza donde acaba la anterior + 1. La subred 2 arranca en `.64` porque la 1 se comió de `.0` a `.63` (red .0, broadcast .63). Siempre cuadra.
+> 💡 **Comprobar a ojo:** cada subred empieza donde acaba la anterior + 1. La subred 2 arranca en `.64` porque la 1 se comió de `.0` a `.63` (red .0, broadcast .63). Siempre cuadra.
 
 ---
 

@@ -143,7 +143,7 @@ Red:     192.168.1.0
 |---|---|
 | Bit | Un dígito binario: 0 o 1 |
 | Peso de un bit | Valor que aporta si está a 1 (128, 64, 32…) |
-| Octal / octeto | Bloque de 8 bits |
+| Octeto | Bloque de 8 bits |
 | AND | Operación bit a bit: solo 1·1 = 1 |
 | Dirección de red | Resultado del AND entre IP y máscara |
 

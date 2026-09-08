@@ -43,7 +43,7 @@ Al terminar, serás capaz de:
 | [06 · IP y Ethernet](/ApuntesRedes/03-modelos-osi-analisis/06-ip-ethernet) | Cabecera IPv4, TTL, MTU, trama, ARP | Todos |
 | [07 · Puertos y sockets](/ApuntesRedes/03-modelos-osi-analisis/07-puertos-y-sockets) | Puertos, socket, rangos, ejemplo navegación | Todos |
 | [08 · Wireshark](/ApuntesRedes/03-modelos-osi-analisis/08-wireshark) | Interfaz, filtros, colores, seguimiento de flujo TCP | Todos |
-| [09 · Cierre](/ApuntesRedes/03-modelos-osi-analisis/09-cierre) | Be the Packet, Fireside, Laboratorio, Crucigrama… | Todos |
+| [09 · Cierre](/ApuntesRedes/03-modelos-osi-analisis/09-cierre) | Sé el Paquete, Fireside, Laboratorio, Crucigrama… | Todos |
 
 > 📖 **Flujo de lectura:** los 8 primeros puntos son teoría en progresión. El 9º es el aterrizaje práctico: léelo justo después del 8º y antes de abrir los boletines.
 
@@ -54,10 +54,10 @@ Al terminar, serás capaz de:
 > Practica con los pares del curso: empezar siempre el resuelto para ver el estilo y luego intentar el por-resolver.
 
 <div class="ejercicio-links">
-  <a href="/ApuntesRedes/boletines/boletin-u04-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
-  <a href="/ApuntesRedes/boletines/boletin-u04-inicial" class="elink">🟢 Inicial por resolver</a>
-  <a href="/ApuntesRedes/boletines/boletin-u04-avanzado-resuelto" class="elink">💪 Avanzado resuelto</a>
-  <a href="/ApuntesRedes/boletines/boletin-u04-avanzado" class="elink">⭐ Avanzado por resolver</a>
+  <a href="/ApuntesRedes/boletines/u03-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
+  <a href="/ApuntesRedes/boletines/u03-inicial" class="elink">🟢 Inicial por resolver</a>
+  <a href="/ApuntesRedes/boletines/u03-avanzado-resuelto" class="elink">💪 Avanzado resuelto</a>
+  <a href="/ApuntesRedes/boletines/u03-avanzado" class="elink">⭐ Avanzado por resolver</a>
 </div>
 
 ---

@@ -13,7 +13,7 @@ Has terminado la teoría. Este cierre es el aterrizaje: recorre lo aprendido con
 
 ---
 
-## ⭐ Be the Packet, my friend...
+## ⭐ Sé el Paquete
 
 > *Eres un paquete HTTP GET. Te estás formando en el navegador porque el usuario ha escrito "google.com".*
 
@@ -188,7 +188,7 @@ Vertical:
 6. **"Explica el three-way handshake de TCP. ¿Qué pasa si nunca llega el ACK final?"**
 7. **"¿Qué es el MTU? ¿Qué pasa si un paquete es más grande que el MTU?"**
 
-> 💡 **Cómo encararlas:** la 3 es la "pregunta reina". Recorre el mismo camino del ⭐ Be the Packet: DNS (capa 7) → TCP 443 (capa 4) → IP (capa 3) → Ethernet (capa 2) → bits (capa 1). Si sabes contarla fluido, ya eres medio administrador.
+> 💡 **Cómo encararlas:** la 3 es la "pregunta reina". Recorre el mismo camino del ⭐ Sé el Paquete: DNS (capa 7) → TCP 443 (capa 4) → IP (capa 3) → Ethernet (capa 2) → bits (capa 1). Si sabes contarla fluido, ya eres medio administrador.
 
 ---
 

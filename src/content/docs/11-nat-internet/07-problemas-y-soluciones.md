@@ -94,10 +94,10 @@ Los **estándares 802.11** que verás en cualquier router actual:
 
 | Estándar | Nombre comercial | Bandas | Velocidad máxima |
 |---|---|---|---|
-| 802.11n | WiFi 4 | 2.4 GHz | ~600 Mbps |
-| 802.11ac | WiFi 5 | 5 GHz | ~1.3 Gbps (hasta 6.9 en multi-antena) |
-| 802.11ax | WiFi 6 | 2.4 + 5 GHz | ~9.6 Gbps |
-| 802.11be | WiFi 7 | 2.4 + 5 + 6 GHz | ~46 Gbps |
+| 802.11n | WiFi 4 | 2,4 GHz | ~600 Mbps |
+| 802.11ac | WiFi 5 | 5 GHz | ~1,3 Gbps (hasta 6,9 en multi-antena) |
+| 802.11ax | WiFi 6 | 2,4 + 5 GHz | ~9,6 Gbps |
+| 802.11be | WiFi 7 | 2,4 + 5 + 6 GHz | ~46 Gbps |
 
 > 💡 **Dato rápido:** el "6E" que ves en muchos routers (WiFi 6E) significa *WiFi 6 extendido*: la novedad es que abre la banda de **6 GHz**, con más espectro libre de interferencias. Es la pista del crucigrama del cierre.
 

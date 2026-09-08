@@ -96,7 +96,7 @@ Que ambos reclaman el mismo "domicilio". El resultado típico es el **conflicto 
 - se pisan: uno va bien un rato y el otro se cae,
 - y en el equipo de red aparecen avisos de "dirección duplicada".
 
-La analogía: dos cartas van al mismo número de portal, y el cartero no sabe a quién entregar. En las redes modernas el protocolo DHCP (lo verás en la U11) reparte direcciones evitando choques, pero los conflictos manuales existen y se diagnostican justamente con la escalera de la página anterior.
+La analogía: dos cartas van al mismo número de portal, y el cartero no sabe a quién entregar. En las redes modernas el protocolo DHCP (lo verás en la U05) reparte direcciones evitando choques, pero los conflictos manuales existen y se diagnostican justamente con la escalera de la página anterior.
 
 <details>
 <summary>🩻 Cómo se detecta un conflicto de IP a pelo</summary>

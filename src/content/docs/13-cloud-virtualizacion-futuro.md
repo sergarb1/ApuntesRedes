@@ -11,7 +11,7 @@ description: La nube que no es vapor ☁️
 
 *El recorrido del paquete ha llegado a su punto más avanzado. El mundo ha cambiado: ya no se trata solo de cables y routers físicos, ahora todo es "nube". Servidores en datacenters remotos que llamamos "cloud".*
 
-Bienvenido a la última unidad de la asignatura. Durante once unidades has seguido al paquete desde que nace en tu navegador hasta que cruza NAT y vuelve. Ahora llega el final del viaje: entenderás que todo lo que has aprendido —cables, IP, switches, routers, VLANs, routing, NAT— sigue vivo, pero **transformado en software**. Aquí la física se convierte en lógica: virtualización, contenedores, SDN, NFV y cloud networking.
+Bienvenido a la última unidad de la asignatura. Durante doce unidades has seguido al paquete desde que nace en tu navegador hasta que cruza NAT y vuelve. Ahora llega el final del viaje: entenderás que todo lo que has aprendido —cables, IP, switches, routers, VLANs, routing, NAT— sigue vivo, pero **transformado en software**. Aquí la física se convierte en lógica: virtualización, contenedores, SDN, NFV y cloud networking.
 
 Esta unidad se lee como un **libro de 9 capítulos**: los 8 primeros desarrollan cada idea y enlazan con el siguiente, y el 9º es el aterrizaje práctico con el que **se cierra la asignatura**. Si llegaste hasta aquí, solo te queda un esfuerzo: atar todos los cabos.
 
@@ -56,10 +56,10 @@ Al terminar, serás capaz de:
 > Practica con los pares del curso: empieza siempre por el resuelto para ver el estilo y luego intenta el por-resolver.
 
 <div class="ejercicio-links">
-  <a href="/ApuntesRedes/boletines/boletin-u14-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
-  <a href="/ApuntesRedes/boletines/boletin-u14-inicial" class="elink">🟢 Inicial por resolver</a>
-  <a href="/ApuntesRedes/boletines/boletin-u14-avanzado-resuelto" class="elink">💪 Avanzado resuelto</a>
-  <a href="/ApuntesRedes/boletines/boletin-u14-avanzado" class="elink">⭐ Avanzado por resolver</a>
+  <a href="/ApuntesRedes/boletines/u13-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
+  <a href="/ApuntesRedes/boletines/u13-inicial" class="elink">🟢 Inicial por resolver</a>
+  <a href="/ApuntesRedes/boletines/u13-avanzado-resuelto" class="elink">💪 Avanzado resuelto</a>
+  <a href="/ApuntesRedes/boletines/u13-avanzado" class="elink">⭐ Avanzado por resolver</a>
 </div>
 
 ---
@@ -72,7 +72,7 @@ Al terminar, serás capaz de:
 | **Ampliación** | IPv8 y futuro | ✅ Análisis y debate (puntos 7-8 y 9) |
 | d) | Frame Relay, RDSI, ADSL | ✅ Mencionado en contexto histórico (punto 8) |
 | e) | WiFi vs WiMax | ✅ En U11 |
-| f) | UMTS y HSDPA | ✅ Mencionado en U11 |
+| f) | UMTS y HSDPA | ❌ No cubierto |
 
 ---
 

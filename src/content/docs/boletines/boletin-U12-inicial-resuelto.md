@@ -11,10 +11,10 @@ description: Soluciones ejercicios básicos de Diagnóstico y monitorización
 
 Orden correcto (OSI de abajo arriba):
 1. (2) Comprobar que el cable está conectado (Capa 1)
-2. (3) Comprobar la tabla MAC del switch (Capa 2)
-3. (1) Hacer ping al gateway (Capa 3)
-4. (4) Hacer ping a 8.8.8.8 (Capa 3)
-5. (5) Hacer nslookup del dominio (Capa 7)
+2. (5) Comprobar la tabla MAC del switch (Capa 2)
+3. (4) Hacer ping al gateway (Capa 3)
+4. (1) Hacer ping a 8.8.8.8 (Capa 3)
+5. (3) Hacer nslookup del dominio (Capa 7)
 
 ## 2. Comandos de diagnóstico
 

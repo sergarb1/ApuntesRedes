@@ -21,6 +21,10 @@ Switch1(config-if-range)# switchport access vlan 10
 Switch1(config)# interface range fa0/6-10
 Switch1(config-if-range)# switchport mode access
 Switch1(config-if-range)# switchport access vlan 20
+Switch1(config)# interface fa0/23
+Switch1(config-if)# switchport mode trunk
+Switch1(config-if)# switchport trunk native vlan 99
+Switch1(config-if)# switchport trunk allowed vlan 10,20
 Switch1(config)# interface fa0/24
 Switch1(config-if)# switchport mode trunk
 Switch1(config-if)# switchport trunk native vlan 99
@@ -96,7 +100,7 @@ c) **Medidas preventivas:**
 
 ## 5. Router-on-a-stick: cuello de botella
 
-a) **Cálculo:** 4 VLANs × 30 Mbps = **120 Mbps**. La interfaz FastEthernet (100 Mbps) NO puede manejar 120 Mbps. **Sí hay cuello de botella** (pérdidas y saturación).
+a) **Cálculo:** 4 VLANs × 30 Mbps = **120 Mbps**. La interfaz FastEthernet (100 Mbps) NO puede soportar 120 Mbps. **Sí hay cuello de botella** (pérdidas y saturación).
 
 b) **Alternativas:**
    - **Interfaz GigabitEthernet** (1000 Mbps) → 120 Mbps es apenas el 12 % de capacidad.

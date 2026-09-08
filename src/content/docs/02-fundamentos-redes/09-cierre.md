@@ -15,7 +15,7 @@ description: El cierre práctico de la unidad, con chicha y diagnóstico real �
 
 ---
 
-## ⭐ Sé el Paquete, my friend...
+## ⭐ Sé el Paquete
 
 > *Eres un paquete de 1500 bytes que acaba de generarse en la interfaz de red de un portátil. Tu IP origen es `192.168.1.10` y quieres llegar a `8.8.8.8` (el DNS de Google). Tu máquina NO tiene la MAC del gateway `192.168.1.1` en su tabla ARP.*
 

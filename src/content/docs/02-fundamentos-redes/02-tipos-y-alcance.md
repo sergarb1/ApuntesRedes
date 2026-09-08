@@ -58,7 +58,7 @@ Si recuerdas que *local*, *metropolitan* y *wide* son radios de acción crecient
 
 Todos los tipos de red se comparan con dos medidores:
 
-- **Ancho de banda (velocidad):** cuántos datos caben por segundo. Una LAN gigabit `mueve` datos en un instante; un enlace WAN contratado, menos.
+- **Ancho de banda (velocidad):** cuántos datos caben por segundo. Una LAN gigabit mueve datos en un instante; un enlace WAN contratado, menos.
 - **Latencia:** cuánto tarda un paquete en llegar. Se mide con `ping` y se llama **RTT** (*Round Trip Time*).
 
 | Criterio | LAN | WAN |
@@ -77,7 +77,7 @@ Todos los tipos de red se comparan con dos medidores:
 - **WAN**: mayor latencia y menor ancho de banda. Se contrata a operadores y cuesta dinero mantener (enlaces, fibra, satélite).
 - **PAN y LAN** son cosa tuya (las montas tú). **MAN y WAN** son cosa de operadores: tu responsabilidad termina donde empieza el enlace contratado.
 
-> 💡 **Para este curso nos focalizamos en LAN y WAN.** Las LAN son lo que administrarás a diario. Las WAN son cómo se conectan esas LAN entre sí. La mayoría de ejercicios usan LAN, pero sin WAN no entendemos Internet.
+> 💡 **Para este curso nos centramos en LAN y WAN.** Las LAN son lo que administrarás a diario. Las WAN son cómo se conectan esas LAN entre sí. La mayoría de ejercicios usan LAN, pero sin WAN no entendemos Internet.
 
 ---
 
@@ -92,7 +92,7 @@ El tamaño no es el único criterio. Un técnico clasifica las redes por varios 
 | **Topología** | Estrella, bus, anillo, malla, árbol, híbrida (veremos en [03](/ApuntesRedes/02-fundamentos-redes/03-topologias)) |
 | **Arquitectura** | Cliente-Servidor vs Peer-to-Peer (visto en [01](/ApuntesRedes/02-fundamentos-redes/01-que-es-una-red)) |
 | **Nivel de acceso** | Intranet (privada), extranet (con socios), Internet (pública) |
-| **Velocidad** | Ethernet (100 Mbps), Fast Ethernet (1 Gbps), 10GbE (10 Gbps) |
+| **Velocidad** | Ethernet (10 Mbps), Fast Ethernet (100 Mbps), Gigabit Ethernet (1 Gbps), 10GbE (10 Gbps) |
 
 ### Ejemplo: clasifica la red de una oficina
 
@@ -101,7 +101,7 @@ El tamaño no es el único criterio. Un técnico clasifica las redes por varios 
 > - **Por medio:** cableada (UTP) + WiFi para visitas.
 > - **Por propiedad:** privada (intranet).
 > - **Por arquitectura:** cliente-servidor (hay un servidor de ficheros).
-> - **Por velocidad:** Fast Ethernet (1 Gbps) en la entrada de cada PC.
+> - **Por velocidad:** Gigabit Ethernet (1 Gbps) en la entrada de cada PC.
 
 ---
 

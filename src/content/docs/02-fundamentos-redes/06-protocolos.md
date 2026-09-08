@@ -62,7 +62,7 @@ Cuando tu navegador pide `https://...` se conecta a la IP del servidor **y al pu
 | **TCP / UDP** | Transporte (4) | Transporte fiable / rápido |
 | **IP** | Red (3) | Direccionamiento y enrutamiento |
 | **ICMP** | Red (3) | Control y errores (el famoso `ping`) |
-| **ARP** | Red/Enlace (3-2) | Traduce IP → MAC |
+| **ARP** | Enlace (2) | Traduce IP → MAC |
 | **Ethernet** | Enlace (2) | Formato de trama en el cable |
 
 ---
@@ -72,7 +72,7 @@ Cuando tu navegador pide `https://...` se conecta a la IP del servidor **y al pu
 | Puerto | Protocolo | Para qué |
 |---|---|---|
 | 22 | SSH | administrar un servidor de forma segura |
-| 21 | FTP | subir y bajar ficheros |
+| 21 | FTP | subir y descargar ficheros |
 | 53 | DNS | resolver nombres a IP |
 | 80 | HTTP | web sin cifrar |
 | 443 | HTTPS | web cifrada |

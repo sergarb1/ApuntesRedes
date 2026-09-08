@@ -81,7 +81,7 @@ netstat -tulpn         # Linux: puertos en escucha
 | TIME_WAIT | La conexión se cerró y queda "enfriando" el cierre |
 | SYN_SENT | Intento de conexión sin respuesta: destino inaccesible |
 
-Si un servicio "no va", lo primero es `netstat` en el servidor: ¿está el puerto en LISTENING? Si no aparece, el problema es que el servicio no está corriendo o se configuró mal, y no hay que tocar la red. Este es el complemento natural de telnet, que probamos a continuación.
+Si un servicio "no va", lo primero es `netstat` en el servidor: ¿está el puerto en LISTENING? Si no aparece, el problema es que el servicio no está ejecutándose o se configuró mal, y no hay que tocar la red. Este es el complemento natural de telnet, que probamos a continuación.
 
 ---
 

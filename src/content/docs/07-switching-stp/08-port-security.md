@@ -52,7 +52,7 @@ Switch(config-if)# switchport port-security violation shutdown
 | `violation restrict` | Descarta el tráfico extra pero **no deshabilita** el puerto |
 | `violation protect` | Descarta el tráfico extra **sin notificar** (silencioso) |
 
-> 💡 **Sticky MAC:** con `mac-address sticky`, la primera MAC que aprende el puerto se convierte en permanente (queda escrita en la configuración en ejecución). Si reinicias el switch, esa MAC sigue siendo la única bienvenida.
+> 💡 **Sticky MAC:** con `mac-address sticky`, la primera MAC que aprende el puerto se convierte en permanente (queda escrita en la configuración en ejecución). Si reinicias el switch **sin guardar** (`copy running-config startup-config`), esa MAC se pierde; guarda la configuración si quieres que sobreviva al reinicio.
 
 ---
 

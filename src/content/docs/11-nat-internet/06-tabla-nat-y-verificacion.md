@@ -39,8 +39,8 @@ tcp 83.45.12.78:60001  192.168.1.10:54321  8.8.8.8:80         8.8.8.8:80
 
 ```
 Pro Inside global      Inside local       Outside local      Outside global
-tcp 83.45.12.78:60001  192.168.1.10:54321  8.8.8.8:53         8.8.8.8:53
-tcp 83.45.12.78:60002  192.168.1.20:54321  8.8.8.8:53         8.8.8.8:53
+udp   192.168.1.  8.8.8.8:53  8.8.8.8:53
+udp   192.168.1.  8.8.8.8:53  8.8.8.8:53
 ```
 
 Ambos PCs usan el puerto origen 54321 y van al mismo destino. ¿Cómo sabe el router quién es quién? Por el **Inside global**: el `60001` pertenece a 192.168.1.10 y el `60002` a 192.168.1.20. Es el mismo mecanismo que viste en PAT: el puerto global desambigua conexiones idénticas.
@@ -81,7 +81,7 @@ Las entradas dinámicas (PAT, pool) no viven para siempre: tienen **timeout**. E
 
 | Protocolo | Timeout típico |
 |---|---|
-| **UDP** | ~24 horas (aunque las implementaciones lo acortan) |
+| **UDP** | ~300 s (5 minutos) |
 | **TCP** | Variable según el estado de la conexión (menos si se cierra limpiamente) |
 | **ICMP** | Corto (segundos/minutos) |
 
@@ -116,7 +116,7 @@ Orden mental para confirmar que tu NAT está vivo:
 
 1. **Inside local** es la IP real del equipo interno (192.168.1.10) y **Inside global** la IP pública traducida (83.45.12.78): la misma conexión vista desde la LAN y desde Internet.
 2. `clear ip nat translation *`. Lo usarías al depurar, para resetear el estado y empezar traducciones limpias.
-3. Los nuevos paquetes **se descartan** hasta que expiran entradas antiguas (timeouts de UDP ~24h, TCP variable), porque no hay hueco en la tabla.
+3. Los nuevos paquetes **se descartan** hasta que expiran entradas antiguas (timeouts de UDP ~5 min, TCP ~24 h), porque no hay hueco en la tabla.
 </details>
 
 ---
@@ -125,7 +125,7 @@ Orden mental para confirmar que tu NAT está vivo:
 
 - La tabla NAT tiene 4 campos: *Inside local*, *Inside global*, *Outside local* y *Outside global* — la misma conexión vista desde dentro y desde fuera.
 - Verificar NAT es `show ip nat translations` + `show ip nat statistics` (+ `debug ip nat` cuando toca).
-- Las entradas caducan por timeout (UDP ~24h) y, si la tabla se llena, el tráfico nuevo se descarta.
+- Las entradas caducan por timeout (UDP ~5 min, TCP ~24 h) y, si la tabla se llena, el tráfico nuevo se descarta.
 
 ## 🐛 Vocabulario rápido
 

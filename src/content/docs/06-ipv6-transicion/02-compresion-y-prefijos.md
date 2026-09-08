@@ -47,7 +47,7 @@ Si una dirección tiene **uno o varios grupos con todo ceros**, puedes sustituir
        └─── 3 grupos cero ────┘     sustituidos por ::
 
 FE80:0:0:0:2AA:FF:FE9A:4CA2   →   FE80::2AA:FF:FE9A:4CA2
-                1 grupo cero            :: (una sola vez)
+                3 grupos cero            :: (una sola vez)
 
 2001:DB8::ABCD:0:0:1234        →   no se comprime más
          │         └──2 ceros──┘   la cadena más larga ya
@@ -120,7 +120,7 @@ La IETF recomienda usar siempre **/64 para subredes** porque:
 <summary>🔄 Respuestas</summary>
 
 1. Regla 1 → `2001:DB8:0:0:0:0:0:1`; Regla 2 → la cadena más larga son los cinco `0` consecutivos → **`2001:DB8::1`**.
-2. El `::` oculta 4 grupos de ceros: `FE80:0000:0000:0000:02AA:00FF:FE9A:4CA2`. Recuerda: `2AA` → `02AA` y `FF` → `00FF` al reexpandir.
+2. El `::` oculta 3 grupos de ceros: `FE80:0000:0000:0000:02AA:00FF:FE9A:4CA2`. Recuerda: `2AA` → `02AA` y `FF` → `00FF` al reexpandir.
 3. Porque el `::` solo puede usarse **una sola vez**: si aparece dos veces, no se puede deducir cuántos grupos cero representa cada uno. La dirección correcta sería `2001:DB8::ABCD:0:0:1`.
 </details>
 

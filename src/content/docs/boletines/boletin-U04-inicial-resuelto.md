@@ -61,7 +61,7 @@ c) **SC** — Conector de fibra óptica, cuadrado, push-pull
 ## 8. Medios y estándares: verdadero o falso
 
 a) **Falso.** La fibra es INMUNE a las interferencias electromagnéticas: transmite luz, no electricidad, y los campos externos no afectan a los fotones.
-b) **Verdadero.** 802.11ax = WiFi 6 (2019, bandas de 2.4 y 5 GHz).
+b) **Verdadero.** 802.11ax = WiFi 6 (2019, bandas de 2,4 y 5 GHz).
 c) **Verdadero.** El WiFi envía ondas electromagnéticas por el aire, sin medio conductor.
 d) **Falso.** Es la fibra **monomodo** la que llega a 40+ km. La **multimodo** se queda en unos 550 m a 10 Gbps.
 e) **Verdadero.** La velocidad real WiFi suele ser el 30-50% de la teórica por overhead, obstrucciones e interferencias.

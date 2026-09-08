@@ -47,7 +47,7 @@ SIN NAT (ideal)                          CON NAT (realidad)
 └──────┘  sale tal cual              └──────┘  a 83.45.12.78
 ```
 
-En el primer caso el PC sale con su IP tal cual (imposible a escala mundial). En el segundo, el router se queda la IP pública y **traduce** la privada de cada paquete que cruza su interfaz *outside*. Todo el "truco" de NAT ocurre en ese recuadro de la derecha.
+En el primer caso el PC sale con su IP tal cual (imposible a escala mundial). En el segundo, el router se queda con la IP pública y **traduce** la privada de cada paquete que cruza su interfaz *outside*. Todo el "truco" de NAT ocurre en ese recuadro de la derecha.
 
 ---
 

@@ -53,7 +53,7 @@ Si veo `[RST]` en una captura, sospecho un puerto cerrado o un corte brusco; si 
 
 ### La ventana deslizante (sliding window)
 
-TCP no envía un paquete y espera: envia **varios a la vez**, tantos como permita la ventana que anuncia el receptor en cada ACK.
+TCP no envía un paquete y espera: envía **varios a la vez**, tantos como permita la ventana que anuncia el receptor en cada ACK.
 
 ```
 Emisor → [Paq1][Paq2][Paq3] → Receptor
@@ -62,7 +62,7 @@ Emisor → [Paq1][Paq2][Paq3] → Receptor
 Emisor: "Ventana de 3, puedo seguir"
 ```
 
-Si un ACK tarda en llegar o faltan paquetes, la ventana se encoge: eso se ve en Wireshark como `TCP Window Update` o `[SYN] Retransmission` cuando algo se pierde. Es el mecanismo que convierte a TCP en "fiable": **cada trozo se numerada y se confirma**.
+Si un ACK tarda en llegar o faltan paquetes, la ventana se encoge: eso se ve en Wireshark como `TCP Window Update` o `[SYN] Retransmission` cuando algo se pierde. Es el mecanismo que convierte a TCP en "fiable": **cada trozo se numera y se confirma**.
 
 ---
 
@@ -76,7 +76,7 @@ Casos típicos de UDP — diles en una entrevista con seguridad:
 
 - **Streaming y VoIP:** mejor perder un trocito que congelar la llamada.
 - **Juegos online:** la rapidez manda y se tolera perder "ticks".
-- **DNS:** una consulta y una respuesta; sin conexión que mantener (aunque algunas garantías sí usan TCP).
+- **DNS:** una consulta y una respuesta; sin conexión que mantener (aunque algunas consultas sí usan TCP).
 - **DHCP:** el cliente aún no tiene IP; manda broadcast y espera respuesta.
 
 ---
@@ -104,7 +104,7 @@ Casos típicos de UDP — diles en una entrevista con seguridad:
 
 Por eso el audio y vídeo en vivo usan UDP: la conversación en tiempo real tolera micro-pérdidas, pero no congela nunca.
 
-**Otro ejemplo resuelto — el cierre limpio:** TCP termina con `FIN` → `ACK` → `FIN` → `ACK` (un "handshake de despedida"). Si ese cierre se corrompe, el servidor acaba en estado `TIME_WAIT` hasta que expira; por eso a veces "los puertos se quedan ocupados" un rato tras cerrar un servicio.
+**Otro ejemplo resuelto — el cierre limpio:** TCP termina con `FIN` → `ACK` → `FIN` → `ACK` (un "handshake de despedida"). Tras un cierre limpio, el lado que envía el último ACK (normalmente quien inició el cierre) queda un tiempo en estado `TIME_WAIT` (por eso a veces "los puertos se quedan ocupados" un rato tras cerrar un servicio).
 
 ---
 

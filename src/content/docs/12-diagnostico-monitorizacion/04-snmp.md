@@ -50,7 +50,7 @@ Las OIDs se escriben como números separados por puntos y forman un **árbol jer
 1.3.6.1.2.1.1.3.0        → sysUpTime (tiempo activo / uptime)
 1.3.6.1.2.1.2.2.1.10     → ifInOctets (tráfico entrante de la interfaz)
 1.3.6.1.2.1.2.2.1.16     → ifOutOctets (tráfico saliente de la interfaz)
-1.3.6.1.2.1.25.3.3.1.2   → hrProcessorLoad (carga de CPU)
+1.3.6.1.2.1.25.3.3.1.2.1 → hrProcessorLoad (carga de CPU; es una tabla, necesita la instancia .1)
 ```
 
 Fíjate en el detalle de las dos de tráfico: `ifInOctets` y `ifOutOctets` son **contadores** (octetos acumulados desde que el equipo arrancó). El gestor los lee dos veces, resta y divide entre el tiempo para obtener la **velocidad**: leer una vez a secas no sirve para medir tráfico. Es el clásico error de principiante que verás en el [Crucigrama del cierre](/ApuntesRedes/12-diagnostico-monitorizacion/09-cierre).
@@ -86,7 +86,7 @@ Desglose importante:
 - **`location` y `contact`** alimentan las variables `sysLocation` y `sysContact` de la MIB: identifica el equipo físicamente y a su responsable.
 - **`enable traps` + `host ... traps`**: activa las **notificaciones activas** (traps). En lugar de esperar a que el gestor pregunte, el agente avisa por su cuenta cuando ocurre algo (caída de interfaz, reinicio). Así el NMS se entera al instante.
 
-El resultado se lee desde el gestor con herramientas como `snmpget` o directamente desde Zabbix, como montarás en el [punto 7](/ApuntesRedes/12-diagnostico-monitorizacion/07-herramientas-de-monitorizacion) y practicarás en el [boletín avanzado](/ApuntesRedes/boletines/boletin-u13-avanzado).
+El resultado se lee desde el gestor con herramientas como `snmpget` o directamente desde Zabbix, como montarás en el [punto 7](/ApuntesRedes/12-diagnostico-monitorizacion/07-herramientas-de-monitorizacion) y practicarás en el [boletín avanzado](/ApuntesRedes/boletines/boletin-u12-avanzado).
 
 ---
 

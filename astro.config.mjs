@@ -182,7 +182,7 @@ const unidadesExpandidas = {
 };
 
 const unidades = unitSlugs.map((slug, i) => {
-  const label = `${emojis[i]} ${i + 1}. ${unitLabels[i]}`;
+  const label = `${emojis[i]} ${i + 2}. ${unitLabels[i]}`;
   if (unidadesExpandidas[slug]) {
     return {
       label,

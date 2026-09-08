@@ -43,7 +43,7 @@ Al terminar, serás capaz de:
 | [06 · VTP y DTP](/ApuntesRedes/08-vlans/06-vtp-y-dtp) | Modos VTP, revision number, riesgos de DTP | Medio |
 | [07 · Seguridad en VLANs](/ApuntesRedes/08-vlans/07-seguridad-en-vlans) | VACL, PVLAN, VLAN hopping y hardening | Medio |
 | [08 · Configuración y verificación](/ApuntesRedes/08-vlans/08-configuracion-y-verificacion) | Escenario departamental paso a paso + troubleshooting | Medio |
-| [09 · Cierre](/ApuntesRedes/08-vlans/09-cierre) | Be the Packet, Fireside, Laboratorio, Crucigrama… | Todos |
+| [09 · Cierre](/ApuntesRedes/08-vlans/09-cierre) | Sé el Paquete, Fireside, Laboratorio, Crucigrama… | Todos |
 
 > 📖 **Flujo de lectura:** los 8 primeros puntos son teoría y configuración en progresión. El 9º es el aterrizaje práctico: léelo justo después del 8º y antes de abrir los boletines.
 
@@ -54,10 +54,10 @@ Al terminar, serás capaz de:
 > Practica con los pares del curso: empezar siempre el resuelto para ver el estilo y luego intentar el por-resolver.
 
 <div class="ejercicio-links">
-  <a href="/ApuntesRedes/boletines/boletin-u09-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
-  <a href="/ApuntesRedes/boletines/boletin-u09-inicial" class="elink">🟢 Inicial por resolver</a>
-  <a href="/ApuntesRedes/boletines/boletin-u09-avanzado-resuelto" class="elink">💪 Avanzado resuelto</a>
-  <a href="/ApuntesRedes/boletines/boletin-u09-avanzado" class="elink">⭐ Avanzado por resolver</a>
+  <a href="/ApuntesRedes/boletines/u08-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
+  <a href="/ApuntesRedes/boletines/u08-inicial" class="elink">🟢 Inicial por resolver</a>
+  <a href="/ApuntesRedes/boletines/u08-avanzado-resuelto" class="elink">💪 Avanzado resuelto</a>
+  <a href="/ApuntesRedes/boletines/u08-avanzado" class="elink">⭐ Avanzado por resolver</a>
 </div>
 
 ---

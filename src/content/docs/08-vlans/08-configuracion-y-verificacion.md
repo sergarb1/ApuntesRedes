@@ -28,15 +28,21 @@ Este punto es el punto 8 porque condensa todo lo anterior en un solo montaje: VL
                          Fa0/0 │
                     [trunk 802.1Q]
                         ┌──────┴──────┐
-                     Fa0/24│           │ Fa0/24
-               ┌───────────┴─────┐  ┌──┴───────────┐
-               │ Switch1         │  │ Switch2       │
-               │ Fa0/1-5 VLAN 10 │  │ Fa0/1-5 VL 10 │
-               │ Fa0/6-10 VL 20  │  │ Fa0/6-10 VL20 │
-               └───────────────┬─┘  └┬─────────────┘
-                VLAN 10 Ventas │     │ VLAN 20 RRHH
-                VLAN 20 RRHH   │     │ (mismas VLANs)
-              PC-A(10) PC-B(20)│     PC-C(10) PC-D(20)
+                         Fa0/23       │
+               ┌───────────┴─────┐    │
+               │ Switch1         │ Fa0/24
+               │ Fa0/1-5 VLAN 10 │    │
+               │ Fa0/6-10 VL 20  │    │
+               │ Fa0/24 → S2     │    │
+               └───────────────┬─┘    │
+                    [trunk Fa0/24]───┘
+               ┌───────────────┬─┐
+               │ Switch2       │
+               │ Fa0/1-5 VL 10 │
+               │ Fa0/6-10 VL20 │
+               │ (trunk al S1) │
+               └───────────────┴─┘
+    PC-A(10) PC-B(20)   PC-C(10) PC-D(20)
 ```
 
 Objetivo: que un PC de la VLAN 10 (Ventas) hable con uno de la VLAN 20 (RRHH) a través del router, y que las VLANs crucen el trunk entre switches.
@@ -99,6 +105,15 @@ Router(config-subif)# ip address 192.168.10.1 255.255.255.0
 Router(config)# interface fa0/0.20
 Router(config-subif)# encapsulation dot1Q 20
 Router(config-subif)# ip address 192.168.20.1 255.255.255.0
+```
+
+**Ojo:** el puerto de **Switch1 que recibe al router (Fa0/23) debe ser trunk**, o el router solo verá la VLAN nativa:
+
+```bash
+Switch1(config)# interface fa0/23
+Switch1(config-if)# switchport mode trunk
+Switch1(config-if)# switchport trunk native vlan 99
+Switch1(config-if)# switchport trunk allowed vlan 10,20
 ```
 
 ## 🛠️ Paso 5 — IPs en los PCs

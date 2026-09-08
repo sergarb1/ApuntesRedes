@@ -19,13 +19,13 @@ Has terminado la teoría. Este cierre es el aterrizaje: recorre lo aprendido con
 
 1. **Capa 1:** ¿El cable está conectado? ¿LEDs? ✅ Sí.
 2. **Capa 2:** ¿La MAC está aprendida en el switch? `show mac address-table` ✅.
-3. **Capa 3:** ¿Tiene IP? `ipconfig`. Sí. ¿Hace ping al gateway? Sí. ¿Hace ping a 8.8.8.8? No.
+3. **Capa 3:** ¿Tiene IP? `ipconfig`. Sí. ¿Hace ping al gateway? Sí. ¿Hace ping a 8.8.8.8? Sí: la red y la salida están bien.
 4. **Capa 4:** ¿Puerto 443 accesible? `telnet intranet.empresa.com 443` — No responde.
 5. **Capa 7:** ¿El DNS resuelve? `nslookup intranet.empresa.com` — ¡Resuelve a otra IP! El registro DNS está obsoleto.
 
 **Problema:** DNS desactualizado. Solución: Actualizar registro DNS o limpiar caché local.
 
-> 💡 **¿Qué habrías hecho tú?** Antes de leer el desenlace, piensa: si el ping a 8.8.8.8 falla pero el gateway responde, ¿qué capa acotarías primero? La respuesta está en la [regla de oro del punto 1](/ApuntesRedes/12-diagnostico-monitorizacion/01-metodologia-de-diagnostico): el problema está en la salida de la red, no en la LAN del usuario.
+> 💡 **¿Qué habrías hecho tú?** Antes de leer el desenlace, piensa: si el ping al gateway y a 8.8.8.8 funcionan pero el navegador no carga, ¿qué capa acotarías primero? La respuesta está en la [regla de oro del punto 1](/ApuntesRedes/12-diagnostico-monitorizacion/01-metodologia-de-diagnostico): el problema está en la salida de la red, no en la LAN del usuario.
 
 ---
 
@@ -53,7 +53,7 @@ Has terminado la teoría. Este cierre es el aterrizaje: recorre lo aprendido con
 
 ## 🕵️ ¿Quién Soy?
 
-1. Te digo si un host está reachable. Mando ICMP Echo Request. Espero Echo Reply.
+1. Te digo si un host está accesible. Mando ICMP Echo Request. Espero Echo Reply.
 2. Muestro cada salto que da un paquete hasta el destino.
 3. Capturo paquetes en tiempo real. Analizo protocolos. Soy la navaja suiza del administrador.
 4. Soy un protocolo que permite monitorizar dispositivos de red. Leo variables como uso de CPU, tráfico, temperatura.
@@ -109,7 +109,7 @@ Has terminado la teoría. Este cierre es el aterrizaje: recorre lo aprendido con
 
 > **Pista 1:** si el ping a una IP funciona pero los nombres no, el fallo 5 (DNS) es el culpable: captura con el filtro `dns` y verás las consultas que "salen y no vuelven".
 >
-> **Pista 2:** si una interfaz aparece `down/down` en `show ip interface brief`, o es el fallo 1 (cable) o el fallo 2 (shutdown). Si aparece `up/down`, el problema está en la capa 3 de esa interfaz.
+> **Pista 2:** si una interfaz aparece `down/down` en `show ip interface brief`, o es el fallo 1 (cable) o el fallo 2 (shutdown). Un `up/down` (protocolo caído) suele ser capa 2 (encapsulación, reloj, keepalive), no capa 3. Si aparece `up/down`, el problema está en la capa 3 de esa interfaz.
 >
 > **Pista 3:** la ruta con máscara incorrecta se detecta con `show ip route`: la ruta existe pero no coincide con la subred real, y el tráfico muere en el router. Comprueba con `traceroute` dónde se detiene el paquete.
 

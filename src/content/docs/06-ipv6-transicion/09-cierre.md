@@ -13,7 +13,7 @@ Has terminado la teoría. Este cierre es el aterrizaje: recorre lo aprendido con
 
 ---
 
-## ⭐ Be the Packet, my friend...
+## ⭐ Sé el Paquete
 
 > *Eres la dirección FE80::1AA:2BB:3CC:4DD1. Acabas de "nacer" en la interfaz de un PC que se acaba de conectar a un switch. ¿Qué tipo de dirección eres?*
 

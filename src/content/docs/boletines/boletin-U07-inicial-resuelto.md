@@ -70,6 +70,6 @@ Tabla completada:
 
 a) **Blocking → Listening → Learning → Forwarding** (Disabled es un estado administrativo, no forma parte de la secuencia normal).
 
-b) Hasta **50 segundos**: 20 s (Blocking) + 15 s (Listening) + 15 s (Learning).
+b) **30 segundos sin fallos** (15 s Listening + 15 s Learning); hasta **50 s** si hay un fallo y entra el Max Age (20 s + 15 s + 15 s).
 
 c) **Forwarding**: es el único estado que reenvía tráfico (y además aprende MACs).

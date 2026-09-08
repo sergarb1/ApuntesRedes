@@ -57,7 +57,7 @@ a) `2001:DB8::1` → **`2001:0DB8:0000:0000:0000:0000:0000:0001`**
    (el `::` oculta 5 grupos de ceros entre `DB8` y el `1`).
 
 b) `FE80::2AA:FF:FE9A:4CA2` → **`FE80:0000:0000:0000:02AA:00FF:FE9A:4CA2`**
-   (el `::` oculta 4 grupos de ceros; al expandir, `2AA` → `02AA` y `FF` → `00FF`).
+(el `::` oculta 3 grupos de ceros; al expandir, `2AA` → `02AA` y `FF` → `00FF`).
 
 c) `::1` → **`0000:0000:0000:0000:0000:0000:0000:0001`**
    (siete grupos de ceros + el `1`).

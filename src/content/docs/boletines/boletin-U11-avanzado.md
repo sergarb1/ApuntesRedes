@@ -56,7 +56,7 @@ Pero IPsec no funciona a través de NAT. ¿Por qué? ¿Qué solución existe?
 
 ## 5. Análisis de timeouts
 
-Un usuario se queja de que su conexión SSH se corta después de 5 minutos de inactividad. La tabla NAT tiene un timeout de 24 horas para UDP y configurable para TCP.
+Un usuario se queja de que su conexión SSH se corta después de 5 minutos de inactividad. La tabla NAT tiene un timeout de 5 minutos para UDP y configurable para TCP.
 
 ¿Por qué se corta la conexión aunque el timeout NAT no haya expirado? ¿Dónde está el verdadero problema?
 

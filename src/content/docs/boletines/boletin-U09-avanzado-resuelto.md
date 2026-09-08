@@ -98,11 +98,17 @@ ip access-list extended FIREWALL_INTERNO
  permit tcp 192.168.1.0 0.0.0.255 any eq 443
  permit udp 192.168.1.0 0.0.0.255 any eq 53
  deny tcp 192.168.1.0 0.0.0.255 any eq 22
- permit tcp any 192.168.1.0 0.0.0.255 established
  deny ip any any
 
 interface g0/1
  ip access-group FIREWALL_INTERNO out
+
+ip access-list extended FIREWALL_RETORNO
+ permit tcp any 192.168.1.0 0.0.0.255 established
+ deny ip any any
+
+interface g0/1
+ ip access-group FIREWALL_RETORNO in
 ```
 
 ## 6. Resolución de problemas de rutas

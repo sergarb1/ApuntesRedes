@@ -13,7 +13,7 @@ Has terminado la teoría. Este cierre es el aterrizaje: recorre lo aprendido con
 
 ---
 
-## ⭐ Be the Packet, my friend...
+## ⭐ Sé el Paquete
 
 > *Eres la dirección IP **192.168.1.10/24**. Tu máscara es 255.255.255.0 y acabas de despertarte en una red que huele a café de la oficina.*
 
@@ -110,7 +110,7 @@ Eres el administrador de redes de una empresa con:
 - **Dirección:** 5 dispositivos
 - **Enlaces entre routers:** 2 IPs por enlace (3 enlaces)
 
-Te dan la red **10.0.0.0/24**. ¿Cabe todo? **No.** Te dan **172.16.0.0/16**. Ahora sí.
+Te dan la red **10.0.0.0/24**. ¿Cabe todo? **Sí, justo**: Ventas 100 → /25 (128), RRHH 30 → /27 (32), IT 20 → /27 (32), Dirección 5 → /29 (8) y 3 enlaces /30 (12) suman 212 de 256. Pero no queda margen de crecimiento. Te dan **172.16.0.0/16**. Ahora sí, con aire de sobra.
 
 **Tareas:**
 1. Diseña el VLSM para que cada departamento tenga su subred con el menor desperdicio posible.
@@ -118,14 +118,14 @@ Te dan la red **10.0.0.0/24**. ¿Cabe todo? **No.** Te dan **172.16.0.0/16**. Ah
 3. Configura DHCP para Ventas y RRHH (rango dinámico). IT y Dirección usarán IPs estáticas.
 4. Configura rutas estáticas para que todas las subredes se vean entre sí.
 
-**Fallo intencionado 1 (segmentación):** Pon **dos departamentos en la SAME subred** (por ejemplo, IT y Dirección compartiendo el mismo rango).
+**Fallo intencionado 1 (segmentación):** Pon **dos departamentos en la MISMA subred** (por ejemplo, IT y Dirección compartiendo el mismo rango).
 
 **Pistas para diagnosticar el fallo 1:**
 - Si han ocupado el mismo rango IP, los **paquetes ARP** se pisan: los dispositivos de un departamento "ven" los del otro en la misma VLAN/capa 2.
 - Revisa las **tablas de enrutamiento** de cada router: si en las rutas aparecen solo 3 subredes en vez de 4, dos departamentos están "fusionados" sin querer.
 - Calcula de nuevo el VLSM en papel: el patrón *encadenado* (cada subred arranca donde terminó la anterior) te delata dónde se solapan.
 
-**Fallo intencionado 2 (seguridad):** Configura un **ACL que bloque el tráfico de Ventas a Dirección**, pero **mal escrito: permites todo sin querer**.
+**Fallo intencionado 2 (seguridad):** Configura un **ACL que bloquee el tráfico de Ventas a Dirección**, pero **mal escrito: permites todo sin querer**.
 
 **Pistas para diagnosticar el fallo 2:**
 - La ACL clásica del "permit all": una línea `permit ip any any` colocada antes de la regla que querías hace que todo pase. Comprueba el **orden** de las líneas: las ACL se evalúan en cascada, de arriba abajo, y la primera coincidencia gana.

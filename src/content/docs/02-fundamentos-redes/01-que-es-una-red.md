@@ -25,7 +25,7 @@ Con una red, en segundos puedes:
 
 - **Compartir archivos**: enviar una foto, un PDF o un vídeo a otro equipo sin lápiz de memoria.
 - **Compartir recursos caros**: una sola impresora sirve a toda la oficina, en vez de una por persona.
-- **Communicarte en tiempo real**: correo, mensajería, videollamadas.
+- **Comunicarte en tiempo real**: correo, mensajería, videollamadas.
 - **Centralizar la información**: los datos viven en un servidor y todos los consultan desde su sitio.
 - **Coordinar sedes**: la oficina de Madrid quiere lo que acaba de generar Barcelona.
 - **Acceder a Internet**: Internet es la red que reúne a todas las redes.
@@ -42,7 +42,7 @@ Dentro de una red doméstica o de oficina, la pregunta técnica número uno es e
 |---|---|---|
 | Velocidad y estabilidad | Mejor y estable | Bueno, pero compartido e inestable |
 | Interferencias | Casi ninguna | Muchas (paredes, microondas, vecinos) |
-| Instalación | Hay que tiender cables | Sin cables, rápida |
+| Instalación | Hay que tender cables | Sin cables, rápida |
 | Seguridad | Difícil de "espiar" sin acceso físico | Hay que cifrar y controlar quién entra |
 
 > 💡 **Regla práctica:** lo fijo (PC, servidor, impresora) mejor por cable; lo que se mueve (móviles, portátiles) por WiFi. A esto vuelve la U04, pero ya te sirve para decidir hoy.
@@ -103,7 +103,7 @@ No es lo mismo cablear tu cuarto que una ciudad entera. Según el terreno cubier
 
 ---
 
-## 🚨 Ojo novatico: red ≠ Internet
+## 🚨 Ojo novato: red ≠ Internet
 
 - **Internet** es la *red de redes*: la red mundial que conecta millones de redes entre sí.
 - **Un servicio de Internet** (Google, WhatsApp, banca online) se *ofrece sobre* Internet.

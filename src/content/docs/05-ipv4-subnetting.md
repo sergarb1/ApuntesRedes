@@ -45,7 +45,7 @@ Al terminar, serás capaz de:
 | [06 · Subnetting paso a paso](/ApuntesRedes/05-ipv4-subnetting/06-subnetting-paso-a-paso) | Prestar bits, fórmulas, ejemplo completo | Todos |
 | [07 · VLSM](/ApuntesRedes/05-ipv4-subnetting/07-vlsm) | Máscara de longitud variable, ejemplo resuelto | Todos |
 | [08 · DHCP](/ApuntesRedes/05-ipv4-subnetting/08-dhcp) | DORA, configuración Cisco, Packet Tracer | Todos |
-| [09 · Cierre](/ApuntesRedes/05-ipv4-subnetting/09-cierre) | Be the Packet, Fireside, Laboratorio, Crucigrama… | Todos |
+| [09 · Cierre](/ApuntesRedes/05-ipv4-subnetting/09-cierre) | Sé el Paquete, Fireside, Laboratorio, Crucigrama… | Todos |
 
 > 📖 **Flujo de lectura:** los puntos 1 a 5 son teoría en progresión. En el 6 y el 7 se hacen los cálculos de verdad: subnetting clásico y VLSM. El 8 es DHCP, el repartidor automático de IPs. El 9º es el aterrizaje práctico: léelo justo después del 8º y antes de abrir los boletines.
 
@@ -56,10 +56,10 @@ Al terminar, serás capaz de:
 > Practica con los pares del curso: empezar siempre el resuelto para ver el estilo y luego intentar el por-resolver.
 
 <div class="ejercicio-links">
-  <a href="/ApuntesRedes/boletines/boletin-u06-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
-  <a href="/ApuntesRedes/boletines/boletin-u06-inicial" class="elink">🟢 Inicial por resolver</a>
-  <a href="/ApuntesRedes/boletines/boletin-u06-avanzado-resuelto" class="elink">💪 Avanzado resuelto</a>
-  <a href="/ApuntesRedes/boletines/boletin-u06-avanzado" class="elink">⭐ Avanzado por resolver</a>
+  <a href="/ApuntesRedes/boletines/u05-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
+  <a href="/ApuntesRedes/boletines/u05-inicial" class="elink">🟢 Inicial por resolver</a>
+  <a href="/ApuntesRedes/boletines/u05-avanzado-resuelto" class="elink">💪 Avanzado resuelto</a>
+  <a href="/ApuntesRedes/boletines/u05-avanzado" class="elink">⭐ Avanzado por resolver</a>
 </div>
 
 ---

@@ -57,6 +57,7 @@ La **distancia administrativa (AD)** es la nota de confianza que le da el router
 |---|---|
 | Conectada | 0 |
 | Estática | 1 |
+| EIGRP | 90 |
 | EIGRP (resumen) | 5 |
 | OSPF | 110 |
 | RIP | 120 |

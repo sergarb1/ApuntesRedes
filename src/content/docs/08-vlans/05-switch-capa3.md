@@ -105,7 +105,7 @@ El SVI de la VLAN de gestión es donde pones la IP del switch para administrarlo
 Switch(config)# interface vlan 999
 Switch(config-if)# ip address 10.0.99.2 255.255.255.0
 Switch(config-if)# no shutdown
-Switch(config)# ip default-gateway 10.0.99.1   # solo switch capa 2 (los capa 3 rutear por rutas conectadas)
+Switch(config)# ip default-gateway 10.0.99.1   # solo switch capa 2 (los de capa 3 rutean por rutas conectadas)
 ```
 
 Y como bonus, un switch capa 3 te permite **rutas estáticas o dinámicas hacia otros routers** (lo que enlaza con la U09): puedes anunciar varias subredes y conectar el campus a Internet. Por eso los switches capa 3 modernos han jubilado al router en muchas redes de distribución.

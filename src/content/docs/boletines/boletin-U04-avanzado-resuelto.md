@@ -64,7 +64,7 @@ c) **Conectores:** LC (estándar en SFP)
 
 ## 5. Pinout y solución de problemas
 
-a) **Falla el pin 3** (el cuarto LED no se enciende: posición 3 de 8).
+a) **Falla el pin 3** (el tercer LED no se enciende: posición 3 de 8).
 
 b) **Par 3-6** (blanco/verde y verde en T568B, o blanco/naranja y naranja en T568A). El pin 3 forma parte del par transmisión/recepción junto con el pin 6.
 
@@ -97,7 +97,7 @@ c) **Funcionará parcialmente.** 100Base-TX solo necesita los pares 1-2 y 3-6. C
 a) **Causas físicas posibles:**
    - **Interferencia de vecinos:** los APs de las oficinas colindantes comparten el canal 1, 6 u 11, y todos se pisan.
    - **Obstrucciones:** los tabiques de cartón-yeso y el mobiliario atenúan la señal (atenuación).
-   - **Covertura insuficiente:** un solo AP para 25 puestos reparte un canal compartido entre muchos clientes; las zonas más alejadas quedan al límite.
+   - **Cobertura insuficiente:** un solo AP para 25 puestos reparte un canal compartido entre muchos clientes; las zonas más alejadas quedan al límite.
    - **Canal saturado:** todos los clientes compiten por el mismo canal, y en horas punta (la tarde) la contienda se dispara.
 
 b) **Herramientas:** analizador WiFi (para ver canales, señal RSSI y APs vecinos), aplicación de escaneo de red para comprobar número de clientes, y medición de velocidad en distintos puntos de la oficina.

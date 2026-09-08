@@ -41,7 +41,7 @@ Al terminar, serás capaz de:
 | [06 · Protocolos, el idioma](/ApuntesRedes/02-fundamentos-redes/06-protocolos) | Qué son, puertos, TCP vs UDP | Todos |
 | [07 · Direcciones MAC e IP](/ApuntesRedes/02-fundamentos-redes/07-direcciones-mac-ip) | MAC, IPv4 y máscara, especiales, públicas vs privadas | Todos |
 | [08 · Conectividad básica](/ApuntesRedes/02-fundamentos-redes/08-conectividad-basica) | Gateway, ping, arp, tracert y método de diagnóstico | Todos |
-| [09 · Cierre](/ApuntesRedes/02-fundamentos-redes/09-cierre) | Be the Packet, Fireside, Quién Soy, Laboratorio, Crucigrama… | Todos |
+| [09 · Cierre](/ApuntesRedes/02-fundamentos-redes/09-cierre) | Sé el Paquete, Fireside, Quién Soy, Laboratorio, Crucigrama… | Todos |
 
 > 📖 **Flujo de lectura:** los 8 primeros puntos son teoría en progresión. El 9º es el aterrizaje práctico: léelo justo después del 8º y antes de abrir los boletines.
 
@@ -52,10 +52,10 @@ Al terminar, serás capaz de:
 > Practica con los pares del curso: empezar siempre el resuelto para ver el estilo y luego intentar el por-resolver.
 
 <div class="ejercicio-links">
-  <a href="/ApuntesRedes/boletines/boletin-u03-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
-  <a href="/ApuntesRedes/boletines/boletin-u03-inicial" class="elink">🟢 Inicial por resolver</a>
-  <a href="/ApuntesRedes/boletines/boletin-u03-avanzado-resuelto" class="elink">💪 Avanzado resuelto</a>
-  <a href="/ApuntesRedes/boletines/boletin-u03-avanzado" class="elink">⭐ Avanzado por resolver</a>
+  <a href="/ApuntesRedes/boletines/u02-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
+  <a href="/ApuntesRedes/boletines/u02-inicial" class="elink">🟢 Inicial por resolver</a>
+  <a href="/ApuntesRedes/boletines/u02-avanzado-resuelto" class="elink">💪 Avanzado resuelto</a>
+  <a href="/ApuntesRedes/boletines/u02-avanzado" class="elink">⭐ Avanzado por resolver</a>
 </div>
 
 ---
@@ -67,7 +67,7 @@ Al terminar, serás capaz de:
 | CE | Criterio | Dónde se cubre |
 |---|---|---|
 | a) | Factores que impulsan la evolución de las redes | ✅ Puntos 1 y 2 |
-| b) | Medios de transmisión | ✅ Puntos 2, 4 y 8 |
+| b) | Medios de transmisión | ✅ Puntos 1, 2 y 4 |
 | c) | Tipos de red y topologías | ✅ Puntos 2 y 3 |
 | g) | Elementos funcionales, físicos y lógicos | ✅ Puntos 1, 4 y 5 |
 | h) | Dispositivos de interconexión | ✅ Punto 4 + 🔥 Fireside (punto 9) |

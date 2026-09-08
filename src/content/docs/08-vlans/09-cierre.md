@@ -13,7 +13,7 @@ Has terminado la teoría. Este cierre es el aterrizaje: recorre lo aprendido con
 
 ---
 
-## ⭐ Be the Packet, my friend...
+## ⭐ Sé el Paquete
 
 > *Eres un frame Ethernet. Te estás formando en el PC de un empleado de RRHH y viajas hacia el PC del jefe de RRHH, en el otro lado del edificio.*
 
@@ -44,7 +44,7 @@ Has terminado la teoría. Este cierre es el aterrizaje: recorre lo aprendido con
 
 **Dinámica:** — Para eso están los servidores VMPS. Centralizas la asignación: tú defines quién es quién y yo lo respeto en cualquier puerto del campus.
 
-**Estática:** — Un servidor VMPS, claro. ¿Y cuándo se cae el VMPS, incluyen callada? Se te cae el castillo de naipes: nadie sabe en qué VLAN va a caer.
+**Estática:** — Un servidor VMPS, claro. ¿Y cuándo se cae el VMPS, te quedas callado? Se te cae el castillo de naipes: nadie sabe en qué VLAN va a caer.
 
 **Dinámica:** — Y cuando el usuario se muda de mesa... ¿vas a cambiar la VLAN del puerto manualmente? A ver, CONRAD, toma nota.
 
@@ -182,7 +182,7 @@ Vertical:
 4. **"¿Ventajas y desventajas de VTP?"**
 5. **"¿Qué es la native VLAN? ¿Qué problema puede causar si está mal configurada?"**
 
-> 💡 **Cómo encararlas:** la 3 es la "pregunta reina". Recorre el mismo camino del ⭐ Be the Packet: VLANs aíslan en capa 2 → hacen falta el trunk (para que viajen) y el **router** (router-on-a-stick con subinterfaces `dot1Q`) o un **switch capa 3 con SVIs**. Si mencionas además la verificación con `show interfaces trunk`, ya eres medio administrador. En la 5 no olvides el *mismatch*: native distinta en cada extremo = tramas sin etiquetar que caen en la VLAN equivocada.
+> 💡 **Cómo encararlas:** la 3 es la "pregunta reina". Recorre el mismo camino del ⭐ Sé el Paquete: VLANs aíslan en capa 2 → hacen falta el trunk (para que viajen) y el **router** (router-on-a-stick con subinterfaces `dot1Q`) o un **switch capa 3 con SVIs**. Si mencionas además la verificación con `show interfaces trunk`, ya eres medio administrador. En la 5 no olvides el *mismatch*: native distinta en cada extremo = tramas sin etiquetar que caen en la VLAN equivocada.
 
 ---
 

@@ -37,7 +37,7 @@ Has terminado la teoría. Este cierre es el aterrizaje: recorre lo aprendido con
 
 **RIP:** — Yo solo cuento saltos. Máximo 15. Simple. Eficiente en redes pequeñas.
 
-**OSPF:** — ¿Saltos? ¿En serio? Yo miro ancho de banda, costo, retardo. Elijo la ruta óptima, no la que menos routers atraviesa.
+**OSPF:** — ¿Saltos? ¿En serio? Yo miro el ancho de banda (de él sale mi coste). Elijo la ruta óptima, no la que menos routers atraviesa.
 
 **RIP:** — Pero soy fácil de configurar. `network` y listo.
 
@@ -109,7 +109,7 @@ Has terminado la teoría. Este cierre es el aterrizaje: recorre lo aprendido con
 1. **Configura OSPF en todos los routers** con sus áreas correctas. Recuerda: `router ospf 1`, un `router-id` único por router, y `network <red> <wildcard> area <área>`. R1 está en el Área 0, R3 en el Área 1 y R4 en el Área 2. ¿Y R2? Tiene enlaces al Área 0 y al Área 1: es el **ABR**. ¿Quién conecta el Área 2 con el Área 0? ¡R1! Es el segundo ABR.
 2. **Verifica las adyacencias** con `show ip ospf neighbor` en cada router: todos deben mostrar vecinos en **FULL**.
 3. **Propaga una ruta por defecto** desde un router conectado a Internet: pon una `ip route 0.0.0.0 0.0.0.0` en R4 y anúnciala con `default-information originate`. Comprueba en R3 con `show ip route ospf` que la ruta por defecto llega (prefijo `O*E2`).
-4. **Cambia el costo de una interfaz** para forzar una ruta alternativa: usa `ip ospf cost` en una interfaz de R1 y verifica con `show ip ospf interface` y `show ip route` que el camino preferido cambia.
+4. **Cambia el coste de una interfaz** para forzar una ruta alternativa: usa `ip ospf cost` en una interfaz de R1 y verifica con `show ip ospf interface` y `show ip route` que el camino preferido cambia.
 
 **Fallo intencionado:** Desconecta el enlace del Área 2 con el Área 0 y conecta directamente R4 (Área 2) con R3 (Área 1). ¿Funciona OSPF entre áreas? **No.** Las rutas inter-área **siempre** deben pasar por el Área 0: sin conexión al backbone, los routers de las áreas 1 y 2 no intercambiarán rutas entre sí, aunque sean vecinos directos en el enlace físico. Verás los vecinos en el enlace directo (R3-R4) en estado FULL, pero sin rutas de la otra área en la tabla (`show ip route ospf`).
 
@@ -134,7 +134,7 @@ Has terminado la teoría. Este cierre es el aterrizaje: recorre lo aprendido con
 
 1. ¿Por qué OSPF necesita un área backbone (Área 0)?
 2. ¿Qué diferencia hay entre router ABR y ASBR?
-3. ¿Cómo calcula OSPF el costo de una ruta?
+3. ¿Cómo calcula OSPF el coste de una ruta?
 4. ¿Cuándo usarías RIP en lugar de OSPF?
 5. ¿Para qué sirve el Router ID? ¿Qué pasa si dos routers tienen el mismo Router ID?
 
@@ -143,7 +143,7 @@ Has terminado la teoría. Este cierre es el aterrizaje: recorre lo aprendido con
 
 1. El **Área 0** es el núcleo. Todas las áreas deben conectarse a ella para evitar bucles de routing inter-área. Es el punto central del routing OSPF.
 2. **ABR** (Area Border Router): conecta el Área 0 con otras áreas. **ASBR** (Autonomous System Boundary Router): introduce rutas externas en OSPF.
-3. **Costo = 10^8 / ancho de banda (bps)**. Ej: 100 Mbps → costo = 1. 10 Mbps → costo = 10. Se puede cambiar manualmente con `ip ospf cost`.
+3. **Coste = 10^8 / ancho de banda (bps)**. Ej: 100 Mbps → coste = 1. 10 Mbps → coste = 10. Se puede cambiar manualmente con `ip ospf cost`.
 4. Solo en redes muy pequeñas (< 15 routers) o por simplicidad. RIP no escala, converge lento y su métrica de saltos es limitada.
 5. El **Router ID** identifica al router OSPF. Si dos routers tienen el mismo Router ID, OSPF no formará adyacencias correctamente.
 </details>

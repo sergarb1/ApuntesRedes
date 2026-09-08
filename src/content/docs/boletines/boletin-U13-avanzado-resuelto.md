@@ -148,7 +148,7 @@ a) **Cómo es posible:** los **Security Groups** son la única capa que se confi
 b) **El deny que no funciona:** los Security Groups **no soportan deny explícito**; solo permiten (allow) reglas. No puedes "escribir un deny" en un SG: cualquier tráfico que no cumpla un allow se bloquea, pero no hay reglas de negación gestionables. Si intentaste bloquear con deny dentro de un SG, esa regla es ignorada/inválida. Para deny explícito se usa una **Network ACL**, que evalúa en **orden numérico** y sí soporta reglas de negación.
 
 c) **Corrección:**
-   - **NACL subnet privada:** Inbound `3306` desde SG/red de la API y `8080` desde el frontend; Deny al resto (regla `*` al final). Outbound: respuesta de esos puertos permitida (stateless → reglas explícitas de vuelta).
+   - **NACL subnet privada:** Inbound `3306` desde la CIDR de la subred de la API y `8080` desde la CIDR del frontend; Deny al resto (regla `*` al final). Las Network ACLs solo admiten rangos CIDR, nunca IDs de Security Group. Outbound: respuesta de esos puertos permitida (stateless → reglas explícitas de vuelta).
    - **SG-api:** solo Inbound `8080` desde SG-web; Outbound `3306` a SG-rds y `443` hacia el NAT (por IP privada del NAT).
    - **SG-rds:** solo Inbound `3306` desde SG-api; **sin** IP pública en la RDS y sin ruta a IGW en la subnet.
    - Añadir NACL en la subnet pública para el resto de la VPC.

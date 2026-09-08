@@ -25,7 +25,7 @@ Históricamente, cada función de red era una **caja de metal** con su software 
 |---|---|---|
 | Firewall | Cisco ASA 5500 | pfSense VM, OPNsense |
 | Load Balancer | F5 BIG-IP | HAProxy, NGINX VM |
-| WAN Optimizer | Riverbed | WANdisco, Squid VM |
+| WAN Optimizer | Riverbed SteelHead | Optimizador WAN en VM (p. ej. SD-WAN con caché) |
 
 La tabla resume el salto: el **Cisco ASA** de siempre ahora es una **pfSense VM**; el **F5** es un **HAProxy** en contenedor; el **Riverbed** se sustituye por cachés y optimizadores en software.
 

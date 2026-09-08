@@ -66,7 +66,7 @@ d) **Si M Flag = 1:** DHCPv6 Stateful. El servidor DHCPv6 da tanto la IP como el
 
 a) **Neighbor Solicitation (NS):** "¿Quién tiene 2001:DB8::20?"
 
-b) **Dirección MAC destino:** Multicast Ethernet (01:80:C2:00:00:00 o 33:33:xx:xx:xx:xx). Concretamente, la dirección multicast derivada de la IP destino (solicited-node multicast).
+b) **Dirección MAC destino:** Multicast Ethernet (33:33:xx:xx:xx:xx). Concretamente, la dirección multicast derivada de la IP destino (solicited-node multicast).
 
 c) **Dirección IPv6 destino:** **Multicast** (FF02::1:FF00:20 — la solicited-node multicast address). NO usa broadcast como ARP en IPv4.
 

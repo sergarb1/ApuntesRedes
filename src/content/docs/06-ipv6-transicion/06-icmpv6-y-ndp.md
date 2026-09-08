@@ -64,7 +64,7 @@ NDP también reemplaza al "gateway + máscara a mano" con dos mensajes:
 PC al encenderse:
   ① RS → "¿Hay algún router?"            (a FF02::2)
   ② RA ← "Sí, prefijo 2001:DB8:1:2::/64,
-          M=0, O=1, RDNSS=8.8.8.8"
+          M=0, O=1, RDNSS=2001:4860:4860::8888"
   ③ PC configura GUA por SLAAC y gateway = FE80 del router
 ```
 
@@ -76,7 +76,7 @@ Este RA es el que vimos en [SLAAC (punto 4)](/ApuntesRedes/06-ipv6-transicion/04
 
 En IPv4, ARP usaba **broadcast**: iba a *todos*, y todos tenían que procesarlo aunque no les importara. En IPv6:
 
-1. El NS va a una **solicited-node multicast** (`FF02::1:FFxx:xxxx`): solo los equipos cuyo último 24 bits coincidan con el IT de la IP objetivo lo procesan.
+1. El NS va a una **solicited-node multicast** (`FF02::1:FFxx:xxxx`): solo los equipos cuyo último 24 bits coincidan con el IID de la IP objetivo lo procesan.
 2. Resultado: **menos interrupciones**, menos CPU gastada, menos tráfico de fondo en redes grandes (los switches no inundan el grupo pretendido).
 
 ```
@@ -84,7 +84,7 @@ IPv4 broadcast:  ARP → FF:FF:FF:FF:FF:FF  → todo el switch procesa
 IPv6 multicast:  NS  → 33:33:FF:xx:xx:xx  → solo el grupo interesado
 ```
 
-> 💡 **Y el ASCI de la lección:** el multicast de IPv6 no es un lujo, es la razón de que redes con miles de equipos no se ahoguen en tráfico de descubrimiento. En el plano de redes es lo que hace escalable al [punto de transición](/ApuntesRedes/06-ipv6-transicion/07-mecanismos-de-transicion).
+> 💡 **Y el ABC de la lección:** el multicast de IPv6 no es un lujo, es la razón de que redes con miles de equipos no se ahoguen en tráfico de descubrimiento. En el plano de redes es lo que hace escalable al [punto de transición](/ApuntesRedes/06-ipv6-transicion/07-mecanismos-de-transicion).
 
 ---
 
@@ -118,7 +118,7 @@ IPv6 multicast:  NS  → 33:33:FF:xx:xx:xx  → solo el grupo interesado
 | NS | Neighbor Solicitation: "¿quién tiene esta IP?" |
 | NA | Neighbor Advertisement: "yo, mi MAC es…" |
 | RS / RA | Router Solicitation / Advertisement: encontrar routers y prefijo |
-| Solicited-node | Multicast reducido derivado del IT, `FF02::1:FFxx:xxxx` |
+| Solicited-node | Multicast reducido derivado del IID, `FF02::1:FFxx:xxxx` |
 | MLD | Multicast Listener Discovery (sustituye a IGMP) |
 
 ---

@@ -69,7 +69,7 @@ Cada dispositivo se conecta al siguiente formando un anillo cerrado.
   <figcaption class="diagram-caption">Cada PC se conecta a sus dos vecinos; el tráfico circula en una dirección (o dos en anillos duales).</figcaption>
 </figure>
 
-- ✅ **Ventajas:** rendimiento predecible (cada equipo ha su turno), no hay colisiones.
+- ✅ **Ventajas:** rendimiento predecible (cada equipo tiene su turno), no hay colisiones.
 - ❌ **Inconvenientes:** si un dispositivo falla puede romper el anillo; añadir equipos obliga a romper el anillo.
 - **Uso actual:** redes SONET/SDH y algunos anillos de fibra metropolitana, donde el anillo doble da redundancia.
 

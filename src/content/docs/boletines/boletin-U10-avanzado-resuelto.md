@@ -70,11 +70,11 @@ a) `redistribute static subnets` inyecta las rutas estáticas configuradas en el
 
 b) **Dos rutas:** la ruta por defecto (0.0.0.0/0) y la ruta estática 10.100.0.0/16.
 
-c) **Sí.** La redistribución + `default-information originate` propaga ambas rutas a todos los routers OSPF en todos los áreas.
+c) **Sí.** La redistribución + `default-information originate` propaga ambas rutas a todos los routers OSPF en todas las áreas.
 
 ## 4. Cambio de coste OSPF
 
-a) **Camino A** (coste 1+1+1 = 3) aunque tenga más routers en FastEthernet (cada enlace tiene coste 1). OSPF elige el camino con menor coste total. Los dos caminos tienen el mismo coste si todos los enlaces son del mismo tipo. Si ambos tienen coste 1+1+1 vs 1+1+1+1, gana el de 3 saltos (menos coste).
+a) **Camino A** (R1→R2→R3, 2 enlaces Gigabit) tiene coste **1+1 = 2**. El **Camino B** (R1→R4→R5→R3, 3 enlaces FastEthernet) tiene coste **1+1+1 = 3**. OSPF elige el camino con menor coste total: **el Camino A**. el mismo coste si todos los enlaces son del mismo tipo. Si ambos tienen coste 1+1+1 vs 1+1+1+1, gana el de 3 saltos (menos coste).
 
 b) Para forzar el Camino B, aumentar el coste en los enlaces de A:
    ```bash
@@ -130,7 +130,7 @@ b) **Orden de diagnóstico:**
 1. `show ip protocols` → comprobar que OSPF arranca en ambos, que el **Router ID** no está duplicado y que las redes declaradas incluyen el enlace Serial.
 2. `show ip ospf interface` → confirmar en ambos routers que la interfaz **participa** en OSPF, y comparar **área**, **wildcard** y **timers** (Hello/Dead). Si no aparece, la red no está declarada o la wildcard está mal.
 3. Verificar que el **área** coincide en los dos lados del enlace (revisar el `network ... area X`).
-4. Comparar los **timers Hello/Dead** en ambos lados con `show ip ospf interface`: deben coincidir (en punto a punto Serial suelen ser 30/120; si uno quedó en 10/40, no forman vecindad).
+4. Comparar los **timers Hello/Dead** en ambos lados con `show ip ospf interface`: deben coincidir (por defecto 10/40 en broadcast y punto a punto Serial; solo en redes NBMA son 30/120). Si uno quedó con valores distintos, no forman vecindad.
 5. `show access-lists` (y contadores en la interfaz) → descartar una **ACL** que bloquee el **protocolo 89 (OSPF)** en el sentido de entrada/salida.
 6. Solo si todo lo anterior está bien, subir un nivel: `debug ip ospf events` (con cuidado) para ver por qué se rechaza el Hello.
 

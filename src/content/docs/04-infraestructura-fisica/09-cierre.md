@@ -13,7 +13,7 @@ Has terminado la teoría: sabes por qué se trenza el cobre, cómo se crimpa un 
 
 ---
 
-## ⭐ Be the Packet, my friend...
+## ⭐ Sé el Bit
 
 > *Eres un bit mordido por la vida: un 1 binario viajando por un cable UTP Cat6 de 95 metros que une un switch con un PC. Acabas de salir del puerto del switch cuesta abajo hacia la roseta de pared.*
 
@@ -105,7 +105,7 @@ Has terminado la teoría: sabes por qué se trenza el cobre, cómo se crimpa un 
 - Cable demasiado largo (>100m) → atenuación
 - Interferencias → colisiones y retransmisiones
 - Cable mal crimpado → conexión intermitente
-- Solo 2 pares conectados en lugar de 4 → negociación a 100 Mbps en lugar de 1 Gbps
+- Solo 3 pares operativos en lugar de 4 → negociación a 100 Mbps en lugar de 1 Gbps
 
 **CONRAD:** — ¿Y qué hacemos con el usuario? NADA de tocar configuraciones. Primero el **comprobador de cables**, luego el tester de señal, y si el cable pasa, entonces sí: hablamos de capas superiores. No confíes solo en los LEDs. Los LEDs son para que la caja parezca viva, no para diagnosticar.
 
@@ -130,11 +130,11 @@ Has terminado la teoría: sabes por qué se trenza el cobre, cómo se crimpa un 
 
 **Pregunta extra:** ¿El cable cruzado funciona en switches modernos? Investiga **Auto MDI-X**.
 
-**Fallo intencionado:** Durante el crimpado del cable 3, "sin querer" metes el hilo blanco/naranja en el pin 3 en lugar del pin 1 en el extremo T568B. El comprobador mostrará una pares incorrectos (split pair). El cable parecerá funcionar a baja velocidad pero generará errores intermitentes.
+**Fallo intencionado:** Durante el crimpado del cable 3, "sin querer" metes el hilo blanco/naranja en el pin 3 en lugar del pin 1 en el extremo T568B. El comprobador mostrará unos pares incorrectosares incorrectos (split pair). El cable parecerá funcionar a baja velocidad pero generará errores intermitentes.
 
-> **Pista 1 (split pair):** no te fíes de que "los 8 LEDs encienden". Comprueba que **las parejas reales coinciden**: en un directo los pares B devem conservar sus parejas 1-2, 3-6, 4-5 y 7-8 en AMBOS extremos. Si blanco/naranja acaba en un pin distinto del que corresponde a su pareja, es split pair.
+> **Pista 1 (split pair):** no te fíes de que "los 8 LEDs encienden". Comprueba que **las parejas reales coinciden**: en un directo los pares B deben conservar sus parejas 1-2, 3-6, 4-5 y 7-8 en AMBOS extremos. Si blanco/naranja acaba en un pin distinto del que corresponde a su pareja, es split pair.
 >
-> **Pista 2 (negociación):** conecta cada cable a la red y mira la velocidad negociada. Un cable de solo 2 pares (7-8 muertos) negociará **100 Mbps** en vez de 1 Gbps. Un split pair puede "funcionar" a 100 con errores raros y fallar al probar Gigabit.
+> **Pista 2 (negociación):** conecta cada cable a la red y mira la velocidad negociada. Un cable con el par 7-8 muerto (3 pares operativos) negociará **100 Mbps** en vez de 1 Gbps. Un split pair puede "funcionar" a 100 con errores raros y fallar al probar Gigabit.
 >
 > **Pista 3 (cruzado vs directo):** el comprobador te lo delata al instante si en el segundo módulo los pares aparecen cruzados. En la red puede pasar desapercibido por Auto MDI-X, pero en equipos antiguos es la diferencia entre "conecta" y "nada".
 
@@ -229,7 +229,7 @@ Sí, para UTP en Ethernet. Es una limitación física: la **atenuación** hace q
 
 > ❓ **¿Qué diferencia hay entre un hub y un switch a nivel físico?**
 
-El hub opera en capa 1 (física): repite la señal por todos los puertos sin ningún tipo de procesamiento. El switch opera en capa 2: examina las tramas, aprende MACs y reenvía selectivamente. Pero ambos usan los mismos conectores RJ45 y el mismo cableado. La diferencia está en el *procesamiento* de la señal, no en el medio físico: puedes cambiar un hub por un switch y el cableado no cambia ni una sola prise.
+El hub opera en capa 1 (física): repite la señal por todos los puertos sin ningún tipo de procesamiento. El switch opera en capa 2: examina las tramas, aprende MACs y reenvía selectivamente. Pero ambos usan los mismos conectores RJ45 y el mismo cableado. La diferencia está en el *procesamiento* de la señal, no en el medio físico: puedes cambiar un hub por un switch y el cableado no cambia ni una sola toma.
 
 ---
 

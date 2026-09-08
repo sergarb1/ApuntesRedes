@@ -31,7 +31,7 @@ Antes de escribir una sola línea de configuración, vas a ver el plano completo
 | 7 | 🏢 **U08 · VLANs** | Segmentar una red física en redes lógicas aisladas | Switching (U07) |
 | 8 | 🧭 **U09 · Routing y ACLs** | Encaminar paquetes entre redes y filtrar el tráfico con listas de control | IP y subredes (U05) |
 | 9 | 🗣️ **U10 · Routing dinámico (OSPF)** | Dejar que los routers se hablen entre ellos y elijan la mejor ruta | Routing y ACLs (U09) |
-| 10 | 🌍 **U11 · NAT y acceso a Internet (DHCP)** | Dar salida a Internet a una red privada y repartir IPs automáticamente | Subredes (U05) y routing (U09-U10) |
+| 10 | 🌍 **U11 · NAT y acceso a Internet** | Dar salida a Internet a una red privada | Subredes (U05) y routing (U09-U10) |
 | 11 | 🩺 **U12 · Diagnóstico y monitorización (SNMP)** | Cazar averías con método y vigilar la red como un NOC | Ping y método de la Unidad 01, más IP (U05) |
 | 12 | ☁️ **U13 · Cloud, virtualización y futuro** | Situar el oficio en la nube y saber hacia dónde camina la profesión | Todo el curso, sobre todo U11 y U12 |
 
@@ -121,7 +121,7 @@ Para terminar el mapa, la misma historia que dará forma a todo el curso, contad
 | El paquete se construye y se etiqueta | U03 · Modelos OSI y análisis con Wireshark |
 | El paquete recorre tu edificio | U07 · Switching y U08 · VLANs |
 | El paquete cruza fronteras entre redes | U09 · Routing y ACLs |
-| El paquete sale al ancho mundo | U11 · NAT (y DHCP reparte las IPs) |
+| El paquete sale al ancho mundo | U11 · NAT (y el DHCP de la U05 reparte las IPs) |
 | Alguien sigue el rastro del paquete | U12 · Diagnóstico y monitorización |
 
 ---

@@ -46,7 +46,7 @@ El vSwitch de las VMs conecta máquinas completas. En Docker, en cambio, la cone
 
 **none** deja al contenedor solo con `loopback`: nada de Ethernet, nada de Internet. Útil para procesos que no deben tocar la red.
 
-**overlay** es la red "mágica" multi-host: los contenedores de distintos servidores hablan entre sí como si estuvieran en la misma LAN, usando **VXLAN** bajo el capó (el mismo túnel que ya viste con VLANs en la U08).
+**overlay** es la red "mágica" multi-host: los contenedores de distintos servidores hablan entre sí como si estuvieran en la misma LAN, usando **VXLAN** bajo el capó (una encapsulación sobre UDP; no es lo mismo que las VLANs 802.1Q que viste en la U08, aunque la idea de aislar redes recuerda a ellas).
 
 ```
   bridge (local)            overlay (multi-host)

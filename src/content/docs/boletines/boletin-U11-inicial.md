@@ -41,8 +41,8 @@ Un router NAT muestra la siguiente tabla:
 
 ```
 Pro Inside global      Inside local       Outside local      Outside global
-tcp 83.45.12.78:50001  192.168.1.10:54321  8.8.8.8:53         8.8.8.8:53
-tcp 83.45.12.78:50002  192.168.1.20:54321  8.8.8.8:53         8.8.8.8:53
+udp   192.168.1.  8.8.8.8:53  8.8.8.8:53
+udp   192.168.1.  8.8.8.8:53  8.8.8.8:53
 ```
 
 a) ¿Cuántos dispositivos están haciendo peticiones DNS?
@@ -79,8 +79,8 @@ El router muestra esta tabla:
 
 ```
 Pro Inside global      Inside local       Outside local      Outside global
-tcp 83.45.12.78:60001  192.168.1.10:54321  8.8.8.8:53         8.8.8.8:53
-tcp 83.45.12.78:60002  192.168.1.20:54321  8.8.8.8:53         8.8.8.8:53
+udp   192.168.1.  8.8.8.8:53  8.8.8.8:53
+udp   192.168.1.  8.8.8.8:53  8.8.8.8:53
 tcp 83.45.12.78:60003  192.168.1.30:49152  142.250.184.4:443  142.250.184.4:443
 ```
 

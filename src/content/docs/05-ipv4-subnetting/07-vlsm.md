@@ -115,7 +115,7 @@ Ventas (100) → RRHH (30) → IT (20) → Dirección (5)
 
 1. n = 27 − 24 = 3 bits prestados → 2³ = **8 subredes**. Incremento: 2⁵ = **32** en el último octeto. Redes: .0, .32, .64, .96, .128, .160, .192, .224.
 2. Ordenando: 40 hosts → /26 (62): **192.168.1.0/26**. 20 hosts → /27 (30): **192.168.1.64/27** (empieza donde acaba la anterior, tras .63).
-3. Desperdicias 57 IPs útililes de golpe (62 − 5): un /29 (6 hosts) es justo lo que necesita. VLSM existe precisamente para evitar ese derroche.
+3. Desperdicias 57 IPs útiles de golpe (62 − 5): un /29 (6 hosts) es justo lo que necesita. VLSM existe precisamente para evitar ese derroche.
 </details>
 
 ---

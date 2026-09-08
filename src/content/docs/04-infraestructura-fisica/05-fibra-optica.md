@@ -99,7 +99,7 @@ En las cajas de bobinas verás tres letras: **OM** (*Optical Multimode*) u **OS*
 <details>
 <summary>🔄 Respuestas</summary>
 
-1. **Monomodo** tiene núcleo fino (9 µm), usa láser y llega a 40+ km (WAN, ISP). **Multimodo** tiene núcleo grueso (50-62,5 µm), usa LED y llega a 550 m a 10 Gbps (LAN, datacenter, campus).
+1. **Monomodo** tiene núcleo fino (9 µm), usa láser y llega a 40+ km (WAN, ISP). **Multimodo** tiene núcleo grueso (50-62,5 µm), usa LED en OM1/OM2 y láser VCSEL en OM3/OM4, y llega a 550 m a 10 Gbps (LAN, datacenter, campus).
 2. **Fibra monomodo (OS2)**, porque 2 km superan con creces los 550 m de la multimodo. El conector estándar sería **LC** (el habitual para módulos SFP).
 3. Sin cambiar de switch, un puerto SFP puede servir **1000Base-T** (cobre, RJ45, 100 m) o **1000Base-LX** (fibra, LC, kilómetros): solo cambias el módulo según el medio que necesites.
 </details>

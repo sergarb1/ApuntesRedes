@@ -141,9 +141,10 @@ Switch(config-if)# no shutdown
 
 f) Sin perder seguridad, puedes:
    - Aumentar `maximum` a 2 si es un puerto compartido.
-   - Configurar el **envejecimiento de la port security** para que la MAC sticky expire si el dispositivo se desenchufa:
+   - Configurar el **envejecimiento de la port security** para que la MAC sticky expire si el dispositivo se desenchufa (las sticky necesitan `aging static` para poder caducar):
      ```bash
      Switch(config-if)# switchport port-security aging time 5
      Switch(config-if)# switchport port-security aging type inactivity
+     Switch(config-if)# switchport port-security aging static
      ```
    - O usar `violation restrict` (descarta el tráfico extra sin deshabilitar el puerto), aunque es menos estricto.

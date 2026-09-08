@@ -134,7 +134,7 @@ Hay más de un tipo de VLAN y cada uno tiene un trabajo. Esta tabla es un adelan
 | VLAN | Red lógica dentro de un switch físico |
 | Dominio de broadcast | Grupo de dispositivos que reciben un mismo broadcast |
 | VLAN 1 | VLAN por defecto de fábrica (datos, native, gestión si no se cambia) |
-| Segmentación | Dividir el tráfico por departamentos u funciones |
+| Segmentación | Dividir el tráfico por departamentos o funciones |
 | "No se ven" | Las VLANs aíslan en capa 2: no se reenvían tramas entre ellas |
 
 ---

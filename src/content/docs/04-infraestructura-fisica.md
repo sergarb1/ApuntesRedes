@@ -43,7 +43,7 @@ Al terminar, serás capaz de:
 | [06 · WiFi](/ApuntesRedes/04-infraestructura-fisica/06-wifi) | Estándares 802.11 y las 4 mentiras de la velocidad WiFi | Todos |
 | [07 · Conceptos físicos clave](/ApuntesRedes/04-infraestructura-fisica/07-conceptos-fisicos) | Ancho de banda, throughput, latencia, atenuación, diafonía | Todos |
 | [08 · Cableado estructurado](/ApuntesRedes/04-infraestructura-fisica/08-cableado-estructurado) | TIA/EIA-568, latiguillos, keystones, patch panels y ventajas | Todos |
-| [09 · Cierre](/ApuntesRedes/04-infraestructura-fisica/09-cierre) | Be the Bit, Fireside, Laboratorio de crimpado, Crucigrama… | Todos |
+| [09 · Cierre](/ApuntesRedes/04-infraestructura-fisica/09-cierre) | Sé el Bit, Fireside, Laboratorio de crimpado, Crucigrama… | Todos |
 
 > 📖 **Flujo de lectura:** los 8 primeros puntos son teoría en progresión. El 9º es el aterrizaje práctico: léelo justo después del 8º y antes de abrir los boletines.
 
@@ -54,10 +54,10 @@ Al terminar, serás capaz de:
 > Practica con los pares del curso: empezar siempre el resuelto para ver el estilo y luego intentar el por-resolver.
 
 <div class="ejercicio-links">
-  <a href="/ApuntesRedes/boletines/boletin-u05-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
-  <a href="/ApuntesRedes/boletines/boletin-u05-inicial" class="elink">🟢 Inicial por resolver</a>
-  <a href="/ApuntesRedes/boletines/boletin-u05-avanzado-resuelto" class="elink">💪 Avanzado resuelto</a>
-  <a href="/ApuntesRedes/boletines/boletin-u05-avanzado" class="elink">⭐ Avanzado por resolver</a>
+  <a href="/ApuntesRedes/boletines/u04-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
+  <a href="/ApuntesRedes/boletines/u04-inicial" class="elink">🟢 Inicial por resolver</a>
+  <a href="/ApuntesRedes/boletines/u04-avanzado-resuelto" class="elink">💪 Avanzado resuelto</a>
+  <a href="/ApuntesRedes/boletines/u04-avanzado" class="elink">⭐ Avanzado por resolver</a>
 </div>
 
 ---

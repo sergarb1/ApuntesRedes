@@ -52,7 +52,7 @@ Déjate el diagrama grabado: es el mapa que usarás en toda la unidad y en el [t
 **¿Cómo memorizar el orden?** Dos trucos clásicos:
 
 - Acrónimo (de abajo arriba): *Física, Enlace, Red, Transporte, Sesión, Presentación, Aplicación* → **"FERTSPA"**.
-- De arriba abajo, piensa en la frase: *"A PaSó Por Todo El Fondo"* — Aplicación, Presentación, Sesión, Transporte, Red, Enlace, Física.
+- De arriba abajo, piensa en la frase: las iniciales A-P-S-T-R-E-F (Aplicación, Presentación, Sesión, Transporte, Red, Enlace, Física).
 
 > ⚠️ **Ojo con la PDU:** cada capa llama a su "caja de datos" con un nombre distinto. **Datos** (7-5), **segmento** (4), **paquete** (3), **trama** (2) y **bits** (1). Identificar la PDU es la pregunta estrella de exámenes y entrevistas.
 

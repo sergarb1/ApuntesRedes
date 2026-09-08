@@ -13,7 +13,7 @@ description: IPv8, RINA y NDN, el más allá de IP 🚀
 
 > Internet está construida sobre **IP**, y aunque **IPv6** resolvió el agotamiento de direcciones, hay propuestas para **rediseñar Internet desde cero**: **IPv8**, **RINA** y **NDN** — ninguna de ellas es un estándar, pero son el laboratorio de ideas del futuro.
 
-Para entender este punto, piensa en la historia que has recorrido: primero hubo redes de conmutación de circuitos (RDSI, ADSL), luego IP conquistó el mundo, y ahora las tablas de BGP crecen sin control y las direcciones se agotan. Este es el capítulo donde miras al horizonte. Y recuerda: las propuestas aquí son **investigación, no tecnología desplegada**.
+Para entender este punto, piensa en la historia que has recorrido: primero hubo redes de conmutación de circuitos (RDSI) y acceso DSL sobre paquetes (ADSL), luego IP conquistó el mundo, y ahora las tablas de BGP crecen sin control y las direcciones se agotan. Este es el capítulo donde miras al horizonte. Y recuerda: las propuestas aquí son **investigación, no tecnología desplegada**.
 
 ---
 

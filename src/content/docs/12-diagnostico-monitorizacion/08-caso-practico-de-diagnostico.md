@@ -31,16 +31,16 @@ Antes de tocar nada, anota el método: **OSI de abajo arriba**. El [punto 1](/Ap
 
 **Capa 2 — Enlace.** ¿La MAC del equipo está aprendida en el switch? `show mac address-table` ✅ la muestra en el puerto correcto, en la VLAN correcta. `show spanning-tree` sin bloqueos anómalos. Descartada.
 
-**Capa 3 — Red.** ¿Tiene IP válida? `ipconfig` ✅. ¿Ping al gateway? ✅ responde. ¿Ping a 8.8.8.8? **❌ No responde.** Aquí ya acotamos: la LAN está bien, el problema está en la salida (router de borde, NAT, ACL o ISP). Es exactamente la progresión de la regla de oro del [punto 1](/ApuntesRedes/12-diagnostico-monitorizacion/01-metodologia-de-diagnostico).
+**Capa 3 — Red.** ¿Tiene IP válida? `ipconfig` ✅. ¿Ping al gateway? ✅ responde. ¿Ping a 8.8.8.8? **✅ Responde.** La red y la salida a Internet están bien; el problema no es de capa 1, 2 ni 3. Es exactamente la progresión de la regla de oro del [punto 1](/ApuntesRedes/12-diagnostico-monitorizacion/01-metodologia-de-diagnostico).
 
 ```
 ping 192.168.1.1      →  ✅ responde     (LAN ok)
-ping 8.8.8.8          →  ❌ timeout      (falla la salida)
+ping 8.8.8.8          →  ✅ responde     (salida ok)
 ```
 
-**Capa 4 — Transporte.** ¿El puerto 443 responde? `telnet intranet.empresa.com 443` — **No conecta**. Pero espera: el ping a 8.8.8.8 ya fallaba, así que el puerto no puede responder aunque esté abierto. Sigamos subiendo.
+**Capa 4 — Transporte.** ¿El puerto 443 responde? `telnet intranet.empresa.com 443` — **No conecta**. Pero espera: el nombre no se ha resuelto aún (capa 7). Si telnet resuelve primero el nombre y este devuelve una IP inexistente, la conexión TCP no puede establecerse aunque el servicio esté vivo. Sigamos subiendo.
 
-**Capa 7 — Aplicación.** ¿Resuelve el nombre? `nslookup intranet.empresa.com` — **¡Resuelve a una IP distinta de la esperada!** El registro DNS está obsoleto: apunta al antiguo servidor, que ya no existe. Por eso el ping a 8.8.8.8 fallaba (salida rota) y por eso la intranet tampoco carga (DNS obsoleto). Son dos problemas encadenados.
+**Capa 7 — Aplicación.** ¿Resuelve el nombre? `nslookup intranet.empresa.com` — **¡Resuelve a una IP distinta de la esperada!** El registro DNS está obsoleto: apunta al antiguo servidor, que ya no existe. Por eso la intranet no carga, aunque la red y la salida a Internet estén perfectas. Un solo problema, bien acotado: **conectividad ≠ resolución de nombres**.
 
 ```
 nslookup intranet.empresa.com
@@ -60,7 +60,7 @@ Address: 203.0.113.10        ← IP vieja, el servidor real está en 10.10.10.5
 La teoría se confirma con una captura en el equipo del usuario, tal como aprendiste en el [punto 3](/ApuntesRedes/12-diagnostico-monitorizacion/03-wireshark):
 
 - **Filtro `dns`:** verás la consulta `intranet.empresa.com` y la **respuesta con la IP obsoleta**. Ese paquete es la prueba del crimen.
-- **Filtro `icmp`:** verás los Echo Requests saliendo hacia 8.8.8.8 sin respuestas: nadie los descarta con *Destination Unreachable*, simplemente no vuelven (ISP o firewall silencioso).
+- **Filtro `icmp`:** verás los Echo Requests hacia 8.8.8.8 **con sus respuestas**: conectividad de sobra. El problema está solo en la resolución del nombre.
 
 > 💡 **Fallo intencionado para practicar:** cambia en el laboratorio el DNS a `192.0.2.99` (IP de documentación que no existe). El ping a 8.8.8.8 seguirá funcionando, pero el navegador no cargará nada: la captura mostrará consultas DNS que salen y nunca vuelven. Es la misma lección: **conectividad ≠ resolución de nombres**.
 

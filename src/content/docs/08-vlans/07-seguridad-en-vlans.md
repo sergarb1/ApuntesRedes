@@ -23,7 +23,7 @@ Una **VACL** (*VLAN Access Control List*) filtra el tráfico **dentro de una VLA
 
 ```bash
 Switch(config)# access-list 101 permit ip any any
-Switch(config)# access-list 102 deny ip 192.168.10.0 0.0.0.255 192.168.20.0 0.0.0.255
+Switch(config)# access-list 102 permit ip 192.168.10.0 0.0.0.255 192.168.20.0 0.0.0.255
 
 Switch(config)# vlan access-map BLOQUEA 10
 Switch(config-access-map)# match ip address 102

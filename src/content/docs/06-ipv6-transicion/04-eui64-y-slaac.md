@@ -37,7 +37,7 @@ Paso 3 — Invertir el bit 7 del primer byte (bit U/L, Universal/Local):
 Resultado (EUI-64):      021A:2BFF:FE3C:4D5E
 ```
 
-**Regla del bit 7:** las MAC se fabrican con el bit *Universal* en `0` (las primeras 3 dan idea). IEEE quiere que el IID se marque como *locally administered* poniendo ese bit a `1`. Como `00` es `00000000`, se convierte en `00000010` = `02`. Por eso, en la práctica, **la primera cifra del IID suele ser `02` (o `02`, `03`, `2`, `3`, `a`, `b` en hexadecimal) si la MAC empezaba por 00, 04, 10, etc.** No es un error: es la inversión del bit U/L.
+**Regla del bit 7:** las MAC se fabrican con el bit *Universal* en `0`. IEEE quiere que el IID se marque como *locally administered* poniendo ese bit a `1`. Como `00` es `00000000`, se convierte en `00000010` = `02`. Por eso, en la práctica, **la primera cifra del IID suele ser `02`, `06`, `12`, `16`… (el primer byte de la MAC con el bit U/L invertido)**. No es un error: es la inversión del bit U/L.
 
 > ⚠️ **Regla mnemotécnica de CONRAD:** "Divide, inserción FF:FE, y flip del bit 7. Tres pasos, uno más que el café con leche."
 
@@ -66,7 +66,7 @@ EUI-64 tiene un **defecto de privacidad**: una misma MAC genera **siempre la mis
 
 ```
 ipconfig (Windows):
-  IPv6 Address....: 2001:DB8:1:2:f822: **aleatorio**  ← temporal (cambia)
+  IPv6 Address....: 2001:DB8:1:2:6dfa:79ff:fe5b:21c4  ← temporal (cambia)
   IPv6 Address....: 2001:DB8:1:2:021a:2bff:fe3c:4d5e ← estable (EUI-64)
 ```
 

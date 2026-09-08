@@ -32,12 +32,11 @@ En el [punto 3](/ApuntesRedes/04-infraestructura-fisica/03-directo-cruzado-conso
 ## 👷 El crimpado paso a paso (norma T568B)
 
 1. **Pelar:** retira unos **2 cm de funda** exterior con el pelacables, con cuidado de no cortar los hilos internos. Desenrolla suavemente.
-2. **Ordenar:** ordena los 8 hilos según **T568B**, de izquierda a derecha con el clip del conector hacia abajo: Blanco/Naranja, Naranja, Blanco/Verde, Azul, Blanco/Azul, Verde, Blanco/Marrón, Marrón.
-3. **Aplanar:** sitúa los pares 4-5 (azul) tras los 1-2, con el blanco/azul a la derecha del azul, para que el orden quede limpio y plano.
-4. **Cortar:** con la cuchilla, corta los hilos **rectos y a escuadra**, dejando ~1 cm desde la funda.
-5. **Insertar:** empuja los hilos en el conector RJ45 hasta ver sus puntas asomar por el frente (los contactos dorados). La funda debe quedar **dentro del conector**, sujeta por el pasador.
-6. **Crimpar:** introduce el conector en la crimpadora y aprieta firmemente hasta oír el clic. Los contactos deben hundirse uniformemente.
-7. **Comprobar:** usa el tester (siguiente sección) para verificar la continuidad de los 8 pines en orden.
+2. **Ordenar:** ordena los 8 hilos según **T568B**, de izquierda a derecha con el clip del conector hacia abajo: Blanco/Naranja, Naranja, Blanco/Verde, Azul, Blanco/Azul, Verde, Blanco/Marrón, Marrón. Termina **aplanando** los pares 4-5 (azul) tras los 1-2, con el blanco/azul a la derecha del azul, para que el orden quede limpio y plano.
+3. **Cortar:** con la cuchilla, corta los hilos **rectos y a escuadra**, dejando ~1 cm desde la funda.
+4. **Insertar:** empuja los hilos en el conector RJ45 hasta ver sus puntas asomar por el frente (los contactos dorados). La funda debe quedar **dentro del conector**, sujeta por el pasador.
+5. **Crimpar:** introduce el conector en la crimpadora y aprieta firmemente hasta oír el clic. Los contactos deben hundirse uniformemente.
+6. **Comprobar:** usa el tester (siguiente sección) para verificar la continuidad de los 8 pines en orden.
 
 > ⚠️ **El error más repetido:** insertar los hilos *sin* meter la funda en el conector. El pasador no agarra nada, el cable baila, y a la primera que alguien tira, se suelta. La funda es el anclaje.
 
@@ -54,7 +53,7 @@ El comprobador de cables tiene dos módulos conectados por los extremos del cabl
 | LEDs de dos pines intercambiados (ej. 1 y 2 cruzados) | **Pares invertidos** |
 | LEDs que solo encienden del 4 al 7 en el otro extremo | **Split pair**: el orden de hilos no respeta los pares cancelativos (ver abajo) |
 | LEDs 1-8 en orden pero en el lateral destino el orden es 8-1 | **Cable de consola** (rollover) |
-| LEDs 1-6 pero no 7-8 | Solo 2 pares conectados: **negociación a 100 Mbps**, no a 1 Gbps |
+| LEDs 1-6 pero no 7-8 | Solo 3 pares conectados: **negociación a 100 Mbps**, no a 1 Gbps |
 
 > 🌡️ **El tester no mide todo:** un tester básico solo comprueba continuidad y orden. No detecta atenuación ni interferencias: para eso están los certificadores (caros, de empresa certificadora) y los [conceptos del punto 7](/ApuntesRedes/04-infraestructura-fisica/07-conceptos-fisicos).
 
@@ -97,7 +96,7 @@ El tester dice *continuidad*, pero la red exige más. La prueba definitiva de un
 
 1. **Pelar** la funda (~2 cm), **ordenar** los hilos según T568B, **cortar** recto a escuadra (~1 cm), **insertar** en el RJ45 con la funda dentro, **crimpar** con la crimpadora hasta el clic y **comprobar** con el tester.
 2. Sospecha de **split pair**: hay continuidad (por eso el tester básico da OK) pero los pares no son cancelativos y se genera diafonía. Para descartarlo, repasa el orden de hilos pin a pin (los pares deben ser 1-2, 3-6, 4-5, 7-8) o usa un certificador que mida diafonía.
-3. Que el **par 4 (7-8, marrón)** no está conectado en ese extremo: solo 2 pares operativos → el cable negociará a **100 Mbps**, nunca a 1 Gbps.
+3. Que el **par 4 (7-8, marrón)** no está conectado en ese extremo: solo 3 pares operativos → el cable negociará a **100 Mbps**, nunca a 1 Gbps.
 </details>
 
 ---

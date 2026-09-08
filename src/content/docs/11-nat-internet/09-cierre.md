@@ -74,7 +74,7 @@ Has terminado la teoría. Este cierre es el aterrizaje: recorres lo aprendido co
 
 ## 🤬 CONRAD VS EL MUNDO: "He abierto un puerto pero no funciona"
 
-**CONRAD:** — "Clásico. Abres el puerto 80 en NAT para que tu servidor web sea accesible desde fuera. Pero: 1) El firewall del router tiene el puerto cerrado. 2) El firewall del Windows tiene el puerto cerrado. 3) El servicio web no corre en el PC destino. 4) La IP del PC destino cambió por DHCP. 4 problemas, ninguna solución."
+**CONRAD:** — "Clásico. Abres el puerto 80 en NAT para que tu servidor web sea accesible desde fuera. Pero: 1) El firewall del router tiene el puerto cerrado. 2) El firewall del Windows tiene el puerto cerrado. 3) El servicio web no se ejecuta en el PC destino. 4) La IP del PC destino cambió por DHCP. 4 problemas, ninguna solución."
 
 **CONRAD:** — "Y luego: *es que he abierto el puerto, ¿por qué no funciona?* — Pues porque el Windows Firewall lo bloquea. Y porque la IP privada del servidor ha cambiado. Y porque el router tiene otro firewall. Diagnóstico: `telnet IP_PUBLICA 80` desde fuera. Si no responde, revisa los 4 puntos."
 
@@ -125,10 +125,10 @@ Has terminado la teoría. Este cierre es el aterrizaje: recorres lo aprendido co
 **Fallo intencionado (¡ahí está la trampa!):** En la tarea 2, **olvida `ip nat inside` en la interfaz LAN y `ip nat outside` en la WAN.** El resto de la configuración es correcta.
 
 - ¿Funciona NAT? **No.** NAT necesita saber qué interfaces son inside y outside. Sin esa configuración, el router no sabe qué tráfico traducir.
-- **Verificación del fallo:** `show ip nat translations` muestra una tabla **vacía** aunque los PCs generen tráfico. `show ip nat statistics` muestra *misses* sin apenas *hits*.
+- **Verificación del fallo:** `show ip nat translations` muestra una tabla **vacía** aunque los PCs generen tráfico. `show ip nat statistics` muestra la tabla vacía y los contadores a cero (NAT ni siquiera se invoca).
 - **Corrección:** añade las marcas de interfaz que faltan y repite las tareas 3 y 4.
 
-> **Pista para el diagnóstico:** si el ping al gateway (192.168.1.1) funciona pero el ping a 8.8.8.8 no, y la tabla NAT está vacía, el problema está en la marca de interfaces. Es el fallo estrella de esta unidad: el que debes saber cazar en el [boletín avanzado](/ApuntesRedes/boletines/boletin-u12-avanzado).
+> **Pista para el diagnóstico:** si el ping al gateway (192.168.1.1) funciona pero el ping a 8.8.8.8 no, y la tabla NAT está vacía, el problema está en la marca de interfaces. Es el fallo estrella de esta unidad: el que debes saber cazar en el [boletín avanzado](/ApuntesRedes/boletines/boletin-u11-avanzado).
 
 ---
 
@@ -158,7 +158,7 @@ Has terminado la teoría. Este cierre es el aterrizaje: recorres lo aprendido co
 2. NAT no traduce IPs dentro del payload de la aplicación. FTP, VoIP y juegos online pueden fallar. Para eso están **ALGs** (Application Layer Gateways).
 3. **UPnP** permite que dispositivos abran puertos automáticamente. Es cómodo pero inseguro: cualquier programa malicioso puede abrir puertos sin que lo sepas.
 4. **NAT** traduce IPs (1 a 1 o muchos a pocos). **PAT** es un tipo de NAT que también traduce puertos, permitiendo que muchas IPs compartan una sola IP pública.
-5. La tabla NAT tiene un límite (depende del router, típicamente miles de entradas). Cuando se llena, los nuevos paquetes se descartan hasta que expiren entradas antiguas (timeout típico 24h para UDP, variable para TCP).
+5. La tabla NAT tiene un límite (depende del router, típicamente miles de entradas). Cuando se llena, los nuevos paquetes se descartan hasta que expiren entradas antiguas (timeout típico: UDP ~5 min, TCP ~24 h).
 </details>
 
 ---
@@ -170,13 +170,13 @@ Horizontal:
 1. Técnica que permite a múltiples IPs compartir una IP pública (3 letras)
 4. Estándar WiFi de 6 GHz (3+2 caracteres)
 5. Red privada virtual (3 letras)
-7. Técnica de traducción 1 a 1 fija (4+7 letras, 2 palabras)
-8. Comando que muestra la tabla NAT (3+3+11 letras, 3 palabras)
+7. Técnica de traducción 1 a 1 fija (3+8 letras, 2 palabras)
+8. Comando que muestra la tabla NAT (4+2+3+12 letras, 4 palabras)
 
 Vertical:
-2. Técnica de traducción 1 a 1 fija (4+7 letras, 2 palabras)
+2. Técnica de traducción 1 a 1 fija (3+8 letras, 2 palabras)
 3. Protocolo que abre puertos automáticamente (4 letras)
-6. Interfaz que mira a la LAN en NAT (5 letras)
+6. Interfaz que mira a la LAN en NAT (6 letras)
 ```
 
 <details>
@@ -213,7 +213,7 @@ NAT no es un firewall, pero da una falsa sensación de seguridad. Los dispositiv
 
 > ❓ **¿Cuántas conexiones puede manejar PAT simultáneamente?**
 
-Depende del router y del tiempo de expiración. Teóricamente, con 65535 puertos disponibles por IP pública, PAT puede manejar hasta ~65000 conexiones simultáneas. En la práctica, los routers domésticos manejan unos pocos miles antes de saturarse.
+Depende del router y del tiempo de expiración. Teóricamente, con 65535 puertos disponibles por IP pública, PAT puede manejar hasta ~65.000 conexiones simultáneas. En la práctica, los routers domésticos manejan unos pocos miles antes de saturarse.
 
 ---
 

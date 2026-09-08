@@ -22,7 +22,7 @@ Esta unidad se lee como un **libro de 9 capítulos**: cada punto desarrolla una 
 Al terminar, serás capaz de:
 
 - Aplicar una metodología de diagnóstico estructurada siguiendo el modelo OSI de abajo arriba.
-- Usar los comandos esenciales (ping, traceroute, netstat, nslookup/dig, telnet) e interpretar su salida.
+- Usar los comandos esenciales (ping, traceroute, netstat, nslookup/dig) e interpretar su salida.
 - Capturar tráfico con Wireshark, aplicar filtros, analizar TCP (handshake, retransmisiones, ventana, RTT) y seguir el flujo de una conversación (Follow TCP Stream).
 - Explicar la arquitectura de SNMP: NMS, agente, MIB y OID, y las diferencias entre las versiones v1, v2c y v3.
 - Configurar SNMP y syslog en dispositivos Cisco y montar un logging centralizado.
@@ -55,10 +55,10 @@ Al terminar, serás capaz de:
 > Practica con los pares del curso: empezar siempre el resuelto para ver el estilo y luego intentar el por-resolver.
 
 <div class="ejercicio-links">
-  <a href="/ApuntesRedes/boletines/boletin-u13-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
-  <a href="/ApuntesRedes/boletines/boletin-u13-inicial" class="elink">🟢 Inicial por resolver</a>
-  <a href="/ApuntesRedes/boletines/boletin-u13-avanzado-resuelto" class="elink">💪 Avanzado resuelto</a>
-  <a href="/ApuntesRedes/boletines/boletin-u13-avanzado" class="elink">⭐ Avanzado por resolver</a>
+  <a href="/ApuntesRedes/boletines/u12-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
+  <a href="/ApuntesRedes/boletines/u12-inicial" class="elink">🟢 Inicial por resolver</a>
+  <a href="/ApuntesRedes/boletines/u12-avanzado-resuelto" class="elink">💪 Avanzado resuelto</a>
+  <a href="/ApuntesRedes/boletines/u12-avanzado" class="elink">⭐ Avanzado por resolver</a>
 </div>
 
 ---

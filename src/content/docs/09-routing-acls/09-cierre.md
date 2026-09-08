@@ -13,7 +13,7 @@ Has terminado la teoría: ya sabes qué es un router, cómo se configura, cómo 
 
 ---
 
-## ⭐ Be the Packet, my friend...
+## ⭐ Sé el Paquete
 
 > *Eres un paquete IP con destino 8.8.8.8. Has sobrevivido al cable, a los switches y aquí estás: ante la interfaz G0/0 (192.168.1.1/24) de un router llamado R1. Necesitas que te lleven al mundo.* [Recuerda: el destino `8.8.8.8` no es la IP de la interfaz; vas de camino a él.]
 
@@ -103,7 +103,7 @@ Has terminado la teoría: ya sabes qué es un router, cómo se configura, cómo 
 1. Configura IPs en todas las interfaces y actívalas (`no shutdown`). Verifica con `show ip interface brief`.
 2. Configura rutas estáticas en ambos routers para que LAN1 y LAN2 se vean (puntito 3 al pie de la letra).
 3. Configura la ruta por defecto en Router2 hacia Internet (puntito 4).
-4. Configura una ACL estándar en Router1 que permita **solo a 192.168.1.10** acceder a la LAN2. (¿Dónde la applies? Cerca del destino, recuerda.)
+4. Configura una ACL estándar en Router1 que permita **solo a 192.168.1.10** acceder a la LAN2. (¿Dónde la aplicas? Cerca del destino, recuerda.)
 
 **Fallo intencionado:** en la tarea 2, configura la ruta a la LAN vecina con la máscara **incorrecta**: en lugar de `/24` (`255.255.255.0`), usa `/16` (`255.255.0.0`) solo en una de las rutas.
 
@@ -146,14 +146,14 @@ Has terminado la teoría: ya sabes qué es un router, cómo se configura, cómo 
 
 ```
 Horizontal:
-1. Ruta hacia 0.0.0.0/0 (7+6 letras, 2 palabras)
+1. Ruta hacia 0.0.0.0/0 (7+5 letras, 2 palabras)
 4. Memoria que guarda la configuración al apagar (6 letras)
 5. ACL que permite filtrar por IP origen, destino y puerto (9 letras)
 7. Protocolo que filtra una ACL extendida (3 letras)
 8. Comando para guardar la configuración (5 letras)
 
 Vertical:
-2. Comando para ver la tabla de rutas (3+2+5 letras, 3 palabras)
+2. Comando para ver la tabla de rutas (4+2+5 letras, 3 palabras)
 3. Interfaz del router "administrativamente caída" (8 letras)
 6. Rango de ACLs estándar (1-__) (2 dígitos)
 ```

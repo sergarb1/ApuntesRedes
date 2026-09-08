@@ -121,7 +121,7 @@ El escenario viene con una trampa oculta (la encontrarás también en el ⚡ Lab
 2. ¿Ping a la IP de la WAN?     → sí
 3. ¿Ping a 8.8.8.8?             → no
 4. show ip nat translations     → VACÍA ← pista principal
-5. show ip nat statistics       → misses sin hits
+5. show ip nat statistics       → contadores a cero (ni hits ni misses, porque NAT ni se invoca)
 6. Revisar interfaces           → ¡falta ip nat inside/outside!
 ```
 

@@ -100,7 +100,7 @@ Tu PC (192.168.1.10) → ping 8.8.8.8
 3. Consulta la tabla ARP local → busca la MAC del gateway.
 4. Si no está, lanza un **ARP Request** de difusión: "¿Quién tiene 192.168.1.1?"
 5. El gateway responde con **ARP Reply** con su MAC (`aa:bb:cc:01:01:01`).
-6. Tu PC envía el paquete ICMP con: **MAC destino = la del gateway**, **IP destino = $8.8.8.8$**.
+6. Tu PC envía el paquete ICMP con: **MAC destino = la del gateway**, **IP destino = `8.8.8.8`**.
 7. El switch lo reenvía al puerto del gateway.
 8. El router ve que la IP destino es `8.8.8.8`, consulta su tabla de rutas y lo reenvía hacia su ISP.
 9. El ISP lo encamina hasta Google.

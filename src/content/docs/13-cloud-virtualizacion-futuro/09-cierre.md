@@ -26,7 +26,7 @@ Has terminado la teoría. Este cierre es el aterrizaje: recorre todo lo aprendid
 3. **No necesitas comprar hardware** → ✅ Correcto, todo es infraestructura compartida.
 4. **No necesitas conocimientos de redes** → ❌ ¡Falso! Los necesitas, y diferentes: subredes, rutas, ACLs, NAT. La nube no elimina el conocimiento, lo transforma.
 
-> 💡 **La moraleja:** lo que has estudiado durante 11 unidades —subredes, routing, NAT, ACLs— sigue vigente en la nube. Solo cambia la interfaz: ahora lo escribes como configuración, no lo crimpas en un rack.
+> 💡 **La moraleja:** lo que has estudiado durante 12 unidades —subredes, routing, NAT, ACLs— sigue vigente en la nube. Solo cambia la interfaz: ahora lo escribes como configuración, no lo crimpas en un rack.
 
 ---
 
@@ -54,7 +54,7 @@ Has terminado la teoría. Este cierre es el aterrizaje: recorre todo lo aprendid
 
 1. Soy una red virtual en la nube. Aíslo recursos de otros clientes. Soy como una VLAN pero a escala cloud.
 2. Soy la tecnología que separa el plano de control del plano de datos en redes.
-3. Soy un estándar de red para contenedores. Creo redes virtuales entre contenedores en el mismo host o entre hosts.
+3. Soy el modo de red de Docker que conecta contenedores de distintos servidores como si estuvieran en la misma LAN. Vivo en un túnel VXLAN.
 4. Soy una propuesta experimental de direccionamiento que combina ASN + IPv4 para ampliar el espacio de direcciones.
 5. Reemplazo appliances físicos (firewalls, load balancers) por software virtualizado.
 
@@ -63,7 +63,7 @@ Has terminado la teoría. Este cierre es el aterrizaje: recorre todo lo aprendid
 
 1. **VPC** (Virtual Private Cloud).
 2. **SDN** (Software Defined Networking).
-3. **CNI** (Container Network Interface) — Ej: Flannel, Calico, Weave.
+3. **Overlay** (el modo de red multi-host de Docker, con VXLAN bajo el capó).
 4. **IPv8** — Propuesta experimental (no es un estándar oficial).
 5. **NFV** (Network Functions Virtualization).
 </details>
@@ -164,7 +164,7 @@ Vertical:
 <summary>📝 Soluciones</summary>
 
 **Horizontal:** 1. IPV8, 4. VPC, 5. SDN, 7. NFV, 8. AWS
-**Vertical:** 2. CNI, 3. TUN, 6. SAAS
+**Vertical:** 2. CNI, 3. VETH, 6. SAAS
 
 </details>
 

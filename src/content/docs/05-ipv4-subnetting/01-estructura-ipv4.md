@@ -70,7 +70,7 @@ No todas las direcciones del espacio IPv4 se pueden usar para asignar a un equip
 
 | Dirección | Significado |
 |---|---|
-| **0.0.0.0/8** | "Esta red" (ruta por defecto, el 0.0.0.0 es la estrella del enrutamiento) |
+| **0.0.0.0/0** | "Esta red" (ruta por defecto, el 0.0.0.0 es la estrella del enrutamiento) |
 | **127.0.0.0/8** | Loopback (localhost: 127.0.0.1 habla contigo mismo) |
 | **169.254.0.0/16** | APIPA: IP autoasignada cuando DHCP no responde y tu OS se inventa una para no llorar |
 | **224.0.0.0/4** | Multicast (224.0.0.5 = OSPF, 224.0.0.1 = todos los hosts de la red local) |
@@ -79,7 +79,7 @@ No todas las direcciones del espacio IPv4 se pueden usar para asignar a un equip
 
 > ⚠️ **Trampa de examen:** el **loopback** (127.x.x.x) no es una IP "de la casa", es una dirección que dice "habla con este mismo equipo". Hacer `ping 127.0.0.1` no sale a ningún sitio: comprueba que tu pila TCP/IP funciona.
 
-Una de las más odiadas es **169.254.x.x**: cuando un PC no consigue IP por DHCP, se asigna él mismo una APIPA. El día que veas esa IP en un `ipconfig /all`, sabe que el DHCP no respondió. Lo verás a fondo en el [punto 8](/ApuntesRedes/05-ipv4-subnetting/08-dhcp).
+Una de las más odiadas es **169.254.x.x**: cuando un PC no consigue IP por DHCP, se asigna él mismo una APIPA. El día que veas esa IP en un `ipconfig /all`, sabrás que el DHCP no respondió. Lo verás a fondo en el [punto 8](/ApuntesRedes/05-ipv4-subnetting/08-dhcp).
 
 ---
 

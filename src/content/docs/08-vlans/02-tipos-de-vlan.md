@@ -82,7 +82,7 @@ Planificar la numeración es un arte. El esquema habitual en oficinas:
 - **VLAN nativa:** únicamente en trunks; elige un número distinto de la VLAN de datos (jamás la 1) y que coincida en ambos extremos.
 - **VLAN de voz:** en cualquier despliegue con telefonía IP, para proteger y priorizar el audio.
 - **VLAN de gestión:** siempre que ataques SSH/SNMP; aíslala del tráfico de usuario y limita el acceso con ACL.
-- **VLAN dinámica:** solo en redes grandes con movilidad constante y servidor VMP S; en el 90% de los casos, estática y a otra cosa.
+- **VLAN dinámica:** solo en redes grandes con movilidad constante y servidor VMPS; en el 90% de los casos, estática y a otra cosa.
 
 ---
 
@@ -97,7 +97,7 @@ Planificar la numeración es un arte. El esquema habitual en oficinas:
 
 1. La VLAN de **datos** transporta tráfico de usuario normal; la **nativa** es la única que **no se etiqueta** en el trunk (viaja "pelada"). Por defecto la nativa es la VLAN 1 y en los trunks debe coincidir en ambos extremos.
 2. Porque el **audio debe tener prioridad** sobre el tráfico de datos: si el teléfono comparte la red con los PCs, una descarga puede saturar la cola y cortar o entrecortar las llamadas. La prioridad la marca el campo **802.1p (PRI)** de la etiqueta 802.1Q.
-3. Solo en **redes muy grandes con mover constante de equipos** y servidor VMPS disponible. En oficinas normales, la **estática** es más simple, predecible y barata de mantener.
+3. Solo en **redes muy grandes con movimiento constante de equipos** y servidor VMPS disponible. En oficinas normales, la **estática** es más simple, predecible y barata de mantener.
 
 </details>
 

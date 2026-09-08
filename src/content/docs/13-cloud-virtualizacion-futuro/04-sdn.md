@@ -54,7 +54,7 @@ action: output=port3
 
 Traducción: "todo lo que llegue desde la red `10.0.0.0/8` y vaya al puerto TCP 80, sácalo por el puerto 3". Como las ACLs de la U09 pero escritas y gestionadas de forma central. El controlador puede añadir, modificar o borrar estas reglas **sin tocar cada switch a mano**.
 
-> 💡 **Piérdale el miedo al "tonto":** que el switch sea "tonto" no significa que no haga nada: reenvía a línea (por eso es rápido). Solo ha delegado el *pensar* (elegir ruta) en el controlador. Es como el empleado que ejecuta la orden de la central en vez de decidir por su cuenta.
+> 💡 **No le tengas miedo al "tonto":** que el switch sea "tonto" no significa que no haga nada: reenvía a línea (por eso es rápido). Solo ha delegado el *pensar* (elegir ruta) en el controlador. Es como el empleado que ejecuta la orden de la central en vez de decidir por su cuenta.
 
 ---
 
