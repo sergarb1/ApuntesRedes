@@ -1,9 +1,10 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
-const emojis = ['🌐','📡','🔌','🧮','🚀','🔀','🏢','🧭','🗣️','🌐','🩺','☁️'];
+const emojis = ['🚪','🌐','📡','🔌','🧮','🚀','🔀','🏢','🧭','🗣️','🌐','🩺','☁️'];
 
 const unitSlugs = [
+  '01-introduccion',
   '02-fundamentos-redes',
   '03-modelos-osi-analisis',
   '04-infraestructura-fisica',
@@ -19,6 +20,7 @@ const unitSlugs = [
 ];
 
 const unitLabels = [
+  'Introducción',
   'Fundamentos de redes',
   'Modelos OSI y análisis',
   'Infraestructura física',
@@ -33,20 +35,19 @@ const unitLabels = [
   'Cloud, virtualización y futuro',
 ];
 
-const unidad0 = {
-  slug: '01-introduccion',
-  label: 'Introducción',
-  puntos: [
-    { slug: '01-introduccion/01-que-es-una-red', label: 'Qué es una red' },
-    { slug: '01-introduccion/02-terminos-basicos', label: 'Términos que no se ven' },
-    { slug: '01-introduccion/03-mapa-del-curso', label: 'El mapa del curso' },
-    { slug: '01-introduccion/04-herramientas', label: 'Herramientas del oficio' },
-    { slug: '01-introduccion/05-metodo-diagnostico', label: 'Mente de administrador' },
-    { slug: '01-introduccion/06-glosario-y-faq', label: 'Glosario y preguntas tontas' },
-  ],
-};
-
 const unidadesExpandidas = {
+  '01-introduccion': [
+    { slug: '01-introduccion/01-que-es-una-red', label: '1 · ¿Qué es una red?' },
+    { slug: '01-introduccion/02-aparatitos', label: '2 · Los aparatitos' },
+    { slug: '01-introduccion/03-mac-ip-puertos', label: '3 · MAC, IP y Puertos' },
+    { slug: '01-introduccion/04-paquetes-y-protocolos', label: '4 · Paquetes y protocolos' },
+    { slug: '01-introduccion/05-dns-y-dhcp', label: '5 · DNS y DHCP' },
+    { slug: '01-introduccion/06-metodo-diagnostico', label: '6 · Método de diagnóstico' },
+    { slug: '01-introduccion/07-instalacion-packet-tracer', label: '7 · Instalación de Packet Tracer' },
+    { slug: '01-introduccion/09-glosario', label: '8 · Glosario' },
+    { slug: '01-introduccion/10-preguntas-tontas', label: '9 · Preguntas tontas' },
+    { slug: '01-introduccion/08-mapa-del-curso', label: '10 · Mapa del curso' },
+  ],
   '02-fundamentos-redes': [
     { slug: '02-fundamentos-redes/01-que-es-una-red', label: '1 · ¿Qué es una red?' },
     { slug: '02-fundamentos-redes/02-tipos-y-alcance', label: '2 · Tipos de red y alcance' },
@@ -182,7 +183,7 @@ const unidadesExpandidas = {
 };
 
 const unidades = unitSlugs.map((slug, i) => {
-  const label = `${emojis[i]} ${i + 2}. ${unitLabels[i]}`;
+  const label = `${emojis[i]} ${i + 1}. ${unitLabels[i]}`;
   if (unidadesExpandidas[slug]) {
     return {
       label,
@@ -197,16 +198,16 @@ const unidades = unitSlugs.map((slug, i) => {
 });
 
 const boletinItems = (code) => [
-  { link: `/boletines/boletin-u${code}-inicial-resuelto`, label: '✅ Inicial resuelto' },
   { link: `/boletines/boletin-u${code}-inicial`, label: '🟢 Inicial por resolver' },
-  { link: `/boletines/boletin-u${code}-avanzado-resuelto`, label: '💪 Avanzado resuelto' },
+  { link: `/boletines/boletin-u${code}-inicial-resuelto`, label: '✅ Inicial resuelto' },
   { link: `/boletines/boletin-u${code}-avanzado`, label: '⭐ Avanzado por resolver' },
+  { link: `/boletines/boletin-u${code}-avanzado-resuelto`, label: '💪 Avanzado resuelto' },
 ];
 
 const boletinCodes = ['01', ...Array.from({ length: 12 }, (_, i) => String(i + 2).padStart(2, '0'))];
 
 const boletinesGroups = boletinCodes.map((code, i) => ({
-  label: code === '01' ? '🚪 Unidad 01' : `${emojis[i - 1]} Unidad ${code}`,
+  label: `${emojis[i]} Unidad ${code}`,
   collapsed: true,
   items: boletinItems(code),
 }));
@@ -238,13 +239,6 @@ export default defineConfig({
         {
           slug: 'index',
           label: 'Inicio',
-        },
-        {
-          label: `🚪 Unidad 01 · ${unidad0.label}`,
-          items: [
-            { slug: unidad0.slug, label: '🏠 Bienvenida e índice' },
-            ...unidad0.puntos.map((p) => ({ slug: p.slug, label: p.label })),
-          ],
         },
         {
           label: '📚 Unidades',

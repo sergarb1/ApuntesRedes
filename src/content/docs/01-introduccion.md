@@ -11,7 +11,7 @@ description: Tu punto de partida si no has tocado una red en tu vida 🚪
 
 ## 👋 ¿Empiezas aquí?
 
-Estos apuntes enseñan a **planificar y administrar redes de ordenadores**. Si acabas de llegar y piensas cosas como *"¿qué es una IP?"*, *"¿el router es la caja que me da la compañía de Internet?"* o *"¿por qué mi ordenador tiene una dirección?"*, esta Unidad 01 es para ti. En seis puntos te pongo al día para que la **Unidad 02** no te suene a chino.
+Estos apuntes enseñan a **planificar y administrar redes de ordenadores**. Si acabas de llegar y piensas cosas como *"¿qué es una IP?"*, *"¿el router es la caja que me da la compañía de Internet?"* o *"¿por qué mi ordenador tiene una dirección?"*, esta Unidad 01 es para ti. En diez puntos te pongo al día para que la **Unidad 02** no te suene a chino.
 
 Y si ya sabes algo de redes, igualmente vale la pena una pasada rápida: aquí definimos el vocabulario común que usaremos en todo el curso, para que todos hablemos el mismo idioma desde el minuto uno.
 
@@ -24,11 +24,15 @@ Y si ya sabes algo de redes, igualmente vale la pena una pasada rápida: aquí d
 | Punto | Qué aprenderás | A quién va dirigido |
 |---|---|---|
 | [01 · ¿Qué es una red?](/ApuntesRedes/01-introduccion/01-que-es-una-red) | Qué es, para qué sirve y sus piezas básicas | Todos |
-| [02 · Términos que no se ven](/ApuntesRedes/01-introduccion/02-terminos-basicos) | IP, MAC, paquete, router, switch, servidor… sin sustos | Principiantes |
-| [03 · El mapa del curso](/ApuntesRedes/01-introduccion/03-mapa-del-curso) | Las 13 etapas del viaje y para qué sirve cada una | Todos |
-| [04 · Las herramientas del oficio](/ApuntesRedes/01-introduccion/04-herramientas) | Packet Tracer y Wireshark + la primera práctica de 5 minutos | Todos |
-| [05 · La mente de un administrador](/ApuntesRedes/01-introduccion/05-metodo-diagnostico) | El método que usas para resolver averías | Todos |
-| [06 · Glosario y preguntas tontas](/ApuntesRedes/01-introduccion/06-glosario-y-faq) | Todas las palabras clave y las dudas de novato | Principiantes |
+| [02 · Los aparatitos](/ApuntesRedes/01-introduccion/02-aparatitos) | Módem, router, AP, switch vs router, cable vs WiFi | Todos |
+| [03 · MAC, IP y Puertos](/ApuntesRedes/01-introduccion/03-mac-ip-puertos) | Las direcciones de red y los puertos lógicos | Todos |
+| [04 · Paquetes y protocolos](/ApuntesRedes/01-introduccion/04-paquetes-y-protocolos) | Cómo viajan los datos y qué reglas siguen | Todos |
+| [05 · DNS y DHCP](/ApuntesRedes/01-introduccion/05-dns-y-dhcp) | Los servicios invisibles que hacen Internet usable | Todos |
+| [06 · Método de diagnóstico](/ApuntesRedes/01-introduccion/06-metodo-diagnostico) | La escalera del ping y la lógica del diagnóstico | Todos |
+| [07 · Instalación de Packet Tracer](/ApuntesRedes/01-introduccion/07-instalacion-packet-tracer) | Prepara tu laboratorio virtual de bolsillo | Todos |
+| [08 · Glosario](/ApuntesRedes/01-introduccion/09-glosario) | Tus términos clave de referencia rápida | Todos |
+| [09 · Preguntas tontas](/ApuntesRedes/01-introduccion/10-preguntas-tontas) | Las dudas que nadie se atreve a hacer en voz alta | Todos |
+| [10 · Mapa del curso](/ApuntesRedes/01-introduccion/08-mapa-del-curso) | Las 13 etapas del viaje y para qué sirve cada una | Todos |
 
 ---
 

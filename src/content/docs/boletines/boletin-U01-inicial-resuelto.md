@@ -7,81 +7,55 @@ description: Soluciones de los ejercicios básicos de la Unidad 01
 
 ---
 
-## 1. Clasifica estas redes
+## 1. Las 4 piezas del puzzle
 
-a) **PAN** — Red personal: lo que te rodea (Bluetooth).
-b) **LAN** — Red local de tu casa.
-c) **LAN** — Sigue siendo local aunque tenga varios laboratorios, si están en el mismo edificio.
-d) **WAN** — Une dos ubicaciones separadas (Madrid y Valencia).
-e) **MAN** — Cubre una ciudad entera (Metropolitan Area Network).
+a) **Dispositivo final** — es el equipo que usa la persona al final del camino.
+b) **Medio de transmisión** — la carretera física por donde viajan los datos.
+c) **Protocolo** — las reglas del idioma para cargar páginas web.
+d) **Dispositivo de interconexión** — la centralita del barrio que conecta los equipos.
+e) **Medio de transmisión** — la carretera invisible por el aire.
+f) **Dispositivo final** — aunque sirva a otros, es una máquina final que almacena los datos.
 
-## 2. Ordena los 4 componentes de una red
+## 2. El mito de la "Caja Blanca"
 
-El orden lógico es:
+La caja es un **3 en 1**: tiene un **Módem** (traduce la señal de la calle), un **Router** (conecta la casa con Internet) y un **Punto de Acceso** (reparte la señal por el aire). Lo que le fallaba a tu amigo por la distancia a su habitación era el **Punto de Acceso (AP)**.
 
-1. **Dispositivos finales** — los que usan las personas (PC, móvil, servidor).
-2. **Dispositivos de interconexión** — los que conectan y organizan (switch, router, AP).
-3. **Medio de transmisión** — el canal por donde viajan los datos (cable, fibra, WiFi).
-4. **Protocolos** — las reglas del idioma que todos respetan.
+## 3. Verdadero o falso (Edición Conrad)
 
-## 3. Verdadero o falso
+a) **Falso.** El Wi-Fi solo te conecta con el Punto de Acceso local. Si ese aparato no tiene salida a la calle, tienes cobertura pero sigues sin Internet.
 
-a) **Verdadero.** Internet es la red de redes que une millones de redes.
-b) **Falso.** El switch es un dispositivo de interconexión, no final.
-c) **Verdadero.** Los protocolos son las reglas para entenderse.
-d) **Falso.** La MAC es fija, está grabada en el hardware.
-e) **Verdadero.** La IP es lógica: cambia de red o se renueva por DHCP.
-f) **Verdadero.** LAN = misma zona local, sin importar el número de equipos.
-g) **Verdadero.** Dos PCs con un switch forman una red válida sin Internet.
-h) **Falso.** El router es un dispositivo; el WiFi es un medio de transmisión.
+b) **Verdadero.** La dirección MAC es como la matrícula del coche: viene grabada de fábrica y nunca cambia.
 
-## 4. Relaciona término con definición
+c) **Falso.** Con 20 PCs conectados a un Switch ya formáis una red perfectamente válida sin salir al exterior. Internet solo aparece cuando unes esa red al mundo exterior con un router.
 
-1 → h (Servidor)
-2 → f (Protocolo)
-3 → g (Switch)
-4 → e (Router)
-5 → d (AP)
-6 → a (Paquete)
-7 → b (MAC)
-8 → c (IP)
+d) **Verdadero.** Un paquete es como un sobre virtual que lleva los datos troceados, la IP de origen y la IP de destino.
 
-## 5. IP o MAC: elige la opción correcta
+e) **Falso.** El puerto 80 es un número lógico virtual que identifica al servicio web, no es el hueco físico donde metes el cable RJ45.
 
-**Opción c)** — La IP es lógica y puede cambiar; la MAC es física y viene grabada en el hardware.
+## 4. Une con flechas (Las analogías de la red)
 
-## 6. ¿Cliente o servidor?
+- Dirección IP → **d)** La calle y el número de tu casa actual.
+- Dirección MAC → **a)** El número de bastidor o matrícula inmutable.
+- Switch → **e)** La centralita que comunica a los vecinos de un mismo edificio.
+- Router → **f)** El control de aduanas que te saca de tu barrio hacia otras redes.
+- DNS → **c)** La agenda de contactos del móvil.
+- DHCP → **b)** El recepcionista del hotel que te asigna una habitación.
 
-a) **Cliente** — El navegador pide la página.
-b) **Servidor** — Atiende a muchos y reparte las notas.
-c) **Cliente** — El móvil pide el correo.
-d) **Servidor** — Atiende las peticiones de muchos clientes.
-e) **Cliente** — El alumno descarga (pide) el archivo.
+## 5. ¿Cliente o Servidor?
 
-## 7. Completa: una red no es Internet
+a) **Cliente** — tu navegador está pidiendo la web.
+b) **Servidor** — está esperando peticiones para entregar los boletines.
+c) **Cliente** — pide datos a los servidores de Meta.
+d) **Servidor** — tu equipo pasa a "servir" contenido a los demás.
 
-a) ... forman **una red** válida.
-b) Internet es **la red de redes**...
-c) ... son **servicios** que se ofrecen sobre Internet.
-d) ... sigue siendo una **LAN**, pero ya forma parte del mundo.
+## 6. Ordena los pasos: La Mente del Administrador
 
-## 8. Mini test de vocabulario
+1. Mirar si la lucecita de la tarjeta de red y el switch están encendidas (Peldaño 0: enlace físico).
+2. ping `127.0.0.1` (Peldaño 1: comprobar los "reflejos" de su propia tarjeta).
+3. ping `<IP del router>` (Peldaño 2: comprobar si llega a la puerta de salida del aula).
+4. ping `8.8.8.8` (Peldaño 3: comprobar si el router le saca a Internet).
+5. ping `www.google.com` (Peldaño 4: comprobar si el servidor DNS funciona y traduce nombres).
 
-1) **a)** Un byte = 8 bits.
-2) **b)** Un bit solo vale 0 o 1.
-3) **a)** Packet Tracer simula redes sin hardware real.
-4) **a)** El WiFi es un método de transmisión sin cables.
-5) **b)** Un paquete es un trocito de datos que viaja por la red.
-6) **a)** El AP reparte la señal WiFi a los equipos sin cable.
+## 7. Resolviendo averías con el "Sonar"
 
-## 9. El método de diagnóstico en capas
-
-a) Primero se comprueba **lo físico**: encendido, cables, luces y señal.
-b) Por ejemplo: comprobar que el cable de red está bien enchufado, que las luces del router parpadean o que el WiFi está activado en el portátil.
-c) Porque sin una capa física sana, nada de lo demás puede funcionar: si el "canal" falla, no viajan los datos. Se va de lo más básico a lo más complejo.
-
-## 10. Herramientas del oficio
-
-1 → b (Packet Tracer)
-2 → c (Wireshark)
-3 → a (ping)
+Está fallando el servidor **DNS**. La conexión a Internet funciona perfectamente (por eso llega a la IP numérica `8.8.8.8`), pero su equipo se ha quedado sin la "agenda telefónica" capaz de traducir el nombre "google.com" a números.

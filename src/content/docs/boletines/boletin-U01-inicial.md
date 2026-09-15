@@ -1,6 +1,6 @@
 ---
 title: "Boletín U01 — Inicial"
-description: "Ejercicios básicos de la Unidad 01: qué es una red, componentes, tipos, cliente/servidor y herramientas"
+description: "Ejercicios básicos de la Unidad 01: componentes, hardware, direcciones, protocolos y diagnóstico"
 ---
 
 # 📝 Boletín U01 — Inicial
@@ -9,129 +9,74 @@ description: "Ejercicios básicos de la Unidad 01: qué es una red, componentes,
 
 ---
 
-## 1. Clasifica estas redes
+## 1. Las 4 piezas del puzzle
 
-Indica si cada caso es una red **PAN**, **LAN**, **MAN** o **WAN**:
+Clasifica los siguientes elementos dentro de una de las 4 piezas fundamentales de toda red (Dispositivo final, Dispositivo de interconexión, Medio de transmisión o Protocolo):
 
-a) Tus auriculares inalámbricos conectados por Bluetooth a tu móvil.
-b) La red de tu casa: el router, un PC, un portátil y dos móviles.
-c) Los laboratorios de un instituto, todos en el mismo edificio.
-d) Las oficinas de una empresa en Madrid y las de Valencia, unidas por fibra.
-e) La red de fibra óptica municipal que da cobertura a toda una ciudad.
+a) Tu teléfono móvil
+b) Un cable RJ45
+c) HTTP
+d) Un Switch
+e) Las ondas del Wi-Fi
+f) El servidor de Moodle del instituto
 
-## 2. Ordena los 4 componentes de una red
+## 2. El mito de la "Caja Blanca"
 
-Toda red se construye con las mismas 4 piezas. Únelas en orden lógico (numéralas del 1 al 4) pensando en cómo se monta y para qué sirve cada una:
+Un amigo te dice: *"He reiniciado el router de mi casa porque no me llegaba bien el Wi-Fi a la habitación"*. Sabiendo lo que hemos estudiado, ¿qué tres aparatos reales tiene dentro esa caja y cuál es el que realmente le estaba fallando a tu amigo?
 
-- [ ] Medio de transmisión (cable, fibra, WiFi)
-- [ ] Dispositivos de interconexión (switch, router, AP)
-- [ ] Protocolos (las reglas del idioma)
-- [ ] Dispositivos finales (PC, móvil, servidor)
+## 3. Verdadero o falso (Edición Conrad)
 
-## 3. Verdadero o falso
+Conrad, nuestro switch cascarrabias, ha corregido estas afirmaciones. Justifica las falsas.
 
-Indica si cada frase es verdadera o falsa:
+a) "Tener Wi-Fi a tope de cobertura significa que tengo Internet".
 
-a) Internet es "la red de redes": conecta millones de redes entre sí.
-b) Un switch es un dispositivo final.
-c) Un protocolo es el conjunto de reglas que los equipos usan para entenderse.
-d) La dirección MAC cambia cada vez que reinicias el ordenador.
-e) La dirección IP puede cambiar (al cambiar de red o vía DHCP).
-f) Una LAN puede tener 5 o 5000 equipos: lo importante es que está en un mismo sitio local.
-g) Dos PCs conectados por un switch, sin Internet, forman una red perfectamente válida.
-h) "Router" y "WiFi" significan lo mismo.
+b) La dirección MAC es como la matrícula del coche: viene grabada de fábrica y nunca cambia.
 
-## 4. Relaciona término con definición
+c) "Para montar una red local (LAN) en el aula y pasarnos archivos, necesitamos contratar Internet".
 
-Asocia cada término con su definición:
+d) Un "paquete" es como un sobre virtual que lleva los datos troceados, la IP de origen y la IP de destino.
 
-| Término | Definición |
-|---|---|
-| 1. Servidor | a) Bultito de datos en el que viaja la conversación |
-| 2. Protocolo | b) Dirección física grabada en el hardware |
-| 3. Switch | c) Dirección lógica de un equipo dentro de la red |
-| 4. Router | d) La antena que emite la señal WiFi (punto de acceso) |
-| 5. AP | e) El "portero" que une tu red con otras redes |
-| 6. Paquete | f) Conjunto de reglas que todos respetan al comunicarse |
-| 7. MAC | g) El "enchufe inteligente" que conecta los equipos de una LAN |
-| 8. IP | h) Máquina potente pensada para atender a muchos clientes |
+e) "Ayer abrí el puerto 80 del ordenador con un destornillador".
 
-## 5. IP o MAC: elige la opción correcta
+## 4. Une con flechas (Las analogías de la red)
 
-¿Cuál de estas afirmaciones sobre las direcciones IP y MAC es la correcta?
+Relaciona cada concepto técnico con su analogía en el mundo real:
 
-a) La IP es física y no cambia; la MAC es lógica y puede cambiar.
-b) IP y MAC son dos nombres para la misma dirección.
-c) La IP es lógica y puede cambiar; la MAC es física y viene grabada en el hardware.
-d) La IP solo existe con WiFi y la MAC solo con cable.
+| Concepto | | Analogía |
+|---|---|---|
+| Dirección IP | | a) El número de bastidor o matrícula inmutable |
+| Dirección MAC | | b) El recepcionista del hotel que te asigna una habitación |
+| Switch | | c) La agenda de contactos del móvil |
+| Router | | d) La calle y el número de tu casa actual |
+| DNS | | e) La centralita que comunica a los vecinos de un mismo edificio |
+| DHCP | | f) El control de aduanas que te saca de tu barrio hacia otras redes |
 
-## 6. ¿Cliente o servidor?
+## 5. ¿Cliente o Servidor?
 
-Indica en cada caso si el protagonista es **Cliente** o **Servidor**:
+Indica qué rol está asumiendo el equipo en las siguientes situaciones:
 
-a) Tu navegador abriendo la página web de tu instituto.
-b) El equipo central que guarda las notas y las reparte a los profesores.
-c) Tu móvil pidiendo el correo al servidor de correo.
-d) El servidor web de una tienda atendiendo las peticiones de muchos clientes.
-e) Un alumno descargando un archivo desde el servidor de archivos.
+a) Estás en tu portátil abriendo `www.gva.es`
+b) La base de datos central que guarda las notas de todos los alumnos
+c) Tu app de WhatsApp comprobando si hay mensajes nuevos
+d) Tu PC cuando le instalas un programa para alojar una página web y que tus compañeros entren
 
-## 7. Completa: una red no es Internet
+## 6. Ordena los pasos: La Mente del Administrador
 
-Completa las frases con estas palabras: **una red**, **la red de redes**, **servicios**, **LAN**.
+Un compañero te grita desde la otra punta del aula: *"¡Profe, no tengo Internet, voy a reiniciar todo y cambiar los cables!"*. Ordena del 1 al 5 los pasos que debes obligarle a dar aplicando la Escalera del Ping y la regla de la lucecita:
 
-a) Dos ordenadores conectados que se intercambian datos, sin salida a Internet, forman ......... válida.
-b) Internet es .........: la red mundial que une millones de redes.
-c) Google, WhatsApp o el correo son ......... que se ofrecen sobre Internet.
-d) Tu casa conectada al router sigue siendo una ........., pero ya forma parte del mundo.
+- [ ] ping `www.google.com`
+- [ ] ping `<IP del router>`
+- [ ] Mirar si la lucecita de la tarjeta de red y el switch están encendidas
+- [ ] ping `127.0.0.1`
+- [ ] ping `8.8.8.8`
 
-## 8. Mini test de vocabulario
+## 7. Resolviendo averías con el "Sonar"
 
-Elige la opción correcta en cada caso:
+Aplicas la escalera del ejercicio anterior y ocurre lo siguiente:
 
-1) Un byte equivale a...
-   a) 8 bits
-   b) 8 bytes
-   c) 8 megas
+- El ping `127.0.0.1` responde bien.
+- El ping al router responde bien.
+- El ping `8.8.8.8` responde bien.
+- Pero cuando haces ping `www.google.com`, te da error.
 
-2) Un bit puede valer solo...
-   a) 1 o 2
-   b) 0 o 1
-   c) 8 o 16
-
-3) Packet Tracer sirve para...
-   a) diseñar y simular redes sin necesidad de hardware real
-   b) medir la longitud de los cables
-   c) mandar mensajes entre personas
-
-4) El WiFi es...
-   a) un método de transmisión sin cables (un tipo de medio)
-   b) un conmutador de la red
-   c) un tipo de dirección
-
-5) Un "paquete" de red es...
-   a) la tarjeta que se mete en la torre del PC
-   b) un trocito de datos que viaja por la red
-   c) el buscador de Google
-
-6) ¿Qué hace un AP (punto de acceso)?
-   a) Reparte la señal WiFi a los equipos sin cable
-   b) Conecta los equipos de la LAN con cables
-   c) Guarda tus archivos
-
-## 9. El método de diagnóstico en capas
-
-Responde de forma breve y clara:
-
-a) El método de diagnóstico en capas empieza siempre por la base. ¿Qué compruebas primero: lo físico (cables, luces, encendido) o lo lógico (configuración, aplicaciones)?
-b) Escribe una sola comprobación concreta del primer paso para el caso: "el portátil no carga ninguna página web".
-c) ¿Por qué se empieza por esa capa y no por la más alta?
-
-## 10. Herramientas del oficio
-
-Asocia cada herramienta con su uso:
-
-| Herramienta | Uso |
-|---|---|
-| 1. Packet Tracer | a) Comprobar si otro equipo responde (básico en el diagnóstico) |
-| 2. Wireshark | b) Simular redes completas en el ordenador y practicar sin cables |
-| 3. ping | c) Capturar y "ver" los paquetes que pasan realmente por la red |
+¿Qué servicio invisible está fallando y por qué?
