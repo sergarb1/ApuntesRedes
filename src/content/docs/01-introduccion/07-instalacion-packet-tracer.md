@@ -187,7 +187,7 @@ Vertical:
 
 Packet Tracer se abre por primera vez en tu ordenador. Un PC virtual aparece en el lienzo y dice: *"¿Esto es todo? ¿Dónde están los cables reales?"*. Un switch virtual le responde: *"Tranquilo, aquí no hay cables que desconectar. Pero cuando aprendas, allá fuera te esperan los de verdad."*.
 
-**PRÓXIMAMENTE EN 08:** El mapa del curso — las 13 etapas del viaje de PAR. 🗺️
+**PRÓXIMAMENTE EN 08:** El mapa del curso — las 12 etapas del viaje de PAR. 🗺️
 
 ---
 

@@ -1,153 +1,114 @@
 ---
-title: Boletín U09 — Avanzado (Resuelto)
-description: Soluciones ejercicios avanzados de Routing y ACLs
+title: Boletín UD9 — Avanzado (Resuelto)
+description: Soluciones ejercicios avanzados de NAT
 ---
 
-# ✅ Boletín U09 — Avanzado (Resuelto)
+# ✅ Boletín UD9 — Avanzado (Resuelto)
 
 ---
 
-## 1. Configuración multi-routing
+## 1. Traducción manual
 
-**R1:**
-```bash
-interface g0/0
- ip address 192.168.1.1 255.255.255.0
- no shutdown
-interface g0/1
- ip address 10.0.0.1 255.255.255.252
- no shutdown
-ip route 192.168.2.0 255.255.255.0 10.0.0.2
-ip route 192.168.3.0 255.255.255.0 10.0.0.2
-ip route 0.0.0.0 0.0.0.0 10.0.0.2
-```
+| Pro | Inside global | Inside local | Outside local | Outside global |
+|---|---|---|---|---|
+| tcp | 83.45.12.78:**60001** | 192.168.1.10:50000 | 8.8.8.8:80 | 8.8.8.8:80 |
+| udp | **83.45.12.78:60002** | 192.168.1.20:50000 | 8.8.8.8:53 | 8.8.8.8:53 |
 
-**R2:**
-```bash
-interface g0/0
- ip address 10.0.0.2 255.255.255.252
- no shutdown
-interface g0/1
- ip address 10.0.0.5 255.255.255.252
- no shutdown
-interface g0/2
- ip address 192.168.2.1 255.255.255.0
- no shutdown
-ip route 192.168.1.0 255.255.255.0 10.0.0.1
-ip route 192.168.3.0 255.255.255.0 10.0.0.6
-```
+NAT asigna puertos únicos (60001, 60002) aunque los puertos origen sean iguales (50000).
 
-**R3:**
-```bash
-interface g0/0
- ip address 10.0.0.6 255.255.255.252
- no shutdown
-interface g0/1
- ip address 192.168.3.1 255.255.255.0
- no shutdown
-ip route 192.168.1.0 255.255.255.0 10.0.0.5
-ip route 192.168.2.0 255.255.255.0 10.0.0.5
-ip route 0.0.0.0 0.0.0.0 10.0.0.5
-```
+## 2. Problema con FTP activo
 
-## 2. ACL extendida: YouTube blocker
+**Falla porque el servidor FTP externo intenta conectar directamente a 192.168.1.10:1025, pero esa IP es privada y no es accesible desde fuera.** Además, NAT no traduce IPs dentro del payload del protocolo FTP (comando PORT).
 
-a) **ACL con time-range:**
-```bash
-time-range LABORAL
- periodic weekdays 9:00 to 18:00
+**Soluciones:**
+- Usar **FTP pasivo**: el cliente inicia ambas conexiones.
+- Activar **ALG FTP** en el router para que inspeccione y traduzca las IPs en el comando PORT.
+- Usar FTP sobre TLS/SSH.
 
-ip access-list extended BLOQUEAR_YT
- deny tcp any 173.194.0.0 0.0.255.255 eq 80 time-range LABORAL
- deny tcp any 173.194.0.0 0.0.255.255 eq 443 time-range LABORAL
- permit ip any any
-```
-
-b) **Aplicar:** Outbound en G0/1 (hacia Internet), para filtrar tráfico saliente.
-
-c) **Alternativa sin time-range:** no se puede definir "9 a 18" con la ACL pura; habría que cambiar manualmente la ACL cada mañana y cada tarde (desastrosamente manual) o gestionarlo con un script/programación externa que alterne las versiones de política. Por eso `time-range` existe.
-
-## 3. Diagnóstico de ACL
-
-a) **Sí, es normal.** La línea 1 deniega explícitamente 192.168.1.10. La línea 2 permite al resto de la red. El deny any implícito está al final.
-
-b) **Sí, 192.168.1.20 puede** porque coincide con la línea 2 (permit 192.168.1.0/24).
-
-c) `show access-lists 10` — Muestra los contadores de hits de cada línea.
-
-d) **No afecta.** La ACL está en G0/1 (outbound). El tráfico entre PCs de la misma LAN no pasa por el router, solo por el switch. Las ACLs en interfaces del router solo afectan al tráfico que pasa por el router.
-
-## 4. Rutas flotantes
-
-a) **Comandos:**
-```bash
-ip route 0.0.0.0 0.0.0.0 10.0.0.2        # AD=1 (por defecto)
-ip route 0.0.0.0 0.0.0.0 10.0.1.2 5      # AD=5 (respaldo)
-ip route 192.168.100.0 255.255.255.0 10.0.0.2
-```
-
-b) **Cuándo se activa:** Cuando la ruta primaria (10.0.0.2) desaparece de la tabla (el siguiente salto deja de ser accesible). Entonces la ruta con AD=5 aparece en la tabla.
-
-c) **Verificación:** `show ip route 0.0.0.0` muestra qué ruta por defecto está activa. Si aparece la de 10.0.1.2, la primaria ha fallado.
-
-## 5. ACL de firewall básico
+## 3. Configuración multi-NAT
 
 ```bash
-ip access-list extended FIREWALL_INTERNO
- permit tcp 192.168.1.0 0.0.0.255 any eq 80
- permit tcp 192.168.1.0 0.0.0.255 any eq 443
- permit udp 192.168.1.0 0.0.0.255 any eq 53
- deny tcp 192.168.1.0 0.0.0.255 any eq 22
- deny ip any any
-
-interface g0/1
- ip access-group FIREWALL_INTERNO out
-
-ip access-list extended FIREWALL_RETORNO
- permit tcp any 192.168.1.0 0.0.0.255 established
- deny ip any any
-
-interface g0/1
- ip access-group FIREWALL_RETORNO in
+R1(config)# ip nat inside source static tcp 192.168.1.10 80 83.45.12.78 8080
+R1(config)# ip nat inside source static tcp 192.168.1.10 443 83.45.12.78 8443
+R1(config)# ip nat inside source static tcp 192.168.1.20 22 83.45.12.78 2222
 ```
 
-## 6. Resolución de problemas de rutas
+## 4. NAT + VPN
 
-a) **No funciona.** La interfaz G0/1 está `shutdown` (administratively down). La ruta por defecto apunta a 10.0.0.2, que está en G0/1. Si la interfaz está caída, la ruta no se instala en la tabla.
+**IPsec no pasa NAT porque NAT modifica la cabecera IP, y los protocolos AH y ESP usan hashes que verifican la integridad de la cabecera IP.** Al cambiar la IP, el hash no coincide y el paquete se rechaza.
 
-b) `show ip route` — 0.0.0.0/0 no aparecerá. `show ip interface brief` — G0/1 aparece como "administratively down".
+**Solución:** **NAT-T (NAT Traversal)** — encapsula paquetes IPsec dentro de UDP (puerto 4500). NAT puede traducir UDP sin problemas, y IPsec viaja encapsulado.
 
-c) **Cambiar:**
-```bash
-interface g0/1
- no shutdown
-```
-Y verificar que el enlace esté físicamente conectado.
+## 5. Análisis de timeouts
 
-## 7. Longest prefix match
+**El problema no es NAT, es el firewall o el propio router que tiene un timeout de sesión TCP menor que el de NAT.** Muchos firewalls cierran conexiones TCP inactivas después de unos minutos. También puede ser el **keepalive TCP** del cliente o servidor SSH.
 
-a) **192.168.1.30 → via 10.0.0.10** (la /28 cubre de .16 a .31: es la coincidencia más larga).
+**Solución:** Configurar keepalive SSH en el cliente (`ServerAliveInterval 60`), o ajustar el timeout de sesión TCP en el router.
 
-b) **192.168.1.200 → via 10.0.0.6** (cae en la /24; la /28 no la cubre y pesa más que la /16).
-
-c) **192.168.3.44 → via 10.0.0.2** (solo la /16 la abarca: ni la /24 ni la /28 llegan a .3.x).
-
-d) **192.168.1.15 → via 10.0.0.6** (está en la /24 pero fuera de la /28, que empieza en .16).
-
-**Regla:** a mayor máscara (28 > 24 > 16), coincidencia más específica y elegida primero.
-
-## 8. ACL nombrada para horario
+## 6. NAT y servidores duales
 
 ```bash
-time-range LABORAL_DIARIO
- periodic daily 9:00 to 18:00
+! PAT para todos los internos
+R1(config)# access-list 1 permit 192.168.10.0 0.0.0.255
+R1(config)# ip nat inside source list 1 interface g0/1 overload
 
-ip access-list extended BLOQUEAR_STREAMING
- deny tcp 192.168.1.0 0.0.0.255 any eq 443 time-range LABORAL_DIARIO
- permit ip any any
+! NAT destino para servidor web (IP pública 83.45.12.78)
+R1(config)# ip nat inside source static tcp 192.168.10.10 80 83.45.12.78 80
+R1(config)# ip nat inside source static tcp 192.168.10.10 443 83.45.12.78 443
 
-interface g0/1
- ip access-group BLOQUEAR_STREAMING out
+! NAT destino para servidor correo (IP pública 83.45.12.79)
+R1(config)# ip nat inside source static tcp 192.168.10.20 25 83.45.12.79 25
+R1(config)# ip nat inside source static tcp 192.168.10.20 587 83.45.12.79 587
+R1(config)# ip nat inside source static tcp 192.168.10.20 993 83.45.12.79 993
+
+! Interfaces
+R1(config)# interface g0/0
+R1(config-if)# ip nat inside
+R1(config)# interface g0/1
+R1(config-if)# ip nat outside
 ```
 
-**Lectura:** de 9 a 18 todos los días, el tráfico HTTPS originado en la red interna se deniega; el resto de horario (y el resto de tráfico, como el puerto 80) pasa. El `permit ip any any` + el deny implícito se encargan del resto.
+## 7. Multi-NAT: servidores duales + PAT simultáneo
+
+```bash
+! PAT para los usuarios internos (83.45.12.78)
+R1(config)# access-list 1 permit 192.168.50.0 0.0.0.255
+R1(config)# ip nat inside source list 1 interface g0/1 overload
+
+! NAT destino para el servidor web (puertos públicos en 83.45.12.78)
+R1(config)# ip nat inside source static tcp 192.168.50.10 80 83.45.12.78 8080
+R1(config)# ip nat inside source static tcp 192.168.50.10 443 83.45.12.78 8443
+
+! NAT estático 1:1 para el servidor de correo (83.45.12.79)
+R1(config)# ip nat inside source static tcp 192.168.50.20 25 83.45.12.79 25
+R1(config)# ip nat inside source static tcp 192.168.50.20 587 83.45.12.79 587
+R1(config)# ip nat inside source static tcp 192.168.50.20 993 83.45.12.79 993
+
+! Interfaces
+R1(config)# interface g0/0
+R1(config-if)# ip nat inside
+R1(config)# interface g0/1
+R1(config-if)# ip nat outside
+```
+
+**Nota:** las traducciones estáticas y el PAT conviven sin problema. El tráfico de los usuarios usa el overload con puertos efímeros; las reglas estáticas tienen prioridad sobre sus puertos concretos (8080, 8443, 25, 587, 993).
+
+## 8. Diagnóstico: "no salimos a Internet"
+
+a) **Orden de comprobaciones (de básico a específico):**
+   1. `ping 192.168.1.1` desde un PC → ¿la LAN está viva?
+   2. `ping 203.0.113.2` desde un PC → ¿el paquete llega hasta la WAN del router?
+   3. `ping 8.8.8.8` desde el propio R1 → ¿tiene el router salida real?
+   4. `show ip nat translations` → ¿hay traducciones activas?
+   5. Revisar la access-list (¿permite la red correcta?) y el `overload` (¿está puesto?).
+   6. Verificar las marcas `ip nat inside/outside` en las interfaces.
+
+b) **`show ip nat translations`.** Esperas ver entradas del tipo `tcp 83.45.12.78:puerto ... 192.168.1.X:puerto ...` en cuanto los PCs generen tráfico hacia fuera.
+
+c) Si la tabla está **vacía** con tráfico circulando:
+   - La access-list no coincide con la red interna (red mal escrita o wildcard incorrecto).
+   - Falta la palabra `overload` en el comando PAT.
+   - Faltan `ip nat inside`/`ip nat outside` en las interfaces.
+   - El tráfico que se prueba no atraviesa las interfaces inside/outside (p. ej. se prueba desde el propio router).
+
+d) **Fallo real:** sin `ip nat inside` en g0/0 ni `ip nat outside` en g0/1, NAT no tiene "puertas" de traducción. La regla `ip nat inside source list 1 interface g0/1 overload` dice QUÉ traducir y A DÓNDE, pero NAT necesita saber qué tráfico es interno y cuál externo. Sin esas marcas de interfaz, los paquetes de la LAN se reenvían tal cual (o se descartan) y la tabla NAT permanece vacía: exactamente el síntoma observado.

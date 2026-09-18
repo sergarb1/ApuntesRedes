@@ -1,121 +1,150 @@
 ---
-title: Boletín U04 — Avanzado (Resuelto)
-description: Soluciones de los ejercicios avanzados de Infraestructura Física de Red
+title: Boletín UD4 — Avanzado (Resuelto)
+description: Soluciones de los ejercicios avanzados de Switching y STP
 ---
 
-# ✅ Boletín U04 — Avanzado (Resuelto)
+# ✅ Boletín UD4 — Avanzado (Resuelto)
 
 ---
 
-## 1. Diagnóstico de cableado
+## 1. Configuración básica de switch
 
-a) **Causas posibles:**
-   - Solo 2 pares conectados (mal crimpado) → negociación a 100 Mbps
-   - Cable Cat5e dañado o de mala calidad
-   - El switch o PC tienen el puerto configurado manualmente a 100 Mbps
-   - Cable demasiado largo (>100 m)
+```bash
+Switch> enable
+Switch# configure terminal
+Switch(config)# hostname SW-OFICINA-01
+SW-OFICINA-01(config)# interface vlan 1
+SW-OFICINA-01(config-if)# ip address 192.168.1.10 255.255.255.0
+SW-OFICINA-01(config-if)# no shutdown
+SW-OFICINA-01(config-if)# exit
+SW-OFICINA-01(config)# ip default-gateway 192.168.1.1
 
-b) **Herramientas:** Comprobador de cables (para verificar continuidad de los 4 pares), y la configuración de red del PC/switch (para ver velocidad negociada).
+SW-OFICINA-01(config)# interface range fa0/1-10
+SW-OFICINA-01(config-if-range)# switchport mode access
+SW-OFICINA-01(config-if-range)# switchport port-security
+SW-OFICINA-01(config-if-range)# switchport port-security maximum 2
+SW-OFICINA-01(config-if-range)# switchport port-security mac-address sticky
+SW-OFICINA-01(config-if-range)# switchport port-security violation shutdown
+SW-OFICINA-01(config-if-range)# exit
 
-c) **Prueba de diagnóstico:**
-   - Probar el mismo cable con otro PC y otro puerto del switch
-   - Probar otro cable conocido bueno en el mismo PC y puerto
-   - Si el cable nuevo funciona a 1 Gbps → el cable original está dañado
-   - Si ningún cable funciona a 1 Gbps → problema en PC o switch
+SW-OFICINA-01(config)# interface range fa0/11-12
+SW-OFICINA-01(config-if-range)# switchport mode trunk
+SW-OFICINA-01(config-if-range)# exit
+```
 
-## 2. Diseño de cableado estructurado
+## 2. Análisis de topología STP
 
-a) **Switches:**
-   - Planta 1: 1 switch de 48 puertos (para 40 puestos + servidores)
-   - Planta 2: 1 switch de 48 puertos (para 30 puestos)
-   - Switch de core en la sala de servidores
+a) **Root Bridge: Switch C.** Prioridad 4096 (la más baja). Aunque Switch A y B tienen MACs más bajas, la prioridad de Switch C (4096) es mucho menor que 32768.
 
-b) **Cable:**
-   - Puestos: Cat6 (estándar para 1 Gbps)
-   - Uplinks entre plantas: fibra multimodo (OM3/OM4, 10 Gbps)
+b) **Root Ports:** Cada switch no-root tiene 1 Root Port. Como hay 3 switches y Switch C es Root, Switches A y B tienen 1 Root Port cada uno = **2 Root Ports** total.
 
-c) **Patch panels:** 1 panel de 48 puertos por planta, cerca del switch correspondiente.
+c) **Designated Ports:** 1 por segmento. Hay 3 segmentos (A-B, B-C, C-A) → **3 Designated Ports** (todos los puertos del Root Bridge y el puerto del segmento con mejor coste hacia el Root).
 
-d) **Conexión entre plantas:** Fibra multimodo desde cada switch de planta hasta el switch de core en la sala de servidores, usando módulos SFP+.
+d) Si **Switch C falla**:
+   - Switches A y B pierden su Root Bridge
+   - Se inicia una nueva elección. Con la misma prioridad (32768), gana Switch A (MAC más baja)
+   - Todos los puertos pasan por los estados STP (blocking → listening → learning → forwarding)
+   - Convergencia: ~50 segundos con STP, ~3 segundos con RSTP
 
-## 3. Cálculo de atenuación
+## 3. Diagnóstico de port security
 
-a) Potencia recibida = 2 dBm - 21,3 dB = **-19,3 dBm**
+a) **Ocurrió porque** el usuario conectó un switch no administrado. Los PCs de ambos usuarios tienen MACs diferentes, y el switch de red ve más de 1 MAC en el puerto, superando el límite (maximum 1).
 
-b) **Sí funciona.** -19,3 dBm > -20 dBm (el umbral del receptor). La señal es válida.
+b) **Dos cambios:**
+   1. Aumentar `maximum` a un valor razonable (ej. 5-10) si es un puerto compartido
+   2. Cambiar `violation` a `restrict` (descarta tráfico extra pero no deshabilita el puerto) o `protect` (descarta silenciosamente)
 
-c) A 120 metros: atenuación proporcional = 21,3 × (120/100) = 25,56 dB
-   Potencia recibida = 2 - 25,56 = **-23,56 dBm**
-   **No funciona.** -23,56 dBm está por debajo del umbral de -20 dBm.
+c) **Recuperar el puerto:**
+   ```bash
+   SW-OFICINA-01(config)# interface fa0/1
+   SW-OFICINA-01(config-if)# shutdown
+   SW-OFICINA-01(config-if)# no shutdown
+   ```
+   O configurar `errdisable recovery cause psecure-violation` para recuperación automática.
 
-## 4. Fibra vs cobre: caso real
+## 4. Diseño de red redundante
 
-a) **200 m:** Fibra multimodo (el cobre Cat6a se queda en 100 m)
-   **500 m:** Fibra multimodo (el cobre no llega a 500 m)
-   **2000 m:** Fibra monomodo (obligatorio para 2 km)
+a) **Topología conceptual:** Malla parcial. SW1 (core) conectado a SW2, SW3, SW4. SW2 conectado a SW3 y SW4. Sin bucles directos SW3-SW4 para limitar redundancia.
 
-b) **200-500 m:** Fibra multimodo OM3/OM4 (10 Gbps, hasta 550 m)
-   **2000 m:** Fibra monomodo OS2 (10 Gbps, hasta 40 km)
+b) **Puertos bloqueados:** Depende del Root Bridge. Si SW1 es Root, sus puertos son Designated. Los switches no-root tendrán Root Ports y Alternate Ports bloqueados. Con 3 conexiones alternativas por switch, aproximadamente 3 puertos bloqueados.
 
-c) **Conectores:** LC (estándar en SFP)
-   **Módulos SFP:**
-   - 200-500 m: SFP+ 10GBASE-SR (multimodo, 850 nm)
-   - 2000 m: SFP+ 10GBASE-LR (monomodo, 1310 nm)
+c) **Prioridad para SW1 como Root:** `spanning-tree vlan 1 priority 4096` (o 0 para forzarlo absolutamente).
 
-## 5. Pinout y solución de problemas
+d) **Si SW1 falla:**
+   - Se elige un nuevo Root Bridge (el de menor Bridge ID entre SW2, SW3, SW4)
+   - **Con STP:** ~50 segundos de convergencia
+   - **Con RSTP:** ~1-3 segundos
 
-a) **Falla el pin 3** (el tercer LED no se enciende: posición 3 de 8).
+## 5. CAM table analysis
 
-b) **Par 3-6** (blanco/verde y verde en T568B, o blanco/naranja y naranja en T568A). El pin 3 forma parte del par transmisión/recepción junto con el pin 6.
+a) **Dos dispositivos** en Fa0/4: 00D0.BC96.1A01 y 00D0.BC96.1A02. La tabla muestra ambas MACs en el mismo puerto.
 
-c) **Funcionará parcialmente.** 100Base-TX solo necesita los pares 1-2 y 3-6. Como falla el par 3-6, el cable **no funcionará ni a 100 Mbps**. Para Gigabit (que necesita los 4 pares), tampoco funcionará.
+b) **4 puertos** con dispositivos: Fa0/1, Fa0/2, Fa0/3, Fa0/4.
 
-## 6. Diseña el latiguillo perfecto
+c) **FFFF.FFFF.FFFF en CPU:** Es la dirección MAC de broadcast. Está en la CPU porque el switch procesa los broadcasts internamente (además de reenviarlos).
 
-**Herramientas:** Crimpadora RJ45, pelacables, cortador, comprobador de cables.
+d) **Si llega una trama con destino 00D0.BC96.1A03:** Es una MAC desconocida (no está en la tabla). El switch **inunda** la trama por todos los puertos excepto el de origen.
 
-**Pasos:**
-1. **Pelar:** Con el pelacables, retira unos 2 cm de la funda exterior. Con cuidado de no dañar los hilos internos.
-2. **Ordenar (T568B, clip hacia abajo, mirando el conector de frente):**
-   - Pin 1: Blanco/Naranja
-   - Pin 2: Naranja
-   - Pin 3: Blanco/Verde
-   - Pin 4: Azul
-   - Pin 5: Blanco/Azul
-   - Pin 6: Verde
-   - Pin 7: Blanco/Marrón
-   - Pin 8: Marrón
-3. **Cortar:** Con la crimpadora, corta los hilos rectos dejando aproximadamente 1 cm desde la funda.
-4. **Insertar:** Mete los hilos en el conector RJ45, empujando hasta que los veas asomar por el frente (por los contactos dorados). La funda debe quedar dentro del conector (el pasador de sujeción la agarra).
-5. **Crimpar:** Introduce el conector en la crimpadora y aprieta firmemente hasta oír un clic.
-6. **Comprobar:** Usa el tester para verificar continuidad en todos los pines (1-8 en orden). Si algún LED no se enciende o el orden es incorrecto, corta y repite.
+## 6. STP: cálculo de costes
 
-**Señal de crimpado correcto:** Todos los contactos dorados están hundidos uniformemente, la funda está sujeta por el pasador, y el tester muestra LEDs 1-8 en secuencia correcta.
+a) **Root Port de Switch C:** Depende del coste acumulado hacia el Root Bridge.
 
-## 7. Caso WiFi: oficina con zonas muertas
+   **Camino A → C directo (Fa0/3):** coste = 19
+   **Camino A → B → C (Fa0/1 → Fa0/2):** coste = 19 + 19 = 38
 
-a) **Causas físicas posibles:**
-   - **Interferencia de vecinos:** los APs de las oficinas colindantes comparten el canal 1, 6 u 11, y todos se pisan.
-   - **Obstrucciones:** los tabiques de cartón-yeso y el mobiliario atenúan la señal (atenuación).
-   - **Cobertura insuficiente:** un solo AP para 25 puestos reparte un canal compartido entre muchos clientes; las zonas más alejadas quedan al límite.
-   - **Canal saturado:** todos los clientes compiten por el mismo canal, y en horas punta (la tarde) la contienda se dispara.
+   Fa0/3 tiene **menor coste total** (19 < 38), así que **Fa0/3 es el Root Port**.
 
-b) **Herramientas:** analizador WiFi (para ver canales, señal RSSI y APs vecinos), aplicación de escaneo de red para comprobar número de clientes, y medición de velocidad en distintos puntos de la oficina.
+b) **Costes:** A→C directo = 19. A→B→C = 38.
 
-c) **Soluciones ordenadas de más barata a más cara:**
-   1. **Elegir canales no solapados** (1, 6, 11 en 2,4 GHz) y configurar el AP en 5 GHz (y, si soporta, activar band-steering).
-   2. **Reubicar el AP** en una posición más central o elevado, lejos de metal y fuentes de interferencia.
-   3. **Añadir APs adicionales** (o un mesh) para cubrir las zonas muertas, con canales distintos entre APs adyacentes.
+c) **Alternate Port:** Fa0/2 (el puerto del camino más caro que queda en discarding como respaldo).
 
-## 8. Elección de medio a escala
+d) **Si el coste de Fa0/3 se cambia a 4:** El coste total por Fa0/3 baja a 4, reforzando aún más que Fa0/3 sea el Root Port. Si en cambio el coste de Fa0/3 subiera a 100, entonces el Root Port pasaría a ser por el camino A→B→C (coste 38 < 100).
 
-a) **Mini-oficina (8 puestos, 60 m²):** **Cobre Cat6 para los puestos fijos** + **1 AP WiFi** para visitas y movilidad. Distancias cortas (< 100 m), presupuesto ajustado: el WiFi por sí solo puede bastar, pero los puestos fijos con cobre garantizan rendimiento y estabilidad.
+## 7. Topología STP/RSTP bajo análisis
 
-b) **Planta de 40 puestos (rack en la misma planta):** **Cobre Cat6 a todos los puestos** (distancias dentro de los 100 m, 1 Gbps) con cableado estructurado (patch panels + latiguillos). El uplink del rack si se extiende a otra sala más lejana: fibra multimodo. WiFi como complemento para salas de reuniones.
+a) **Root Bridge: SW1.** Prioridad 4096, muy por debajo de los 32768 de los demás. No hace falta desempate por MAC.
 
-c) **Campus de 3 edificios:**
-   - **100 m:** Cobre Cat6a (límite exacto del cobre; correcto y barato) o fibra multimodo si se prefiere backbone.
-   - **500 m:** **Fibra multimodo OM3/OM4** (el cobre no llega a 500 m; la multimodo cubre hasta ~550 m a 10 Gbps).
-   - **2000 m:** **Fibra monomodo OS2** (obligatoria: solo la monomodo cubre distancias de kilómetros).
+b) **Puerto en estado Discarding:** el enlace redundante **SW2-SW3**. Concretamente, el puerto de SW3 hacia SW2 (el extremo con mayor coste acumulado hacia el Root, que queda como **Alternate Port**). Los enlaces directos SW1-SW2, SW1-SW3 y SW1-SW4 son Designated (todos los puertos del Root).
 
-> 💡 **Regla resumen:** distancia decide el medio (cobre ≤ 100 m, multimodo ≤ ~550 m, monomodo el resto); movilidad decide el WiFi; presupuesto decide las categorías.
+c) **3 Root Ports**: SW2, SW3 y SW4 son switches no-root, cada uno con su Root Port hacia SW1 (por su enlace directo de coste 19).
+
+d) **Con RSTP:** la red converge en **1-3 segundos** (handshake propuesta/acuerdo). **Con STP clásico:** **30-50 segundos** (esperando temporizadores).
+
+e) Los puertos del Root Bridge son todos **Designated**: son el "punto de referencia" del árbol y nunca se bloquean.
+
+## 8. Laboratorio: Port Security en la sala de profesores
+
+a) y b) Configuración completa:
+
+```bash
+Switch(config)# interface fa0/24
+Switch(config-if)# switchport mode access
+Switch(config-if)# switchport port-security
+Switch(config-if)# switchport port-security maximum 1
+Switch(config-if)# switchport port-security mac-address sticky
+Switch(config-if)# switchport port-security violation shutdown
+```
+
+c) Verificación: `Switch# show port-security interface fa0/24` (muestra el máximo, las MACs seguras y el estado del puerto).
+
+d) La violación ocurre porque la **MAC sticky del PC original NO caduca**: aunque el PC se desenchufe, su MAC permanece aprendida como permanente. Al conectar el portátil, su MAC nueva hace un total de 2 MACs en el puerto y se supera el máximo (1) → violación shutdown → errdisable.
+
+e) Recuperar el puerto:
+
+```bash
+Switch(config)# interface fa0/24
+Switch(config-if)# shutdown
+Switch(config-if)# no shutdown
+```
+
+(O configurar `errdisable recovery cause psecure-violation`.)
+
+f) Sin perder seguridad, puedes:
+   - Aumentar `maximum` a 2 si es un puerto compartido.
+   - Configurar el **envejecimiento de la port security** para que la MAC sticky expire si el dispositivo se desenchufa (las sticky necesitan `aging static` para poder caducar):
+     ```bash
+     Switch(config-if)# switchport port-security aging time 5
+     Switch(config-if)# switchport port-security aging type inactivity
+     Switch(config-if)# switchport port-security aging static
+     ```
+   - O usar `violation restrict` (descarta el tráfico extra sin deshabilitar el puerto), aunque es menos estricto.

@@ -1,92 +1,67 @@
 ---
-title: Boletín U11 — Inicial
-description: Ejercicios básicos de NAT
+title: Boletín UD11 — Inicial
+description: Ejercicios básicos de redes inalámbricas
 ---
 
-# 📝 Boletín U11 — Inicial
+# 📝 Boletín UD11 — Inicial
 
-> Ejercicios para practicar los fundamentos de NAT.
+> Ejercicios básicos para afianzar los conceptos de redes WLAN: estándares, seguridad y diseño.
 
 ---
 
-## 1. ¿Qué es NAT?
+## 1. ¿Quién soy?
 
-Define qué es NAT y por qué es necesario en las redes IPv4 actuales.
+a) Estándar IEEE que define las redes WLAN.
+b) El identificador de la red que ves al escanear.
+c) Dispositivo que convierte la señal cableada en radio.
+d) Modo en el que dos portátiles se conectan directamente sin punto de acceso.
+e) Organización que certifica la interoperabilidad de los equipos WiFi.
 
-<details>
-<summary>💡 Pista</summary>
-Piensa en la escasez de direcciones IPv4 públicas y cómo una LAN privada accede a Internet.
-</details>
+## 2. Bandas y canales
 
-## 2. Tipos de NAT
+a) ¿Qué dos bandas usa el WiFi doméstico habitual?
+b) ¿Cuántos canales no solapados hay en 2,4 GHz y cuáles son?
+c) ¿Qué banda tolera mejor la interferencia y cuál llega más lejos?
+d) ¿Qué canal usarías en un edificio con vecinos saturando el 1 y el 11?
 
-Relaciona cada tipo de NAT con su descripción:
+## 3. Verdadero o falso
 
-| Tipo | Descripción |
+a) WEP sigue siendo una opción válida para redes domésticas pequeñas.
+b) WPA2-Personal usa una clave compartida (PSK).
+c) WPA3 añade SAE, que resiste mejor los ataques de diccionario.
+d) En 5 GHz los canales no solapados son muchos más que en 2,4 GHz.
+e) Un AP con SSID oculto está protegido contra clientes no autorizados.
+
+## 4. Seguridad: escala del mal
+
+Ordena de peor a mejor: WEP, WPA3, WPA, WPA2, red abierta.
+
+## 5. WiFi 4 → WiFi 7
+
+Relaciona cada marketing-name con su estándar IEEE:
+
+| Marketing | IEEE |
 |---|---|
-| NAT estático | A. Muchas IPs privadas comparten una IP pública variando puertos |
-| NAT dinámico | B. Una IP privada fija se traduce a una IP pública fija |
-| PAT | C. Se asigna una IP pública de un pool disponible |
+| 1. WiFi 4 | a) 802.11ax |
+| 2. WiFi 5 | b) 802.11n |
+| 3. WiFi 6 | c) 802.11ac |
+| 4. WiFi 6E | d) 802.11be |
+| 5. WiFi 7 | e) 802.11ax en 6 GHz |
 
-## 3. Configura PAT
+## 6. Cobertura
 
-Escribe los comandos necesarios para configurar PAT en un router Cisco donde:
-- Interfaz LAN: GigabitEthernet 0/0 (192.168.1.1/24)
-- Interfaz WAN: GigabitEthernet 0/1 (83.45.12.78/30)
-- Red interna: 192.168.1.0/24
+El despacho del fondo no tiene señal. El router está en el salón.
 
-## 4. Tabla NAT
+a) ¿Cuáles son los tres primeros ajustes que probarías?
+b) ¿Por qué colocar el AP en el suelo o dentro de un armario metálico es mala idea?
+c) ¿Qué es el "cliente travieso" (hidden node) y cómo se manifiesta?
 
-Un router NAT muestra la siguiente tabla:
+## 7. Configuración mínima de un AP
 
-```
-Pro Inside global      Inside local       Outside local      Outside global
-udp   192.168.1.  8.8.8.8:53  8.8.8.8:53
-udp   192.168.1.  8.8.8.8:53  8.8.8.8:53
-```
+Escribe la configuración que pondrías en un AP doméstico para una red de un estudio de música: SSID `EstudioNet`, WPA2/WPA3 Personal, contraseña segura, 2,4 GHz canal 6, 20 MHz.
 
-a) ¿Cuántos dispositivos están haciendo peticiones DNS?
-b) ¿Cuál es la IP pública del router?
-c) ¿Qué puerto ha asignado NAT al PC 192.168.1.10?
+## 8. Autenticación: Personal vs Enterprise
 
-## 5. Verdadero o falso
-
-a) NAT estático permite que múltiples PCs compartan una IP pública.
-b) PAT necesita configurar `ip nat inside` y `ip nat outside`.
-c) NAT dinámico traduce siempre la misma IP privada a la misma IP pública.
-d) `show ip nat translations` muestra las traducciones activas.
-
-## 6. NAT destino (port forwarding)
-
-Quieres que un servidor web interno (192.168.1.10:80) sea accesible desde Internet en la IP pública 83.45.12.78:80. Escribe los comandos necesarios.
-
-## 7. ¿Qué tipo de NAT es?
-
-Identifica el tipo de NAT que se aplica en cada escenario:
-
-| Escenario | Tipo de NAT |
-|---|---|
-| a) El servidor web de la empresa (192.168.1.10) siempre sale a Internet como 83.45.12.78 | |
-| b) La oficina tiene un pool de 4 IPs públicas (83.45.12.78-81) y cada usuario toma una al salir | |
-| c) 300 alumnos de un instituto salen todos por la misma IP pública del router | |
-| d) Un cliente de Internet visita 83.45.12.78:8080 y llega al servidor interno 192.168.1.10:80 | |
-
-**Pista:** recuerda la tabla de tipos del punto 2 de la unidad: estático (1:1 fijo), dinámico (pool), PAT (muchos:1 con puertos) y destino (puerto público → IP:puerto interno).
-
-## 8. Lee la tabla NAT
-
-El router muestra esta tabla:
-
-```
-Pro Inside global      Inside local       Outside local      Outside global
-udp   192.168.1.  8.8.8.8:53  8.8.8.8:53
-udp   192.168.1.  8.8.8.8:53  8.8.8.8:53
-tcp 83.45.12.78:60003  192.168.1.30:49152  142.250.184.4:443  142.250.184.4:443
-```
-
-a) ¿Cuántas conexiones hay activas y de qué tipo de tráfico?
-b) ¿Qué puerto efímero original usaba el PC 192.168.1.30?
-c) ¿Por qué dos PCs pueden usar el mismo puerto origen (54321) sin conflicto?
-d) ¿A qué servicio destino van las dos primeras conexiones? ¿Y la tercera?
-
-**Pista:** los puertos efímeros (49152-65535) los elige cada PC; NAT añade un puerto global único por conexión (60001, 60002…) para desambiguar. Fíjate en la columna *Outside local* para saber el destino.
+a) ¿Qué diferencia esencial hay entre WPA2-PSK y WPA2-Enterprise?
+b) ¿Qué servidor aparece en Enterprise y qué protocolo habla con el AP?
+c) ¿Qué red del instituto sería candidata a Enterprise y por qué?

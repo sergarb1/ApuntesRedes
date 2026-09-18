@@ -1,9 +1,9 @@
 ---
-title: "Boletín U01 — Avanzado (Resuelto)"
+title: "Boletín UD1 — Avanzado (Resuelto)"
 description: Soluciones de los ejercicios avanzados de la Unidad 01
 ---
 
-# 💪 Boletín U01 — Avanzado (Resuelto)
+# 💪 Boletín UD1 — Avanzado (Resuelto)
 
 ---
 
@@ -67,7 +67,7 @@ c) 4 letras = 4 bytes; 4 × 8 = **32 bits**.
 ## 7. El mapa del curso
 
 1. **Sin saber qué es una red, no sabrías para qué configuras cada aparato.** Si no conoces las 4 piezas (dispositivos finales, de interconexión, medio, protocolos), configurar un switch o un router sería como girar una llave sin saber qué puerta abre.
-2. **El método de diagnóstico en capas lo usarás en cada laboratorio del curso.** Desde la U02 hasta la U13, cada vez que algo falle, volverás a la escalera del ping. Aprenderlo primero te da una herramienta que acompaña todo el curso.
+2. **El método de diagnóstico en capas lo usarás en cada laboratorio del curso.** Desde la UD1 hasta la UD1, cada vez que algo falle, volverás a la escalera del ping. Aprenderlo primero te da una herramienta que acompaña todo el curso.
 
 ## 8. El entorno de trabajo: Preparación del taller virtual
 

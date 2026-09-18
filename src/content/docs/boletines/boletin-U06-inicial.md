@@ -1,91 +1,74 @@
 ---
-title: Boletín U06 — Inicial
-description: Ejercicios básicos de IPv6 y Transición
+title: Boletín UD6 — Inicial
+description: Ejercicios básicos de enrutamiento estático
 ---
 
-# 📝 Boletín U06 — Inicial
+# 📝 Boletín UD6 — Inicial
 
-> Ejercicios básicos para afianzar los conceptos de direccionamiento IPv6.
+> Ejercicios básicos para afianzar los conceptos del router y las rutas estáticas.
 
 ---
 
-## 1. Compresión de direcciones
+## 1. Componentes del router
 
-Comprime estas direcciones IPv6 al máximo:
+Relaciona cada componente con su función:
 
-a) `2001:0DB8:0000:0000:0000:0000:0000:0001`
-b) `FE80:0000:0000:0000:02AA:00FF:FE9A:4CA2`
-c) `0000:0000:0000:0000:0000:0000:0000:0001`
-d) `2001:0DB8:0000:0000:ABCD:0000:0000:1234`
-
-## 2. Identifica el tipo
-
-Indica qué tipo de dirección IPv6 es cada una:
-
-a) `2001:DB8::1`
-b) `FE80::1`
-c) `::1`
-d) `FC00::1`
-e) `FF02::1`
-
-## 3. Completa
-
-Completa las equivalencias:
-
-a) IPv4 tiene __ bits, IPv6 tiene __ bits.
-b) IPv4 se representa en decimal, IPv6 en __.
-c) El prefijo de Link-Local es __.
-d) El prefijo de Global Unicast es __.
-e) __ reemplaza a ARP en IPv6.
-
-## 4. Verdadero o falso
-
-a) Las direcciones Link-Local son enrutables en Internet.
-b) SLAAC no necesita un servidor central.
-c) :: se puede usar varias veces en la misma dirección IPv6.
-d) DHCPv6 funciona igual que DHCP en IPv4.
-e) Dual Stack significa tener IPv4 e IPv6 simultáneamente.
-
-## 5. NDP
-
-Relaciona cada mensaje ICMPv6 con su función:
-
-| Mensaje | Función |
+| Componente | Función |
 |---|---|
-| 1. Neighbor Solicitation | a) El router anuncia su prefijo |
-| 2. Neighbor Advertisement | b) El dispositivo busca routers |
-| 3. Router Solicitation | c) "¿Quién tiene esta IP?" |
-| 4. Router Advertisement | d) "Yo tengo esa IP, aquí está mi MAC" |
+| 1. RAM | a) Almacena el IOS |
+| 2. NVRAM | b) Configuración en ejecución |
+| 3. Flash | c) Startup-config |
+| 4. ROM | d) Monitor de recuperación |
 
-## 6. Mecanismos de transición
+## 2. Verdadero o falso
 
-Relaciona cada mecanismo con su descripción:
+a) Una ruta estática se configura manualmente.
+b) La ruta por defecto es 0.0.0.0/0.
+c) Una ruta estática con next-hop inalcanzable se instala igualmente en la tabla.
+d) La métrica de una ruta estática es siempre 0.
+e) `show ip route` muestra la tabla de rutas.
 
-| Mecanismo | Descripción |
+## 3. ¿Qué comando?
+
+Relaciona el comando con su función:
+
+| Comando | Función |
 |---|---|
-| 1. Dual Stack | a) Traduce IPv6 a IPv4 para acceder a servidores antiguos |
-| 2. Túnel 6to4 | b) IPv4 e IPv6 funcionando a la vez |
-| 3. NAT64 | c) Encapsula IPv6 dentro de IPv4 |
+| 1. `ip route 0.0.0.0 0.0.0.0 10.0.0.2` | a) Ver interfaces: IP, estado y protocolo |
+| 2. `show ip route` | b) Ver solo la tabla de rutas |
+| 3. `show ip interface brief` | c) Configurar ruta por defecto |
+| 4. `ip route 192.168.2.0 255.255.255.0 10.0.0.2` | d) Configurar ruta estática a una red concreta |
 
-## 7. Expande direcciones
+## 4. Modos del router
 
-Descomprime estas direcciones a su forma **completa de 8 grupos**:
+Ordena los modos de configuración del router (de menor a mayor privilegio):
 
-a) `2001:DB8::1`
-b) `FE80::2AA:FF:FE9A:4CA2`
-c) `::1`
+a) Configuración global (`Router(config)#`)
+b) Usuario (`Router>`)
+c) Configuración de interfaz (`Router(config-if)#`)
+d) Privilegiado (`Router#`)
 
-Recuerda: el `::` oculta tantos grupos de ceros como falten para completar 8.
+## 5. Anatomía de una ruta
 
-## 8. Clasifica tipo y ámbito
+En la salida `S 192.168.3.0/24 [1/0] via 10.0.0.2`, identifica qué es cada trozo:
 
-Indica para cada dirección su **tipo** (GUA, LLA, ULA, Loopback, Multicast) y su **ámbito** (global, enlace local, privado, este nodo):
+| Trozo | ¿Qué significa? |
+|---|---|
+| `S` | |
+| `192.168.3.0/24` | |
+| `[1/0]` | |
+| `via 10.0.0.2` | |
 
-| Dirección | Tipo | Ámbito |
-|---|---|---|
-| a) `2001:DB8::1` | | |
-| b) `FE80::1` | | |
-| c) `FC00::1` | | |
-| d) `::1` | | |
-| e) `FF02::1` | | |
-| f) `2001:DB8:1:2:21A:2BFF:FE3C:4D5E` | | |
+## 6. Tu primera ruta estática
+
+R1 tiene la LAN 192.168.1.0/24 y en G0/1 la IP 10.0.0.1/30. R2 está en 10.0.0.2 y detrás de él vive la red 192.168.2.0/24.
+
+Escribe el comando exacto para que R1 llegue a 192.168.2.0/24.
+
+## 7. ¿Ruta por defecto o ruta específica?
+
+Un router de una sucursal pequeña con una única salida a Internet. ¿Qué prefieres configurar: una ruta por defecto o 50 rutas específicas? ¿Por qué?
+
+## 8. Verificación
+
+Has configurado una ruta estática pero el ping falla. ¿Qué tres comandos usarías, en qué orden y qué mirarías en cada uno?

@@ -1,85 +1,103 @@
 ---
-title: Boletín U04 — Inicial
-description: Ejercicios básicos de Infraestructura Física de Red
+title: Boletín UD4 — Inicial
+description: Ejercicios básicos de Switching y STP
 ---
 
-# 📝 Boletín U04 — Inicial
+# 📝 Boletín UD4 — Inicial
 
-> Ejercicios básicos para afianzar los conceptos de medios físicos, cableado, crimpado y WiFi.
+> Ejercicios básicos para afianzar los conceptos de switching y STP.
 
 ---
 
-## 1. Identifica el cable
+## 1. ¿Qué hace el switch?
 
-Relaciona cada tipo de cable con su uso:
+Relaciona la situación con la acción del switch:
 
-| Cable | Uso |
+| Situación | Acción |
 |---|---|
-| 1. Directo | a) PC a PC |
-| 2. Cruzado | b) PC a switch |
-| 3. Consola | c) Configuración inicial de un switch Cisco |
+| 1. Llega una trama con MAC destino conocida | a) Inunda por todos los puertos menos el origen |
+| 2. Llega una trama con MAC destino desconocida | b) Reenvía solo por el puerto correspondiente |
+| 3. Llega una trama broadcast | c) Inunda por todos los puertos |
 
-## 2. ¿Qué categoría?
+## 2. Verdadero o falso
 
-Indica qué categoría de cable UTP necesitas para cada situación:
+a) Un switch segmenta los dominios de colisión.
+b) Un switch segmenta los dominios de broadcast.
+c) STP evita bucles en redes conmutadas.
+d) RSTP converge más rápido que STP.
+e) La tabla MAC de un switch se llama tabla ARP.
 
-a) Red de oficina a 1 Gbps
-b) Datacenter con 10 Gbps a 100 metros
-c) Cableado económico para una pequeña empresa
+## 3. Estados STP
 
-## 3. Verdadero o falso
+Ordena los estados STP por los que pasa un puerto desde que se activa hasta que reenvía tráfico:
 
-a) La fibra óptica usa pulsos eléctricos para transmitir datos.
-b) El estándar T568B pone el par naranja en los pines 1 y 2.
-c) Un cable UTP tiene 4 pares de hilos (8 hilos en total).
-d) El Auto MDI-X permite usar cables directos entre switches.
-e) La diafonía es la pérdida de señal con la distancia.
+a) Learning
+b) Forwarding
+c) Blocking
+d) Listening
 
-## 4. Ordena el crimpado
+## 4. Identifica el rol
 
-Ordena los pasos para crimpar un cable RJ45 (del 1 al 6):
+Indica qué rol STP tiene cada puerto:
 
-a) Insertar los hilos en el conector RJ45
-b) Pelar la funda exterior del cable
-c) Comprobar el cable con un tester
-d) Ordenar los hilos según T568B
-e) Cortar los hilos rectos
-f) Crimpar con la crimpadora
+a) Puerto del Root Bridge hacia un switch no-root
+b) Puerto que mira hacia el Root Bridge (en un switch no-root)
+c) Puerto bloqueado que proporciona un camino alternativo
 
-## 5. Relaciona concepto y definición
+## 5. ¿Qué comando?
 
-| Concepto | Definición |
+Relaciona el comando con su función:
+
+| Comando | Función |
 |---|---|
-| 1. Atenuación | a) Interferencia entre pares de hilos adyacentes |
-| 2. Diafonía | b) Capacidad máxima de transmisión de un medio |
-| 3. Ancho de banda | c) Tiempo de ida y vuelta de un paquete |
-| 4. Latencia | d) Pérdida de intensidad de la señal con la distancia |
+| 1. `show mac address-table` | a) Ver estado STP |
+| 2. `show spanning-tree` | b) Configurar PortFast |
+| 3. `spanning-tree portfast` | c) Ver tabla MAC del switch |
+| 4. `switchport port-security` | d) Activar seguridad de puerto |
 
-## 6. Sopa de letras de conectores
+## 6. Tormenta de broadcast
 
-Nombra estos conectores y el medio en el que se usan:
+¿Qué es necesario para que ocurra una tormenta de broadcast?
 
-a) RJ45
-b) LC
-c) SC
+a) Un solo switch con muchos PCs
+b) Un bucle en la red (switches conectados formando un círculo)
+c) Un cable defectuoso
+d) Un router mal configurado
 
-## 7. Cableado estructurado
+## 7. Reenvío de tramas y la tabla CAM
 
-Relaciona cada elemento del cableado estructurado con su función:
+Observa la tabla CAM de un switch:
 
-| Elemento | Función |
-|---|---|
-| 1. Latiguillo | a) Concentra los cables horizontales en el rack |
-| 2. Keystone | b) Cable flexible que une el PC con la roseta (o el patch panel con el switch) |
-| 3. Patch panel | c) Conector hembra RJ45 en la roseta de pared |
-| 4. Cable horizontal | d) Cable sólido empotrado que va del patch panel al keystone |
+```
+Vlan    Mac Address       Type        Ports
+----    -----------       --------    -----
+   1    0050.7966.6800    DYNAMIC     Fa0/1
+   1    0050.7966.6801    DYNAMIC     Fa0/2
+   1    00D0.BC96.1A01    DYNAMIC     Fa0/3
+```
 
-## 8. Medios y estándares: verdadero o falso
+Indica qué hace el switch en cada caso:
 
-Indica si cada afirmación es verdadera (V) o falsa (F) y corrige las falsas:
+a) Llega una trama por Fa0/2 con MAC origen `0050.7966.6801` y destino `00D0.BC96.1A01`.
+b) Llega una trama por Fa0/1 con MAC origen `0050.7966.6800` y destino `0050.7966.6802` (desconocida).
+c) Llega una trama por Fa0/3 con destino `FFFF.FFFF.FFFF` (broadcast).
+d) Llega una trama por Fa0/4 con MAC origen `0050.7966.6801`, una MAC que ya estaba aprendida en Fa0/2. ¿Qué hace el switch con la tabla CAM?
 
-a) La fibra óptica se ve afectada por las interferencias electromagnéticas.
-b) El estándar 802.11ax se conoce comercialmente como WiFi 6.
-c) El WiFi transmite por ondas electromagnéticas en el aire, sin cable.
-d) La fibra multimodo llega a distancias de más de 40 km.
-e) La velocidad real del WiFi suele estar entre el 30% y el 50% de la teórica.
+**Pista:** si la MAC destino está en la tabla, reenvío selectivo; si no está, inundo. Y si la misma MAC origen aparece por un puerto distinto, la tabla se actualiza con el puerto más reciente.
+
+## 8. Estados STP
+
+Completa la tabla de estados STP:
+
+| Estado | ¿Reenvía tráfico? | ¿Aprende MACs? | Tiempo |
+|---|---|---|---|
+| Blocking | No | ... | ... |
+| Listening | ... | No | 15 s |
+| Learning | No | ... | ... |
+| Forwarding | ... | Sí | Indefinido |
+
+a) ¿Cuál es el orden exacto de los estados desde que se activa el puerto?
+b) ¿Cuánto tarda un puerto STP en pasar de blocking a forwarding si no hay fallos?
+c) ¿En qué estado está un puerto que ya reenvía tráfico y aprende MACs?
+
+**Pista:** solo Learning aprende sin reenviar, y solo Forwarding reenvía. Suma los tiempos de los estados intermedios.

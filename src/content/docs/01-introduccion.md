@@ -5,7 +5,7 @@ description: Tu punto de partida si no has tocado una red en tu vida 🚪
 
 <p><small>Tu punto de partida si no has tocado una red en tu vida 🚪</small></p>
 
-> 🗺️ **El mapa del paquete:** 🚪 **AQUÍ ESTÁS** → 🌐 Fundamentos → 📦 OSI → 🔌 Físico → 🧮 IPv4 → 🚀 IPv6 → 🔀 Switching → 🏢 VLAN → 🧭 Routing → 🗣️ OSPF → 🌐 NAT → 🩺 Diagnóstico → ☁️ Cloud
+> 🗺️ **El mapa del paquete:** 🚪 **AQUÍ ESTÁS** → 📡 Ethernet → 🧮 IP y subnetting → 🔀 Switching y VLAN → 🏢 Trunking → 🧭 Routing estático → 🗣️ OSPF → 🛡️ ACLs → 🌐 NAT → 🗄️ Servicios → 📶 WiFi → 🔁 Alta disponibilidad
 
 ---
 
@@ -30,9 +30,9 @@ Y si ya sabes algo de redes, igualmente vale la pena una pasada rápida: aquí d
 | [05 · DNS y DHCP](/ApuntesRedes/01-introduccion/05-dns-y-dhcp) | Los servicios invisibles que hacen Internet usable | Todos |
 | [06 · Método de diagnóstico](/ApuntesRedes/01-introduccion/06-metodo-diagnostico) | La escalera del ping y la lógica del diagnóstico | Todos |
 | [07 · Instalación de Packet Tracer](/ApuntesRedes/01-introduccion/07-instalacion-packet-tracer) | Prepara tu laboratorio virtual de bolsillo | Todos |
-| [08 · Glosario](/ApuntesRedes/01-introduccion/09-glosario) | Tus términos clave de referencia rápida | Todos |
-| [09 · Preguntas tontas](/ApuntesRedes/01-introduccion/10-preguntas-tontas) | Las dudas que nadie se atreve a hacer en voz alta | Todos |
-| [10 · Mapa del curso](/ApuntesRedes/01-introduccion/08-mapa-del-curso) | Las 13 etapas del viaje y para qué sirve cada una | Todos |
+| [08 · Mapa del curso](/ApuntesRedes/01-introduccion/08-mapa-del-curso) | Las 12 etapas del viaje y para qué sirve cada una | Todos |
+| [09 · Glosario](/ApuntesRedes/01-introduccion/09-glosario) | Tus términos clave de referencia rápida | Todos |
+| [10 · Preguntas tontas](/ApuntesRedes/01-introduccion/10-preguntas-tontas) | Las dudas que nadie se atreve a hacer en voz alta | Todos |
 
 ---
 

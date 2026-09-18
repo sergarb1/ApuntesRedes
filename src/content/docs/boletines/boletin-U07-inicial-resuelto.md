@@ -1,75 +1,75 @@
 ---
-title: Boletín U07 — Inicial (Resuelto)
-description: Soluciones de los ejercicios básicos de Switching y STP
+title: Boletín UD7 — Inicial (Resuelto)
+description: Soluciones de los ejercicios básicos de Routing Dinámico
 ---
 
-# ✅ Boletín U07 — Inicial (Resuelto)
+# ✅ Boletín UD7 — Inicial (Resuelto)
 
 ---
 
-## 1. ¿Qué hace el switch?
+## 1. IGP vs EGP
 
-1 → b (MAC destino conocida → reenvío selectivo)
-2 → a (MAC destino desconocida → inunda)
-3 → c (Broadcast → inunda)
+a) OSPF → **IGP**
+b) BGP → **EGP**
+c) RIP → **IGP**
+d) EIGRP → **IGP** (propietario Cisco, pero interior)
 
 ## 2. Verdadero o falso
 
-a) **Verdadero.** Cada puerto es un dominio de colisión independiente.
-b) **Falso.** Los switches no segmentan dominios de broadcast. Eso lo hacen los routers.
-c) **Verdadero.** STP bloquea puertos redundantes para romper bucles.
-d) **Verdadero.** RSTP (IEEE 802.1w) converge en 1-3 segundos frente a los 30-50 de STP.
-e) **Falso.** La tabla MAC se llama tabla MAC o CAM table. La tabla ARP está en los hosts, no en los switches.
+a) **Verdadero.** OSPF usa SPF (Dijkstra) para calcular la ruta más corta.
+b) **Verdadero.** RIP máximo 15 saltos. 16 = inalcanzable.
+c) **Verdadero.** Todas las áreas deben conectarse al Área 0.
+d) **Verdadero.** El Router ID debe ser único o las adyacencias fallan.
+e) **Falso.** OSPF converge en segundos, RIP tarda minutos.
 
-## 3. Estados STP
+## 3. Relaciona
 
-1. c) **Blocking** (20s escuchando BPDUs)
-2. d) **Listening** (15s, escucha pero no aprende MACs)
-3. a) **Learning** (15s, aprende MACs pero no reenvía)
-4. b) **Forwarding** (reenvía tráfico normalmente)
+1 → b (LSA = Link State Advertisement)
+2 → c (LSDB = Link State Database)
+3 → a (ABR = Area Border Router)
+4 → d (SPF = Shortest Path First)
 
-Tiempo total: ~50 segundos.
+## 4. Coste OSPF
 
-## 4. Identifica el rol
+a) 100 Mbps → **1** (10⁸ / 100×10⁶ = 1)
+b) 1 Gbps → **1** (el coste mínimo es 1)
+c) 1.544 Mbps → **64** (10⁸ / 1.544×10⁶ ≈ 64)
 
-a) **Designated Port** — El Root Bridge tiene todos sus puertos como Designated.
-b) **Root Port** — Cada switch no-root tiene un Root Port hacia el Root Bridge.
-c) **Alternate Port** — Puerto bloqueado como respaldo.
+## 5. Completa
 
-## 5. ¿Qué comando?
+a) `router ospf 1`
+b) `network 192.168.1.0 0.0.0.255 area 0`
+c) `default-information originate`
+d) `show ip ospf neighbor`
 
-1 → c (`show mac address-table`)
-2 → a (`show spanning-tree`)
-3 → b (`spanning-tree portfast`)
-4 → d (`switchport port-security`)
+## 6. Tipos de routers
 
-## 6. Tormenta de broadcast
+1 → c (Internal Router: misma área)
+2 → b (ABR: conecta áreas)
+3 → a (ASBR: rutas externas)
 
-**b) Un bucle en la red.** Si hay caminos redundantes sin STP, los broadcasts rebotan infinitamente entre switches, saturando la red.
+## 7. Dinámico vs estático
 
-## 7. Reenvío de tramas y la tabla CAM
+a)
+- **OSPF → IGP**
+- **RIP → IGP**
+- **BGP → EGP**
+- **EIGRP → IGP** (interior, aunque propietario de Cisco)
 
-a) MAC origen `0050.7966.6801` → **aprende/refresca Fa0/2**. MAC destino `00D0.BC96.1A01` conocida → **reenvía solo por Fa0/3**.
+b) **Ventajas del dinámico:**
+1. **Autoaprendizaje:** las redes nuevas se comparten solas, sin ir router por router.
+2. **Convergencia automática:** si cae un enlace, la red recalcula y se reencamina sin intervención.
+3. **Menos error humano:** la tabla de rutas la calcula el protocolo, no un administrador tecleando.
 
-b) MAC origen `0050.7966.6800` → aprende/refresca Fa0/1 (ya estaba). MAC destino `0050.7966.6802` **desconocida** → **inunda por todos los puertos excepto Fa0/1**.
+**Caso para estático:** redes muy pequeñas (2-3 routers), un enlace **stub** con una única salida, o una ruta de respaldo a mano (`floating static`): ahí el dinámico solo añadiría tráfico y complejidad.
 
-c) Destino broadcast `FFFF.FFFF.FFFF` → **inunda por todos los puertos** excepto el de origen (Fa0/3).
+## 8. Coste OSPF: tabla de velocidades
 
-d) La MAC `0050.7966.6801` aparece por Fa0/4 cuando estaba aprendida en Fa0/2: el switch **actualiza la tabla CAM** y asocia la MAC a Fa0/4 (la entrada dinámica se mueve al puerto más reciente).
+| Velocidad | Cálculo | Coste OSPF |
+|---|---|---|
+| 10 Mbps | 10⁸ / 10⁷ | **10** |
+| 100 Mbps | 10⁸ / 10⁸ | **1** |
+| 1 Gbps | 10⁸ / 10⁹ = 0,1 | **1** (mínimo) |
+| 1.544 Mbps (T1) | 10⁸ / 1.544.000 ≈ 64,8 | **64** |
 
-## 8. Estados STP
-
-Tabla completada:
-
-| Estado | ¿Reenvía tráfico? | ¿Aprende MACs? | Tiempo |
-|---|---|---|---|
-| Blocking | No | No | 20 s (Max Age) |
-| Listening | No | No | 15 s |
-| Learning | No | Sí | 15 s |
-| Forwarding | Sí | Sí | Indefinido |
-
-a) **Blocking → Listening → Learning → Forwarding** (Disabled es un estado administrativo, no forma parte de la secuencia normal).
-
-b) **30 segundos sin fallos** (15 s Listening + 15 s Learning); hasta **50 s** si hay un fallo y entra el Max Age (20 s + 15 s + 15 s).
-
-c) **Forwarding**: es el único estado que reenvía tráfico (y además aprende MACs).
+> El coste mínimo es **1**: todos los enlaces de 100 Mbps en adelante valen lo mismo por defecto, salvo que subas el `auto-cost reference-bandwidth`.

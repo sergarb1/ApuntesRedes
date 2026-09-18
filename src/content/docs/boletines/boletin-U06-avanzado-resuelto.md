@@ -1,107 +1,132 @@
 ---
-title: Boletín U06 — Avanzado (Resuelto)
-description: Soluciones ejercicios avanzados de IPv6 y Transición
+title: Boletín UD6 — Avanzado (Resuelto)
+description: Soluciones de los ejercicios avanzados de enrutamiento estático
 ---
 
-# ✅ Boletín U06 — Avanzado (Resuelto)
+# ✅ Boletín UD6 — Avanzado (Resuelto)
 
 ---
 
-## 1. Subnetting IPv6
+## 1. Configuración multi-router
 
-a) **Máscara para sedes:** /48 → para 5 sedes necesitas 3 bits extra (2³ = 8). Cada sede tendría /51. Pero en IPv6 lo estándar es dar /48 a cada sede (todas son /48 independientes). Si solo tienes un /48 global, entonces usas /52 para 16 subredes (2⁴ = 16).
+**R1:**
+```bash
+interface g0/0
+ ip address 192.168.1.1 255.255.255.0
+ no shutdown
+interface g0/1
+ ip address 10.0.0.1 255.255.255.252
+ no shutdown
+ip route 192.168.2.0 255.255.255.0 10.0.0.2
+ip route 192.168.3.0 255.255.255.0 10.0.0.2
+ip route 0.0.0.0 0.0.0.0 10.0.0.2
+```
 
-b) **Subredes /64 dentro de /48:** 64 - 48 = 16 bits → 2¹⁶ = **65.536 subredes** /64.
+**R2:**
+```bash
+interface g0/0
+ ip address 10.0.0.2 255.255.255.252
+ no shutdown
+interface g0/1
+ ip address 10.0.0.5 255.255.255.252
+ no shutdown
+interface g0/2
+ ip address 192.168.2.1 255.255.255.0
+ no shutdown
+ip route 192.168.1.0 255.255.255.0 10.0.0.1
+ip route 192.168.3.0 255.255.255.0 10.0.0.6
+```
 
-c) **Primeras 3 subredes /64:**
-   - 2001:DB8:CAFE:0000::/64
-   - 2001:DB8:CAFE:0001::/64
-   - 2001:DB8:CAFE:0002::/64
+**R3:**
+```bash
+interface g0/0
+ ip address 10.0.0.6 255.255.255.252
+ no shutdown
+interface g0/1
+ ip address 192.168.3.1 255.255.255.0
+ no shutdown
+ip route 192.168.1.0 255.255.255.0 10.0.0.5
+ip route 192.168.2.0 255.255.255.0 10.0.0.5
+ip route 0.0.0.0 0.0.0.0 10.0.0.5
+```
 
-## 2. EUI-64
+## 2. Rutas flotantes
 
-a) **EUI-64:** 021A:2BFF:FE3C:4D5E
-   (Invertir bit 7 del primer byte: 00 → 02, insertar FF:FE entre las mitades)
+a) **Comandos:**
+```bash
+ip route 0.0.0.0 0.0.0.0 10.0.0.2        # AD=1 (por defecto)
+ip route 0.0.0.0 0.0.0.0 10.0.1.2 5      # AD=5 (respaldo)
+ip route 192.168.100.0 255.255.255.0 10.0.0.2
+```
 
-b) **IPv6 completa:** 2001:DB8:1:2:021A:2BFF:FE3C:4D5E/64
+b) **Cuándo se activa:** Cuando la ruta primaria (10.0.0.2) desaparece de la tabla (el siguiente salto deja de ser accesible). Entonces la ruta con AD=5 aparece en la tabla.
 
-c) **Problema de privacidad:** La IP es siempre la misma para una MAC dada. Esto permite rastrear un dispositivo físico a través de redes. Las Privacy Extensions (RFC 4941) generan direcciones temporales que cambian periódicamente.
+c) **Verificación:** `show ip route 0.0.0.0` muestra qué ruta por defecto está activa. Si aparece la de 10.0.1.2, la primaria ha fallado.
 
-## 3. Diagnóstico IPv6
+## 3. Resolución de problemas de rutas
 
-a) **Dos direcciones:** Una es Link-Local (fe80::...) necesaria para comunicación local, y otra es Global Unicast (2001:db8:...) para comunicación global. Es normal tener ambas.
+a) **No funciona.** La interfaz G0/1 está `shutdown` (administratively down). La ruta por defecto apunta a 10.0.0.2, que está en G0/1. Si la interfaz está caída, la ruta no se instala en la tabla.
 
-b) **%12 (Zone ID):** Identifica la interfaz de red (en este caso, la número 12). Es necesario en Link-Local porque la misma dirección FE80 podría existir en múltiples interfaces.
+b) `show ip route` — 0.0.0.0/0 no aparecerá. `show ip interface brief` — G0/1 aparece como "administratively down".
 
-c) **Sí puede acceder a Internet** (en el escenario del ejercicio). Tiene una Global Unicast (`2001:db8::`, prefijo de documentación que aquí hace de GUA) y un gateway configurado. En Internet real `2001:DB8::/32` no enruta: es el rango reservado por RFC 3849 para ejemplos.
+c) **Cambiar:**
+```bash
+interface g0/1
+ no shutdown
+```
+Y verificar que el enlace esté físicamente conectado.
 
-d) **Comando:** `ipconfig /all` en Windows, `ip addr` en Linux, `ifconfig -a` en macOS.
+## 4. Longest prefix match
 
-## 4. Diseño de transición
+a) **192.168.1.30 → via 10.0.0.10** (la /28 cubre de .16 a .31: es la coincidencia más larga).
 
-a) **Dual Stack en las LANs.** El ISP ofrece IPv6 nativo, así que ambas sedes pueden tener IPv4 e IPv6 simultáneamente. Es la opción más limpia y sin encapsulación extra.
+b) **192.168.1.200 → via 10.0.0.6** (cae en la /24; la /28 no la cubre y pesa más que la /16).
 
-b) **Conexión entre sedes:** Usando IPv6 nativo (el ISP ya lo ofrece). Cada sede tiene un rango /48 asignado. El enrutamiento IPv6 se hace con OSPFv3 o rutas estáticas.
+c) **192.168.3.44 → via 10.0.0.2** (solo la /16 la abarca: ni la /24 ni la /28 llegan a .3.x).
 
-c) **Acceso al servicio cloud solo-IPv4:** NAT64 + DNS64. El router de la sede central traduce el tráfico IPv6 de los clientes a IPv4 hacia el servidor cloud.
+d) **192.168.1.15 → via 10.0.0.6** (está en la /24 pero fuera de la /28, que empieza en .16).
 
-d) **Configuración en routers:**
-   - Habilitar `ipv6 unicast-routing`
-   - Configurar interfaz WAN con IPv6 del ISP
-   - Configurar interfaz LAN con prefijo /64 de la sede
-   - Configurar rutas IPv6 estáticas o dinámicas
-   - Configurar NAT64 para el servicio cloud legacy
+**Regla:** a mayor máscara (28 > 24 > 16), coincidencia más específica y elegida primero.
 
-## 5. Análisis de Router Advertisement
+## 5. V/F con matices
 
-a) **Método:** DHCPv6 Stateless (O Flag = 1, M Flag = 0). SLAAC da la IP, DHCPv6 da configuración adicional.
+a) **Falso.** La sintaxis es válida y el IOS la acepta en la config; lo que pasa es que no se *instala* en la tabla porque el next-hop es inalcanzable. Comprueba `show ip route` e interfaces.
+b) **Verdadero.** En multiacceso (Ethernet con varios vecinos) una ruta con interfaz de salida hace que el router pregunte por ARP a cualquiera: solo es segura en punto a punto.
+c) **Verdadero.** Es exactamente una ruta flotante: gana la de menor AD, la otra espera en la configuración.
+d) **Verdadero.** Es la ruta de último recurso: solo se consulta cuando el longest prefix match no encuentra nada más específico.
+e) **Falso.** El router necesita una ruta conectada (o aprendida) a la subred del next-hop; si no, la estática no se instala.
 
-b) **La IP la da SLAAC** (el router anuncia el prefijo con RA, el cliente genera su IP). **El DNS lo da DHCPv6** (el cliente consulta al servidor DHCPv6 para obtener DNS y otros parámetros).
+## 6. Diseño de rutas para una sede
 
-c) **No.** SLAAC puro no da DNS. Si el cliente solo soporta SLAAC, necesitaría DHCPv6 para DNS. Pero los clientes modernos suelen soportar RDNSS (DNS en RA), que permite al router anunciar DNS directamente en los RA sin DHCPv6.
+a) **Cuatro:** dos rutas estáticas (LAN de R2 y LAN de R3) + la ruta por defecto a Internet. Las redes de enlace (10.0.0.0/30 y 10.0.0.4/30) no necesitan rutas en R1 porque son conectadas.
 
-d) **Si M Flag = 1:** DHCPv6 Stateful. El servidor DHCPv6 da tanto la IP como el DNS. SLAAC no se usa para la IP. Esto es más parecido al DHCP de IPv4.
+b) **En R1:**
+```bash
+ip route 192.168.2.0 255.255.255.0 10.0.0.2
+ip route 192.168.3.0 255.255.255.0 10.0.0.6
+ip route 0.0.0.0 0.0.0.0 <ip_del_proveedor>
+```
 
-## 6. NDP en acción
+c) **Una ruta por defecto al router central:**
+```bash
+ip route 0.0.0.0 0.0.0.0 10.0.0.1
+```
+Todo lo que no sea su propia LAN se lo entrega a R1, que ya sabe encaminarlo (sucursales) o lo manda a Internet.
 
-a) **Neighbor Solicitation (NS):** "¿Quién tiene 2001:DB8::20?"
+## 7. Interferencia con rutas conectadas
 
-b) **Dirección MAC destino:** Multicast Ethernet (33:33:xx:xx:xx:xx). Concretamente, la dirección multicast derivada de la IP destino (solicited-node multicast).
+**No pasa nada dramático:** la ruta estática se configura pero NO gana. En `show ip route` verías ambas entradas: la `C` (conectada, AD 0) activa y la `S` (estática, AD 1) entre corchetes como alternativa menos fiable. El router siempre prefiere la de menor AD para el mismo prefijo, así que el encaminamiento local sigue funcionando. Eso sí: es una config descuidada — sobra y conviene quitarla con `no ip route ...`.
 
-c) **Dirección IPv6 destino:** **Multicast** (FF02::1:FF00:20 — la solicited-node multicast address). NO usa broadcast como ARP en IPv4.
+## 8. Escenario completo de diagnóstico
 
-d) **PC-B responde con un Neighbor Advertisement (NA)** unicast dirigido a PC-A, indicando su MAC.
+a) **A R2 le faltan las rutas de vuelta** hacia 192.168.1.0/24 (y hacia 10.0.0.0/30 no hace falta: es conectada). Sin ruta de retorno, el paquete de ping llega pero la respuesta se pierde:
+```bash
+ip route 192.168.1.0 255.255.255.0 10.0.0.1
+```
 
-e) **Este proceso se llama NDP** (Neighbor Discovery Protocol). Es parte de ICMPv6 y reemplaza a ARP. Es más eficiente que ARP porque usa multicast en lugar de broadcast, y solo los dispositivos interesados procesan el mensaje.
+b) **A R1 le falta la ruta hacia 192.168.2.0/24:**
+```bash
+ip route 192.168.2.0 255.255.255.0 10.0.0.2
+```
 
-## 7. Diagnóstico ping6
-
-Contexto: `ping fe80::1` (la Link-Local del gateway) funciona, así que el enlace, la MAC y NDP básico están OK. El fallo es exclusivo del destino *global* `2001:DB8:1::10`. Tres causas posibles:
-
-a) **Firewall del PC destino (o del propio PC-A) bloqueando ICMPv6 hacia la GUA.** Muchos sistemas abren por defecto el tráfico a Link-Local y al descubrimiento de vecinos, pero responden peor (o no responden) a pings a su dirección global.
-   - *Verificación:* intenta ping desde un tercer equipo; o desactiva temporalmente el firewall del PC destino y repite el ping. Si entonces funciona, es el firewall.
-
-b) **La GUA destino está duplicada o no es la activa.** Si el PC destino tiene varios adaptadores, o SLAAC le dio un prefijo distinto, la dirección que pingueas puede estar asignada en otra interfaz o marcada como *tentative* (durante DAD). El host simplemente no responde en esa dirección en la interfaz que esperas.
-   - *Verificación:* en el destino ejecuta `ipconfig /all` (Windows) o `ip -6 addr show` (Linux) y comprueba que `2001:DB8:1::10` exista y esté marcada como activa en esa interfaz (estado *preferred*). Prueba también `ping -6 2001:DB8:1::10%<id-interfaz>`.
-
-c) **Prefijo/ámbito fuera de la subred (on-link).** Para un *origen* con un prefijo distinto o sin ruta hacia `2001:DB8:1::/64`, esa GUA NO es *on-link*: el tráfico saldría al router (gateway), no resolvería la MAC por NDP local. Si la LAN es realmente `2001:DB8:1::/64` pero el PC-A o el switch han sido configurados con otro prefijo, el ping "no tiene a quién preguntar".
-   - *Verificación:* revisa que el prefijo del origen (`2001:db8:1:...`) y el destino compartan el mismo /64, y que el gateway `fe80::1` enrute correctamente. Un `pathping`/`tracert` IPv6 te dice si el salto intenta salir por el router o se queda en el enlace.
-
-> ✅ Resumen rápido: misma LAN + ping a LLA OK → el fallo al ping a GUA casi siempre es **firewall**, **dirección no activa** (tentative/duplicada) o **prefijo mal / fuera de enlace**.
-
-## 8. Tabla IPv4 vs IPv6
-
-| Concepto | IPv4 | IPv6 |
-|---|---|---|
-| Bits de la dirección | 32 | **128** |
-| Notación | Decimal con puntos | **Hexadecimal con dos puntos** (8 grupos) |
-| Direcciones privadas | RFC 1918 (192.168…, 172.16…, 10…) | **ULA `FC00::/7`** (privada/organización) |
-| Broadcast | Sí (envía a todos) | **No existe**: solo multicast (`FF02::1` ≈ todos los nodos) |
-| Resolución IP → MAC | ARP | **NDP** (NS/NA vía ICMPv6, multicast) |
-| Multicast de listeners | IGMP | **MLD** (Multicast Listener Discovery) |
-| Configuración automática | DHCP | **SLAAC + DHCPv6** (stateless/stateful, flags M/O) |
-| Loopback | 127.0.0.1 | **`::1`** |
-| Fragmentación | La hacen cualquier router intermedio | **Solo la hace el origen** (Path MTU Discovery) |
-| Seguridad / NAT | NAT compartido para las privadas | **Sin NAT**: extremo a extremo; firewall y (opcional) IPsec |
-
-> 💡 La fila de *fragmentación* y la de *NAT* suelen ser las que más sorprende: en IPv6 los routers ya no fragmentan (lo hace el origen), y el NAT, además de feo, era una falsa sensación de seguridad. Se acabó el escondite.
+c) Porque el **traceroute usa respuestas ICMP time-exceeded** (o UDP con puerto inalcanzable) que algún router intermedio no genera o filtra. El forwarding puede estar perfecto y aun así el traceroute no pintar el último salto: no siempre es un problema de rutas.

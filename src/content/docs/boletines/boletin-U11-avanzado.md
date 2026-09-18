@@ -1,103 +1,79 @@
 ---
-title: Boletín U11 — Avanzado
-description: Ejercicios avanzados de NAT
+title: Boletín UD11 — Avanzado
+description: Ejercicios avanzados de redes inalámbricas
 ---
 
-# 📝 Boletín U11 — Avanzado
+# 📝 Boletín UD11 — Avanzado
 
-> Ejercicios que requieren comprender NAT en profundidad.
+> Ejercicios que requieren diseñar y diagnosticar WLANs. En los difíciles tienes pista.
 
 ---
 
-## 1. Traducción manual
+## 1. Diseño de cobertura de un instituto
 
-Dado el siguiente escenario:
+Edificio de dos plantas, 40×20 m, hormigón armado. Usuarios: 30 profesores con portátiles, 300 alumnos con móviles, ~50 IPs extra (cámaras, impresoras).
 
-- PC1: 192.168.1.10, accede a 8.8.8.8:80 (HTTP)
-- PC2: 192.168.1.20, accede a 8.8.8.8:53 (DNS)
-- Router NAT IP pública: 83.45.12.78
+a) ¿Cuántos APs pondrías como mínimo y dónde (a grandes rasgos)?
+b) ¿Qué bandas asignas a qué uso?
+c) Dos SSIDs: `Profesores` (Enterprise) y `Alumnos` (PSK con portal cautivo). ¿Por qué esta separación?
+d) ¿Qué pasa con el canal si dos APs vecinos emiten en el mismo canal 2,4 GHz?
 
-El PC1 usa puerto origen 50000 y PC2 puerto 50000 también. Completa la tabla NAT:
+**Pista:** en 2,4 GHz solo hay 3 canales no solapados (1/6/11); el patrón clásico de celdas alterna 1-6-11-1-6-11.
 
-| Pro | Inside global | Inside local | Outside local | Outside global |
-|---|---|---|---|---|
-| tcp | 83.45.12.78:___ | 192.168.1.10:50000 | 8.8.8.8:80 | 8.8.8.8:80 |
-| udp | ___ | 192.168.1.20:50000 | 8.8.8.8:53 | 8.8.8.8:53 |
+## 2. El misterio del aula 12
 
-## 2. Problema con FTP activo
+El aula 12 tiene WiFi pésimo: se desconecta cada pocos minutos, aunque la señal que muestra el portátil es "excelente".
 
-Un usuario interno (192.168.1.10) intenta usar FTP activo para enviar un archivo a un servidor externo (200.100.50.1). El protocolo FTP activo funciona así:
+a) ¿Cómo puede haber señal excelente y mala calidad? ¿Qué mide cada cosa?
+b) Enumera 3 causas típicas de este síntoma.
+c) ¿Qué herramienta del portátil o del AP usarías para confirmarlo?
 
-- El cliente abre puerto 1025 para datos.
-- El cliente envía el comando PORT 192,168,1,10,4,1 (puerto 4×256+1=1025).
-- El servidor intenta conectar a 192.168.1.10:1025.
+**Pista:** RSSI alto no es sinonimo de SNR alto: mira la interferencia y la reutilización de canal.
 
-¿Por qué falla? ¿Cómo lo solucionas?
+## 3. Plan de canales 5 GHz
 
-## 3. Configuración multi-NAT
+Tienes 4 APs en la misma planta. En 5 GHz dispones de canales de 20 MHz (36, 40, 44, 48, 52, 56, 60, 64, 100+…).
 
-Una empresa tiene dos servidores internos:
-- Servidor web en 192.168.1.10:80 y 192.168.1.10:443
-- Servidor SSH en 192.168.1.20:22
-- IP pública: 83.45.12.78
+a) Asigna canales a los 4 APs para minimizar solape.
+b) ¿Qué ventaja tiene usar 40 u 80 MHz en 5 GHz en lugar de 20 MHz? ¿Y su riesgo?
+c) ¿Qué son los canales DFS y qué riesgo tienen?
 
-Quieren:
-- Web accesible desde fuera como 83.45.12.78:8080 → 192.168.1.10:80
-- HTTPS accesible como 83.45.12.78:8443 → 192.168.1.10:443
-- SSH accesible como 83.45.12.78:2222 → 192.168.1.20:22
+## 4. WPA3 y el handshake
 
-Configura el NAT destino necesario.
+a) ¿Qué problema clásico de WPA2-PSK corrige WPA3 con SAE?
+b) ¿Qué es el "modo transición" WPA2/WPA3 y cuándo tiene sentido?
+c) Un compañero propone "SSID oculto + filtrado MAC" como seguridad. Desmonta la idea con dos argumentos.
 
-## 4. NAT + VPN
+## 5. Portal cautivo y VLANs
 
-Un empleado necesita conectar por VPN (IPsec) a la oficina. El router de la oficina hace NAT.
+El WiFi de invitados debe: tener portal de aceptación de condiciones, no ver la red interna y salir solo a Internet.
 
-Pero IPsec no funciona a través de NAT. ¿Por qué? ¿Qué solución existe?
+a) ¿En qué VLAN lo metes y por qué?
+b) ¿Qué es un portal cautivo y qué limitaciones tiene?
+c) ¿Qué norma de seguridad de la unidad aplicas al aislar invitados?
 
-## 5. Análisis de timeouts
+## 6. Diagnóstico de un despliegue roto
 
-Un usuario se queja de que su conexión SSH se corta después de 5 minutos de inactividad. La tabla NAT tiene un timeout de 5 minutos para UDP y configurable para TCP.
+Tras instalar 6 APs nuevos, los usuarios se quejan: en pasillos funciona bien, pero al caminar entre zonas el WiFi se corta 20 segundos. `show` del controlador: cada AP emite al máximo de potencia, todos con el mismo SSID y canales 1-1-1-6-1-11 en 2,4 GHz.
 
-¿Por qué se corta la conexión aunque el timeout NAT no haya expirado? ¿Dónde está el verdadero problema?
+a) ¿Qué dos errores de diseño detectas?
+b) ¿Por qué se corta 20 segundos al caminar (roaming)?
+c) ¿Qué ajustarías (potencias, canales, roaming)?
 
-## 6. NAT y servidores duales
+**Pista:** para que el roaming funcione bien, las celdas deben solaparse un poco (≈15-20%) pero con canales distintos.
 
-Una empresa tiene:
-- 2 IPs públicas: 83.45.12.78 y 83.45.12.79
-- Servidor web interno: 192.168.10.10
-- Servidor de correo interno: 192.168.10.20
+## 7. Cálculo rápido de throughput
 
-Quieren que el web sea accesible por 83.45.12.78 y el correo por 83.45.12.79. Los PCs internos deben salir por PAT con la IP 83.45.12.78.
+Un AP WiFi 6 teórico en 80 MHz, 2×2: hasta 1200 Mbps de enlace. Un aula tiene 25 alumnos compartiendo ese AP.
 
-Configura todo.
+a) ¿Por qué el throughput real por alumno es mucho menor que 1200/25?
+b) ¿Qué papel juega el medio compartido (CSMA/CA) en esto?
+c) ¿Qué dos medidas de diseño mejoran la experiencia si el aula crece a 50 alumnos?
 
-## 7. Multi-NAT: servidores duales + PAT simultáneo
+## 8. Caso integrador con Packet Tracer
 
-Una empresa tiene:
-- Red interna 192.168.50.0/24, servidor web DMZ en 192.168.50.10 (puertos 80 y 443).
-- Dos IPs públicas: 83.45.12.78 y 83.45.12.79.
-- Los usuarios internos deben salir a Internet por **PAT** con la IP 83.45.12.78.
-- El servidor web debe ser accesible desde fuera como **83.45.12.78:8080 → 192.168.50.10:80** y **83.45.12.78:8443 → 192.168.50.10:443**.
-- Además, la IP pública 83.45.12.79 se reserva para un servidor de correo (192.168.50.20) con **NAT estático 1:1** para los puertos 25, 587 y 993.
+Monta en Packet Tracer: un router 2911 con servidor DHCP, un switch 2960 con dos VLANs (10 docentes, 20 alumnos), un AP doméstico en la VLAN 20 y dos portátiles inalámbricos.
 
-Configura todo el NAT en el router (interfaces: g0/0 LAN inside, g0/1 WAN outside).
-
-**Pista:** puedes combinar PAT overload y `ip nat inside source static tcp` en el mismo router. Revisa que el tráfico saliente de los usuarios no colisione con las traducciones estáticas reservadas.
-
-## 8. Diagnóstico: "no salimos a Internet"
-
-En el instituto no sale Internet. Configuración actual de R1:
-
-- g0/0: 192.168.1.1/24 (inside LAN)
-- g0/1: 203.0.113.2/30 (outside, hacia el ISP con ruta por defecto)
-- `ip nat inside source list 1 interface g0/1 overload`
-- `access-list 1 permit 192.168.1.0 0.0.0.255`
-
-Síntoma: los PCs hacen ping al gateway (192.168.1.1) y a 203.0.113.2, pero **no** a 8.8.8.8.
-
-a) Ordena las comprobaciones de diagnóstico que harías, de la más básica a la más específica.
-b) ¿Qué comando confirma que NAT está traduciendo? ¿Qué esperas ver?
-c) Tras revisar, ves que `show ip nat translations` está vacío aunque hay tráfico. ¿Qué comprobarías a continuación? Da al menos 3 causas probables.
-d) Encuentra el fallo real: las interfaces g0/0 y g0/1 **no tienen** `ip nat inside` / `ip nat outside`. Explica por qué sin esas marcas no hay traducción, aunque el resto de comandos sean correctos.
-
-**Pista:** NAT se diagnostica en progresión: primero conectividad, luego traducción, luego ruta. Sin `ip nat inside/outside`, el router no sabe qué tráfico traducir: los paquetes salen sin traducir (o se descartan) y la tabla NAT queda vacía.
+a) ¿Qué tipo de puerto de switch conecta el AP y por qué?
+b) El portátil de alumnos obtiene IP de la VLAN 20 pero no navega. El gateway de la VLAN 20 está bien. ¿Qué dos cosas compruebas primero?
+c) El AP doméstico de Packet Tracer solo permite WPA2-PSK. ¿Cómo se llama esa misma seguridad en la nomenclatura de la unidad?

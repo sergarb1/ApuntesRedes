@@ -1,122 +1,106 @@
 ---
-title: Boletín U05 — Avanzado
-description: Ejercicios avanzados de IPv4 y Subnetting
+title: Boletín UD5 — Avanzado
+description: Ejercicios avanzados de VLANs
 ---
 
-# 📝 Boletín U05 — Avanzado
+# 📝 Boletín UD5 — Avanzado
 
-> Ejercicios que requieren aplicar subnetting, VLSM y DHCP de forma más profunda.
+> Ejercicios que requieren aplicar los conceptos de VLANs, trunks y routing de forma más profunda. En los difíciles tienes pista.
 
 ---
 
-## 1. Diseño VLSM
+## 1. Configuración completa de VLANs
 
-Te dan la red **172.16.0.0/24**. Debes diseñar el direccionamiento para:
+Configura este escenario en Packet Tracer (o describe los comandos):
 
-- **Producción:** 60 hosts
-- **Desarrollo:** 30 hosts
-- **Testing:** 10 hosts
-- **Enlaces WAN:** 3 enlaces punto a punto (2 IPs cada uno)
+- **Switch1:** VLAN 10 (Ventas) puertos 1-5, VLAN 20 (RRHH) puertos 6-10
+- **Switch2:** VLAN 10 puertos 1-5, VLAN 20 puertos 6-10
+- **Trunk:** Switch1 Fa0/24 ↔ Switch2 Fa0/24
+- **Router:** Fa0/0 conectado a Switch1 Fa0/23, subinterfaces para VLAN 10 y 20
 
-a) Diseña el VLSM con el mínimo desperdicio de direcciones.
-b) Indica la red, máscara, rango de hosts y broadcast para cada subred.
-c) ¿Cuántas IPs sobran?
+Escribe la configuración completa del router y ambos switches.
 
-**Pista:** Ordena de mayor a menor necesidad. Recuerda que los enlaces /30 solo necesitan 2 hosts.
+## 2. Diagnóstico de native VLAN
 
-## 2. Diagnóstico DHCP
-
-Un usuario no puede conectarse a Internet. Su configuración IP es:
+Un administrador configura un trunk entre dos switches:
 
 ```
-IPv4: 169.254.15.33
-Máscara: 255.255.0.0
-Gateway: (vacío)
-DNS: (vacío)
+Switch1: native VLAN 99, allowed VLANs 10,20,30
+Switch2: native VLAN 1,  allowed VLANs 10,20,30
 ```
 
-a) ¿Qué tipo de dirección es 169.254.15.33?
-b) ¿Por qué tiene esa IP?
-c) ¿Qué solución propones?
+a) ¿Qué problemas puede causar esta discrepancia?
+b) ¿Qué comando usarías para diagnosticarlo?
+c) ¿Cómo arreglarlo sin perder conectividad?
 
-**Pista:** 169.254.0.0/16 es APIPA (Automatic Private IP Addressing). Windows asigna esta IP cuando el servidor DHCP no responde.
+**Pista:** `show interface trunk` muestra la native VLAN de cada extremo.
 
-## 3. Subnetting binario
+## 3. Diseño de VLANs corporativas
 
-Dada la IP 200.100.50.30 con máscara 255.255.255.224 (/27):
+Diseña la segmentación VLAN para una empresa con:
 
-a) Escribe la IP y la máscara en binario
-b) Calcula la dirección de red (AND)
-c) ¿Cuál es la dirección de broadcast?
-d) ¿Cuántos hosts útiles tiene esta subred?
-e) ¿La IP 200.100.50.62 está en la misma subred? ¿Por qué?
+- **3 plantas:**
+  - Planta baja: Recepción (5 PCs) + Sala servidores (10 servidores)
+  - Planta 1: Ventas (30 PCs) + Marketing (15 PCs)
+  - Planta 2: IT (20 PCs) + Dirección (5 PCs)
 
-## 4. Resumen de subredes
+- **Requisitos:**
+  - Cada departamento debe estar en VLAN separada
+  - Los servidores están en VLAN propia
+  - IT debe poder acceder a todas las VLANs (administración)
+  - Dirección solo accede a su VLAN y a servidores
 
-Tienes 10.0.0.0/16. Necesitas crear 8 subredes del mismo tamaño.
+a) Propón una tabla de VLANs (ID, nombre, puertos)
+b) ¿Dónde pones el router-on-a-stick? ¿Y si usas switch capa 3?
+c) ¿Qué VLANs permites en cada trunk?
+d) ¿Con qué ACLs limitas el acceso de Dirección?
 
-a) ¿Cuántos bits debes pedir prestados?
-b) ¿Cuál es la nueva máscara?
-c) ¿Cuántos hosts por subred?
-d) Enumera las 8 direcciones de red resultantes
+## 4. VTP disaster recovery
 
-## 5. Sumarización de rutas
+Un administrador conecta un switch con VTP server y revision number 500 a una red donde el server actual tiene revision 100. En 2 segundos, todas las VLANs de la red desaparecen.
 
-Tienes estas 4 subredes:
-- 192.168.0.0/24
-- 192.168.1.0/24
-- 192.168.2.0/24
-- 192.168.3.0/24
+a) ¿Por qué ocurrió?
+b) ¿Cómo recuperas la red?
+c) ¿Qué medidas preventivas tomarías para evitar que vuelva a ocurrir?
 
-a) ¿Puedes resumirlas en una sola ruta? ¿Cuál?
-b) ¿Qué máscara tendría la ruta resumida?
-c) ¿Cuántas IPs totales abarca la ruta resumida?
+**Pista:** VTP propaga la base de datos del switch con mayor revision number.
 
-**Pista:** Mira los bits en común. Las 4 redes comparten los primeros 22 bits.
+## 5. Router-on-a-stick: cuello de botella
 
-## 6. Plan de direccionamiento para una empresa
+Un router-on-a-stick con interfaz FastEthernet (100 Mbps) atiende 4 VLANs. Cada VLAN genera 30 Mbps de tráfico.
 
-Diseña un plan completo para una empresa con:
+a) ¿Hay cuello de botella? Calcula el tráfico total.
+b) ¿Qué alternativa propones si el tráfico crece al doble?
+c) ¿Cómo cambia el escenario con una interfaz GigabitEthernet?
 
-**Sede central:**
-- 200 hosts en Administración
-- 100 hosts en Producción
-- 50 hosts en IT
-- 10 hosts en Dirección
+## 6. Seguridad en VLANs
 
-**Sucursal:**
-- 50 hosts en Ventas
-- 20 hosts en Almacén
+Enumera 3 riesgos de seguridad específicos de VLANs y cómo mitigarlos:
 
-**Enlaces:**
-- 1 enlace /30 entre sede y sucursal
+| Riesgo | Mitigación |
+|---|---|
+| 1. | |
+| 2. | |
+| 3. | |
 
-Te dan la red **10.0.0.0/22**.
+**Pista:** Piensa en DTP, native VLAN, VTP, VLAN hopping, etc.
 
-a) Diseña el VLSM completo
-b) ¿Cuántas IPs sobran?
-c) ¿Qué problemas podrías encontrar si la empresa crece al doble?
+## 7. VLAN hopping y hardening
 
-## 7. VLSM con requisitos mínimos
+a) Describe **3 vectores de ataque** que permiten a un atacante salirse de su VLAN (VLAN hopping), explicando cómo funciona cada uno.
+b) Propón **3 mitigaciones concretas** de hardening con sus comandos.
 
-Tienes la red **192.168.1.0/24** y necesitas estas subredes:
+**Pista:** piensa en DTP/negociación de trunks, en el double tagging sobre la native VLAN y en el etiquetado 802.1Q aplicado a tramas que no deberían llevarlo. Las mitigaciones están en el punto 7 de seguridad: `switchport nonegotiate`, native VLAN ≠ 1, `allowed vlan`, VTP.
 
-- **Producción:** 50 hosts
-- **Comercial:** 25 hosts
-- **Soporte:** 10 hosts
-- **Enlace WAN:** 2 hosts
+## 8. Inter-VLAN con SVI paso a paso
 
-a) Diseña el **VLSM mínimo** (sin desperdiciar IPs): indica red, máscara, rango y broadcast de cada subred.
-b) ¿Qué bloque queda libre al final y de qué tamaño?
+Escribe la configuración completa que necesita un **switch capa 3** (por ejemplo un 3560) para enrutar entre 3 VLANs (10 Ventas → 192.168.10.0/24, 20 RRHH → 192.168.20.0/24, 30 IT → 192.168.30.0/24), asumiendo que los puertos access ya están asignados.
 
-**Pista:** Ordena de mayor a menor necesidad y elige para cada subred la máscara más pequeña que cumpla `2ʰ − 2 ≥ hosts`. Recuerda que cada subred empieza donde terminó la anterior.
+Incluye:
 
-## 8. Conflicto de IP
+a) La creación de las VLANs con nombre.
+b) El comando que activa el routing global.
+c) Los tres SVIs con su IP y `no shutdown`.
+d) El gateway que debe tener cada PC de cada VLAN.
 
-El administrador de una empresa configura **manual (estática)** la IP `192.168.1.20` en una impresora. Lamentablemente, esa IP está dentro del **pool DHCP** que reparte el router (`network 192.168.1.0 255.255.255.0`).
-
-a) Explica qué ocurre cuando un PC pide IP por DHCP y recibe `192.168.1.20`, que ya tiene la impresora.
-b) ¿Cómo detectaría el administrador el conflicto? ¿Qué comando usaría en el router?
-c) ¿Cómo se **previene** este problema desde el diseño?
-
-**Pista:** Antes de conceder una IP, el servidor DHCP suele comprobar (el RFC lo llama "ping") si la dirección ya está en uso. En Cisco el resultado se registra en una tabla concreta que se consulta con `show`. Y la solución de fondo ya la viste en el punto 8 de la unidad: `ip dhcp excluded-address`.
+**Pista:** el orden de los comandos importa: primero `ip routing`, después cada `interface vlan X`. Sin `ip routing`, los SVIs existen pero no enrutan. El gateway de cada VLAN es la IP del SVI de esa VLAN.

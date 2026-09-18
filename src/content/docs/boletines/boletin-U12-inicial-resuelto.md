@@ -1,78 +1,65 @@
 ---
-title: Boletín U12 — Inicial (Resuelto)
-description: Soluciones ejercicios básicos de Diagnóstico y monitorización
+title: Boletín UD12 — Inicial (Resuelto)
+description: Soluciones de los ejercicios básicos de alta disponibilidad y redundancia
 ---
 
-# ✅ Boletín U12 — Inicial (Resuelto)
+# ✅ Boletín UD12 — Inicial (Resuelto)
 
 ---
 
-## 1. Metodología de troubleshooting
+## 1. ¿Qué concepto soy?
 
-Orden correcto (OSI de abajo arriba):
-1. (2) Comprobar que el cable está conectado (Capa 1)
-2. (5) Comprobar la tabla MAC del switch (Capa 2)
-3. (4) Hacer ping al gateway (Capa 3)
-4. (1) Hacer ping a 8.8.8.8 (Capa 3)
-5. (3) Hacer nslookup del dominio (Capa 7)
+a) **SPOF** (Single Point of Failure).
+b) **STP** (Spanning Tree Protocol).
+c) **EtherChannel** (o LAG/port-channel).
+d) **FHRP** (HSRP, VRRP o GLBP).
+e) Los **cuatro nueves**: 99,99% ≈ 52 minutos al año.
 
-## 2. Comandos de diagnóstico
+## 2. Verdadero o falso
 
-| Comando | Función |
-|---|---|
-| ping | **B** — Prueba conectividad básica |
-| traceroute | **A** — Muestra la ruta hasta un destino |
-| nslookup | **D** — Resuelve nombres DNS |
-| Wireshark | **C** — Captura paquetes en tiempo real |
-| netstat | **E** — Muestra conexiones activas |
+a) **Verdadero.** Bloquea puertos redundantes y los deja de reserva: si falla el camino activo, desbloquea.
+b) **Verdadero.** Suma ancho de banda y si un miembro cae, el canal sigue (con menos ancho).
+c) **Falso.** Cada router conserva su IP física; la IP virtual es **compartida** y la responde el activo.
+d) **Verdadero.** El stack se ve como un switch: una config, una MAC, una gestión.
+e) **Falso.** Cada "nueve" extra multiplica el coste (redundancia, monitorización, pruebas). El diseño busca el equilibrio coste/riesgo.
 
-## 3. Interpreta un ping
+## 3. Cálculo de disponibilidad
 
-a) **Sí.** Hay conectividad completa.
-b) **Buena.** 14-16 ms es latencia excelente para Internet.
-c) **TTL=117** significa que el paquete ha pasado por varios routers (TTL inicial típico 128 - 11 routers = 117).
+a) 99,9% → **8,76 horas** al año (0,001 × 8.760 h).
+b) 99,99% → **52,6 minutos** al año.
+c) 0,995 × 0,995 × 0,995 ≈ **98,5%** (≈ 131 horas al año de caída). En serie, la disponibilidad del conjunto siempre es **peor** que la del peor eslabón.
 
-## 4. Configura SNMP
+## 4. ¿Quién bloquea el puerto?
 
-```bash
-R1(config)# snmp-server community monitor ro
-R1(config)# snmp-server community admin rw
-R1(config)# snmp-server location SalaServidores
-R1(config)# snmp-server enable traps
-R1(config)# snmp-server host 192.168.1.100 traps version 2c monitor
-```
+a) **SW2** (el que no es raíz): elige un puerto raíz y bloquea el otro de los dos enlaces.
+b) El **ID de sistema del switch emisor** (prioridad + MAC): gana el BPDU con menor ID; a igualdad, la MAC más baja.
+c) **Tormenta de broadcast**: las tramas de broadcast giran eternamente, multiplicándose en cada vuelta, y la red se satura en segundos (y las tablas MAC se corruptan).
 
-## 5. Verdadero o falso
+## 5. Relaciona comandos HSRP
 
-a) **Verdadero.** SNMP v3 usa cifrado AES y autenticación SHA.
-b) **Falso.** Wireshark funciona en Windows, Linux, macOS.
-c) **Falso.** Si ping al gateway funciona, la LAN está bien. Si ping a 8.8.8.8 falla, el problema está más allá del gateway (WAN, ISP).
-d) **Falso.** Nivel 0 (Emergency) es el más grave. Nivel 7 (Debug) es el menos grave.
+1 → b (`standby 1 ip` define la IP virtual)
+2 → a (`priority` más alta = más candidato a activo)
+3 → d (`preempt` permite recuperar el rol activo al volver)
+4 → c (`show standby brief` = estado de los grupos)
 
-## 6. Análisis de traceroute
+## 6. Diseño básico redundante
 
-a) **4 saltos** (el destino está en el salto 4).
-b) **El router en el salto 3 no responde a ICMP.** Puede ser un firewall que bloquea ICMP, pero eso no significa que no esté funcionando (el salto 4 responde).
-c) **Sí**, el destino final responde en el salto 4.
+a) **EtherChannel** en los enlaces de acceso→distribución (2×1G por enlace, por ejemplo) y en la interconexión de los dos routers de salida. Duplica ancho y tolera la caída de un miembro.
 
-## 7. Filtros de Wireshark
+b) **STP** actúa en toda la topología de capa 2 (acceso y distribución): bloquee los enlaces redundantes que crearían bucles. **HSRP** actúa en capa 3, entre los dos routers de salida, hacia la puerta de enlace de cada VLAN.
 
-| Filtro | Qué muestra |
-|---|---|
-| a) `tcp.flags.syn == 1` → **3** | Paquetes SYN (inicio de conexión) |
-| b) `ip.addr == 192.168.1.10` → **4** | Tráfico de/a esa IP |
-| c) `tcp.analysis.retransmission` → **2** | Retransmisiones TCP |
-| d) `dns` → **1** | Tráfico DNS |
-| e) `http.request` → **5** | Solo peticiones HTTP |
+c) Si cae un switch de distribución: STP desbloquea los puertos de reserva, el HSRP activo puede pasar al otro router si era él quien cayó, y el servicio sigue (con quizá menos ancho). Es el objetivo de la redundancia: que el fallo sea un "evento", no una "incidencia".
 
-## 8. Niveles de syslog
+## 7. VRRP vs HSRP
 
-De menos a más grave:
+a) **HSRP** es propietario de Cisco; **VRRP** es el estándar abierto (RFC 5798).
+b) Por defecto VRRP usa la **IP física del router maestro como IP virtual** (distinto de HSRP, que usa una IP virtual propia en la subred).
+c) En VRRP se llama **router maestro** (y los otros, backup); en HSRP, **activo** y en espera.
 
-1. **Debug** (7) — Depuración
-2. **Informational** (6) — Informativo
-3. **Warning** (4) — Advertencia
-4. **Critical** (2) — Crítica
-5. **Emergency** (0) — El más grave, sistema inusable
+## 8. Diagnóstico rápido
 
-**Nivel para producción:** **5 (notifications)** o **6 (informational)**. Dan suficiente detalle (caídas de interfaz, errores, eventos significativos) sin el torrente de mensajes del nivel 7 (debug), que llenaría el disco del servidor en pocas horas. Nivel 0-4, en cambio, filtraría demasiado y perderías avisos valiosos.
+a) Porque el gateway (routers con HSRP) está vivo en **capa 2**: el ping solo prueba que el router activo responde, no que sepa encaminar hacia Internet.
+
+b) `show ip route` en el router HSRP activo (y `show standby brief` para saber cuál es).
+
+c) **No.** HSRP protege la **caída del gateway** (capa 3 local). Aquí el fallo está en el **routing de salida** del propio activo: si cae todo el router, HSRP ayuda; pero un fallo de ruta en el activo con el router vivo no dispara el failover (salvo con tracking/ip SLA configurado).

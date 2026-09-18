@@ -1,93 +1,87 @@
 ---
-title: Boletín U03 — Inicial
-description: Ejercicios básicos de Modelos OSI y Análisis de Tráfico
+title: Boletín UD3 — Inicial
+description: Ejercicios básicos de IPv4 y Subnetting
 ---
 
-# 📝 Boletín U03 — Inicial
+# 📝 Boletín UD3 — Inicial
 
-> Ejercicios básicos para afianzar los conceptos de capas OSI, TCP/IP, encapsulación y Wireshark.
+> Ejercicios básicos para afianzar los conceptos de direccionamiento IPv4 y máscaras.
 
 ---
 
-## 1. Ordena las capas OSI
+## 1. Conversión binario
 
-Ordena de menor a mayor (de capa 1 a capa 7):
+Convierte a binario (8 bits):
 
-a) Transporte
-b) Aplicación
-c) Red
-d) Enlace
-e) Sesión
-f) Física
-g) Presentación
+a) 192
+b) 10
+c) 255
+d) 0
 
-## 2. ¿Qué capa soy?
+## 2. Conversión a decimal
 
-Relaciona cada función con la capa OSI correspondiente:
+Convierte a decimal:
 
-| Función | Capa |
+a) 11000000
+b) 10101000
+c) 00001010
+d) 11111111
+
+## 3. ¿Qué máscara es?
+
+Relaciona la notación CIDR con la máscara decimal:
+
+| CIDR | Máscara |
 |---|---|
-| a) Direccionamiento IP y enrutamiento | |
-| b) Transmisión de bits por el cable | |
-| c) Segmentación y control de flujo | |
-| d) Interfaz con el usuario/aplicación | |
-| e) Direccionamiento MAC y detección de errores | |
+| /24 | a) 255.255.255.252 |
+| /16 | b) 255.255.255.0 |
+| /30 | c) 255.255.0.0 |
+| /8 | d) 255.0.0.0 |
 
-## 3. Verdadero o falso
+## 4. Verdadero o falso
 
-a) El modelo TCP/IP tiene 7 capas como el OSI.
-b) La PDU de la capa de Red se llama "paquete".
-c) UDP garantiza que los datos lleguen en orden.
-d) El three-way handshake es propio de TCP.
-e) Wireshark puede capturar el tráfico unicast de otros equipos en un switch sin configuración especial.
+a) Una dirección IPv4 tiene 48 bits.
+b) 192.168.1.256 es una IP válida.
+c) La dirección de broadcast de 192.168.1.0/24 es 192.168.1.255.
+d) DHCP asigna IPs automáticamente.
+e) Las IPs privadas pueden viajar por Internet.
 
-## 4. Identifica el puerto
+## 5. Calcula hosts
 
-Indica qué puerto y protocolo (TCP/UDP) usa cada servicio:
+¿Cuántos hosts útiles tiene cada subred?
 
-a) HTTP
-b) HTTPS
-c) DNS
-d) SSH
-e) DHCP
+a) /24
+b) /27
+c) /30
+d) /29
 
-## 5. Tamaños de cabeceras
+## 6. Identifica el tipo
 
-Completa la tabla:
+Indica si cada IP es pública, privada o especial:
 
-| Cabecera | Tamaño mínimo (bytes) |
-|---|---|
-| Ethernet | |
-| IPv4 | |
-| TCP | |
-| UDP | |
+a) 10.0.0.15
+b) 8.8.8.8
+c) 192.168.1.1
+d) 127.0.0.1
+e) 172.16.0.100
+f) 169.254.1.1
 
-## 6. ¿Qué PDU es?
+## 7. Calcula la dirección de red
 
-Relaciona cada capa con su PDU:
+Para cada par de IP y máscara, haz el **AND** bit a bit y di cuál es la **dirección de red**:
 
-| Capa | PDU |
-|---|---|
-| 4. Transporte | a) Bits |
-| 3. Red | b) Trama |
-| 2. Enlace | c) Paquete |
-| 1. Física | d) Segmento/Datagrama |
+a) IP: 192.168.1.37 · Máscara: 255.255.255.0
+b) IP: 10.0.0.150 · Máscara: 255.0.0.0
+c) IP: 172.16.0.200 · Máscara: 255.255.255.128
+d) IP: 192.168.1.66 · Máscara: 255.255.255.192
 
-## 7. El campo TTL
+**Pista:** pasa el octeto "mágico" (el último de la máscara que no es 255) a binario y haz el AND con el octeto correspondiente de la IP. El resto de octetos se copian tal cual (si la máscara es 255) o se ponen a 0 (si la máscara es 0).
 
-a) ¿Para qué sirve el campo **TTL** de la cabecera IPv4?
-b) Un paquete sale con TTL = 64 y llega a su destino con TTL = 57. ¿Cuántos routers (saltos) ha cruzado?
-c) ¿Qué EtherType esperas en la cabecera Ethernet de una trama que contiene un paquete IPv4?
+## 8. Subredes iguales
 
-## 8. Origen y destino
+Divide la red **192.168.5.0/24** en **4 subredes del mismo tamaño**.
 
-Observa esta conexión:
-
-```
-Origen:  192.168.1.10:54321
-Destino: 142.250.184.4:443
-```
-
-a) ¿Cuál de los dos puertos es *efímero*? ¿En qué rango está?
-b) ¿Qué servicio reconoce el puerto 443?
-c) ¿Qué identifica exactamente un *socket*?
+a) ¿Cuántos bits debes prestar a la máscara?
+b) ¿Cuál es la nueva máscara (CIDR y decimal)?
+c) ¿Cuántos hosts útiles tiene cada subred?
+d) Enumera las 4 direcciones de red con su rango de hosts.

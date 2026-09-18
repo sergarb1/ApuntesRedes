@@ -126,7 +126,7 @@ Adivina qué dispositivo de red soy:
 2. El switch tiene muchos cables saliendo hacia los PC del aula.
 3. Si un cable va de un puerto del switch a otro puerto del mismo switch, es un **loop** (bucle): eso crea tormentas de broadcast.
 
-> ⚠️ **El fallo es: cable en loop dentro del switch.** Solución: desconectar uno de los dos extremos. Esto se estudiará en profundidad en la U07 (STP).
+> ⚠️ **El fallo es: cable en loop dentro del switch.** Solución: desconectar uno de los dos extremos. Esto se estudiará en profundidad en la UD4 (STP).
 
 ---
 

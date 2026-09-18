@@ -1,84 +1,76 @@
 ---
-title: Boletín U10 — Inicial
-description: Ejercicios básicos de Routing Dinámico
+title: Boletín UD10 — Inicial
+description: Ejercicios básicos de servicios de red (DHCP, DNS y NTP)
 ---
 
-# 📝 Boletín U10 — Inicial
+# 📝 Boletín UD10 — Inicial
 
-> Ejercicios básicos para afianzar los conceptos de OSPF y routing dinámico.
+> Ejercicios básicos para afianzar los conceptos de DHCP, DNS y NTP.
 
 ---
 
-## 1. IGP vs EGP
+## 1. ¿Qué servicio soy?
 
-Clasifica cada protocolo como IGP o EGP:
+Adivina el servicio por su descripción:
 
-a) OSPF
-b) BGP
-c) RIP
-d) EIGRP
+a) Reparto direcciones IP a los equipos que se conectan a la red.
+b) Traduzco nombres de dominio en direcciones IP.
+c) Mantengo sincronizado el reloj de todos los dispositivos de la red.
+d) Me mencionas cada vez que escribes `www.google.com` en el navegador.
 
-## 2. Verdadero o falso
+## 2. Las cuatro fases de DHCP
 
-a) OSPF usa el algoritmo de Dijkstra (SPF).
-b) RIP tiene un límite de 15 saltos.
-c) OSPF necesita un área backbone (Área 0).
-d) El Router ID de OSPF debe ser único en la red.
-e) RIP converge más rápido que OSPF.
+Ordena las fases de la negociación DORA:
 
-## 3. Relaciona
+a) Request
+b) Offer
+c) Discover
+d) Acknowledge
 
-| Término | Descripción |
+## 3. Verdadero o falso
+
+a) DHCP entrega una IP durante un tiempo limitado llamado concesión (lease).
+b) Un registro A de DNS relaciona un nombre con una dirección IPv6.
+c) NTP usa el puerto UDP 123.
+d) Si falla DHCP, puedes configurar la IP a mano pero no la puerta de enlace.
+e) El servidor DHCP puede entregar también máscara, gateway y servidores DNS.
+
+## 4. ¿Qué registro DNS?
+
+Relaciona cada situación con el registro adecuado:
+
+| Situación | Registro |
 |---|---|
-| 1. LSA | a) Router que conecta áreas |
-| 2. LSDB | b) Anuncio de estado de enlace |
-| 3. ABR | c) Base de datos de la topología |
-| 4. SPF | d) Algoritmo de cálculo de rutas |
+| 1. dominio.com → 203.0.113.10 | a) CNAME |
+| 2. www → dominio.com (alias) | b) MX |
+| 3. dominio.com → 2001:db8::10 | c) A |
+| 4. El servidor de correo del dominio | d) AAAA |
+| 5. Saber quién es dueño de un dominio | e) PTR |
+| 6. 203.0.113.10 → dominio.com (inverso) | f) SOA/NS |
 
-## 4. Coste OSPF
+## 5. ¿Qué comando?
 
-Calcula el coste OSPF para estas interfaces:
+Relaciona el comando con su función:
 
-a) FastEthernet (100 Mbps)
-b) GigabitEthernet (1 Gbps)
-c) Serial (1.544 Mbps)
-
-## 5. Completa
-
-Completa los comandos OSPF:
-
-a) `router ___ 1` (inicia el proceso OSPF)
-b) `network 192.168.1.0 0.0.0.255 area ___` (área backbone)
-c) `default-information ___` (propagar ruta por defecto)
-d) `show ip ospf ___` (ver vecinos)
-
-## 6. Tipos de routers
-
-Relaciona el tipo de router OSPF con su función:
-
-| Tipo | Función |
+| Comando | Función |
 |---|---|
-| 1. Internal Router | a) Introduce rutas externas |
-| 2. ABR | b) Conecta Área 0 con otras áreas |
-| 3. ASBR | c) Todas sus interfaces en la misma área |
+| 1. `ipconfig /renew` | a) Ver la caché DNS del equipo |
+| 2. `nslookup www.ejemplo.es` | b) Forzar nueva petición DHCP |
+| 3. `ipconfig /displaydns` | c) Consultar un servidor DNS concreto |
+| 4. `ipconfig /flushdns` | d) Vaciar la caché DNS |
 
-## 7. Dinámico vs estático
+## 6. El reloj y los logs
 
-a) Clasifica cada protocolo como IGP o EGP: **OSPF**, **RIP**, **BGP**, **EIGRP**.
+El switch del centro guarda sus logs, pero al revisarlos a las 9:00 aparece todo con fecha del día anterior y una hora sin sentido. ¿Qué servicio falta y por qué importa para diagnosticar incidencias?
 
-b) Enumera **3 ventajas** del routing dinámico frente al estático y pon un caso donde convenga usar estático.
+## 7. DHCP helper
 
-**Pista:** IGP enruta dentro de un AS y EGP entre AS (BGP). Dinámico = autoaprendizaje, convergencia automática y menos error humano; estático = determinista, útil en enlaces stub o redes muy pequeñas.
+Un servidor DHCP está en la VLAN 10 (192.168.10.5). Los equipos de la VLAN 20 no reciben IP. ¿Qué falta configurar y en qué dispositivo?
 
-## 8. Coste OSPF: tabla de velocidades
+## 8. Verifica tu red
 
-Completa la tabla con el coste OSPF de cada velocidad usando la fórmula `coste = 10^8 / ancho_de_banda`:
+En tu portátil, ejecuta `ipconfig /all` (o `ip addr` en Linux) e identifica:
 
-| Velocidad | Cálculo | Coste OSPF |
-|---|---|---|
-| 10 Mbps | 10⁸ / 10⁷ | |
-| 100 Mbps | 10⁸ / 10⁸ | |
-| 1 Gbps | 10⁸ / 10⁹ | |
-| 1.544 Mbps (T1) | 10⁸ / 1.544.000 | |
-
-**Pista:** el coste mínimo es 1: los enlaces a partir de 100 Mbps valen lo mismo por defecto. Los decimales se redondean hacia abajo.
+a) ¿Tu IP es DHCP o estática? ¿Cómo lo sabes?
+b) ¿Cuándo expira tu concesión?
+c) ¿Qué servidores DNS te han asignado?

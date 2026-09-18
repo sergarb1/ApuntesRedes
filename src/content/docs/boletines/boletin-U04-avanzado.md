@@ -1,102 +1,139 @@
 ---
-title: Boletín U04 — Avanzado
-description: Ejercicios avanzados de Infraestructura Física de Red
+title: Boletín UD4 — Avanzado
+description: Ejercicios avanzados de Switching y STP
 ---
 
-# 📝 Boletín U04 — Avanzado
+# 📝 Boletín UD4 — Avanzado
 
-> Ejercicios que requieren aplicar los conceptos de cableado, medios físicos y WiFi de forma combinada. En los difíciles tienes pista.
+> Ejercicios que requieren aplicar los conceptos de switching y STP de forma más profunda.
 
 ---
 
-## 1. Diagnóstico de cableado
+## 1. Configuración básica de switch
 
-Un usuario reporta que su PC solo alcanza 100 Mbps en lugar de 1 Gbps. El switch es Gigabit, el cable es Cat5e y el PC tiene una tarjeta Gigabit.
+Configura un switch Cisco desde cero con:
 
-a) ¿Cuáles pueden ser las causas?
-b) ¿Qué herramienta usarías para diagnosticar?
-c) ¿Cómo probarías si el problema es el cable, el PC o el switch?
+a) Hostname: SW-OFICINA-01
+b) IP de gestión en VLAN 1: 192.168.1.10/24, gateway 192.168.1.1
+c) Puertos Fa0/1-10 como access, seguridad de puerto con máximo 2 MACs
+d) Puertos Fa0/11-12 como trunk
 
-**Pista:** Gigabit Ethernet requiere los 4 pares. Si solo 2 pares están conectados, la negociación cae a 100 Mbps.
+Escribe los comandos necesarios.
 
-## 2. Diseño de cableado estructurado
+## 2. Análisis de topología STP
 
-Diseña el cableado para una oficina de 2 plantas:
+Tienes 3 switches con estas configuraciones:
 
-**Planta 1:** 40 puestos de trabajo + sala de servidores
-**Planta 2:** 30 puestos de trabajo
+| Switch | Prioridad | MAC |
+|---|---|---|
+| Switch A | 32768 | 0011.2233.4400 |
+| Switch B | 32768 | 0011.2233.4401 |
+| Switch C | 4096 | 0011.2233.4402 |
 
-Especifica:
-a) Cuántos switches necesitas y de qué tipo
-b) Qué categoría de cable usas para puestos y para uplinks
-c) Dónde colocas los patch panels
-d) Cómo conectas las dos plantas
+Los switches están conectados en triángulo (A-B, B-C, C-A).
 
-**Pista:** Piensa en términos de cable horizontal, patch panels, y uplinks entre plantas. La fibra para uplinks entre plantas es una buena práctica.
+a) ¿Quién es el Root Bridge? ¿Por qué?
+b) ¿Cuántos Root Ports hay en total?
+c) ¿Cuántos Designated Ports hay?
+d) Si Switch C falla, ¿qué cambios ocurren en la topología?
 
-## 3. Cálculo de atenuación
+## 3. Diagnóstico de port security
 
-Un cable UTP Cat6 tiene una atenuación máxima de 21,3 dB a 100 MHz para 100 metros. La señal del transmisor tiene una potencia de 2 dBm.
-
-a) ¿Qué potencia llega al receptor después de 100 m?
-b) Si el receptor necesita al menos -20 dBm para interpretar la señal, ¿funciona?
-c) ¿Qué pasa si el cable mide 120 metros?
-
-**Pista:** Potencia recibida = Potencia transmitida - Atenuación. La atenuación es proporcional a la distancia.
-
-## 4. Fibra vs cobre: caso real
-
-Eres el administrador de un campus universitario con 3 edificios separados por 200, 500 y 2000 metros respectivamente.
-
-a) ¿Qué medio usarías para conectar cada edificio? ¿Por qué?
-b) Si usas fibra, ¿monomodo o multimodo? ¿Para cada distancia?
-c) ¿Qué conectores y módulos SFP elegirías?
-
-**Pista:** 200 m → multimodo (barato). 2000 m → monomodo (necesario por distancia).
-
-## 5. Pinout y solución de problemas
-
-Tienes un cable que no funciona. Usas un comprobador y ves esta secuencia de LEDs:
+Un administrador configuró port security en un puerto:
 
 ```
-Extremo A: 1 2 3 4 5 6 7 8
-Extremo B: 1 2 3 4 5 6 7 8
-           ✓ ✓ ✗ ✓ ✓ ✓ ✓ ✓
+Switch(config-if)# switchport port-security maximum 1
+Switch(config-if)# switchport port-security violation shutdown
 ```
 
-a) ¿Qué pin falla?
-b) ¿Qué par de hilos está afectado?
-c) ¿El cable funcionará parcialmente? ¿A qué velocidad?
+Un usuario se conecta con su portátil y funciona. Luego conecta otro portátil (el suyo y el de un compañero) usando un switch no administrado. El puerto se deshabilita.
 
-**Pista:** Localiza qué par (1-2, 3-6, 4-5, 7-8) corresponde al pin que falla.
+a) ¿Por qué ocurrió?
+b) ¿Qué dos cambios harías en la configuración para permitir esta situación sin perder seguridad?
+c) ¿Cómo recuperas el puerto?
 
-## 6. Diseña el latiguillo perfecto
+## 4. Diseño de red redundante
 
-Describe paso a paso cómo crimpar un cable directo T568B, incluyendo:
+Diseña una red con 4 switches (SW1, SW2, SW3, SW4) y 2 enlaces redundantes entre cada par. Debe tener:
 
-a) Herramientas necesarias
-b) Longitud recomendada de pelado de funda
-c) Orden exacto de los hilos (de izquierda a derecha, con el clip hacia abajo)
-d) Cómo saber si el crimpado ha sido correcto
+- 50 PCs distribuidos
+- Redundancia: si cualquier switch o enlace individual falla, la red sigue funcionando
+- STP activo
 
-## 7. Caso WiFi: oficina con zonas muertas
+a) Dibuja la topología conceptual
+b) ¿Cuántos puertos quedarán bloqueados por STP?
+c) ¿Qué prioridad asignarías para forzar a SW1 como Root Bridge?
+d) ¿Qué pasa si SW1 falla? ¿Cuánto tarda la red en recuperarse con STP? ¿Y con RSTP?
 
-En una oficina de 25 puestos separados por tabiques de cartón-yeso, un único AP wifi en el pasillo central da "zonas muertas" y una velocidad general decepcionante. Los empleados se quejan cada tarde.
+## 5. CAM table analysis
 
-a) ¿Qué causas físicas explicarían la lentitud (nombra al menos 3)?
-b) ¿Qué herramientas usarías para confirmarlas?
-c) Propón 3 soluciones realistas ordenadas de más barata a más cara.
+Observa esta tabla MAC:
 
-**Pista:** piensa en canales (1, 6, 11), interferencia de vecinos, obstáculos y el número de clientes compartiendo el mismo AP. Recuerda que la velocidad real WiFi es del 30-50%.
+```
+Vlan    Mac Address       Type        Ports
+----    -----------       --------    -----
+   1    0050.7966.6800    DYNAMIC     Fa0/1
+   1    0050.7966.6801    DYNAMIC     Fa0/2
+   1    0050.7966.6802    DYNAMIC     Fa0/3
+   1    00D0.BC96.1A01    DYNAMIC     Fa0/4
+   1    00D0.BC96.1A02    DYNAMIC     Fa0/4
+   1    FFFF.FFFF.FFFF    STATIC     CPU
+```
 
-## 8. Elección de medio a escala
+a) ¿Cuántos dispositivos hay conectados al puerto Fa0/4? ¿Cómo lo sabes?
+b) ¿Cuántos puertos del switch tienen dispositivos conectados?
+c) La entrada FFFF.FFFF.FFFF en la CPU: ¿qué es?
+d) Si llega una trama con destino 00D0.BC96.1A03, ¿qué hace el switch?
 
-Decide qué medio de transmisión usarías para cada escenario y justifícalo:
+## 6. STP: cálculo de costes
 
-a) **Mini-oficina** de 8 puestos en un local de 60 m².
-b) **Planta** de 40 puestos en un edificio de oficinas con el rack en la misma planta.
-c) **Campus** de 3 edificios separados por 100, 500 y 2000 metros.
+Tienes esta topología STP:
 
-En cada caso indica: medio (cobre/fibra/WiFi), categoría/estándar aproximado y, si usas fibra, monomodo o multimodo.
+- Switch A (Root Bridge)
+- Switch B conectado a A por Fa0/1 (coste 19)
+- Switch C conectado a B por Fa0/2 (coste 19)
+- Switch C también conectado a A por Fa0/3 (coste 19)
 
-**Pista:** decide primero por distancia y presupuesto; luego por movilidad y rendimiento. 100 m es el límite del cobre, la multimodo cubre hasta ~550 m y la monomodo el resto.
+a) ¿Cuál es el Root Port de Switch C?
+b) ¿Qué coste tiene cada camino hacia el Root?
+c) ¿Cuál es el Alternate Port de Switch C?
+d) Si el coste de Fa0/3 se cambia a 4, ¿qué cambia?
+
+## 7. Topología STP/RSTP bajo análisis
+
+Tienes 4 switches con estas configuraciones:
+
+| Switch | Prioridad | MAC |
+|---|---|---|
+| SW1 | 4096 | 0011.2233.4400 |
+| SW2 | 32768 | 0011.2233.4401 |
+| SW3 | 32768 | 0011.2233.4402 |
+| SW4 | 32768 | 0011.2233.4403 |
+
+Conexiones (todas de coste 19):
+- SW1-SW2, SW1-SW3 y SW1-SW4 (enlace directo al Root)
+- SW2-SW3 (enlace redundante que cierra el bucle)
+
+a) ¿Quién es el Root Bridge y por qué?
+b) ¿Qué puertos quedan en estado Blocking/Discarding?
+c) ¿Cuántos Root Ports hay en total?
+d) Con RSTP, ¿cuánto tardaría la red en converger si SW1 se cae? ¿Y con STP clásico?
+e) ¿Qué papel juegan los puertos del Root Bridge?
+
+**Pista:** el Root Bridge es el de menor Bridge ID; todos sus puertos son Designated. Los switches no-root tienen 1 Root Port cada uno, y el enlace redundante SW2-SW3 crea un Alternate Port en el extremo con mayor coste acumulado hacia el Root.
+
+## 8. Laboratorio: Port Security en la sala de profesores
+
+Configura el puerto Fa0/24 del switch (donde se enchufa el PC de la sala de profesores) para que:
+
+a) Solo permita 1 MAC aprendida automáticamente y permanente (sticky).
+b) Si aparece una segunda MAC, el puerto se deshabilite (violación shutdown).
+c) Escribe los comandos completos y verifica con el comando de comprobación adecuado.
+
+Después, un profe desenchufa su PC y conecta su portátil personal. El puerto entra en errdisable.
+
+d) ¿Por qué ha ocurrido la violación si solo hay UN dispositivo conectado?
+e) ¿Qué dos comandos ejecutarías para recuperar el puerto?
+f) ¿Cómo evitarías el problema sin perder seguridad (piensa en el envejecimiento de la MAC sticky)?
+
+**Pista:** la MAC sticky NO caduca aunque el PC se desenchufe; si cambias de equipo, hay dos MACs distintas "conocidas" en el puerto y se supera el máximo. Para recuperar errdisable: `shutdown` + `no shutdown`. Para expirar la sticky cuando el dispositivo se desenchufa, configura el envejecimiento de la port security (`switchport port-security aging`).

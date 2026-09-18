@@ -1,65 +1,72 @@
 ---
-title: Boletín U09 — Inicial (Resuelto)
-description: Soluciones ejercicios básicos de Routing y ACLs
+title: Boletín UD9 — Inicial (Resuelto)
+description: Soluciones ejercicios básicos de NAT
 ---
 
-# ✅ Boletín U09 — Inicial (Resuelto)
+# ✅ Boletín UD9 — Inicial (Resuelto)
 
 ---
 
-## 1. Componentes del router
+## 1. ¿Qué es NAT?
 
-1 → b (RAM: configuración activa, tabla de rutas)
-2 → c (NVRAM: startup-config)
-3 → a (Flash: IOS)
-4 → d (ROM: ROMMON)
+**NAT** (Network Address Translation) traduce direcciones IP privadas (no enrutables en Internet) a direcciones IP públicas (enrutables). Es necesario porque:
+- Las IPv4 públicas son limitadas.
+- Una LAN completa puede compartir una o pocas IPs públicas.
 
-## 2. Verdadero o falso
+## 2. Tipos de NAT
 
-a) **Verdadero.** Las rutas estáticas se configuran con `ip route`.
-b) **Verdadero.** 0.0.0.0/0 es la ruta de último recurso.
-c) **Falso.** Las ACLs estándar filtran solo por IP origen.
-d) **Falso.** Al final hay un **deny any** implícito, no permit.
-e) **Verdadero.** `show ip route` muestra las rutas del router.
-
-## 3. ¿Qué comando?
-
-1 → c (`ip route 0.0.0.0 0.0.0.0` = ruta por defecto)
-2 → d (`show ip route` = tabla de rutas)
-3 → b (`ip access-group` = aplicar ACL)
-4 → a (`ip route` con red específica = ruta estática)
-
-## 4. Números de ACL
-
-| Tipo | Rango |
+| Tipo | Descripción |
 |---|---|
-| Estándar | **1-99, 1300-1999** |
-| Extendida | **100-199, 2000-2699** |
+| NAT estático | **B** — Una IP privada fija se traduce a una IP pública fija |
+| NAT dinámico | **C** — Se asigna una IP pública de un pool disponible |
+| PAT | **A** — Muchas IPs privadas comparten una IP pública variando puertos |
 
-## 5. Modos del router
+## 3. Configura PAT
 
-1. b) Usuario (`Router>`)
-2. d) Privilegiado (`Router#`)
-3. a) Configuración global (`Router(config)#`)
-4. c) Configuración de interfaz (`Router(config-if)#`)
+```bash
+R1(config)# access-list 1 permit 192.168.1.0 0.0.0.255
+R1(config)# ip nat inside source list 1 interface g0/1 overload
+R1(config)# interface g0/0
+R1(config-if)# ip nat inside
+R1(config)# interface g0/1
+R1(config-if)# ip nat outside
+```
 
-## 6. ACL básica
+## 4. Tabla NAT
 
-a) `access-list 10 permit 192.168.1.0 0.0.0.255`
-b) `interface g0/1` → `ip access-group 10 out`
+a) **2 dispositivos** (192.168.1.10 y 192.168.1.20).
+b) **83.45.12.78**.
+c) **50001**.
 
-## 7. Wildcard masks
+## 5. Verdadero o falso
 
-La wildcard es el **inverso** de la máscara de subred (restando cada octeto a 255):
+a) **Falso.** NAT estático es 1 a 1. PAT permite compartir una IP.
+b) **Verdadero.** NAT necesita saber qué interfaz es inside y cuál outside.
+c) **Falso.** NAT estático hace eso. NAT dinámico asigna de un pool, no es fijo.
+d) **Verdadero.**
 
-| Máscara de subred | Wildcard | ¿Qué representa? |
-|---|---|---|
-| 255.255.255.0 | `0.0.0.255` | Los 24 primeros bits fijos: una red /24 |
-| 255.255.255.255 | `0.0.0.0` | Todos los bits fijos: **solo esa IP** (host exacto) |
-| 255.255.0.0 | `0.0.255.255` | Los 16 primeros bits fijos: una red /16 |
+## 6. NAT destino (port forwarding)
 
-## 8. Comandos de verificación
+```bash
+R1(config)# ip nat inside source static tcp 192.168.1.10 80 83.45.12.78 80
+R1(config)# interface g0/0
+R1(config-if)# ip nat inside
+R1(config)# interface g0/1
+R1(config-if)# ip nat outside
+```
 
-1 → c (`show ip route` muestra la tabla de rutas)
-2 → a (`show access-lists` muestra las ACLs y sus contadores)
-3 → b (`show ip interface brief` resume IP, estado y protocolo de cada interfaz)
+## 7. ¿Qué tipo de NAT es?
+
+| Escenario | Tipo |
+|---|---|
+| a) Servidor web 192.168.1.10 ↔ 83.45.12.78 fijo | **NAT estático** (1:1) |
+| b) Pool de 4 IPs públicas asignadas al vuelo | **NAT dinámico** (pool) |
+| c) 300 alumnos saliendo por una IP pública | **PAT** (sobrecarga) |
+| d) Puerto público 8080 → 192.168.1.10:80 | **NAT destino** (port forwarding) |
+
+## 8. Lee la tabla NAT
+
+a) **3 conexiones activas:** dos consultas DNS (8.8.8.8:53) y una sesión HTTPS (142.250.184.4:443).
+b) **49152** — es el puerto efímero original del PC 192.168.1.30 (columna *Inside local*).
+c) Porque **NAT asigna un puerto global distinto** a cada conexión (60001, 60002, 60003): los puertos efímeros duplicados no chocan porque el *Inside global* los desambigua.
+d) Las dos primeras van a **8.8.8.8:53 (DNS)**; la tercera a **142.250.184.4:443 (HTTPS)**.

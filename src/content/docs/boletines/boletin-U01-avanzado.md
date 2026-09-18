@@ -1,9 +1,9 @@
 ---
-title: "Boletín U01 — Avanzado"
+title: "Boletín UD1 — Avanzado"
 description: "Ejercicios de nivel avanzado de la Unidad 01: razonar, diagnosticar y diseñar"
 ---
 
-# 📝 Boletín U01 — Avanzado
+# 📝 Boletín UD1 — Avanzado
 
 > Ejercicios que piden razonar, diagnosticar y defender ideas. No buscan memorizar: buscan que pienses como un administrador de redes.
 

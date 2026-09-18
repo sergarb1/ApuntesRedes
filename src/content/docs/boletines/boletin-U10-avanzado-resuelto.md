@@ -1,137 +1,129 @@
 ---
-title: Boletín U10 — Avanzado (Resuelto)
-description: Soluciones de los ejercicios avanzados de Routing Dinámico
+title: Boletín UD10 — Avanzado (Resuelto)
+description: Soluciones de los ejercicios avanzados de servicios de red (DHCP, DNS y NTP)
 ---
 
-# ✅ Boletín U10 — Avanzado (Resuelto)
+# ✅ Boletín UD10 — Avanzado (Resuelto)
 
 ---
 
-## 1. Configuración OSPF multiárea
+## 1. DHCP en el router Cisco
 
-**R1:**
+a)
 ```bash
-interface loopback 0
- ip address 1.1.1.1 255.255.255.255
-interface g0/0
- ip address 192.168.1.1 255.255.255.0
-interface g0/1
- ip address 192.168.2.1 255.255.255.0
-interface g0/2
- ip address 10.0.0.1 255.255.255.252
-router ospf 1
- router-id 1.1.1.1
- network 192.168.1.0 0.0.0.255 area 0
- network 192.168.2.0 0.0.0.255 area 0
- network 10.0.0.0 0.0.0.3 area 0
+ip dhcp excluded-address 192.168.1.1 192.168.1.20
+ip dhcp pool LAN1
+ network 192.168.1.0 255.255.255.0
+ default-router 192.168.1.1
+ dns-server 8.8.8.8 1.1.1.1
+ lease 3
 ```
 
-**R2 (ABR):**
+b) Secuencia de diagnóstico:
+1. `show running-config | section dhcp` → ¿existe el pool y las exclusiones?
+2. `show ip dhcp binding` → ¿ha entregado alguna dirección alguna vez? Si nadie tiene concesión, el problema es de alcance (VLAN/helper) o de pool.
+3. `show ip interface brief` → ¿la interfaz de la LAN está Up/Up con su IP? (si está down, el pool no sirve)
+4. En el PC: `ipconfig /renew` y mira si llega Offer; si no llega, comprueba que PC y servidor comparten red o que existe `ip helper-address` en la VLAN.
+5. Repasa exclusiones: si por error excluyes toda la subred, el pool no tiene nada que ofrecer.
+
+## 2. DNS jerárquico
+
+a) Recorrido:
+1. El resolver del PC pregunta al DNS configurado (p. ej. el router o el DNS del centro).
+2. Si ese resolver no tiene la respuesta en caché, pregunta a un **servidor raíz**: "¿quién es la autoridad de `.es`?"
+3. El raíz responde con los servidores del **TLD** `.es`.
+4. El resolver pregunta al TLD, que le da los servidores **autoritativos** de `ejemplo.es`.
+5. El autoritativo responde el registro A de `www.ejemplo.es`.
+6. El resolver entrega la IP al PC y la guarda en su caché.
+
+b) La segunda vez la respuesta sale de la **caché** del resolver (y probablemente también de la del propio PC): ni raíz ni TLD ni autoritativo se consultan.
+
+c) El **TTL** define cuántos segundos puede reutilizarse una respuesta cacheada. TTL corto = cambios rápidos pero más consultas; TTL largo = menos tráfico pero cambios lentos en propagarse.
+
+## 3. Selección de registros para un mini-proyecto
+
+a)
+```
+instituto.edu.      A      198.51.100.10
+instituto.edu.      AAAA   2001:db8::10
+www                 A      198.51.100.10
+www                 AAAA   2001:db8::10
+aulas               CNAME  www.instituto.edu.
+instituto.edu.      MX 10  mail.proveedor.com.
+```
+(En los registros MX el nombre del servidor de correo debe tener su propio A/AAAA.)
+
+b) El **MX** del dominio apuntando a `mail.proveedor.com.` (con punto final), más el A/AAAA de ese host si no lo gestiona el proveedor.
+
+c) **No.** La RFC prohíbe CNAME en el apex del dominio (convive con SOA/NS). Para el raíz se usan registros A/AAAA directos, o ALIAS/ANAME donde el proveedor lo ofrezca.
+
+## 4. Diagnóstico con nslookup
+
+a) El **servidor DNS configurado no responde** (timeout). La consulta no se resuelve: problema de alcance o del propio servidor 192.168.1.1.
+
+b) Consulta correcta: `www` es un **CNAME** hacia `web.ejemplo.es`, que resuelve a 203.0.113.99. Todo normal: la cadena de alias termina en un A.
+
+c) El **DNS funciona pero el navegador no**: prueba caché del navegador corrupta (vaciarla), un proxy configurado, un archivo hosts con una entrada vieja, o un firewall local. El DNS es una capa; la navegación depende de más cosas.
+
+## 5. NTP con jerarquía
+
+a) **Diseño:**
+- R1 (borde) sincroniza con servidores públicos (p. ej. `pool.ntp.org` o el NTP del proveedor) → quedará en estrato 2 o 3.
+- S1 sincroniza con R1 → estrato 3 o 4.
+- Los switches de acceso y demás equipos sincronizan con S1 (o con R1 si la red es pequeña) → un estrato más abajo.
+Nunca todos los equipos contra Internet: peor control, más tráfico y menos consistencia interna.
+
+b)
 ```bash
-interface loopback 0
- ip address 2.2.2.2 255.255.255.255
-interface g0/0
- ip address 10.0.0.2 255.255.255.252
-interface g0/1
- ip address 10.0.0.5 255.255.255.252
-router ospf 1
- router-id 2.2.2.2
- network 10.0.0.0 0.0.0.3 area 0
- network 10.0.0.4 0.0.0.3 area 1
+! R1 (borde)
+ntp server pool.ntp.org
+! (opcional) ntp master 3  si no hay acceso público garantizado
+
+! S1
+ntp server <ip_de_R1>
 ```
 
-**R3:**
+c)
 ```bash
-interface loopback 0
- ip address 3.3.3.3 255.255.255.255
+show ntp status
+show ntp associations
+```
+En `show ntp status` buscas la línea de sincronización y el estrato; en `associations`, el peer elegido (marcado con `*`), su IP y su estrato.
+
+## 6. Los tres servicios en un solo caso
+
+a) **DHCP** caído o inalcanzable. El rango 169.254.0.0/16 es **APIPA** (Automatic Private IP Addressing): el PC se autoasigna una IP de ese rango cuando nadie le contesta al Discover.
+
+b) DHCP Discover es un **broadcast**, y los broadcasts no cruzan VLANs (ni routers). Si el PC está en otra VLAN distinta a la del servidor DHCP sin un `ip helper-address` en el router de esa VLAN, la petición nunca llega.
+
+c) Ahora falla **DNS**. Compruebas con `nslookup` (o `Resolve-DnsName` en PowerShell): si `nslookup www.google.com 8.8.8.8` funciona pero con el DNS asignado no, el problema es el servidor DNS asignado por DHCP (o su helper). Complementa con `ping 8.8.8.8` para confirmar que hay salida a Internet.
+
+d) El PC estaba bien porque los **PCs ya sincronizaban su reloj** (con NTP interno o con Windows por Internet cuando hubo red). El switch, sin embargo, lleva su reloj propio sin fuente NTP configurada: tras el corte eléctrico perdió la hora (los switches sin NTP arrancan con fecha por defecto). De ahí la importancia de configurar NTP en los equipos de red, no solo en los PCs.
+
+## 7. DHCPv6 y doble pila
+
+a) **SLAAC:** el PC construye su propia dirección a partir del prefijo que anuncia el router (RA) + su identificador de interfaz (EUI-64 o aleatorio), sin servidor que lleve registro. **Stateful DHCPv6:** un servidor DHCPv6 asigna y registra las direcciones, como DHCPv4 pero en IPv6.
+
+b) **SLAAC + stateless DHCPv6:** los RA anuncian el prefijo (flag O=1, M=0) y el DHCPv6 solo entrega "otra información": DNS, dominio, NTP.
+
+c)
+```bash
+ipv6 unicast-routing
 interface g0/0
- ip address 192.168.3.1 255.255.255.0
-interface g0/1
- ip address 10.0.0.6 255.255.255.252
-router ospf 1
- router-id 3.3.3.3
- network 192.168.3.0 0.0.0.255 area 1
- network 10.0.0.4 0.0.0.3 area 1
+ ipv6 address fe80::1 link-local
+ ipv6 address 2001:db8:ab::1/64
+ ipv6 nd other-config-flag
+ipv6 dhcp pool CLIENTES
+ dns-server 2001:4860:4860::8888
+ domain-name instituto.edu
+interface g0/0
+ ipv6 dhcp server CLIENTES
 ```
 
-## 2. Diagnóstico OSPF
+## 8. El "no tiene Internet" clásico
 
-a) **FULL/DR:** El vecino 3.3.3.3 es el DR y la adyacencia está completa (FULL). Es normal en Ethernet.
+a) **Sano:** DHCP (IP y gateway correctos), routing básico (llega a 1.1.1.1, si nslookup contra 1.1.1.1 funciona hay salida a Internet). **Roto:** el **DNS configurado** en el equipo (el asignado no responde; uno externo sí).
 
-b) **2WAY/DROTHER:** El vecino 4.4.4.4 no es DR ni BDR (DROTHER). La adyacencia está en 2WAY, que es el estado normal entre DROTHERS (no intercambian LSAs directamente, solo con el DR).
+b) 1) Arreglar/renombrar el servidor DNS configurado (por ejemplo poner 1.1.1.1 u 8.8.8.8 a mano) y 2) corregir de raíz el DNS que entrega el DHCP del router del centro (opción `dns-server` en el pool) o el propio servidor DNS caído.
 
-c) **Porque no es necesario.** En redes multiacceso, los DROTHERS solo forman adyacencia FULL con el DR y BDR. Entre DROTHERS se quedan en 2WAY.
-
-d) **No se ve directamente.** Pero por contexto, si este router tiene vecinos en G0/0 y G0/1, su Router ID podría ser otro (el más alto de sus loopbacks o interfaces físicas).
-
-## 3. Redistribución OSPF
-
-a) `redistribute static subnets` inyecta las rutas estáticas configuradas en el router al proceso OSPF, para que otros routers OSPF aprendan esas rutas.
-
-b) **Dos rutas:** la ruta por defecto (0.0.0.0/0) y la ruta estática 10.100.0.0/16.
-
-c) **Sí.** La redistribución + `default-information originate` propaga ambas rutas a todos los routers OSPF en todas las áreas.
-
-## 4. Cambio de coste OSPF
-
-a) **Camino A** (R1→R2→R3, 2 enlaces Gigabit) tiene coste **1+1 = 2**. El **Camino B** (R1→R4→R5→R3, 3 enlaces FastEthernet) tiene coste **1+1+1 = 3**. OSPF elige el camino con menor coste total: **el Camino A**. el mismo coste si todos los enlaces son del mismo tipo. Si ambos tienen coste 1+1+1 vs 1+1+1+1, gana el de 3 saltos (menos coste).
-
-b) Para forzar el Camino B, aumentar el coste en los enlaces de A:
-   ```bash
-   R1(config-if)# ip ospf cost 10
-   ```
-
-c) `show ip ospf interface` o `show ip route` muestra el coste de cada ruta.
-
-## 5. DR/BDR election
-
-a) **DR: R3** (prioridad 10, la más alta). **BDR: R4** (prioridad 5, segunda más alta).
-
-b) Prioridad **0** significa que el router **no participa** en la elección de DR/BDR. Nunca será DR ni BDR.
-
-c) Cambiar la **prioridad** de R1 a un valor más alto que 10:
-   ```bash
-   R1(config-if)# ip ospf priority 20
-   ```
-   (Nota: la elección solo ocurre al iniciar OSPF o al reiniciar el proceso)
-
-## 6. Troubleshooting OSPF
-
-**Paso 1:** Verificar conectividad capa 3 → `ping` entre routers vecinos. Si no hay ping, el problema está en capa 1 o 2.
-
-**Paso 2:** Verificar que las interfaces están activas → `show ip interface brief`. Buscar "up/up".
-
-**Paso 3:** Verificar que OSPF está configurado → `show ip protocols`. Debe mostrar OSPF con Router ID y redes declaradas.
-
-**Paso 4:** Verificar vecinos → `show ip ospf neighbor`. Si no hay vecinos, comprobar:
-- `network` declarada correctamente (wildcard, área)
-- Hello/Dead timers coinciden (por defecto 10/40 en broadcast)
-- No hay ACL bloqueando protocolo 89 (OSPF)
-
-**Paso 5:** Verificar LSDB → `show ip ospf database`. Debe haber LSAs de todos los routers.
-
-**Paso 6:** Verificar tabla de rutas → `show ip route ospf`. Las rutas deben aparecer con prefijo O (OSPF).
-
-## 7. Elección DR/BDR en otro segmento
-
-a) **DR: R-B** (prioridad 200, la más alta). **BDR: R-C** (prioridad 150, segunda más alta).
-
-b) **R-D** tiene prioridad **0**: no participa en la elección. Solo actuará como **DROTHER**, sincronizándose con el DR y el BDR sin poder ser elegido.
-
-c) **R-B** — con prioridades empatadas (1 = 1), el desempate lo hace el **Router ID más alto** (10.0.0.2 > 10.0.0.1). La prioridad manda primero; el Router ID solo decide empates.
-
-d) **No cambia.** La elección de DR/BDR solo ocurre al arrancar OSPF o al reiniciar el proceso; subir la prioridad de R-C a 255 no destrona al DR ya elegido (R-B). Para que cambie tendrías que **reiniciar el proceso OSPF** (o el router) en los routers del segmento, y entonces R-C (prioridad 255) ganaría.
-
-## 8. La adyacencia que no levanta
-
-a) Al funcionar el ping, queda **descartado el plano físico/enlace y la capa 3** del enlace: las IPs se alcanzan. El problema está en el **plano OSPF** (configuración lógica del protocolo), no en la conectividad.
-
-b) **Orden de diagnóstico:**
-1. `show ip protocols` → comprobar que OSPF arranca en ambos, que el **Router ID** no está duplicado y que las redes declaradas incluyen el enlace Serial.
-2. `show ip ospf interface` → confirmar en ambos routers que la interfaz **participa** en OSPF, y comparar **área**, **wildcard** y **timers** (Hello/Dead). Si no aparece, la red no está declarada o la wildcard está mal.
-3. Verificar que el **área** coincide en los dos lados del enlace (revisar el `network ... area X`).
-4. Comparar los **timers Hello/Dead** en ambos lados con `show ip ospf interface`: deben coincidir (por defecto 10/40 en broadcast y punto a punto Serial; solo en redes NBMA son 30/120). Si uno quedó con valores distintos, no forman vecindad.
-5. `show access-lists` (y contadores en la interfaz) → descartar una **ACL** que bloquee el **protocolo 89 (OSPF)** en el sentido de entrada/salida.
-6. Solo si todo lo anterior está bien, subir un nivel: `debug ip ospf events` (con cuidado) para ver por qué se rechaza el Hello.
-
-c) `show ip ospf interface <interfaz>`: si la interfaz aparece listada con su área y sus timers, está **participando en OSPF sin ambigüedad**. Si no sale, OSPF no la tiene declarada (falta `network` o wildcard incorrecta).
+c) **NTP** solo sincroniza relojes; **DHCP** está funcionando (hay IP y gateway); **routing** hay: las consultas a 1.1.1.1 van y vuelven. El único servicio que falla es la resolución de nombres con el servidor asignado.

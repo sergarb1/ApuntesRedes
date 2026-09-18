@@ -1,61 +1,62 @@
 ---
-title: Boletín U08 — Inicial (Resuelto)
-description: Soluciones ejercicios básicos de VLANs
+title: Boletín UD8 — Inicial (Resuelto)
+description: Soluciones de los ejercicios básicos de ACLs y seguridad de red
 ---
 
-# ✅ Boletín U08 — Inicial (Resuelto)
+# ✅ Boletín UD8 — Inicial (Resuelto)
 
 ---
 
-## 1. ¿Qué VLAN soy?
+## 1. Verdadero o falso
 
-1 → c (VLAN de datos: tráfico normal de usuario)
-2 → a (VLAN de voz: teléfonos IP, QoS 802.1p)
-3 → d (VLAN nativa: sin etiquetar en el trunk)
-4 → b (VLAN de gestión: administración del switch, SSH/SNMP)
+a) **Verdadero.** Solo IP origen (o rechaza todo lo demás). Para origen+destino+puerto, extendida.
+b) **Falso.** Al final hay un **deny any** implícito, no permit.
+c) **Verdadero.** Protocolo (IP, TCP, UDP, ICMP…), IP origen/destino y puerto de origen/destino.
+d) **Verdadero.** Con solo líneas deny, el deny any implícito del final rechaza todo: la ACL corta el 100% del tráfico que evalúa.
+e) **Verdadero.** Y con contadores de matches por línea, muy útil para diagnosticar.
 
-## 2. Verdadero o falso
+## 2. Números de ACL
 
-a) **Verdadero.** Cada VLAN es un dominio de broadcast independiente: un broadcast de VLAN 10 no llega a la VLAN 20.
-b) **Verdadero.** IEEE 802.1Q es el estándar de etiquetado VLAN (TPID 0x8100, 4 bytes).
-c) **Falso.** Las VLANs aíslan en capa 2. Necesitan un router (o un switch capa 3) para hacer inter-VLAN routing.
-d) **Verdadero.** Un trunk transporta todas las VLANs permitidas, etiquetadas con 802.1Q (salvo la native).
-e) **Verdadero.** VLAN 1 es la native y la VLAN por defecto del switch. Por seguridad conviene cambiarla.
+| Tipo | Rango |
+|---|---|
+| Estándar | **1-99, 1300-1999** |
+| Extendida | **100-199, 2000-2699** |
 
-## 3. Identifica
+## 3. ¿Qué comando?
 
-a) **Puerto access** — Solo una VLAN, tráfico sin etiquetar.
-b) **Puerto trunk** — Múltiples VLANs etiquetadas con 802.1Q (y la native sin etiquetar).
+1 → b (`ip access-group` = aplicar ACL a interfaz)
+2 → d (`access-list` numerada estándar)
+3 → a (`ip access-list extended` = ACL nombrada extendida)
+4 → c (`show access-lists` = ACLs y contadores)
 
-## 4. Números
+## 4. Wildcard masks
 
-a) **12 bits** para el VLAN ID.
-b) **4094 VLANs** (12 bits = 4096, reservadas 0 y 4095).
-c) **4 bytes** insertados entre la MAC de origen y el EtherType: TPID (2 bytes) + TCI (2 bytes) = PRI (3 bits) + CFI (1 bit) + VLAN ID (12 bits).
+La wildcard es el **inverso** de la máscara de subred (restando cada octeto a 255):
 
-## 5. Relaciona
+| Máscara de subred | Wildcard | ¿Qué representa? |
+|---|---|---|
+| 255.255.255.0 | `0.0.0.255` | Los 24 primeros bits fijos: una red /24 |
+| 255.255.255.255 | `0.0.0.0` | Todos los bits fijos: **solo esa IP** (host exacto) |
+| 255.255.0.0 | `0.0.255.255` | Los 16 primeros bits fijos: una red /16 |
 
-1 → b (`switchport mode trunk` configura el puerto como trunk)
-2 → a (`vlan 10` crea la VLAN 10)
-3 → c (`show vlan brief` muestra las VLANs y sus puertos)
-4 → d (`encapsulation dot1Q 10` etiqueta la subinterfaz con la VLAN 10)
+## 5. ACL básica
 
-## 6. ¿Qué necesito?
+a) `access-list 10 permit 192.168.1.0 0.0.0.255`
+b) `interface g0/1` → `ip access-group 10 out`
 
-**b) Un router o switch capa 3.** Las VLANs aíslan en capa 2. Para comunicarse entre VLANs se necesita routing (inter-VLAN routing): router-on-a-stick con subinterfaces o un switch multicapa con SVIs.
+## 6. Estándar o extendida
 
-## 7. Comandos de resolución
+a) **Estándar.** Solo filtra por origen, y solo hay un origen que bloquear: el host escaneador. Además la estándar es más ligera.
+b) **Extendida.** Filtra protocolo (TCP) y puerto (80/443), cosa que la estándar no puede.
+c) **Estándar.** Es el escenario clásico de la estándar: menos CPU y solo interesa el origen.
 
-1 → c (`show vlan brief` → VLANs y puertos access)
-2 → a (`show interfaces trunk` → native VLAN, allowed y mismatches)
-3 → b (`show running-config` → configuración completa actual)
+## 7. ¿Dónde aplico la ACL?
 
-d) **`show ip interface brief`** — en el router-on-a-stick, te muestra las subinterfaces (Fa0/0.10, Fa0/0.20…) con su estado **Up/Up** y sus IPs. Si una subinterfaz está *down/down*, el problema suele ser la interfaz física sin `no shutdown`, o que la VLAN no exista en el switch.
+a) **Cerca del destino**: en R1, interfaz hacia LAN-B, sentido **out**. (Otra opción correcta: en la interfaz que recibe el tráfico de PC1, sentido in.) La estándar se coloca cerca del destino para no filtrar de más en el camino.
+b) **Cerca del origen**: en R1, interfaz hacia LAN-A, sentido **in**. La extendida filtra con precisión (protocolo+puerto), así que conviene cortar el tráfico lo antes posible y no consumir ancho de banda en vano.
 
-## 8. V/F inter-VLAN
+## 8. Comandos de verificación
 
-a) **Verdadero.** Cada VLAN necesita su subinterfaz (`interface fa0/0.10`) con `encapsulation dot1Q 10` y su IP de gateway.
-b) **Verdadero.** Un switch capa 3 enruta entre VLANs con SVIs (`interface vlan X`) + `ip routing`, sin router externo.
-c) **Verdadero.** El router-on-a-stick enruta todo por la única interfaz física: es el cuello de botella del diseño.
-d) **Verdadero.** Sin `ip routing`, los SVIs están Up/Up pero NO enrutan entre VLANs. Es el fallo nº1 al probar.
-e) **Verdadero.** Todo el tráfico inter-VLAN atraviesa la misma interfaz: si las VLANs generan más de su ancho de banda, se satura (por eso se usa Gigabit o un switch capa 3).
+1 → b (`show access-lists` muestra contadores de matches por línea)
+2 → a (`show ip interface` indica la ACL aplicada y el sentido)
+3 → c (`show running-config` muestra las líneas tal como las escribiste)

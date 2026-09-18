@@ -1,114 +1,74 @@
 ---
-title: Boletín U11 — Avanzado (Resuelto)
-description: Soluciones ejercicios avanzados de NAT
+title: Boletín UD11 — Avanzado (Resuelto)
+description: Soluciones de los ejercicios avanzados de redes inalámbricas
 ---
 
-# ✅ Boletín U11 — Avanzado (Resuelto)
+# ✅ Boletín UD11 — Avanzado (Resuelto)
 
 ---
 
-## 1. Traducción manual
+## 1. Diseño de cobertura de un instituto
 
-| Pro | Inside global | Inside local | Outside local | Outside global |
-|---|---|---|---|---|
-| tcp | 83.45.12.78:**60001** | 192.168.1.10:50000 | 8.8.8.8:80 | 8.8.8.8:80 |
-| udp | **83.45.12.78:60002** | 192.168.1.20:50000 | 8.8.8.8:53 | 8.8.8.8:53 |
+a) **Mínimo 6-8 APs** (2 por planta como mínimo por superficie, más si hay paredes de hormigón): repartidos para solapar celdas ~15-20%. El hormigón armado atenuina mucho: más APs con menos potencia gana a pocos APs a tope.
 
-NAT asigna puertos únicos (60001, 60002) aunque los puertos origen sean iguales (50000).
+b) **2,4 GHz:** dispositivos lentos/IoT y compatibilidad; poco ancho de banda útil (3 canales). **5 GHz:** profesores y alumnos con portátiles/móviles modernos: más canales, más velocidad. 6 GHz si el hardware lo permite (WiFi 6E/7).
 
-## 2. Problema con FTP activo
+c) Porque **profesores** requiere autenticación por usuario (Enterprise/RADIUS), trazabilidad y acceso a recursos internos; **alumnos** solo necesita Internet con control de ancho y registro. VLANs distintas aíslan ambos mundos en capa 2 y permiten políticas distintas en capa 3.
 
-**Falla porque el servidor FTP externo intenta conectar directamente a 192.168.1.10:1025, pero esa IP es privada y no es accesible desde fuera.** Además, NAT no traduce IPs dentro del payload del protocolo FTP (comando PORT).
+d) **Interferencia por reutilización de canal (co-channel interference)**: los APs se oyen entre sí, compiten por el medio (CSMA/CA) y el throughput de la zona se divide. Por eso el plan 1-6-11.
 
-**Soluciones:**
-- Usar **FTP pasivo**: el cliente inicia ambas conexiones.
-- Activar **ALG FTP** en el router para que inspeccione y traduzca las IPs en el comando PORT.
-- Usar FTP sobre TLS/SSH.
+## 2. El misterio del aula 12
 
-## 3. Configuración multi-NAT
+a) La **potencia de señal** (RSSI) mide cuánto llega; la **calidad** (SNR y reutilización de canal) mide cuánto ruido/competencia hay. Puedes "oír" el AP perfectamente y aun así perder paquetes por interferencias.
 
-```bash
-R1(config)# ip nat inside source static tcp 192.168.1.10 80 83.45.12.78 8080
-R1(config)# ip nat inside source static tcp 192.168.1.10 443 83.45.12.78 8443
-R1(config)# ip nat inside source static tcp 192.168.1.20 22 83.45.12.78 2222
-```
+b) 1) Vecinos u otros APs en el mismo canal (co-channel); 2) microondas, videoporteros, Bluetooth u otros emisores de 2,4 GHz; 3) reflexiones multipath por paredes/metal que ensucian la señal (o hidden node).
 
-## 4. NAT + VPN
+c) Analizador WiFi (inSSIDer, WiFi Analyzer, Acrylic): mira SNR, canal ocupado por otros BSSIDs y utilisation. En el controlador: estadísticas de retransmisiones y de errores CRC del AP.
 
-**IPsec no pasa NAT porque NAT modifica la cabecera IP, y los protocolos AH y ESP usan hashes que verifican la integridad de la cabecera IP.** Al cambiar la IP, el hash no coincide y el paquete se rechaza.
+## 3. Plan de canales 5 GHz
 
-**Solución:** **NAT-T (NAT Traversal)** — encapsula paquetes IPsec dentro de UDP (puerto 4500). NAT puede traducir UDP sin problemas, y IPsec viaja encapsulado.
+a) Ejemplo: AP1 → 36, AP2 → 44, AP3 → 52, AP4 → 60 (separación de 4 números × 20 MHz; solape nulo). Si son APs con 80 MHz: 36, 52, 100, 116 (bloques no solapados).
 
-## 5. Análisis de timeouts
+b) Con 40/80 MHz **dobles/cuadruplicas el ancho** del canal → más throughput pico. Riesgo: consumes varios canales de 20, chocas con vecinos y en 2,4 GHz es directamente una mala idea (solo hay 3).
 
-**El problema no es NAT, es el firewall o el propio router que tiene un timeout de sesión TCP menor que el de NAT.** Muchos firewalls cierran conexiones TCP inactivas después de unos minutos. También puede ser el **keepalive TCP** del cliente o servidor SSH.
+c) **DFS** (Dynamic Frequency Selection): canales compartidos con radares (meteorológicos/militares). El AP debe despejar el canal si detecta radar: salta de canal y provoca microcortes de clientes. Riesgo: inestabilidad en zonas con radares activos.
 
-**Solución:** Configurar keepalive SSH en el cliente (`ServerAliveInterval 60`), o ajustar el timeout de sesión TCP en el router.
+## 4. WPA3 y el handshake
 
-## 6. NAT y servidores duales
+a) Con WPA2-PSK, un atacante que captura el 4-way handshake puede probar contraseñas **offline** (millones/segundo). Con **SAE**, la negociación es resistente a ataques offline: cada intento cuesta interacción real con el AP.
 
-```bash
-! PAT para todos los internos
-R1(config)# access-list 1 permit 192.168.10.0 0.0.0.255
-R1(config)# ip nat inside source list 1 interface g0/1 overload
+b) Que el AP acepta WPA2 y WPA3 a la vez: los equipos viejos entran por WPA2 y los modernos por WPA3. Tiene sentido durante la transición del parque de dispositivos; en cuanto el parque lo permita, mejor WPA3 puro.
 
-! NAT destino para servidor web (IP pública 83.45.12.78)
-R1(config)# ip nat inside source static tcp 192.168.10.10 80 83.45.12.78 80
-R1(config)# ip nat inside source static tcp 192.168.10.10 443 83.45.12.78 443
+c) 1) El SSID "oculto" viaja en claro en las tramas de gestión: cualquier analizador lo ve (y además empeora el roaming de los clientes, que gritan por la red buscando el SSID). 2) El filtrado MAC se falsifica en 10 segundos: la MAC viaja en claro y se puede suplantar. Ninguno de los dos autentica a nadie: usa WPA2/WPA3.
 
-! NAT destino para servidor correo (IP pública 83.45.12.79)
-R1(config)# ip nat inside source static tcp 192.168.10.20 25 83.45.12.79 25
-R1(config)# ip nat inside source static tcp 192.168.10.20 587 83.45.12.79 587
-R1(config)# ip nat inside source static tcp 192.168.10.20 993 83.45.12.79 993
+## 5. Portal cautivo y VLANs
 
-! Interfaces
-R1(config)# interface g0/0
-R1(config-if)# ip nat inside
-R1(config)# interface g0/1
-R1(config-if)# ip nat outside
-```
+a) **VLAN de invitados propia** (p. ej. VLAN 99), separada en capa 2 de docentes/alumnos y con su propia subred. Los broadcasts y el tráfico de invitados nunca tocan la red interna.
 
-## 7. Multi-NAT: servidores duales + PAT simultáneo
+b) Página web que exige aceptar condiciones (y a veces credenciales o un código) antes de dejar pasar tráfico. Limitaciones: es "seguridad de cortesía", no cifrado (la red sigue abierta salvo que haya PSK/802.1X), y su cumplimiento depende del navegador (los dispositivos IoT no lo abren).
 
-```bash
-! PAT para los usuarios internos (83.45.12.78)
-R1(config)# access-list 1 permit 192.168.50.0 0.0.0.255
-R1(config)# ip nat inside source list 1 interface g0/1 overload
+c) **Segmentación** de la unidad: aislar por VLAN los dispositivos no confiables y aplicar ACLs/firewall en el borde de esa VLAN (solo salida a Internet). Complementa con WPA2/WPA3-PSK para cifrar aunque sea mínimamente.
 
-! NAT destino para el servidor web (puertos públicos en 83.45.12.78)
-R1(config)# ip nat inside source static tcp 192.168.50.10 80 83.45.12.78 8080
-R1(config)# ip nat inside source static tcp 192.168.50.10 443 83.45.12.78 8443
+## 6. Diagnóstico de un despliegue roto
 
-! NAT estático 1:1 para el servidor de correo (83.45.12.79)
-R1(config)# ip nat inside source static tcp 192.168.50.20 25 83.45.12.79 25
-R1(config)# ip nat inside source static tcp 192.168.50.20 587 83.45.12.79 587
-R1(config)# ip nat inside source static tcp 192.168.50.20 993 83.45.12.79 993
+a) 1) **Canales mal asignados:** 1-1-1-6-1-11 apila tres APs vecinos en el canal 1: co-channel interference brutal. 2) **Potencia al máximo en todos:** celdas enormes que se solapan demasiado; el cliente "se casa" con un AP lejano en vez de moverse al cercano.
 
-! Interfaces
-R1(config)# interface g0/0
-R1(config-if)# ip nat inside
-R1(config)# interface g0/1
-R1(config-if)# ip nat outside
-```
+b) Al caminar, el cliente pierde al AP viejo y busca uno nuevo; si las celdas están mal solapadas (o el cliente se empeña en el lejano), el roving tarda: escanea canales, reautentica (con Enterprise, además, 802.1X completo). 20 s es roaming roto, no una microscaída.
 
-**Nota:** las traducciones estáticas y el PAT conviven sin problema. El tráfico de los usuarios usa el overload con puertos efímeros; las reglas estáticas tienen prioridad sobre sus puertos concretos (8080, 8443, 25, 587, 993).
+c) 1) **Bajar potencia** a un nivel que dé celdas del tamaño adecuado con solape controlado. 2) Replan de canales 1-6-11 alternados (y en 5 GHz, bloques no solapados). 3) Activar las ayudas del controlador: roaming asistido (802.11k/v/r) y balanceo de clientes. 4) En Enterprise, fast roaming (PMKID/FT) para no repetir el 802.1X completo.
 
-## 8. Diagnóstico: "no salimos a Internet"
+## 7. Cálculo rápido de throughput
 
-a) **Orden de comprobaciones (de básico a específico):**
-   1. `ping 192.168.1.1` desde un PC → ¿la LAN está viva?
-   2. `ping 203.0.113.2` desde un PC → ¿el paquete llega hasta la WAN del router?
-   3. `ping 8.8.8.8` desde el propio R1 → ¿tiene el router salida real?
-   4. `show ip nat translations` → ¿hay traducciones activas?
-   5. Revisar la access-list (¿permite la red correcta?) y el `overload` (¿está puesto?).
-   6. Verificar las marcas `ip nat inside/outside` en las interfaces.
+a) El 1200 Mbps es **enlace físico teórico** (mejor caso, MCS alto, sin reintentos). Real: 30-50% en el mejor caso; y se **comparte** por tiempo, no se reparte por igual: quien más transmite, más come. 25 alumnos → decenas de Mbps reales por cabeza en hora punta.
 
-b) **`show ip nat translations`.** Esperas ver entradas del tipo `tcp 83.45.12.78:puerto ... 192.168.1.X:puerto ...` en cuanto los PCs generen tráfico hacia fuera.
+b) **CSMA/CA**: el medio radio es único y compartido: solo uno transmite a la vez, y cada retransmisión por colisión o mala señal roba tiempo útil a todos.
 
-c) Si la tabla está **vacía** con tráfico circulando:
-   - La access-list no coincide con la red interna (red mal escrita o wildcard incorrecto).
-   - Falta la palabra `overload` en el comando PAT.
-   - Faltan `ip nat inside`/`ip nat outside` en las interfaces.
-   - El tráfico que se prueba no atraviesa las interfaces inside/outside (p. ej. se prueba desde el propio router).
+c) 1) **Más APs** (repartir la carga entre celdas) con canales distintos y potencias contenidas. 2) **Dirigir más carga a 5 GHz** (band steering): más canales, menos competencia. 3) Si el AP lo soporta, perfiles/limites por cliente para que nadie monopilice.
 
-d) **Fallo real:** sin `ip nat inside` en g0/0 ni `ip nat outside` en g0/1, NAT no tiene "puertas" de traducción. La regla `ip nat inside source list 1 interface g0/1 overload` dice QUÉ traducir y A DÓNDE, pero NAT necesita saber qué tráfico es interno y cuál externo. Sin esas marcas de interfaz, los paquetes de la LAN se reenvían tal cual (o se descartan) y la tabla NAT permanece vacía: exactamente el síntoma observado.
+## 8. Caso integrador con Packet Tracer
+
+a) **Puerto access** de la VLAN 20: un AP doméstico solo habla una VLAN (su SSID mapea a una subred); no etiqueta 802.1Q. (Un AP enterprise con varios SSIDs sí llevaría trunk.)
+
+b) 1) **DNS del pool DHCP de la VLAN 20** (¿apunta a un DNS válido?). 2) **Ruta de retorno** (¿el router sabe volver a 192.168.20.0/24?) o NAT si sale a Internet. Si el ping al 8.8.8.8 funciona y los nombres no, es DNS.
+
+c) **WPA2-Personal (PSK)**: la misma seguridad que en un AP real se llama WPA2-PSK o WPA2-Personal según el fabricante.
