@@ -1,74 +1,62 @@
 ---
-title: Boletín U06 — Inicial (Resuelto)
-description: Soluciones ejercicios básicos de IPv6 y Transición
+title: Boletín UD6 — Inicial (Resuelto)
+description: Soluciones de los ejercicios básicos de enrutamiento estático
 ---
 
-# ✅ Boletín U06 — Inicial (Resuelto)
+# ✅ Boletín UD6 — Inicial (Resuelto)
 
 ---
 
-## 1. Compresión de direcciones
+## 1. Componentes del router
 
-a) `2001:DB8::1`
-b) `FE80::2AA:FF:FE9A:4CA2`
-c) `::1`
-d) `2001:DB8::ABCD:0:0:1234` (solo un ::, la secuencia de ceros más larga)
+1 → b (RAM: configuración activa, tabla de rutas)
+2 → c (NVRAM: startup-config)
+3 → a (Flash: IOS)
+4 → d (ROM: ROMMON)
 
-## 2. Identifica el tipo
+## 2. Verdadero o falso
 
-a) `2001:DB8::1` → **Global Unicast** (2000::/3)
-b) `FE80::1` → **Link-Local** (FE80::/10)
-c) `::1` → **Loopback**
-d) `FC00::1` → **Unique Local** (FC00::/7)
-e) `FF02::1` → **Multicast** (todos los nodos)
+a) **Verdadero.** Las rutas estáticas se configuran con `ip route`.
+b) **Verdadero.** 0.0.0.0/0 es la ruta de último recurso.
+c) **Falso.** Si el next-hop es inalcanzable, la ruta NO se instala en la tabla de rutas (aunque la tengas escrita en la config).
+d) **Verdadero.** Las rutas estáticas tienen AD 1 y métrica 0.
+e) **Verdadero.** `show ip route` muestra las rutas del router.
 
-## 3. Completa
+## 3. ¿Qué comando?
 
-a) IPv4 tiene **32** bits, IPv6 tiene **128** bits.
-b) IPv4 se representa en decimal, IPv6 en **hexadecimal**.
-c) El prefijo de Link-Local es **FE80::/10**.
-d) El prefijo de Global Unicast es **2000::/3**.
-e) **NDP** (Neighbor Discovery Protocol) reemplaza a ARP en IPv6.
+1 → c (`ip route 0.0.0.0 0.0.0.0` = ruta por defecto)
+2 → b (`show ip route` = tabla de rutas)
+3 → a (`show ip interface brief` = estado de interfaces)
+4 → d (`ip route` con red específica = ruta estática)
 
-## 4. Verdadero o falso
+## 4. Modos del router
 
-a) **Falso.** Las Link-Local solo funcionan en el mismo enlace. No son enrutables.
-b) **Verdadero.** SLAAC se basa en Router Advertisements del router. Sin servidor central.
-c) **Falso.** :: solo puede usarse UNA vez por dirección. Si no, el router no sabe cuántos grupos cero hay.
-d) **Verdadero básicamente**, pero DHCPv6 tiene dos modos (stateless y stateful) que no existen en IPv4.
-e) **Verdadero.** Dual Stack ejecuta ambas pilas de protocolos simultáneamente.
+1. b) Usuario (`Router>`)
+2. d) Privilegiado (`Router#`)
+3. a) Configuración global (`Router(config)#`)
+4. c) Configuración de interfaz (`Router(config-if)#`)
 
-## 5. NDP
+## 5. Anatomía de una ruta
 
-1 → c (Neighbor Solicitation: "¿Quién tiene esta IP?")
-2 → d (Neighbor Advertisement: "Yo, aquí está mi MAC")
-3 → b (Router Solicitation: dispositivo busca routers)
-4 → a (Router Advertisement: router anuncia su prefijo)
+- `S` → origen estático (aprendida con `ip route`)
+- `192.168.3.0/24` → red destino y su prefijo
+- `[1/0]` → distancia administrativa 1 / métrica 0
+- `via 10.0.0.2` → next-hop: a quién le paso el paquete
 
-## 6. Mecanismos de transición
+## 6. Tu primera ruta estática
 
-1 → b (Dual Stack: ambos protocolos a la vez)
-2 → c (Túnel 6to4: encapsula IPv6 en IPv4)
-3 → a (NAT64: traduce IPv6→IPv4)
+```bash
+ip route 192.168.2.0 255.255.255.0 10.0.0.2
+```
 
-## 7. Expande direcciones
+Red destino + máscara + next-hop. Sin el `via`: en IOS el next-hop se escribe tal cual al final del comando.
 
-a) `2001:DB8::1` → **`2001:0DB8:0000:0000:0000:0000:0000:0001`**
-   (el `::` oculta 5 grupos de ceros entre `DB8` y el `1`).
+## 7. ¿Ruta por defecto o ruta específica?
 
-b) `FE80::2AA:FF:FE9A:4CA2` → **`FE80:0000:0000:0000:02AA:00FF:FE9A:4CA2`**
-(el `::` oculta 3 grupos de ceros; al expandir, `2AA` → `02AA` y `FF` → `00FF`).
+**Ruta por defecto.** Con una única salida, cualquier destino que no sea la LAN propia va a ese next-hop: `ip route 0.0.0.0 0.0.0.0 <ip_salida>`. Cincuenta rutas específicas serían 50 líneas que mantener a mano para cubrir lo mismo.
 
-c) `::1` → **`0000:0000:0000:0000:0000:0000:0000:0001`**
-   (siete grupos de ceros + el `1`).
+## 8. Verificación
 
-## 8. Clasifica tipo y ámbito
-
-| Dirección | Tipo | Ámbito |
-|---|---|---|
-| a) `2001:DB8::1` | **Global Unicast** (GUA, 2000::/3) | **Global** (Internet) |
-| b) `FE80::1` | **Link-Local** (LLA, FE80::/10) | **Enlace local** (misma LAN) |
-| c) `FC00::1` | **Unique Local** (ULA, FC00::/7) | **Privado/organización** |
-| d) `::1` | **Loopback** | **Este nodo** (local) |
-| e) `FF02::1` | **Multicast** (todos los nodos) | **Enlace local** (el `02` en FF02) |
-| f) `2001:DB8:1:2:21A:2BFF:FE3C:4D5E` | **Global Unicast** (2000::/3) | **Global** (Internet) |
+1. `show running-config | include ip route` → ¿está escrita la ruta? (fallo típico: errata en la IP)
+2. `show ip route` → ¿aparece con una `S`? Si no aparece, el next-hop es inalcanzable: mira `show ip interface brief` (punto 3).
+3. `show ip interface brief` → ¿la interfaz de salida está Up/Up? Si está down/down (cable) o administratively down (falta `no shutdown`), la ruta no se instala.

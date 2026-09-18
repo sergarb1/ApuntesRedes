@@ -1,114 +1,89 @@
 ---
-title: Boletín U12 — Avanzado
-description: Ejercicios avanzados de Diagnóstico y monitorización
+title: Boletín UD12 — Avanzado
+description: Ejercicios avanzados de alta disponibilidad y redundancia
 ---
 
-# 📝 Boletín U12 — Avanzado
+# 📝 Boletín UD12 — Avanzado
 
-> Ejercicios que requieren comprensión profunda de diagnóstico y SNMP.
+> Ejercicios que requieren diseñar y diagnosticar arquitecturas redundantes. En los difíciles tienes pista.
 
 ---
 
-## 1. Análisis Wireshark
+## 1. Diseño jerárquico completo
 
-Has capturado una comunicación TCP. Ves estos paquetes en orden:
+Empresa con: 2 routers de borde (R1, R2), 2 switches de distribución (D1, D2), 4 switches de acceso (A1-A4). Cada switch de acceso se conecta a ambos de distribución. VLANs 10 (usuarios) y 20 (servidores).
 
-```
-1: 192.168.1.10:50000 → 93.184.216.34:80  [SYN]
-2: 93.184.216.34:80 → 192.168.1.10:50000  [SYN, ACK]
-3: 192.168.1.10:50000 → 93.184.216.34:80  [ACK]
-4: 192.168.1.10:50000 → 93.184.216.34:80  [PSH, ACK]  (GET / HTTP/1.1)
-5: 93.184.216.34:80 → 192.168.1.10:50000  [PSH, ACK]  (HTTP 200 OK)
-...
-```
+a) ¿Dónde aplicas cada mecanismo: STP, EtherChannel, HSRP, routing?
+b) ¿Qué pasa si cae D1? Detalla capa 2 y capa 3.
+c) ¿Qué SPOFs quedan si el "pool" de servidores tiene una sola tarjeta de red por servidor?
 
-a) Identifica las 3 fases del handshake TCP.
-b) ¿Qué significa PSH?
-c) Si ves 10 paquetes [TCP Retransmission] después del paquete 4, ¿qué está pasando?
+**Pica:** piensa por capas: capa 2 (STP/EtherChannel), capa 3 gateway (FHRP), capa 3 salida (routing/ISP).
 
-## 2. Monitorización SNMP avanzada
+## 2. HSRP con preempt y tracking
 
-Un administrador quiere monitorizar estos parámetros de un router:
-- Nombre del dispositivo
-- Tiempo activo (uptime)
-- Tráfico entrante y saliente de la interfaz G0/0
-- CPU load
+Configura R1 y R2 para la VLAN 10 (192.168.10.0/24):
 
-a) Investiga y escribe las OIDs de cada parámetro.
-b) ¿Cómo harías una consulta SNMP desde línea de comandos para leer el uptime?
-c) ¿Qué herramienta usarías para graficar estas métricas a lo largo del tiempo?
+- IP virtual: 192.168.10.1
+- R1 activo (priority 110), R2 en espera (priority 100)
+- Preempt en R1
+- R1 debe ceder el rol si su interfaz WAN cae (tracking con decremento 20)
 
-## 3. Diagnóstico de problema real
+a) Escribe la configuración de ambos.
+b) ¿Qué pasa si cae la WAN de R1? ¿Y si se recupera?
+c) ¿Por qué sin `preempt`, tras recuperarse R1, seguiría R2 de activo?
 
-Un usuario reporta: *"Internet va muy lento desde las 9 de la mañana. Antes de las 9 iba bien."*
+## 3. Diagnóstico de un EtherChannel roto
 
-Desarrolla un plan de diagnóstico completo. Incluye:
-- Qué comandos usarías en cada paso
-- Qué herramientas usarías
-- Qué métricas compararías
+Un port-channel entre SW1 y SW2 no sube. Config de SW1: `channel-group 1 mode on` en Fa0/1-2. Config de SW2: `channel-group 1 mode desirable` en Fa0/1-2.
 
-## 4. Configura Syslog centralizado
+a) ¿Por qué falla la negociación?
+b) ¿Qué combinaciones `on/desirable/auto/active/passive` funcionan entre sí?
+c) ¿Qué comando usarías para ver el estado y por qué?
 
-Tienes 5 routers Cisco que deben enviar logs a un servidor Linux (192.168.100.50).
+**Pista:** `mode on` no negocia nada; LACP es `active/passive`, PAgP es `desirable/auto`.
 
-a) Configura el logging en los routers.
-b) ¿Qué configuración necesitas en el servidor Linux para recibir logs?
-c) ¿Qué nivel de logging es adecuado para producción sin llenar el disco?
+## 4. Bucle de capa 2 en producción
 
-## 5. Comparativa de herramientas
+Lunes 8:15: la red del centro se satura. Un becario conectó un cable entre dos switches de acceso "para probar". STP: RSTP en todos los switches.
 
-Completa la tabla comparativa:
+a) ¿Por qué RSTP no bloqueó el bucle al instante?
+b) ¿Qué otros mecanismos complementan a STP contra esto? (pista: funciones de puerto de acceso)
+c) ¿Qué configuración prevents en los puertos de acceso para la próxima vez?
 
-| Herramienta | Tipo | Puerto(s) | Cifrado | ¿Activa o pasiva? |
-|---|---|---|---|---|
-| SNMP v2c | | | No | Activa (polling) |
-| Syslog | | | | |
-| NetFlow | | | | |
-| Wireshark | | N/A | | |
+## 5. Cálculo de costes y failover
 
-## 6. Troubleshooting complejo
+Topología: SW1(raíz) — SW2 y SW3, y un enlace SW2-SW3. Costes RSTP: 1 Gbps = 4, 100 Mbps = 19.
 
-Un sitio remoto no puede acceder a la sede central. La topología es:
+a) SW2 y SW3 conectados a SW1 por 1 Gbps, y entre ellos por 100 Mbps. ¿Qué puerto bloquea STP y en qué switch?
+b) Cae el enlace SW1-SW3. ¿Qué pasa con el puerto bloqueado?
+c) ¿Cuánto tarda RSTP en converger aproximadamente, frente a STP clásico?
 
-```
-SitioA (192.168.1.0/24) ─── RouterA ─── Internet ─── RouterB ─── SedeCentral (10.0.0.0/24)
-```
+## 6. Doble nodo con keepalives
 
-- Desde SitioA, `ping 10.0.0.1` (RouterB) funciona.
-- Desde SitioA, `telnet 10.0.0.100 443` (servidor web en SedeCentral) no funciona.
-- Desde SedeCentral, se puede acceder al servidor web localmente.
+Dos firewalls en HA activo/pasivo con su interfaz de heartbeat. El enlace heartbeat se rompe pero ambos firewalls siguen vivos.
 
-¿Cuál es el problema probable? ¿Qué comandos usarías para confirmarlo?
+a) ¿Qué problema aparece (y cómo se llama)?
+b) ¿Qué efectos verían los usuarios?
+c) ¿Qué mitiga este problema?
 
-## 7. Análisis de una captura con retransmisiones
+**Pista:** split-brain: dos nodos creyéndose dueños de la IP virtual.
 
-Te entregan esta captura Wireshark de una conexión web (filtrada):
+## 7. Stack vs no stack
 
-```
-1: 192.168.1.10:50000 → 93.184.216.34:80  [SYN]                       Seq=0
-2: 93.184.216.34:80 → 192.168.1.10:50000  [SYN, ACK]                  Seq=0 Ack=1
-3: 192.168.1.10:50000 → 93.184.216.34:80  [ACK]                       Seq=1 Ack=1
-4: 192.168.1.10:50000 → 93.184.216.34:80  [PSH, ACK] (GET /)          Seq=1 Ack=1
-5: 192.168.1.10:50000 → 93.184.216.34:80  [TCP Retransmission] (GET /)  Seq=1
-6: 192.168.1.10:50000 → 93.184.216.34:80  [TCP Retransmission] (GET /)  Seq=1
-7: 93.184.216.34:80 → 192.168.1.10:50000  [TCP Window Update] Window=0
-```
+Un centro duda entre 2 switches apilados (stack) o 2 switches independientes con STP y HSRP en los routers.
 
-a) ¿El three-way handshake se completó correctamente? Justifícalo con los paquetes.
-b) ¿Qué significa que los paquetes 5 y 6 sean retransmisiones del 4?
-c) ¿Qué indica el paquete 7 (`Window=0`)? ¿Qué conclusión global sacas de la conexión?
+a) ¿Qué ventaja tiene el stack para el gateway (con SVIs) frente a 2 switches independientes?
+b) ¿Qué pasa con el stack si falla el cable de stacking o el switch master?
+c) ¿Qué riesgo compartido (shared risk) introduce el stack que dos cajas separadas no tienen?
 
-**Pista:** piensa en las dos señales que viste en el punto de Wireshark: las retransmisiones indican pérdida o congestión, y `Window=0` indica saturación del receptor. ¿Qué secuencia de eventos explica que primero se pierda la petición y luego el servidor pida pausa?
+## 8. Plan de continuidad
 
-## 8. Plan de monitorización SNMP + syslog
+Un instituto define su plan de continuidad para la red:
 
-Debes monitorizar una red de 10 dispositivos (5 switches, 3 routers, 1 firewall, 1 servidor) y montar un sistema que te avise antes de que un fallo afecte a los usuarios.
+- RTO objetivo: 5 minutos
+- RPO: no aplica (no es un servicio de datos, es conectividad)
+- Componentes: 2 routers (HSRP), 2 switches de distribución (stack), UPS en cada armario, 2 enlaces ISP (uno de respaldo con rutas flotantes)
 
-Diseña el plan completo:
-
-a) Elige 4 OIDs clave que monitorizarías en los switches y routers (una de ellas para tráfico de una interfaz).
-b) Elige la herramienta de monitorización (entre Zabbix, PRTG, Nagios o LibreNMS) y justifica por qué.
-c) Diseña la configuración SNMP y syslog para los dispositivos: comunidad, umbral de severidad de logs y destino.
-d) Define 3 alarmas concretas con sus umbrales (ej. "CPU > 80% durante 5 minutos").
-
-**Pista:** recuerda que los contadores de tráfico (`ifInOctets`, `ifOutOctets`) necesitan dos lecturas separadas en el tiempo para calcular velocidad, que SNMP v3 es lo seguro y que el nivel de syslog 7 (debug) llenaría el disco.
+a) ¿Qué es RTO y por qué 5 minutos es un objetivo exigente pero razonable con esta arquitectura?
+b) ¿Qué escenarios cubre bien el plan y cuáles no? (piensa: caída de un router, de un ISP, de un armario eléctrico, de la fibra del campus)
+c) ¿Qué prueba harías cada semestre para validar el plan?

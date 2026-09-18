@@ -1,78 +1,67 @@
 ---
-title: Boletín U02 — Inicial (Resuelto)
-description: Soluciones de los ejercicios básicos de Fundamentos de Redes
+title: Boletín UD2 — Inicial (Resuelto)
+description: Soluciones de los ejercicios básicos de Infraestructura Física de Red
 ---
 
-# ✅ Boletín U02 — Inicial (Resuelto)
+# ✅ Boletín UD2 — Inicial (Resuelto)
 
 ---
 
-## 1. Clasifica estas redes
+## 1. Identifica el cable
 
-a) **LAN** — Todo dentro del mismo hogar.
-b) **LAN** — Sigue siendo local aunque tenga 200 PCs: un solo edificio.
-c) **WAN** — Une dos ubicaciones geográficamente separadas (Madrid y Barcelona).
-d) **MAN** — Cubre una ciudad (Metropolitan Area Network).
+1 → b (Directo: PC a switch)
+2 → a (Cruzado: PC a PC)
+3 → c (Consola: configuración switch)
 
-## 2. Verdadero o falso
+## 2. ¿Qué categoría?
 
-a) **Falso.** El hub NO segmenta: todos sus puertos comparten un único dominio de colisión.
-b) **Verdadero.** El switch construye su tabla MAC dinámicamente según el tráfico que ve.
-c) **Falso.** El router trabaja en la capa 3 (Red). La capa 2 es cosa del switch/puente.
-d) **Verdadero.** 48 bits representados en hexadecimal (ej. `AA:BB:CC:DD:EE:FF`).
-e) **Falso.** La MAC va grabada de fábrica y es permanente; la que cambia con el reinicio o el DHCP es la IP.
+a) **Cat6** — 1 Gbps a 100 m, estándar actual en oficinas
+b) **Cat6a o superior** — 10 Gbps a 100 m
+c) **Cat5e** — 1 Gbps a 100 m, más barato que Cat6
 
-## 3. Dibuja la topología
+## 3. Verdadero o falso
 
-**Descripción:** topología en estrella extendida (o árbol).
+a) **Falso.** La fibra usa pulsos de LUZ (fotones), no electricidad.
+b) **Verdadero.** T568B: pin 1 = Blanco/Naranja, pin 2 = Naranja.
+c) **Verdadero.** 4 pares trenzados = 8 hilos.
+d) **Verdadero.** Auto MDI-X detecta el tipo de cable y ajusta la interfaz.
+e) **Falso.** La diafonía (crosstalk) es la interferencia entre pares. La pérdida con la distancia es atenuación.
 
-- Router conectado a Switch1 y a Switch2 (un cable a cada uno).
-- Switch1 conectado a PC1 y PC2.
-- Switch2 conectado a PC3 y PC4.
-- El router da la salida a Internet.
+## 4. Ordena el crimpado
 
-## 4. Empaqueta tu memoria: une cada PDU con su capa
+1. b) Pelar la funda exterior del cable
+2. d) Ordenar los hilos según T568B
+3. e) Cortar los hilos rectos
+4. a) Insertar los hilos en el conector RJ45
+5. f) Crimpar con la crimpadora
+6. c) Comprobar el cable con un tester
 
-1 → b (Bits · Física)
-2 → c (Trama · Enlace)
-3 → d (Paquete · Red)
-4 → a (Segmento · Transporte)
+## 5. Relaciona concepto y definición
 
->Truco: a medida que bajas capas, la PDU gana cabeceras (segmento → paquete → trama → bit).
+1 → d (Atenuación)
+2 → a (Diafonía)
+3 → b (Ancho de banda)
+4 → c (Latencia)
 
-## 5. ¿TCP o UDP?
+## 6. Sopa de letras de conectores
 
-a) **TCP** — El PDF debe llegar completo y en orden.
-b) **UDP** — Prefiere fluidez; se tolera perder algún fotograma.
-c) **TCP** — La web se apoya en una conexión fiable.
-d) **UDP** — Una consulta puntual no necesita asegurar conexión.
+a) **RJ45** — Conector de 8 pines para cable UTP (cobre)
+b) **LC** — Conector de fibra óptica, pequeño, tipo push-pull
+c) **SC** — Conector de fibra óptica, cuadrado, push-pull
 
-## 6. Calcula: una red /24
+## 7. Cableado estructurado
 
-a) **256** direcciones totales (2^8 = 256 porque 8 bits de host).
-b) **254** utilizables (256 - la de red - la de broadcast).
-c) La dirección de la red es **`192.168.1.0`** (hosts a 0).
-d) La de broadcast es **`192.168.1.255`** (hosts a 1). Ninguna de las dos se asigna a equipos.
+1 → b (Latiguillo: flexible, une PC con roseta o patch panel con switch)
+2 → c (Keystone: conector hembra RJ45 en la roseta de pared)
+3 → a (Patch panel: concentra los cables horizontales en el rack)
+4 → d (Cable horizontal: sólido, empotrado, del patch panel al keystone)
 
-## 7. Sopa de letras conceptual
+> 💡 **La idea:** el latiguillo es la parte flexible y desechable; el cable horizontal es la parte fija que no se toca nunca. El keystone es donde termina en la pared y el patch panel donde concentra el rack.
 
-1 → b (Hub)
-2 → e (Switch)
-3 → a (Router)
-4 → c (MAC)
-5 → d (Protocolo)
-6 → f (IP)
+## 8. Medios y estándares: verdadero o falso
 
-## 8. Ping mental guiado
-
-1. PC-A consulta la tabla ARP: no tiene la MAC de `192.168.1.20`.
-2. Lanza un **ARP Request** de difusión: "¿Quién tiene 192.168.1.20?" (MAC destino `FF:FF:FF:FF:FF:FF`).
-3. El switch recibe la trama y la inunda por todos los puertos menos el de origen.
-4. PC-B ve que el ARP pide su IP y responde con **ARP Reply** (unicast) dando su MAC.
-5. El switch aprende que PC-B está en ese puerto y lo anota en su tabla MAC.
-6. PC-A guarda la MAC de PC-B en su tabla ARP.
-7. PC-A construye la trama Ethernet con MAC destino = MAC de PC-B e IP destino `192.168.1.20`.
-8. Envía el **ICMP Echo Request** (el ping).
-9. El switch lo reenvía solo por el puerto de PC-B (ya sabe dónde está).
-10. PC-B responde con **ICMP Echo Reply**.
-11. PC-A recibe la respuesta: **ping exitoso**.
+a) **Falso.** La fibra es INMUNE a las interferencias electromagnéticas: transmite luz, no electricidad, y los campos externos no afectan a los fotones.
+b) **Verdadero.** 802.11ax = WiFi 6 (2019, bandas de 2,4 y 5 GHz).
+c) **Verdadero.** El WiFi envía ondas electromagnéticas por el aire, sin medio conductor.
+d) **Falso.** Es la fibra **monomodo** la que llega a 40+ km. La **multimodo** se queda en unos 550 m a 10 Gbps.
+e) **Verdadero.** La velocidad real WiFi suele ser el 30-50% de la teórica por overhead, obstrucciones e interferencias.

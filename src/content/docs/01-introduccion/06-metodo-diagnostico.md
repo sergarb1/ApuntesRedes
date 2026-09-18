@@ -231,8 +231,8 @@ Significa que la **tarjeta de red del PC está rota o deshabilitada**. No es un 
 
 El PC del alumno hace `ping 127.0.0.1` y responde. El PC se respira aliviado: *"Al menos sigo vivo"*. Luego hace `ping` al gateway: *"¡Llego hasta la puerta!"*. Luego a `8.8.8.8`: *"¡Salgo a la calle!"*. Y por fin a `google.com`: *"¡El DNS también funciona!"*. El PC sonríe: *"Todo va bien... hasta la próxima avería"*.
 
-**PRÓXIMAMENTE EN U02:** Fundamentos de redes — los cimientos sobre los que se construye todo lo que hemos visto aquí. 🌐
+**PRÓXIMAMENTE EN UD2:** Ethernet, medios y cableado — los cimientos físicos sobre los que se construye todo lo que hemos visto aquí. 📡
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/01-introduccion) · **Anterior:** [05 · DNS y DHCP](/ApuntesRedes/01-introduccion/05-dns-y-dhcp) · **Siguiente:** [07 · Glosario](/ApuntesRedes/01-introduccion/07-glosario)
+📚 [Volver al índice de la unidad](/ApuntesRedes/01-introduccion) · **Anterior:** [05 · DNS y DHCP](/ApuntesRedes/01-introduccion/05-dns-y-dhcp) · **Siguiente:** [07 · Glosario](/ApuntesRedes/01-introduccion/09-glosario)

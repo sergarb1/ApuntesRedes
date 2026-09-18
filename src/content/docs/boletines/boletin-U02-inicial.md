@@ -1,80 +1,85 @@
 ---
-title: Boletín U02 — Inicial
-description: Ejercicios básicos de Fundamentos de Redes
+title: Boletín UD2 — Inicial
+description: Ejercicios básicos de Infraestructura Física de Red
 ---
 
-# 📝 Boletín U02 — Inicial
+# 📝 Boletín UD2 — Inicial
 
-> Ejercicios básicos para afianzar los conceptos de redes. Intenta resolverlos sin mirar los apuntes.
+> Ejercicios básicos para afianzar los conceptos de medios físicos, cableado, crimpado y WiFi.
 
 ---
 
-## 1. Clasifica estas redes
+## 1. Identifica el cable
 
-Indica si cada una es LAN, MAN o WAN:
+Relaciona cada tipo de cable con su uso:
 
-a) La red de tu casa con 3 dispositivos
-b) La red de un edificio de oficinas con 200 PCs
-c) La red que une las sedes de una empresa en Madrid y Barcelona
-d) La red de fibra óptica que cubre toda una ciudad
-
-## 2. Verdadero o falso
-
-a) Un hub segmenta los dominios de colisión.
-b) Un switch aprende direcciones MAC automáticamente.
-c) Un router trabaja en la capa 2 del modelo OSI.
-d) Una dirección MAC tiene 48 bits.
-e) La dirección MAC de un equipo cambia cada vez que se reinicia.
-
-## 3. Dibuja la topología
-
-Tienes:
-- 1 router
-- 2 switches
-- 4 PCs
-
-Dibuja (o describe con palabras) la topología en estrella extendida que los conecta todos a Internet.
-
-## 4. Empaqueta tu memoria: une cada PDU con su capa
-
-| PDU | Capa |
+| Cable | Uso |
 |---|---|
-| 1. Bits | a) Capa 4 · Transporte |
-| 2. Trama | b) Capa 1 · Física |
-| 3. Paquete | c) Capa 2 · Enlace |
-| 4. Segmento | d) Capa 3 · Red |
+| 1. Directo | a) PC a PC |
+| 2. Cruzado | b) PC a switch |
+| 3. Consola | c) Configuración inicial de un switch Cisco |
 
-## 5. ¿TCP o UDP?
+## 2. ¿Qué categoría?
 
-Elige el protocolo de transporte correcto para cada caso:
+Indica qué categoría de cable UTP necesitas para cada situación:
 
-a) Descargar un PDF de 2 GB
-b) Una videollamada con la familia
-c) Navegar por una web HTTPS
-d) Una única consulta a un servidor DNS
+a) Red de oficina a 1 Gbps
+b) Datacenter con 10 Gbps a 100 metros
+c) Cableado económico para una pequeña empresa
 
-## 6. Calcula: una red /24
+## 3. Verdadero o falso
 
-La red es `192.168.1.0/24` (máscara `255.255.255.0`):
+a) La fibra óptica usa pulsos eléctricos para transmitir datos.
+b) El estándar T568B pone el par naranja en los pines 1 y 2.
+c) Un cable UTP tiene 4 pares de hilos (8 hilos en total).
+d) El Auto MDI-X permite usar cables directos entre switches.
+e) La diafonía es la pérdida de señal con la distancia.
 
-a) ¿Cuántas direcciones IP totales hay en la subred?
-b) ¿Cuántas son utilizables por equipos?
-c) ¿De qué dirección se escribe como "dirección de la propia red"?
-d) ¿Y la dirección de broadcast?
+## 4. Ordena el crimpado
 
-## 7. Sopa de letras conceptual
+Ordena los pasos para crimpar un cable RJ45 (del 1 al 6):
 
-Relaciona cada término con su definición:
+a) Insertar los hilos en el conector RJ45
+b) Pelar la funda exterior del cable
+c) Comprobar el cable con un tester
+d) Ordenar los hilos según T568B
+e) Cortar los hilos rectos
+f) Crimpar con la crimpadora
 
-| Término | Definición |
+## 5. Relaciona concepto y definición
+
+| Concepto | Definición |
 |---|---|
-| 1. Hub | a) Dispositivo capa 3 que encamina paquetes |
-| 2. Switch | b) Repite la señal por todos los puertos |
-| 3. Router | c) Identificador de 48 bits grabado en la NIC |
-| 4. MAC | d) Conjunto de reglas de comunicación |
-| 5. Protocolo | e) Dispositivo capa 2 que aprende MACs |
-| 6. IP | f) Dirección lógica de 32 bits |
+| 1. Atenuación | a) Interferencia entre pares de hilos adyacentes |
+| 2. Diafonía | b) Capacidad máxima de transmisión de un medio |
+| 3. Ancho de banda | c) Tiempo de ida y vuelta de un paquete |
+| 4. Latencia | d) Pérdida de intensidad de la señal con la distancia |
 
-## 8. Ping mental guiado
+## 6. Sopa de letras de conectores
 
-El PC-A (`192.168.1.10`) hace ping al PC-B (`192.168.1.20`). Misma red, mismo switch, tabla ARP de PC-A vacía. Describe paso a paso qué ocurre desde que se escribe `ping 192.168.1.20` hasta que llega la respuesta.
+Nombra estos conectores y el medio en el que se usan:
+
+a) RJ45
+b) LC
+c) SC
+
+## 7. Cableado estructurado
+
+Relaciona cada elemento del cableado estructurado con su función:
+
+| Elemento | Función |
+|---|---|
+| 1. Latiguillo | a) Concentra los cables horizontales en el rack |
+| 2. Keystone | b) Cable flexible que une el PC con la roseta (o el patch panel con el switch) |
+| 3. Patch panel | c) Conector hembra RJ45 en la roseta de pared |
+| 4. Cable horizontal | d) Cable sólido empotrado que va del patch panel al keystone |
+
+## 8. Medios y estándares: verdadero o falso
+
+Indica si cada afirmación es verdadera (V) o falsa (F) y corrige las falsas:
+
+a) La fibra óptica se ve afectada por las interferencias electromagnéticas.
+b) El estándar 802.11ax se conoce comercialmente como WiFi 6.
+c) El WiFi transmite por ondas electromagnéticas en el aire, sin cable.
+d) La fibra multimodo llega a distancias de más de 40 km.
+e) La velocidad real del WiFi suele estar entre el 30% y el 50% de la teórica.

@@ -1,116 +1,102 @@
 ---
-title: Boletín U10 — Avanzado
-description: Ejercicios avanzados de Routing Dinámico
+title: Boletín UD10 — Avanzado
+description: Ejercicios avanzados de servicios de red (DHCP, DNS y NTP)
 ---
 
-# 📝 Boletín U10 — Avanzado
+# 📝 Boletín UD10 — Avanzado
 
-> Ejercicios que requieren aplicar conceptos de OSPF de forma más profunda.
+> Ejercicios que requieren aplicar DHCP, DNS y NTP de forma combinada. En los difíciles tienes pista.
 
 ---
 
-## 1. Configuración OSPF multiárea
+## 1. DHCP en el router Cisco
 
-Configura OSPF para esta topología:
+Configura el router R1 como servidor DHCP para la LAN 192.168.1.0/24:
 
+- Rango excluido: .1 a .20 (infraestructura)
+- Gateway: 192.168.1.1
+- DNS: 8.8.8.8 y 1.1.1.1
+- Concesión de 3 días
+
+a) Escribe la configuración completa.
+b) Un PC no recibe IP. Enumera tu secuencia de diagnóstico (comandos y qué buscas en cada uno).
+
+**Pista:** `ip dhcp excluded-address` + `ip dhcp pool`.
+
+## 2. DNS jerárquico
+
+Explica el recorrido completo de una consulta DNS para `www.ejemplo.es` la primera vez que la hace un equipo (cachés vacías):
+
+a) ¿Quién pregunta a quién? Enumera los pasos (resolver local → raíz → TLD → autoritativo).
+b) ¿Qué pasa la segunda vez, cinco minutos después?
+c) ¿Qué papel juega el TTL de los registros?
+
+## 3. Selección de registros para un mini-proyecto
+
+Tu centro va a publicar: web (`www.instituto.edu`), correo propio, y un alias corto `aulas` que apunta al mismo servidor que `www`. El servidor tiene IP 198.51.100.10 (IPv4) y 2001:db8::10 (IPv6). El correo lo gestiona un proveedor externo.
+
+a) Escribe los registros mínimos con sus tipos.
+b) ¿Qué registro necesitarías añadir para que `mail.proveedor.com` reciba el correo en nombre del instituto?
+c) Un compañero propone un registro CNAME para el dominio raíz `instituto.edu`. ¿Es buena idea?
+
+## 4. Diagnóstico con nslookup
+
+Interpreta estas salidas y di qué está pasando en cada caso:
+
+a)
 ```
-R1 (Área 0) ──── R2 (ABR) ──── R3 (Área 1)
-  │                             │
-LAN1 (192.168.1.0/24)      LAN3 (192.168.3.0/24)
-LAN2 (192.168.2.0/24)
-```
+Servidor: UnKnown
+Address: 192.168.1.1
 
-**Enlaces:**
-- R1-R2: 10.0.0.0/30
-- R2-R3: 10.0.0.4/30
-
-Escribe la configuración completa de OSPF en los 3 routers.
-
-## 2. Diagnóstico OSPF
-
-Un router muestra esto en `show ip ospf neighbor`:
-
-```
-Neighbor ID     Pri   State           Dead Time   Address         Interface
-3.3.3.3         1    FULL/DR         00:00:35    10.0.0.2        GigabitEthernet0/0
-4.4.4.4         1    2WAY/DROTHER    00:00:37    10.0.0.6        GigabitEthernet0/1
-```
-
-a) ¿Qué significa FULL/DR?
-b) ¿Qué significa 2WAY/DROTHER?
-c) ¿Por qué el vecino 4.4.4.4 no está FULL?
-d) ¿Cuál es el Router ID de este router? (pista: no se muestra)
-
-## 3. Redistribución OSPF
-
-Un router tiene esta configuración:
-
-```
-router ospf 1
- redistribute static subnets
- default-information originate
-!
-ip route 0.0.0.0 0.0.0.0 serial 0/0/0
-ip route 10.100.0.0 255.255.0.0 10.0.0.2
+*** No se puede encontrar el nombre del servidor: DNS request timed out.
+Nombre: www.ejemplo.es
 ```
 
-a) ¿Qué hace `redistribute static subnets`?
-b) ¿Qué rutas estáticas se redistribuyen a OSPF?
-c) ¿Todos los routers OSPF recibirán la ruta 10.100.0.0/16?
+b)
+```
+Nombre: www.ejemplo.es
+Address: 203.0.113.99
+Aliases: www.ejemplo.es
+          web.ejemplo.es
+```
 
-## 4. Cambio de coste OSPF
+c) `nslookup www.ejemplo.es 8.8.8.8` responde correctamente, pero el navegador no abre la web.
 
-Tienes 2 caminos de R1 a R3:
-- Camino A: R1 → R2 → R3 (todos GigabitEthernet, coste 1 cada enlace)
-- Camino B: R1 → R4 → R5 → R3 (todos FastEthernet, coste 1 cada enlace)
+## 5. NTP con jerarquía
 
-a) ¿Qué camino elige OSPF? ¿Por qué?
-b) ¿Cómo forzarías OSPF a usar el Camino B?
-c) ¿Qué comando usarías para verificar el coste de cada ruta?
+Tu red tiene un router de borde (R1), un switch de distribución (S1) y decenas de switches de acceso.
 
-## 5. DR/BDR election
+a) Diseña la jerarquía NTP: ¿de dónde toma la hora cada nivel? ¿Qué estrato quedaría aproximadamente en cada uno?
+b) Escribe la configuración de R1 y S1.
+c) ¿Qué comando usas en S1 para comprobar con quién está sincronizado y en qué estrato está?
 
-En una red con 4 routers OSPF en el mismo segmento Ethernet:
+## 6. Los tres servicios en un solo caso
 
-| Router | Prioridad | Router ID |
-|---|---|---|
-| R1 | 1 | 1.1.1.1 |
-| R2 | 0 | 2.2.2.2 |
-| R3 | 10 | 3.3.3.3 |
-| R4 | 5 | 4.4.4.4 |
+Escenario: tras una caída eléctrica, el aula de informática no navega. Un alumno apunta estos datos de su PC:
 
-a) ¿Quién es el DR? ¿Quién el BDR?
-b) ¿Por qué R2 (prioridad 0) no puede ser DR/BDR?
-c) ¿Cómo forzarías a R1 como DR sin cambiar Router ID?
+- IP: 169.254.18.42, máscara 255.255.0.0
+- DNS en blanco
+- La hora del equipo está bien
 
-## 6. Troubleshooting OSPF
+a) ¿Qué servicio está fallando? ¿Cómo se llama ese rango 169.254.x.x?
+b) El profesor comprueba el switch del aula y no está en la VLAN correcta. ¿Por qué eso explica el fallo de DHCP?
+c) Arreglada la VLAN, el PC navega por IP pero `www.google.com` sigue fallando. ¿Qué compruebas ahora y con qué comando?
+d) Al final del caso, ¿por qué el reloj del PC estaba bien? ¿Qué le pasó al switch, entonces?
 
-Un administrador reporta que OSPF no funciona entre dos routers. Escribe el orden de diagnóstico que seguirías, incluyendo qué comandos usarías y qué esperarías ver en cada paso.
+**Pista:** APIPA y su rango 169.254.0.0/16; y piensa quién da la hora a quién en cada dispositivo.
 
-## 7. Elección DR/BDR en otro segmento
+## 7. DHCPv6 y doble pila
 
-En un segmento Ethernet nuevo compiten 4 routers OSPF:
+El centro quiere IPv6 en el aula: prefijo 2001:db8:ab::/64, gateway fe80::1, DNS 2001:4860:4860::8888.
 
-| Router | Prioridad | Router ID |
-|---|---|---|
-| R-A | 1 | 10.0.0.1 |
-| R-B | 200 | 10.0.0.2 |
-| R-C | 150 | 10.0.0.3 |
-| R-D | 0 | 10.0.0.4 |
+a) ¿Dos formas de dar dirección IPv6 a los clientes? Describe brevemente SLAAC y stateful DHCPv6.
+b) ¿Qué opción usarías si solo quieres repartir DNS y dominio (las direcciones las autoconfiguran los PCs)?
+c) Escribe la config de un router Cisco para la opción b).
 
-a) ¿Quién es el DR y quién el BDR?
-b) ¿Qué papel juega R-D y por qué?
-c) R-A y R-B empiezan con la misma prioridad (1) pero R-B tiene el Router ID más alto. ¿Quién ganaría en ese caso, y por qué?
-d) La elección ya ha ocurrido y el DR es R-B. Si ahora subes la prioridad de R-C a 255, ¿cambia el DR? ¿Qué tendrías que hacer para que cambie?
+## 8. El "no tiene Internet" clásico
 
-**Pista:** la elección se decide por prioridad y, en empate, por el Router ID más alto. Prioridad 0 queda fuera. La elección solo ocurre al arrancar o reiniciar el proceso OSPF.
+Una usuaria llama: "no tengo Internet". Su PC muestra: IP correcta 192.168.1.50 (DHCP OK), gateway correcto, pero `nslookup www.elmundo.es` falla; `nslookup www.elmundo.es 1.1.1.1` funciona.
 
-## 8. La adyacencia que no levanta
-
-R1 y R2 están conectados por un enlace Serial, ambos con OSPF configurado, pero `show ip ospf neighbor` sale vacío en los dos. El ping entre las IPs del enlace **sí funciona**.
-
-a) Como el ping funciona, ¿qué nivel queda descartado? ¿Por qué?
-b) Escribe el orden de diagnóstico completo que seguirías, con los comandos y qué esperarías ver en cada paso, para descartar, en orden: red no declarada o wildcard mal, área incorrecta, timers Hello/Dead distintos, y ACL que bloquea OSPF (protocolo 89).
-c) ¿Qué comando te confirmaría, sin ambigüedad, que una interfaz está participando en OSPF y con qué área?
-
-**Pista:** sigue la escalera de diagnóstico del punto 8 de la unidad: `show ip protocols`, `show ip ospf interface`, `show access-lists`. Los timers de Hello/Dead por defecto son 10/40 en broadcast y en punto a punto Serial; solo en redes NBMA (Frame Relay) son 30/120.
+a) ¿Qué capa/servicio está sano y cuál roto?
+b) ¿Qué dos arreglos inmediatos propones?
+c) ¿Por qué NO es un problema de NTP, de DHCP ni de routing?

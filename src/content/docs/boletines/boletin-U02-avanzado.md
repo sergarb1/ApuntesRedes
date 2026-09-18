@@ -1,90 +1,102 @@
 ---
-title: Boletín U02 — Avanzado
-description: Ejercicios avanzados de Fundamentos de Redes
+title: Boletín UD2 — Avanzado
+description: Ejercicios avanzados de Infraestructura Física de Red
 ---
 
-# 📝 Boletín U02 — Avanzado
+# 📝 Boletín UD2 — Avanzado
 
-> Ejercicios de razonamiento. Algunos no tienen una única respuesta; justifica siempre tu elección.
+> Ejercicios que requieren aplicar los conceptos de cableado, medios físicos y WiFi de forma combinada. En los difíciles tienes pista.
 
 ---
 
-## 1. Diagnóstico de red
+## 1. Diagnóstico de cableado
 
-Tienes una pequeña oficina con la red `192.168.1.0/24` y el router como gateway `192.168.1.1`.
+Un usuario reporta que su PC solo alcanza 100 Mbps en lugar de 1 Gbps. El switch es Gigabit, el cable es Cat5e y el PC tiene una tarjeta Gigabit.
 
-El PC-A responde al ping del PC-B (misma red), pero **no** responde al ping de `8.8.8.8`.
+a) ¿Cuáles pueden ser las causas?
+b) ¿Qué herramienta usarías para diagnosticar?
+c) ¿Cómo probarías si el problema es el cable, el PC o el switch?
 
-Los tres dispositivos están en la misma VLAN y el cable está bien.
+**Pista:** Gigabit Ethernet requiere los 4 pares. Si solo 2 pares están conectados, la negociación cae a 100 Mbps.
 
-**¿Qué tres causas probables se te ocurren? ¿Cuál es la más probable?**
+## 2. Diseño de cableado estructurado
 
-**Pista:** el PC-A y el PC-B se ven; el problema está entre el PC-A y el resto del mundo.
+Diseña el cableado para una oficina de 2 plantas:
 
-## 2. Diseño de red mínima
+**Planta 1:** 40 puestos de trabajo + sala de servidores
+**Planta 2:** 30 puestos de trabajo
 
-Debes montar la red de una oficina con **15 PCs, 2 impresoras y 1 servidor** de archivos. Presupuesto mínimo.
+Especifica:
+a) Cuántos switches necesitas y de qué tipo
+b) Qué categoría de cable usas para puestos y para uplinks
+c) Dónde colocas los patch panels
+d) Cómo conectas las dos plantas
 
-a) ¿Qué dispositivos compras (switch, router, cables...)? Justifica el tamaño del switch.
-b) Propón un direccionamiento IPv4 privado razonable: red, máscara, gateway, impresoras, servidor y rango DHCP.
+**Pista:** Piensa en términos de cable horizontal, patch panels, y uplinks entre plantas. La fibra para uplinks entre plantas es una buena práctica.
 
-**Pista:** cuenta todos los puertos que necesitas antes de comprar el switch.
+## 3. Cálculo de atenuación
 
-## 3. ¿Cuántos dominios?
+Un cable UTP Cat6 tiene una atenuación máxima de 21,3 dB a 100 MHz para 100 metros. La señal del transmisor tiene una potencia de 2 dBm.
 
-Tres switches, cada uno con 1 PC conectado, y conectados entre sí en cadena (Switch1 ↔ Switch2 ↔ Switch3), con un router al final que sale a Internet.
+a) ¿Qué potencia llega al receptor después de 100 m?
+b) Si el receptor necesita al menos -20 dBm para interpretar la señal, ¿funciona?
+c) ¿Qué pasa si el cable mide 120 metros?
 
-a) ¿Cuántos dominios de colisión hay?
-b) ¿Cuántos dominios de broadcast hay?
+**Pista:** Potencia recibida = Potencia transmitida - Atenuación. La atenuación es proporcional a la distancia.
 
-**Pista:** ¿qué dispositivos segmentan colisión y cuáles segmentan broadcast? No es lo mismo.
+## 4. Fibra vs cobre: caso real
 
-## 4. ARP en acción
+Eres el administrador de un campus universitario con 3 edificios separados por 200, 500 y 2000 metros respectivamente.
 
-El PC-A (`10.0.0.1`) quiere enviar un paquete al PC-B (`10.0.0.2`), ambos en la misma subred y sin tabla ARP previa. El PC-A solo conoce la IP destino, no la MAC.
+a) ¿Qué medio usarías para conectar cada edificio? ¿Por qué?
+b) Si usas fibra, ¿monomodo o multimodo? ¿Para cada distancia?
+c) ¿Qué conectores y módulos SFP elegirías?
 
-a) ¿Qué tipo de trama lanza primero (broadcast, unicast o multicast)?
-b) ¿Qué dirección de destino MAC lleva esa trama?
-c) ¿Cómo responde el PC-B?
-d) Escribe qué información contiene la respuesta.
+**Pista:** 200 m → multimodo (barato). 2000 m → monomodo (necesario por distancia).
 
-**Pista:** ARP es "el cartero que llama por el megáfono para saber quién es quién".
+## 5. Pinout y solución de problemas
 
-## 5. Desencapsulación: el viaje inverso
+Tienes un cable que no funciona. Usas un comprobador y ves esta secuencia de LEDs:
 
-Un servidor web recibe una trama Ethernet que contiene tu petición `GET /index.html`. En orden inverso al envío:
+```
+Extremo A: 1 2 3 4 5 6 7 8
+Extremo B: 1 2 3 4 5 6 7 8
+           ✓ ✓ ✗ ✓ ✓ ✓ ✓ ✓
+```
 
-a) ¿Qué capa elimina la cabecera Ethernet y qué PDU queda?
-b) ¿Qué capa elimina la cabecera IP y qué PDU queda?
-c) ¿Qué capa elimina la cabecera TCP y qué PDU queda?
-d) ¿Dónde acaba el contenido?
+a) ¿Qué pin falla?
+b) ¿Qué par de hilos está afectado?
+c) ¿El cable funcionará parcialmente? ¿A qué velocidad?
 
-**Pista:** anda hacia atrás y cada capa "desempaqueta" la PDU de la capa superior.
+**Pista:** Localiza qué par (1-2, 3-6, 4-5, 7-8) corresponde al pin que falla.
 
-## 6. Diferencia práctica: hub, switch y router
+## 6. Diseña el latiguillo perfecto
 
-Explica qué dispositivo usarías en cada escenario y por qué:
+Describe paso a paso cómo crimpar un cable directo T568B, incluyendo:
 
-a) Una red doméstica de los años 90 con 3 PCs e impresora compartida.
-b) Una oficina actual con 20 PCs que compiten por ancho de banda.
-c) Conectar tu oficina (192.168.1.0/24) con la sede central (10.0.0.0/16).
+a) Herramientas necesarias
+b) Longitud recomendada de pelado de funda
+c) Orden exacto de los hilos (de izquierda a derecha, con el clip hacia abajo)
+d) Cómo saber si el crimpado ha sido correcto
 
-**Pista:** ¿quién apronta colisiones, quién aprende MACs y quién toma decisiones entre redes?
+## 7. Caso WiFi: oficina con zonas muertas
 
-## 7. Verdadero o falso (justifica los falsos)
+En una oficina de 25 puestos separados por tabiques de cartón-yeso, un único AP wifi en el pasillo central da "zonas muertas" y una velocidad general decepcionante. Los empleados se quejan cada tarde.
 
-a) Un router es capaz de que PC-A hable con PC-B en una red diferente.
-b) Un switch conoce las IPs de los equipos de su red.
-c) En topología de bus, si el cable principal se rompe, la red se divide en dos segmentos aislados.
-d) En topología de estrella, si el switch se apaga, toda la red deja de funcionar.
-e) Tu portátil tiene la misma IP al conectarte en casa y en el trabajo.
+a) ¿Qué causas físicas explicarían la lentitud (nombra al menos 3)?
+b) ¿Qué herramientas usarías para confirmarlas?
+c) Propón 3 soluciones realistas ordenadas de más barata a más cara.
 
-**Pista:** e es trampa: separa lo que cambia (IP) de lo que no (MAC).
+**Pista:** piensa en canales (1, 6, 11), interferencia de vecinos, obstáculos y el número de clientes compartiendo el mismo AP. Recuerda que la velocidad real WiFi es del 30-50%.
 
-## 8. Puertos bien conocidos en acción
+## 8. Elección de medio a escala
 
-a) Un cliente no abre una página web. WhatsApp sigue funcionando, pero el navegador "no hay conexión". El técnico sospecha de la seguridad del router. ¿Qué puerto/protocolo está vetado?
-b) Quieres administrar el servidor de la empresa con seguridad. Reenvías el puerto 22 al servidor. ¿Qué protocolo de aplicación aceptarás y por qué lo recomiendas frente a reenviar el 21?
-c) Si un antivirus bloquea el puerto 53, ¿qué deja de funcionar en todo el equipo?
+Decide qué medio de transmisión usarías para cada escenario y justifícalo:
 
-**Pista:** revisa la tabla de puertos bien conocidos del punto 6 de los apuntes.
+a) **Mini-oficina** de 8 puestos en un local de 60 m².
+b) **Planta** de 40 puestos en un edificio de oficinas con el rack en la misma planta.
+c) **Campus** de 3 edificios separados por 100, 500 y 2000 metros.
+
+En cada caso indica: medio (cobre/fibra/WiFi), categoría/estándar aproximado y, si usas fibra, monomodo o multimodo.
+
+**Pista:** decide primero por distancia y presupuesto; luego por movilidad y rendimiento. 100 m es el límite del cobre, la multimodo cubre hasta ~550 m y la monomodo el resto.

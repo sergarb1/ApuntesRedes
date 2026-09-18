@@ -1,9 +1,9 @@
 ---
-title: "Boletín U01 — Inicial (Resuelto)"
+title: "Boletín UD1 — Inicial (Resuelto)"
 description: Soluciones de los ejercicios básicos de la Unidad 01
 ---
 
-# ✅ Boletín U01 — Inicial (Resuelto)
+# ✅ Boletín UD1 — Inicial (Resuelto)
 
 ---
 

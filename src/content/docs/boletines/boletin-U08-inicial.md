@@ -1,86 +1,80 @@
 ---
-title: Boletín U08 — Inicial
-description: Ejercicios básicos de VLANs
+title: Boletín UD8 — Inicial
+description: Ejercicios básicos de ACLs y seguridad de red
 ---
 
-# 📝 Boletín U08 — Inicial
+# 📝 Boletín UD8 — Inicial
 
-> Ejercicios básicos para afianzar los conceptos de VLANs: tipos, 802.1Q, trunks e inter-VLAN routing.
+> Ejercicios básicos para afianzar los conceptos de ACLs y seguridad de red.
 
 ---
 
-## 1. ¿Qué VLAN soy?
+## 1. Verdadero o falso
 
-Relaciona el tipo de VLAN con su descripción:
+a) Las ACLs estándar filtran solo por IP origen.
+b) Al final de toda ACL hay un permit any implícito.
+c) Una ACL extendida puede filtrar por protocolo y puerto.
+d) Una ACL sin ninguna línea `permit` bloquea todo el tráfico que le llega.
+e) `show access-lists` muestra las ACLs configuradas y sus contadores.
 
-| Tipo | Descripción |
+## 2. Números de ACL
+
+¿Qué rango de números usan las ACLs estándar y extendidas?
+
+| Tipo | Rango |
 |---|---|
-| 1. VLAN de datos | a) Para teléfonos IP, con prioridad QoS |
-| 2. VLAN de voz | b) Para administrar el switch |
-| 3. VLAN nativa | c) Tráfico normal de usuario |
-| 4. VLAN de gestión | d) Sin etiquetar en el trunk |
+| Estándar | |
+| Extendida | |
 
-## 2. Verdadero o falso
+## 3. ¿Qué comando?
 
-a) Una VLAN segmenta el dominio de broadcast.
-b) El estándar de etiquetado VLAN es 802.1Q.
-c) Dos PCs en diferentes VLANs pueden comunicarse directamente sin router.
-d) Un trunk transporta tráfico de múltiples VLANs.
-e) La native VLAN por defecto es VLAN 1.
-
-## 3. Identifica
-
-¿Qué tipo de puerto es cada uno?
-
-a) Puerto que conecta un PC (solo una VLAN)
-b) Puerto que conecta dos switches (múltiples VLANs)
-
-## 4. Números
-
-Completa:
-
-a) ¿Cuántos bits tiene el VLAN ID en 802.1Q? ___
-b) ¿Cuántas VLANs permite el estándar? ___
-c) ¿Cuántos bytes añade 802.1Q a la trama? ___
-
-## 5. Relaciona
+Relaciona el comando con su función:
 
 | Comando | Función |
 |---|---|
-| 1. `switchport mode trunk` | a) Crear una VLAN |
-| 2. `vlan 10` | b) Configurar puerto como trunk |
-| 3. `show vlan brief` | c) Ver todas las VLANs |
-| 4. `encapsulation dot1Q 10` | d) Configurar subinterfaz para VLAN 10 |
+| 1. `ip access-group 10 out` | a) Crear ACL nombrada extendida |
+| 2. `access-list 10 permit ...` | b) Aplicar ACL a interfaz |
+| 3. `ip access-list extended MI_ACL` | c) Ver las ACLs y sus contadores |
+| 4. `show access-lists` | d) Crear ACL numerada estándar |
 
-## 6. ¿Qué necesito?
+## 4. Wildcard masks
 
-Para que PCs de VLAN 10 y VLAN 20 se comuniquen, necesito:
+Las ACLs usan *wildcard masks*, el inverso de la máscara de subred. Para cada máscara de subred, escribe su wildcard y qué representa (qué bits quedan libres para cualquier valor):
 
-a) Un trunk entre switches
-b) Un router o switch capa 3
-c) Un cable cruzado
-d) STP activado
+| Máscara de subred | Wildcard | ¿Qué representa? |
+|---|---|---|
+| 255.255.255.0 | | |
+| 255.255.255.255 | | |
+| 255.255.0.0 | | |
 
-## 7. Comandos de resolución
+## 5. ACL básica
+
+Escribe los comandos para:
+
+a) Crear una ACL estándar que permita la red 192.168.1.0/24
+b) Aplicarla a la interfaz G0/1 en sentido outbound
+
+## 6. Estándar o extendida
+
+¿Qué tipo de ACL usarías en cada caso y por qué?
+
+a) Bloquear a un host concreto de la LAN que hace escaneos.
+b) Permitir solo HTTP/HTTPS de la VLAN 30 hacia el servidor web interno.
+c) Filtrar por IP origen en un router antiguo con muy poca CPU.
+
+## 7. ¿Dónde aplico la ACL?
+
+Regla práctica: la estándar se coloca **cerca del destino** y la extendida **cerca del origen**. En este escenario (PC1 en LAN-A, servidor en LAN-B, R1 en medio), ¿dónde aplicarías cada ACL y en qué sentido?
+
+a) ACL estándar que bloquea a PC1 llegar al servidor.
+b) ACL extendida que permite solo HTTP de LAN-A al servidor.
+
+## 8. Comandos de verificación
 
 Relaciona cada comando de verificación con su utilidad:
 
 | Comando | Utilidad |
 |---|---|
-| 1. `show vlan brief` | a) Ver la native VLAN, VLANs permitidas y mismatches del trunk |
-| 2. `show interfaces trunk` | b) Ver la configuración completa actual del dispositivo |
-| 3. `show running-config` | c) Ver qué VLANs existen y qué puertos access tiene cada una |
-
-Además, responde:
-
-d) ¿Qué comando usarías para comprobar si las subinterfaces del router están Up/Up?
-
-## 8. V/F inter-VLAN
-
-Verdadero o falso sobre router-on-a-stick y SVIs:
-
-a) En router-on-a-stick, cada VLAN necesita su propia subinterfaz con `encapsulation dot1Q`.
-b) Un switch capa 3 enruta entre VLANs sin necesidad de router externo.
-c) El cuello de botella del router-on-a-stick es la única interfaz física que comparten todas las VLANs.
-d) Sin el comando `ip routing`, los SVIs de un switch capa 3 no enrutan entre VLANs.
-e) En router-on-a-stick, el tráfico de todas las VLANs pasa por la misma interfaz y por tanto se puede saturar con mucho tráfico.
+| 1. `show access-lists` | a) Ver qué ACL está aplicada a cada interfaz y sentido |
+| 2. `show ip interface` | b) Ver contadores de matches por línea de la ACL |
+| 3. `show running-config` | c) Ver las líneas exactas de la ACL tal como se configuraron |

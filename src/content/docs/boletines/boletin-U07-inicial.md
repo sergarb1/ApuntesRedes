@@ -1,103 +1,84 @@
 ---
-title: Boletín U07 — Inicial
-description: Ejercicios básicos de Switching y STP
+title: Boletín UD7 — Inicial
+description: Ejercicios básicos de Routing Dinámico
 ---
 
-# 📝 Boletín U07 — Inicial
+# 📝 Boletín UD7 — Inicial
 
-> Ejercicios básicos para afianzar los conceptos de switching y STP.
+> Ejercicios básicos para afianzar los conceptos de OSPF y routing dinámico.
 
 ---
 
-## 1. ¿Qué hace el switch?
+## 1. IGP vs EGP
 
-Relaciona la situación con la acción del switch:
+Clasifica cada protocolo como IGP o EGP:
 
-| Situación | Acción |
-|---|---|
-| 1. Llega una trama con MAC destino conocida | a) Inunda por todos los puertos menos el origen |
-| 2. Llega una trama con MAC destino desconocida | b) Reenvía solo por el puerto correspondiente |
-| 3. Llega una trama broadcast | c) Inunda por todos los puertos |
+a) OSPF
+b) BGP
+c) RIP
+d) EIGRP
 
 ## 2. Verdadero o falso
 
-a) Un switch segmenta los dominios de colisión.
-b) Un switch segmenta los dominios de broadcast.
-c) STP evita bucles en redes conmutadas.
-d) RSTP converge más rápido que STP.
-e) La tabla MAC de un switch se llama tabla ARP.
+a) OSPF usa el algoritmo de Dijkstra (SPF).
+b) RIP tiene un límite de 15 saltos.
+c) OSPF necesita un área backbone (Área 0).
+d) El Router ID de OSPF debe ser único en la red.
+e) RIP converge más rápido que OSPF.
 
-## 3. Estados STP
+## 3. Relaciona
 
-Ordena los estados STP por los que pasa un puerto desde que se activa hasta que reenvía tráfico:
-
-a) Learning
-b) Forwarding
-c) Blocking
-d) Listening
-
-## 4. Identifica el rol
-
-Indica qué rol STP tiene cada puerto:
-
-a) Puerto del Root Bridge hacia un switch no-root
-b) Puerto que mira hacia el Root Bridge (en un switch no-root)
-c) Puerto bloqueado que proporciona un camino alternativo
-
-## 5. ¿Qué comando?
-
-Relaciona el comando con su función:
-
-| Comando | Función |
+| Término | Descripción |
 |---|---|
-| 1. `show mac address-table` | a) Ver estado STP |
-| 2. `show spanning-tree` | b) Configurar PortFast |
-| 3. `spanning-tree portfast` | c) Ver tabla MAC del switch |
-| 4. `switchport port-security` | d) Activar seguridad de puerto |
+| 1. LSA | a) Router que conecta áreas |
+| 2. LSDB | b) Anuncio de estado de enlace |
+| 3. ABR | c) Base de datos de la topología |
+| 4. SPF | d) Algoritmo de cálculo de rutas |
 
-## 6. Tormenta de broadcast
+## 4. Coste OSPF
 
-¿Qué es necesario para que ocurra una tormenta de broadcast?
+Calcula el coste OSPF para estas interfaces:
 
-a) Un solo switch con muchos PCs
-b) Un bucle en la red (switches conectados formando un círculo)
-c) Un cable defectuoso
-d) Un router mal configurado
+a) FastEthernet (100 Mbps)
+b) GigabitEthernet (1 Gbps)
+c) Serial (1.544 Mbps)
 
-## 7. Reenvío de tramas y la tabla CAM
+## 5. Completa
 
-Observa la tabla CAM de un switch:
+Completa los comandos OSPF:
 
-```
-Vlan    Mac Address       Type        Ports
-----    -----------       --------    -----
-   1    0050.7966.6800    DYNAMIC     Fa0/1
-   1    0050.7966.6801    DYNAMIC     Fa0/2
-   1    00D0.BC96.1A01    DYNAMIC     Fa0/3
-```
+a) `router ___ 1` (inicia el proceso OSPF)
+b) `network 192.168.1.0 0.0.0.255 area ___` (área backbone)
+c) `default-information ___` (propagar ruta por defecto)
+d) `show ip ospf ___` (ver vecinos)
 
-Indica qué hace el switch en cada caso:
+## 6. Tipos de routers
 
-a) Llega una trama por Fa0/2 con MAC origen `0050.7966.6801` y destino `00D0.BC96.1A01`.
-b) Llega una trama por Fa0/1 con MAC origen `0050.7966.6800` y destino `0050.7966.6802` (desconocida).
-c) Llega una trama por Fa0/3 con destino `FFFF.FFFF.FFFF` (broadcast).
-d) Llega una trama por Fa0/4 con MAC origen `0050.7966.6801`, una MAC que ya estaba aprendida en Fa0/2. ¿Qué hace el switch con la tabla CAM?
+Relaciona el tipo de router OSPF con su función:
 
-**Pista:** si la MAC destino está en la tabla, reenvío selectivo; si no está, inundo. Y si la misma MAC origen aparece por un puerto distinto, la tabla se actualiza con el puerto más reciente.
+| Tipo | Función |
+|---|---|
+| 1. Internal Router | a) Introduce rutas externas |
+| 2. ABR | b) Conecta Área 0 con otras áreas |
+| 3. ASBR | c) Todas sus interfaces en la misma área |
 
-## 8. Estados STP
+## 7. Dinámico vs estático
 
-Completa la tabla de estados STP:
+a) Clasifica cada protocolo como IGP o EGP: **OSPF**, **RIP**, **BGP**, **EIGRP**.
 
-| Estado | ¿Reenvía tráfico? | ¿Aprende MACs? | Tiempo |
-|---|---|---|---|
-| Blocking | No | ... | ... |
-| Listening | ... | No | 15 s |
-| Learning | No | ... | ... |
-| Forwarding | ... | Sí | Indefinido |
+b) Enumera **3 ventajas** del routing dinámico frente al estático y pon un caso donde convenga usar estático.
 
-a) ¿Cuál es el orden exacto de los estados desde que se activa el puerto?
-b) ¿Cuánto tarda un puerto STP en pasar de blocking a forwarding si no hay fallos?
-c) ¿En qué estado está un puerto que ya reenvía tráfico y aprende MACs?
+**Pista:** IGP enruta dentro de un AS y EGP entre AS (BGP). Dinámico = autoaprendizaje, convergencia automática y menos error humano; estático = determinista, útil en enlaces stub o redes muy pequeñas.
 
-**Pista:** solo Learning aprende sin reenviar, y solo Forwarding reenvía. Suma los tiempos de los estados intermedios.
+## 8. Coste OSPF: tabla de velocidades
+
+Completa la tabla con el coste OSPF de cada velocidad usando la fórmula `coste = 10^8 / ancho_de_banda`:
+
+| Velocidad | Cálculo | Coste OSPF |
+|---|---|---|
+| 10 Mbps | 10⁸ / 10⁷ | |
+| 100 Mbps | 10⁸ / 10⁸ | |
+| 1 Gbps | 10⁸ / 10⁹ | |
+| 1.544 Mbps (T1) | 10⁸ / 1.544.000 | |
+
+**Pista:** el coste mínimo es 1: los enlaces a partir de 100 Mbps valen lo mismo por defecto. Los decimales se redondean hacia abajo.

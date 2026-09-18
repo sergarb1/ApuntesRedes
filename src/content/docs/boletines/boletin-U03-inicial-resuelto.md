@@ -1,74 +1,105 @@
 ---
-title: Boletín U03 — Inicial (Resuelto)
-description: Soluciones de los ejercicios básicos de Modelos OSI y Análisis de Tráfico
+title: Boletín UD3 — Inicial (Resuelto)
+description: Soluciones ejercicios básicos de IPv4 y Subnetting
 ---
 
-# ✅ Boletín U03 — Inicial (Resuelto)
+# ✅ Boletín UD3 — Inicial (Resuelto)
 
 ---
 
-## 1. Ordena las capas OSI
+## 1. Conversión binario
 
-1. **Física** — Capa 1
-2. **Enlace** — Capa 2
-3. **Red** — Capa 3
-4. **Transporte** — Capa 4
-5. **Sesión** — Capa 5
-6. **Presentación** — Capa 6
-7. **Aplicación** — Capa 7
+a) 192 → **11000000**
+b) 10 → **00001010**
+c) 255 → **11111111**
+d) 0 → **00000000**
 
-## 2. ¿Qué capa soy?
+## 2. Conversión a decimal
 
-a) Direccionamiento IP y enrutamiento → **Capa 3 (Red)**
-b) Transmisión de bits por el cable → **Capa 1 (Física)**
-c) Segmentación y control de flujo → **Capa 4 (Transporte)**
-d) Interfaz con el usuario/aplicación → **Capa 7 (Aplicación)**
-e) Direccionamiento MAC y detección de errores → **Capa 2 (Enlace)**
+a) 11000000 → **192**
+b) 10101000 → **168**
+c) 00001010 → **10**
+d) 11111111 → **255**
 
-## 3. Verdadero o falso
+## 3. ¿Qué máscara es?
 
-a) **Falso.** TCP/IP tiene 4 capas: Aplicación, Transporte, Internet y Acceso a Red.
-b) **Verdadero.** En la capa de Red la PDU se llama paquete (datagrama en UDP).
-c) **Falso.** UDP no garantiza orden ni fiabilidad: eso es TCP.
-d) **Verdadero.** SYN, SYN-ACK, ACK: el three-way handshake es la esencia de TCP.
-e) **Falso.** Con un switch solo ves tu tráfico unicast; el de otros necesita un hub, puerto espejo o ARP spoofing.
+/24 → b) 255.255.255.0
+/16 → c) 255.255.0.0
+/30 → a) 255.255.255.252
+/8 → d) 255.0.0.0
 
-## 4. Identifica el puerto
+## 4. Verdadero o falso
 
-a) HTTP → **80/TCP**
-b) HTTPS → **443/TCP**
-c) DNS → **53/UDP** (y TCP para transferencias de zona)
-d) SSH → **22/TCP**
-e) DHCP → **67-68/UDP**
+a) **Falso.** IPv4 tiene 32 bits (4 octetos).
+b) **Falso.** Cada octeto va de 0 a 255. 256 no existe en un octeto de 8 bits.
+c) **Verdadero.** La última dirección del rango es el broadcast.
+d) **Verdadero.** Dynamic Host Configuration Protocol.
+e) **Falso.** Las IPs privadas (RFC 1918) no son enrutables en Internet. Necesitan NAT.
 
-## 5. Tamaños de cabeceras
+## 5. Calcula hosts
 
-| Cabecera | Tamaño mínimo (bytes) |
-|---|---|
-| Ethernet | 14 (+ 4 FCS) |
-| IPv4 | 20 |
-| TCP | 20 |
-| UDP | 8 |
+a) /24 → 256 - 2 = **254 hosts**
+b) /27 → 32 - 2 = **30 hosts**
+c) /30 → 4 - 2 = **2 hosts**
+d) /29 → 8 - 2 = **6 hosts**
 
-## 6. ¿Qué PDU es?
+## 6. Identifica el tipo
 
-| Capa | PDU |
-|---|---|
-| 4. Transporte → d) | Segmento/Datagrama |
-| 3. Red → c) | Paquete |
-| 2. Enlace → b) | Trama |
-| 1. Física → a) | Bits |
+a) 10.0.0.15 → **Privada** (clase A, RFC 1918)
+b) 8.8.8.8 → **Pública** (DNS de Google)
+c) 192.168.1.1 → **Privada** (clase C, RFC 1918)
+d) 127.0.0.1 → **Especial** (loopback/localhost)
+e) 172.16.0.100 → **Privada** (clase B, RFC 1918)
+f) 169.254.1.1 → **Especial** (APIPA, cuando DHCP no responde)
 
-## 7. El campo TTL
+## 7. Calcula la dirección de red
 
-a) **Evitar bucles infinitos:** cada router lo decrementa en 1 y, si llega a 0, el paquete se descarta.
-b) **64 - 57 = 7 saltos**.
-c) **0x0800** — el EtherType de IPv4 (0x86DD es IPv6 y 0x0806 es ARP).
+a) `192.168.1.37` & `255.255.255.0` → la máscara deja pasar los 3 primeros octetos y borra el último → **192.168.1.0/24**
 
-## 8. Origen y destino
+```
+IP:      192.168.1.37  → 11000000.10101000.00000001.00100101
+Máscara: 255.255.255.0 → 11111111.11111111.11111111.00000000
+AND:                   → 11000000.10101000.00000001.00000000
+Red:     192.168.1.0
+```
 
-a) El **54321** es el efímero: está en el rango **49152-65535**.
-b) El **443** es **HTTPS** (web cifrada), un puerto *well-known* (0-1023).
-c) Un **socket** es la combinación `IP:puerto` que identifica un extremo completo de la conversación (aquí `192.168.1.10:54321` y `142.250.184.4:443`).
+b) `10.0.0.150` & `255.0.0.0` → **10.0.0.0/8**
 
-> La conexión se define por DOS sockets: el de origen y el de destino.
+```
+IP:      10.0.0.150  → 00001010.00000000.00000000.10010110
+Máscara: 255.0.0.0   → 11111111.00000000.00000000.00000000
+AND:                 → 00001010.00000000.00000000.00000000
+Red:     10.0.0.0
+```
+
+c) `172.16.0.200` & `255.255.255.128` → el octeto mágico es el último: `200 = 11001000`, `128 = 10000000` → AND = `10000000` = 128 → **172.16.0.128/25**
+
+```
+IP:      172.16.0.200  → 10101100.00010000.00000000.11001000
+Máscara: 255.255.255.128 → 11111111.11111111.11111111.10000000
+AND:                    → 10101100.00010000.00000000.10000000
+Red:     172.16.0.128
+```
+
+d) `192.168.1.66` & `255.255.255.192` → octeto mágico el último: `66 = 01000010`, `192 = 11000000` → AND = `01000000` = 64 → **192.168.1.64/26**
+
+```
+IP:      192.168.1.66  → 11000000.10101000.00000001.01000010
+Máscara: 255.255.255.192 → 11111111.11111111.11111111.11000000
+AND:                    → 11000000.10101000.00000001.01000000
+Red:     192.168.1.64
+```
+
+## 8. Subredes iguales
+
+a) **2 bits:** `2ⁿ ≥ 4` → n = 2 (2² = 4).
+b) Nueva máscara: **/26 = 255.255.255.192** (`11111111.11111111.11111111.11000000`).
+c) Hosts=(32 − 26 = 6 bits) → 2⁶ − 2 = **62 hosts útiles** por subred.
+d) Incremento = 2⁶ = 64:
+
+| Subred | Red | Primer host | Último host | Broadcast |
+|---|---|---|---|---|
+| 1 | 192.168.5.0/26 | 192.168.5.1 | 192.168.5.62 | 192.168.5.63 |
+| 2 | 192.168.5.64/26 | 192.168.5.65 | 192.168.5.126 | 192.168.5.127 |
+| 3 | 192.168.5.128/26 | 192.168.5.129 | 192.168.5.190 | 192.168.5.191 |
+| 4 | 192.168.5.192/26 | 192.168.5.193 | 192.168.5.254 | 192.168.5.255 |

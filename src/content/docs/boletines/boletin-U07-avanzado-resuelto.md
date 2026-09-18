@@ -1,150 +1,137 @@
 ---
-title: Boletín U07 — Avanzado (Resuelto)
-description: Soluciones de los ejercicios avanzados de Switching y STP
+title: Boletín UD7 — Avanzado (Resuelto)
+description: Soluciones de los ejercicios avanzados de Routing Dinámico
 ---
 
-# ✅ Boletín U07 — Avanzado (Resuelto)
+# ✅ Boletín UD7 — Avanzado (Resuelto)
 
 ---
 
-## 1. Configuración básica de switch
+## 1. Configuración OSPF multiárea
 
+**R1:**
 ```bash
-Switch> enable
-Switch# configure terminal
-Switch(config)# hostname SW-OFICINA-01
-SW-OFICINA-01(config)# interface vlan 1
-SW-OFICINA-01(config-if)# ip address 192.168.1.10 255.255.255.0
-SW-OFICINA-01(config-if)# no shutdown
-SW-OFICINA-01(config-if)# exit
-SW-OFICINA-01(config)# ip default-gateway 192.168.1.1
-
-SW-OFICINA-01(config)# interface range fa0/1-10
-SW-OFICINA-01(config-if-range)# switchport mode access
-SW-OFICINA-01(config-if-range)# switchport port-security
-SW-OFICINA-01(config-if-range)# switchport port-security maximum 2
-SW-OFICINA-01(config-if-range)# switchport port-security mac-address sticky
-SW-OFICINA-01(config-if-range)# switchport port-security violation shutdown
-SW-OFICINA-01(config-if-range)# exit
-
-SW-OFICINA-01(config)# interface range fa0/11-12
-SW-OFICINA-01(config-if-range)# switchport mode trunk
-SW-OFICINA-01(config-if-range)# exit
+interface loopback 0
+ ip address 1.1.1.1 255.255.255.255
+interface g0/0
+ ip address 192.168.1.1 255.255.255.0
+interface g0/1
+ ip address 192.168.2.1 255.255.255.0
+interface g0/2
+ ip address 10.0.0.1 255.255.255.252
+router ospf 1
+ router-id 1.1.1.1
+ network 192.168.1.0 0.0.0.255 area 0
+ network 192.168.2.0 0.0.0.255 area 0
+ network 10.0.0.0 0.0.0.3 area 0
 ```
 
-## 2. Análisis de topología STP
+**R2 (ABR):**
+```bash
+interface loopback 0
+ ip address 2.2.2.2 255.255.255.255
+interface g0/0
+ ip address 10.0.0.2 255.255.255.252
+interface g0/1
+ ip address 10.0.0.5 255.255.255.252
+router ospf 1
+ router-id 2.2.2.2
+ network 10.0.0.0 0.0.0.3 area 0
+ network 10.0.0.4 0.0.0.3 area 1
+```
 
-a) **Root Bridge: Switch C.** Prioridad 4096 (la más baja). Aunque Switch A y B tienen MACs más bajas, la prioridad de Switch C (4096) es mucho menor que 32768.
+**R3:**
+```bash
+interface loopback 0
+ ip address 3.3.3.3 255.255.255.255
+interface g0/0
+ ip address 192.168.3.1 255.255.255.0
+interface g0/1
+ ip address 10.0.0.6 255.255.255.252
+router ospf 1
+ router-id 3.3.3.3
+ network 192.168.3.0 0.0.0.255 area 1
+ network 10.0.0.4 0.0.0.3 area 1
+```
 
-b) **Root Ports:** Cada switch no-root tiene 1 Root Port. Como hay 3 switches y Switch C es Root, Switches A y B tienen 1 Root Port cada uno = **2 Root Ports** total.
+## 2. Diagnóstico OSPF
 
-c) **Designated Ports:** 1 por segmento. Hay 3 segmentos (A-B, B-C, C-A) → **3 Designated Ports** (todos los puertos del Root Bridge y el puerto del segmento con mejor coste hacia el Root).
+a) **FULL/DR:** El vecino 3.3.3.3 es el DR y la adyacencia está completa (FULL). Es normal en Ethernet.
 
-d) Si **Switch C falla**:
-   - Switches A y B pierden su Root Bridge
-   - Se inicia una nueva elección. Con la misma prioridad (32768), gana Switch A (MAC más baja)
-   - Todos los puertos pasan por los estados STP (blocking → listening → learning → forwarding)
-   - Convergencia: ~50 segundos con STP, ~3 segundos con RSTP
+b) **2WAY/DROTHER:** El vecino 4.4.4.4 no es DR ni BDR (DROTHER). La adyacencia está en 2WAY, que es el estado normal entre DROTHERS (no intercambian LSAs directamente, solo con el DR).
 
-## 3. Diagnóstico de port security
+c) **Porque no es necesario.** En redes multiacceso, los DROTHERS solo forman adyacencia FULL con el DR y BDR. Entre DROTHERS se quedan en 2WAY.
 
-a) **Ocurrió porque** el usuario conectó un switch no administrado. Los PCs de ambos usuarios tienen MACs diferentes, y el switch de red ve más de 1 MAC en el puerto, superando el límite (maximum 1).
+d) **No se ve directamente.** Pero por contexto, si este router tiene vecinos en G0/0 y G0/1, su Router ID podría ser otro (el más alto de sus loopbacks o interfaces físicas).
 
-b) **Dos cambios:**
-   1. Aumentar `maximum` a un valor razonable (ej. 5-10) si es un puerto compartido
-   2. Cambiar `violation` a `restrict` (descarta tráfico extra pero no deshabilita el puerto) o `protect` (descarta silenciosamente)
+## 3. Redistribución OSPF
 
-c) **Recuperar el puerto:**
+a) `redistribute static subnets` inyecta las rutas estáticas configuradas en el router al proceso OSPF, para que otros routers OSPF aprendan esas rutas.
+
+b) **Dos rutas:** la ruta por defecto (0.0.0.0/0) y la ruta estática 10.100.0.0/16.
+
+c) **Sí.** La redistribución + `default-information originate` propaga ambas rutas a todos los routers OSPF en todas las áreas.
+
+## 4. Cambio de coste OSPF
+
+a) **Camino A** (R1→R2→R3, 2 enlaces Gigabit) tiene coste **1+1 = 2**. El **Camino B** (R1→R4→R5→R3, 3 enlaces FastEthernet) tiene coste **1+1+1 = 3**. OSPF elige el camino con menor coste total: **el Camino A**. el mismo coste si todos los enlaces son del mismo tipo. Si ambos tienen coste 1+1+1 vs 1+1+1+1, gana el de 3 saltos (menos coste).
+
+b) Para forzar el Camino B, aumentar el coste en los enlaces de A:
    ```bash
-   SW-OFICINA-01(config)# interface fa0/1
-   SW-OFICINA-01(config-if)# shutdown
-   SW-OFICINA-01(config-if)# no shutdown
+   R1(config-if)# ip ospf cost 10
    ```
-   O configurar `errdisable recovery cause psecure-violation` para recuperación automática.
 
-## 4. Diseño de red redundante
+c) `show ip ospf interface` o `show ip route` muestra el coste de cada ruta.
 
-a) **Topología conceptual:** Malla parcial. SW1 (core) conectado a SW2, SW3, SW4. SW2 conectado a SW3 y SW4. Sin bucles directos SW3-SW4 para limitar redundancia.
+## 5. DR/BDR election
 
-b) **Puertos bloqueados:** Depende del Root Bridge. Si SW1 es Root, sus puertos son Designated. Los switches no-root tendrán Root Ports y Alternate Ports bloqueados. Con 3 conexiones alternativas por switch, aproximadamente 3 puertos bloqueados.
+a) **DR: R3** (prioridad 10, la más alta). **BDR: R4** (prioridad 5, segunda más alta).
 
-c) **Prioridad para SW1 como Root:** `spanning-tree vlan 1 priority 4096` (o 0 para forzarlo absolutamente).
+b) Prioridad **0** significa que el router **no participa** en la elección de DR/BDR. Nunca será DR ni BDR.
 
-d) **Si SW1 falla:**
-   - Se elige un nuevo Root Bridge (el de menor Bridge ID entre SW2, SW3, SW4)
-   - **Con STP:** ~50 segundos de convergencia
-   - **Con RSTP:** ~1-3 segundos
+c) Cambiar la **prioridad** de R1 a un valor más alto que 10:
+   ```bash
+   R1(config-if)# ip ospf priority 20
+   ```
+   (Nota: la elección solo ocurre al iniciar OSPF o al reiniciar el proceso)
 
-## 5. CAM table analysis
+## 6. Troubleshooting OSPF
 
-a) **Dos dispositivos** en Fa0/4: 00D0.BC96.1A01 y 00D0.BC96.1A02. La tabla muestra ambas MACs en el mismo puerto.
+**Paso 1:** Verificar conectividad capa 3 → `ping` entre routers vecinos. Si no hay ping, el problema está en capa 1 o 2.
 
-b) **4 puertos** con dispositivos: Fa0/1, Fa0/2, Fa0/3, Fa0/4.
+**Paso 2:** Verificar que las interfaces están activas → `show ip interface brief`. Buscar "up/up".
 
-c) **FFFF.FFFF.FFFF en CPU:** Es la dirección MAC de broadcast. Está en la CPU porque el switch procesa los broadcasts internamente (además de reenviarlos).
+**Paso 3:** Verificar que OSPF está configurado → `show ip protocols`. Debe mostrar OSPF con Router ID y redes declaradas.
 
-d) **Si llega una trama con destino 00D0.BC96.1A03:** Es una MAC desconocida (no está en la tabla). El switch **inunda** la trama por todos los puertos excepto el de origen.
+**Paso 4:** Verificar vecinos → `show ip ospf neighbor`. Si no hay vecinos, comprobar:
+- `network` declarada correctamente (wildcard, área)
+- Hello/Dead timers coinciden (por defecto 10/40 en broadcast)
+- No hay ACL bloqueando protocolo 89 (OSPF)
 
-## 6. STP: cálculo de costes
+**Paso 5:** Verificar LSDB → `show ip ospf database`. Debe haber LSAs de todos los routers.
 
-a) **Root Port de Switch C:** Depende del coste acumulado hacia el Root Bridge.
+**Paso 6:** Verificar tabla de rutas → `show ip route ospf`. Las rutas deben aparecer con prefijo O (OSPF).
 
-   **Camino A → C directo (Fa0/3):** coste = 19
-   **Camino A → B → C (Fa0/1 → Fa0/2):** coste = 19 + 19 = 38
+## 7. Elección DR/BDR en otro segmento
 
-   Fa0/3 tiene **menor coste total** (19 < 38), así que **Fa0/3 es el Root Port**.
+a) **DR: R-B** (prioridad 200, la más alta). **BDR: R-C** (prioridad 150, segunda más alta).
 
-b) **Costes:** A→C directo = 19. A→B→C = 38.
+b) **R-D** tiene prioridad **0**: no participa en la elección. Solo actuará como **DROTHER**, sincronizándose con el DR y el BDR sin poder ser elegido.
 
-c) **Alternate Port:** Fa0/2 (el puerto del camino más caro que queda en discarding como respaldo).
+c) **R-B** — con prioridades empatadas (1 = 1), el desempate lo hace el **Router ID más alto** (10.0.0.2 > 10.0.0.1). La prioridad manda primero; el Router ID solo decide empates.
 
-d) **Si el coste de Fa0/3 se cambia a 4:** El coste total por Fa0/3 baja a 4, reforzando aún más que Fa0/3 sea el Root Port. Si en cambio el coste de Fa0/3 subiera a 100, entonces el Root Port pasaría a ser por el camino A→B→C (coste 38 < 100).
+d) **No cambia.** La elección de DR/BDR solo ocurre al arrancar OSPF o al reiniciar el proceso; subir la prioridad de R-C a 255 no destrona al DR ya elegido (R-B). Para que cambie tendrías que **reiniciar el proceso OSPF** (o el router) en los routers del segmento, y entonces R-C (prioridad 255) ganaría.
 
-## 7. Topología STP/RSTP bajo análisis
+## 8. La adyacencia que no levanta
 
-a) **Root Bridge: SW1.** Prioridad 4096, muy por debajo de los 32768 de los demás. No hace falta desempate por MAC.
+a) Al funcionar el ping, queda **descartado el plano físico/enlace y la capa 3** del enlace: las IPs se alcanzan. El problema está en el **plano OSPF** (configuración lógica del protocolo), no en la conectividad.
 
-b) **Puerto en estado Discarding:** el enlace redundante **SW2-SW3**. Concretamente, el puerto de SW3 hacia SW2 (el extremo con mayor coste acumulado hacia el Root, que queda como **Alternate Port**). Los enlaces directos SW1-SW2, SW1-SW3 y SW1-SW4 son Designated (todos los puertos del Root).
+b) **Orden de diagnóstico:**
+1. `show ip protocols` → comprobar que OSPF arranca en ambos, que el **Router ID** no está duplicado y que las redes declaradas incluyen el enlace Serial.
+2. `show ip ospf interface` → confirmar en ambos routers que la interfaz **participa** en OSPF, y comparar **área**, **wildcard** y **timers** (Hello/Dead). Si no aparece, la red no está declarada o la wildcard está mal.
+3. Verificar que el **área** coincide en los dos lados del enlace (revisar el `network ... area X`).
+4. Comparar los **timers Hello/Dead** en ambos lados con `show ip ospf interface`: deben coincidir (por defecto 10/40 en broadcast y punto a punto Serial; solo en redes NBMA son 30/120). Si uno quedó con valores distintos, no forman vecindad.
+5. `show access-lists` (y contadores en la interfaz) → descartar una **ACL** que bloquee el **protocolo 89 (OSPF)** en el sentido de entrada/salida.
+6. Solo si todo lo anterior está bien, subir un nivel: `debug ip ospf events` (con cuidado) para ver por qué se rechaza el Hello.
 
-c) **3 Root Ports**: SW2, SW3 y SW4 son switches no-root, cada uno con su Root Port hacia SW1 (por su enlace directo de coste 19).
-
-d) **Con RSTP:** la red converge en **1-3 segundos** (handshake propuesta/acuerdo). **Con STP clásico:** **30-50 segundos** (esperando temporizadores).
-
-e) Los puertos del Root Bridge son todos **Designated**: son el "punto de referencia" del árbol y nunca se bloquean.
-
-## 8. Laboratorio: Port Security en la sala de profesores
-
-a) y b) Configuración completa:
-
-```bash
-Switch(config)# interface fa0/24
-Switch(config-if)# switchport mode access
-Switch(config-if)# switchport port-security
-Switch(config-if)# switchport port-security maximum 1
-Switch(config-if)# switchport port-security mac-address sticky
-Switch(config-if)# switchport port-security violation shutdown
-```
-
-c) Verificación: `Switch# show port-security interface fa0/24` (muestra el máximo, las MACs seguras y el estado del puerto).
-
-d) La violación ocurre porque la **MAC sticky del PC original NO caduca**: aunque el PC se desenchufe, su MAC permanece aprendida como permanente. Al conectar el portátil, su MAC nueva hace un total de 2 MACs en el puerto y se supera el máximo (1) → violación shutdown → errdisable.
-
-e) Recuperar el puerto:
-
-```bash
-Switch(config)# interface fa0/24
-Switch(config-if)# shutdown
-Switch(config-if)# no shutdown
-```
-
-(O configurar `errdisable recovery cause psecure-violation`.)
-
-f) Sin perder seguridad, puedes:
-   - Aumentar `maximum` a 2 si es un puerto compartido.
-   - Configurar el **envejecimiento de la port security** para que la MAC sticky expire si el dispositivo se desenchufa (las sticky necesitan `aging static` para poder caducar):
-     ```bash
-     Switch(config-if)# switchport port-security aging time 5
-     Switch(config-if)# switchport port-security aging type inactivity
-     Switch(config-if)# switchport port-security aging static
-     ```
-   - O usar `violation restrict` (descarta el tráfico extra sin deshabilitar el puerto), aunque es menos estricto.
+c) `show ip ospf interface <interfaz>`: si la interfaz aparece listada con su área y sus timers, está **participando en OSPF sin ambigüedad**. Si no sale, OSPF no la tiene declarada (falta `network` o wildcard incorrecta).

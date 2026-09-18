@@ -1,85 +1,92 @@
 ---
-title: Boletín U09 — Inicial
-description: Ejercicios básicos de Routing y ACLs
+title: Boletín UD9 — Inicial
+description: Ejercicios básicos de NAT
 ---
 
-# 📝 Boletín U09 — Inicial
+# 📝 Boletín UD9 — Inicial
 
-> Ejercicios básicos para afianzar los conceptos de routing y ACLs.
+> Ejercicios para practicar los fundamentos de NAT.
 
 ---
 
-## 1. Componentes del router
+## 1. ¿Qué es NAT?
 
-Relaciona cada componente con su función:
+Define qué es NAT y por qué es necesario en las redes IPv4 actuales.
 
-| Componente | Función |
+<details>
+<summary>💡 Pista</summary>
+Piensa en la escasez de direcciones IPv4 públicas y cómo una LAN privada accede a Internet.
+</details>
+
+## 2. Tipos de NAT
+
+Relaciona cada tipo de NAT con su descripción:
+
+| Tipo | Descripción |
 |---|---|
-| 1. RAM | a) Almacena el IOS |
-| 2. NVRAM | b) Configuración en ejecución |
-| 3. Flash | c) Startup-config |
-| 4. ROM | d) Monitor de recuperación |
+| NAT estático | A. Muchas IPs privadas comparten una IP pública variando puertos |
+| NAT dinámico | B. Una IP privada fija se traduce a una IP pública fija |
+| PAT | C. Se asigna una IP pública de un pool disponible |
 
-## 2. Verdadero o falso
+## 3. Configura PAT
 
-a) Una ruta estática se configura manualmente.
-b) La ruta por defecto es 0.0.0.0/0.
-c) Las ACLs estándar filtran por IP origen y destino.
-d) Al final de toda ACL hay un permit any implícito.
-e) `show ip route` muestra la tabla de rutas.
+Escribe los comandos necesarios para configurar PAT en un router Cisco donde:
+- Interfaz LAN: GigabitEthernet 0/0 (192.168.1.1/24)
+- Interfaz WAN: GigabitEthernet 0/1 (83.45.12.78/30)
+- Red interna: 192.168.1.0/24
 
-## 3. ¿Qué comando?
+## 4. Tabla NAT
 
-Relaciona el comando con su función:
+Un router NAT muestra la siguiente tabla:
 
-| Comando | Función |
+```
+Pro Inside global      Inside local       Outside local      Outside global
+udp   192.168.1.  8.8.8.8:53  8.8.8.8:53
+udp   192.168.1.  8.8.8.8:53  8.8.8.8:53
+```
+
+a) ¿Cuántos dispositivos están haciendo peticiones DNS?
+b) ¿Cuál es la IP pública del router?
+c) ¿Qué puerto ha asignado NAT al PC 192.168.1.10?
+
+## 5. Verdadero o falso
+
+a) NAT estático permite que múltiples PCs compartan una IP pública.
+b) PAT necesita configurar `ip nat inside` y `ip nat outside`.
+c) NAT dinámico traduce siempre la misma IP privada a la misma IP pública.
+d) `show ip nat translations` muestra las traducciones activas.
+
+## 6. NAT destino (port forwarding)
+
+Quieres que un servidor web interno (192.168.1.10:80) sea accesible desde Internet en la IP pública 83.45.12.78:80. Escribe los comandos necesarios.
+
+## 7. ¿Qué tipo de NAT es?
+
+Identifica el tipo de NAT que se aplica en cada escenario:
+
+| Escenario | Tipo de NAT |
 |---|---|
-| 1. `ip route 0.0.0.0 0.0.0.0 10.0.0.2` | a) Configurar ruta estática |
-| 2. `show ip route` | b) Aplicar ACL a interfaz |
-| 3. `ip access-group 10 out` | c) Configurar ruta por defecto |
-| 4. `ip route 192.168.2.0 255.255.255.0 10.0.0.2` | d) Mostrar tabla de rutas |
+| a) El servidor web de la empresa (192.168.1.10) siempre sale a Internet como 83.45.12.78 | |
+| b) La oficina tiene un pool de 4 IPs públicas (83.45.12.78-81) y cada usuario toma una al salir | |
+| c) 300 alumnos de un instituto salen todos por la misma IP pública del router | |
+| d) Un cliente de Internet visita 83.45.12.78:8080 y llega al servidor interno 192.168.1.10:80 | |
 
-## 4. Números de ACL
+**Pista:** recuerda la tabla de tipos del punto 2 de la unidad: estático (1:1 fijo), dinámico (pool), PAT (muchos:1 con puertos) y destino (puerto público → IP:puerto interno).
 
-¿Qué rango de números usan las ACLs estándar y extendidas?
+## 8. Lee la tabla NAT
 
-| Tipo | Rango |
-|---|---|
-| Estándar | |
-| Extendida | |
+El router muestra esta tabla:
 
-## 5. Modos del router
+```
+Pro Inside global      Inside local       Outside local      Outside global
+udp   192.168.1.  8.8.8.8:53  8.8.8.8:53
+udp   192.168.1.  8.8.8.8:53  8.8.8.8:53
+tcp 83.45.12.78:60003  192.168.1.30:49152  142.250.184.4:443  142.250.184.4:443
+```
 
-Ordena los modos de configuración del router (de menor a mayor privilegio):
+a) ¿Cuántas conexiones hay activas y de qué tipo de tráfico?
+b) ¿Qué puerto efímero original usaba el PC 192.168.1.30?
+c) ¿Por qué dos PCs pueden usar el mismo puerto origen (54321) sin conflicto?
+d) ¿A qué servicio destino van las dos primeras conexiones? ¿Y la tercera?
 
-a) Configuración global (`Router(config)#`)
-b) Usuario (`Router>`)
-c) Configuración de interfaz (`Router(config-if)#`)
-d) Privilegiado (`Router#`)
-
-## 6. ACL básica
-
-Escribe los comandos para:
-
-a) Crear una ACL estándar que permita la red 192.168.1.0/24
-b) Aplicarla a la interfaz G0/1 en sentido outbound
-
-## 7. Wildcard masks
-
-Las ACLs usan *wildcard masks*, el inverso de la máscara de subred. Para cada máscara de subred, escribe su wildcard y qué representa (qué bits quedan libres para cualquier valor):
-
-| Máscara de subred | Wildcard | ¿Qué representa? |
-|---|---|---|
-| 255.255.255.0 | | |
-| 255.255.255.255 | | |
-| 255.255.0.0 | | |
-
-## 8. Comandos de verificación
-
-Relaciona cada comando de verificación con su utilidad:
-
-| Comando | Utilidad |
-|---|---|
-| 1. `show ip route` | a) Ver qué ACLs están aplicadas y sus contadores |
-| 2. `show access-lists` | b) Resumen de interfaces: IP, estado y protocolo |
-| 3. `show ip interface brief` | c) Ver la tabla de rutas del router |
+**Pista:** los puertos efímeros (49152-65535) los elige cada PC; NAT añade un puerto global único por conexión (60001, 60002…) para desambiguar. Fíjate en la columna *Outside local* para saber el destino.

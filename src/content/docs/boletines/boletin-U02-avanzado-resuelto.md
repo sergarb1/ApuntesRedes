@@ -1,77 +1,121 @@
 ---
-title: Boletín U02 — Avanzado (Resuelto)
-description: Soluciones de los ejercicios avanzados de Fundamentos de Redes
+title: Boletín UD2 — Avanzado (Resuelto)
+description: Soluciones de los ejercicios avanzados de Infraestructura Física de Red
 ---
 
-# ✅ Boletín U02 — Avanzado (Resuelto)
+# ✅ Boletín UD2 — Avanzado (Resuelto)
 
 ---
 
-## 1. Diagnóstico de red
+## 1. Diagnóstico de cableado
 
-PC-A ve a PC-B (misma red) pero no llega a `8.8.8.8` (Internet).
+a) **Causas posibles:**
+   - Solo 2 pares conectados (mal crimpado) → negociación a 100 Mbps
+   - Cable Cat5e dañado o de mala calidad
+   - El switch o PC tienen el puerto configurado manualmente a 100 Mbps
+   - Cable demasiado largo (>100 m)
 
-**Causas probables (por orden de probabilidad):**
-1. El **gateway por defecto** de PC-A no está configurado o es incorrecto. PC-A no sabe dónde dejar los paquetes para salir de su red.
-2. El **router** no tiene ruta a Internet o carece de NAT.
-3. El router no tiene conexión con el ISP (corte del operador).
+b) **Herramientas:** Comprobador de cables (para verificar continuidad de los 4 pares), y la configuración de red del PC/switch (para ver velocidad negociada).
 
-**Más probable:** el gateway por defecto de PC-A. Es la causa clásica de "me veo contigo, pero no con el mundo".
+c) **Prueba de diagnóstico:**
+   - Probar el mismo cable con otro PC y otro puerto del switch
+   - Probar otro cable conocido bueno en el mismo PC y puerto
+   - Si el cable nuevo funciona a 1 Gbps → el cable original está dañado
+   - Si ningún cable funciona a 1 Gbps → problema en PC o switch
 
-## 2. Diseño de red mínima
+## 2. Diseño de cableado estructurado
 
-a) **Dispositivos:** 1 switch (los puertos sobran si eliges bien) + 1 router para Internet.
-   - Puertos consumidos: 15 PCs + 2 impresoras + 1 servidor + 1 enlace al router = 19. Un switch de **24 puertos** deja márgen ante fallos.
-   - Cables: 19 UTP.
+a) **Switches:**
+   - Planta 1: 1 switch de 48 puertos (para 40 puestos + servidores)
+   - Planta 2: 1 switch de 48 puertos (para 30 puestos)
+   - Switch de core en la sala de servidores
 
-b) **Direccionamiento privado:**
-   - Red: `192.168.0.0/24` (máscara `255.255.255.0`).
-   - Router (gateway): `192.168.0.1`.
-   - Servidor: `192.168.0.2`.
-   - Impresoras: `192.168.0.3` y `192.168.0.4`.
-   - PCs: rango DHCP `192.168.0.10 → 192.168.0.24`.
+b) **Cable:**
+   - Puestos: Cat6 (estándar para 1 Gbps)
+   - Uplinks entre plantas: fibra multimodo (OM3/OM4, 10 Gbps)
 
-## 3. ¿Cuántos dominios?
+c) **Patch panels:** 1 panel de 48 puertos por planta, cerca del switch correspondiente.
 
-a) **Dominios de colisión:** cada puerto de switch es un dominio de colisión propio.
-   - 3 PCs → 3 dominios.
-   - 2 enlaces entre switches → 2 dominios más (un extremo en cada switch).
-   - 1 enlace Switch3→router → 1 dominio más.   - Total: **3 + 2 + 1 = 6 dominios de colisión**.
+d) **Conexión entre plantas:** Fibra multimodo desde cada switch de planta hasta el switch de core en la sala de servidores, usando módulos SFP+.
 
-b) **Dominios de broadcast:** los switches NO segmentan broadcast y los enlaces no añaden ninguno. Toda la red comparte un único dominio de broadcast (el router lo segmentaría si hubiera otra red detrás). Total: **1 dominio de broadcast**.
+## 3. Cálculo de atenuación
 
-## 4. ARP en acción
+a) Potencia recibida = 2 dBm - 21,3 dB = **-19,3 dBm**
 
-a) Lanza un **ARP Request** de tipo **broadcast** (lo escuchan todos).
-b) MAC destino **`FF:FF:FF:FF:FF:FF`** (dirección de difusión).
-c) PC-B responde con un **ARP Reply** de tipo **unicast**, direccionado directamente a PC-A.
-d) La respuesta contiene la resolución: "La IP `10.0.0.2` pertenece a la MAC `BB:BB:BB:BB:BB:BB`".
+b) **Sí funciona.** -19,3 dBm > -20 dBm (el umbral del receptor). La señal es válida.
 
-## 5. Desencapsulación: el viaje inverso
+c) A 120 metros: atenuación proporcional = 21,3 × (120/100) = 25,56 dB
+   Potencia recibida = 2 - 25,56 = **-23,56 dBm**
+   **No funciona.** -23,56 dBm está por debajo del umbral de -20 dBm.
 
-a) La capa **2 (Enlace)** elimina la cabecera Ethernet y queda el **paquete** IP.
-b) La capa **3 (Red)** elimina la cabecera IP y queda el **segmento** TCP.
-c) La capa **4 (Transporte)** elimina la cabecera TCP y queda la **petición** `GET /index.html`.
-d) El contenido sube a la capa 7 (Aplicación), donde el servidor web lo procesa y responde.
+## 4. Fibra vs cobre: caso real
 
->Truco: es el mismo "empaquetado" del envío pero al revés — cada capa quita su cabecera.
+a) **200 m:** Fibra multimodo (el cobre Cat6a se queda en 100 m)
+   **500 m:** Fibra multimodo (el cobre no llega a 500 m)
+   **2000 m:** Fibra monomodo (obligatorio para 2 km)
 
-## 6. Diferencia práctica: hub, switch y router
+b) **200-500 m:** Fibra multimodo OM3/OM4 (10 Gbps, hasta 550 m)
+   **2000 m:** Fibra monomodo OS2 (10 Gbps, hasta 40 km)
 
-a) **Hub.** Red pequeña de los 90: barato y suficiente, aunque todo el tráfico colisiona en un solo dominio. Hoy nadie lo usaría.
-b) **Switch.** Cada PC tiene puerto dedicado: ancho de banda íntegro y sin colisiones por equipo.
-c) **Router.** Une dos redes diferentes (`192.168.1.0/24` y `10.0.0.0/16`) y decide por dónde enviar cada paquete.
+c) **Conectores:** LC (estándar en SFP)
+   **Módulos SFP:**
+   - 200-500 m: SFP+ 10GBASE-SR (multimodo, 850 nm)
+   - 2000 m: SFP+ 10GBASE-LR (monomodo, 1310 nm)
 
-## 7. Verdadero o falso (justifica los falsos)
+## 5. Pinout y solución de problemas
 
-a) **Verdadero.** Es la función principal del router: encaminar entre redes distintas.
-b) **Falso.** El switch no entiende de IP. Trabaja solo con MACs dentro de la misma red.
-c) **Verdadero.** En bus, una rotura del cable central parte la red en dos segmentos aislados.
-d) **Verdadero.** En estrella todo pasa por el punto central; sin él, nadie se comunica.
-e) **Falso.** La IP la asigna DHCP y cambia con la red a la que te conectas; la que permanece fija es la MAC. En casa y en el trabajo tienes la misma MAC, pero IP distinta.
+a) **Falla el pin 3** (el tercer LED no se enciende: posición 3 de 8).
 
-## 8. Puertos bien conocidos en acción
+b) **Par 3-6** (blanco/verde y verde en T568B, o blanco/naranja y naranja en T568A). El pin 3 forma parte del par transmisión/recepción junto con el pin 6.
 
-a) El puerto **80/HTTP** o **443/HTTPS** está bloqueado en el router. Sin ellos no hay navegación web.
-b) El puerto **22 (SSH)**. Es administración cifrada; reenviar el **21 (FTP)** sería un riesgo porque las credenciales viajan en texto claro.
-c) El puerto **53 (DNS)** traduce nombres a IPs. Bloqueado, el navegador no sabrá qué dirección hay detrás de una URL y **no resolverá ningún dominio** (indicaría "servidor no encontrado").
+c) **Funcionará parcialmente.** 100Base-TX solo necesita los pares 1-2 y 3-6. Como falla el par 3-6, el cable **no funcionará ni a 100 Mbps**. Para Gigabit (que necesita los 4 pares), tampoco funcionará.
+
+## 6. Diseña el latiguillo perfecto
+
+**Herramientas:** Crimpadora RJ45, pelacables, cortador, comprobador de cables.
+
+**Pasos:**
+1. **Pelar:** Con el pelacables, retira unos 2 cm de la funda exterior. Con cuidado de no dañar los hilos internos.
+2. **Ordenar (T568B, clip hacia abajo, mirando el conector de frente):**
+   - Pin 1: Blanco/Naranja
+   - Pin 2: Naranja
+   - Pin 3: Blanco/Verde
+   - Pin 4: Azul
+   - Pin 5: Blanco/Azul
+   - Pin 6: Verde
+   - Pin 7: Blanco/Marrón
+   - Pin 8: Marrón
+3. **Cortar:** Con la crimpadora, corta los hilos rectos dejando aproximadamente 1 cm desde la funda.
+4. **Insertar:** Mete los hilos en el conector RJ45, empujando hasta que los veas asomar por el frente (por los contactos dorados). La funda debe quedar dentro del conector (el pasador de sujeción la agarra).
+5. **Crimpar:** Introduce el conector en la crimpadora y aprieta firmemente hasta oír un clic.
+6. **Comprobar:** Usa el tester para verificar continuidad en todos los pines (1-8 en orden). Si algún LED no se enciende o el orden es incorrecto, corta y repite.
+
+**Señal de crimpado correcto:** Todos los contactos dorados están hundidos uniformemente, la funda está sujeta por el pasador, y el tester muestra LEDs 1-8 en secuencia correcta.
+
+## 7. Caso WiFi: oficina con zonas muertas
+
+a) **Causas físicas posibles:**
+   - **Interferencia de vecinos:** los APs de las oficinas colindantes comparten el canal 1, 6 u 11, y todos se pisan.
+   - **Obstrucciones:** los tabiques de cartón-yeso y el mobiliario atenúan la señal (atenuación).
+   - **Cobertura insuficiente:** un solo AP para 25 puestos reparte un canal compartido entre muchos clientes; las zonas más alejadas quedan al límite.
+   - **Canal saturado:** todos los clientes compiten por el mismo canal, y en horas punta (la tarde) la contienda se dispara.
+
+b) **Herramientas:** analizador WiFi (para ver canales, señal RSSI y APs vecinos), aplicación de escaneo de red para comprobar número de clientes, y medición de velocidad en distintos puntos de la oficina.
+
+c) **Soluciones ordenadas de más barata a más cara:**
+   1. **Elegir canales no solapados** (1, 6, 11 en 2,4 GHz) y configurar el AP en 5 GHz (y, si soporta, activar band-steering).
+   2. **Reubicar el AP** en una posición más central o elevado, lejos de metal y fuentes de interferencia.
+   3. **Añadir APs adicionales** (o un mesh) para cubrir las zonas muertas, con canales distintos entre APs adyacentes.
+
+## 8. Elección de medio a escala
+
+a) **Mini-oficina (8 puestos, 60 m²):** **Cobre Cat6 para los puestos fijos** + **1 AP WiFi** para visitas y movilidad. Distancias cortas (< 100 m), presupuesto ajustado: el WiFi por sí solo puede bastar, pero los puestos fijos con cobre garantizan rendimiento y estabilidad.
+
+b) **Planta de 40 puestos (rack en la misma planta):** **Cobre Cat6 a todos los puestos** (distancias dentro de los 100 m, 1 Gbps) con cableado estructurado (patch panels + latiguillos). El uplink del rack si se extiende a otra sala más lejana: fibra multimodo. WiFi como complemento para salas de reuniones.
+
+c) **Campus de 3 edificios:**
+   - **100 m:** Cobre Cat6a (límite exacto del cobre; correcto y barato) o fibra multimodo si se prefiere backbone.
+   - **500 m:** **Fibra multimodo OM3/OM4** (el cobre no llega a 500 m; la multimodo cubre hasta ~550 m a 10 Gbps).
+   - **2000 m:** **Fibra monomodo OS2** (obligatoria: solo la monomodo cubre distancias de kilómetros).
+
+> 💡 **Regla resumen:** distancia decide el medio (cobre ≤ 100 m, multimodo ≤ ~550 m, monomodo el resto); movilidad decide el WiFi; presupuesto decide las categorías.

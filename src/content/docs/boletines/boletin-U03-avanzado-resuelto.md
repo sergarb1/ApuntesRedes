@@ -1,94 +1,154 @@
 ---
-title: Boletín U03 — Avanzado (Resuelto)
-description: Soluciones de los ejercicios avanzados de Modelos OSI y Análisis de Tráfico
+title: Boletín UD3 — Avanzado (Resuelto)
+description: Soluciones ejercicios avanzados de IPv4 y Subnetting
 ---
 
-# ✅ Boletín U03 — Avanzado (Resuelto)
+# ✅ Boletín UD3 — Avanzado (Resuelto)
 
 ---
 
-## 1. Análisis de captura Wireshark
+## 1. Diseño VLSM
 
-a) **Paquetes 1-3:** three-way handshake TCP entre el PC (192.168.1.10) y el gateway (192.168.1.1). El PC abre una conexión desde el puerto efímero 54321 hacia el 443 (HTTPS) del gateway.
+Red base: 172.16.0.0/24 (256 direcciones totales)
 
-b) **Paquete 4:** el PC inicia un **nuevo** three-way handshake, ahora hacia 142.250.184.4 (un servidor real de Google). Sugiere que el primer handshake fue local (una validación o proxy del gateway) y ahora procede con el destino real.
+**Ordenando de mayor a menor:** Producción (60) → Desarrollo (30) → Testing (10) → 3 enlaces WAN (2 c/u)
 
-c) **Lo que falta:** la respuesta al paquete 4 (el SYN-ACK del servidor). Es probable que la captura se detuviera antes, o que el destino aún no responda. En HTTPS, además, el contenido viaja cifrado y no aparecería como HTTP.
+| Subred | Hosts | CIDR | Red | Rango | Broadcast |
+|---|---|---|---|---|---|
+| Producción | 60 (62) | /26 | 172.16.0.0 | .1 - .62 | .63 |
+| Desarrollo | 30 (30) | /27 | 172.16.0.64 | .65 - .94 | .95 |
+| Testing | 10 (14) | /28 | 172.16.0.96 | .97 - .110 | .111 |
+| WAN 1 | 2 (2) | /30 | 172.16.0.112 | .113 - .114 | .115 |
+| WAN 2 | 2 (2) | /30 | 172.16.0.116 | .117 - .118 | .119 |
+| WAN 3 | 2 (2) | /30 | 172.16.0.120 | .121 - .122 | .123 |
 
-## 2. Diseña la encapsulación
+**Sobran:** 172.16.0.124 - 172.16.0.255 = **132 direcciones** (132 - 2 = 130 hosts útiles).
 
-a) **Ethernet:**
-   - MAC destino: la del **gateway** (192.168.1.1).
-   - MAC origen: la del PC.
-   - EtherType: `0x0800` (IPv4).
+## 2. Diagnóstico DHCP
 
-b) **IP:**
-   - IP origen: `192.168.1.10`.
-   - IP destino: `8.8.8.8`.
-   - Protocol: **17 (UDP)**, porque la consulta DNS va sobre UDP.
-   - TTL: 64 (típico en Linux).
+a) Es una **dirección APIPA** (Automatic Private IP Addressing), rango 169.254.0.0/16.
 
-c) **UDP:**
-   - Puerto origen: **efímero** (ej. 34567).
-   - Puerto destino: **53** (DNS).
+b) Windows asigna automáticamente una IP APIPA cuando el **servidor DHCP no responde** o no está disponible.
 
-d) **DNS:** la consulta pide la dirección A (IPv4) de "google.com": `¿Quién es google.com?`.
+c) **Soluciones:**
+   1. Verificar que el servidor DHCP esté encendido y funcionando
+   2. Comprobar la conectividad con el servidor DHCP (¿está en la misma red? ¿hay switches funcionando?)
+   3. Hacer `ipconfig /release` y `ipconfig /renew` para forzar una nueva solicitud DHCP
+   4. Asignar una IP estática si el DHCP no es recuperable
 
-## 3. Diagnóstico por capas
+## 3. Subnetting binario
 
-a) **Capa 7 (Aplicación)** — concretamente el servicio **DNS**. El ping a 8.8.8.8 (ICMP, capa 3) funciona, pero los nombres no se resuelven.
-b) `nslookup google.com` o `dig google.com`.
-c) **Causa más probable:** el servidor DNS configurado no responde o es inaccesible (IP inventada o caído).
+a) **IP en binario:** 200.100.50.30 = 11001000.01100100.00110010.00011110
+   **Máscara en binario:** 255.255.255.224 = 11111111.11111111.11111111.11100000
 
-## 4. Three-way handshake
+b) **AND → Dirección de red:** 11001000.01100100.00110010.00000000 = **200.100.50.0/27**
 
-a) **SYN perdido:** el cliente no recibe SYN-ACK, espera el RTO y **reenvía el SYN**. La conexión se establece una vez que el SYN llega y el servidor responde.
-b) **SYN-ACK perdido:** el cliente tampoco recibe respuesta y reenvía su SYN; el servidor, al recibir el segundo SYN, reenvía su SYN-ACK. La conexión se establece cuando el SYN-ACK llega.
-c) **ACK final perdido:** el servidor queda en estado **SYN-RECEIVED** y reenvía el SYN-ACK tras su RTO. El cliente, que ya cree tener la conexión, puede incluso mandar datos que el servidor aceptará. Si tras varios reintentos no llega el ACK, el servidor cierra.
+c) **Broadcast:** 200.100.50.31 (todos los bits de host a 1: 00011111)
 
-**Resumen:** en a) y b) la conexión acaba estableciéndose tras la retransmisión. En c) puede quedar "a medias": el cliente cree que sí y el servidor no está seguro.
+d) **Hosts útiles:** 2⁵ - 2 = 32 - 2 = **30 hosts**
 
-## 5. TTL y fragmentación
+e) **200.100.50.62 → binario:** 11001000.01100100.00110010.00111110
+   Red de .62 con /27: 200.100.50.32/27 (bits de red fijos, 00100000)
+   **NO está en la misma subred.** .30 está en 200.100.50.0/27, .62 está en 200.100.50.32/27.
 
-Datos: paquete IP de 2500 bytes, MTU Ethernet = 1500.
+## 4. Resumen de subredes
 
-a) **Fragmentos generados:**
-   - Cabecera IP: 20 bytes.
-   - Datos a fragmentar: 2500 - 20 = 2480 bytes.
-   - Fragmento 1: 20 (cabecera) + 1480 (datos) = **1500 bytes** (MF=1).
-   - Fragmento 2: 20 (cabecera) + 1000 (datos restantes) = **1020 bytes** (MF=0).
+a) **Bits a pedir:** 2ⁿ = 8 → n = 3 bits
 
-   **Total: 2 fragmentos** (no 3: hay que contar la cabecera de cada fragmento).
+b) Máscara original: /16. Nuevos bits: 16 + 3 = **/19** (255.255.224.0)
 
-b) **Campos que cambian:**
-   - Flags: **MF=1** en el primero, **MF=0** en el último.
-   - **Fragment Offset:** 0 en el primero, 185 (1480/8) en el segundo.
-   - **Total Length:** 1500 y 1020.
-   - **Identification:** el mismo en ambos (para que el destino los asocie).
-   - **Header Checksum:** se recalcula en cada fragmento.
+c) **Hosts por subred:** 32 - 19 = 13 bits de host → 2¹³ - 2 = **8190 hosts**
 
-c) **TTL al llegar:** 64 - 15 = **49**.
+d) **Subredes:**
+   - 10.0.0.0/19
+   - 10.0.32.0/19
+   - 10.0.64.0/19
+   - 10.0.96.0/19
+   - 10.0.128.0/19
+   - 10.0.160.0/19
+   - 10.0.192.0/19
+   - 10.0.224.0/19
 
-## 6. Wireshark: filtros combinados
+(El incremento entre subredes es 32 en el tercer octeto: 2¹⁹⁻¹⁶ = 2³ = 32)
 
-a) `http && ip.src == 192.168.1.10`
-b) `tcp.dstport == 22 || tcp.dstport == 443`
-c) `dns && !(dns.qry.name == "google.com")`
-d) `tcp.analysis.flags`
+## 5. Sumarización de rutas
 
-## 7. La conexión que no se cierra
+a) **Ruta resumida:** 192.168.0.0/22
 
-a) **Capa 4 (Transporte)**, protocolo **TCP**: el estado `TIME_WAIT` es propio del cierre de conexiones TCP.
-b) El cierre **FIN → ACK → FIN → ACK**. Cuando ambos lados terminan, la conexión pasa a `TIME_WAIT` durante **2 × MSL** (el doble del tiempo máximo de vida de un segmento, ~2 minutos) para asegurar que los ACKs finales no se pierdan.
+**Razonamiento:**
+- 192.168.0.0/24: bits 22-23 = 00
+- 192.168.1.0/24: bits 22-23 = 01
+- 192.168.2.0/24: bits 22-23 = 10
+- 192.168.3.0/24: bits 22-23 = 11
 
-c) **Recomendaciones:** aumentar el rango de puertos efímeros (o activar *time-wait reuse*), reducir el rango de conexiones en espera, o mejorar la liberación del stack (`tcp_tw_reuse` en Linux). La clave es entender que el estado NO se queda para siempre: es un periodo de seguridad de TCP.
+Los primeros 22 bits son idénticos. La ruta /22 engloba las 4 subredes.
 
-## 8. Del nombre a la trama, al revés
+b) **Máscara:** /22 (255.255.252.0)
 
-a) La **capa 2 (Enlace)** elimina la cabecera Ethernet y queda el **paquete IP**.
+c) **IPs totales:** 2^(32-22) - 2 = 2¹⁰ - 2 = **1022 hosts** (1024 direcciones totales)
 
-b) En `0x0800` = **IPv4** (capa 3); con Protocol = 6, el contenido es **TCP** (capa 4). Es una trama que lleva tráfico TCP sobre IPv4 → perfecta para `https://example.com`.
+## 6. Plan de direccionamiento para una empresa
 
-c) TCP **ordena los segmentos por su número de secuencia** en el receptor y los reensambla para reconstruir la página antes de entregarla a la aplicación.
+Red base: 10.0.0.0/22 (1024 direcciones, 1022 hosts útiles)
 
-d) La capa 2 comprueba el **FCS (CRC)**: si no coincide, la trama se **descarta** sin entregarla a la capa 3.
+**Ordenando de mayor a menor:**
+- Administración: 200 → /24 (254 hosts)
+- Producción: 100 → /25 (126 hosts)
+- IT: 50 → /26 (62 hosts)
+- Ventas: 50 → /26 (62 hosts)
+- Almacén: 20 → /27 (30 hosts)
+- Dirección: 10 → /28 (14 hosts)
+- Enlace /30
+
+**Plan VLSM:**
+
+| Subred | CIDR | Red | Rango | Broadcast |
+|---|---|---|---|---|
+| Administración | /24 | 10.0.0.0 | .1 - .254 | .255 |
+| Producción | /25 | 10.0.1.0 | .1 - .126 | .127 |
+| IT | /26 | 10.0.1.128 | .129 - .190 | .191 |
+| Ventas | /26 | 10.0.1.192 | .193 - .254 | .255 |
+| Almacén | /27 | 10.0.2.0 | .1 - .30 | .31 |
+| Dirección | /28 | 10.0.2.32 | .33 - .46 | .47 |
+| Enlace | /30 | 10.0.2.48 | .49 - .50 | .51 |
+
+**Sobran:** 10.0.2.52 - 10.0.3.255 → **~460 IPs**
+
+**Problemas si crece al doble:** Si cada departamento duplica sus hosts, Administración necesitaría /23 (510 hosts), lo que rompe el plan VLSM actual. Habría que rediseñar usando una red base más grande (ej. /20) desde el principio.
+
+## 7. VLSM con requisitos mínimos
+
+Red base: 192.168.1.0/24 (256 direcciones, 254 hosts útiles)
+
+**Ordenando de mayor a menor:** Producción (50) → Comercial (25) → Soporte (10) → Enlace WAN (2)
+
+| Subred | Resolviendo | CIDR | Red | Rango | Broadcast |
+|---|---|---|---|---|---|
+| Producción | 2ʰ−2 ≥ 50 → h=6 (62) | /26 | 192.168.1.0 | .1 - .62 | .63 |
+| Comercial | 2ʰ−2 ≥ 25 → h=5 (30) | /27 | 192.168.1.64 | .65 - .94 | .95 |
+| Soporte | 2ʰ−2 ≥ 10 → h=4 (14) | /28 | 192.168.1.96 | .97 - .110 | .111 |
+| Enlace WAN | 2ʰ−2 ≥ 2 → h=2 (2) | /30 | 192.168.1.112 | .113 - .114 | .115 |
+
+b) **Queda libre** desde 192.168.1.116 hasta 192.168.1.255 = **140 direcciones** (138 hosts útiles en /24).
+
+**Comprobación del encadenado:** Producción acaba en .63 → Comercial arranca en .64. Comercial acaba en .95 → Soporte arranca en .96. Soporte acaba en .111 → el enlace WAN arranca en .112.
+
+## 8. Conflicto de IP
+
+a) **Qué ocurre:** cuando el PC pide IP por DHCP recibe 192.168.1.20, pero la impresora ya la tiene en uso. Hay **duplicado de dirección**: uno de los dos (o ambos, según el momento) pierde conectividad, aparecen errores de "duplicate address", y el tráfico hacia esa IP puede ir a uno o a otro. El servidor DHCP puede detectarlo *antes* de conceder la IP haciendo un ping/ARProbe a la dirección; si hay respuesta, la descarta y la registra en la tabla de conflictos.
+
+b) **Cómo lo detecta:** en el router, el comando:
+
+```
+show ip dhcp conflict
+```
+
+Muestra las direcciones que el servidor DHCP encontró en conflicto (con el método de detección y la fecha). Si la impresora estática sigue borrada del pool, verás la entrada y podrás actuar.
+
+c) **Cómo prevenirlo:** desde el diseño, **excluir las IPs estáticas** del pool DHCP antes de que reparta nada:
+
+```
+ip dhcp excluded-address 192.168.1.1 192.168.1.30
+```
+
+Así el router nunca concede las direcciones fijas (impresoras, servidores, el propio gateway). Alternativa: usar **reservas DHCP** por MAC para los equipos que quieras fijos sin configurarlos a mano.

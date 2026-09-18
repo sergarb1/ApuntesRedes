@@ -1,104 +1,122 @@
 ---
-title: Boletín U03 — Avanzado
-description: Ejercicios avanzados de Modelos OSI y Análisis de Tráfico
+title: Boletín UD3 — Avanzado
+description: Ejercicios avanzados de IPv4 y Subnetting
 ---
 
-# 📝 Boletín U03 — Avanzado
+# 📝 Boletín UD3 — Avanzado
 
-> Ejercicios que requieren aplicar los conceptos de capas OSI, protocolos y Wireshark de forma combinada. En los difíciles tienes pista.
+> Ejercicios que requieren aplicar subnetting, VLSM y DHCP de forma más profunda.
 
 ---
 
-## 1. Análisis de captura Wireshark
+## 1. Diseño VLSM
 
-Observa esta captura simplificada:
+Te dan la red **172.16.0.0/24**. Debes diseñar el direccionamiento para:
+
+- **Producción:** 60 hosts
+- **Desarrollo:** 30 hosts
+- **Testing:** 10 hosts
+- **Enlaces WAN:** 3 enlaces punto a punto (2 IPs cada uno)
+
+a) Diseña el VLSM con el mínimo desperdicio de direcciones.
+b) Indica la red, máscara, rango de hosts y broadcast para cada subred.
+c) ¿Cuántas IPs sobran?
+
+**Pista:** Ordena de mayor a menor necesidad. Recuerda que los enlaces /30 solo necesitan 2 hosts.
+
+## 2. Diagnóstico DHCP
+
+Un usuario no puede conectarse a Internet. Su configuración IP es:
 
 ```
-No.  Time     Source          Destination       Protocol   Info
-1    0.000    192.168.1.10    192.168.1.1       TCP        54321 → 443 [SYN] Seq=0
-2    0.002    192.168.1.1     192.168.1.10      TCP        443 → 54321 [SYN, ACK] Seq=0 Ack=1
-3    0.003    192.168.1.10    192.168.1.1       TCP        54321 → 443 [ACK] Seq=1 Ack=1
-4    0.010    192.168.1.10    142.250.184.4     TCP        54321 → 443 [SYN] Seq=0
+IPv4: 169.254.15.33
+Máscara: 255.255.0.0
+Gateway: (vacío)
+DNS: (vacío)
 ```
 
-**Preguntas:**
-a) ¿Qué está ocurriendo en los paquetes 1-3?
-b) ¿Por qué el paquete 4 tiene IP destino diferente?
-c) ¿Qué falta entre los paquetes 3 y 4? ¿Por qué?
+a) ¿Qué tipo de dirección es 169.254.15.33?
+b) ¿Por qué tiene esa IP?
+c) ¿Qué solución propones?
 
-**Pista:** fíjate en las IPs. ¿`192.168.1.1` y `142.250.184.4` están en la misma red?
+**Pista:** 169.254.0.0/16 es APIPA (Automatic Private IP Addressing). Windows asigna esta IP cuando el servidor DHCP no responde.
 
-## 2. Diseña la encapsulación
+## 3. Subnetting binario
 
-Eres un paquete DNS que viaja desde tu PC (192.168.1.10) al servidor DNS (8.8.8.8). Describe el contenido de cada cabecera:
+Dada la IP 200.100.50.30 con máscara 255.255.255.224 (/27):
 
-a) **Ethernet:** ¿MAC destino? (sabes que el gateway es 192.168.1.1)
-b) **IP:** ¿IP origen? ¿IP destino? ¿Valor del campo Protocol?
-c) **UDP:** ¿Puerto origen? ¿Puerto destino?
-d) **DNS:** ¿Qué contiene la consulta?
+a) Escribe la IP y la máscara en binario
+b) Calcula la dirección de red (AND)
+c) ¿Cuál es la dirección de broadcast?
+d) ¿Cuántos hosts útiles tiene esta subred?
+e) ¿La IP 200.100.50.62 está en la misma subred? ¿Por qué?
 
-**Pista:** DNS usa UDP por defecto en las consultas. El puerto origen será un puerto efímero (>1024).
+## 4. Resumen de subredes
 
-## 3. Diagnóstico por capas
+Tienes 10.0.0.0/16. Necesitas crear 8 subredes del mismo tamaño.
 
-Un usuario reporta: "No puedo acceder a google.com, pero sí a 8.8.8.8".
+a) ¿Cuántos bits debes pedir prestados?
+b) ¿Cuál es la nueva máscara?
+c) ¿Cuántos hosts por subred?
+d) Enumera las 8 direcciones de red resultantes
 
-a) ¿En qué capa(s) OSI está el problema?
-b) ¿Qué herramienta usarías para confirmarlo?
-c) ¿Cuál es la causa más probable?
+## 5. Sumarización de rutas
 
-**Pista:** si el ping a una IP funciona pero el navegador no carga, el problema está en la resolución de nombres.
+Tienes estas 4 subredes:
+- 192.168.0.0/24
+- 192.168.1.0/24
+- 192.168.2.0/24
+- 192.168.3.0/24
 
-## 4. Three-way handshake
+a) ¿Puedes resumirlas en una sola ruta? ¿Cuál?
+b) ¿Qué máscara tendría la ruta resumida?
+c) ¿Cuántas IPs totales abarca la ruta resumida?
 
-Explica paso a paso qué ocurre si durante un three-way handshake:
+**Pista:** Mira los bits en común. Las 4 redes comparten los primeros 22 bits.
 
-a) El SYN del cliente se pierde
-b) El SYN-ACK del servidor se pierde
-c) El ACK final del cliente se pierde
+## 6. Plan de direccionamiento para una empresa
 
-¿En qué casos se establece la conexión? ¿En cuáles no?
+Diseña un plan completo para una empresa con:
 
-**Pista:** TCP es robusto pero tiene límites. Investiga el temporizador de retransmisión (RTO).
+**Sede central:**
+- 200 hosts en Administración
+- 100 hosts en Producción
+- 50 hosts en IT
+- 10 hosts en Dirección
 
-## 5. TTL y fragmentación
+**Sucursal:**
+- 50 hosts en Ventas
+- 20 hosts en Almacén
 
-Un paquete IP de 2500 bytes debe viajar por una red Ethernet (MTU=1500).
+**Enlaces:**
+- 1 enlace /30 entre sede y sucursal
 
-a) ¿Cuántos fragmentos se generan?
-b) ¿Qué campos del header IP cambian en cada fragmento?
-c) Si el TTL inicial es 64 y el destino está a 15 saltos, ¿cuál será el TTL al llegar?
+Te dan la red **10.0.0.0/22**.
 
-**Pista:** la fragmentación divide el paquete en trozos que no superen el MTU. No olvides contar la cabecera IP de cada fragmento.
+a) Diseña el VLSM completo
+b) ¿Cuántas IPs sobran?
+c) ¿Qué problemas podrías encontrar si la empresa crece al doble?
 
-## 6. Wireshark: filtros combinados
+## 7. VLSM con requisitos mínimos
 
-Escribe el filtro de Wireshark para cada situación:
+Tienes la red **192.168.1.0/24** y necesitas estas subredes:
 
-a) Todo el tráfico HTTP desde la IP 192.168.1.10
-b) Paquetes TCP con puerto destino 22 o 443
-c) Tráfico DNS que no sea de google.com
-d) Paquetes con errores (retransmisiones o duplicados)
+- **Producción:** 50 hosts
+- **Comercial:** 25 hosts
+- **Soporte:** 10 hosts
+- **Enlace WAN:** 2 hosts
 
-**Pista:** usa operadores lógicos como `&&`, `||`, `!` y la sintaxis `ip.src`, `tcp.port`, etc.
+a) Diseña el **VLSM mínimo** (sin desperdiciar IPs): indica red, máscara, rango y broadcast de cada subred.
+b) ¿Qué bloque queda libre al final y de qué tamaño?
 
-## 7. La conexión que no se cierra
+**Pista:** Ordena de mayor a menor necesidad y elige para cada subred la máscara más pequeña que cumpla `2ʰ − 2 ≥ hosts`. Recuerda que cada subred empieza donde terminó la anterior.
 
-Tras un test de carga, el servidor web muestra cientos de conexiones en estado `TIME_WAIT` en `netstat` y "se queda sin puertos".
+## 8. Conflicto de IP
 
-a) ¿Qué capa OSI gestiona ese estado y qué protocolo lo crea?
-b) ¿Qué mecanismo de cierre TCP deja una conexión en `TIME_WAIT`?
-c) ¿Qué recomendación concreta darías a un administrador para mitigarlo?
+El administrador de una empresa configura **manual (estática)** la IP `192.168.1.20` en una impresora. Lamentablemente, esa IP está dentro del **pool DHCP** que reparte el router (`network 192.168.1.0 255.255.255.0`).
 
-**Pista:** el cierre limpio de TCP es FIN → ACK → FIN → ACK. Busca qué pasa si ambos lados cierran a la vez y cuánto dura el `TIME_WAIT` (2 × MSL).
+a) Explica qué ocurre cuando un PC pide IP por DHCP y recibe `192.168.1.20`, que ya tiene la impresora.
+b) ¿Cómo detectaría el administrador el conflicto? ¿Qué comando usaría en el router?
+c) ¿Cómo se **previene** este problema desde el diseño?
 
-## 8. Del nombre a la trama, al revés
-
-Tu navegador solicitó `https://example.com` y el servidor ha recibido la trama de respuesta. El EtherType de la trama es `0x0800` y el campo Protocol de IP vale 6.
-
-a) ¿Qué capa elimina primero la cabecera Ethernet y qué PDU queda dentro?
-b) Según el EtherType y el campo Protocol, ¿de qué protocolos se trata y en qué capas viven?
-c) ¿Qué hace TCP con los segmentos para reconstruir la página, y dónde se reordenan?
-d) ¿Qué comprobación hace la capa 2 antes de entregar la trama a la capa 3?
-
-**Pista:** reutiliza el diagrama de encapsulación del punto 4 pero en orden inverso; el campo Protocol vale 6 = TCP, 17 = UDP y 1 = ICMP.
+**Pista:** Antes de conceder una IP, el servidor DHCP suele comprobar (el RFC lo llama "ping") si la dirección ya está en uso. En Cisco el resultado se registra en una tabla concreta que se consulta con `show`. Y la solución de fondo ya la viste en el punto 8 de la unidad: `ip dhcp excluded-address`.

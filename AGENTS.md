@@ -6,7 +6,7 @@ Este archivo ayuda a cualquier agente LLM (como opencode, Claude, ChatGPT, etc.)
 
 ## 📋 Descripción del proyecto
 
-Apuntes del módulo **PAR** (Planificación y Administración de Redes) para CFGS de Administración de Sistemas Informáticos en Red. 13 secciones didácticas (Unidad 01 de introducción + 12 unidades) con enfoque 80% práctico y un estilo conversacional con humor. Publicado como web estática con Astro + Starlight + GitHub Pages.
+Apuntes del módulo **PAR** (Planificación y Administración de Redes) para CFGS de Administración de Sistemas Informáticos en Red. 12 unidades didácticas (Unidad 01 de introducción + 11 unidades de temario, UD2–UD12) con enfoque 80% práctico y un estilo conversacional con humor. Publicado como web estática con Astro + Starlight + GitHub Pages.
 
 ---
 
@@ -25,9 +25,20 @@ Apuntes del módulo **PAR** (Planificación y Administración de Redes) para CFG
 ## 📁 Estructura de directorios
 
 ```
-src/content/docs/            → Secciones en Markdown (raíz, índice)
-src/content/docs/01-introduccion/… → 9 puntos por sección (01-…, 09-cierre)
-src/content/docs/boletines/  → Ejercicios (inicial, avanzado + resueltos)
+src/content/docs/            → Secciones en Markdown (raíz, índices de unidad)
+src/content/docs/01-introduccion/… → 10 puntos (01-…, 08-mapa, 09-glosario, 10-preguntas-tontas)
+src/content/docs/02-ethernet-cableado/…      → UD2 · Ethernet, medios y cableado
+src/content/docs/03-direccionamiento-ip/…    → UD3 · Direccionamiento IP y subnetting (IPv4 + IPv6)
+src/content/docs/04-switching/…              → UD4 · Switching y VLAN
+src/content/docs/05-trunking-inter-vlan/…    → UD5 · Trunking e inter-VLAN
+src/content/docs/06-enrutamiento-estatico/…  → UD6 · Enrutamiento estático
+src/content/docs/07-ospf/…                   → UD7 · OSPF
+src/content/docs/08-acl-seguridad/…          → UD8 · ACL y seguridad básica
+src/content/docs/09-nat-pat/…                → UD9 · NAT y PAT
+src/content/docs/10-servicios-red/…          → UD10 · Servicios: DHCP, DNS y NTP
+src/content/docs/11-redes-inalambricas/…     → UD11 · Redes inalámbricas
+src/content/docs/12-alta-disponibilidad/…    → UD12 · Alta disponibilidad
+src/content/docs/boletines/  → Ejercicios (inicial, avanzado + resueltos, por unidad U01–U12)
 src/styles/custom.css        → CSS del tema (azul #2563eb + teal #4ecdc4, Geist Sans, glassmorphism)
 src/assets/logo.svg          → Logo
 scripts/                     → Scripts de exportación (PDF, EPUB) y diagramas (D2)

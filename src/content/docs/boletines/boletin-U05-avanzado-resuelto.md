@@ -1,154 +1,174 @@
 ---
-title: Boletín U05 — Avanzado (Resuelto)
-description: Soluciones ejercicios avanzados de IPv4 y Subnetting
+title: Boletín UD5 — Avanzado (Resuelto)
+description: Soluciones ejercicios avanzados de VLANs
 ---
 
-# ✅ Boletín U05 — Avanzado (Resuelto)
+# ✅ Boletín UD5 — Avanzado (Resuelto)
 
 ---
 
-## 1. Diseño VLSM
+## 1. Configuración completa de VLANs
 
-Red base: 172.16.0.0/24 (256 direcciones totales)
-
-**Ordenando de mayor a menor:** Producción (60) → Desarrollo (30) → Testing (10) → 3 enlaces WAN (2 c/u)
-
-| Subred | Hosts | CIDR | Red | Rango | Broadcast |
-|---|---|---|---|---|---|
-| Producción | 60 (62) | /26 | 172.16.0.0 | .1 - .62 | .63 |
-| Desarrollo | 30 (30) | /27 | 172.16.0.64 | .65 - .94 | .95 |
-| Testing | 10 (14) | /28 | 172.16.0.96 | .97 - .110 | .111 |
-| WAN 1 | 2 (2) | /30 | 172.16.0.112 | .113 - .114 | .115 |
-| WAN 2 | 2 (2) | /30 | 172.16.0.116 | .117 - .118 | .119 |
-| WAN 3 | 2 (2) | /30 | 172.16.0.120 | .121 - .122 | .123 |
-
-**Sobran:** 172.16.0.124 - 172.16.0.255 = **132 direcciones** (132 - 2 = 130 hosts útiles).
-
-## 2. Diagnóstico DHCP
-
-a) Es una **dirección APIPA** (Automatic Private IP Addressing), rango 169.254.0.0/16.
-
-b) Windows asigna automáticamente una IP APIPA cuando el **servidor DHCP no responde** o no está disponible.
-
-c) **Soluciones:**
-   1. Verificar que el servidor DHCP esté encendido y funcionando
-   2. Comprobar la conectividad con el servidor DHCP (¿está en la misma red? ¿hay switches funcionando?)
-   3. Hacer `ipconfig /release` y `ipconfig /renew` para forzar una nueva solicitud DHCP
-   4. Asignar una IP estática si el DHCP no es recuperable
-
-## 3. Subnetting binario
-
-a) **IP en binario:** 200.100.50.30 = 11001000.01100100.00110010.00011110
-   **Máscara en binario:** 255.255.255.224 = 11111111.11111111.11111111.11100000
-
-b) **AND → Dirección de red:** 11001000.01100100.00110010.00000000 = **200.100.50.0/27**
-
-c) **Broadcast:** 200.100.50.31 (todos los bits de host a 1: 00011111)
-
-d) **Hosts útiles:** 2⁵ - 2 = 32 - 2 = **30 hosts**
-
-e) **200.100.50.62 → binario:** 11001000.01100100.00110010.00111110
-   Red de .62 con /27: 200.100.50.32/27 (bits de red fijos, 00100000)
-   **NO está en la misma subred.** .30 está en 200.100.50.0/27, .62 está en 200.100.50.32/27.
-
-## 4. Resumen de subredes
-
-a) **Bits a pedir:** 2ⁿ = 8 → n = 3 bits
-
-b) Máscara original: /16. Nuevos bits: 16 + 3 = **/19** (255.255.224.0)
-
-c) **Hosts por subred:** 32 - 19 = 13 bits de host → 2¹³ - 2 = **8190 hosts**
-
-d) **Subredes:**
-   - 10.0.0.0/19
-   - 10.0.32.0/19
-   - 10.0.64.0/19
-   - 10.0.96.0/19
-   - 10.0.128.0/19
-   - 10.0.160.0/19
-   - 10.0.192.0/19
-   - 10.0.224.0/19
-
-(El incremento entre subredes es 32 en el tercer octeto: 2¹⁹⁻¹⁶ = 2³ = 32)
-
-## 5. Sumarización de rutas
-
-a) **Ruta resumida:** 192.168.0.0/22
-
-**Razonamiento:**
-- 192.168.0.0/24: bits 22-23 = 00
-- 192.168.1.0/24: bits 22-23 = 01
-- 192.168.2.0/24: bits 22-23 = 10
-- 192.168.3.0/24: bits 22-23 = 11
-
-Los primeros 22 bits son idénticos. La ruta /22 engloba las 4 subredes.
-
-b) **Máscara:** /22 (255.255.252.0)
-
-c) **IPs totales:** 2^(32-22) - 2 = 2¹⁰ - 2 = **1022 hosts** (1024 direcciones totales)
-
-## 6. Plan de direccionamiento para una empresa
-
-Red base: 10.0.0.0/22 (1024 direcciones, 1022 hosts útiles)
-
-**Ordenando de mayor a menor:**
-- Administración: 200 → /24 (254 hosts)
-- Producción: 100 → /25 (126 hosts)
-- IT: 50 → /26 (62 hosts)
-- Ventas: 50 → /26 (62 hosts)
-- Almacén: 20 → /27 (30 hosts)
-- Dirección: 10 → /28 (14 hosts)
-- Enlace /30
-
-**Plan VLSM:**
-
-| Subred | CIDR | Red | Rango | Broadcast |
-|---|---|---|---|---|
-| Administración | /24 | 10.0.0.0 | .1 - .254 | .255 |
-| Producción | /25 | 10.0.1.0 | .1 - .126 | .127 |
-| IT | /26 | 10.0.1.128 | .129 - .190 | .191 |
-| Ventas | /26 | 10.0.1.192 | .193 - .254 | .255 |
-| Almacén | /27 | 10.0.2.0 | .1 - .30 | .31 |
-| Dirección | /28 | 10.0.2.32 | .33 - .46 | .47 |
-| Enlace | /30 | 10.0.2.48 | .49 - .50 | .51 |
-
-**Sobran:** 10.0.2.52 - 10.0.3.255 → **~460 IPs**
-
-**Problemas si crece al doble:** Si cada departamento duplica sus hosts, Administración necesitaría /23 (510 hosts), lo que rompe el plan VLSM actual. Habría que rediseñar usando una red base más grande (ej. /20) desde el principio.
-
-## 7. VLSM con requisitos mínimos
-
-Red base: 192.168.1.0/24 (256 direcciones, 254 hosts útiles)
-
-**Ordenando de mayor a menor:** Producción (50) → Comercial (25) → Soporte (10) → Enlace WAN (2)
-
-| Subred | Resolviendo | CIDR | Red | Rango | Broadcast |
-|---|---|---|---|---|---|
-| Producción | 2ʰ−2 ≥ 50 → h=6 (62) | /26 | 192.168.1.0 | .1 - .62 | .63 |
-| Comercial | 2ʰ−2 ≥ 25 → h=5 (30) | /27 | 192.168.1.64 | .65 - .94 | .95 |
-| Soporte | 2ʰ−2 ≥ 10 → h=4 (14) | /28 | 192.168.1.96 | .97 - .110 | .111 |
-| Enlace WAN | 2ʰ−2 ≥ 2 → h=2 (2) | /30 | 192.168.1.112 | .113 - .114 | .115 |
-
-b) **Queda libre** desde 192.168.1.116 hasta 192.168.1.255 = **140 direcciones** (138 hosts útiles en /24).
-
-**Comprobación del encadenado:** Producción acaba en .63 → Comercial arranca en .64. Comercial acaba en .95 → Soporte arranca en .96. Soporte acaba en .111 → el enlace WAN arranca en .112.
-
-## 8. Conflicto de IP
-
-a) **Qué ocurre:** cuando el PC pide IP por DHCP recibe 192.168.1.20, pero la impresora ya la tiene en uso. Hay **duplicado de dirección**: uno de los dos (o ambos, según el momento) pierde conectividad, aparecen errores de "duplicate address", y el tráfico hacia esa IP puede ir a uno o a otro. El servidor DHCP puede detectarlo *antes* de conceder la IP haciendo un ping/ARProbe a la dirección; si hay respuesta, la descarta y la registra en la tabla de conflictos.
-
-b) **Cómo lo detecta:** en el router, el comando:
-
-```
-show ip dhcp conflict
+**Switch1:**
+```bash
+Switch1(config)# vlan 10
+Switch1(config-vlan)# name Ventas
+Switch1(config)# vlan 20
+Switch1(config-vlan)# name RRHH
+Switch1(config)# interface range fa0/1-5
+Switch1(config-if-range)# switchport mode access
+Switch1(config-if-range)# switchport access vlan 10
+Switch1(config)# interface range fa0/6-10
+Switch1(config-if-range)# switchport mode access
+Switch1(config-if-range)# switchport access vlan 20
+Switch1(config)# interface fa0/23
+Switch1(config-if)# switchport mode trunk
+Switch1(config-if)# switchport trunk native vlan 99
+Switch1(config-if)# switchport trunk allowed vlan 10,20
+Switch1(config)# interface fa0/24
+Switch1(config-if)# switchport mode trunk
+Switch1(config-if)# switchport trunk native vlan 99
+Switch1(config-if)# switchport trunk allowed vlan 10,20
 ```
 
-Muestra las direcciones que el servidor DHCP encontró en conflicto (con el método de detección y la fecha). Si la impresora estática sigue borrada del pool, verás la entrada y podrás actuar.
+**Switch2:** (configuración similar: mismas VLANs, mismos puertos access 1-5 → 10 y 6-10 → 20, y el mismo trunk en Fa0/24 con native 99 y `allowed vlan 10,20`).
 
-c) **Cómo prevenirlo:** desde el diseño, **excluir las IPs estáticas** del pool DHCP antes de que reparta nada:
-
+**Router:**
+```bash
+Router(config)# interface fa0/0
+Router(config-if)# no shutdown
+Router(config)# interface fa0/0.10
+Router(config-subif)# encapsulation dot1Q 10
+Router(config-subif)# ip address 192.168.10.1 255.255.255.0
+Router(config)# interface fa0/0.20
+Router(config-subif)# encapsulation dot1Q 20
+Router(config-subif)# ip address 192.168.20.1 255.255.255.0
 ```
-ip dhcp excluded-address 192.168.1.1 192.168.1.30
+
+## 2. Diagnóstico de native VLAN
+
+a) **Problemas:** las tramas sin etiquetar (de la VLAN nativa, incluyendo tráfico de control CDP/VTP/DTP y datos de esa VLAN) se interpretan en la VLAN equivocada en el otro extremo.
+   - Tráfico de control (CDP, VTP) no funciona correctamente entre switches.
+   - Posibles problemas de conectividad en la native VLAN (va y viene a ratos).
+   - Mensajes de error en el log de ambos switches: *"Native VLAN mismatch discovered on Fa0/24"*.
+
+b) **Diagnóstico:** `show interfaces trunk` en ambos switches. Muestra la native VLAN de cada extremo y reporta directamente el mismatch.
+
+c) **Arreglo sin pérdida:** configurar la **misma native VLAN en ambos extremos** — elegir un número (ej. 99) y ponerlo en ambos:
+   ```bash
+   Switch2(config-if)# switchport trunk native vlan 99
+   ```
+   El cambio es **inmediato**: la native VLAN solo afecta a tramas sin etiquetar. Las VLANs etiquetadas (10, 20, 30) no sufren interrupción durante el cambio.
+
+## 3. Diseño de VLANs corporativas
+
+a) **Tabla de VLANs:**
+   | VLAN | Nombre | Puertos |
+   |------|--------|---------|
+   | 10 | Recepción | Planta baja 1-5 |
+   | 20 | Servidores | Planta baja 6-15 |
+   | 30 | Ventas | Planta 1, puertos 1-30 |
+   | 40 | Marketing | Planta 1, puertos 31-45 |
+   | 50 | IT | Planta 2, puertos 1-20 |
+   | 60 | Dirección | Planta 2, puertos 21-25 |
+
+b) **Router-on-a-stick:** en la planta baja, cerca de los servidores, conectado por un trunk a un puerto del core (puede enrutar todas las VLANs con subinterfaces). **Alternativa:** switch capa 3 como core en la sala de servidores, haciendo routing entre VLANs internamente con SVIs (se elimina el cuello de botella del router).
+
+c) **VLANs en trunks:** todas (10, 20, 30, 40, 50, 60) en los trunks del core, con **native VLAN cambiada** (ej. 999) y **`allowed vlan`** cubriendo todas. IT necesita acceso a todas las VLANs para administrar.
+
+d) **ACLs para limitar Dirección** (se aplican en la subinterfaz del router de la VLAN 60):
+   ```bash
+   access-list 101 permit ip 192.168.60.0 0.0.0.255 192.168.20.0 0.0.0.255
+   access-list 101 deny ip 192.168.60.0 0.0.0.255 any
+   ```
+   Aplicar con `ip access-group 101 in` en la subinterfaz `Fa0/0.60`. (Detalles finos de ACLs en la UD6.)
+
+## 4. VTP disaster recovery
+
+a) **Por qué:** VTP propaga la base de datos del switch con mayor **revision number**. El switch nuevo (rev 500) tiene número más alto que el server actual (rev 100). Al propagar su base de datos (posiblemente vacía), todas las VLANs se borran en la red. Basta un trunk para que el anuncio llegue a todos.
+
+b) **Recuperación:**
+   1. **Desconectar el switch problemático inmediatamente** (cable del trunk) para frenar la propagación.
+   2. Reconfigurar las VLANs manualmente en cada switch (o restaurar un backup de la config).
+   3. Cambiar los switches a **VTP transparent** (o VTPv3 mode off) para que ningún switch pueda volver a hacer esto.
+
+c) **Medidas preventivas:**
+   - Usar **VTP transparent** o **VTPv3 mode off** (no propaga ni procesa anuncios).
+   - Verificar el **revision number** (`show vtp status`) de todo switch antes de enchufarlo.
+   - **Resetear** la base de datos de cualquier equipo usado: `delete flash:vlan.dat` y reiniciar, antes de conectarlo.
+   - Documentar la base de datos de VLANs (la config es tu backup).
+
+## 5. Router-on-a-stick: cuello de botella
+
+a) **Cálculo:** 4 VLANs × 30 Mbps = **120 Mbps**. La interfaz FastEthernet (100 Mbps) NO puede soportar 120 Mbps. **Sí hay cuello de botella** (pérdidas y saturación).
+
+b) **Alternativas:**
+   - **Interfaz GigabitEthernet** (1000 Mbps) → 120 Mbps es apenas el 12 % de capacidad.
+   - **Switch capa 3 con SVIs** → routing en hardware interno, sin interfaz única de salida.
+   - Dividir las VLANs entre **dos interfaces físicas** del router (proporcional al tráfico).
+
+c) **Con GigabitEthernet:** 120 Mbps sobre 1000 Mbps = **12 % de uso**, sin cuello de botella. Si el tráfico se duplica (240 Mbps), seguimos al 24 %: holgado.
+
+## 6. Seguridad en VLANs
+
+| Riesgo | Mitigación |
+|---|---|
+| 1. **VLAN Hopping por DTP**: el atacante negocia un trunk (`dynamic desirable`) y recibe todas las VLANs | `switchport mode access` + `switchport nonegotiate`; puertos libres con `shutdown` |
+| 2. **Double tagging en la native VLAN**: el atacante manda una trama con doble etiqueta 802.1Q y la segunda etiqueta llega a otra VLAN | Native VLAN **≠ 1** y **sin datos en la native**; segmentar físicamente zonas sensibles |
+| 3. **VTP como arma**: un switch con revision number mayor anuncia su base de datos (vacía) y borra VLANs | VTP transparent / VTPv3 off, verificar `show vtp status` antes de conectar equipo |
+
+## 7. VLAN hopping y hardening
+
+a) **Tres vectores de ataque:**
+   1. **Negociación de trunk por DTP:** un portátil conectado a un puerto en modo `dynamic desirable` (o `dynamic auto` si el portátil pide) tramita el protocolo DTP y consigue que el puerto se convierta en **trunk**. A partir de ahí, todas las VLANs que cruzan el trunk quedan a su alcance.
+   2. **Double tagging:** el atacante envía una trama con **dos etiquetas 802.1Q** (a menudo con la native VLAN). El primer switch elimina la primera etiqueta (la trata como native) y la reenvía por el trunk; el segundo switch ve la segunda etiqueta y la entrega en la **VLAN objetivo**. El atacante nunca llega a ser trunk ni a hablar directamente: salta a la VLAN objetivo de forma encubierta.
+   3. **Tráfico mislabeled / native VLAN vulnerable:** si la native VLAN transporta datos y es la VLAN 1, todo el tráfico sin etiquetar (o mal etiquetado) acaba en la VLAN por defecto, donde pueden mezclarse con otras VLANs mal configuradas (o con el double tagging del vector anterior gratuitamente).
+
+b) **Tres mitigaciones concretas:**
+   1. **Apagar DTP en puertos de usuario:** `switchport mode access` + `switchport nonegotiate` (y `shutdown` en los puertos no usados) → el atacante no puede negociar un trunk.
+   2. **Cambiar la native VLAN y no usarla para datos:** `switchport trunk native vlan 99` (o 999) en TODOS los trunks, y usar VLANs de datos distintas de la native → el double tagging pierde su puerta de entrada.
+   3. **Limitar y segmentar:** `switchport trunk allowed vlan 10,20,30` para restringir qué VLANs cruzan cada trunk, y **VTP transparent / VTPv3 off** para que un switch rogue no arrase la base de datos.
+
+## 8. Inter-VLAN con SVI paso a paso
+
+**(Se asume que los puertos access de las VLANs 10/20/30 ya están asignados.)**
+
+a) **Creación de VLANs:**
+```bash
+Switch(config)# vlan 10
+Switch(config-vlan)# name Ventas
+Switch(config)# vlan 20
+Switch(config-vlan)# name RRHH
+Switch(config)# vlan 30
+Switch(config-vlan)# name IT
 ```
 
-Así el router nunca concede las direcciones fijas (impresoras, servidores, el propio gateway). Alternativa: usar **reservas DHCP** por MAC para los equipos que quieras fijos sin configurarlos a mano.
+b) **Activar el routing global:**
+```bash
+Switch(config)# ip routing
+```
+
+c) **SVIs (uno por VLAN):**
+```bash
+Switch(config)# interface vlan 10
+Switch(config-if)# ip address 192.168.10.1 255.255.255.0
+Switch(config-if)# no shutdown
+
+Switch(config)# interface vlan 20
+Switch(config-if)# ip address 192.168.20.1 255.255.255.0
+Switch(config-if)# no shutdown
+
+Switch(config)# interface vlan 30
+Switch(config-if)# ip address 192.168.30.1 255.255.255.0
+Switch(config-if)# no shutdown
+```
+
+d) **Gateway de cada PC:**
+
+| VLAN | Subred | Gateway (IP del SVI) |
+|---|---|---|
+| 10 Ventas | 192.168.10.0/24 | 192.168.10.1 |
+| 20 RRHH | 192.168.20.0/24 | 192.168.20.1 |
+| 30 IT | 192.168.30.0/24 | 192.168.30.1 |
+
+**Verificación:** comprueba que el SVI esté Up/Up (`show ip interface brief`), revisa que las VLANs existan en `show vlan brief` y prueba la conectividad con `ping` entre SVIs (ej. desde el SVI 10 contra 192.168.20.1). Si los SVIs están Up/Up pero no enrutan, el culpable es el comando `ip routing` olvidado.
