@@ -5,8 +5,6 @@ description: Tu punto de partida si no has tocado una red en tu vida 🚪
 
 <p><small>Tu punto de partida si no has tocado una red en tu vida 🚪</small></p>
 
-> 🗺️ **El mapa del paquete:** 🚪 **AQUÍ ESTÁS** → 📡 Ethernet → 🧮 IP y subnetting → 🔀 Switching y VLAN → 🏢 Trunking → 🧭 Routing estático → 🗣️ OSPF → 🛡️ ACLs → 🌐 NAT → 🗄️ Servicios → 📶 WiFi → 🔁 Alta disponibilidad
-
 ---
 
 ## 👋 ¿Empiezas aquí?
