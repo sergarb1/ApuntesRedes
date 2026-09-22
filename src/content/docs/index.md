@@ -169,10 +169,10 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
     <span class="num">Unidad 01</span>
   </div>
   <div class="ejercicio-links">
-    <a href="/ApuntesRedes/boletines/boletin-u01-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
     <a href="/ApuntesRedes/boletines/boletin-u01-inicial" class="elink">🟢 Inicial por resolver</a>
-    <a href="/ApuntesRedes/boletines/boletin-u01-avanzado-resuelto" class="elink">💪 Avanzado resuelto</a>
+    <a href="/ApuntesRedes/boletines/boletin-u01-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
     <a href="/ApuntesRedes/boletines/boletin-u01-avanzado" class="elink">⭐ Avanzado por resolver</a>
+    <a href="/ApuntesRedes/boletines/boletin-u01-avanzado-resuelto" class="elink">💪 Avanzado resuelto</a>
   </div>
 </div>
 
@@ -181,10 +181,10 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
     <span class="num">Unidad 02</span>
   </div>
   <div class="ejercicio-links">
-    <a href="/ApuntesRedes/boletines/boletin-u02-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
     <a href="/ApuntesRedes/boletines/boletin-u02-inicial" class="elink">🟢 Inicial por resolver</a>
-    <a href="/ApuntesRedes/boletines/boletin-u02-avanzado-resuelto" class="elink">💪 Avanzado resuelto</a>
+    <a href="/ApuntesRedes/boletines/boletin-u02-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
     <a href="/ApuntesRedes/boletines/boletin-u02-avanzado" class="elink">⭐ Avanzado por resolver</a>
+    <a href="/ApuntesRedes/boletines/boletin-u02-avanzado-resuelto" class="elink">💪 Avanzado resuelto</a>
   </div>
 </div>
 
@@ -193,14 +193,14 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
     <span class="num">Unidad 03</span>
   </div>
   <div class="ejercicio-links">
-    <a href="/ApuntesRedes/boletines/boletin-u03-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
     <a href="/ApuntesRedes/boletines/boletin-u03-inicial" class="elink">🟢 Inicial por resolver</a>
-    <a href="/ApuntesRedes/boletines/boletin-u03-avanzado-resuelto" class="elink">💪 Avanzado resuelto</a>
+    <a href="/ApuntesRedes/boletines/boletin-u03-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
     <a href="/ApuntesRedes/boletines/boletin-u03-avanzado" class="elink">⭐ Avanzado por resolver</a>
-    <a href="/ApuntesRedes/boletines/boletin-u03-ipv6-inicial-resuelto" class="elink">✅ IPv6 inicial resuelto</a>
+    <a href="/ApuntesRedes/boletines/boletin-u03-avanzado-resuelto" class="elink">💪 Avanzado resuelto</a>
     <a href="/ApuntesRedes/boletines/boletin-u03-ipv6-inicial" class="elink">🟢 IPv6 inicial por resolver</a>
-    <a href="/ApuntesRedes/boletines/boletin-u03-ipv6-avanzado-resuelto" class="elink">💪 IPv6 avanzado resuelto</a>
+    <a href="/ApuntesRedes/boletines/boletin-u03-ipv6-inicial-resuelto" class="elink">✅ IPv6 inicial resuelto</a>
     <a href="/ApuntesRedes/boletines/boletin-u03-ipv6-avanzado" class="elink">⭐ IPv6 avanzado por resolver</a>
+    <a href="/ApuntesRedes/boletines/boletin-u03-ipv6-avanzado-resuelto" class="elink">💪 IPv6 avanzado resuelto</a>
   </div>
 </div>
 
@@ -209,10 +209,10 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
     <span class="num">Unidad 04</span>
   </div>
   <div class="ejercicio-links">
-    <a href="/ApuntesRedes/boletines/boletin-u04-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
     <a href="/ApuntesRedes/boletines/boletin-u04-inicial" class="elink">🟢 Inicial por resolver</a>
-    <a href="/ApuntesRedes/boletines/boletin-u04-avanzado-resuelto" class="elink">💪 Avanzado resuelto</a>
+    <a href="/ApuntesRedes/boletines/boletin-u04-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
     <a href="/ApuntesRedes/boletines/boletin-u04-avanzado" class="elink">⭐ Avanzado por resolver</a>
+    <a href="/ApuntesRedes/boletines/boletin-u04-avanzado-resuelto" class="elink">💪 Avanzado resuelto</a>
   </div>
 </div>
 
@@ -221,10 +221,10 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
     <span class="num">Unidad 05</span>
   </div>
   <div class="ejercicio-links">
-    <a href="/ApuntesRedes/boletines/boletin-u05-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
     <a href="/ApuntesRedes/boletines/boletin-u05-inicial" class="elink">🟢 Inicial por resolver</a>
-    <a href="/ApuntesRedes/boletines/boletin-u05-avanzado-resuelto" class="elink">💪 Avanzado resuelto</a>
+    <a href="/ApuntesRedes/boletines/boletin-u05-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
     <a href="/ApuntesRedes/boletines/boletin-u05-avanzado" class="elink">⭐ Avanzado por resolver</a>
+    <a href="/ApuntesRedes/boletines/boletin-u05-avanzado-resuelto" class="elink">💪 Avanzado resuelto</a>
   </div>
 </div>
 
@@ -233,10 +233,10 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
     <span class="num">Unidad 06</span>
   </div>
   <div class="ejercicio-links">
-    <a href="/ApuntesRedes/boletines/boletin-u06-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
     <a href="/ApuntesRedes/boletines/boletin-u06-inicial" class="elink">🟢 Inicial por resolver</a>
-    <a href="/ApuntesRedes/boletines/boletin-u06-avanzado-resuelto" class="elink">💪 Avanzado resuelto</a>
+    <a href="/ApuntesRedes/boletines/boletin-u06-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
     <a href="/ApuntesRedes/boletines/boletin-u06-avanzado" class="elink">⭐ Avanzado por resolver</a>
+    <a href="/ApuntesRedes/boletines/boletin-u06-avanzado-resuelto" class="elink">💪 Avanzado resuelto</a>
   </div>
 </div>
 
@@ -245,10 +245,10 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
     <span class="num">Unidad 07</span>
   </div>
   <div class="ejercicio-links">
-    <a href="/ApuntesRedes/boletines/boletin-u07-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
     <a href="/ApuntesRedes/boletines/boletin-u07-inicial" class="elink">🟢 Inicial por resolver</a>
-    <a href="/ApuntesRedes/boletines/boletin-u07-avanzado-resuelto" class="elink">💪 Avanzado resuelto</a>
+    <a href="/ApuntesRedes/boletines/boletin-u07-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
     <a href="/ApuntesRedes/boletines/boletin-u07-avanzado" class="elink">⭐ Avanzado por resolver</a>
+    <a href="/ApuntesRedes/boletines/boletin-u07-avanzado-resuelto" class="elink">💪 Avanzado resuelto</a>
   </div>
 </div>
 
@@ -257,10 +257,10 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
     <span class="num">Unidad 08</span>
   </div>
   <div class="ejercicio-links">
-    <a href="/ApuntesRedes/boletines/boletin-u08-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
     <a href="/ApuntesRedes/boletines/boletin-u08-inicial" class="elink">🟢 Inicial por resolver</a>
-    <a href="/ApuntesRedes/boletines/boletin-u08-avanzado-resuelto" class="elink">💪 Avanzado resuelto</a>
+    <a href="/ApuntesRedes/boletines/boletin-u08-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
     <a href="/ApuntesRedes/boletines/boletin-u08-avanzado" class="elink">⭐ Avanzado por resolver</a>
+    <a href="/ApuntesRedes/boletines/boletin-u08-avanzado-resuelto" class="elink">💪 Avanzado resuelto</a>
   </div>
 </div>
 
@@ -269,10 +269,10 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
     <span class="num">Unidad 09</span>
   </div>
   <div class="ejercicio-links">
-    <a href="/ApuntesRedes/boletines/boletin-u09-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
     <a href="/ApuntesRedes/boletines/boletin-u09-inicial" class="elink">🟢 Inicial por resolver</a>
-    <a href="/ApuntesRedes/boletines/boletin-u09-avanzado-resuelto" class="elink">💪 Avanzado resuelto</a>
+    <a href="/ApuntesRedes/boletines/boletin-u09-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
     <a href="/ApuntesRedes/boletines/boletin-u09-avanzado" class="elink">⭐ Avanzado por resolver</a>
+    <a href="/ApuntesRedes/boletines/boletin-u09-avanzado-resuelto" class="elink">💪 Avanzado resuelto</a>
   </div>
 </div>
 
@@ -281,10 +281,10 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
     <span class="num">Unidad 10</span>
   </div>
   <div class="ejercicio-links">
-    <a href="/ApuntesRedes/boletines/boletin-u10-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
     <a href="/ApuntesRedes/boletines/boletin-u10-inicial" class="elink">🟢 Inicial por resolver</a>
-    <a href="/ApuntesRedes/boletines/boletin-u10-avanzado-resuelto" class="elink">💪 Avanzado resuelto</a>
+    <a href="/ApuntesRedes/boletines/boletin-u10-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
     <a href="/ApuntesRedes/boletines/boletin-u10-avanzado" class="elink">⭐ Avanzado por resolver</a>
+    <a href="/ApuntesRedes/boletines/boletin-u10-avanzado-resuelto" class="elink">💪 Avanzado resuelto</a>
   </div>
 </div>
 
@@ -293,10 +293,10 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
     <span class="num">Unidad 11</span>
   </div>
   <div class="ejercicio-links">
-    <a href="/ApuntesRedes/boletines/boletin-u11-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
     <a href="/ApuntesRedes/boletines/boletin-u11-inicial" class="elink">🟢 Inicial por resolver</a>
-    <a href="/ApuntesRedes/boletines/boletin-u11-avanzado-resuelto" class="elink">💪 Avanzado resuelto</a>
+    <a href="/ApuntesRedes/boletines/boletin-u11-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
     <a href="/ApuntesRedes/boletines/boletin-u11-avanzado" class="elink">⭐ Avanzado por resolver</a>
+    <a href="/ApuntesRedes/boletines/boletin-u11-avanzado-resuelto" class="elink">💪 Avanzado resuelto</a>
   </div>
 </div>
 
@@ -305,10 +305,10 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
     <span class="num">Unidad 12</span>
   </div>
   <div class="ejercicio-links">
-    <a href="/ApuntesRedes/boletines/boletin-u12-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
     <a href="/ApuntesRedes/boletines/boletin-u12-inicial" class="elink">🟢 Inicial por resolver</a>
-    <a href="/ApuntesRedes/boletines/boletin-u12-avanzado-resuelto" class="elink">💪 Avanzado resuelto</a>
+    <a href="/ApuntesRedes/boletines/boletin-u12-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
     <a href="/ApuntesRedes/boletines/boletin-u12-avanzado" class="elink">⭐ Avanzado por resolver</a>
+    <a href="/ApuntesRedes/boletines/boletin-u12-avanzado-resuelto" class="elink">💪 Avanzado resuelto</a>
   </div>
 </div>
 

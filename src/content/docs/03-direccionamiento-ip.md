@@ -62,14 +62,14 @@ Al terminar, serás capaz de:
 > Esta unidad tiene dos pares de boletines: uno de IPv4/subnetting y otro específico de IPv6.
 
 <div class="ejercicio-links">
-  <a href="/ApuntesRedes/boletines/boletin-u03-inicial-resuelto" class="elink">✅ IPv4 inicial resuelto</a>
   <a href="/ApuntesRedes/boletines/boletin-u03-inicial" class="elink">🟢 IPv4 inicial por resolver</a>
-  <a href="/ApuntesRedes/boletines/boletin-u03-avanzado-resuelto" class="elink">💪 IPv4 avanzado resuelto</a>
+  <a href="/ApuntesRedes/boletines/boletin-u03-inicial-resuelto" class="elink">✅ IPv4 inicial resuelto</a>
   <a href="/ApuntesRedes/boletines/boletin-u03-avanzado" class="elink">⭐ IPv4 avanzado por resolver</a>
-  <a href="/ApuntesRedes/boletines/boletin-u03-ipv6-inicial-resuelto" class="elink">✅ IPv6 inicial resuelto</a>
+  <a href="/ApuntesRedes/boletines/boletin-u03-avanzado-resuelto" class="elink">💪 IPv4 avanzado resuelto</a>
   <a href="/ApuntesRedes/boletines/boletin-u03-ipv6-inicial" class="elink">🟢 IPv6 inicial por resolver</a>
-  <a href="/ApuntesRedes/boletines/boletin-u03-ipv6-avanzado-resuelto" class="elink">💪 IPv6 avanzado resuelto</a>
+  <a href="/ApuntesRedes/boletines/boletin-u03-ipv6-inicial-resuelto" class="elink">✅ IPv6 inicial resuelto</a>
   <a href="/ApuntesRedes/boletines/boletin-u03-ipv6-avanzado" class="elink">⭐ IPv6 avanzado por resolver</a>
+  <a href="/ApuntesRedes/boletines/boletin-u03-ipv6-avanzado-resuelto" class="elink">💪 IPv6 avanzado resuelto</a>
 </div>
 
 ---
