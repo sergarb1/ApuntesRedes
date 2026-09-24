@@ -49,6 +49,8 @@ Para que lo visualices rápidamente, imagina que tu barrio es una red:
 - Las **señales de tráfico** son los *protocolos* (sin reglas, habría accidentes continuos).
 - El **conserje o el cartero** son los *dispositivos de interconexión* (hacen que el barrio funcione por dentro y por fuera).
 
+![Las 4 piezas de toda red: dispositivos finales, de interconexión, medio de transmisión y protocolos](/ApuntesRedes/diagrams/u01-4-piezas.svg)
+
 ---
 
 ## 🗝️ La base de todo servicio: cliente y servidor

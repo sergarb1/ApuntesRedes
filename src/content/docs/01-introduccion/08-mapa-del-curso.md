@@ -35,6 +35,8 @@ Antes de escribir una sola línea de configuración, vas a ver el plano completo
 
 > 📌 **Cómo leer la tabla:** cada fila solo tiene sentido si has hecho la de arriba. Es la "escalera" del curso: si te saltas un peldaño, el siguiente te va a costar el doble. La Unidad 01 (estas páginas) es el vestíbulo: sin él, la UD2 te sonará a chino.
 
+![Las 12 etapas del curso en dos cuatrimestres: de la Unidad 01 a la alta disponibilidad](/ApuntesRedes/diagrams/u01-mapa-curso.svg)
+
 ---
 
 ## 🧩 Las tres piezas invisibles de la ruta
