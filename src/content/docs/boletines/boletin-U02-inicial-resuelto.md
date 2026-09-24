@@ -1,6 +1,6 @@
 ---
 title: Boletín UD2 — Inicial (Resuelto)
-description: Soluciones de los ejercicios básicos de Infraestructura Física de Red
+description: Soluciones de los ejercicios básicos de Infraestructura Física, OSI y trama Ethernet
 ---
 
 # ✅ Boletín UD2 — Inicial (Resuelto)
@@ -61,7 +61,31 @@ c) **SC** — Conector de fibra óptica, cuadrado, push-pull
 ## 8. Medios y estándares: verdadero o falso
 
 a) **Falso.** La fibra es INMUNE a las interferencias electromagnéticas: transmite luz, no electricidad, y los campos externos no afectan a los fotones.
-b) **Verdadero.** 802.11ax = WiFi 6 (2019, bandas de 2,4 y 5 GHz).
-c) **Verdadero.** El WiFi envía ondas electromagnéticas por el aire, sin medio conductor.
+b) **Verdadero.** El cobre UTP es sensible a la interferencia electromagnética externa (motor, fluorescente…): de ahí el trenzado de los pares.
+c) **Verdadero.** 1000BASE-T (Gigabit Ethernet) trabaja sobre par trenzado de cobre Cat5e o superior.
 d) **Falso.** Es la fibra **monomodo** la que llega a 40+ km. La **multimodo** se queda en unos 550 m a 10 Gbps.
-e) **Verdadero.** La velocidad real WiFi suele ser el 30-50% de la teórica por overhead, obstrucciones e interferencias.
+e) **Verdadero.** La monomodo está pensada para enlaces largos (cientos de metros y kilómetros); la multimodo, para distancias cortas/medias.
+
+## 9. Modelo OSI: capas y PDUs
+
+**Matching:** 1 → b (bits) · 2 → c (trama) · 3 → a (paquete) · 4 → d (segmento)
+
+**V/F:**
+
+a) **Falso.** OSI es un **modelo teórico** (7 capas, ISO); en Internet corre **TCP/IP**.
+b) **Verdadero.** TCP/IP es la pila real; OSI es el mapa de examen y de diagnóstico.
+c) **Verdadero.** Medios y cableado = capa 1; trama Ethernet = capa 2.
+d) **Verdadero.** "Capa 3", "capa Red" y "capa de red" apuntan a lo mismo (IP, routers).
+
+## 10. La trama Ethernet
+
+a) **Dest MAC (6 B), Src MAC (6 B) y EtherType (2 B).**
+b) **IPv4** (0x0800).
+c) **Mínimo 46 bytes** de payload (60 en total con cabecera+FCS) y **máximo 1500** (MTU); con cabeceras, la trama clásica se queda en **1518 bytes**.
+d) **FCS** = CRC de 4 bytes de integridad (capa 2). Si no cuadra → la trama se **descarta** (errores CRC).
+e) La calcula quien **envía** (la NIC o el switch al reenviar) y la comprueba quien la **recibe**; si falla, el receptor la descarta sin subirla.
+
+**V/F:**
+
+f) **Verdadero.** El mínimo de payload es 46 bytes (60 totales con cabecera de 14 y FCS de 4).
+g) **Falso.** El WiFi **también es capa 2**: entrega local por MAC; el aire es solo el medio (capa 1).

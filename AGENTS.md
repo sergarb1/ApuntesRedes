@@ -27,7 +27,7 @@ Apuntes del módulo **PAR** (Planificación y Administración de Redes) para CFG
 ```
 src/content/docs/            → Secciones en Markdown (raíz, índices de unidad)
 src/content/docs/01-introduccion/… → 10 puntos (01-…, 08-mapa, 09-glosario, 10-preguntas-tontas)
-src/content/docs/02-ethernet-cableado/…      → UD2 · Ethernet, medios y cableado
+src/content/docs/02-ethernet-cableado/…      → UD2 · Ethernet, medios y cableado (10 puntos: 01–07 teoría, 08 modelo OSI, 09 trama, 10 cierre)
 src/content/docs/03-direccionamiento-ip/…    → UD3 · Direccionamiento IP y subnetting (IPv4 + IPv6)
 src/content/docs/04-switching/…              → UD4 · Switching y VLAN
 src/content/docs/05-trunking-inter-vlan/…    → UD5 · Trunking e inter-VLAN
@@ -86,6 +86,14 @@ description: Descripción corta 😵
 
 - **🏆 Logros** — gamificación (meter al inicio o final)
 - **🐍 Spoiler / Soluciones** — usar siempre `<details><summary>...</summary>...</details>`
+
+### Límites de contenido por unidad (UD2 y puentes)
+
+- **UD2 vive solo en las capas 1 y 2** (medios, cable UTP/fibra, crimpado, cableado estructurado, modelo OSI como mapa teórico y trama Ethernet). No meter en profundidad: WiFi/802.11 (→ UD11), ARP, cabecera IPv4 ni fragmentación/MTU (→ UD3, ampliada en `01-estructura-ipv4.md`).
+- Se puede **nombrar** ARP o capa 3 como puente hacia UD3, sin desarrollarlos (el enlace natural es `09-trama-ethernet.md` → UD3).
+- **OSI en UD2 es "solo culturilla"**: 7 capas + OSI vs TCP/IP + "aquí estamos en 1–2"; el modelo real y lo de capa 3+ se tocan en unidades posteriores.
+- Trama Ethernet en UD2 cubre **medios guiados (802.3) y no guiados (802.11)** a alto nivel (mismas capas 1–2); el detalle WiFi va en UD11.
+- **Boletines:** si un ejercicio de UD2 toca WiFi → moverlo al boletín de UD11; si toca ARP/MTU/cabecera → al de UD3 (añadir ahí si no existe; no duplicar en UD2).
 
 ### Estilo de escritura
 
@@ -243,7 +251,9 @@ Diagramas interactivos/visuales generados con **`mcp-excalidraw-server`** (canva
 | `u02-fibra-smf-mmf` | `05-fibra-optica.md` · SMF vs MMF | Núcleo, fuente, distancia y coste |
 | `u02-atenuacion-crosstalk` | `06-conceptos-fisicos.md` · Atenuación y diafonía | Señal que se debilita + NEXT/FEXT |
 | `u02-recorrido-senal` | `07-cableado-estructurado.md` · Recorrido de la señal | PC → latiguillo → keystone → horizontal → patch panel → switch |
-| `u02-trama-ethernet` | `08-trama-ethernet.md` · Trama Ethernet II | Preamble, MACs, EtherType, payload, FCS |
+| `u02-modelo-osi` | `08-modelo-osi.md` · Modelo OSI | 7 capas apiladas, marca "AQUÍ ESTAMOS" en 1–2, nota TCP/IP |
+| `u02-trama-ethernet` | `09-trama-ethernet.md` · Trama Ethernet II | MACs, EtherType, payload, FCS |
+| — | `10-cierre.md` | Cierre práctico: sin diagrama (actividades, no conceptos) |
 
 ### Fotos stock (criterio por unidad)
 
@@ -252,7 +262,7 @@ Las fotos **solo proceden cuando ilustran un objeto físico real** que el alumno
 - Fuentes: **Pexels** o **Unsplash** (uso libre; no exigen atribución, pero se cita origen en esta tabla).
 - Destino: `public/photos/uXX-nombre.jpg` (jpg, ~1260 px de ancho).
 - Inserción: `![alt es-ES](/ApuntesRedes/photos/uXX-nombre.jpg)` junto a la sección conceptual; alt en español de España.
-- **De momento solo UD2 tiene fotos.** Al ampliar otra unidad, evaluar caso a caso con la regla de arriba y no saturar: 1–2 fotos por página como máximo.
+- **De momento solo UD2 tiene fotos** (4, en los puntos 02, 04, 05 y 07). Al ampliar otra unidad, evaluar caso a caso con la regla de arriba y no saturar: 1–2 fotos por página como máximo. **Los boletines nunca llevan fotos ni diagramas** (ver ⚠️ Notas, punto 6).
 
 | Fichero | `.md` | Muestra | Origen |
 |---|---|---|---|
@@ -306,7 +316,7 @@ npx astro build   # Solo Astro (si D2 NO está instalado; npm run build ejecuta 
 3. **Siempre mantener las secciones obligatorias** — cada unidad debe tener todas las secciones enumeradas arriba.
 4. **Los ejercicios SIEMPRE con solución** en `<details>`.
 5. **Laboratorios SIEMPRE con fallo intencionado** — el 80% práctico es obligatorio.
-6. **Los boletines siguen el patrón:** `inicial` (fácil) y `avanzado` (difícil), cada uno con su `-resuelto`, en `src/content/docs/boletines/` con nombre `boletin-UXX-inicial(-resuelto).md` / `boletin-UXX-avanzado(-resuelto).md`.
+6. **Los boletines siguen el patrón:** `inicial` (fácil) y `avanzado` (difícil), cada uno con su `-resuelto`, en `src/content/docs/boletines/` con nombre `boletin-UXX-inicial(-resuelto).md` / `boletin-UXX-avanzado(-resuelto).md`. **Son texto puro por diseño: NO llevan diagramas ni fotos** (mismo criterio en las 56 hojas U01–U12; pegar el diagrama de la unidad bajo un ejercicio de recall regalaría la respuesta). La UD3 tiene además la variante `boletin-U03-ipv6-*`.
 7. **El CSS no debe romperse** — probar con `npm run build` después de cambios.
 8. **CI/CD en rama `main`**.
 9. **Puppeteer** instalado para PDFs, pero con `PUPPETEER_SKIP_DOWNLOAD=true` en CI. En local, si la versión cacheada de Chrome falla, se usa el Chrome del sistema con `PUPPETEER_EXECUTABLE_PATH="C:\Program Files\Google\Chrome\Application\chrome.exe"`.

@@ -134,4 +134,4 @@ La inversión extra del cableado estructurado se paga en la **primera mudanza de
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/02-ethernet-cableado) · **Anterior:** [6 · Conceptos físicos clave](/ApuntesRedes/02-ethernet-cableado/06-conceptos-fisicos) · **Siguiente:** [8 · La trama Ethernet](/ApuntesRedes/02-ethernet-cableado/08-trama-ethernet)
+📚 [Volver al índice de la unidad](/ApuntesRedes/02-ethernet-cableado) · **Anterior:** [6 · Conceptos físicos clave](/ApuntesRedes/02-ethernet-cableado/06-conceptos-fisicos) · **Siguiente:** [8 · El modelo OSI](/ApuntesRedes/02-ethernet-cableado/08-modelo-osi)

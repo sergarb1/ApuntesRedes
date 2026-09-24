@@ -1,11 +1,11 @@
 ---
 title: Boletín UD2 — Avanzado
-description: Ejercicios avanzados de Infraestructura Física de Red
+description: Ejercicios avanzados de Infraestructura Física, diagnóstico por capas y trama
 ---
 
 # 📝 Boletín UD2 — Avanzado
 
-> Ejercicios que requieren aplicar los conceptos de cableado, medios físicos y WiFi de forma combinada. En los difíciles tienes pista.
+> Ejercicios que requieren aplicar los conceptos de cableado, medios físicos, OSI y trama de forma combinada. En los difíciles tienes pista.
 
 ---
 
@@ -79,17 +79,7 @@ b) Longitud recomendada de pelado de funda
 c) Orden exacto de los hilos (de izquierda a derecha, con el clip hacia abajo)
 d) Cómo saber si el crimpado ha sido correcto
 
-## 7. Caso WiFi: oficina con zonas muertas
-
-En una oficina de 25 puestos separados por tabiques de cartón-yeso, un único AP wifi en el pasillo central da "zonas muertas" y una velocidad general decepcionante. Los empleados se quejan cada tarde.
-
-a) ¿Qué causas físicas explicarían la lentitud (nombra al menos 3)?
-b) ¿Qué herramientas usarías para confirmarlas?
-c) Propón 3 soluciones realistas ordenadas de más barata a más cara.
-
-**Pista:** piensa en canales (1, 6, 11), interferencia de vecinos, obstáculos y el número de clientes compartiendo el mismo AP. Recuerda que la velocidad real WiFi es del 30-50%.
-
-## 8. Elección de medio a escala
+## 7. Elección de medio a escala
 
 Decide qué medio de transmisión usarías para cada escenario y justifícalo:
 
@@ -97,6 +87,22 @@ a) **Mini-oficina** de 8 puestos en un local de 60 m².
 b) **Planta** de 40 puestos en un edificio de oficinas con el rack en la misma planta.
 c) **Campus** de 3 edificios separados por 100, 500 y 2000 metros.
 
-En cada caso indica: medio (cobre/fibra/WiFi), categoría/estándar aproximado y, si usas fibra, monomodo o multimodo.
+En cada caso indica: medio (cobre/fibra), categoría/estándar aproximado y, si usas fibra, monomodo o multimodo.
 
-**Pista:** decide primero por distancia y presupuesto; luego por movilidad y rendimiento. 100 m es el límite del cobre, la multimodo cubre hasta ~550 m y la monomodo el resto.
+**Pista:** decide primero por distancia y presupuesto. 100 m es el límite del cobre, la multimodo cubre hasta ~550 m y la monomodo el resto.
+
+## 8. Diagnóstico por capas (OSI en acción)
+
+Síntomas en una oficina:
+
+- **Síntoma A:** el LED del switch está verde, el tester de cables pasa al 100%, pero Wireshark muestra tramas con FCS erróneo y el ping a la IP del gateway falla a veces.
+- **Síntoma B:** el LED del puerto del switch está apagado en el PC del usuario, aunque el cable está enchufado a ambos lados.
+- **Síntoma C:** el cable está pelado y un par partido: no hay LED de enlace.
+
+Para cada síntoma:
+
+a) ¿En qué capa OSI (1, 2 o 3) sitúas el fallo? Justifica con la PDU afectada (bits, trama, paquete).
+b) ¿Qué comando o herramienta usarías primero?
+c) En el Síntoma A, ¿por qué el fallo NO está en la capa 1 si el tester ha pasado?
+
+**Pista:** escalera 1→2→3 de UD1; si hay LED y tester OK, la capa 1 local funciona y el problema sube a la trama o más arriba.

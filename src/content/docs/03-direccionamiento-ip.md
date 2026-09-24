@@ -11,7 +11,7 @@ description: La calculadora maldita, ahora con IPv6 🧮
 
 *Dos ordenadores se cruzan en un cable: uno quiere hablar, el otro se llama 192.168.1.10 y ni siquiera sabe si la pregunta es para él. El direccionamiento IP es el sistema postal de las redes: sin direcciones bien repartidas, los paquetes acaban en el buzón equivocado o en ninguno. Y cuando una red crece, el arte de partirla en subredes se convierte en la habilidad más pedida (y más temida) de la profesión.*
 
-Bienvenido a la unidad que convierte binario en oficio. Primero dominas IPv4: estructura, clases, máscaras, CIDR, VLSM y el subnetting clásico con papel y boli. Después saltas al futuro: IPv6, su notación, sus tipos de dirección, SLAAC, DHCPv6 y los mecanismos que permiten que ambos mundos convivan. DHCP aparece aquí en versión introductoria; en la [UD10](/ApuntesRedes/10-servicios-red) lo despliega a fondo.
+Bienvenido a la unidad que convierte binario en oficio. Primero dominas IPv4: estructura de la dirección y de la cabecera, ARP, fragmentación, clases, máscaras, CIDR, VLSM y el subnetting clásico con papel y boli. Después saltas al futuro: IPv6, su notación, sus tipos de dirección, SLAAC, DHCPv6 y los mecanismos que permiten que ambos mundos convivan. DHCP aparece aquí en versión introductoria; en la [UD10](/ApuntesRedes/10-servicios-red) lo despliega a fondo. ARP, la cabecera y la fragmentación cierran el puente con la trama de la [UD2](/ApuntesRedes/02-ethernet-cableado/09-trama-ethernet).
 
 Esta unidad se lee como un **libro de 17 capítulos**: los 16 primeros son teoría en progresión y el 17º es el aterrizaje práctico.
 
@@ -22,6 +22,7 @@ Esta unidad se lee como un **libro de 17 capítulos**: los 16 primeros son teor�
 Al terminar, serás capaz de:
 
 - Explicar la estructura de una dirección IPv4 y convertirla a binario sin calculadora.
+- Leer una cabecera IPv4 (TTL, protocolo, IPs) y explicar fragmentación/MTU y ARP (IP→MAC).
 - Distinguir clases, rangos privados/públicos y direcciones especiales.
 - Aplicar la máscara con la operación AND para saber si dos IPs son de la misma red.
 - Calcular subredes con CIDR y diseñar esquemas con VLSM.
@@ -35,7 +36,7 @@ Al terminar, serás capaz de:
 
 | Punto | Qué aprenderás | Nivel |
 |---|---|---|
-| [01 · Estructura de IPv4](/ApuntesRedes/03-direccionamiento-ip/01-estructura-ipv4) | Octetos, binario, notación | Todos |
+| [01 · Estructura de IPv4](/ApuntesRedes/03-direccionamiento-ip/01-estructura-ipv4) | Octetos, notación, cabecera, MTU y ARP | Clave |
 | [02 · Binario y la operación AND](/ApuntesRedes/03-direccionamiento-ip/02-binario-y-and) | Máscara, AND y "¿misma red?" | Clave |
 | [03 · Clases de direcciones](/ApuntesRedes/03-direccionamiento-ip/03-clases-de-direcciones) | A/B/C, bucle local y especiales | Todos |
 | [04 · IPs privadas y públicas](/ApuntesRedes/03-direccionamiento-ip/04-ip-privadas-y-publicas) | RFC 1918 y NAT como adelanto | Todos |
@@ -81,7 +82,7 @@ Al terminar, serás capaz de:
 | RA2·d) | Direccionamiento lógico IPv4/IPv6 | ✅ Puntos 1-5 y 9-12 + ⚡ Laboratorio (punto 17) |
 | RA1·c) | Subredes y diseño lógico | ✅ Puntos 5-7 (CIDR/VLSM) |
 | RA2·g) | Servicios de configuración automática | ✅ Puntos 8 y 12-13 |
-| RA6 | Fundamentos para el encaminamiento | ✅ Puntos 2 y 5 (máscaras/redes) |
+| RA6 | Fundamentos para el encaminamiento | ✅ Puntos 1-2 y 5 (cabecera, ARP, máscaras/redes) |
 
 ---
 

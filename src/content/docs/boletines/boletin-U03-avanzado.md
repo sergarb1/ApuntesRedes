@@ -1,11 +1,11 @@
 ---
 title: Boletín UD3 — Avanzado
-description: Ejercicios avanzados de IPv4 y Subnetting
+description: Ejercicios avanzados de subnetting, VLSM, cabecera IPv4, ARP y fragmentación
 ---
 
 # 📝 Boletín UD3 — Avanzado
 
-> Ejercicios que requieren aplicar subnetting, VLSM y DHCP de forma más profunda.
+> Ejercicios que requieren aplicar subnetting, VLSM, DHCP, cabecera IPv4, ARP y fragmentación de forma más profunda.
 
 ---
 
@@ -120,3 +120,30 @@ b) ¿Cómo detectaría el administrador el conflicto? ¿Qué comando usaría en 
 c) ¿Cómo se **previene** este problema desde el diseño?
 
 **Pista:** Antes de conceder una IP, el servidor DHCP suele comprobar (el RFC lo llama "ping") si la dirección ya está en uso. En Cisco el resultado se registra en una tabla concreta que se consulta con `show`. Y la solución de fondo ya la viste en el punto 8 de la unidad: `ip dhcp excluded-address`.
+
+## 9. Fragmentación real (túnel y MTU)
+
+Un PC manda un datagrama IPv4 de **datos 5000 B** (cabecera 20 B). Primero cruza un enlace Gigabit (MTU 1500) y luego un enlace WAN de **MTU 1000**.
+
+a) ¿Cuántos fragmentos genera el **primer** router (o el origen) al salir por el WAN de 1000?
+b) Indica para cada fragmento: bytes de datos, flag MF y offset (en múltiplos de 8).
+c) Si el Path MTU Discovery falla porque un firewall bloquea ICMP, ¿qué síntoma típico ves con `ping -l 5000` y con un `tracert`?
+d) En IPv6, ¿podría este mismo router intermedio fragmentar? Justifica en una frase.
+
+**Pista:** payload útil = MTU − 20; el offset va en múltiplos de 8; MF=0 solo en el último.
+
+## 10. ARP, Wireshark y capas
+
+Captura en la red local. Se ve, en orden:
+
+1. Trama broadcast EtherType `0x0806`, mensaje ARP *"who has 192.168.1.1? Tell 192.168.1.50"*
+2. Trama unicast EtherType `0x0806`, ARP reply *192.168.1.1 is at aa:bb:cc:dd:ee:ff*
+3. Trama EtherType `0x0800` ICMP echo request
+4. Trama EtherType `0x0800` ICMP echo reply
+
+a) ¿Por qué el ICMP (capa 3) necesita esos dos pasos ARP antes?
+b) Si en el paso 2 **no hay reply**, ¿en qué capa falla la comunicación siguiente y por qué el ping no sale "por la puerta"?
+c) El PC ve la MAC del gateway en `arp -a`, el ping al gateway funciona, pero falla el ping a `8.8.8.8`. ¿Culpas de ARP? ¿De qué síntoma sí?
+d) El EtherType del ICMP es `0x0800`: ¿qué "sobre" hay dentro de la trama y en qué campo de ese sobre se copian las IPs 192.168.1.50 → 192.168.1.1?
+
+**Pista:** ARP es el puente IP→MAC solo en la LAN; una vez resuelto, el problema de "salir a Internet" es otra capa.

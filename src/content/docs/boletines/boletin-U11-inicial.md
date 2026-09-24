@@ -1,6 +1,6 @@
 ---
 title: Boletín UD11 — Inicial
-description: Ejercicios básicos de redes inalámbricas
+description: Ejercicios básicos de redes inalámbricas (WiFi)
 ---
 
 # 📝 Boletín UD11 — Inicial
@@ -65,3 +65,13 @@ Escribe la configuración que pondrías en un AP doméstico para una red de un e
 a) ¿Qué diferencia esencial hay entre WPA2-PSK y WPA2-Enterprise?
 b) ¿Qué servidor aparece en Enterprise y qué protocolo habla con el AP?
 c) ¿Qué red del instituto sería candidata a Enterprise y por qué?
+
+## 9. Medios y estándares WiFi: verdadero o falso
+
+Indica si cada afirmación es verdadera (V) o falsa (F) y corrige las falsas:
+
+a) El estándar 802.11ax se conoce comercialmente como WiFi 6.
+b) El WiFi transmite por ondas electromagnéticas en el aire, sin cable.
+c) La velocidad real del WiFi suele estar entre el 30% y el 50% de la teórica.
+d) El WiFi NO es capa 2 del modelo OSI porque no hay cable.
+e) En 2,4 GHz hay tres canales no solapados: 1, 6 y 11.

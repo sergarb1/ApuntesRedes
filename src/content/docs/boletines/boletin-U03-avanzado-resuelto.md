@@ -1,6 +1,6 @@
 ---
 title: Boletín UD3 — Avanzado (Resuelto)
-description: Soluciones ejercicios avanzados de IPv4 y Subnetting
+description: Soluciones de ejercicios avanzados de subnetting, VLSM, cabecera IPv4, ARP y fragmentación
 ---
 
 # ✅ Boletín UD3 — Avanzado (Resuelto)
@@ -152,3 +152,35 @@ ip dhcp excluded-address 192.168.1.1 192.168.1.30
 ```
 
 Así el router nunca concede las direcciones fijas (impresoras, servidores, el propio gateway). Alternativa: usar **reservas DHCP** por MAC para los equipos que quieras fijos sin configurarlos a mano.
+
+## 9. Fragmentación real (túnel y MTU)
+
+a) Payload útil en el WAN: 1000 − 20 = **980 bytes**… pero 980 **no** es múltiplo de 8; el mayor múltiplo de 8 ≤ 980 es **976**.  
+   Datos totales: 5000 → **6 fragmentos** (5 × 976 + 120).
+
+b)
+
+| Frag | Datos | MF | Offset (×8) |
+|---|---|---|---|
+| 1 | 976 | 1 | 0 |
+| 2 | 976 | 1 | 122 (976/8) |
+| 3 | 976 | 1 | 244 |
+| 4 | 976 | 1 | 366 |
+| 5 | 976 | 1 | 488 |
+| 6 | 120 | **0** | 610 |
+
+(5×976 = 4880; 5000 − 4880 = 120 en el último.)
+
+c) Síntoma clásico: **el ping pequeño va y el grande se corta o da "Packet needs to be fragmented but DF set"**; con `tracert` los saltos intermedios pueden no responder si el problema es de encapsulado/túnel. En Windows: `ping -f -l 1472` (prueba de Path MTU) fallando en el salto problemático.
+
+d) **No.** En IPv6 solo el **origen** fragmenta; los routers intermedios no fragmentan (Path MTU Discovery / Packet Too Big de ICMPv6).
+
+## 10. ARP, Wireshark y capas
+
+a) Porque la capa 2 no puede montar la trama sin la **MAC destino**. ICMP ya tiene las IPs, pero el "sobre" Ethernet necesita la dirección de enlace del gateway (o del host): ARP la obtiene antes de enviar el primer paquete IP.
+
+b) Sin reply, el host **no tiene MAC destino** → no construye la trama → el ICMP "se queda" en la pila. Falla en la frontera **capa 2/3 de la LAN** (sin ARP no hay trama). El ping no sale "por la puerta" (gateway).
+
+c) **No culpes de ARP:** si `arp -a` trae la MAC del gateway y el ping al gateway va, la resolución local funciona. El fallo a `8.8.8.8` es **ruta por defecto, NAT, firewall o DNS** (capa 3+ / servicio).
+
+d) Dentro va un **paquete IPv4** (EtherType `0x0800`). Las IPs van en la **cabecera IPv4**: campo **IP origen** = 192.168.1.50, campo **IP destino** = 192.168.1.1 (además del protocolo = 1 para ICMP).
