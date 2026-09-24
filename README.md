@@ -89,7 +89,8 @@ npm run preview   # Previsualizar build
 npm run pdf       # PDF único (ApuntesPAR.pdf) desde GitHub Pages → public/pdf/
 npm run pdf:local # PDF único desde el servidor local (localhost:4321)
 npm run epub      # Generar EPUB completo → public/epub/
-npm run export    # PDF + EPUB (todo en uno)
+npm run docx      # DOCX por unidad y boletín → docx/
+npm run export    # PDF + EPUB + DOCX (todo en uno)
 ```
 
 ### Exportación
@@ -98,6 +99,7 @@ npm run export    # PDF + EPUB (todo en uno)
 |---|---|---|
 | **PDF** | `npm run pdf` / `npm run pdf:local` | 1 PDF único con todas las unidades y portada → `public/pdf/ApuntesPAR.pdf` |
 | **EPUB** | `npm run epub` | 1 archivo EPUB completo para eBook readers |
+| **DOCX** | `npm run docx` | 1 `.docx` por unidad + 1 por boletín → `docx/<unidad>/` (Pandoc) |
 | **Ctrl+P** | Desde el navegador | Por página, con estilos print optimizados |
 
 ---
@@ -130,9 +132,12 @@ public/
 ├── portada.svg                   → Portada web / PDF / EPUB
 ├── pdf/                          → ApuntesPAR.pdf
 └── epub/                         → ApuntesPAR.epub
+docx/
+└── <unidad>/                     → DOCX de la unidad + de cada boletín (Pandoc)
 scripts/
 ├── generate-diagrams.mjs         → Generación SVG con D2
 ├── generate-epub.ps1 + epub.css  → Generación EPUB (Pandoc)
+├── generate-docx.mjs             → Generación DOCX por unidad y boletín (Pandoc)
 ├── pdf-cover/header/footer.html  → Portada y márgenes PDF (starlight-to-pdf)
 └── check-links.mjs               → Comprobación de enlaces
 .github/workflows/

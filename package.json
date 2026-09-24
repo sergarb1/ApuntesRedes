@@ -11,7 +11,8 @@
     "pdf": "npm run build && npx starlight-to-pdf https://sergarb1.github.io/ApuntesRedes -p public/pdf -f ApuntesPAR --footer scripts/pdf-footer.html --header scripts/pdf-header.html --preceding-html scripts/pdf-cover.html --print-bg",
     "pdf:local": "npm run build && npx starlight-to-pdf http://localhost:4321/ApuntesRedes -p public/pdf -f ApuntesPAR --footer scripts/pdf-footer.html --header scripts/pdf-header.html --preceding-html scripts/pdf-cover.html --print-bg",
     "epub": "pwsh -NoProfile -File scripts/generate-epub.ps1",
-    "export": "npm run pdf && npm run epub"
+    "docx": "node scripts/generate-docx.mjs",
+    "export": "npm run pdf && npm run epub && npm run docx"
   },
   "dependencies": {
     "@astrojs/starlight": "^0.41.0",
