@@ -60,6 +60,8 @@ Cuando alguien te diga *"no tengo Internet"*, abre la terminal y sube esta escal
 | 3 | `ping 8.8.8.8` | Pruebas si puedes salir hacia la "calle" exterior (una IP de Google). | La red local va bien, el fallo está en el router o en el operador. |
 | 4 | `ping www.google.com` | Pruebas si tu equipo sabe traducir nombres a IPs mediante el servicio DNS. | Tienes Internet, pero fallan los DNS (la agenda está rota). |
 
+![La Escalera del Ping: de mirar las luces al DNS, peldaño a peldaño, con la avería marcada en rojo](/ApuntesRedes/diagrams/u01-escalera-ping.svg)
+
 ---
 
 ## 😡 Conrad, el switch cascarrabias (y el error del principiante)
