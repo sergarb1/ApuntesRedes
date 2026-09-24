@@ -1,15 +1,15 @@
 ---
-title: "9 — Cierre: consolida lo aprendido"
+title: "10 — Cierre: consolida lo aprendido"
 description: El cierre práctico de la UD2, con cables, luz y caos controlado 🔌
 ---
 
 <p><small>El cierre práctico de la UD2, con cables, luz y caos controlado 🔌</small></p>
 
-> 🗺️ **Estás en:** 📡 **UD2 · Ethernet y cableado** → 9 · Cierre: consolida lo aprendido
+> 🗺️ **Estás en:** 📡 **UD2 · Ethernet y cableado** → 10 · Cierre: consolida lo aprendido
 
 ---
 
-Has terminado la teoría: sabes por qué se trenza el cobre, cómo se crimpa un RJ45, cuándo la fibra manda, por qué el WiFi miente y cómo se cablea un edificio en serio. Este cierre es el aterrizaje: recorres lo aprendido con juegos, un laboratorio real de crimpado y las preguntas que te harán en una entrevista. Léelo justo después del [punto 8](/ApuntesRedes/02-ethernet-cableado/07-cableado-estructurado) y antes de abrir los boletines.
+Has terminado la teoría: sabes por qué se trenza el cobre, cómo se crimpa un RJ45, cuándo la fibra manda, por qué el WiFi miente, cómo se cablea un edificio en serio y en qué capas del modelo OSI se mueve todo esto. Este cierre es el aterrizaje: recorres lo aprendido con juegos, un laboratorio real de crimpado y las preguntas que te harán en una entrevista. Léelo justo después del [punto 9](/ApuntesRedes/02-ethernet-cableado/09-trama-ethernet) y antes de abrir los boletines.
 
 ---
 
@@ -252,8 +252,8 @@ Un cable Cat6 transporta 1 Gbps sin problemas hasta que una silla pasa por encim
 | c) | Comprobadores de conectividad | ✅ Tester de cables, LEDs, split pair (puntos 4 y 7) |
 | d) | Direccionamiento lógico IP | ✅ (Introducción — se verá en UD3) |
 | e) | Estándares inalámbricos | ✅ WiFi 4/5/6/7 (punto 6) |
-| f) | Integración de dispositivos | ✅ Cableado estructurado (punto 8) |
+| f) | Integración de dispositivos | ✅ Cableado estructurado (punto 7) |
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/02-ethernet-cableado) · **Anterior:** [8 · La trama Ethernet](/ApuntesRedes/02-ethernet-cableado/08-trama-ethernet) · **Siguiente:** [UD3 · Direccionamiento IP y subnetting](/ApuntesRedes/03-direccionamiento-ip)
+📚 [Volver al índice de la unidad](/ApuntesRedes/02-ethernet-cableado) · **Anterior:** [9 · La trama Ethernet](/ApuntesRedes/02-ethernet-cableado/09-trama-ethernet) · **Siguiente:** [UD3 · Direccionamiento IP y subnetting](/ApuntesRedes/03-direccionamiento-ip)

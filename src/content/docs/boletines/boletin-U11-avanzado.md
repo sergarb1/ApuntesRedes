@@ -1,6 +1,6 @@
 ---
 title: Boletín UD11 — Avanzado
-description: Ejercicios avanzados de redes inalámbricas
+description: Ejercicios avanzados de redes inalámbricas (WiFi)
 ---
 
 # 📝 Boletín UD11 — Avanzado
@@ -77,3 +77,23 @@ Monta en Packet Tracer: un router 2911 con servidor DHCP, un switch 2960 con dos
 a) ¿Qué tipo de puerto de switch conecta el AP y por qué?
 b) El portátil de alumnos obtiene IP de la VLAN 20 pero no navega. El gateway de la VLAN 20 está bien. ¿Qué dos cosas compruebas primero?
 c) El AP doméstico de Packet Tracer solo permite WPA2-PSK. ¿Cómo se llama esa misma seguridad en la nomenclatura de la unidad?
+
+## 9. Caso WiFi: oficina con zonas muertas
+
+En una oficina de 25 puestos separados por tabiques de cartón-yeso, un único AP wifi en el pasillo central da "zonas muertas" y una velocidad general decepcionante. Los empleados se quejan cada tarde.
+
+a) ¿Qué causas físicas explicarían la lentitud (nombra al menos 3)?
+b) ¿Qué herramientas usarías para confirmarlas?
+c) Propón 3 soluciones realistas ordenadas de más barata a más cara.
+
+**Pista:** piensa en canales (1, 6, 11), interferencia de vecinos, obstáculos y el número de clientes compartiendo el mismo AP. Recuerda que la velocidad real WiFi es del 30-50%.
+
+## 10. 802.3 vs 802.11 en la misma oficina
+
+Una oficina tiene 20 PCs por cable (FastE/GigE) y 20 portátiles por WiFi detrás del mismo switch.
+
+a) ¿Los dos grupos comparten la capa OSI de "entrega local"? ¿Cuál?
+b) Compara en tabla: nº de MACs en la cabecera, quién "monta" la trama en el aire y qué pasa con las colisiones/medio compartido.
+c) ¿Por qué el OS de arriba (IPv4) no distingue si el tramo local fue RJ45 o radio?
+
+**Pista:** misma capa 2 lógica, distinto estándar; el estándar 802.x es un detalle de la capa 1–2.

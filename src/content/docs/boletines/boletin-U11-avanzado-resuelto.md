@@ -1,6 +1,6 @@
 ---
 title: Boletín UD11 — Avanzado (Resuelto)
-description: Soluciones de los ejercicios avanzados de redes inalámbricas
+description: Soluciones de los ejercicios avanzados de redes inalámbricas (WiFi)
 ---
 
 # ✅ Boletín UD11 — Avanzado (Resuelto)
@@ -72,3 +72,32 @@ a) **Puerto access** de la VLAN 20: un AP doméstico solo habla una VLAN (su SSI
 b) 1) **DNS del pool DHCP de la VLAN 20** (¿apunta a un DNS válido?). 2) **Ruta de retorno** (¿el router sabe volver a 192.168.20.0/24?) o NAT si sale a Internet. Si el ping al 8.8.8.8 funciona y los nombres no, es DNS.
 
 c) **WPA2-Personal (PSK)**: la misma seguridad que en un AP real se llama WPA2-PSK o WPA2-Personal según el fabricante.
+
+## 9. Caso WiFi: oficina con zonas muertas
+
+a) **Causas físicas posibles:**
+   - **Interferencia de vecinos:** los APs de las oficinas colindantes comparten el canal 1, 6 u 11, y todos se pisan.
+   - **Obstrucciones:** los tabiques de cartón-yeso y el mobiliario atenúan la señal (atenuación).
+   - **Cobertura insuficiente:** un solo AP para 25 puestos reparte un canal compartido entre muchos clientes; las zonas más alejadas quedan al límite.
+   - **Canal saturado:** todos los clientes compiten por el mismo canal, y en horas punta (la tarde) la contienda se dispara.
+
+b) **Herramientas:** analizador WiFi (para ver canales, señal RSSI y APs vecinos), aplicación de escaneo de red para comprobar número de clientes, y medición de velocidad en distintos puntos de la oficina.
+
+c) **Soluciones ordenadas de más barata a más cara:**
+   1. **Elegir canales no solapados** (1, 6, 11 en 2,4 GHz) y configurar el AP en 5 GHz (y, si soporta, activar band-steering).
+   2. **Reubicar el AP** en una posición más central o elevado, lejos de metal y fuentes de interferencia.
+   3. **Añadir APs adicionales** (o un mesh) para cubrir las zonas muertas, con canales distintos entre APs adyacentes.
+
+## 10. 802.3 vs 802.11 en la misma oficina
+
+a) **Sí, la misma:** capa 2 (enlace). Cableados usan **IEEE 802.3**; los portátiles, **IEEE 802.11**. Misma función: entregar por MAC en la red local.
+
+b)
+
+| | 802.3 (cable) | 802.11 (aire) |
+|---|---|---|
+| MACs en cabecera | 2 (origen, destino) | Hasta **4** (RA, TA, DA, SA según tipo) |
+| Quién monta/envía | La NIC / el switch reenvía | La NIC WiFi (el AP reenvía); el AP puede cifrar en el borde |
+| Medio | Enlace punto a punto / dominio de colisión gestionado | Canal de radio **compartido** (CSMA/CA, interferencias, vecinos) |
+
+c) Porque **arriba de la trama** IPv4 solo ve "entrega local por MAC hecha". El estándar 802.x es un detalle de la capa 1–2: la pila de Internet no cambia si el tramo fue cobre, fibra o aire.

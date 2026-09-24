@@ -1,11 +1,11 @@
 ---
 title: Boletín UD3 — Inicial
-description: Ejercicios básicos de IPv4 y Subnetting
+description: Ejercicios básicos de IPv4, cabecera, ARP, fragmentación y subnetting
 ---
 
 # 📝 Boletín UD3 — Inicial
 
-> Ejercicios básicos para afianzar los conceptos de direccionamiento IPv4 y máscaras.
+> Ejercicios básicos para afianzar los conceptos de direccionamiento IPv4, máscaras, cabecera, ARP y fragmentación.
 
 ---
 
@@ -29,14 +29,21 @@ d) 11111111
 
 ## 3. ¿Qué máscara es?
 
-Relaciona la notación CIDR con la máscara decimal:
+Relaciona la notación CIDR con la máscara decimal (escribe la letra):
 
-| CIDR | Máscara |
+| CIDR | Letra |
 |---|---|
-| /24 | a) 255.255.255.252 |
-| /16 | b) 255.255.255.0 |
-| /30 | c) 255.255.0.0 |
-| /8 | d) 255.0.0.0 |
+| /24 | ___ |
+| /16 | ___ |
+| /30 | ___ |
+| /8 | ___ |
+
+| Opciones de máscara | |
+|---|---|
+| a) | 255.255.255.252 |
+| b) | 255.255.255.0 |
+| c) | 255.255.0.0 |
+| d) | 255.0.0.0 |
 
 ## 4. Verdadero o falso
 
@@ -85,3 +92,38 @@ a) ¿Cuántos bits debes prestar a la máscara?
 b) ¿Cuál es la nueva máscara (CIDR y decimal)?
 c) ¿Cuántos hosts útiles tiene cada subred?
 d) Enumera las 4 direcciones de red con su rango de hosts.
+
+## 9. Cabecera IPv4
+
+Relaciona cada campo de la cabecera con su función:
+
+| Campo | Función |
+|---|---|
+| 1. TTL | a) Dice qué hay dentro: TCP (6), UDP (17), ICMP (1) |
+| 2. Protocolo | b) IP origen y destino del paquete |
+| 3. IP origen / destino | c) Contador de saltos; a 0 el paquete se descarta |
+| 4. Offset + flags MF | d) Coordinan la fragmentación y el reensamblado |
+
+V/F:
+
+e) La cabecera IPv4 mínima mide 20 bytes.
+f) El checksum de la cabecera IP protege el payload de los datos.
+g) TTL evita bucles de rutas indefinidas.
+
+## 10. ARP en la red local
+
+Una PC `192.168.1.10` quiere hacer ping a `192.168.1.20` y su tabla ARP está vacía.
+
+a) ¿Qué mensaje ARP se envía primero y con qué dirección MAC de destino (capa 2)?
+b) ¿Quién contesta y con qué tipo de mensaje?
+c) ¿Qué guarda la PC en su tabla al terminar? ¿Con qué comando lo compruebas en Windows?
+d) ¿ARP resuelve IP→MAC o MAC→IP?
+
+## 11. MTU y fragmentación
+
+Un host envía un datagrama IPv4 de **4000 bytes de datos** + 20 de cabecera por un enlace con **MTU 1500**.
+
+a) ¿Cuántos bytes de payload caben en cada fragmento (recuerda el múltiplo de 8 y la cabecera)?
+b) ¿Cuántos fragmentos salen en total? ¿Cuánto mide el último?
+c) ¿Qué flag indica al destino que aún faltan fragmentos?
+d) ¿Quién reensambla: el router intermedio o el host destino?

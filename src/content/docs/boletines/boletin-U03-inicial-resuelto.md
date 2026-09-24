@@ -1,6 +1,6 @@
 ---
 title: Boletín UD3 — Inicial (Resuelto)
-description: Soluciones ejercicios básicos de IPv4 y Subnetting
+description: Soluciones de ejercicios básicos de IPv4, cabecera, ARP, fragmentación y subnetting
 ---
 
 # ✅ Boletín UD3 — Inicial (Resuelto)
@@ -23,9 +23,9 @@ d) 11111111 → **255**
 
 ## 3. ¿Qué máscara es?
 
-/24 → b) 255.255.255.0
-/16 → c) 255.255.0.0
-/30 → a) 255.255.255.252
+/24 → b) 255.255.255.0  
+/16 → c) 255.255.0.0  
+/30 → a) 255.255.255.252  
 /8 → d) 255.0.0.0
 
 ## 4. Verdadero o falso
@@ -103,3 +103,29 @@ d) Incremento = 2⁶ = 64:
 | 2 | 192.168.5.64/26 | 192.168.5.65 | 192.168.5.126 | 192.168.5.127 |
 | 3 | 192.168.5.128/26 | 192.168.5.129 | 192.168.5.190 | 192.168.5.191 |
 | 4 | 192.168.5.192/26 | 192.168.5.193 | 192.168.5.254 | 192.168.5.255 |
+
+## 9. Cabecera IPv4
+
+**Matching:** 1 → c (TTL) · 2 → a (Protocolo) · 3 → b (IPs) · 4 → d (fragmentación)
+
+**V/F:**
+
+e) **Verdadero.** 5 words de 32 bits = **20 bytes** (sin opciones).
+f) **Falso.** El checksum de la cabecera solo valida **la cabecera** en cada salto. Los datos los protegen TCP/UDP; el enlace, el FCS de la trama.
+g) **Verdadero.** Cada router resta 1 al TTL; a 0 se descarta y se suele notificar ICMP "Time Exceeded" (base del `traceroute`).
+
+## 10. ARP en la red local
+
+a) **ARP Request** en broadcast: MAC destino `FF:FF:FF:FF:FF:FF`. Pregunta: *"¿quién tiene 192.168.1.20?"*.
+b) El host dueño de `192.168.1.20` responde con un **ARP Reply en unicast** incluyendo su MAC.
+c) Guarda el par **IP → MAC** en la **tabla ARP**. En Windows: `arp -a` (en Linux, `ip neigh`).
+d) **IP → MAC** (dirección lógica a dirección de enlace). La inversa no hace falta: la MAC solo se usa en el medio local.
+
+## 11. MTU y fragmentación
+
+a) Payload útil por fragmento = 1500 − 20 = **1480 bytes** (1480 es múltiplo de 8, como exige el offset).
+b) Datos totales = 4000.  
+   - Frag 1: 1480 · Frag 2: 1480 · Frag 3: **1040** (4000 − 2960).  
+   → **3 fragmentos.** El último mide 1040 + 20 = **1060 bytes** en total.
+c) **Flag MF** (*More Fragments*) = **1** en los que no son el último; el último lleva **MF = 0**.
+d) **El host destino.** Los routers solo fragmentan si hace falta; no reensamblan.

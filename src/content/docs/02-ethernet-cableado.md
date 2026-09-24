@@ -13,7 +13,7 @@ description: Donde todo viaje empieza por un cable 📡
 
 Bienvenido a la primera unidad de contenidos. Aquí estudias el mundo físico que sostiene todo lo demás: los medios guiados (cobre, fibra) y no guiados (radio), las normas de cableado, cómo se crimpa un RJ45, cómo se organiza el cableado de un edificio y, como broche, la trama Ethernet: el sobre que envuelve todos los datos de tu red local.
 
-Esta unidad se lee como un **libro de 9 capítulos**: los 8 primeros son teoría en progresión y el 9º es el aterrizaje práctico con laboratorio.
+Esta unidad se lee como un **libro de 10 capítulos**: los 9 primeros son teoría en progresión y el 10º es el aterrizaje práctico con laboratorio.
 
 ---
 
@@ -28,7 +28,8 @@ Al terminar, serás capaz de:
 - Elegir entre fibra monomodo y multimodo según distancia y presupuesto.
 - Aplicar conceptos físicos clave: atenuación, diafonía, anchura de banda vs velocidad.
 - Diseñar el cableado estructurado de un edificio (TIA/EIA-568): rack, patch panel, horizontal.
-- Analizar la trama Ethernet: MACs, EtherType, MTU, FCS y por qué existe el CRC.
+- Situar las capas 1 y 2 en el modelo OSI (y distinguirlo de TCP/IP como modelo real).
+- Analizar la trama Ethernet: MACs, EtherType, MTU y FCS; comparar 802.3 (guiado) y 802.11 (no guiado).
 
 ---
 
@@ -43,10 +44,11 @@ Al terminar, serás capaz de:
 | [05 · Fibra óptica](/ApuntesRedes/02-ethernet-cableado/05-fibra-optica) | Monomodo vs multimodo, conectores y usos | Todos |
 | [06 · Conceptos físicos clave](/ApuntesRedes/02-ethernet-cableado/06-conceptos-fisicos) | Atenuación, diafonía, Mbps vs MHz | Clave |
 | [07 · Cableado estructurado](/ApuntesRedes/02-ethernet-cableado/07-cableado-estructurado) | TIA/EIA-568: rack, patch panel, horizontal | Todos |
-| [08 · La trama Ethernet](/ApuntesRedes/02-ethernet-cableado/08-trama-ethernet) | Cabeceras, MACs, EtherType, FCS | Clave |
-| [09 · Cierre](/ApuntesRedes/02-ethernet-cableado/09-cierre) | Sé el Bit, Fireside, Laboratorio, Crucigrama… | Todos |
+| [08 · El modelo OSI](/ApuntesRedes/02-ethernet-cableado/08-modelo-osi) | 7 capas, TCP/IP de cultura, dónde estamos | Clave |
+| [09 · La trama Ethernet](/ApuntesRedes/02-ethernet-cableado/09-trama-ethernet) | Capa 2: MACs, EtherType, FCS, 802.3 y 802.11 | Clave |
+| [10 · Cierre](/ApuntesRedes/02-ethernet-cableado/10-cierre) | Sé el Bit, Fireside, Laboratorio, Crucigrama… | Todos |
 
-> 📖 **Flujo de lectura:** los 8 primeros puntos son teoría en progresión. El 9º es el aterrizaje práctico: léelo justo después del 8º y antes de abrir los boletines.
+> 📖 **Flujo de lectura:** los 9 primeros puntos son teoría en progresión. El 10º es el aterrizaje práctico: léelo justo después del 9º y antes de abrir los boletines.
 
 ---
 
@@ -69,16 +71,16 @@ Al terminar, serás capaz de:
 |---|---|---|
 | RA1·b) | Medios de transmisión | ✅ Puntos 1, 2 y 5 |
 | RA2·a) | Estándares para redes cableadas | ✅ Puntos 2-3 y 7 |
-| RA2·b) | Montaje de cables | ✅ Punto 4 + ⚡ Laboratorio (punto 9) |
+| RA2·b) | Montaje de cables | ✅ Punto 4 + ⚡ Laboratorio (punto 10) |
 | RA2·c) | Comprobadores de conectividad | ✅ Puntos 4 y 6 |
-| RA1·d) | Trama y encapsulación Ethernet | ✅ Punto 8 + 🧠 Atrévete a pensar (punto 9) |
+| RA1·d) | Trama y encapsulación Ethernet | ✅ Puntos 8–9 + 🧠 Atrévete a pensar (punto 10) |
 
 ---
 
 ## 🚪 ¿Por dónde empiezo?
 
 - ¿Vienes de la Unidad 01? Perfecto: ahí viste el mapa; aquí empieza el viaje de verdad.
-- ¿Ya crimpeas cables? Salta a la [trama Ethernet](/ApuntesRedes/02-ethernet-cableado/08-trama-ethernet), el punto más "examen" de la unidad.
+- ¿Ya crimpeas cables? Salta al [modelo OSI](/ApuntesRedes/02-ethernet-cableado/08-modelo-osi) y a la [trama Ethernet](/ApuntesRedes/02-ethernet-cableado/09-trama-ethernet), lo más "examen" de la unidad.
 
 **📍 Primer punto:** [01 · Medios de transmisión](/ApuntesRedes/02-ethernet-cableado/01-medios-de-transmision)  
 **⏭️ Al acabar la unidad, continúa en [UD3 · Direccionamiento IP y subnetting](/ApuntesRedes/03-direccionamiento-ip).**

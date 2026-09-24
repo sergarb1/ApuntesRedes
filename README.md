@@ -1,7 +1,7 @@
 # Apuntes PAR — Planificación y Administración de Redes
 
 > **Aprende redes como si la red se fuera a caer mañana.**  
-> 13 unidades didácticas (Unidad 01 de introducción + 12 de contenido) · 80% práctico · Estilo conversacional
+> 12 unidades didácticas (Unidad 01 de introducción + 11 de temario, UD2–UD12) · 80% práctico · Estilo conversacional
 
 **CC BY-SA 4.0** — [Sergi Garcia Barea](https://github.com/sergarb1)
 
@@ -18,30 +18,29 @@
 Un paquete IP viaja desde que nace en un navegador hasta la nube. Cada unidad avanza con él.
 
 ```
-U01: 🚪 Bienvenida  → U02: 🏠 Origen     → U03: 📦 Encapsulado → U04: 🔌 Cable
-U05: 🏷️ IP          → U06: 🌍 IPv6       → U07: 🔀 Switch      → U08: 🏢 VLAN
-U09: 🧭 Router      → U10: 🗣️ OSPF        → U11: 🌐 NAT         → U12: 🩺 Diagnóstico → U13: ☁️ Cloud
+U01: 🚪 Bienvenida  → U02: 📡 Cable y trama  → U03: 🧮 IP y subnetting → U04: 🔀 Switching
+U05: 🌉 Trunking    → U06: 🧭 Rutas estáticas → U07: 🗣️ OSPF           → U08: 🛡️ ACLs
+U09: 🌐 NAT/PAT     → U10: 🗄️ DHCP/DNS/NTP    → U11: 📶 Inalámbrico    → U12: 🔁 Alta disponibilidad
 ```
 
 ---
 
 ## 📚 Unidades
 
-| # | Título | Nombre didáctico | RA | Proyecto |
-|---|---|---|---|---|
-| U01 | Introducción | Tu punto de partida 🚪 | — | Ponerte al día |
-| U02 | Fundamentos de redes | La red mágica que no funciona 😵‍💫 | RA1 | Montar red desde cero |
-| U03 | Modelos y análisis de tráfico | El paquete perdido 🧳 | RA1 | Rastrear paquete con Wireshark |
-| U04 | Infraestructura física | El cable traicionero 🔌 | RA2 | Cableado oficina + crimpado |
-| U05 | IPv4 y subnetting | La calculadora maldita 🧮 | RA2 | Diseñar red IP empresarial |
-| U06 | IPv6 y transición | El futuro que ya llegó 🚀 | RA2/RA7 | Migrar red a IPv6 |
-| U07 | Switching y STP | El switch enfadado 😡 | RA3 | Red empresarial segmentada |
-| U08 | VLANs | La oficina dividida 🏢 | RA5 | Separar departamentos en red |
-| U09 | Routing y ACLs | El GPS perdido 🧭 | RA4 | Conectar sedes remotas |
-| U10 | Routing dinámico | El router que habla solo 🗣️ | RA6 | Red corporativa escalable |
-| U11 | NAT y acceso a Internet | Internet no funciona otra vez 🌐 | RA7 | Conectar empresa a Internet |
-| U12 | Diagnóstico y monitorización | Apágalo y vuelve a encenderlo 🧠 | Transv. | NOC + reparar averías |
-| U13 | Cloud, virtualización y futuro | La nube que no es vapor ☁️ | Ampliación | Infraestructura híbrida |
+| # | Título | Nombre didáctico | Emoji |
+|---|---|---|---|
+| U01 | Introducción | Bienvenida al mundo de las redes | 🚪 |
+| U02 | Ethernet, medios de transmisión y cableado | Donde todo viaje empieza por un cable | 📡 |
+| U03 | Direccionamiento IP y subnetting | La calculadora maldita, ahora con IPv6 | 🧮 |
+| U04 | Switching y VLAN | El cerebro de la red local | 🔀 |
+| U05 | Trunking y enrutamiento inter-VLAN | Un enlace, muchas VLANs | 🌉 |
+| U06 | Enrutamiento estático | El GPS de bolsillo | 🧭 |
+| U07 | Enrutamiento dinámico con OSPF | El router que habla solo | 🗣️ |
+| U08 | ACLs y seguridad de red | Filtrar sin romper la red | 🛡️ |
+| U09 | NAT y PAT | Salir a Internet sin quemar IPs | 🌐 |
+| U10 | Servicios de red: DHCP, DNS y NTP | Los que trabajan en silencio | 🗄️ |
+| U11 | Redes inalámbricas | Libertad sin cables, con vecinos incluidos | 📶 |
+| U12 | Alta disponibilidad y redundancia | Que no se caiga nunca | 🔁 |
 
 ---
 
@@ -72,7 +71,8 @@ U09: 🧭 Router      → U10: 🗣️ OSPF        → U11: 🌐 NAT         →
 | **Fuente** | Geist Sans (fallback Inter) |
 | **Idioma** | Castellano (raíz `/`) |
 | **Buscador** | Pagefind integrado (Starlight) |
-| **Renderizado** | D2 (Terrastruct) → SVGs vectoriales |
+| **Diagramas** | Excalidraw (MCP `mcp-excalidraw-server`) → SVG en `public/diagrams/` + fuentes `.excalidraw`; D2 (Terrastruct) como alternativa vía `npm run diagrams` |
+| **Fotos** | Stock Pexels/Unsplash en `public/photos/` (solo objetos físicos; hoy solo UD2) |
 | **Despliegue** | GitHub Actions → GitHub Pages (`main` branch) |
 
 ---
@@ -107,28 +107,38 @@ npm run export    # PDF + EPUB (todo en uno)
 ```
 src/
 ├── content/
-│   ├── docs/                     → 13 unidades en Markdown
+│   ├── docs/                     → 12 unidades en Markdown
 │   │   ├── index.md              → Portada con hero + cards
-│   │   ├── 01-introduccion.md …  → Índice de cada sección
-│   │   ├── 01-introduccion/      → Puntos por sección (01-…, 09-cierre)
-│   │   └── boletines/            → Ejercicios (inicial, avanzado + resueltos)
+│   │   ├── 01-introduccion.md …  → Índice de cada unidad
+│   │   ├── 01-introduccion/      → Puntos (01-…, 08-mapa, 09-glosario, 10-preguntas)
+│   │   ├── 02-ethernet-cableado/ → UD2 (01-…07 teoría, 08 OSI, 09 trama, 10 cierre)
+│   │   ├── 03-direccionamiento-ip/ … 12-alta-disponibilidad/
+│   │   └── boletines/            → Ejercicios: inicial/avanzado + resueltos (texto puro, sin imágenes)
 │   └── config.ts                 → Colecciones de contenido
 ├── styles/
 │   └── custom.css                → Tema azul + glassmorphism + print
 ├── assets/
 │   └── logo.svg                  → Logo PAR
 └── env.d.ts
-├── scripts/
-│   ├── generate-diagrams.mjs     → Generación SVG con D2
-│   ├── pdf-cover.html             → Portada PDF
-│   ├── pdf-header.html            → Cabecera PDF
-│   ├── pdf-footer.html            → Pie PDF
-│   ├── epub.css                   → Estilos EPUB
-│   └── generate-epub.ps1          → Generación EPUB
-├── .github/workflows/
-│   └── deploy.yml                → CI/CD a GitHub Pages
-├── astro.config.mjs              → Config Astro + Starlight
-├── package.json
+docs/
+├── excalidraw-icons.md           → Diccionario de iconos de red (JSON para Excalidraw)
+├── network-topology-icons.excalidrawlib → Librería local de iconos
+└── excalidraw-setup.md           → Guía reutilizable del MCP Excalidraw
+public/
+├── diagrams/                     → SVG + fuentes .excalidraw (U01 y U02)
+├── photos/                       → Fotos stock (solo UD2: UTP, RJ45, fibra, patch panel)
+├── portada.svg                   → Portada web / PDF / EPUB
+├── pdf/                          → ApuntesPAR.pdf
+└── epub/                         → ApuntesPAR.epub
+scripts/
+├── generate-diagrams.mjs         → Generación SVG con D2
+├── generate-epub.ps1 + epub.css  → Generación EPUB (Pandoc)
+├── pdf-cover/header/footer.html  → Portada y márgenes PDF (starlight-to-pdf)
+└── check-links.mjs               → Comprobación de enlaces
+.github/workflows/
+└── deploy.yml                    → CI/CD a GitHub Pages
+astro.config.mjs                  → Config Astro + Starlight (sidebar y unidades)
+package.json
 └── README.md
 ```
 

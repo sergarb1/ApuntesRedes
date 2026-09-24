@@ -1,6 +1,6 @@
 ---
 title: Boletín UD11 — Inicial (Resuelto)
-description: Soluciones de los ejercicios básicos de redes inalámbricas
+description: Soluciones de los ejercicios básicos de redes inalámbricas (WiFi)
 ---
 
 # ✅ Boletín UD11 — Inicial (Resuelto)
@@ -65,3 +65,11 @@ a) **PSK:** una contraseña compartida por todos (si se filtra, cambia para todo
 b) Un servidor **RADIUS**; el AP habla con él mediante **802.1X/EAP**.
 
 c) El WiFi de **profesores/administración** o el corporativo: cientos de usuarios identificables, posibilidad de revocar a uno concreto sin tocar al resto y trazabilidad por usuario. El WiFi de invitados, en cambio, es PSK de toda la vida.
+
+## 9. Medios y estándares WiFi: verdadero o falso
+
+a) **Verdadero.** 802.11ax = WiFi 6 (2019, bandas de 2,4 y 5 GHz).
+b) **Verdadero.** El WiFi envía ondas electromagnéticas por el aire, sin medio conductor.
+c) **Verdadero.** La velocidad real WiFi suele ser el 30-50% de la teórica por overhead, obstrucciones e interferencias.
+d) **Falso.** El WiFi **sí es capa 2** (enlace): entrega local por MAC con tramas 802.11; el aire es solo el medio (capa 1).
+e) **Verdadero.** En 2,4 GHz los tres canales no solapados son 1, 6 y 11.
