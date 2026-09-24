@@ -29,6 +29,8 @@ Antes de entrar en detalle, quédate con la tabla que resume toda la unidad:
 
 Observa el patrón: **el cobre es barato y corto, la fibra es cara y kilométrica, el aire es flexible pero impredecible.** En los puntos siguientes vas a desmontar cada uno y ver sus tripas.
 
+![Los tres medios de transmisión (cobre, fibra y aire) con sus características principales](/ApuntesRedes/diagrams/u02-tres-medios.svg)
+
 ---
 
 ## 🔌 El cobre: el rey de las LAN

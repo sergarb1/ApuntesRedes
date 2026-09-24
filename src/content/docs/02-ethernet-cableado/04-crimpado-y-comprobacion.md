@@ -27,6 +27,8 @@ En el [punto 3](/ApuntesRedes/02-ethernet-cableado/03-directo-cruzado-consola) d
 
 > 💡 **Regla de oro del material:** compra conectores compatibles con el diámetro de tu cable (los hay de Cat6 con pasador reforzado). Un conector barato arruina un cable bueno.
 
+![Conector RJ45 sobre el cable: la pieza que vas a crimpar](/ApuntesRedes/photos/u02-rj45.jpg)
+
 ---
 
 ## 👷 El crimpado paso a paso (norma T568B)
@@ -39,6 +41,8 @@ En el [punto 3](/ApuntesRedes/02-ethernet-cableado/03-directo-cruzado-consola) d
 6. **Comprobar:** usa el tester (siguiente sección) para verificar la continuidad de los 8 pines en orden.
 
 > ⚠️ **El error más repetido:** insertar los hilos *sin* meter la funda en el conector. El pasador no agarra nada, el cable baila, y a la primera que alguien tira, se suelta. La funda es el anclaje.
+
+![Crimpado paso a paso (T568B): pelar, ordenar, cortar, insertar, crimpar y comprobar](/ApuntesRedes/diagrams/u02-crimpado-pasos.svg)
 
 ---
 

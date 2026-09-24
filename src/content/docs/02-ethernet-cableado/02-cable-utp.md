@@ -15,6 +15,10 @@ description: 8 hilos, 4 pares y una buena razón para trenzarlos 🌊
 
 Probablemente lo has pisado, enrollado y maldito mil veces, pero nunca has mirado por qué es como es. Este punto te enseña la anatomía del cable que sostiene casi todas las oficinas del planeta.
 
+![Cable Ethernet UTP azul con conector RJ45 en primer plano](/ApuntesRedes/photos/u02-cable-utp.jpg)
+
+![Anatomía del cable UTP: funda, 4 pares trenzados y sus colores T568B](/ApuntesRedes/diagrams/u02-anatomia-utp.svg)
+
 ---
 
 ## 🎨 Los 8 hilos y sus colores

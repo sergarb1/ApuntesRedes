@@ -45,6 +45,8 @@ La pregunta estrella de la fibra: ¿qué fibra necesito?
 
 > 💡 **La regla mental:** **campus → multimodo; ciudad/campo → monomodo.** Si la distancia cabe en 550 m, la multimodo (OM3/OM4) es la opción barata y sensata. Si hablamos de kilómetros entre edificios o hacia el ISP, la monomodo (OS2) no tiene rival.
 
+![Fibra monomodo (SMF) vs multimodo (MMF): núcleo, fuente de luz, distancia y coste](/ApuntesRedes/diagrams/u02-fibra-smf-mmf.svg)
+
 ---
 
 ## 🔌 Conectores de fibra
@@ -59,6 +61,8 @@ La fibra se termina con conectores de precisión (los de empalme por fusión o l
 | **FC** | Rosca | Entornos de vibración |
 
 > ⚠️ **Dato práctico:** el conector **LC es el rey hoy** por encajar en los módulos SFP. Si memorizas uno, que sea ese.
+
+![Conectores de fibra óptica de colores en un panel de datos](/ApuntesRedes/photos/u02-fibra-conectores.jpg)
 
 ---
 

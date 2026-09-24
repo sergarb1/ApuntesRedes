@@ -42,7 +42,8 @@ src/content/docs/boletines/  → Ejercicios (inicial, avanzado + resueltos, por 
 src/styles/custom.css        → CSS del tema (azul #2563eb + teal #4ecdc4, Geist Sans, glassmorphism)
 src/assets/logo.svg          → Logo
 scripts/                     → Scripts de exportación (PDF, EPUB) y diagramas (D2)
-docs/excalidraw-icons.md     → Diccionario de iconos de red para Excalidraw (JSON listo para copiar)
+docs/excalidraw-icons.md     → Diccionario de iconos de red para Excalidraw (los 10 de dwelle, JSON listo para copiar)
+docs/network-topology-icons.excalidrawlib → Fuente local de la librería de iconos
 docs/excalidraw-setup.md     → Prompt/guía reutilizable para montar Excalidraw MCP en otros proyectos Astro
 public/diagrams/             → SVGs + fuentes `.excalidraw` (D2 y Excalidraw)
 public/portada.svg           → Portada para web, PDF y EPUB
@@ -122,6 +123,7 @@ description: Descripción corta 😵
 - Blockquotes: `> ` para citas normales
 - Enlaces: `[texto](url)` formato estándar
 - Imágenes: `![alt](/ApuntesRedes/ruta.png)` para imágenes en `public/`
+- Fotos stock: `![alt es-ES](/ApuntesRedes/photos/nombre.jpg)` en `public/photos/`. Ver sección 📸 Fotos stock.
 - Diagramas: D2 o Excalidraw → en `.md` referenciar como `![alt es-ES](/ApuntesRedes/diagrams/nombre.svg)`. Ver sección 📊 Diagramas Excalidraw.
 
 ---
@@ -207,10 +209,10 @@ Diagramas interactivos/visuales generados con **`mcp-excalidraw-server`** (canva
 
 ### Iconos de red
 
-- Diccionario del proyecto: **`docs/excalidraw-icons.md`** (Computer, Server, Switch, Router, Client… en JSON Excalidraw). Copiar el objeto, desplazar `x`/`y` del grupo, regenerar `id` si se reutiliza.
-- Librerías de origen (re-descargables; Temp local ya limpiado): dwelle *network-topology-icons* (10), *network-elements* (5); `network-flat` corrupto (no usar).
-- Extraer iconos → `import_scene` (merge) de un JSON de iconos copiado al raíz del repo y borrarlo tras importar; o regenerar `docs/excalidraw-icons.md` desde `.excalidrawlib`.
-- Fuentes `.excalidrawlib` = zip con `scene.json`; se pueden editar con Excalidraw.com.
+- Diccionario del proyecto: **`docs/excalidraw-icons.md`** — **los 10 iconos íntegros** de dwelle *network-topology-icons*: Computer (3 variantes), Server, Switch, Hub, Router, Client, Firewall y VPN. En JSON Excalidraw listo para copiar. Copiar el objeto, desplazar `x`/`y` del grupo, regenerar `id` si se reutiliza.
+- Fuente local: **`docs/network-topology-icons.excalidrawlib`** (descarga de https://libraries.excalidraw.com/libraries/dwelle/network-topology-icons.excalidrawlib). Sirve para regenerar el diccionario o reimportar en Excalidraw.com.
+- Otras librerías re-descargables: dwelle *network-elements* (5); `network-flat` corrupto (no usar).
+- Regenerar el diccionario desde la `.excalidrawlib` si hace falta (script Node que vuelva cada `libraryItems` como sección `###`).
 
 ### Inserción en Markdown
 
@@ -229,6 +231,35 @@ Diagramas interactivos/visuales generados con **`mcp-excalidraw-server`** (canva
 | `u01-4-piezas` | `01-que-es-una-red.md` · Las 4 piezas | Topología real: Finales → Medio → Interconexión; **4. Protocolos abajo** (base) + pie con analogía del barrio |
 | `u01-escalera-ping` | `06-metodo-diagnostico.md` · Escalera del Ping | 5 peldaños 0–4 de abajo arriba + caja roja de avería |
 | `u01-mapa-curso` | `08-mapa-del-curso.md` · 12 etapas | 2 bandas de cuatrimestre, U01→UD12 con flechas |
+
+### Diagramas U02 existentes
+
+| Fichero | Sección `.md` | Contenido |
+|---|---|---|
+| `u02-tres-medios` | `01-medios-de-transmision.md` · Los tres medios | Cob re, fibra y aire con sus características |
+| `u02-anatomia-utp` | `02-cable-utp.md` · Anatomía UTP | Funda, 4 pares trenzados, colores T568B |
+| `u02-pinout-t568` | `03-directo-cruzado-consola.md` · Pinout T568B | Orden de los 8 hilos en el RJ45 |
+| `u02-crimpado-pasos` | `04-crimpado-y-comprobacion.md` · Crimpado paso a paso | 6 pasos T568B + error típico de funda |
+| `u02-fibra-smf-mmf` | `05-fibra-optica.md` · SMF vs MMF | Núcleo, fuente, distancia y coste |
+| `u02-atenuacion-crosstalk` | `06-conceptos-fisicos.md` · Atenuación y diafonía | Señal que se debilita + NEXT/FEXT |
+| `u02-recorrido-senal` | `07-cableado-estructurado.md` · Recorrido de la señal | PC → latiguillo → keystone → horizontal → patch panel → switch |
+| `u02-trama-ethernet` | `08-trama-ethernet.md` · Trama Ethernet II | Preamble, MACs, EtherType, payload, FCS |
+
+### Fotos stock (criterio por unidad)
+
+Las fotos **solo proceden cuando ilustran un objeto físico real** que el alumno debe reconocer (cable, conector, herramienta, panel, rack, AP…). **No** se usan para conceptos abstractos (subnetting, STP, OSPF, NAT, ACL, VLAN lógica…): ahí manda el diagrama Excalidraw o el esquema en código.
+
+- Fuentes: **Pexels** o **Unsplash** (uso libre; no exigen atribución, pero se cita origen en esta tabla).
+- Destino: `public/photos/uXX-nombre.jpg` (jpg, ~1260 px de ancho).
+- Inserción: `![alt es-ES](/ApuntesRedes/photos/uXX-nombre.jpg)` junto a la sección conceptual; alt en español de España.
+- **De momento solo UD2 tiene fotos.** Al ampliar otra unidad, evaluar caso a caso con la regla de arriba y no saturar: 1–2 fotos por página como máximo.
+
+| Fichero | `.md` | Muestra | Origen |
+|---|---|---|---|
+| `u02-cable-utp` | `02-cable-utp.md` | Cable UTP con RJ45 | Pexels |
+| `u02-rj45` | `04-crimpado-y-comprobacion.md` | Conector RJ45 | Pexels |
+| `u02-fibra-conectores` | `05-fibra-optica.md` | Conectores de fibra | Pexels |
+| `u02-patch-panel` | `07-cableado-estructurado.md` | Patch panel etiquetado | Pexels |
 
 ### CLI útil
 
