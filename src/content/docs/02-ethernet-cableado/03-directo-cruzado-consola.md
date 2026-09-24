@@ -36,6 +36,8 @@ Ambas son válidas para Ethernet: solo intercambian los pares 2 y 3 (naranja y v
 
 > 💡 **Truco de memoria T568B:** *"BlancoNaranja, Naranja, BlancoVerde, Azul, BlancoAzul, Verde, BlancoMarrón, Marrón"*. Con el clip del RJ45 hacia abajo y los contactos mirando hacia ti, el hilo 1 queda a la izquierda.
 
+![Pinout T568B: orden de los 8 hilos en el conector RJ45](/ApuntesRedes/diagrams/u02-pinout-t568.svg)
+
 ---
 
 ## ➡️ Cable directo (straight-through)

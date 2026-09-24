@@ -39,6 +39,8 @@ Del puerto del PC al puerto del switch median **dos latiguillos** (flexibles) y 
 
 En cristiano: el PC se enchufa a la **roseta de pared** con un latiguillo corto. Detrás de la pared, el **cable horizontal** viaja hasta el rack, donde termina en un **patch panel**. Del patch panel al switch te lo une otro latiguillo. Cambiar de puerto del switch = cambiar un latiguillo del rack, sin tocar obra.
 
+![Recorrido de la señal en cableado estructurado: de la PC al switch](/ApuntesRedes/diagrams/u02-recorrido-senal.svg)
+
 ---
 
 ## 🧩 Los cuatro elementos
@@ -49,6 +51,8 @@ En cristiano: el PC se enchufa a la **roseta de pared** con un latiguillo corto.
 | **Keystone** | Conector hembra RJ45 | La roseta de pared | Donde termina el cable horizontal en el puesto |
 | **Patch panel** | Panel con 12-48 puertos RJ45 | El rack | Concentra todos los cables horizontales del edificio |
 | **Cable horizontal** | UTP sólido (no flexible) | Empotrado: paredes, falsos techos | Va del patch panel al keystone; no se toca nunca |
+
+![Patch panel con latiguillos etiquetados en el rack](/ApuntesRedes/photos/u02-patch-panel.jpg)
 
 > 💡 **Por qué el cable horizontal es sólido y el latiguillo flexible:** el cable sólido aguanta mejor en la pared y tiene mejor rendimiento a igual categoría; el latiguillo necesita flexibilidad para sobrevivir al roce. Usar cable flexible como horizontal es un fallo de instalador novato.
 

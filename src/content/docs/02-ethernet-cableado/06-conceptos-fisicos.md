@@ -80,6 +80,8 @@ Interferencia de un par de hilos sobre otro par adyacente. Como viste con el [tr
 
 > ⚠️ **La jugada sucia del split pair:** si no respetas los pares cancelativos, la diafonía se dispara sin que el tester básico lo vea (hay continuidad). Es el motivo por el que un cable "ok" da errores intermitentes: la diafonía en niveles altos es veneno para Ethernet.
 
+![Atenuación y diafonía en el cobre: señal que se debilita y pares que se pisan](/ApuntesRedes/diagrams/u02-atenuacion-crosstalk.svg)
+
 ---
 
 ## 🧩 Jitter y SNR: los dos extras que lo cuentan todo

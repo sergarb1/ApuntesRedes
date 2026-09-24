@@ -79,6 +79,8 @@ La caja que viaja por el cable. Cabecera de **14 bytes** + **FCS** de 4:
 
 > 💡 **EtherType en Wireshark:** al expandir la cabecera Ethernet verás el campo *Type* con esos valores hexadecimales. Es lo que te confirma "esto es IPv4" frente a "esto es ARP".
 
+![Trama Ethernet (Ethernet II): Preamble, MACs, EtherType, payload y FCS](/ApuntesRedes/diagrams/u02-trama-ethernet.svg)
+
 ---
 
 ## 🌍 ARP: la puerta entre IP y MAC
