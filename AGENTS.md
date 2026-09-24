@@ -15,7 +15,7 @@ Apuntes del módulo **PAR** (Planificación y Administración de Redes) para CFG
 - **Framework:** Astro 7 + Starlight 0.41
 - **Idioma:** Solo castellano (NO hay versión valenciana)
 - **Tema:** Azul #2563eb + teal #4ecdc4, glassmorphism, degradados, Geist Sans
-- **Exportación:** PDF (starlight-to-pdf con portada) + EPUB (Pandoc) + DOCX por unidad (Pandoc)
+- **Exportación:** PDF (starlight-to-pdf con portada) + EPUB (Pandoc) + DOCX por unidad (Pandoc **3.11**, vía winget en Windows)
 - **Despliegue:** GitHub Actions → GitHub Pages en rama `main`
 - **Diagramas:** D2 (Terrastruct) + Excalidraw (MCP `mcp-excalidraw-server`) → SVGs en `public/diagrams/`
 
@@ -329,6 +329,7 @@ npx astro build   # Solo Astro (si D2 NO está instalado; npm run build ejecuta 
 12. **PDF** se genera con `starlight-to-pdf` — un único PDF con todas las unidades y portada. Ver `scripts/pdf-*.html`.
 13. **EPUB** se genera con Pandoc — `scripts/generate-epub.ps1` + `scripts/epub.css`. El script reescribe las rutas `/ApuntesRedes/diagrams/` → `public/diagrams/` para que Pandoc encuentre los SVGs.
 14. **DOCX por unidad** — `scripts/generate-docx.mjs` (`npm run docx`, requiere Pandoc CLI en PATH). Crea `docx/<unidad>/` con un `.docx` de la unidad completa y un `.docx` suelto por cada boletín (incl. `-resuelto` y variantes `U03-ipv6-*`). **Sí va al repo** (no está en `.gitignore`). Tras editar contenido de unidades o boletines, regenerar con `npm run docx` y commitear los DOCX juntos. Mismas reescrituras de rutas que el EPUB (`/ApuntesRedes/…` → `public/…` para diagrams/photos).
+14b. **Pandoc 3.11** instalado en local con winget (`winget upgrade JohnMacFarlane.Pandoc`). Tras actualizar, refrescar el PATH de la shell (`$env:Path = [System.Environment]::GetEnvironmentVariable('Path','Machine') + ';' + [System.Environment]::GetEnvironmentVariable('Path','User')`) o abrir una terminal nueva.
 15. **Lenguaje es-ES obligatorio** — todo texto nuevo o editado cumple la sección 🗣️ Requisito lingüístico; hacer la comprobación lingüística antes de cerrar.
 15. **Excalidraw** — MCP + skill instalados; **recomendado reinstalar/actualizar la skill** si se cambia de entorno (`install-skill --dir …`); seguir workflow y reglas de la sección 📊; verificar con screenshot antes de exportar; NO subir sin comprobar solapes.
 16. **D2 puede no estar instalado** — en local usar `npx astro build` para validar Markdown/CSS sin fallar por D2; `npm run build` solo si hay D2 CLI.

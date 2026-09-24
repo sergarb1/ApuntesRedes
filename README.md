@@ -73,6 +73,7 @@ U09: 🌐 NAT/PAT     → U10: 🗄️ DHCP/DNS/NTP    → U11: 📶 Inalámbric
 | **Buscador** | Pagefind integrado (Starlight) |
 | **Diagramas** | Excalidraw (MCP `mcp-excalidraw-server`) → SVG en `public/diagrams/` + fuentes `.excalidraw`; D2 (Terrastruct) como alternativa vía `npm run diagrams` |
 | **Fotos** | Stock Pexels/Unsplash en `public/photos/` (solo objetos físicos; hoy solo UD2) |
+| **Exportación** | PDF (starlight-to-pdf) · EPUB + DOCX (Pandoc 3.11) |
 | **Despliegue** | GitHub Actions → GitHub Pages (`main` branch) |
 
 ---
@@ -99,7 +100,7 @@ npm run export    # PDF + EPUB + DOCX (todo en uno)
 |---|---|---|
 | **PDF** | `npm run pdf` / `npm run pdf:local` | 1 PDF único con todas las unidades y portada → `public/pdf/ApuntesPAR.pdf` |
 | **EPUB** | `npm run epub` | 1 archivo EPUB completo para eBook readers |
-| **DOCX** | `npm run docx` | 1 `.docx` por unidad + 1 por boletín → `docx/<unidad>/` (Pandoc) |
+| **DOCX** | `npm run docx` | 1 `.docx` por unidad + 1 por boletín → `docx/<unidad>/` (Pandoc 3.11) |
 | **Ctrl+P** | Desde el navegador | Por página, con estilos print optimizados |
 
 ---
