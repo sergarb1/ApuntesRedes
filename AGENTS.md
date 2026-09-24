@@ -46,6 +46,7 @@ docs/excalidraw-icons.md     → Diccionario de iconos de red para Excalidraw (J
 docs/excalidraw-setup.md     → Prompt/guía reutilizable para montar Excalidraw MCP en otros proyectos Astro
 docs/excalidraw-setup.md     → Prompt/guía reutilizable para montar Excalidraw MCP en otros proyectos Astro
 docs/excalidraw-setup.md     → Prompt/guía reutilizable para montar Excalidraw MCP en otros proyectos Astro
+docs/excalidraw-setup.md     → Prompt/guía reutilizable para montar Excalidraw MCP en otros proyectos Astro
 public/diagrams/             → SVGs + fuentes `.excalidraw` (D2 y Excalidraw)
 public/portada.svg           → Portada para web, PDF y EPUB
 public/pdf/                  → PDFs generados (ApuntesPAR.pdf)
