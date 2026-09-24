@@ -15,7 +15,7 @@ Apuntes del módulo **PAR** (Planificación y Administración de Redes) para CFG
 - **Framework:** Astro 7 + Starlight 0.41
 - **Idioma:** Solo castellano (NO hay versión valenciana)
 - **Tema:** Azul #2563eb + teal #4ecdc4, glassmorphism, degradados, Geist Sans
-- **Exportación:** PDF (starlight-to-pdf con portada) + EPUB (Pandoc)
+- **Exportación:** PDF (starlight-to-pdf con portada) + EPUB (Pandoc) + DOCX por unidad (Pandoc)
 - **Despliegue:** GitHub Actions → GitHub Pages en rama `main`
 - **Diagramas:** D2 (Terrastruct) + Excalidraw (MCP `mcp-excalidraw-server`) → SVGs en `public/diagrams/`
 
@@ -41,7 +41,7 @@ src/content/docs/12-alta-disponibilidad/…    → UD12 · Alta disponibilidad
 src/content/docs/boletines/  → Ejercicios (inicial, avanzado + resueltos, por unidad U01–U12)
 src/styles/custom.css        → CSS del tema (azul #2563eb + teal #4ecdc4, Geist Sans, glassmorphism)
 src/assets/logo.svg          → Logo
-scripts/                     → Scripts de exportación (PDF, EPUB) y diagramas (D2)
+scripts/                     → Scripts de exportación (PDF, EPUB, DOCX) y diagramas (D2)
 docs/excalidraw-icons.md     → Diccionario de iconos de red para Excalidraw (los 10 de dwelle, JSON listo para copiar)
 docs/network-topology-icons.excalidrawlib → Fuente local de la librería de iconos
 docs/excalidraw-setup.md     → Prompt/guía reutilizable para montar Excalidraw MCP en otros proyectos Astro
@@ -49,6 +49,9 @@ public/diagrams/             → SVGs + fuentes `.excalidraw` (D2 y Excalidraw)
 public/portada.svg           → Portada para web, PDF y EPUB
 public/pdf/                  → PDFs generados (ApuntesPAR.pdf)
 public/epub/                 → EPUBs generados (ApuntesPAR.epub)
+docx/                        → DOCX por unidad (va al repo; NO está en .gitignore)
+  <unidad>/<unidad>.docx     → índice + puntos de la unidad
+  <unidad>/boletin-UXX-*.docx → cada boletín (y resuelto) por separado
 ```
 
 ---
@@ -294,7 +297,8 @@ npm run preview   # Previsualizar build
 npm run pdf       # Generar PDFs
 npm run pdf:local # Generar PDF desde localhost
 npm run epub      # Generar EPUB
-npm run export    # PDF + EPUB
+npm run docx      # Generar DOCX por unidad → docx/
+npm run export    # PDF + EPUB + DOCX
 npm run diagrams  # Generar diagramas con D2 (Terrastruct)
 npx astro build   # Solo Astro (si D2 NO está instalado; npm run build ejecuta diagrams antes)
 ```
@@ -324,7 +328,8 @@ npx astro build   # Solo Astro (si D2 NO está instalado; npm run build ejecuta 
 11. **El build ejecuta `npm run build` que genera diagramas automáticamente** (prependido en el script).
 12. **PDF** se genera con `starlight-to-pdf` — un único PDF con todas las unidades y portada. Ver `scripts/pdf-*.html`.
 13. **EPUB** se genera con Pandoc — `scripts/generate-epub.ps1` + `scripts/epub.css`. El script reescribe las rutas `/ApuntesRedes/diagrams/` → `public/diagrams/` para que Pandoc encuentre los SVGs.
-14. **Lenguaje es-ES obligatorio** — todo texto nuevo o editado cumple la sección 🗣️ Requisito lingüístico; hacer la comprobación lingüística antes de cerrar.
+14. **DOCX por unidad** — `scripts/generate-docx.mjs` (`npm run docx`, requiere Pandoc CLI en PATH). Crea `docx/<unidad>/` con un `.docx` de la unidad completa y un `.docx` suelto por cada boletín (incl. `-resuelto` y variantes `U03-ipv6-*`). **Sí va al repo** (no está en `.gitignore`). Tras editar contenido de unidades o boletines, regenerar con `npm run docx` y commitear los DOCX juntos. Mismas reescrituras de rutas que el EPUB (`/ApuntesRedes/…` → `public/…` para diagrams/photos).
+15. **Lenguaje es-ES obligatorio** — todo texto nuevo o editado cumple la sección 🗣️ Requisito lingüístico; hacer la comprobación lingüística antes de cerrar.
 15. **Excalidraw** — MCP + skill instalados; **recomendado reinstalar/actualizar la skill** si se cambia de entorno (`install-skill --dir …`); seguir workflow y reglas de la sección 📊; verificar con screenshot antes de exportar; NO subir sin comprobar solapes.
 16. **D2 puede no estar instalado** — en local usar `npx astro build` para validar Markdown/CSS sin fallar por D2; `npm run build` solo si hay D2 CLI.
 17. **Antes de un diagrama Excalidraw nuevo:** leer `excalidraw-skill/SKILL.md` + `excalidraw_read_diagram_guide`; comprobar `npx -y mcp-excalidraw-server status` y pestaña abierta; iconos en `docs/excalidraw-icons.md`.
