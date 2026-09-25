@@ -9,7 +9,7 @@ description: El cierre práctico de la unidad, con chicha y diagnóstico real �
 
 ---
 
-Has terminado la teoría. Este cierre es el aterrizaje: recorre lo aprendido con juegos, un laboratorio real en Packet Tracer y las preguntas que te harán en una entrevista. Léelo justo después del [punto 8](/ApuntesRedes/05-trunking-inter-vlan/03-inter-vlan-routing) y antes de abrir los boletines. Todo lo que sabes de VLANs se pone aquí del revés: porque olvidar una native VLAN te enseña más que acertarla a la primera.
+Has terminado la teoría. Este cierre es el aterrizaje: recorre lo aprendido con juegos, un laboratorio real en Packet Tracer y las preguntas que te harán en una entrevista. Léelo justo después del [punto 9](/ApuntesRedes/04-switching/09-tipos-de-vlan) y antes de abrir los boletines. Todo lo que sabes de VLANs se pone aquí del revés: porque olvidar una native VLAN te enseña más que acertarla a la primera.
 
 ---
 

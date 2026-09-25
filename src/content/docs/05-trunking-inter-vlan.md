@@ -27,6 +27,7 @@ Al terminar, serás capaz de:
 - Configurar un switch capa 3 con `ip routing` y SVIs para enrutamiento inter-VLAN.
 - Entender VTP y DTP, sus modos y por qué se desactivan en redes seguras.
 - Aplicar hardening a enlaces: nonegotiate, VLAN de gestión separada, seguridad en trunks.
+- Repartir IPs automáticamente con un **pool DHCP por VLAN** y activar el relay (`ip helper-address`) cuando el servidor está en otra red.
 
 ---
 
@@ -40,7 +41,7 @@ Al terminar, serás capaz de:
 | [04 · Switch de capa 3 y SVIs](/ApuntesRedes/05-trunking-inter-vlan/04-switch-capa3) | ip routing, interface vlan X, rutas conectadas | Clave |
 | [05 · VTP y DTP](/ApuntesRedes/05-trunking-inter-vlan/05-vtp-y-dtp) | Protocolos automáticos de Cisco y sus peligros | Todos |
 | [06 · Seguridad en VLANs y trunks](/ApuntesRedes/05-trunking-inter-vlan/06-seguridad-en-vlans) | Native aparte, nonegotiate, VLAN de gestión | Clave |
-| [07 · Configuración y verificación](/ApuntesRedes/05-trunking-inter-vlan/03-inter-vlan-routing) | El laboratorio completo de la unidad, paso a paso | Todos |
+| [07 · DHCP por VLAN](/ApuntesRedes/05-trunking-inter-vlan/07-dhcp-por-vlan) | Un pool por VLAN, relay y captura del DORA | Todos |
 | [08 · Cierre](/ApuntesRedes/05-trunking-inter-vlan/08-cierre) | Sé el Paquete, Fireside, Laboratorio, Crucigrama… | Todos |
 
 > 📖 **Flujo de lectura:** los 7 primeros puntos son teoría en progresión. El 8º es el aterrizaje práctico: léelo justo después del 7º y antes de abrir los boletines.
@@ -65,7 +66,7 @@ Al terminar, serás capaz de:
 | CE | Criterio | Dónde se cubre |
 |---|---|---|
 | RA3 | Administración de conmutadores (enlaces y segmentación) | ✅ Puntos 1-2, 5 y 7 + ⚡ Laboratorio (punto 8) |
-| RA4 | Encaminamiento entre redes | ✅ Puntos 3-4 + 🧠 Atrévete a pensar (punto 8) |
+| RA4 | Encaminamiento entre redes | ✅ Puntos 3-4 y 7 (relay) + 🧠 Atrévete a pensar (punto 8) |
 | RA5 | Segmentación lógica y aislamiento | ✅ Puntos 1, 3 y 6 + 💬 Entrevista (punto 8) |
 
 ---

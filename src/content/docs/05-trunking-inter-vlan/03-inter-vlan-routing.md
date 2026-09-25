@@ -121,6 +121,8 @@ Router# show ip route                  # las rutas conectadas 192.168.10.0/24, 2
 
 En el switch, el puerto hacia el router debe ser trunk: `switchport mode trunk` (o `switchport trunk allowed vlan 10,20,30`). Y para probar la conectividad, `ping` desde un PC de VLAN 10 a otro de VLAN 20: debe responder atravesando el router.
 
+> 💡 **Atajo:** configurar a mano la IP, la máscara y el gateway de cada PC funciona para 4 equipos, pero aburre a partir de 10. En el [punto 7](/ApuntesRedes/05-trunking-inter-vlan/07-dhcp-por-vlan) ves cómo cada VLAN se reparte sus IPs sola con DHCP — y por qué, si el servidor DHCP vive en otra VLAN, el router tiene que echar una mano con el relay.
+
 ---
 
 ## 🧠 Mini-chequeo

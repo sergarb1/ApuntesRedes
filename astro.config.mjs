@@ -97,6 +97,7 @@ const unidadesExpandidas = {
     { slug: '05-trunking-inter-vlan/04-switch-capa3', label: '4 · Switch capa 3 y SVIs' },
     { slug: '05-trunking-inter-vlan/05-vtp-y-dtp', label: '5 · VTP y DTP' },
     { slug: '05-trunking-inter-vlan/06-seguridad-en-vlans', label: '6 · Seguridad en VLANs' },
+    { slug: '05-trunking-inter-vlan/07-dhcp-por-vlan', label: '7 · DHCP por VLAN' },
     { slug: '05-trunking-inter-vlan/08-cierre', label: '8 · Cierre' },
   ],
   '06-enrutamiento-estatico': [
