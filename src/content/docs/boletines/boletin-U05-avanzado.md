@@ -90,7 +90,7 @@ Enumera 3 riesgos de seguridad específicos de VLANs y cómo mitigarlos:
 a) Describe **3 vectores de ataque** que permiten a un atacante salirse de su VLAN (VLAN hopping), explicando cómo funciona cada uno.
 b) Propón **3 mitigaciones concretas** de hardening con sus comandos.
 
-**Pista:** piensa en DTP/negociación de trunks, en el double tagging sobre la native VLAN y en el etiquetado 802.1Q aplicado a tramas que no deberían llevarlo. Las mitigaciones están en el punto 7 de seguridad: `switchport nonegotiate`, native VLAN ≠ 1, `allowed vlan`, VTP.
+**Pista:** piensa en DTP/negociación de trunks, en el double tagging sobre la native VLAN y en el etiquetado 802.1Q aplicado a tramas que no deberían llevarlo. Las mitigaciones están en el punto 6 de seguridad: `switchport nonegotiate`, native VLAN ≠ 1, `allowed vlan`, VTP.
 
 ## 8. Inter-VLAN con SVI paso a paso
 
@@ -104,3 +104,14 @@ c) Los tres SVIs con su IP y `no shutdown`.
 d) El gateway que debe tener cada PC de cada VLAN.
 
 **Pista:** el orden de los comandos importa: primero `ip routing`, después cada `interface vlan X`. Sin `ip routing`, los SVIs existen pero no enrutan. El gateway de cada VLAN es la IP del SVI de esa VLAN.
+
+## 9. DHCP por VLAN sin teclear IPs
+
+Siguiendo con el escenario del ejercicio 8 (SVIs 192.168.10.1, 192.168.20.1 y 192.168.30.1), la empresa tiene 60 PCs y no quiere configurarles la IP a mano:
+
+a) Escribe los pools DHCP para las VLANs 10 (Ventas) y 20 (RRHH): `network`, `default-router` y `dns-server 8.8.8.8`.
+b) ¿Qué rango debes excluir y qué problema evitas con ello?
+c) El servidor DHCP real está en la VLAN 30 (`192.168.30.10`). ¿Qué línea añades en las SVIs de las VLANs 10 y 20 y por qué no funciona sin ella?
+d) Un PC de la VLAN 10 se queda en `169.254.10.50`. Escribe en orden las 3 comprobaciones que harías para encontrar el culpable.
+
+**Pista:** `ip dhcp pool`, `ip dhcp excluded-address` y `ip helper-address`. Recuerda que el DISCOVER es broadcast y que el broadcast no cruza VLANs.

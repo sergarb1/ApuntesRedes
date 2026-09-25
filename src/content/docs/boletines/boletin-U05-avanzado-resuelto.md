@@ -172,3 +172,32 @@ d) **Gateway de cada PC:**
 | 30 IT | 192.168.30.0/24 | 192.168.30.1 |
 
 **Verificación:** comprueba que el SVI esté Up/Up (`show ip interface brief`), revisa que las VLANs existan en `show vlan brief` y prueba la conectividad con `ping` entre SVIs (ej. desde el SVI 10 contra 192.168.20.1). Si los SVIs están Up/Up pero no enrutan, el culpable es el comando `ip routing` olvidado.
+
+## 9. DHCP por VLAN sin teclear IPs
+
+a) **Pools (en el switch capa 3):**
+```bash
+Switch(config)# ip dhcp excluded-address 192.168.10.1 192.168.10.10
+Switch(config)# ip dhcp excluded-address 192.168.20.1 192.168.20.10
+
+Switch(config)# ip dhcp pool VENTAS
+Switch(dhcp-config)# network 192.168.10.0 255.255.255.0
+Switch(dhcp-config)# default-router 192.168.10.1
+Switch(dhcp-config)# dns-server 8.8.8.8
+
+Switch(config)# ip dhcp pool RRHH
+Switch(dhcp-config)# network 192.168.20.0 255.255.255.0
+Switch(dhcp-config)# default-router 192.168.20.1
+Switch(dhcp-config)# dns-server 8.8.8.8
+```
+
+b) **Exclusión:** el rango `.1` a `.10` de cada subred (el `.1` es el SVI/gateway). Sin la exclusión, DHCP puede entregar `192.168.10.1` a un PC: dos equipos con la misma IP, el gateway "ocupado" y conflictos que son un dolor de localizar.
+
+c) **Relay:** `ip helper-address 192.168.30.10` en `interface vlan 10` y en `interface vlan 20`. Sin esa línea, el DISCOVER del PC es broadcast y **no cruza el router** (el broadcast se queda en su VLAN); el servidor de la VLAN 30 nunca lo ve y el PC acaba en APIPA.
+
+d) **Diagnóstico en orden:**
+   1. `show ip dhcp pool` → ¿existe el pool VENTAS y su `network` es 192.168.10.0/24? ¿Hay IPs libres?
+   2. `show ip interface brief` → ¿la SVI de la VLAN 10 está Up/Up?
+   3. `show ip helper-address` (o revisar la config de la SVI) → ¿está el `ip helper-address 192.168.30.10`? Y en el switch del PC: `show vlan brief` → ¿el puerto está en la VLAN 10?
+
+Si el DISCOVER ni siquiera aparece, el problema está aguas abajo (VLAN/puerto); si aparece pero no hay OFFER, es el pool o el relay.

@@ -149,4 +149,4 @@ El "ritual" para dejar un switch de VLANs a prueba de balas (y de pentesters):
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/05-trunking-inter-vlan) · **Anterior:** [5 · VTP y DTP](/ApuntesRedes/05-trunking-inter-vlan/05-vtp-y-dtp) · **Siguiente:** [UD6 · Enrutamiento estático](/ApuntesRedes/06-enrutamiento-estatico)
+📚 [Volver al índice de la unidad](/ApuntesRedes/05-trunking-inter-vlan) · **Anterior:** [5 · VTP y DTP](/ApuntesRedes/05-trunking-inter-vlan/05-vtp-y-dtp) · **Siguiente:** [7 · DHCP por VLAN](/ApuntesRedes/05-trunking-inter-vlan/07-dhcp-por-vlan)

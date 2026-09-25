@@ -9,7 +9,7 @@ description: El cierre práctico de la U05, con trunks, VLANs y routers de por m
 
 ---
 
-Has terminado la teoría: sabes cómo un trunk transporta todas las VLANs, por qué la native VLAN manda, cómo un router-on-a-stick o un switch capa 3 hacen hablar a VLANs separadas y qué papeles juegan VTP, DTP y la seguridad. Este cierre es el aterrizaje: juegos, un laboratorio con fallos intencionados y las preguntas de la entrevista. Léelo justo después del [punto 7](/ApuntesRedes/05-trunking-inter-vlan/03-inter-vlan-routing) y antes de abrir los boletines.
+Has terminado la teoría: sabes cómo un trunk transporta todas las VLANs, por qué la native VLAN manda, cómo un router-on-a-stick o un switch capa 3 hacen hablar a VLANs separadas y qué papeles juegan VTP, DTP y la seguridad. Este cierre es el aterrizaje: juegos, un laboratorio con fallos intencionados y las preguntas de la entrevista. Léelo justo después del [punto 7](/ApuntesRedes/05-trunking-inter-vlan/07-dhcp-por-vlan) y antes de abrir los boletines.
 
 ---
 
@@ -102,6 +102,8 @@ Has terminado la teoría: sabes cómo un trunk transporta todas las VLANs, por q
 2. Trunk entre switch y router/SVL con native 99 y DTP desactivado (`switchport nonegotiate`).
 3. Gateways correctos en los PCs (192.168.10.1 y 192.168.20.1).
 4. Verifica: PC de VLAN 10 pinge a PC de VLAN 20 y viceversa.
+
+> 🤖 **Variante exprés (recomendada):** en lugar del paso 3, monta los pools DHCP del [punto 7](/ApuntesRedes/05-trunking-inter-vlan/07-dhcp-por-vlan) (uno por VLAN, con su `default-router` y sus excluded-address) y deja que cada PC pida IP sola. Si alguna queda en `169.254.x.x`, diagnostica la cadena pool → VLAN → relay antes de seguir: un PC en APIPA arruina el resto del laboratorio.
 
 **Ahora, SIN MIRAR, tu profesor introduce TRES fallos:**
 - Fallo A: quita la subinterfaz G0/0.20 (o el `ip routing` del switch L3).
@@ -222,4 +224,4 @@ El paquete de RRHH imprimió su acta de auditoría en la impresora de la VLAN 30
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/05-trunking-inter-vlan) · **Anterior:** [07 · Configuración y verificación](/ApuntesRedes/05-trunking-inter-vlan/03-inter-vlan-routing) · **Siguiente:** [UD6 · Enrutamiento estático](/ApuntesRedes/06-enrutamiento-estatico)
+📚 [Volver al índice de la unidad](/ApuntesRedes/05-trunking-inter-vlan) · **Anterior:** [07 · DHCP por VLAN](/ApuntesRedes/05-trunking-inter-vlan/07-dhcp-por-vlan) · **Siguiente:** [UD6 · Enrutamiento estático](/ApuntesRedes/06-enrutamiento-estatico)
