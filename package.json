@@ -12,6 +12,7 @@
     "pdf:local": "npm run build && npx starlight-to-pdf http://localhost:4321/ApuntesRedes -p public/pdf -f ApuntesPAR --footer scripts/pdf-footer.html --header scripts/pdf-header.html --preceding-html scripts/pdf-cover.html --print-bg",
     "epub": "pwsh -NoProfile -File scripts/generate-epub.ps1",
     "docx": "node scripts/generate-docx.mjs",
+    "check:diagrams": "node scripts/check-diagrams.mjs",
     "export": "npm run pdf && npm run epub && npm run docx"
   },
   "dependencies": {

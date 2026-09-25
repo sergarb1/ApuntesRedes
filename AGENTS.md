@@ -216,7 +216,20 @@ Diagramas interactivos/visuales generados con **`mcp-excalidraw-server`** (canva
 - Texto ≥16 (títulos ≥20–28); shapes ≥120×60; gaps entre cajas 40–80; rejilla de 20px; ≤3–4 colores de relleno por diagrama.
 - Etiquetas de flecha: ≤12 caracteres, solo si aportan; no etiquetar todas.
 - Evitar flechas en diagonal que crucen otras zonas (preferir ortogonales o rejilla 2×2 con hueco central libre).
+- **Texto suelto siempre con `textAlign: "left"`** (el `x` es el borde izquierdo); las etiquetas **vinculadas** se quedan en `center`.
 - Guía completa: tool `excalidraw_read_diagram_guide` + skill instalada.
+
+### Control de calidad de los diagramas
+
+Tres scripts en `scripts/` (idempotentes; se pueden repetir):
+
+- `node scripts/fix-fonts.mjs` — unifica `fontFamily: 3` (Cascadia) y sube a 16 px cualquier texto menor, escalando `width`/`height` en la misma proporción.
+- `node scripts/fix-text-align.mjs` — pasa a `textAlign: "left"` todos los textos **sueltos** (sin `containerId`). *Por qué:* el cliente Excalidraw re-mide el texto al restaurar la escena y ancla el centrado en `element.x`, así que un `center` desplaza el texto media anchura a la izquierda (se sale de su caja y agranda el `viewBox` del SVG). Con `left` el texto empieza en `x`, igual que en los SVG aprobados del repo. Las etiquetas vinculadas a rectángulo o flecha **no se tocan** (el cliente las re-centra solo).
+- `npm run check:diagrams` (`scripts/check-diagrams.mjs`) — 7 reglas: familia, tamaño ≥16, contención y aire, solapes texto↔texto, SVG >1 KB, título ≈ nombre base y paleta. **Devuelve 0 si todo está bien y 1 si hay fallos.**
+
+**Flujo al tocar un diagrama:** editar el `.excalidraw` → re-exportar su SVG (workflow de arriba) → `npm run check:diagrams`. El checker lee las cajas renderizadas del SVG (posición del `<g>` + media anchura del `rotate`, que es la anchura real del texto), así que **sin re-exportar da falsos positivos**. Los `.tmp-*` de `public/diagrams/` son desechables: borrarlos antes de commitear.
+
+*Pendiente:* la coordenada Y del SVG no es un traslado global (varía entre texto suelto y etiqueta vinculada), así que la contención vertical se calcula con el `y` guardado en el `.excalidraw` y la horizontal con el SVG.
 
 ### Iconos de red
 
@@ -308,6 +321,9 @@ npm run epub      # Generar EPUB
 npm run docx      # Generar DOCX por unidad → docx/
 npm run export    # PDF + EPUB + DOCX
 npm run diagrams  # Generar diagramas con D2 (Terrastruct)
+npm run check:diagrams  # Calidad de los diagramas Excalidraw (7 reglas)
+node scripts/fix-fonts.mjs       # Unificar fuente Cascadia y tamaño mínimo 16
+node scripts/fix-text-align.mjs  # Textos sueltos a textAlign left
 npx astro build   # Solo Astro (si D2 NO está instalado; npm run build ejecuta diagrams antes)
 ```
 
@@ -342,6 +358,7 @@ npx astro build   # Solo Astro (si D2 NO está instalado; npm run build ejecuta 
 15. **Excalidraw** — MCP + skill instalados; **recomendado reinstalar/actualizar la skill** si se cambia de entorno (`install-skill --dir …`); seguir workflow y reglas de la sección 📊; verificar con screenshot antes de exportar; NO subir sin comprobar solapes.
 16. **D2 puede no estar instalado** — en local usar `npx astro build` para validar Markdown/CSS sin fallar por D2; `npm run build` solo si hay D2 CLI.
 17. **Antes de un diagrama Excalidraw nuevo:** leer `excalidraw-skill/SKILL.md` + `excalidraw_read_diagram_guide`; comprobar `npx -y mcp-excalidraw-server status` y pestaña abierta; iconos en `docs/excalidraw-icons.md`.
+18. **Tras editar un diagrama:** re-exportar su `.excalidraw` **y** su SVG y pasar `npm run check:diagrams` (el checker lee el SVG, así que sin re-exportar acusa fallos falsos). Borrar los `.tmp-*` de `public/diagrams/` antes de commitear. Ver sección 📊 *Control de calidad de los diagramas*.
 
 ---
 

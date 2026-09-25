@@ -71,7 +71,7 @@ U09: 🌐 NAT/PAT     → U10: 🗄️ DHCP/DNS/NTP    → U11: 📶 Inalámbric
 | **Fuente** | Geist Sans (fallback Inter) |
 | **Idioma** | Castellano (raíz `/`) |
 | **Buscador** | Pagefind integrado (Starlight) |
-| **Diagramas** | Excalidraw (MCP `mcp-excalidraw-server`) → SVG en `public/diagrams/` + fuentes `.excalidraw`; D2 (Terrastruct) como alternativa vía `npm run diagrams` |
+| **Diagramas** | Excalidraw (MCP `mcp-excalidraw-server`) → SVG en `public/diagrams/` + fuentes `.excalidraw`, con control de calidad (`npm run check:diagrams`); D2 (Terrastruct) como alternativa vía `npm run diagrams` |
 | **Fotos** | Stock Pexels/Unsplash en `public/photos/` (solo objetos físicos; hoy solo UD2) |
 | **Exportación** | PDF (starlight-to-pdf) · EPUB + DOCX (Pandoc 3.11) |
 | **Despliegue** | GitHub Actions → GitHub Pages (`main` branch) |
@@ -92,6 +92,7 @@ npm run pdf:local # PDF único desde el servidor local (localhost:4321)
 npm run epub      # Generar EPUB completo → public/epub/
 npm run docx      # DOCX por unidad y boletín → docx/
 npm run export    # PDF + EPUB + DOCX (todo en uno)
+npm run check:diagrams  # Control de calidad de los diagramas Excalidraw
 ```
 
 ### Exportación
@@ -140,7 +141,10 @@ scripts/
 ├── generate-epub.ps1 + epub.css  → Generación EPUB (Pandoc)
 ├── generate-docx.mjs             → Generación DOCX por unidad y boletín (Pandoc)
 ├── pdf-cover/header/footer.html  → Portada y márgenes PDF (starlight-to-pdf)
-└── check-links.mjs               → Comprobación de enlaces
+├── check-links.mjs               → Comprobación de enlaces
+├── check-diagrams.mjs            → Calidad de los diagramas (npm run check:diagrams)
+├── fix-fonts.mjs                 → Fuente Cascadia y tamaño mínimo en todos los diagramas
+└── fix-text-align.mjs            → Textos sueltos a textAlign left (render correcto)
 .github/workflows/
 └── deploy.yml                    → CI/CD a GitHub Pages
 astro.config.mjs                  → Config Astro + Starlight (sidebar y unidades)
