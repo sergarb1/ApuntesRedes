@@ -5,7 +5,7 @@ description: El guardián que bloquea para que la red viva 🌉
 
 <p><small>El guardián que bloquea para que la red viva 🌉</small></p>
 
-> 🗺️ **Estás en:** 🔁 **UD12 · Alta disponibilidad y redundancia** → 02 · STP: redundancia sin bucles
+> 🗺️ **Estás en:** 🔁 **Alta disponibilidad y redundancia** → 02 · STP: redundancia sin bucles
 
 ---
 
@@ -13,7 +13,7 @@ description: El guardián que bloquea para que la red viva 🌉
 
 > En una red con caminos duplicados, **STP bloquea deliberadamente los enlaces redundantes** para evitar bucles y los desbloquea solos cuando el camino principal muere: es, exactamente, tu primer mecanismo de alta disponibilidad en capa 2, y se diseña, no se sufre.
 
-En la [UD4](/ApuntesRedes/04-switching) aprendiste el mecanismo (root bridge, costes, estados). Aquí lo miramos con ojos de HA: cómo diseñar la topología para que el bloqueo caiga donde quieres y la conmutación sea rápida.
+En la [unidad de switching](/ApuntesRedes/04-switching) aprendiste el mecanismo (root bridge, costes, estados). Aquí lo miramos con ojos de HA: cómo diseñar la topología para que el bloqueo caiga donde quieres y la conmutación sea rápida.
 
 ---
 

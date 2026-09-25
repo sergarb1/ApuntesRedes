@@ -5,7 +5,7 @@ description: Manos al aire, con cable de red debajo 🛠️
 
 <p><small>Manos al aire, con cable de red debajo 🛠️</small></p>
 
-> 🗺️ **Estás en:** 📶 **UD11 · Redes inalámbricas** → 08 · Configuración y verificación
+> 🗺️ **Estás en:** 📶 **Redes inalámbricas** → 08 · Configuración y verificación
 
 ---
 
@@ -75,7 +75,7 @@ En la Laptop-1 → Desktop → PC Wireless:
 2. Conecta a `CORP` con su frase → pestaña **Link Information**: señal y velocidad.
 3. Desktop → Command Prompt: `ipconfig` → IP 192.168.10.x y gateway .1 entregados por DHCP.
 4. `ping 192.168.10.1` → OK. Y desde PC-1 (cable, VLAN 10) `ping 192.168.10.50` → OK.
-5. Repite con `INVITADOS` → IP 192.168.99.x. Y ahora `ping 192.168.10.50` → **debe fallar** (aislamiento entre VLANs, sin ruta o con ACL de la UD8).
+5. Repite con `INVITADOS` → IP 192.168.99.x. Y ahora `ping 192.168.10.50` → **debe fallar** (aislamiento entre VLANs, sin ruta o con ACL).
 
 ---
 
@@ -96,7 +96,7 @@ AP(config-if)# power local 50       ← potencia moderada
 AP(config-subif)# encapsulation dot1Q 10
 ```
 
-La estructura mental: **SSID → VLAN → subinterfaz radio + subinterfaz Ethernet**, el mismo patrón "router-on-a-stick" de la UD5, pero con radio.
+La estructura mental: **SSID → VLAN → subinterfaz radio + subinterfaz Ethernet**, el mismo patrón "router-on-a-stick" ya visto, pero con radio.
 
 ---
 
@@ -116,7 +116,7 @@ Fallos típicos y su escalera:
 1. Cliente "no ve la red" → SSID mal escrito, AP apagado, adaptador del cliente sin activar (o módulo inexistente).
 2. Ve la red pero no conecta → frase/seguridad incorrecta (WPA2 vs WPA3, AES vs TKIP) o MAC filtrada.
 3. Conecta pero sin IP → el SSID no está mapeado a su VLAN, el trunk del switch no permite esa VLAN o el pool DHCP no existe.
-4. IP correcta pero "no navega" → gateway/ACL (recuerda la escalera de la UD10).
+4. IP correcta pero "no navega" → gateway/ACL (recuerda la escalera de diagnóstico).
 
 ---
 
@@ -144,7 +144,7 @@ Fallos típicos y su escalera:
 
 1. **SSID** (nombre), **VLAN** (a qué red cableada puentea) y **seguridad** (WPA2/WPA3, PSK o Enterprise, frase/credenciales).
 2. El mapeo SSID→VLAN: `CORP` está etiquetando tráfico a la VLAN 99 (o el trunk/switch mapea el puerto a la VLAN equivocada). Revisa encapsulación dot1Q en AP/switch y el pool del que sale la IP.
-3. Por el mismo plan de canales de la UD5 del aire: dos radios del mismo AP (o APs vecinos) en el mismo canal se pisarían; 1 y 11 no solapan.
+3. Misma lógica con el plan de canales: dos radios del mismo AP (o APs vecinos) en el mismo canal se pisarían; 1 y 11 no solapan.
 4. ¿Ve la red? → ¿Conecta (seguridad)? → ¿IP (DHCP/VLAN)? → ¿Ping gateway? → ¿Nombres (DNS)? Un escalón por vez, sin saltar.
 </details>
 

@@ -1,9 +1,9 @@
 ---
-title: Boletín UD6 — Inicial (Resuelto)
+title: Boletín de Enrutamiento estático — Inicial (Resuelto)
 description: Soluciones de los ejercicios básicos de enrutamiento estático
 ---
 
-# ✅ Boletín UD6 — Inicial (Resuelto)
+# ✅ Boletín de Enrutamiento estático — Inicial (Resuelto)
 
 ---
 

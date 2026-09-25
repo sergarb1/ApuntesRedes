@@ -5,7 +5,7 @@ description: Subredes a la medida de cada departamento, sin desperdiciar ni una 
 
 <p><small>Subredes a la medida de cada departamento, sin desperdiciar ni una IP 🎯</small></p>
 
-> 🗺️ **Estás en:** 🧮 **UD3 · Direccionamiento IP y subnetting** → 7 · VLSM
+> 🗺️ **Estás en:** 🧮 **Direccionamiento IP y subnetting** → 7 · VLSM
 
 ---
 

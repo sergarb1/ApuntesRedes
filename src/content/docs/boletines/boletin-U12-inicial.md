@@ -1,9 +1,9 @@
 ---
-title: Boletín UD12 — Inicial
+title: Boletín de Alta disponibilidad — Inicial
 description: Ejercicios básicos de alta disponibilidad y redundancia
 ---
 
-# 📝 Boletín UD12 — Inicial
+# 📝 Boletín de Alta disponibilidad — Inicial
 
 > Ejercicios básicos para afianzar los conceptos de redundancia: SPOFs, STP, EtherChannel y FHRP.
 

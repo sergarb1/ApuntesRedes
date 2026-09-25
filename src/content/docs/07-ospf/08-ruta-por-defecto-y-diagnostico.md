@@ -5,7 +5,7 @@ description: Cómo anunciar el camino a Internet y cazar fallos de adyacencia �
 
 <p><small>Cómo anunciar el camino a Internet y cazar fallos de adyacencia 🔍</small></p>
 
-> 🗺️ **Estás en:** 🗣️ **UD7 · Enrutamiento dinámico con OSPF** → 8 · Ruta por defecto y diagnóstico
+> 🗺️ **Estás en:** 🗣️ **Enrutamiento dinámico con OSPF** → 8 · Ruta por defecto y diagnóstico
 
 ---
 
@@ -19,7 +19,7 @@ Este punto cierra la teoría: cómo dar a toda la red una **puerta de salida ún
 
 ## 🌐 Propagar la ruta por defecto
 
-En la [UD6](/ApuntesRedes/06-enrutamiento-estatico) configuraste rutas por defecto con `ip route 0.0.0.0 0.0.0.0`. Ahora toca **compartirla con el resto de routers OSPF**. En el router que conecta con Internet (el borde, normalmente un ASBR):
+En la [unidad de enrutamiento estático](/ApuntesRedes/06-enrutamiento-estatico) configuraste rutas por defecto con `ip route 0.0.0.0 0.0.0.0`. Ahora toca **compartirla con el resto de routers OSPF**. En el router que conecta con Internet (el borde, normalmente un ASBR):
 
 ```bash
 R3(config)# ip route 0.0.0.0 0.0.0.0 serial 0/0/0    ; ruta por defecto local

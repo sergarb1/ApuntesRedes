@@ -5,7 +5,7 @@ description: La salida de emergencia 0.0.0.0/0 y las rutas flotantes de respaldo
 
 <p><small>La salida de emergencia 0.0.0.0/0 y las rutas flotantes de respaldo 🚪</small></p>
 
-> 🗺️ **Estás en:** 🧭 **UD6 · Enrutamiento estático** → 4 · Ruta por defecto
+> 🗺️ **Estás en:** 🧭 **Enrutamiento estático** → 4 · Ruta por defecto
 
 ---
 

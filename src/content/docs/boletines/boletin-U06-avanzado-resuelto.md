@@ -1,9 +1,9 @@
 ---
-title: Boletín UD6 — Avanzado (Resuelto)
+title: Boletín de Enrutamiento estático — Avanzado (Resuelto)
 description: Soluciones de los ejercicios avanzados de enrutamiento estático
 ---
 
-# ✅ Boletín UD6 — Avanzado (Resuelto)
+# ✅ Boletín de Enrutamiento estático — Avanzado (Resuelto)
 
 ---
 

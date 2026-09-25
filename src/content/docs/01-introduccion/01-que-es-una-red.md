@@ -5,7 +5,7 @@ description: La explicación que tu abuela entendería 💡
 
 <p><small>La explicación que tu abuela entendería 💡</small></p>
 
-> 🗺️ **Estás en:** 🚪 **U01 · Introducción** → 01 · ¿Qué es una red?
+> 🗺️ **Estás en:** 🚪 **Introducción** → 01 · ¿Qué es una red?
 
 ---
 
@@ -148,11 +148,11 @@ Adivina qué componente de red soy:
 
 ---
 
-## 🏆 Logros de la Unidad 01
+## 🏆 Logros de la unidad
 
 | Logro | Cómo conseguirlo |
 |---|---|
-| 🏅 **Turista informado** | Leer la Unidad 01 completa sin saltarte ningún punto |
+| 🏅 **Turista informado** | Leer la unidad completa sin saltarte ningún punto |
 | 🏅 **Diagnóstico visual** | Encontrar el fallo del laboratorio mirando SOLO las luces |
 | 🏅 **Diferenciador** | Explicar a alguien la diferencia entre red e Internet sin equivocarte |
 

@@ -5,7 +5,7 @@ description: Una red lógica dentro de un switch físico 🏢
 
 <p><small>Una red lógica dentro de un switch físico 🏢</small></p>
 
-> 🗺️ **Estás en:** 🔀 **UD4 · Switching y VLAN** → 8 · ¿Qué es una VLAN?
+> 🗺️ **Estás en:** 🔀 **Switching y VLAN** → 8 · ¿Qué es una VLAN?
 
 ---
 
@@ -13,7 +13,7 @@ description: Una red lógica dentro de un switch físico 🏢
 
 > Una **VLAN** (*Virtual Local Area Network*) es una **red lógica** creada dentro de un switch físico: los dispositivos de la misma VLAN se comportan como si estuvieran conectados al mismo switch, aunque físicamente compartan hardware con otras VLANs que "no ven".
 
-En UD4 viste el switch como un dispositivo que aprende MACs y segmenta el unicast. Ahora le damos un paso más: comprar un switch por departamento es caro, así que partimos uno solo en varios "pedazos" lógicos. Es como un edificio de oficinas: la infraestructura (luz, ascensor, paredes) es común, pero los departamentos no se enteran del ruido de los vecinos.
+En los puntos anteriores viste el switch como un dispositivo que aprende MACs y segmenta el unicast. Ahora le damos un paso más: comprar un switch por departamento es caro, así que partimos uno solo en varios "pedazos" lógicos. Es como un edificio de oficinas: la infraestructura (luz, ascensor, paredes) es común, pero los departamentos no se enteran del ruido de los vecinos.
 
 ---
 
@@ -70,7 +70,7 @@ Con VLANs (3 dominios de broadcast):
 
 Este es el punto clave de la capa 2 que luego usarás con los routers: **dos VLANs que comparten switch no se ven**. Y "no verse" es exactamente lo que quieres entre departamentos.
 
-> 💡 **Puente al DHCP:** si cada VLAN es un dominio de broadcast propio, un DISCOVER de DHCP **no pasa de su VLAN**. Por eso, en cuanto montes varias VLANs en un laboratorio, cada una necesita su propio pool DHCP (o un relay en el router). En vez de teclear IP y gateway en cada PC, las dejas que se configuren solas — lo vemos en el [punto 7 de la UD5](/ApuntesRedes/05-trunking-inter-vlan/07-dhcp-por-vlan).
+> 💡 **Puente al DHCP:** si cada VLAN es un dominio de broadcast propio, un DISCOVER de DHCP **no pasa de su VLAN**. Por eso, en cuanto montes varias VLANs en un laboratorio, cada una necesita su propio pool DHCP (o un relay en el router). En vez de teclear IP y gateway en cada PC, las dejas que se configuren solas — lo vemos en el [punto 7 de trunking e inter-VLAN](/ApuntesRedes/05-trunking-inter-vlan/07-dhcp-por-vlan).
 
 ---
 
@@ -87,7 +87,7 @@ Todos los switches Cisco traen creada la **VLAN 1** y todos los puertos arrancan
 
 > ⚠️ **CONRAD dice:** "VLAN 1 es el camino de entrada de todo el que no ha configurado nada. Clientes, intrudores y novatos comparten la misma VLAN sin darse cuenta. Cambia la native VLAN, desactiva DTP y usa VLANs numeradas para cada cosa. Y si alguien te pregunta por qué, diles que CONRAD se lo dijo."
 
-Varias marcas usan VLANs numeradas como estándar para evitar la VLAN 1 (Cisco recomienda reservarla y usar VLANs de datos como 10/20/30). Los detalles de hardening los verás en el [punto 6 de la UD5](/ApuntesRedes/05-trunking-inter-vlan/06-seguridad-en-vlans).
+Varias marcas usan VLANs numeradas como estándar para evitar la VLAN 1 (Cisco recomienda reservarla y usar VLANs de datos como 10/20/30). Los detalles de hardening los verás en el [punto 6 de trunking e inter-VLAN](/ApuntesRedes/05-trunking-inter-vlan/06-seguridad-en-vlans).
 
 ---
 

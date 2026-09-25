@@ -5,7 +5,7 @@ description: Routing a velocidad de hardware dentro del propio switch ⚡
 
 <p><small>Routing a velocidad de hardware dentro del propio switch ⚡</small></p>
 
-> 🗺️ **Estás en:** 🌉 **UD5 · Trunking y enrutamiento inter-VLAN** → 4 · Switch capa 3 y SVIs
+> 🗺️ **Estás en:** 🌉 **Trunking y enrutamiento inter-VLAN** → 4 · Switch capa 3 y SVIs
 
 ---
 
@@ -108,7 +108,7 @@ Switch(config-if)# no shutdown
 Switch(config)# ip default-gateway 10.0.99.1   # solo switch capa 2 (los de capa 3 rutean por rutas conectadas)
 ```
 
-Y como bonus, un switch capa 3 te permite **rutas estáticas o dinámicas hacia otros routers** (lo que enlaza con la UD6): puedes anunciar varias subredes y conectar el campus a Internet. Por eso los switches capa 3 modernos han jubilado al router en muchas redes de distribución.
+Y como bonus, un switch capa 3 te permite **rutas estáticas o dinámicas hacia otros routers** (lo que enlaza con el enrutamiento estático): puedes anunciar varias subredes y conectar el campus a Internet. Por eso los switches capa 3 modernos han jubilado al router en muchas redes de distribución.
 
 ---
 

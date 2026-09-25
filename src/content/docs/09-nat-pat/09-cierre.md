@@ -5,7 +5,7 @@ description: "El cierre práctico de NAT: sé el router, laboratorio y entrevist
 
 <p><small>El cierre práctico de NAT: sé el router, laboratorio y entrevista 🧠</small></p>
 
-> 🗺️ **Estás en:** 🌐 **UD9 · NAT y PAT** → 9 · Cierre: consolida lo aprendido
+> 🗺️ **Estás en:** 🌐 **NAT y PAT** → 9 · Cierre: consolida lo aprendido
 
 ---
 
@@ -227,7 +227,7 @@ Depende del router y del tiempo de expiración. Teóricamente, con 65535 puertos
 
 *El paquete es descartado por falta de reglas de acceso.*
 
-**PRÓXIMAMENTE EN UD10:** *Servicios de red: DHCP, DNS y NTP. Porque una red sin DHCP reparte IPs a mano, sin DNS navega por números y sin NTP ni sabe qué hora es. Tu NAT recién configurado necesita a los tres para no volverse loco.*
+**PRÓXIMAMENTE:** *Servicios de red: DHCP, DNS y NTP. Porque una red sin DHCP reparte IPs a mano, sin DNS navega por números y sin NTP ni sabe qué hora es. Tu NAT recién configurado necesita a los tres para no volverse loco.*
 
 ---
 
@@ -245,4 +245,4 @@ Depende del router y del tiempo de expiración. Teóricamente, con 65535 puertos
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/09-nat-pat) · **Anterior:** [8 · Configuración completa](/ApuntesRedes/09-nat-pat/08-configuracion-completa) · **Siguiente:** [UD10 · Servicios de red: DHCP, DNS y NTP](/ApuntesRedes/10-servicios-red)
+📚 [Volver al índice de la unidad](/ApuntesRedes/09-nat-pat) · **Anterior:** [8 · Configuración completa](/ApuntesRedes/09-nat-pat/08-configuracion-completa) · **Siguiente:** [Servicios de red: DHCP, DNS y NTP](/ApuntesRedes/10-servicios-red)

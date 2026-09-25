@@ -5,7 +5,7 @@ description: Por qué el routing estático no escala y qué ganas con lo dinámi
 
 <p><small>Por qué el routing estático no escala y qué ganas con lo dinámico 🧭</small></p>
 
-> 🗺️ **Estás en:** 🗣️ **UD7 · Enrutamiento dinámico con OSPF** → 1 · De estático a dinámico
+> 🗺️ **Estás en:** 🗣️ **Enrutamiento dinámico con OSPF** → 1 · De estático a dinámico
 
 ---
 
@@ -13,7 +13,7 @@ description: Por qué el routing estático no escala y qué ganas con lo dinámi
 
 > El **routing estático** funciona porque un administrador escribe cada ruta a mano; el **routing dinámico** funciona porque los propios routers intercambian información y construyen sus tablas solos, sin intervención humana.
 
-En la [UD6 · Routing y ACLs](/ApuntesRedes/06-enrutamiento-estatico) escribiste rutas con `ip route` una a una. Funcionan, pero imagina que la empresa crece: 50 routers, 200 redes, y cada vez que cae un enlace tienes que saltar a la consola a corregir rutas. Ese es el problema que resuelve este punto.
+En la [unidad de enrutamiento estático](/ApuntesRedes/06-enrutamiento-estatico) escribiste rutas con `ip route` una a una. Funcionan, pero imagina que la empresa crece: 50 routers, 200 redes, y cada vez que cae un enlace tienes que saltar a la consola a corregir rutas. Ese es el problema que resuelve este punto.
 
 ---
 

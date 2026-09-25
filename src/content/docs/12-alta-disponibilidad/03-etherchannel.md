@@ -5,7 +5,7 @@ description: Varios cables, un solo enlace gigante ⚡
 
 <p><small>Varios cables, un solo enlace gigante ⚡</small></p>
 
-> 🗺️ **Estás en:** 🔁 **UD12 · Alta disponibilidad y redundancia** → 03 · EtherChannel
+> 🗺️ **Estás en:** 🔁 **Alta disponibilidad y redundancia** → 03 · EtherChannel
 
 ---
 

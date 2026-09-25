@@ -5,7 +5,7 @@ description: Tu chuleta rápida de términos de red 📖
 
 <p><small>Tu chuleta rápida de términos de red 📖</small></p>
 
-> 🗺️ **Estás en:** 🚪 **U01 · Introducción** → 09 · Glosario
+> 🗺️ **Estás en:** 🚪 **Introducción** → 09 · Glosario
 
 ---
 

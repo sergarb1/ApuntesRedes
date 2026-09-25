@@ -5,7 +5,7 @@ description: Nombres para humanos, IPs para máquinas 📖
 
 <p><small>Nombres para humanos, IPs para máquinas 📖</small></p>
 
-> 🗺️ **Estás en:** 🗄️ **UD10 · Servicios de red: DHCP, DNS y NTP** → 04 · DNS: la guía telefónica de Internet
+> 🗺️ **Estás en:** 🗄️ **Servicios de red: DHCP, DNS y NTP** → 04 · DNS: la guía telefónica de Internet
 
 ---
 
@@ -13,7 +13,7 @@ description: Nombres para humanos, IPs para máquinas 📖
 
 > **DNS** (*Domain Name System*) traduce nombres de dominio —que tú recuerdas— en direcciones IP —que los equipos necesitan— mediante un sistema jerárquico y distribuido que es, probablemente, el servicio más exitoso de la historia de Internet.
 
-En la Unidad 01 viste DNS como "el servicio que hace la web usable". Ahora lo abrimos del todo: quién resuelve, cómo se reparte el trabajo y por qué este diseño aguanta miles de millones de consultas al día sin despeñarse.
+En unidades anteriores viste DNS como "el servicio que hace la web usable". Ahora lo abrimos del todo: quién resuelve, cómo se reparte el trabajo y por qué este diseño aguanta miles de millones de consultas al día sin despeñarse.
 
 ---
 

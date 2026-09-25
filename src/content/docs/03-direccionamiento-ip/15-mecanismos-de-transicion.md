@@ -5,7 +5,7 @@ description: Dual Stack, túneles y NAT64/DNS64 para convivir durante la migraci
 
 <p><small>Dual Stack, túneles y NAT64/DNS64 para convivir durante la migración 🔀</small></p>
 
-> 🗺️ **Estás en:** 🧮 **UD3 · Direccionamiento IP y subnetting** → 15 · Mecanismos de transición
+> 🗺️ **Estás en:** 🧮 **Direccionamiento IP y subnetting** → 15 · Mecanismos de transición
 
 ---
 
@@ -68,7 +68,7 @@ Cuando tu red es **solo IPv6** (sin IPv4 en el cliente) pero quieres acceder a s
 ```
 
 - **DNS64** inventa **direcciones IPv6 sintéticas** para los registros A (IPv4): el cliente IPv6 resuelve el nombre sin problema.
-- **NAT64** traduce el tráfico real: IPv6→IPv4 hacia fuera y la respuesta IPv4→IPv6 hacia dentro. Es el *NAT inverso* de la UD9.
+- **NAT64** traduce el tráfico real: IPv6→IPv4 hacia fuera y la respuesta IPv4→IPv6 hacia dentro. Es el *NAT inverso* de la unidad de NAT.
 
 ```
   PC:  "¿example.com?"        → DNS64 genera 64:FF9B::C000:0201 (IPv6 sintética)

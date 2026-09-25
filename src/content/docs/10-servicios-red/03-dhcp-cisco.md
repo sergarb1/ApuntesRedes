@@ -5,7 +5,7 @@ description: Un pool, unas exclusiones y un helper 🧰
 
 <p><small>Un pool, unas exclusiones y un helper 🧰</small></p>
 
-> 🗺️ **Estás en:** 🗄️ **UD10 · Servicios de red: DHCP, DNS y NTP** → 03 · DHCP en Cisco y el agente de reenvío
+> 🗺️ **Estás en:** 🗄️ **Servicios de red: DHCP, DNS y NTP** → 03 · DHCP en Cisco y el agente de reenvío
 
 ---
 
@@ -101,7 +101,7 @@ ip dhcp pool VLAN20-RRHH
  default-router 192.168.20.1
 ```
 
-Con los SVIs de la [UD5](/ApuntesRedes/05-trunking-inter-vlan) configurados (192.168.10.1 y 192.168.20.1 en el switch capa 3), cada VLAN recibirá direcciones de su pool automáticamente. Recuerda que si el DHCP server está fuera, cada SVI necesita su `ip helper-address`.
+Con los SVIs de la [unidad de trunking e inter-VLAN](/ApuntesRedes/05-trunking-inter-vlan) configurados (192.168.10.1 y 192.168.20.1 en el switch capa 3), cada VLAN recibirá direcciones de su pool automáticamente. Recuerda que si el DHCP server está fuera, cada SVI necesita su `ip helper-address`.
 
 ---
 

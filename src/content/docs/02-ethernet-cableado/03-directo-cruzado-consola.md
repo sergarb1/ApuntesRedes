@@ -5,7 +5,7 @@ description: T568A vs T568B y cuándo cada cable manda 🤝
 
 <p><small>T568A vs T568B y cuándo cada cable manda 🤝</small></p>
 
-> 🗺️ **Estás en:** 📡 **UD2 · Ethernet y cableado** → 3 · Directo, cruzado y consola
+> 🗺️ **Estás en:** 📡 **Ethernet y cableado** → 3 · Directo, cruzado y consola
 
 ---
 

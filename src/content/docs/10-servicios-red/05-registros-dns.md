@@ -5,7 +5,7 @@ description: El directorio de tu dominio, fila a fila 📝
 
 <p><small>El directorio de tu dominio, fila a fila 📝</small></p>
 
-> 🗺️ **Estás en:** 🗄️ **UD10 · Servicios de red: DHCP, DNS y NTP** → 05 · Registros y zonas DNS
+> 🗺️ **Estás en:** 🗄️ **Servicios de red: DHCP, DNS y NTP** → 05 · Registros y zonas DNS
 
 ---
 

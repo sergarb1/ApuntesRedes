@@ -5,7 +5,7 @@ description: "LSA, LSDB, SPF, Router ID y Hello: la maquinaria interna de OSPF �
 
 <p><small>LSA, LSDB, SPF, Router ID y Hello: la maquinaria interna de OSPF 🧠</small></p>
 
-> 🗺️ **Estás en:** 🗣️ **UD7 · Enrutamiento dinámico con OSPF** → 3 · Conceptos OSPF
+> 🗺️ **Estás en:** 🗣️ **Enrutamiento dinámico con OSPF** → 3 · Conceptos OSPF
 
 ---
 

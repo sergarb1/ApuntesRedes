@@ -1,9 +1,9 @@
 ---
-title: Boletín UD5 — Inicial (Resuelto)
+title: Boletín de Trunking e inter-VLAN — Inicial (Resuelto)
 description: Soluciones ejercicios básicos de VLANs
 ---
 
-# ✅ Boletín UD5 — Inicial (Resuelto)
+# ✅ Boletín de Trunking e inter-VLAN — Inicial (Resuelto)
 
 ---
 

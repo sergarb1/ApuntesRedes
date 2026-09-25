@@ -1,9 +1,9 @@
 ---
-title: Boletín UD2 — Inicial
+title: Boletín de Ethernet y cableado — Inicial
 description: Ejercicios básicos de Infraestructura Física de Red (medios, cableado, OSI y trama)
 ---
 
-# 📝 Boletín UD2 — Inicial
+# 📝 Boletín de Ethernet y cableado — Inicial
 
 > Ejercicios básicos para afianzar los conceptos de medios físicos, cableado, crimpado, modelo OSI y trama Ethernet.
 
@@ -99,7 +99,7 @@ Indica además si cada frase es verdadera (V) o falsa (F) y corrige las falsas:
 
 a) OSI es el modelo de 7 capas que corre de verdad en Internet.
 b) TCP/IP es la pila real; OSI se usa como mapa para hablar y diagnosticar.
-c) Esta unidad (UD2) vive sobre todo en las capas 1 y 2.
+c) Esta unidad vive sobre todo en las capas 1 y 2.
 d) "Capa 3" y "capa Red" son sinónimos en el lenguaje de clase.
 
 ## 10. La trama Ethernet

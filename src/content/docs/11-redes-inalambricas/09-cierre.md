@@ -1,11 +1,11 @@
 ---
 title: "09 — Cierre: consolida lo aprendido"
-description: El cierre práctico de la U11, con canales, SSIDs y vecinos ruidosos 📶
+description: El cierre práctico, con canales, SSIDs y vecinos ruidosos 📶
 ---
 
-<p><small>El cierre práctico de la U11, con canales, SSIDs y vecinos ruidosos 📶</small></p>
+<p><small>El cierre práctico, con canales, SSIDs y vecinos ruidosos 📶</small></p>
 
-> 🗺️ **Estás en:** 📶 **UD11 · Redes inalámbricas** → 09 · Cierre
+> 🗺️ **Estás en:** 📶 **Redes inalámbricas** → 09 · Cierre
 
 ---
 
@@ -206,7 +206,7 @@ No: el 3 **solapa** tanto con el 1 como con el 6, así que estorbarías a dos re
 
 El portátil nómada cerró la sesión en la cafetería, el RADIUS contó su entrada y el WLC movió su sesión de AP en AP sin que el usuario notara nada. El usuario, eufórico, exclamó: "¡Este WiFi es buenísimo!" CONRAD, desde la consola del WLC, suspiró: *"Buenísimo. Diseñado. Medido. Con canales alternos y un trunk bien puesto. Pero sí, buenísimo… Presenta mi parte también, ingrato."*
 
-**PRÓXIMAMENTE EN U12:** Alta disponibilidad y redundancia: STP con EtherChannel, FHRPs (HSRP/VRRP/GLBP), stacked switches y por qué la red que "nunca falla" es la que se diseña para fallar bien. Ahora que el aire está dominado, toca que todo siga vivo cuando algo se rompe.
+**PRÓXIMAMENTE:** Alta disponibilidad y redundancia: STP con EtherChannel, FHRPs (HSRP/VRRP/GLBP), stacked switches y por qué la red que "nunca falla" es la que se diseña para fallar bien. Ahora que el aire está dominado, toca que todo siga vivo cuando algo se rompe.
 
 ---
 
@@ -223,4 +223,4 @@ El portátil nómada cerró la sesión en la cafetería, el RADIUS contó su ent
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/11-redes-inalambricas) · **Anterior:** [08 · Configuración y verificación](/ApuntesRedes/11-redes-inalambricas/08-configuracion-wlan) · **Siguiente:** [UD12 · Alta disponibilidad y redundancia](/ApuntesRedes/12-alta-disponibilidad)
+📚 [Volver al índice de la unidad](/ApuntesRedes/11-redes-inalambricas) · **Anterior:** [08 · Configuración y verificación](/ApuntesRedes/11-redes-inalambricas/08-configuracion-wlan) · **Siguiente:** [Alta disponibilidad y redundancia](/ApuntesRedes/12-alta-disponibilidad)

@@ -5,7 +5,7 @@ description: De cable suelto a latiguillo perfecto, con tester de por medio 🛠
 
 <p><small>De cable suelto a latiguillo perfecto, con tester de por medio 🛠️</small></p>
 
-> 🗺️ **Estás en:** 📡 **UD2 · Ethernet y cableado** → 4 · Crimpado y comprobación
+> 🗺️ **Estás en:** 📡 **Ethernet y cableado** → 4 · Crimpado y comprobación
 
 ---
 

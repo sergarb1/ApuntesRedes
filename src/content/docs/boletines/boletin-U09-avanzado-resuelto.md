@@ -1,9 +1,9 @@
 ---
-title: Boletín UD9 — Avanzado (Resuelto)
+title: Boletín de NAT y PAT — Avanzado (Resuelto)
 description: Soluciones ejercicios avanzados de NAT
 ---
 
-# ✅ Boletín UD9 — Avanzado (Resuelto)
+# ✅ Boletín de NAT y PAT — Avanzado (Resuelto)
 
 ---
 

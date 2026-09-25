@@ -5,7 +5,7 @@ description: Quién puede hablar a la vez y quién lo oye todo 🌐
 
 <p><small>Quién puede hablar a la vez y quién lo oye todo 🌐</small></p>
 
-> 🗺️ **Estás en:** 🔀 **UD4 · Switching y VLAN** → 3 · Dominios de colisión y broadcast
+> 🗺️ **Estás en:** 🔀 **Switching y VLAN** → 3 · Dominios de colisión y broadcast
 
 ---
 
@@ -76,7 +76,7 @@ Reglas de oro para contarlos:
   → 1 dominio de colisión, 2 dominios de broadcast
 ```
 
-> ⚠️ **Trampa clásica:** un switch conectado a otro switch NO crea un dominio de broadcast nuevo: siguen siendo uno solo. Solo el router (o un switch de capa 3 con SVIs, como verás en la [UD4](/ApuntesRedes/04-switching/08-que-es-una-vlan)) divide dominios de broadcast.
+> ⚠️ **Trampa clásica:** un switch conectado a otro switch NO crea un dominio de broadcast nuevo: siguen siendo uno solo. Solo el router (o un switch de capa 3 con SVIs, como verás en la [unidad de switching](/ApuntesRedes/04-switching/08-que-es-una-vlan)) divide dominios de broadcast.
 
 ---
 

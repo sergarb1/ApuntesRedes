@@ -1,9 +1,9 @@
 ---
-title: Boletín UD9 — Avanzado
+title: Boletín de NAT y PAT — Avanzado
 description: Ejercicios avanzados de NAT
 ---
 
-# 📝 Boletín UD9 — Avanzado
+# 📝 Boletín de NAT y PAT — Avanzado
 
 > Ejercicios que requieren comprender NAT en profundidad.
 

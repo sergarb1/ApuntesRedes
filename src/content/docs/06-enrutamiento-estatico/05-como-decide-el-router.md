@@ -5,7 +5,7 @@ description: "El cerebro detrás de cada reenvío: tabla, AD y longest prefix ma
 
 <p><small>El cerebro detrás de cada reenvío: tabla, AD y longest prefix match 🧠</small></p>
 
-> 🗺️ **Estás en:** 🧭 **UD6 · Enrutamiento estático** → 5 · Cómo decide un router
+> 🗺️ **Estás en:** 🧭 **Enrutamiento estático** → 5 · Cómo decide un router
 
 ---
 
@@ -117,4 +117,4 @@ Y entre **dos rutas de la misma máscara** hacia el mismo destino, ya no decide 
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/06-enrutamiento-estatico) · **Anterior:** [4 · Ruta por defecto](/ApuntesRedes/06-enrutamiento-estatico/04-ruta-por-defecto) · **Siguiente:** [UD7 · Enrutamiento dinámico con OSPF](/ApuntesRedes/07-ospf)
+📚 [Volver al índice de la unidad](/ApuntesRedes/06-enrutamiento-estatico) · **Anterior:** [4 · Ruta por defecto](/ApuntesRedes/06-enrutamiento-estatico/04-ruta-por-defecto) · **Siguiente:** [Enrutamiento dinámico con OSPF](/ApuntesRedes/07-ospf)

@@ -5,7 +5,7 @@ description: El cierre práctico de la unidad, con chicha y diagnóstico real �
 
 <p><small>El cierre práctico de la unidad, con chicha y diagnóstico real 🧠</small></p>
 
-> 🗺️ **Estás en:** 🔀 **UD4 · Switching y VLAN** → 10 · Cierre: consolida lo aprendido
+> 🗺️ **Estás en:** 🔀 **Switching y VLAN** → 10 · Cierre: consolida lo aprendido
 
 ---
 
@@ -210,7 +210,7 @@ Número mágico: el estándar 802.1Q permite hasta **4094 VLANs** (IDs 1-4094, r
 
 Las VLANs segmentan la red de forma efectiva: el tráfico de Ventas no es visible para RRHH, y el departamento de IT permanece aislado de Dirección. Sin embargo, la segmentación lógica no es una solución de seguridad completa: la conexión de dispositivos externos o no autorizados puede introducir riesgos (VLAN hopping, native VLAN mal puesta, VTP desbocado) que las VLANs por sí solas no mitigan. Por eso el administrador moderno configura el switch "de entrada": puertos access, DTP apagado, native VLAN alta y VTP en *off*.
 
-**PRÓXIMAMENTE EN UD5:** Las VLANs separan la red por departamentos... y ahora toca decidir **quién puede cruzar** esas fronteras. En la UD5 los **trunks 802.1Q** y el **encaminamiento inter-VLAN** se encargan de que las VLANs puedan hablarse: enlaces troncales, router-on-a-stick y switch capa 3.
+**PRÓXIMAMENTE:** Las VLANs separan la red por departamentos... y ahora toca decidir **quién puede cruzar** esas fronteras. En la unidad siguiente los **trunks 802.1Q** y el **encaminamiento inter-VLAN** se encargan de que las VLANs puedan hablarse: enlaces troncales, router-on-a-stick y switch capa 3.
 
 ---
 
@@ -229,4 +229,4 @@ Las VLANs segmentan la red de forma efectiva: el tráfico de Ventas no es visibl
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/04-switching) · **Anterior:** [9 · Tipos de VLAN](/ApuntesRedes/04-switching/09-tipos-de-vlan) · **Siguiente:** [UD5 · Trunking y enrutamiento inter-VLAN](/ApuntesRedes/05-trunking-inter-vlan)
+📚 [Volver al índice de la unidad](/ApuntesRedes/04-switching) · **Anterior:** [9 · Tipos de VLAN](/ApuntesRedes/04-switching/09-tipos-de-vlan) · **Siguiente:** [Trunking y enrutamiento inter-VLAN](/ApuntesRedes/05-trunking-inter-vlan)

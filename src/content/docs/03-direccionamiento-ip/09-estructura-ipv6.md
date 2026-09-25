@@ -5,7 +5,7 @@ description: Por qué IPv6 y cómo leer sus 128 bits en 8 grupos hexadecimales �
 
 <p><small>Por qué IPv6 y cómo leer sus 128 bits en 8 grupos hexadecimales 🧬</small></p>
 
-> 🗺️ **Estás en:** 🧮 **UD3 · Direccionamiento IP y subnetting** → 9 · Estructura de IPv6
+> 🗺️ **Estás en:** 🧮 **Direccionamiento IP y subnetting** → 9 · Estructura de IPv6
 
 ---
 

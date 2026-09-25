@@ -5,7 +5,7 @@ description: Qué hay dentro de un router y cómo enciende por la mañana 💾
 
 <p><small>Qué hay dentro de un router y cómo enciende por la mañana 💾</small></p>
 
-> 🗺️ **Estás en:** 🧭 **UD6 · Enrutamiento estático** → 1 · Componentes del router
+> 🗺️ **Estás en:** 🧭 **Enrutamiento estático** → 1 · Componentes del router
 
 ---
 
@@ -13,7 +13,7 @@ description: Qué hay dentro de un router y cómo enciende por la mañana 💾
 
 > Un router es un **ordenador especializado en reenviar paquetes**: tiene CPU, memoria y sistema operativo (IOS), pero sus tripas están organizadas para no perder ni un segundo decidiendo por dónde manda cada paquete.
 
-A simple vista es una caja con LEDs parpadeantes. Por dentro es un mini-PC con una misión: **leer la dirección IP destino de cada paquete, consultar su tabla de rutas y reenviarlo** por la interfaz correcta. En la UD4 tu switch aprendía MACs; el router, en cambio, trabaja en capa 3.
+A simple vista es una caja con LEDs parpadeantes. Por dentro es un mini-PC con una misión: **leer la dirección IP destino de cada paquete, consultar su tabla de rutas y reenviarlo** por la interfaz correcta. En unidades anteriores tu switch aprendía MACs; el router, en cambio, trabaja en capa 3.
 
 Para administrarlo tendrás que saber qué memoria guarda qué, y qué pasa cuando conectas la corriente. Eso es exactamente lo que hace el router durante sus primeros segundos de vida.
 

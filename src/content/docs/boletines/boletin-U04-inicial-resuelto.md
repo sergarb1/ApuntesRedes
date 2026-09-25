@@ -1,9 +1,9 @@
 ---
-title: Boletín UD4 — Inicial (Resuelto)
+title: Boletín de Switching y VLAN — Inicial (Resuelto)
 description: Soluciones de los ejercicios básicos de Switching y STP
 ---
 
-# ✅ Boletín UD4 — Inicial (Resuelto)
+# ✅ Boletín de Switching y VLAN — Inicial (Resuelto)
 
 ---
 

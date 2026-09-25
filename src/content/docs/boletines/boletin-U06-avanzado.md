@@ -1,9 +1,9 @@
 ---
-title: Boletín UD6 — Avanzado
+title: Boletín de Enrutamiento estático — Avanzado
 description: Ejercicios avanzados de enrutamiento estático
 ---
 
-# 📝 Boletín UD6 — Avanzado
+# 📝 Boletín de Enrutamiento estático — Avanzado
 
 > Ejercicios que requieren aplicar rutas estáticas con criterio. En los difíciles tienes pista.
 

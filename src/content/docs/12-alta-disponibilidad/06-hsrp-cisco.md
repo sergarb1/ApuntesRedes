@@ -5,7 +5,7 @@ description: Manos a la IP virtual ⚙️
 
 <p><small>Manos a la IP virtual ⚙️</small></p>
 
-> 🗺️ **Estás en:** 🔁 **UD12 · Alta disponibilidad y redundancia** → 06 · HSRP en Cisco
+> 🗺️ **Estás en:** 🔁 **Alta disponibilidad y redundancia** → 06 · HSRP en Cisco
 
 ---
 

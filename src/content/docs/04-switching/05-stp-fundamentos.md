@@ -5,7 +5,7 @@ description: BPDUs, Root Bridge y el árbol sin bucles 🌳
 
 <p><small>BPDUs, Root Bridge y el árbol sin bucles 🌳</small></p>
 
-> 🗺️ **Estás en:** 🔀 **UD4 · Switching y VLAN** → 5 · STP: fundamentos
+> 🗺️ **Estás en:** 🔀 **Switching y VLAN** → 5 · STP: fundamentos
 
 ---
 

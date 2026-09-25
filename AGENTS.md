@@ -6,7 +6,7 @@ Este archivo ayuda a cualquier agente LLM (como opencode, Claude, ChatGPT, etc.)
 
 ## 📋 Descripción del proyecto
 
-Apuntes del módulo **PAR** (Planificación y Administración de Redes) para CFGS de Administración de Sistemas Informáticos en Red. 12 unidades didácticas (Unidad 01 de introducción + 11 unidades de temario, UD2–UD12) con enfoque 80% práctico y un estilo conversacional con humor. Publicado como web estática con Astro + Starlight + GitHub Pages.
+Apuntes del módulo **PAR** (Planificación y Administración de Redes) para CFGS de Administración de Sistemas Informáticos en Red. 12 unidades didácticas (introducción + 11 unidades de temario) con enfoque 80% práctico y un estilo conversacional con humor. Publicado como web estática con Astro + Starlight + GitHub Pages.
 
 ---
 
@@ -38,7 +38,7 @@ src/content/docs/09-nat-pat/…                → UD9 · NAT y PAT
 src/content/docs/10-servicios-red/…          → UD10 · Servicios: DHCP, DNS y NTP
 src/content/docs/11-redes-inalambricas/…     → UD11 · Redes inalámbricas
 src/content/docs/12-alta-disponibilidad/…    → UD12 · Alta disponibilidad
-src/content/docs/boletines/  → Ejercicios (inicial, avanzado + resueltos, por unidad U01–U12; variante `packettracer` en U02–U03)
+src/content/docs/boletines/  → Ejercicios (inicial, avanzado + resueltos, por unidad; variante `packettracer` en Ethernet y dirección IP)
 src/styles/custom.css        → CSS del tema (azul #2563eb + teal #4ecdc4, Geist Sans, glassmorphism)
 src/assets/logo.svg          → Logo
 scripts/                     → Scripts de exportación (PDF, EPUB, DOCX) y diagramas (D2)
@@ -64,10 +64,22 @@ Cada unidad `.md` debe empezar con:
 
 ```yaml
 ---
-title: U0X — Título
+title: Título de la unidad (sin prefijo "U0X —")
 description: Descripción corta 😵
 ---
 ```
+
+### Números de unidad en el texto (regla obligatoria)
+
+El contenido de las unidades **no lleva números de unidad** (`UD3`, `U05`, `Unidad 01`…) en prosa, títulos, migajas, textos de enlace ni en los títulos de los boletines: así el temario se puede reordenar o renumerar sin reescribir las unidades. En su lugar:
+
+- Referencias cruzadas → *"en unidades anteriores" / "en unidades posteriores"* o el nombre del tema (*"la unidad de dirección IP"*, *"el punto 7 de trunking e inter-VLAN"*).
+- Títulos de boletín → *"Boletín de Trunking e inter-VLAN — Avanzado"* (nombre de la unidad, no número).
+- Pie de navegación → `**Siguiente:** [Enrutamiento estático](…)` (sin `UD6 ·`).
+
+**Exentos** (navegación/identidad, sí llevan números): las etiquetas del sidebar en `astro.config.mjs` (autonumeradas) y los **nombres de fichero/URLs/rutas** (`boletin-U05-…`, `u03-…svg`).
+
+Verificación: `node scripts/check-uds.mjs` (scanner de referencias en el Markdown de `src/content/docs/` — landing y mapa incluidos — y en el texto de los SVG de `public/diagrams/`) tras cualquier edición masiva.
 
 ### Secciones obligatorias (en este orden)
 
@@ -90,13 +102,13 @@ description: Descripción corta 😵
 - **🏆 Logros** — gamificación (meter al inicio o final)
 - **🐍 Spoiler / Soluciones** — usar siempre `<details><summary>...</summary>...</details>`
 
-### Límites de contenido por unidad (UD2 y puentes)
+### Límites de contenido por unidad (Ethernet y puentes)
 
-- **UD2 vive solo en las capas 1 y 2** (medios, cable UTP/fibra, crimpado, cableado estructurado, modelo OSI como mapa teórico y trama Ethernet). No meter en profundidad: WiFi/802.11 (→ UD11), ARP, cabecera IPv4 ni fragmentación/MTU (→ UD3, ampliada en `01-estructura-ipv4.md`).
-- Se puede **nombrar** ARP o capa 3 como puente hacia UD3, sin desarrollarlos (el enlace natural es `09-trama-ethernet.md` → UD3).
-- **OSI en UD2 es "solo culturilla"**: 7 capas + OSI vs TCP/IP + "aquí estamos en 1–2"; el modelo real y lo de capa 3+ se tocan en unidades posteriores.
-- Trama Ethernet en UD2 cubre **medios guiados (802.3) y no guiados (802.11)** a alto nivel (mismas capas 1–2); el detalle WiFi va en UD11.
-- **Boletines:** si un ejercicio de UD2 toca WiFi → moverlo al boletín de UD11; si toca ARP/MTU/cabecera → al de UD3 (añadir ahí si no existe; no duplicar en UD2).
+- **La unidad de Ethernet vive solo en las capas 1 y 2** (medios, cable UTP/fibra, crimpado, cableado estructurado, modelo OSI como mapa teórico y trama Ethernet). No meter en profundidad: WiFi/802.11 (→ redes inalámbricas), ARP, cabecera IPv4 ni fragmentación/MTU (→ dirección IP, ampliada en `01-estructura-ipv4.md`).
+- Se puede **nombrar** ARP o capa 3 como puente hacia la unidad de dirección IP, sin desarrollarlos (el enlace natural es de `09-trama-ethernet.md` a dirección IP).
+- **OSI en la unidad de Ethernet es "solo culturilla"**: 7 capas + OSI vs TCP/IP + "aquí estamos en 1–2"; el modelo real y lo de capa 3+ se tocan en unidades posteriores.
+- El punto de trama Ethernet cubre **medios guiados (802.3) y no guiados (802.11)** a alto nivel (mismas capas 1–2); el detalle WiFi va en redes inalámbricas.
+- **Boletines:** si un ejercicio de Ethernet toca WiFi → moverlo al boletín de redes inalámbricas; si toca ARP/MTU/cabecera → al de dirección IP (añadir ahí si no existe; no duplicar en Ethernet).
 
 ### Estilo de escritura
 
@@ -248,15 +260,15 @@ Tres scripts en `scripts/` (idempotentes; se pueden repetir):
 - Tras la sección conceptual correspondiente del `.md`.
 - La fuente `.excalidraw` queda al lado del SVG en `public/diagrams/` para reeditar.
 
-### Diagramas U01 existentes
+### Diagramas de la introducción existentes
 
 | Fichero | Sección `.md` | Contenido |
 |---|---|---|
 | `u01-4-piezas` | `01-que-es-una-red.md` · Las 4 piezas | Topología real: Finales → Medio → Interconexión; **4. Protocolos abajo** (base) + pie con analogía del barrio |
 | `u01-escalera-ping` | `06-metodo-diagnostico.md` · Escalera del Ping | 5 peldaños 0–4 de abajo arriba + caja roja de avería |
-| `u01-mapa-curso` | `08-mapa-del-curso.md` · 12 etapas | 2 bandas de cuatrimestre, U01→UD12 con flechas |
+| `u01-mapa-curso` | `08-mapa-del-curso.md` · 12 etapas | 2 bandas de cuatrimestre, las etapas del curso con flechas |
 
-### Diagramas U02 existentes
+### Diagramas de la unidad de Ethernet existentes
 
 | Fichero | Sección `.md` | Contenido |
 |---|---|---|
@@ -271,7 +283,7 @@ Tres scripts en `scripts/` (idempotentes; se pueden repetir):
 | `u02-trama-ethernet` | `09-trama-ethernet.md` · Trama Ethernet II | MACs, EtherType, payload, FCS |
 | — | `10-cierre.md` | Cierre práctico: sin diagrama (actividades, no conceptos) |
 
-### Diagramas U03 existentes
+### Diagramas de la unidad de dirección IP existentes
 
 | Fichero | Sección `.md` | Contenido |
 |---|---|---|
@@ -286,7 +298,7 @@ Las fotos **solo proceden cuando ilustran un objeto físico real** que el alumno
 - Fuentes: **Pexels** o **Unsplash** (uso libre; no exigen atribución, pero se cita origen en esta tabla).
 - Destino: `public/photos/uXX-nombre.jpg` (jpg, ~1260 px de ancho).
 - Inserción: `![alt es-ES](/ApuntesRedes/photos/uXX-nombre.jpg)` junto a la sección conceptual; alt en español de España.
-- **De momento solo UD2 tiene fotos** (4, en los puntos 02, 04, 05 y 07). **UD3 no lleva fotos stock** (todo es abstracto: subnetting, DORA, cabeceras…). Al ampliar otra unidad, evaluar caso a caso con la regla de arriba y no saturar: 1–2 fotos por página como máximo. **Los boletines nunca llevan fotos ni diagramas** (ver ⚠️ Notas, punto 6).
+- **De momento solo la unidad de Ethernet tiene fotos** (4, en los puntos 02, 04, 05 y 07). **La unidad de dirección IP no lleva fotos stock** (todo es abstracto: subnetting, DORA, cabecenas…). Al ampliar otra unidad, evaluar caso a caso con la regla de arriba y no saturar: 1–2 fotos por página como máximo. **Los boletines nunca llevan fotos ni diagramas** (ver ⚠️ Notas, punto 6).
 
 | Fichero | `.md` | Muestra | Origen |
 |---|---|---|---|
@@ -344,7 +356,7 @@ npx astro build   # Solo Astro (si D2 NO está instalado; npm run build ejecuta 
 3. **Siempre mantener las secciones obligatorias** — cada unidad debe tener todas las secciones enumeradas arriba.
 4. **Los ejercicios SIEMPRE con solución** en `<details>`.
 5. **Laboratorios SIEMPRE con fallo intencionado** — el 80% práctico es obligatorio.
-6. **Los boletines siguen el patrón:** `inicial` (fácil) y `avanzado` (difícil), cada uno con su `-resuelto`, en `src/content/docs/boletines/` con nombre `boletin-UXX-inicial(-resuelto).md` / `boletin-UXX-avanzado(-resuelto).md`. **Son texto puro por diseño: NO llevan diagramas ni fotos** (mismo criterio en las 60 hojas U01–U12; pegar el diagrama de la unidad bajo un ejercicio de recall regalaría la respuesta). La UD3 tiene además la variante `boletin-U03-ipv6-*`. UD2 y UD3 tienen además la variante **`boletin-U02-packettracer-*` / `boletin-U03-packettracer-*`**: práctica guiada de nivel único (no es el par inicial/avanzado), 8 micro-prácticas + resuelto 1:1; se enlaza en el sidebar como grupo "· Packet Tracer" y en los índices de cada unidad.
+6. **Los boletines siguen el patrón:** `inicial` (fácil) y `avanzado` (difícil), cada uno con su `-resuelto`, en `src/content/docs/boletines/` con nombre `boletin-UXX-inicial(-resuelto).md` / `boletin-UXX-avanzado(-resuelto).md`. **Son texto puro por diseño: NO llevan diagramas ni fotos** (mismo criterio en las 60 hojas del curso; pegar el diagrama de la unidad bajo un ejercicio de recall regalaría la respuesta). La unidad de dirección IP tiene además la variante `boletin-U03-ipv6-*`. Ethernet y dirección IP tienen además la variante **`boletin-U02-packettracer-*` / `boletin-U03-packettracer-*`**: práctica guiada de nivel único (no es el par inicial/avanzado), 8 micro-prácticas + resuelto 1:1; se enlaza en el sidebar como grupo "· Packet Tracer" y en los índices de cada unidad.
 7. **El CSS no debe romperse** — probar con `npm run build` después de cambios.
 8. **CI/CD en rama `main`**.
 9. **Puppeteer** instalado para PDFs, pero con `PUPPETEER_SKIP_DOWNLOAD=true` en CI. En local, si la versión cacheada de Chrome falla, se usa el Chrome del sistema con `PUPPETEER_EXECUTABLE_PATH="C:\Program Files\Google\Chrome\Application\chrome.exe"`.
@@ -365,6 +377,7 @@ npx astro build   # Solo Astro (si D2 NO está instalado; npm run build ejecuta 
 ## 🧪 Checklist para nueva unidad
 
 - [ ] Frontmatter (title, description con emoji)
+- [ ] Sin números de unidad en prosa ni títulos (`node scripts/check-uds.mjs`)
 - [ ] 🗺️ Ruta del paquete actualizada
 - [ ] 📚 Contenidos listados
 - [ ] ⭐ Sé el Paquete con 2-3 opciones

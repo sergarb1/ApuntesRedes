@@ -5,7 +5,7 @@ description: Los protocolos que propagan VLANs... y los riesgos que traen 🎭
 
 <p><small>Los protocolos que propagan VLANs... y los riesgos que traen 🎭</small></p>
 
-> 🗺️ **Estás en:** 🌉 **UD5 · Trunking y enrutamiento inter-VLAN** → 5 · VTP y DTP
+> 🗺️ **Estás en:** 🌉 **Trunking y enrutamiento inter-VLAN** → 5 · VTP y DTP
 
 ---
 

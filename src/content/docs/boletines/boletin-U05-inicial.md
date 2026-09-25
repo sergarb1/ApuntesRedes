@@ -1,9 +1,9 @@
 ---
-title: Boletín UD5 — Inicial
+title: Boletín de Trunking e inter-VLAN — Inicial
 description: Ejercicios básicos de VLANs
 ---
 
-# 📝 Boletín UD5 — Inicial
+# 📝 Boletín de Trunking e inter-VLAN — Inicial
 
 > Ejercicios básicos para afianzar los conceptos de VLANs: tipos, 802.1Q, trunks e inter-VLAN routing.
 

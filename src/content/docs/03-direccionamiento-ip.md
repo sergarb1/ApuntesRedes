@@ -1,17 +1,17 @@
 ---
-title: U03 — Direccionamiento IP y subnetting
+title: Direccionamiento IP y subnetting
 description: La calculadora maldita, ahora con IPv6 🧮
 ---
 
 <p><small>La calculadora maldita, ahora con IPv6 🧮</small></p>
 
-> 🗺️ **El mapa del curso:** 📡 Ethernet → **🧮 AQUÍ ESTÁS (U03)** → 🔀 Switching → 🌉 Trunking
+> 🗺️ **El mapa del curso:** 📡 Ethernet → **🧮 AQUÍ ESTÁS** → 🔀 Switching → 🌉 Trunking
 
 ---
 
 *Dos ordenadores se cruzan en un cable: uno quiere hablar, el otro se llama 192.168.1.10 y ni siquiera sabe si la pregunta es para él. El direccionamiento IP es el sistema postal de las redes: sin direcciones bien repartidas, los paquetes acaban en el buzón equivocado o en ninguno. Y cuando una red crece, el arte de partirla en subredes se convierte en la habilidad más pedida (y más temida) de la profesión.*
 
-Bienvenido a la unidad que convierte binario en oficio. Primero dominas IPv4: estructura de la dirección y de la cabecera, ARP, fragmentación, clases, máscaras, CIDR, VLSM y el subnetting clásico con papel y boli. Después saltas al futuro: IPv6, su notación, sus tipos de dirección, SLAAC, DHCPv6 y los mecanismos que permiten que ambos mundos convivan. DHCP aparece aquí en versión introductoria; en la [UD10](/ApuntesRedes/10-servicios-red) lo despliega a fondo. ARP, la cabecera y la fragmentación cierran el puente con la trama de la [UD2](/ApuntesRedes/02-ethernet-cableado/09-trama-ethernet).
+Bienvenido a la unidad que convierte binario en oficio. Primero dominas IPv4: estructura de la dirección y de la cabecera, ARP, fragmentación, clases, máscaras, CIDR, VLSM y el subnetting clásico con papel y boli. Después saltas al futuro: IPv6, su notación, sus tipos de dirección, SLAAC, DHCPv6 y los mecanismos que permiten que ambos mundos convivan. DHCP aparece aquí en versión introductoria; en la [unidad de servicios de red](/ApuntesRedes/10-servicios-red) lo despliega a fondo. ARP, la cabecera y la fragmentación cierran el puente con la trama de la [unidad de Ethernet y cableado](/ApuntesRedes/02-ethernet-cableado/09-trama-ethernet).
 
 Esta unidad se lee como un **libro de 18 capítulos**: los 17 primeros son teoría en progresión (el último es actualidad pura: IPv8) y el 18º es el aterrizaje práctico.
 
@@ -95,4 +95,4 @@ Al terminar, serás capaz de:
 - ¿Ya calculas subredes? Salta directo a la parte IPv6 en el [punto 9](/ApuntesRedes/03-direccionamiento-ip/09-estructura-ipv6).
 
 **📍 Primer punto:** [01 · Estructura de IPv4](/ApuntesRedes/03-direccionamiento-ip/01-estructura-ipv4)  
-**⏭️ Al acabar la unidad, continúa en [UD4 · Switching y VLAN](/ApuntesRedes/04-switching).**
+**⏭️ Al acabar la unidad, continúa en [Switching y VLAN](/ApuntesRedes/04-switching).**

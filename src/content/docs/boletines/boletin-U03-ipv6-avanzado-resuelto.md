@@ -1,9 +1,9 @@
 ---
-title: Boletín UD3 · IPv6 — Avanzado (Resuelto)
+title: Boletín de Direccionamiento IP · IPv6 — Avanzado (Resuelto)
 description: Soluciones ejercicios avanzados de IPv6 y Transición
 ---
 
-# ✅ Boletín UD3 · IPv6 — Avanzado (Resuelto)
+# ✅ Boletín de Direccionamiento IP · IPv6 — Avanzado (Resuelto)
 
 ---
 

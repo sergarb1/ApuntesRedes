@@ -1,9 +1,9 @@
 ---
-title: Boletín UD8 — Avanzado
+title: Boletín de ACL y seguridad — Avanzado
 description: Ejercicios avanzados de ACLs y seguridad de red
 ---
 
-# 📝 Boletín UD8 — Avanzado
+# 📝 Boletín de ACL y seguridad — Avanzado
 
 > Ejercicios que requieren aplicar ACLs con criterio. En los difíciles tienes pista.
 

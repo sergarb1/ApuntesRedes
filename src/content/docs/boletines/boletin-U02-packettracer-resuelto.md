@@ -1,9 +1,9 @@
 ---
-title: Boletín UD2 — Packet Tracer resuelto
+title: Boletín de Ethernet y cableado — Packet Tracer resuelto
 description: Soluciones paso a paso de las prácticas de capas 1 y 2 en Packet Tracer ✅
 ---
 
-# ✅ Boletín UD2 — Packet Tracer resuelto
+# ✅ Boletín de Ethernet y cableado — Packet Tracer resuelto
 
 > Misma numeración y enunciados que el [por-resolver](/ApuntesRedes/boletines/boletin-u02-packettracer). Aquí tienes el camino completo: qué clicar, qué comando pegar y qué deberías ver.
 
@@ -121,7 +121,7 @@ En cada sobre, pestaña *Outbound PDU details*: confirma **EtherType** y direcci
 | Source | MAC de `PC0` |
 | Type | **IPv4 (0x0800)** |
 
-El EtherType `0x0800` es el que ya viste en la trama Ethernet de la UD2: el payload de esa trama es un paquete IPv4.
+El EtherType `0x0800` es el que ya viste en la trama Ethernet de esta unidad: el payload de esa trama es un paquete IPv4.
 
 ---
 
@@ -163,13 +163,13 @@ Who has 192.168.1.11? Tell 192.168.1.10   (request, EtherType 0x0806)
 
 ## 📋 Criterios de esta práctica
 
-| Ejercicio | Concepto UD2 | Capa |
+| Ejercicio | Concepto | Capa |
 |---|---|---|
 | 1–2 | Cables directo/cruzado, montaje | 1 |
 | 3 | Tabla MAC, switches | 2 |
 | 4 | Diagnóstico de fallo físico | 1 / OSI |
 | 5 | Simulation mode, flujo de la trama | 1–2 |
-| 6–7 | EtherType, MACs, ARP (aporte a UD3) | 2 |
+| 6–7 | EtherType, MACs, ARP (aporte a la unidad siguiente) | 2 |
 | 8 | Hub vs switch | 1–2 |
 
 ---

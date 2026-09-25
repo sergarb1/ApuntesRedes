@@ -5,7 +5,7 @@ description: Cuando NAT rompe aplicaciones, ALGs y compañía ⚠️
 
 <p><small>Cuando NAT rompe aplicaciones, ALGs y compañía ⚠️</small></p>
 
-> 🗺️ **Estás en:** 🌐 **UD9 · NAT y PAT** → 7 · Problemas y soluciones
+> 🗺️ **Estás en:** 🌐 **NAT y PAT** → 7 · Problemas y soluciones
 
 ---
 

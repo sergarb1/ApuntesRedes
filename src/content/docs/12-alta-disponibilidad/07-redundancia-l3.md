@@ -5,7 +5,7 @@ description: Dos caminos a Internet y una decisión automática 🛣️
 
 <p><small>Dos caminos a Internet y una decisión automática 🛣️</small></p>
 
-> 🗺️ **Estás en:** 🔁 **UD12 · Alta disponibilidad y redundancia** → 07 · Redundancia en capa 3
+> 🗺️ **Estás en:** 🔁 **Alta disponibilidad y redundancia** → 07 · Redundancia en capa 3
 
 ---
 
@@ -17,7 +17,7 @@ description: Dos caminos a Internet y una decisión automática 🛣️
 
 ## 🛣️ Rutas flotantes: la ruta de emergencia
 
-Recuerda la [UD6](/ApuntesRedes/06-enrutamiento-estatico): cada ruta tiene una **distancia administrativa** (AD). Dos rutas a la misma red con AD distinta no compiten: la de menor AD gana y la otra **duerme** hasta que la primera muere. Eso es una ruta flotante:
+Recuerda la [unidad de enrutamiento estático](/ApuntesRedes/06-enrutamiento-estatico): cada ruta tiene una **distancia administrativa** (AD). Dos rutas a la misma red con AD distinta no compiten: la de menor AD gana y la otra **duerme** hasta que la primera muere. Eso es una ruta flotante:
 
 ```
 R1(config)# ip route 0.0.0.0 0.0.0.0 203.0.113.1        ← ISP-1 (AD 1, la clásica)
@@ -84,7 +84,7 @@ Este patrón —SLA + track + ruta— es el "análisis de vida" de tu salida a I
 
 ## 🌐 Y el routing dinámico, ¿no era la redundancia?
 
-También. Si tu red interna corre OSPF (UD7), la redundancia entre routers internos es automática: OSPF descubre caminos alternativos y reconverge. Los patrones de esta unidad complementan al dinámico en dos sitios concretos:
+También. Si tu red interna corre OSPF, la redundancia entre routers internos es automática: OSPF descubre caminos alternativos y reconverge. Los patrones de esta unidad complementan al dinámico en dos sitios concretos:
 
 - **Borde:** hacia Internet casi siempre hay rutas estáticas (no anuncias tu tabla al ISP): flotantes y SLA+track son la herramienta.
 - **Afinado fino:** OSPF elige por coste; si quieres manipular caminos (primario/respaldo entre sucursales), ajustas costes o metes rutas estáticas específicas.

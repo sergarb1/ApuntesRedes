@@ -1,9 +1,9 @@
 ---
-title: Boletín UD2 — Inicial (Resuelto)
+title: Boletín de Ethernet y cableado — Inicial (Resuelto)
 description: Soluciones de los ejercicios básicos de Infraestructura Física, OSI y trama Ethernet
 ---
 
-# ✅ Boletín UD2 — Inicial (Resuelto)
+# ✅ Boletín de Ethernet y cableado — Inicial (Resuelto)
 
 ---
 

@@ -1,9 +1,9 @@
 ---
-title: Boletín UD2 — Packet Tracer
+title: Boletín de Ethernet y cableado — Packet Tracer
 description: Prácticas guiadas de capas 1 y 2 en Packet Tracer (y un toque de Wireshark) 🖥️
 ---
 
-# 🖥️ Boletín UD2 — Packet Tracer
+# 🖥️ Boletín de Ethernet y cableado — Packet Tracer
 
 > **Variante práctica de nivel único** (no es el par inicial/avanzado). Ocho micro-prácticas de baja dificultad en **Packet Tracer** para afianzar medios, cableado, capas 1–2 y la trama Ethernet. Una o dos abres Wireshark (o el *Simulation mode* de PT) para mirar EtherTypes y MACs. El resuelto está justo al lado: úsalo solo cuando te atasques.
 
@@ -21,7 +21,7 @@ Monta en PT **3 PCs** (`PC0`, `PC1`, `PC2`) conectadas a un **Switch0**. Usa el 
 
 Conecta **solo `PC0` y `PC1`** con un cable entre sus interfaces Ethernet (sin switch). Intenta un `ping`. Si no funciona, prueba con el otro tipo de cable de cobre de PT y vuelve a probar.
 
-> 💡 **Pista:** recuerda la regla de la UD2 (directo vs cruzado) y mira si tu versión de PT aplica Auto-MDI-X.
+> 💡 **Pista:** recuerda la regla de esta unidad (directo vs cruzado) y mira si tu versión de PT aplica Auto-MDI-X.
 
 ## 3. La tabla MAC del switch
 
@@ -57,19 +57,19 @@ En la misma captura del ejercicio 6, localiza los mensajes **ARP** (EtherType `0
 
 Monta dos mini-topologías en paralelo: (A) 3 PCs + **hub**; (B) 3 PCs + **switch**. Desde una PC, observa el tráfico en *Simulation mode* o con captura: ¿a quién llegan las tramas en cada caso? Resume la diferencia en una frase.
 
-> 💡 **Pista:** relaciona el resultado con los dominios de colisión y de broadcast de la UD2.
+> 💡 **Pista:** relaciona el resultado con los dominios de colisión y de broadcast ya vistos.
 
 ---
 
 ## 📋 Criterios de esta práctica
 
-| Ejercicio | Concepto UD2 | Capa |
+| Ejercicio | Concepto | Capa |
 |---|---|---|
 | 1–2 | Cables directo/cruzado, montaje | 1 |
 | 3 | Tabla MAC, switches | 2 |
 | 4 | Diagnóstico de fallo físico | 1 / OSI |
 | 5 | Simulation mode, flujo de la trama | 1–2 |
-| 6–7 | EtherType, MACs, ARP (aporte a UD3) | 2 |
+| 6–7 | EtherType, MACs, ARP (aporte a la unidad siguiente) | 2 |
 | 8 | Hub vs switch | 1–2 |
 
 ---

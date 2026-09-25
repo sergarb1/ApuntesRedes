@@ -1,9 +1,9 @@
 ---
-title: Boletín UD2 — Avanzado
+title: Boletín de Ethernet y cableado — Avanzado
 description: Ejercicios avanzados de Infraestructura Física, diagnóstico por capas y trama
 ---
 
-# 📝 Boletín UD2 — Avanzado
+# 📝 Boletín de Ethernet y cableado — Avanzado
 
 > Ejercicios que requieren aplicar los conceptos de cableado, medios físicos, OSI y trama de forma combinada. En los difíciles tienes pista.
 
@@ -105,4 +105,4 @@ a) ¿En qué capa OSI (1, 2 o 3) sitúas el fallo? Justifica con la PDU afectada
 b) ¿Qué comando o herramienta usarías primero?
 c) En el Síntoma A, ¿por qué el fallo NO está en la capa 1 si el tester ha pasado?
 
-**Pista:** escalera 1→2→3 de UD1; si hay LED y tester OK, la capa 1 local funciona y el problema sube a la trama o más arriba.
+**Pista:** escalera 1→2→3 de la unidad inicial; si hay LED y tester OK, la capa 1 local funciona y el problema sube a la trama o más arriba.

@@ -5,7 +5,7 @@ description: Siete capas de teoría para ubicar dónde juega Ethernet 🧅
 
 <p><small>Siete capas de teoría para ubicar dónde juega Ethernet 🧅</small></p>
 
-> 🗺️ **Estás en:** 📡 **UD2 · Ethernet y cableado** → 8 · El modelo OSI
+> 🗺️ **Estás en:** 📡 **Ethernet y cableado** → 8 · El modelo OSI
 
 ---
 
@@ -35,26 +35,26 @@ La regla de oro: **cada capa solo habla con la suya** (por encima y por debajo).
 | 2 | **Enlace** | Entrega en la red local por MAC | **Trama** | Ethernet, switches |
 | 1 | **Física** | Bits por el medio (cable, fibra, aire) | **Bits** | Cable UTP, fibra, radio |
 
-> 💡 **Truco de los tres abajo:** **1** = bits, **2** = trama, **3** = paquete. Si recuerdas esa escalera, ya puedes situar cualquier fallo con la [escalera del ping de UD1](/ApuntesRedes/01-introduccion/06-metodo-diagnostico).
+> 💡 **Truco de los tres abajo:** **1** = bits, **2** = trama, **3** = paquete. Si recuerdas esa escalera, ya puedes situar cualquier fallo con la [escalera del ping](/ApuntesRedes/01-introduccion/06-metodo-diagnostico).
 
-![Modelo OSI de 7 capas con la marca de dónde estamos: las capas 1 y 2 de la UD2](/ApuntesRedes/diagrams/u02-modelo-osi.svg)
+![Modelo OSI de 7 capas con la marca de dónde estamos: las capas 1 y 2](/ApuntesRedes/diagrams/u02-modelo-osi.svg)
 
 ---
 
 ## 📍 ¿Dónde estamos en el mapa?
 
-Esta unidad (UD2) es **casi toda capa 1 y capa 2**:
+Esta unidad es **casi toda capa 1 y capa 2**:
 
 - **Capa 1 — Física:** los medios que ya viste (cobre, fibra, aire), atenuación, crimpado, cableado del edificio.
-- **Capa 2 — Enlace:** la **trama Ethernet** (punto 9): MACs, EtherType, FCS. El switch de la [UD4](/ApuntesRedes/04-switching/01-que-es-un-switch) también vive aquí.
+- **Capa 2 — Enlace:** la **trama Ethernet** (punto 9): MACs, EtherType, FCS. El switch de la [unidad de switching](/ApuntesRedes/04-switching/01-que-es-un-switch) también vive aquí.
 
-La **capa 3 (IP)** es la [UD3](/ApuntesRedes/03-direccionamiento-ip); el direccionamiento y las rutas **no** son tema de cableado.
+La **capa 3 (IP)** es la [unidad de dirección IP](/ApuntesRedes/03-direccionamiento-ip); el direccionamiento y las rutas **no** son tema de cableado.
 
 | Si esto falla… | Estás en… | Unidad |
 |---|---|---|
-| Cable suelto, LED apagado, señal débil | Capa 1 | UD2 (puntos 1–7) |
-| Trama con FCS mal, MAC desconocida | Capa 2 | UD2 (punto 9) y UD4 |
-| No hay ping a la IP de la red vecina | Capa 3 | UD3, UD6, UD7 |
+| Cable suelto, LED apagado, señal débil | Capa 1 | Aquí (puntos 1–7) |
+| Trama con FCS mal, MAC desconocida | Capa 2 | Aquí (punto 9) y en unidades posteriores |
+| No hay ping a la IP de la red vecina | Capa 3 | En unidades posteriores |
 
 ---
 
@@ -81,14 +81,14 @@ En la práctica:
 ## 🧠 Mini-chequeo
 
 1. ¿Qué PDU viaja en la capa 1, en la 2 y en la 3?
-2. ¿En qué capas "vive" esta unidad (UD2) y por qué?
+2. ¿En qué capas "vive" esta unidad y por qué?
 3. ¿ OSI y TCP/IP son protocolos o modelos? ¿Cuál se usa de verdad en Internet?
 
 <details>
 <summary>🔄 Respuestas</summary>
 
 1. **1 → bits · 2 → trama · 3 → paquete.**
-2. **Capas 1 y 2:** medios y cableado (1) y trama Ethernet con MACs (2). La capa 3 (IP) es UD3.
+2. **Capas 1 y 2:** medios y cableado (1) y trama Ethernet con MACs (2). La capa 3 (IP) vive en la unidad de dirección IP.
 3. Son **modelos** (mapas). En Internet manda **TCP/IP**; OSI se usa para **nombrar** capas y diagnosticar.
 </details>
 
@@ -98,7 +98,7 @@ En la práctica:
 
 - OSI es un **modelo teórico de 7 capas** que da un vocabulario común: cada capa tiene su tarea, su PDU y sus dispositivos.
 - En el día a día corre **TCP/IP** (4–5 capas), pero seguimos diciendo "capa 2" y "capa 3" al estilo OSI.
-- La UD2 trabaja en las **capas 1 (bits) y 2 (trama Ethernet)**; la IP y las rutas son capa 3 (UD3 en adelante).
+- Esta unidad trabaja en las **capas 1 (bits) y 2 (trama Ethernet)**; la IP y las rutas son capa 3 (más adelante).
 
 ## 🐛 Vocabulario rápido
 

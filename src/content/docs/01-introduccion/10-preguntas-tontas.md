@@ -5,7 +5,7 @@ description: Las dudas que nadie se atreve a hacer en voz alta 😅
 
 <p><small>Las dudas que nadie se atreve a hacer en voz alta 😅</small></p>
 
-> 🗺️ **Estás en:** 🚪 **U01 · Introducción** → 10 · Preguntas tontas
+> 🗺️ **Estás en:** 🚪 **Introducción** → 10 · Preguntas tontas
 
 ---
 
@@ -225,7 +225,7 @@ Vertical:
 
 Un alumno se acerca tímidamente a Conrad después de clase: *"CONRAD, tengo una pregunta tonta..."*. Conrad se enciende: *"¿TONTA? ¡No hay preguntas tontas! ¡Preguntar es de listos! ¡Los que no preguntan son los que luego tocan cables sin saber y me rompen!"*. El alumno sonríe: *"Pues... ¿el WiFi es lo mismo que Internet?"*. Conrad responde: *"¡POR FIN UNA BUENA PREGUNTA! No, no es lo mismo. Y ya puedes irte a casa sabiendo algo que el 90% de los usuarios no sabe."*
 
-Y con esta pregunta "tonta" termina la Unidad 01. Has llegado hasta aquí, y eso significa que ya sabes qué es una red, cómo se monta, cómo se diagnostica y qué palabras clave necesitas. **Estás listo para la UD1.**
+Y con esta pregunta "tonta" termina la unidad. Has llegado hasta aquí, y eso significa que ya sabes qué es una red, cómo se monta, cómo se diagnostica y qué palabras clave necesitas. **Estás listo para la siguiente unidad.**
 
 ---
 

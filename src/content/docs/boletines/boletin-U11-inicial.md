@@ -1,9 +1,9 @@
 ---
-title: Boletín UD11 — Inicial
+title: Boletín de Redes inalámbricas — Inicial
 description: Ejercicios básicos de redes inalámbricas (WiFi)
 ---
 
-# 📝 Boletín UD11 — Inicial
+# 📝 Boletín de Redes inalámbricas — Inicial
 
 > Ejercicios básicos para afianzar los conceptos de redes WLAN: estándares, seguridad y diseño.
 

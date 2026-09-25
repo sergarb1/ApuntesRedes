@@ -5,7 +5,7 @@ description: Dónde poner cada AP y en qué canal 📐
 
 <p><small>Dónde poner cada AP y en qué canal 📐</small></p>
 
-> 🗺️ **Estás en:** 📶 **UD11 · Redes inalámbricas** → 05 · Cobertura y diseño
+> 🗺️ **Estás en:** 📶 **Redes inalámbricas** → 05 · Cobertura y diseño
 
 ---
 

@@ -1,9 +1,9 @@
 ---
-title: Boletín UD11 — Avanzado (Resuelto)
+title: Boletín de Redes inalámbricas — Avanzado (Resuelto)
 description: Soluciones de los ejercicios avanzados de redes inalámbricas (WiFi)
 ---
 
-# ✅ Boletín UD11 — Avanzado (Resuelto)
+# ✅ Boletín de Redes inalámbricas — Avanzado (Resuelto)
 
 ---
 

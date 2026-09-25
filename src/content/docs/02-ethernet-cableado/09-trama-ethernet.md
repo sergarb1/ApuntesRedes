@@ -5,7 +5,7 @@ description: El sobre de la capa 2, en cobre, fibra y en el aire 📦
 
 <p><small>El sobre de la capa 2, en cobre, fibra y en el aire 📦</small></p>
 
-> 🗺️ **Estás en:** 📡 **UD2 · Ethernet y cableado** → 9 · La trama Ethernet
+> 🗺️ **Estás en:** 📡 **Ethernet y cableado** → 9 · La trama Ethernet
 
 ---
 
@@ -54,9 +54,9 @@ Sobre el **cobre (UTP)** y la **fibra**, Ethernet (IEEE 802.3) usa la trama clá
 | **Payload** | 46–1500 bytes | El "carta" que viaja (el **MTU 1500** es el techo) |
 | **FCS** | 4 bytes | CRC de integridad: si no cuadra → trama **descartada** |
 
-- **MTU 1500:** no es magia de IP; es el **máximo payload que acepta la trama Ethernet**. Si los datos de arriba mandan más, la capa 3 (IPv4) **fragmenta**: lo verás en el [punto 1 de UD3](/ApuntesRedes/03-direccionamiento-ip/01-estructura-ipv4).
+- **MTU 1500:** no es magia de IP; es el **máximo payload que acepta la trama Ethernet**. Si los datos de arriba mandan más, la capa 3 (IPv4) **fragmenta**: lo verás en el [punto 1 de dirección IP](/ApuntesRedes/03-direccionamiento-ip/01-estructura-ipv4).
 - **FCS:** un hash de 4 bytes. El switch y la NIC lo calculan al enviar y lo comprueban al recibir; un cable sucio o una interferencia = FCS malo = trama fuera.
-- **EtherType `0x0806`:** significa *"dentro de esto hay un mensaje ARP"*. **ARP** (request broadcast, reply unicast, IP→MAC) se explica en el [punto 1 de UD3](/ApuntesRedes/03-direccionamiento-ip/01-estructura-ipv4); aquí solo nos interesa que **la trama ya sabe etiquetar su contenido**.
+- **EtherType `0x0806`:** significa *"dentro de esto hay un mensaje ARP"*. **ARP** (request broadcast, reply unicast, IP→MAC) se explica en el [punto 1 de dirección IP](/ApuntesRedes/03-direccionamiento-ip/01-estructura-ipv4); aquí solo nos interesa que **la trama ya sabe etiquetar su contenido**.
 
 ![Trama Ethernet (Ethernet II): MACs, EtherType, payload y FCS](/ApuntesRedes/diagrams/u02-trama-ethernet.svg)
 
@@ -79,7 +79,7 @@ El WiFi **también es capa 2**: sin trama no hay entrega local, con cable o sin 
 
 **Lo que no cambia:** al otro lado, la tarjeta de red (o el chip WiFi) **reconstruye una trama válida** para entregarla a la capa 3. Arriba de 802.11, el mundo IP ni se entera de si venías de un RJ45 o de una antena.
 
-> 🔗 Los detalles de 802.11 (canales, asociación, seguridad) están en la [UD11 · Redes inalámbricas](/ApuntesRedes/11-redes-inalambricas/01-medio-inalambrico). Aquí solo te queda la idea: **misma capa  diferente trama**.
+> 🔗 Los detalles de 802.11 (canales, asociación, seguridad) están en la [unidad de redes inalámbricas](/ApuntesRedes/11-redes-inalambricas/01-medio-inalambrico). Aquí solo te queda la idea: **misma capa, diferente trama**.
 
 ---
 
@@ -104,7 +104,7 @@ El WiFi **también es capa 2**: sin trama no hay entrega local, con cable o sin 
 <summary>🔄 Respuestas</summary>
 
 1. **Dest MAC** (para quién), **Src MAC** (quién), **EtherType** (qué va dentro).
-2. **ARP** — la etiqueta lo dice; el detalle (request/reply y tabla ARP) está en el punto 1 de UD3.
+2. **ARP** — la etiqueta lo dice; el detalle (request/reply y tabla ARP) está en el punto 1 de la unidad de dirección IP.
 3. **Cambia:** estándar (802.3 vs 802.11), cabecera, número de direcciones, medio compartido. **No cambia:** sigue siendo **capa 2**, entrega local por MAC y el resto de la pila ve "una trama".
 </details>
 
@@ -114,7 +114,7 @@ El WiFi **también es capa 2**: sin trama no hay entrega local, con cable o sin 
 
 - La trama es la **PDU de la capa 2**: MACs, EtherType y FCS sobre un payload de hasta **1500 bytes**.
 - En **medios guiados** (cobre/fibra) manda **802.3 Ethernet**; en **no guiados** (aire), **802.11** con otra cabecera, **misma capa**.
-- El EtherType etiqueta el contenido (IPv4, IPv6, ARP…); ARP se estudia a fondo en UD3.
+- El EtherType etiqueta el contenido (IPv4, IPv6, ARP…); ARP se estudia a fondo en la unidad de dirección IP.
 
 ## 🐛 Vocabulario rápido
 

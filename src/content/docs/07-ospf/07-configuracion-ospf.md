@@ -5,7 +5,7 @@ description: Configuración básica y multiárea paso a paso 🛠️
 
 <p><small>Configuración básica y multiárea paso a paso 🛠️</small></p>
 
-> 🗺️ **Estás en:** 🗣️ **UD7 · Enrutamiento dinámico con OSPF** → 7 · Configuración OSPF
+> 🗺️ **Estás en:** 🗣️ **Enrutamiento dinámico con OSPF** → 7 · Configuración OSPF
 
 ---
 

@@ -5,7 +5,7 @@ description: Las dos reglas para acortar direcciones y por qué /64 manda ✂️
 
 <p><small>Las dos reglas para acortar direcciones y por qué /64 manda ✂️</small></p>
 
-> 🗺️ **Estás en:** 🧮 **UD3 · Direccionamiento IP y subnetting** → 10 · Compresión y prefijos
+> 🗺️ **Estás en:** 🧮 **Direccionamiento IP y subnetting** → 10 · Compresión y prefijos
 
 ---
 

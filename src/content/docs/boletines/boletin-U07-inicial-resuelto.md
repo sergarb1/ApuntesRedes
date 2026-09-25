@@ -1,9 +1,9 @@
 ---
-title: Boletín UD7 — Inicial (Resuelto)
+title: Boletín de OSPF — Inicial (Resuelto)
 description: Soluciones de los ejercicios básicos de Routing Dinámico
 ---
 
-# ✅ Boletín UD7 — Inicial (Resuelto)
+# ✅ Boletín de OSPF — Inicial (Resuelto)
 
 ---
 

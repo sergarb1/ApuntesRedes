@@ -1,9 +1,9 @@
 ---
-title: Boletín UD5 — Avanzado
+title: Boletín de Trunking e inter-VLAN — Avanzado
 description: Ejercicios avanzados de VLANs
 ---
 
-# 📝 Boletín UD5 — Avanzado
+# 📝 Boletín de Trunking e inter-VLAN — Avanzado
 
 > Ejercicios que requieren aplicar los conceptos de VLANs, trunks y routing de forma más profunda. En los difíciles tienes pista.
 

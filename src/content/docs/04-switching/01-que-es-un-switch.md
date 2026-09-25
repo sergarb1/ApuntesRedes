@@ -5,7 +5,7 @@ description: El cerebro de la red local, reenviando tramas sin repetirlas 🔀
 
 <p><small>El cerebro de la red local, reenviando tramas sin repetirlas 🔀</small></p>
 
-> 🗺️ **Estás en:** 🔀 **UD4 · Switching y VLAN** → 1 · ¿Qué es un switch?
+> 🗺️ **Estás en:** 🔀 **Switching y VLAN** → 1 · ¿Qué es un switch?
 
 ---
 
@@ -28,7 +28,7 @@ El switch trabaja en la **capa 2 del modelo OSI**, la capa de Enlace. Su "idioma
 | Decide con | Dirección MAC destino |
 | Dirección MAC | 48 bits, escrita en hexadecimal (ej. `AA:BB:CC:DD:EE:FF`) |
 
-Recuerda el reparto de poderes: si la decisión se toma con **IP**, el dispositivo es un **router** (capa 3). El switch vive un piso más abajo, en el mundo de las MACs. Cuando llegues a la [UD4 de VLANs](/ApuntesRedes/04-switching/08-que-es-una-vlan) verás que hasta los switches pueden "subir de piso" cuando trabajan en capa 3, pero eso es otro capítulo.
+Recuerda el reparto de poderes: si la decisión se toma con **IP**, el dispositivo es un **router** (capa 3). El switch vive un piso más abajo, en el mundo de las MACs. Cuando llegues al [punto de las VLANs](/ApuntesRedes/04-switching/08-que-es-una-vlan) verás que hasta los switches pueden "subir de piso" cuando trabajan en capa 3, pero eso es otro capítulo.
 
 ---
 

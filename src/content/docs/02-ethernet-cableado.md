@@ -1,11 +1,11 @@
 ---
-title: U02 — Ethernet, medios de transmisión y cableado
+title: Ethernet, medios de transmisión y cableado
 description: Donde todo viaje empieza por un cable 📡
 ---
 
 <p><small>Donde todo viaje empieza por un cable 📡</small></p>
 
-> 🗺️ **El mapa del curso:** 🚪 Introducción → **📡 AQUÍ ESTÁS (U02)** → 🧮 IP → 🔀 Switching
+> 🗺️ **El mapa del curso:** 🚪 Introducción → **📡 AQUÍ ESTÁS** → 🧮 IP → 🔀 Switching
 
 ---
 
@@ -81,8 +81,8 @@ Al terminar, serás capaz de:
 
 ## 🚪 ¿Por dónde empiezo?
 
-- ¿Vienes de la Unidad 01? Perfecto: ahí viste el mapa; aquí empieza el viaje de verdad.
+- ¿Vienes de la unidad anterior? Perfecto: ahí viste el mapa; aquí empieza el viaje de verdad.
 - ¿Ya crimpeas cables? Salta al [modelo OSI](/ApuntesRedes/02-ethernet-cableado/08-modelo-osi) y a la [trama Ethernet](/ApuntesRedes/02-ethernet-cableado/09-trama-ethernet), lo más "examen" de la unidad.
 
 **📍 Primer punto:** [01 · Medios de transmisión](/ApuntesRedes/02-ethernet-cableado/01-medios-de-transmision)  
-**⏭️ Al acabar la unidad, continúa en [UD3 · Direccionamiento IP y subnetting](/ApuntesRedes/03-direccionamiento-ip).**
+**⏭️ Al acabar la unidad, continúa en [Direccionamiento IP y subnetting](/ApuntesRedes/03-direccionamiento-ip).**

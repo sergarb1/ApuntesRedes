@@ -1,5 +1,5 @@
 ---
-title: Unidad 01 — Bienvenida al mundo de las redes
+title: Bienvenida al mundo de las redes
 description: Tu punto de partida si no has tocado una red en tu vida 🚪
 ---
 
@@ -9,11 +9,11 @@ description: Tu punto de partida si no has tocado una red en tu vida 🚪
 
 ## 👋 ¿Empiezas aquí?
 
-Estos apuntes enseñan a **planificar y administrar redes de ordenadores**. Si acabas de llegar y piensas cosas como *"¿qué es una IP?"*, *"¿el router es la caja que me da la compañía de Internet?"* o *"¿por qué mi ordenador tiene una dirección?"*, esta Unidad 01 es para ti. En diez puntos te pongo al día para que la **Unidad 02** no te suene a chino.
+Estos apuntes enseñan a **planificar y administrar redes de ordenadores**. Si acabas de llegar y piensas cosas como *"¿qué es una IP?"*, *"¿el router es la caja que me da la compañía de Internet?"* o *"¿por qué mi ordenador tiene una dirección?"*, esta primera unidad es para ti. En diez puntos te pongo al día para que la **unidad siguiente** no te suene a chino.
 
 Y si ya sabes algo de redes, igualmente vale la pena una pasada rápida: aquí definimos el vocabulario común que usaremos en todo el curso, para que todos hablemos el mismo idioma desde el minuto uno.
 
-> 🎯 **Objetivo de la Unidad 01:** llegar a la U02 sabiendo *de qué* va la fiesta, sin miedo a los términos raros y con el entorno de trabajo ya preparado.
+> 🎯 **Objetivo de la unidad:** llegar a la unidad siguiente sabiendo *de qué* va la fiesta, sin miedo a los términos raros y con el entorno de trabajo ya preparado.
 
 ---
 
@@ -38,7 +38,7 @@ Y si ya sabes algo de redes, igualmente vale la pena una pasada rápida: aquí d
 
 Estos apuntes funcionan como un **libro de aventuras técnicas**:
 
-1. **Avanza en orden.** Cada unidad enlaza con la siguiente. La Unidad 01 va antes de la U02 a propósito.
+1. **Avanza en orden.** Cada unidad enlaza con la siguiente. Lo básico va antes de lo avanzado a propósito.
 2. **No memorices, entiende.** Cada concepto se explica con analogías del día a día (el cartero, las calles de una ciudad, el correo postal). Si captas la idea, los detalles luego se recuerdan solos.
 3. **Practícalo todo.** El curso es 80% práctico. Todo lo que se lee se puede montar en Packet Tracer o probar en tu propio equipo.
 4. **No te saltes los ejercicios.** Al final de cada unidad hay "Atrévete a pensar", un crucigrama y un boletín. Hacerlos es lo que convierte "creo que lo sé" en "lo sé de verdad".
@@ -48,11 +48,11 @@ Estos apuntes funcionan como un **libro de aventuras técnicas**:
 
 ---
 
-## 🏆 Logros de la Unidad 01
+## 🏆 Logros de la unidad
 
 | Logro | Cómo conseguirlo |
 |---|---|
-| 🏅 **Turista informado** | Leer la Unidad 01 completa sin saltarte ningún punto |
+| 🏅 **Turista informado** | Leer la unidad completa sin saltarte ningún punto |
 | 🏅 **Instalador relámpago** | Tener Packet Tracer funcionando y montar tu primera red en un rato |
 | 🏅 **Método en la cabeza** | Recordar los pasos del método de diagnóstico sin mirar |
 | 🏅 **Glosario exprés** | Explicar 10 términos del glosario con tus propias palabras |
@@ -73,6 +73,6 @@ Si una o las tres te han hecho dudar, **eras el público perfecto**. Resolvemos 
 
 ## 🎬 Última cosa antes de empezar
 
-La Unidad 01 es el vestíbulo de este curso. No tiene poscréditos propios: el vestíbulo no es una unidad con cierre, pero tienes delante una puerta abierta: la primera página de verdad.
+Esta unidad es el vestíbulo de este curso. No tiene poscréditos propios: el vestíbulo no es una unidad con cierre, pero tienes delante una puerta abierta: la primera página de verdad.
 
 **📍 Siguiente punto:** [01 · ¿Qué es una red?](/ApuntesRedes/01-introduccion/01-que-es-una-red)

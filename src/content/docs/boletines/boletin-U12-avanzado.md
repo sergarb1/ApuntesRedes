@@ -1,9 +1,9 @@
 ---
-title: Boletín UD12 — Avanzado
+title: Boletín de Alta disponibilidad — Avanzado
 description: Ejercicios avanzados de alta disponibilidad y redundancia
 ---
 
-# 📝 Boletín UD12 — Avanzado
+# 📝 Boletín de Alta disponibilidad — Avanzado
 
 > Ejercicios que requieren diseñar y diagnosticar arquitecturas redundantes. En los difíciles tienes pista.
 

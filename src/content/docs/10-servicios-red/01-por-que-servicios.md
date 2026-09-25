@@ -5,7 +5,7 @@ description: La red como plataforma, no como fin 🏗️
 
 <p><small>La red como plataforma, no como fin 🏗️</small></p>
 
-> 🗺️ **Estás en:** 🗄️ **UD10 · Servicios de red: DHCP, DNS y NTP** → 01 · Por qué necesitas servicios
+> 🗺️ **Estás en:** 🗄️ **Servicios de red: DHCP, DNS y NTP** → 01 · Por qué necesitas servicios
 
 ---
 
@@ -17,7 +17,7 @@ description: La red como plataforma, no como fin 🏗️
 
 ## 🏗️ De la infraestructura a la plataforma
 
-En las unidades anteriores levantaste el esqueleto: cables y tramas (UD2), direcciones y subredes (UD3), switches y VLANs (UD4-UD5), routers y rutas (UD6-UD7), filtrado (UD8) y salida a Internet (UD9). Ese esqueleto resuelve el problema del **transporte**: que un paquete llegue de A a B.
+En las unidades anteriores levantaste el esqueleto: cables y tramas, direcciones y subredes, switches y VLANs, routers y rutas, filtrado y salida a Internet. Ese esqueleto resuelve el problema del **transporte**: que un paquete llegue de A a B.
 
 Pero los usuarios no piden transporte; piden **trabajo hecho**: abrir una web, imprimir, iniciar sesión, guardar un archivo. Entre el transporte y el trabajo hay una capa de servicios que convierte "red que funciona" en "red que se usa":
 

@@ -1,9 +1,9 @@
 ---
-title: "Boletín UD1 — Inicial"
-description: "Ejercicios básicos de la Unidad 01: componentes, hardware, direcciones, protocolos y diagnóstico"
+title: "Boletín de Introducción — Inicial"
+description: "Ejercicios básicos: componentes, hardware, direcciones, protocolos y diagnóstico"
 ---
 
-# 📝 Boletín UD1 — Inicial
+# 📝 Boletín de Introducción — Inicial
 
 > Ejercicios sencillos para calmar motores. Si respondes esto sin mirar los apuntes, ya tienes la base del curso.
 

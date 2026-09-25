@@ -1,9 +1,9 @@
 ---
-title: Boletín UD3 — Packet Tracer resuelto
+title: Boletín de Direccionamiento IP — Packet Tracer resuelto
 description: Soluciones paso a paso de las prácticas de IP, DHCP y IPv6 en Packet Tracer ✅
 ---
 
-# ✅ Boletín UD3 — Packet Tracer resuelto
+# ✅ Boletín de Direccionamiento IP — Packet Tracer resuelto
 
 > Misma numeración y enunciados que el [por-resolver](/ApuntesRedes/boletines/boletin-u03-packettracer). Comandos, valores exactos y qué deberías ver en cada paso.
 
@@ -172,13 +172,13 @@ ping 192.168.10.11
 
 ## 📋 Criterios de esta práctica
 
-| Ejercicio | Concepto UD3 | Punto |
+| Ejercicio | Concepto | Punto |
 |---|---|---|
 | 1 | IP estática y misma subred | 1–2 |
 | 2–3 | AND, máscaras, límites de subred | 2, 5–6 |
 | 4–5 | DHCP pool, excluded, APIPA | 8 |
 | 6 | DORA paso a paso | 8 |
-| 7 | ARP (puente UD2→UD3) | 1 |
+| 7 | ARP (puente con la trama) | 1 |
 | 8 | IPv6 estático / SLAAC | 12, 16 |
 
 ---

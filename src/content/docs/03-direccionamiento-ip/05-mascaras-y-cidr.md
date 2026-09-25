@@ -5,7 +5,7 @@ description: La frontera que separa red de host, del /30 al /8 🪟
 
 <p><small>La frontera que separa red de host, del /30 al /8 🪟</small></p>
 
-> 🗺️ **Estás en:** 🧮 **UD3 · Direccionamiento IP y subnetting** → 5 · Máscaras y notación CIDR
+> 🗺️ **Estás en:** 🧮 **Direccionamiento IP y subnetting** → 5 · Máscaras y notación CIDR
 
 ---
 

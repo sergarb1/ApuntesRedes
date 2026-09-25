@@ -1,9 +1,9 @@
 ---
-title: Boletín UD10 — Inicial
+title: Boletín de Servicios de red — Inicial
 description: Ejercicios básicos de servicios de red (DHCP, DNS y NTP)
 ---
 
-# 📝 Boletín UD10 — Inicial
+# 📝 Boletín de Servicios de red — Inicial
 
 > Ejercicios básicos para afianzar los conceptos de DHCP, DNS y NTP.
 

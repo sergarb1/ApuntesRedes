@@ -1,9 +1,9 @@
 ---
-title: Boletín UD10 — Avanzado
+title: Boletín de Servicios de red — Avanzado
 description: Ejercicios avanzados de servicios de red (DHCP, DNS y NTP)
 ---
 
-# 📝 Boletín UD10 — Avanzado
+# 📝 Boletín de Servicios de red — Avanzado
 
 > Ejercicios que requieren aplicar DHCP, DNS y NTP de forma combinada. En los difíciles tienes pista.
 

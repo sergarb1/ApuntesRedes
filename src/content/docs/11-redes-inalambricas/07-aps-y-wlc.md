@@ -5,7 +5,7 @@ description: Autónomos, ligeros y el cerebro que los dirige 🧠
 
 <p><small>Autónomos, ligeros y el cerebro que los dirige 🧠</small></p>
 
-> 🗺️ **Estás en:** 📶 **UD11 · Redes inalámbricas** → 07 · APs y controladores
+> 🗺️ **Estás en:** 📶 **Redes inalámbricas** → 07 · APs y controladores
 
 ---
 
@@ -68,7 +68,7 @@ El túnel **CAPWAP** encapsula el tráfico de gestión (y, en modo central, el d
 
 ## 🏗️ Integración con la red cableada: el trunk manda
 
-Recuerda la [UD5](/ApuntesRedes/05-trunking-inter-vlan): un AP con varios SSIDs necesita un **trunk** hasta el switch, porque cada SSID vive en su VLAN:
+Recuerda la [unidad de trunking e inter-VLAN](/ApuntesRedes/05-trunking-inter-vlan): un AP con varios SSIDs necesita un **trunk** hasta el switch, porque cada SSID vive en su VLAN:
 
 ```
 Switch(config)# interface gigabitEthernet 1/0/24

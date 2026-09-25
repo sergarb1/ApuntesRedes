@@ -5,7 +5,7 @@ description: "El usuario dice «no funciona»: tú sabes dónde mirar 🔍"
 
 <p><small>El usuario dice "no funciona": tú sabes dónde mirar 🔍</small></p>
 
-> 🗺️ **Estás en:** 🗄️ **UD10 · Servicios de red: DHCP, DNS y NTP** → 08 · Diagnóstico de servicios
+> 🗺️ **Estás en:** 🗄️ **Servicios de red: DHCP, DNS y NTP** → 08 · Diagnóstico de servicios
 
 ---
 
@@ -17,7 +17,7 @@ description: "El usuario dice «no funciona»: tú sabes dónde mirar 🔍"
 
 ## 🪜 La escalera del servicio
 
-El método es el mismo que aprendiste en la Unidad 01 (la escalera del ping), pero aplicado a los servicios:
+El método es el mismo que aprendiste en unidades anteriores (la escalera del ping), pero aplicado a los servicios:
 
 ```
 1. ¿Tiene IP, máscara y gateway?          → DHCP      (ipconfig / ip addr)

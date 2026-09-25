@@ -1,9 +1,9 @@
 ---
-title: Boletín UD3 · IPv6 — Inicial (Resuelto)
+title: Boletín de Direccionamiento IP · IPv6 — Inicial (Resuelto)
 description: Soluciones ejercicios básicos de IPv6 y Transición
 ---
 
-# ✅ Boletín UD3 · IPv6 — Inicial (Resuelto)
+# ✅ Boletín de Direccionamiento IP · IPv6 — Inicial (Resuelto)
 
 ---
 

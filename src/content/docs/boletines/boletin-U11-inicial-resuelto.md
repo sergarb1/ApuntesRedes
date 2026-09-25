@@ -1,9 +1,9 @@
 ---
-title: Boletín UD11 — Inicial (Resuelto)
+title: Boletín de Redes inalámbricas — Inicial (Resuelto)
 description: Soluciones de los ejercicios básicos de redes inalámbricas (WiFi)
 ---
 
-# ✅ Boletín UD11 — Inicial (Resuelto)
+# ✅ Boletín de Redes inalámbricas — Inicial (Resuelto)
 
 ---
 

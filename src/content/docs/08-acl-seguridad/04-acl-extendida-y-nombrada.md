@@ -5,7 +5,7 @@ description: Filtrar por protocolo y puerto, horarios laborales y tráfico de re
 
 <p><small>Filtrar por protocolo y puerto, horarios laborales y tráfico de retorno con ACLs de lujo 🚀</small></p>
 
-> 🗺️ **Estás en:** 🛡️ **UD8 · ACLs y seguridad de red** → 4 · ACL extendida y nombrada
+> 🗺️ **Estás en:** 🛡️ **ACLs y seguridad de red** → 4 · ACL extendida y nombrada
 
 ---
 

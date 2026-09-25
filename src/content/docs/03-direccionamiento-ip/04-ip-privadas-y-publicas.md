@@ -5,7 +5,7 @@ description: Las direcciones que nunca salen de casa y las que se pasean por Int
 
 <p><small>Las direcciones que nunca salen de casa y las que se pasean por Internet 🏠</small></p>
 
-> 🗺️ **Estás en:** 🧮 **UD3 · Direccionamiento IP y subnetting** → 4 · IPs privadas y públicas
+> 🗺️ **Estás en:** 🧮 **Direccionamiento IP y subnetting** → 4 · IPs privadas y públicas
 
 ---
 
@@ -48,7 +48,7 @@ Moraleja: el espacio IPv4 se agotó porque **4.294 millones de direcciones se qu
 
 - Una organización usando `192.168.0.0/16` tiene **65.536 direcciones internas** sin costar ni un céntimo de espacio público.
 - Porque esas direcciones se pueden **reutilizar simultáneamente** en millones de redes distintas del planeta.
-- Y cuando un equipo de dentro necesita salir a Internet, el router hace **NAT** y le presta una IP pública a la vez (lo verás en el [punto de NAT de la UD9](/ApuntesRedes/09-nat-pat)).
+- Y cuando un equipo de dentro necesita salir a Internet, el router hace **NAT** y le presta una IP pública a la vez (lo verás en el [punto de NAT](/ApuntesRedes/09-nat-pat)).
 
 ---
 
@@ -72,9 +72,9 @@ El reparto es en pirámide: la **IANA** entrega bloques a los **RIR** (registros
 
 Ahora encajan todas las piezas:
 
-- **NAT (UD9):** el router convierte la IP privada de la LAN en su IP pública para salir. Un solo `83.45.12.78` de la oficina puede sostener cientos de PCs internos con IPs privadas distintas.
+- **NAT:** el router convierte la IP privada de la LAN en su IP pública para salir. Un solo `83.45.12.78` de la oficina puede sostener cientos de PCs internos con IPs privadas distintas.
 - **Reutilización:** dos redes pueden usar la misma `10.0.1.10` sin conflicto, porque el NAT aísla sus ámbitos. Es como dos personas llamadas "Juan" en ciudades distintas.
-- **IPv6 (UD3):** con 128 bits, cada dispositivo puede tener una dirección pública *de verdad* sin NAT. Las privadas son un apaño brillante... pero un apaño al fin y al cabo.
+- **IPv6:** con 128 bits, cada dispositivo puede tener una dirección pública *de verdad* sin NAT. Las privadas son un apaño brillante... pero un apaño al fin y al cabo.
 
 > ⚠️ **Error común de examen:** decir "las IPs privadas no se pueden usar". Falso: se usan constantemente *dentro* de la red. Lo que no pueden hacer es **circular por Internet sin traducirse**.
 
@@ -119,7 +119,7 @@ Un buen examen valora que distingas **privado** (RFC 1918, lo eliges tú al dise
 | IP privada | Dirección interna, no enrutable en Internet |
 | IP pública | Dirección única mundial, enrutable por Internet |
 | IANA | Entidad que reparte los bloques de direcciones IP globales |
-| NAT | Traducción de IP privada a pública al salir (UD9) |
+| NAT | Traducción de IP privada a pública al salir |
 
 ---
 

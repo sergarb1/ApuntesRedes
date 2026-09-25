@@ -5,7 +5,7 @@ description: Unicast, multicast y anycast; GUA, LLA, ULA y loopback 🎯
 
 <p><small>Unicast, multicast y anycast; GUA, LLA, ULA y loopback 🎯</small></p>
 
-> 🗺️ **Estás en:** 🧮 **UD3 · Direccionamiento IP y subnetting** → 11 · Tipos de direcciones
+> 🗺️ **Estás en:** 🧮 **Direccionamiento IP y subnetting** → 11 · Tipos de direcciones
 
 ---
 

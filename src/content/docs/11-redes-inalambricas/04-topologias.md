@@ -5,7 +5,7 @@ description: BSS, ESS, ad-hoc, repetidores y mallas 🕸️
 
 <p><small>BSS, ESS, ad-hoc, repetidores y mallas 🕸️</small></p>
 
-> 🗺️ **Estás en:** 📶 **UD11 · Redes inalámbricas** → 04 · Topologías y modos de trabajo
+> 🗺️ **Estás en:** 📶 **Redes inalámbricas** → 04 · Topologías y modos de trabajo
 
 ---
 
@@ -26,7 +26,7 @@ Estos términos son el idioma de las redes inalámbricas; caen en examen y en en
 | **SSID** | El nombre lógico de la red | "Empresa-WiFi" |
 | **ESS** (Extended SS) | Varios APs con el mismo SSID, unidos por cable | El WiFi de todo el edificio |
 | **IBSS / ad-hoc** | Clientes hablándose directamente, sin AP | Dos portátiles compartiendo archivos |
-| **DS** (Distribution System) | La red cableada que une los APs del ESS | El switch y los trunks de la UD5 |
+| **DS** (Distribution System) | La red cableada que une los APs del ESS | El switch y los trunks ya vistos |
 
 La diferencia SSID/BSSID aclara el gran misterio del "roaming invisible": en un ESS, tu portátil ve **un solo SSID** aunque haya 8 APs; cada AP se distingue por su BSSID (MAC), y el cliente cambia de AP sin que cambie de red. A eso se le llama **roaming**.
 

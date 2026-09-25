@@ -1,6 +1,6 @@
 # contenido-unidad — Estándar de calidad de las unidades didácticas
 
-> Barra de calidad "libro de verdad" que toda unidad (U01–U12) debe cumplir tras su ampliación. Prioridad: utilidad real para personas que parten de cero en redes.
+> Barra de calidad "libro de verdad" que toda unidad del curso debe cumplir tras su ampliación. Prioridad: utilidad real para personas que parten de cero en redes.
 
 ## ADDED Requirements
 
@@ -58,7 +58,7 @@ El contenido es consistente con el resto del curso.
 
 #### Scenario: Poscréditos con continuidad
 - **WHEN** se cierra la unidad
-- **THEN** la escena de Poscréditos enlaza de forma coherente con la siguiente unidad ("PRÓXIMAMENTE EN U0X") y ambas se corresponden
+- **THEN** la escena de Poscréditos enlaza de forma coherente con la siguiente unidad ("PRÓXIMAMENTE: <nombre de la siguiente unidad>") y ambas se corresponden
 
 ### Requirement: Cobertura de criterios de evaluación
 
@@ -78,7 +78,7 @@ Cuando la unidad se amplía a varios archivos, el flujo de lectura entre puntos 
 
 #### Scenario: Referencias cruzadas
 - **WHEN** un punto menciona contenido de otra unidad o de otro punto
-- **THEN** hay un enlace cruzado al punto correspondiente o una indicación clara ("se verá en U07")
+- **THEN** hay un enlace cruzado al punto correspondiente o una indicación clara ("se verá en la unidad de OSPF")
 
 ### Requirement: Lenguaje es-ES obligatorio
 

@@ -1,11 +1,11 @@
 ---
-title: U12 — Alta disponibilidad y redundancia
+title: Alta disponibilidad y redundancia
 description: Diseñar para que fallar no importe 🔁
 ---
 
 <p><small>Diseñar para que fallar no importe 🔁</small></p>
 
-> 🗺️ **El mapa del curso:** 🗄️ Servicios → 📶 WiFi → **🔁 AQUÍ ESTÁS (U12)** → 🏁 Fin del viaje
+> 🗺️ **El mapa del curso:** 🗄️ Servicios → 📶 WiFi → **🔁 AQUÍ ESTÁS** → 🏁 Fin del viaje
 
 ---
 
@@ -36,7 +36,7 @@ Al terminar, serás capaz de:
 | Punto | Qué aprenderás | Nivel |
 |---|---|---|
 | [01 · Disponibilidad y SPOFs](/ApuntesRedes/12-alta-disponibilidad/01-disponibilidad-y-spofs) | Los nueves, el coste del parón y los puntos únicos de fallo | Todos |
-| [02 · STP: redundancia sin bucles](/ApuntesRedes/12-alta-disponibilidad/02-stp-redundancia) | Recap de UD4 con ojos de HA: diseño y protecciones | Todos |
+| [02 · STP: redundancia sin bucles](/ApuntesRedes/12-alta-disponibilidad/02-stp-redundancia) | Recap de switching con ojos de HA: diseño y protecciones | Todos |
 | [03 · EtherChannel](/ApuntesRedes/12-alta-disponibilidad/03-etherchannel) | LACP, PAgP, balanceo y verificación | Todos |
 | [04 · Stacking y chassis virtuales](/ApuntesRedes/12-alta-disponibilidad/04-stacking) | StackWise, VSS, MLAG: varios equipos, un cerebro | Clave |
 | [05 · FHRP: gateway redundante](/ApuntesRedes/12-alta-disponibilidad/05-fhrp) | HSRP, VRRP, GLBP: la IP virtual | Clave |
@@ -75,7 +75,7 @@ Al terminar, serás capaz de:
 
 ## 🚪 ¿Por dónde empiezo?
 
-- ¿STP te suena a chino? Repasa primero el [punto 5 (STP) de la UD4](/ApuntesRedes/04-switching/05-stp-fundamentos): aquí damos por sabido que STP bloquea puertos para evitar bucles.
+- ¿STP te suena a chino? Repasa primero el [punto 5 (STP)](/ApuntesRedes/04-switching/05-stp-fundamentos): aquí damos por sabido que STP bloquea puertos para evitar bucles.
 - ¿Vienes directo por el routing? → El trío [FHRP → HSRP → capa 3](/ApuntesRedes/12-alta-disponibilidad/05-fhrp) es tu camino.
 
 **📍 Primer punto:** [01 · Disponibilidad y SPOFs](/ApuntesRedes/12-alta-disponibilidad/01-disponibilidad-y-spofs)  

@@ -1,9 +1,9 @@
 ---
-title: Boletín UD4 — Avanzado
+title: Boletín de Switching y VLAN — Avanzado
 description: Ejercicios avanzados de Switching y STP
 ---
 
-# 📝 Boletín UD4 — Avanzado
+# 📝 Boletín de Switching y VLAN — Avanzado
 
 > Ejercicios que requieren aplicar los conceptos de switching y STP de forma más profunda.
 

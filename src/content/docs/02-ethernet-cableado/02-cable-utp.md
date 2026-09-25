@@ -5,7 +5,7 @@ description: 8 hilos, 4 pares y una buena razón para trenzarlos 🌊
 
 <p><small>8 hilos, 4 pares y una buena razón para trenzarlos 🌊</small></p>
 
-> 🗺️ **Estás en:** 📡 **UD2 · Ethernet y cableado** → 2 · El cable UTP
+> 🗺️ **Estás en:** 📡 **Ethernet y cableado** → 2 · El cable UTP
 
 ---
 

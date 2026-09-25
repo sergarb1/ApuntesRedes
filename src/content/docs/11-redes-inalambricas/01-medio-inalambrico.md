@@ -5,7 +5,7 @@ description: El aire como cable que nadie controla 🌬️
 
 <p><small>El aire como cable que nadie controla 🌬️</small></p>
 
-> 🗺️ **Estás en:** 📶 **UD11 · Redes inalámbricas** → 01 · El medio inalámbrico
+> 🗺️ **Estás en:** 📶 **Redes inalámbricas** → 01 · El medio inalámbrico
 
 ---
 

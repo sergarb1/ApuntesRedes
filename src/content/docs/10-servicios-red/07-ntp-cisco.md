@@ -5,7 +5,7 @@ description: Manos al reloj del router ⚙️
 
 <p><small>Manos al reloj del router ⚙️</small></p>
 
-> 🗺️ **Estás en:** 🗄️ **UD10 · Servicios de red: DHCP, DNS y NTP** → 07 · NTP en Cisco: configuración y verificación
+> 🗺️ **Estás en:** 🗄️ **Servicios de red: DHCP, DNS y NTP** → 07 · NTP en Cisco: configuración y verificación
 
 ---
 

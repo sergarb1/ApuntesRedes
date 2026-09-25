@@ -5,7 +5,7 @@ description: De la MAC al identificador de interfaz y la autoconfiguración plug
 
 <p><small>De la MAC al identificador de interfaz y la autoconfiguración plug-and-play 🌱</small></p>
 
-> 🗺️ **Estás en:** 🧮 **UD3 · Direccionamiento IP y subnetting** → 12 · EUI-64 y SLAAC
+> 🗺️ **Estás en:** 🧮 **Direccionamiento IP y subnetting** → 12 · EUI-64 y SLAAC
 
 ---
 

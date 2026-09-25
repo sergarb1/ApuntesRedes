@@ -1,17 +1,17 @@
 ---
-title: U07 — Enrutamiento dinámico con OSPF
+title: Enrutamiento dinámico con OSPF
 description: El router que habla con sus vecinos y elige solo 🗣️
 ---
 
 <p><small>El router que habla con sus vecinos y elige solo 🗣️</small></p>
 
-> 🗺️ **El mapa del curso:** 🧭 Routing estático → **🗣️ AQUÍ ESTÁS (U07)** → 🛡️ ACLs → 🌐 NAT
+> 🗺️ **El mapa del curso:** 🧭 Routing estático → **🗣️ AQUÍ ESTÁS** → 🛡️ ACLs → 🌐 NAT
 
 ---
 
 *Tu red crece: ya no hay dos routers, hay doce, con enlaces que se caen, caminos alternativos y planes de sucursales nuevas. Escribir rutas estáticas a mano se convierte en un trabajo de titánico con errores garantizados. ¿Y si los routers se contaran entre sí dónde está cada red y eligieran sus caminos solos? Eso es el enrutamiento dinámico, y OSPF es su estándar de facto en redes de empresa.*
 
-Bienvenido a la unidad donde los routers aprenden a hablar. Partes de lo que sabes de la [UD6](/ApuntesRedes/06-enrutamiento-estatico) (AD, métricas, tablas) y descubres el protocolo de enlace de estado: vecinos, adyacencias, LSAs, áreas, DR/BDR y coste. Al final, configuras OSPF de verdad y dejas que la red se cure sola de un enlace muerto.
+Bienvenido a la unidad donde los routers aprenden a hablar. Partes de lo que sabes de la [unidad de enrutamiento estático](/ApuntesRedes/06-enrutamiento-estatico) (AD, métricas, tablas) y descubres el protocolo de enlace de estado: vecinos, adyacencias, LSAs, áreas, DR/BDR y coste. Al final, configuras OSPF de verdad y dejas que la red se cure sola de un enlace muerto.
 
 Esta unidad se lee como un **libro de 9 capítulos**: los 8 primeros son teoría en progresión y el 9º es el aterrizaje práctico con laboratorio.
 
@@ -83,4 +83,4 @@ Al terminar, serás capaz de:
 - ¿Ya dominas OSPF de teoría? → Salta a la [configuración](/ApuntesRedes/07-ospf/07-configuracion-ospf) y al [diagnóstico](/ApuntesRedes/07-ospf/08-ruta-por-defecto-y-diagnostico).
 
 **📍 Primer punto:** [01 · De estático a dinámico](/ApuntesRedes/07-ospf/01-de-estatico-a-dinamico)  
-**⏭️ Al acabar la unidad, continúa en [UD8 · ACLs y seguridad de red](/ApuntesRedes/08-acl-seguridad).**
+**⏭️ Al acabar la unidad, continúa en [ACLs y seguridad de red](/ApuntesRedes/08-acl-seguridad).**

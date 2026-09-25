@@ -1,11 +1,11 @@
 ---
 title: "06 — Cierre: consolida lo aprendido"
-description: El cierre práctico de la U08, con listas, wildcards y muñecos rusos 🛡️
+description: El cierre práctico, con listas, wildcards y muñecos rusos 🛡️
 ---
 
-<p><small>El cierre práctico de la U08, con listas, wildcards y muñecos rusos 🛡️</small></p>
+<p><small>El cierre práctico, con listas, wildcards y muñecos rusos 🛡️</small></p>
 
-> 🗺️ **Estás en:** 🛡️ **UD8 · ACLs y seguridad de red** → 06 · Cierre
+> 🗺️ **Estás en:** 🛡️ **ACLs y seguridad de red** → 06 · Cierre
 
 ---
 
@@ -26,7 +26,7 @@ Has terminado la teoría: sabes cómo un paquete cruza las dos aduanas del route
 **¿Qué ha pasado?**
 1. **La ACL extendida de entrada bloqueó el telnet desde invitados y las VTY bloquean el SSH ajeno** → ✅ ¡Correcto! Filtrado de tráfico (ACL) y filtrado de administración (access-class en VTY) son capas distintas y complementarias.
 2. **El firewall del operador me bloqueó** → ❌ El descarte fue local: lo hizo el router en su interfaz de entrada. Nada cruzó el ISP.
-3. **El switch capa 3 me descartó por VLAN** → ❌ Entre VLANs hay enrutamiento (con switch L3 o router-on-a-stick, UD5); mi tráfico se encaminó correctamente hasta el router. Me paró la ACL, no la segmentación.
+3. **El switch capa 3 me descartó por VLAN** → ❌ Entre VLANs hay enrutamiento (con switch L3 o router-on-a-stick); mi tráfico se encaminó correctamente hasta el router. Me paró la ACL, no la segmentación.
 
 > 💡 **La moraleja del paquete curioso:** la seguridad en profundidad funciona por capas: una ACL para el tráfico y otra (access-class) para la administración; Port Security para el enchufe; contraseñas y SSH para el equipo. Un paquete malintencionado debe encontrar muchas puertas cerradas, y todas distintas.
 
@@ -213,7 +213,7 @@ Ni cifran ni leen la mente: filtran por cabeceras (IP, puertos), no por contenid
 
 El paquete curioso de invitados volvió a casa con dos puertas en la cara (la ACL extendida y el access-class de las VTY) y una lección: en esta red, cada capa pregunta y ninguna fía. CONRAD, desde el terminal, lo dejó escrito en el banner del router: *"Las ACLs no son listas de la compra: son leyes con orden, wildcards y un deny implícito que todo lo abarca. Y si tocas lo que no entiendes, la única lista que te espera es la de despidos."*
 
-**PRÓXIMAMENTE EN U09:** NAT y PAT: cómo toda tu red privada sale a Internet con una sola IP pública. Ahora que decides quién pasa, toca disfrazar a los que pasan.
+**PRÓXIMAMENTE:** NAT y PAT: cómo toda tu red privada sale a Internet con una sola IP pública. Ahora que decides quién pasa, toca disfrazar a los que pasan.
 
 ---
 
@@ -229,4 +229,4 @@ El paquete curioso de invitados volvió a casa con dos puertas en la cara (la AC
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/08-acl-seguridad) · **Anterior:** [05 · Port Security](/ApuntesRedes/08-acl-seguridad/05-port-security) · **Siguiente:** [UD9 · NAT y PAT](/ApuntesRedes/09-nat-pat)
+📚 [Volver al índice de la unidad](/ApuntesRedes/08-acl-seguridad) · **Anterior:** [05 · Port Security](/ApuntesRedes/08-acl-seguridad/05-port-security) · **Siguiente:** [NAT y PAT](/ApuntesRedes/09-nat-pat)

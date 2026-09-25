@@ -5,7 +5,7 @@ description: El 1:1 fijo y el pool de IPs públicas 🎯
 
 <p><small>El 1:1 fijo y el pool de IPs públicas 🎯</small></p>
 
-> 🗺️ **Estás en:** 🌐 **UD9 · NAT y PAT** → 3 · NAT estático y dinámico
+> 🗺️ **Estás en:** 🌐 **NAT y PAT** → 3 · NAT estático y dinámico
 
 ---
 
