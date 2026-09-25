@@ -1,9 +1,9 @@
 ---
-title: Boletín UD11 — Avanzado
+title: Boletín de Redes inalámbricas — Avanzado
 description: Ejercicios avanzados de redes inalámbricas (WiFi)
 ---
 
-# 📝 Boletín UD11 — Avanzado
+# 📝 Boletín de Redes inalámbricas — Avanzado
 
 > Ejercicios que requieren diseñar y diagnosticar WLANs. En los difíciles tienes pista.
 

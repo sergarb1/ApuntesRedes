@@ -1,9 +1,9 @@
 ---
-title: Boletín UD10 — Inicial (Resuelto)
+title: Boletín de Servicios de red — Inicial (Resuelto)
 description: Soluciones de los ejercicios básicos de servicios de red (DHCP, DNS y NTP)
 ---
 
-# ✅ Boletín UD10 — Inicial (Resuelto)
+# ✅ Boletín de Servicios de red — Inicial (Resuelto)
 
 ---
 

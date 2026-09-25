@@ -5,7 +5,7 @@ description: Roles de puerto y los 4 estados hasta reenviar 🚦
 
 <p><small>Roles de puerto y los 4 estados hasta reenviar 🚦</small></p>
 
-> 🗺️ **Estás en:** 🔀 **UD4 · Switching y VLAN** → 6 · Puertos y estados STP
+> 🗺️ **Estás en:** 🔀 **Switching y VLAN** → 6 · Puertos y estados STP
 
 ---
 

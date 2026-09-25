@@ -1,9 +1,9 @@
 ---
-title: Boletín UD12 — Avanzado (Resuelto)
+title: Boletín de Alta disponibilidad — Avanzado (Resuelto)
 description: Soluciones de los ejercicios avanzados de alta disponibilidad y redundancia
 ---
 
-# ✅ Boletín UD12 — Avanzado (Resuelto)
+# ✅ Boletín de Alta disponibilidad — Avanzado (Resuelto)
 
 ---
 

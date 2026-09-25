@@ -5,7 +5,7 @@ description: ARP, IGMP y broadcast pasan a mejor vida; llega NDP 🟢
 
 <p><small>ARP, IGMP y broadcast pasan a mejor vida; llega NDP 🟢</small></p>
 
-> 🗺️ **Estás en:** 🧮 **UD3 · Direccionamiento IP y subnetting** → 14 · ICMPv6 y NDP
+> 🗺️ **Estás en:** 🧮 **Direccionamiento IP y subnetting** → 14 · ICMPv6 y NDP
 
 ---
 

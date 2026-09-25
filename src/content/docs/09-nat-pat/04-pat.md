@@ -5,7 +5,7 @@ description: Una IP pública para todos, puertos al rescate 🔁
 
 <p><small>Una IP pública para todos, puertos al rescate 🔁</small></p>
 
-> 🗺️ **Estás en:** 🌐 **UD9 · NAT y PAT** → 4 · PAT (sobrecarga)
+> 🗺️ **Estás en:** 🌐 **NAT y PAT** → 4 · PAT (sobrecarga)
 
 ---
 

@@ -5,7 +5,7 @@ description: 32 bits, 4 octetos, el sobre del paquete y el puente con la MAC �
 
 <p><small>32 bits, 4 octetos, el sobre del paquete y el puente con la MAC 🎭</small></p>
 
-> 🗺️ **Estás en:** 🧮 **UD3 · Direccionamiento IP y subnetting** → 1 · Estructura de IPv4
+> 🗺️ **Estás en:** 🧮 **Direccionamiento IP y subnetting** → 1 · Estructura de IPv4
 
 ---
 
@@ -96,7 +96,7 @@ Campos que de verdad importan en examen y en el día a día:
 
 ![Campos clave de la cabecera IPv4](/ApuntesRedes/diagrams/u03-cabecera-ipv4.svg)
 
-> 🔗 **De la trama al paquete:** en la [UD2](/ApuntesRedes/02-ethernet-cableado/09-trama-ethernet) viste la trama Ethernet (MACs + EtherType + FCS). Si el EtherType es `0x0800`, el payload de esa trama es **este sobre IPv4**. Capa 2 entrega en la LAN; capa 3 decide hacia dónde va de punta a punta.
+> 🔗 **De la trama al paquete:** en la [unidad de Ethernet y cableado](/ApuntesRedes/02-ethernet-cableado/09-trama-ethernet) viste la trama Ethernet (MACs + EtherType + FCS). Si el EtherType es `0x0800`, el payload de esa trama es **este sobre IPv4**. Capa 2 entrega en la LAN; capa 3 decide hacia dónde va de punta a punta.
 
 > ⚠️ **No confundas checksums:** el **FCS** de la trama protege toda la trama en el enlace (capa 2). El **checksum de la cabecera IP** solo valida la cabecera en cada salto (capa 3). Los datos los protegen TCP/UDP (capa 4).
 
@@ -104,7 +104,7 @@ Campos que de verdad importan en examen y en el día a día:
 
 ## ✂️ Fragmentación y MTU
 
-Cada medio tiene un **techo de tamaño**. En Ethernet ese techo es el **MTU de 1500 bytes** de payload (lo viste en UD2). Si un paquete IP es más grande que el MTU del siguiente enlace, **alguien lo parte**: eso es **fragmentación**.
+Cada medio tiene un **techo de tamaño**. En Ethernet ese techo es el **MTU de 1500 bytes** de payload (lo viste en unidades anteriores). Si un paquete IP es más grande que el MTU del siguiente enlace, **alguien lo parte**: eso es **fragmentación**.
 
 ```
 Paquete de 4000 B  →  MTU del enlace = 1500 B
@@ -149,11 +149,11 @@ Una de las más odiadas es **169.254.x.x**: cuando un PC no consigue IP por DHCP
 
 ---
 
-## 🔗 ARP: de la IP a la MAC (el puente con la UD2)
+## 🔗 ARP: de la IP a la MAC (el puente con la trama)
 
 La cabecera IP dice *a qué equipo* va el paquete; la trama Ethernet necesita *a qué MAC*. En la red local, el que traduce una cosa en la otra es **ARP** (*Address Resolution Protocol*).
 
-En la [UD2](/ApuntesRedes/02-ethernet-cableado/09-trama-ethernet) solo nombramos el EtherType `0x0806` ("aquí hay un mensaje ARP"). Aquí va el proceso:
+En la [unidad de Ethernet y cableado](/ApuntesRedes/02-ethernet-cableado/09-trama-ethernet) solo nombramos el EtherType `0x0806` ("aquí hay un mensaje ARP"). Aquí va el proceso:
 
 1. Tu PC (`192.168.1.10`) quiere hablar con `192.168.1.20`, pero **no tiene la MAC** de esa IP en su **tabla ARP**.
 2. Manda un **ARP Request** en **broadcast** de capa 2 (`FF:FF:FF:FF:FF:FF`): *"¿Quién tiene la IP 192.168.1.20? Decídmelo a mí, 192.168.1.10"*.
@@ -210,7 +210,7 @@ PC .10                                PC .20
 
 - Una IPv4 son **32 bits en 4 octetos**, escritos en notación decimal punteada con valores de 0 a 255; algunas están **reservadas** (loopback, APIPA, multicast, broadcast).
 - Esas direcciones viajan en la **cabecera IPv4** (mínimo 20 bytes) con TTL, protocolo e IPs; si no caben en el MTU del enlace, se **fragmentan** y el destino reensambla.
-- En la red local, **ARP** traduce IP→MAC (request broadcast, reply unicast) para que la trama Ethernet de la UD2 llegue al equipo correcto.
+- En la red local, **ARP** traduce IP→MAC (request broadcast, reply unicast) para que la trama Ethernet vista antes llegue al equipo correcto.
 
 ## 🐛 Vocabulario rápido
 

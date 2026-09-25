@@ -5,7 +5,7 @@ description: El conserje que reparte IPs automáticamente con el proceso DORA �
 
 <p><small>El conserje que reparte IPs automáticamente con el proceso DORA 🤖</small></p>
 
-> 🗺️ **Estás en:** 🧮 **UD3 · Direccionamiento IP y subnetting** → 8 · DHCP
+> 🗺️ **Estás en:** 🧮 **Direccionamiento IP y subnetting** → 8 · DHCP
 
 ---
 

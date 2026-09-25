@@ -1,17 +1,17 @@
 ---
-title: U06 — Enrutamiento estático
+title: Enrutamiento estático
 description: El router con su mapa y sus decisiones 🧭
 ---
 
 <p><small>El router con su mapa y sus decisiones 🧭</small></p>
 
-> 🗺️ **El mapa del curso:** 🌉 Trunking → **🧭 AQUÍ ESTÁS (U06)** → 🗣️ OSPF → 🛡️ ACLs
+> 🗺️ **El mapa del curso:** 🌉 Trunking → **🧭 AQUÍ ESTÁS** → 🗣️ OSPF → 🛡️ ACLs
 
 ---
 
 *Un paquete de tu LAN quiere llegar a una sucursal a 800 kilómetros de fibra. Nadie en tu red sabe el camino entero: solo hay que preguntar al router más cercano, que pregunta a su vecino, que pregunta al siguiente. Cada router consulta su mapa, elige la salida y pasa el paquete. Así funciona Internet entera: saltos y mapas.*
 
-Bienvenido a la unidad donde tu red crece más allá de un solo router. En la [UD5](/ApuntesRedes/05-trunking-inter-vlan) hiciste hablar VLANs entre sí; aquí hacemos hablar **redes completas**: las tripas del router, la CLI, las rutas estáticas, la ruta por defecto y las reglas de decisión (longest prefix match, distancia administrativa). Es la base sobre la que se montará OSPF en la [UD7](/ApuntesRedes/07-ospf).
+Bienvenido a la unidad donde tu red crece más allá de un solo router. En la [unidad de trunking e inter-VLAN](/ApuntesRedes/05-trunking-inter-vlan) hiciste hablar VLANs entre sí; aquí hacemos hablar **redes completas**: las tripas del router, la CLI, las rutas estáticas, la ruta por defecto y las reglas de decisión (longest prefix match, distancia administrativa). Es la base sobre la que se montará OSPF en la [unidad de OSPF](/ApuntesRedes/07-ospf).
 
 Esta unidad se lee como un **libro de 6 capítulos**: los 5 primeros son teoría en progresión y el 6º es el aterrizaje práctico con laboratorio.
 
@@ -75,7 +75,7 @@ Al terminar, serás capaz de:
 ## 🚪 ¿Por dónde empiezo?
 
 - ¿Nunca has tocado la CLI de un router? Empieza por el [punto 1](/ApuntesRedes/06-enrutamiento-estatico/01-componentes-del-router) sin saltarte nada.
-- ¿Vienes de la UD5? El enrutamiento inter-VLAN ya te enseñó subinterfaces: aquí le toca el turno a las redes completas.
+- ¿Vienes de la unidad anterior? El enrutamiento inter-VLAN ya te enseñó subinterfaces: aquí le toca el turno a las redes completas.
 
 **📍 Primer punto:** [01 · Componentes del router](/ApuntesRedes/06-enrutamiento-estatico/01-componentes-del-router)  
-**⏭️ Al acabar la unidad, continúa en [UD7 · Enrutamiento dinámico con OSPF](/ApuntesRedes/07-ospf).**
+**⏭️ Al acabar la unidad, continúa en [Enrutamiento dinámico con OSPF](/ApuntesRedes/07-ospf).**

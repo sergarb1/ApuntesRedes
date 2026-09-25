@@ -5,7 +5,7 @@ description: Prestar bits de host para crear subredes, con las fórmulas y un ej
 
 <p><small>Prestar bits de host para crear subredes, con las fórmulas y un ejemplo completo ✂️</small></p>
 
-> 🗺️ **Estás en:** 🧮 **UD3 · Direccionamiento IP y subnetting** → 6 · Subnetting paso a paso
+> 🗺️ **Estás en:** 🧮 **Direccionamiento IP y subnetting** → 6 · Subnetting paso a paso
 
 ---
 

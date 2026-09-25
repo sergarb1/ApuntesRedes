@@ -5,7 +5,7 @@ description: Antes de filtrar, saber por dónde viaja 🗺️
 
 <p><small>Antes de filtrar, saber por dónde viaja 🗺️</small></p>
 
-> 🗺️ **Estás en:** 🛡️ **UD8 · ACLs y seguridad de red** → 01 · De las rutas a las ACLs
+> 🗺️ **Estás en:** 🛡️ **ACLs y seguridad de red** → 01 · De las rutas a las ACLs
 
 ---
 
@@ -17,7 +17,7 @@ description: Antes de filtrar, saber por dónde viaja 🗺️
 
 ## 🧭 El mapa mental del router
 
-En la [UD6](/ApuntesRedes/06-enrutamiento-estatico) configuraste rutas y viste cómo el router consulta su tabla. El flujo completo de un paquete que entra en un router:
+En la [unidad de enrutamiento estático](/ApuntesRedes/06-enrutamiento-estatico) configuraste rutas y viste cómo el router consulta su tabla. El flujo completo de un paquete que entra en un router:
 
 ```
 1. Llega el paquete por una interfaz
@@ -59,9 +59,9 @@ Las ACLs son una pieza del puzzle de seguridad perimetral e interna; ten el mapa
 |---|---|---|
 | **Acceso físico/management** | Contraseñas, SSH, listas de acceso a la VTY | Quién administra los equipos |
 | **Tráfico entre segmentos** | ACLs en routers/switches L3 | Qué red habla con qué red (y qué puertos) |
-| **Dispositivo final** | Port Security (UD5), firewall, NAC | Qué equipo se enchufa y qué servicios usa |
+| **Dispositivo final** | Port Security, firewall, NAC | Qué equipo se enchufa y qué servicios usa |
 
-Esta unidad se centra en la capa media (ACLs + hardening básico del router), con una incursión en la tercera (Port Security, ya conocida). La gestión segura del equipo la viste en la [UD6](/ApuntesRedes/06-enrutamiento-estatico/02-configuracion-basica): SSH, contraseñas y banner incluidos.
+Esta unidad se centra en la capa media (ACLs + hardening básico del router), con una incursión en la tercera (Port Security, ya conocida). La gestión segura del equipo la viste en la [unidad de enrutamiento estático](/ApuntesRedes/06-enrutamiento-estatico/02-configuracion-basica): SSH, contraseñas y banner incluidos.
 
 ---
 
@@ -92,7 +92,7 @@ Esta unidad se centra en la capa media (ACLs + hardening básico del router), co
 | Término | Idea general |
 |---|---|
 | ACL in/out | Filtro en la entrada/salida de una interfaz del router |
-| Longest prefix match | La ruta más específica gana (UD6) |
+| Longest prefix match | La ruta más específica gana |
 | VTY | Las líneas de acceso de administración del equipo |
 | Hardening | Endurecer la configuración de un equipo |
 | Perímetro | La frontera entre tu red y el resto del mundo |

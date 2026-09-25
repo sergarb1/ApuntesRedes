@@ -1,17 +1,17 @@
 ---
-title: U04 — Switching y VLAN
+title: Switching y VLAN
 description: El switch que aprende y la red que se divide 🔀
 ---
 
 <p><small>El switch que aprende y la red que se divide 🔀</small></p>
 
-> 🗺️ **El mapa del curso:** 🧮 IP → **🔀 AQUÍ ESTÁS (U04)** → 🌉 Trunking → 🧭 Routing
+> 🗺️ **El mapa del curso:** 🧮 IP → **🔀 AQUÍ ESTÁS** → 🌉 Trunking → 🧭 Routing
 
 ---
 
 *Conectas cuatro equipos a un switch, cada uno por su cable, y ninguno pisa a nadie. Un año después, ese mismo switch tiene 48 equipos, tres departamentos que no deberían verse entre sí y una tormenta de broadcasts a punto de subir por los cables. Bienvenido al mundo de la conmutación, donde el orden se construye en capa 2.*
 
-Bienvenido a la unidad del switch. En la [UD3](/ApuntesRedes/03-direccionamiento-ip) diste a los equipos direcciones; aquí el switch aprende a entregarlas trama a trama: cómo aprende MACs, qué son los dominios de colisión y broadcast, por qué STP salva la red de sí misma y cómo las VLANs parten un switch físico en varios lógicos. La primera mitad del curso se cierra aquí; la [UD5](/ApuntesRedes/05-trunking-inter-vlan) llevará esas VLANs entre switches y las hará hablar.
+Bienvenido a la unidad del switch. En la [unidad de dirección IP](/ApuntesRedes/03-direccionamiento-ip) diste a los equipos direcciones; aquí el switch aprende a entregarlas trama a trama: cómo aprende MACs, qué son los dominios de colisión y broadcast, por qué STP salva la red de sí misma y cómo las VLANs parten un switch físico en varios lógicos. La primera mitad del curso se cierra aquí; la [unidad de trunking e inter-VLAN](/ApuntesRedes/05-trunking-inter-vlan) llevará esas VLANs entre switches y las hará hablar.
 
 Esta unidad se lee como un **libro de 10 capítulos**: los 9 primeros son teoría en progresión y el 10º es el aterrizaje práctico con laboratorio.
 
@@ -76,8 +76,8 @@ Al terminar, serás capaz de:
 
 ## 🚪 ¿Por dónde empiezo?
 
-- ¿Vienes de la UD3? Perfecto: aquí los bits ya tienen direcciones y ahora aprenden a viajar ordenados.
+- ¿Vienes de la unidad anterior? Perfecto: aquí los bits ya tienen direcciones y ahora aprenden a viajar ordenados.
 - ¿Solo te interesan las VLANs? Salta al [punto 8](/ApuntesRedes/04-switching/08-que-es-una-vlan), pero repasa el [punto 3](/ApuntesRedes/04-switching/03-dominios-colision-broadcast) para entender qué estás separando.
 
 **📍 Primer punto:** [01 · ¿Qué es un switch?](/ApuntesRedes/04-switching/01-que-es-un-switch)  
-**⏭️ Al acabar la unidad, continúa en [UD5 · Trunking y enrutamiento inter-VLAN](/ApuntesRedes/05-trunking-inter-vlan).**
+**⏭️ Al acabar la unidad, continúa en [Trunking y enrutamiento inter-VLAN](/ApuntesRedes/05-trunking-inter-vlan).**

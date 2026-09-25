@@ -5,7 +5,7 @@ description: El cierre práctico de OSPF, con laboratorio y diagnóstico real �
 
 <p><small>El cierre práctico de OSPF, con laboratorio y diagnóstico real 🧠</small></p>
 
-> 🗺️ **Estás en:** 🗣️ **UD7 · Enrutamiento dinámico con OSPF** → 9 · Cierre: consolida lo aprendido
+> 🗺️ **Estás en:** 🗣️ **Enrutamiento dinámico con OSPF** → 9 · Cierre: consolida lo aprendido
 
 ---
 
@@ -212,7 +212,7 @@ Sí, mientras no se reinicie el proceso. La elección de DR/BDR solo ocurre **al
 
 *La red se auto-repara gracias al protocolo de routing dinámico.*
 
-**PRÓXIMAMENTE EN UD8:** *Filtrado y seguridad. Las IPs viajan y los routers encaminan, pero ¿quién decide qué tráfico entra y cuál no? Necesitamos ACLs.*
+**PRÓXIMAMENTE:** *Filtrado y seguridad. Las IPs viajan y los routers encaminan, pero ¿quién decide qué tráfico entra y cuál no? Necesitamos ACLs.*
 
 ---
 
@@ -228,4 +228,4 @@ Sí, mientras no se reinicie el proceso. La elección de DR/BDR solo ocurre **al
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/07-ospf) · **Anterior:** [8 · Ruta por defecto y diagnóstico](/ApuntesRedes/07-ospf/08-ruta-por-defecto-y-diagnostico) · **Siguiente:** [UD8 · ACLs y seguridad de red](/ApuntesRedes/08-acl-seguridad)
+📚 [Volver al índice de la unidad](/ApuntesRedes/07-ospf) · **Anterior:** [8 · Ruta por defecto y diagnóstico](/ApuntesRedes/07-ospf/08-ruta-por-defecto-y-diagnostico) · **Siguiente:** [ACLs y seguridad de red](/ApuntesRedes/08-acl-seguridad)

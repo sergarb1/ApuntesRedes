@@ -1,17 +1,17 @@
 ---
-title: U05 — Trunking y enrutamiento inter-VLAN
+title: Trunking y enrutamiento inter-VLAN
 description: Un cable para todas las VLANs y una frontera entre ellas 🌉
 ---
 
 <p><small>Un cable para todas las VLANs y una frontera entre ellas 🌉</small></p>
 
-> 🗺️ **El mapa del curso:** 🔀 Switching → **🌉 AQUÍ ESTÁS (U05)** → 🧭 Routing estático → 🗣️ OSPF
+> 🗺️ **El mapa del curso:** 🔀 Switching → **🌉 AQUÍ ESTÁS** → 🧭 Routing estático → 🗣️ OSPF
 
 ---
 
 *El switch de acceso tiene 48 puertos y tres departamentos. El cable que sube al núcleo es uno solo. ¿Cómo viajan Ventas, RRHH e Informática por el mismo latiguillo sin mezclarse? Y cuando alguien de Ventas necesita hablar con RRHH, ¿quién construye la frontera con su aduana?*
 
-Bienvenido a la unidad que conecta la segmentación con el enrutamiento. En la [UD4](/ApuntesRedes/04-switching) creaste VLANs; aquí aprendes a **transportarlas entre switches** (trunks 802.1Q, native VLAN, VTP) y a **hacerlas hablar entre sí** (router-on-a-stick y switch de capa 3 con SVIs). Es el puente natural entre el mundo de la conmutación y el del encaminamiento.
+Bienvenido a la unidad que conecta la segmentación con el enrutamiento. En la [unidad de switching](/ApuntesRedes/04-switching) creaste VLANs; aquí aprendes a **transportarlas entre switches** (trunks 802.1Q, native VLAN, VTP) y a **hacerlas hablar entre sí** (router-on-a-stick y switch de capa 3 con SVIs). Es el puente natural entre el mundo de la conmutación y el del encaminamiento.
 
 Esta unidad se lee como un **libro de 8 capítulos**: los 7 primeros son teoría en progresión y el 8º es el aterrizaje práctico con laboratorio.
 
@@ -73,8 +73,8 @@ Al terminar, serás capaz de:
 
 ## 🚪 ¿Por dónde empiezo?
 
-- ¿Las VLANs te suenan vagas? Repasa el [punto 8 de la UD4](/ApuntesRedes/04-switching/08-que-es-una-vlan): aquí seguimos exactamente desde donde te dejaste.
+- ¿Las VLANs te suenan vagas? Repasa el [punto 8 de switching](/ApuntesRedes/04-switching/08-que-es-una-vlan): aquí seguimos exactamente desde donde te dejaste.
 - ¿Ya conoces los trunks? → Salta al [enrutamiento inter-VLAN](/ApuntesRedes/05-trunking-inter-vlan/03-inter-vlan-routing), el corazón de la unidad.
 
 **📍 Primer punto:** [01 · Trunks y 802.1Q](/ApuntesRedes/05-trunking-inter-vlan/01-trunks-y-8021q)  
-**⏭️ Al acabar la unidad, continúa en [UD6 · Enrutamiento estático](/ApuntesRedes/06-enrutamiento-estatico).**
+**⏭️ Al acabar la unidad, continúa en [Enrutamiento estático](/ApuntesRedes/06-enrutamiento-estatico).**

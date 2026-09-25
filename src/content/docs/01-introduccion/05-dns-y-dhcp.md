@@ -5,7 +5,7 @@ description: La agenda telefónica y el recepcionista que nadie ve 📖
 
 <p><small>La agenda telefónica y el recepcionista que nadie ve 📖</small></p>
 
-> 🗺️ **Estás en:** 🚪 **U01 · Introducción** → 05 · DNS y DHCP
+> 🗺️ **Estás en:** 🚪 **Introducción** → 05 · DNS y DHCP
 
 ---
 

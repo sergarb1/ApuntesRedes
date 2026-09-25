@@ -5,7 +5,7 @@ description: Cómo OSPF convierte ancho de banda en coste ⚖️
 
 <p><small>Cómo OSPF convierte ancho de banda en coste ⚖️</small></p>
 
-> 🗺️ **Estás en:** 🗣️ **UD7 · Enrutamiento dinámico con OSPF** → 6 · El coste OSPF
+> 🗺️ **Estás en:** 🗣️ **Enrutamiento dinámico con OSPF** → 6 · El coste OSPF
 
 ---
 

@@ -5,7 +5,7 @@ description: El antiguo régimen de clases A-E y cómo CIDR lo derrocó 👑
 
 <p><small>El antiguo régimen de clases A-E y cómo CIDR lo derrocó 👑</small></p>
 
-> 🗺️ **Estás en:** 🧮 **UD3 · Direccionamiento IP y subnetting** → 3 · Clases de direcciones
+> 🗺️ **Estás en:** 🧮 **Direccionamiento IP y subnetting** → 3 · Clases de direcciones
 
 ---
 
@@ -45,7 +45,7 @@ Originalmente la dirección se *leía* en los primeros bits: según cómo empeza
 
 ### ¿Y qué pasa con la clase D y la E?
 
-- **D** no se usa para equipos: es la reserva del **multicast** (envío de "uno a muchos dentro de un grupo"). Ahí viven OSPF y otros protocolos que verás en la UD7.
+- **D** no se usa para equipos: es la reserva del **multicast** (envío de "uno a muchos dentro de un grupo"). Ahí viven OSPF y otros protocolos que verás más adelante.
 - **E** es experimental: reservada por la IETF, no se asigna nunca en producción. Si un router recibe un destino en clase E, normalmente lo descarta.
 
 ---

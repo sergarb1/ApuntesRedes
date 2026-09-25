@@ -1,7 +1,7 @@
 # Apuntes PAR — Planificación y Administración de Redes
 
 > **Aprende redes como si la red se fuera a caer mañana.**  
-> 12 unidades didácticas (Unidad 01 de introducción + 11 de temario, UD2–UD12) · 80% práctico · Estilo conversacional
+> 12 unidades didácticas (introducción + 11 de temario) · 80% práctico · Estilo conversacional
 
 **CC BY-SA 4.0** — [Sergi Garcia Barea](https://github.com/sergarb1)
 
@@ -18,29 +18,29 @@
 Un paquete IP viaja desde que nace en un navegador hasta la nube. Cada unidad avanza con él.
 
 ```
-U01: 🚪 Bienvenida  → U02: 📡 Cable y trama  → U03: 🧮 IP y subnetting → U04: 🔀 Switching
-U05: 🌉 Trunking    → U06: 🧭 Rutas estáticas → U07: 🗣️ OSPF           → U08: 🛡️ ACLs
-U09: 🌐 NAT/PAT     → U10: 🗄️ DHCP/DNS/NTP    → U11: 📶 Inalámbrico    → U12: 🔁 Alta disponibilidad
+🚪 Bienvenida  → 📡 Cable y trama  → 🧮 IP y subnetting → 🔀 Switching
+🌉 Trunking    → 🧭 Rutas estáticas → 🗣️ OSPF           → 🛡️ ACLs
+🌐 NAT/PAT     → 🗄️ DHCP/DNS/NTP    → 📶 Inalámbrico    → 🔁 Alta disponibilidad
 ```
 
 ---
 
 ## 📚 Unidades
 
-| # | Título | Nombre didáctico | Emoji |
-|---|---|---|---|
-| U01 | Introducción | Bienvenida al mundo de las redes | 🚪 |
-| U02 | Ethernet, medios de transmisión y cableado | Donde todo viaje empieza por un cable | 📡 |
-| U03 | Direccionamiento IP y subnetting | La calculadora maldita, ahora con IPv6 | 🧮 |
-| U04 | Switching y VLAN | El cerebro de la red local | 🔀 |
-| U05 | Trunking y enrutamiento inter-VLAN | Un enlace, muchas VLANs | 🌉 |
-| U06 | Enrutamiento estático | El GPS de bolsillo | 🧭 |
-| U07 | Enrutamiento dinámico con OSPF | El router que habla solo | 🗣️ |
-| U08 | ACLs y seguridad de red | Filtrar sin romper la red | 🛡️ |
-| U09 | NAT y PAT | Salir a Internet sin quemar IPs | 🌐 |
-| U10 | Servicios de red: DHCP, DNS y NTP | Los que trabajan en silencio | 🗄️ |
-| U11 | Redes inalámbricas | Libertad sin cables, con vecinos incluidos | 📶 |
-| U12 | Alta disponibilidad y redundancia | Que no se caiga nunca | 🔁 |
+| Título | Nombre didáctico | Emoji |
+|---|---|---|
+| Introducción | Bienvenida al mundo de las redes | 🚪 |
+| Ethernet, medios de transmisión y cableado | Donde todo viaje empieza por un cable | 📡 |
+| Direccionamiento IP y subnetting | La calculadora maldita, ahora con IPv6 | 🧮 |
+| Switching y VLAN | El cerebro de la red local | 🔀 |
+| Trunking y enrutamiento inter-VLAN | Un enlace, muchas VLANs | 🌉 |
+| Enrutamiento estático | El GPS de bolsillo | 🧭 |
+| Enrutamiento dinámico con OSPF | El router que habla solo | 🗣️ |
+| ACLs y seguridad de red | Filtrar sin romper la red | 🛡️ |
+| NAT y PAT | Salir a Internet sin quemar IPs | 🌐 |
+| Servicios de red: DHCP, DNS y NTP | Los que trabajan en silencio | 🗄️ |
+| Redes inalámbricas | Libertad sin cables, con vecinos incluidos | 📶 |
+| Alta disponibilidad y redundancia | Que no se caiga nunca | 🔁 |
 
 ---
 
@@ -72,7 +72,7 @@ U09: 🌐 NAT/PAT     → U10: 🗄️ DHCP/DNS/NTP    → U11: 📶 Inalámbric
 | **Idioma** | Castellano (raíz `/`) |
 | **Buscador** | Pagefind integrado (Starlight) |
 | **Diagramas** | Excalidraw (MCP `mcp-excalidraw-server`) → SVG en `public/diagrams/` + fuentes `.excalidraw`, con control de calidad (`npm run check:diagrams`); D2 (Terrastruct) como alternativa vía `npm run diagrams` |
-| **Fotos** | Stock Pexels/Unsplash en `public/photos/` (solo objetos físicos; hoy solo UD2) |
+| **Fotos** | Stock Pexels/Unsplash en `public/photos/` (solo objetos físicos; hoy solo en la unidad de Ethernet) |
 | **Exportación** | PDF (starlight-to-pdf) · EPUB + DOCX (Pandoc 3.11) |
 | **Despliegue** | GitHub Actions → GitHub Pages (`main` branch) |
 
@@ -115,9 +115,9 @@ src/
 │   │   ├── index.md              → Portada con hero + cards
 │   │   ├── 01-introduccion.md …  → Índice de cada unidad
 │   │   ├── 01-introduccion/      → Puntos (01-…, 08-mapa, 09-glosario, 10-preguntas)
-│   │   ├── 02-ethernet-cableado/ → UD2 (01-…07 teoría, 08 OSI, 09 trama, 10 cierre)
+│   │   ├── 02-ethernet-cableado/ → Ethernet (01-…07 teoría, 08 OSI, 09 trama, 10 cierre)
 │   │   ├── 03-direccionamiento-ip/ … 12-alta-disponibilidad/
-│   │   └── boletines/            → Ejercicios: inicial/avanzado + resueltos (texto puro, sin imágenes); variante packettracer en U02–U03
+│   │   └── boletines/            → Ejercicios: inicial/avanzado + resueltos (texto puro, sin imágenes); variante packettracer en Ethernet y dirección IP
 │   └── config.ts                 → Colecciones de contenido
 ├── styles/
 │   └── custom.css                → Tema azul + glassmorphism + print
@@ -129,8 +129,8 @@ docs/
 ├── network-topology-icons.excalidrawlib → Librería local de iconos
 └── excalidraw-setup.md           → Guía reutilizable del MCP Excalidraw
 public/
-├── diagrams/                     → SVG + fuentes .excalidraw (U01 y U02)
-├── photos/                       → Fotos stock (solo UD2: UTP, RJ45, fibra, patch panel)
+├── diagrams/                     → SVG + fuentes .excalidraw (introducción, Ethernet y dirección IP)
+├── photos/                       → Fotos stock (solo en Ethernet: UTP, RJ45, fibra, patch panel)
 ├── portada.svg                   → Portada web / PDF / EPUB
 ├── pdf/                          → ApuntesPAR.pdf
 └── epub/                         → ApuntesPAR.epub

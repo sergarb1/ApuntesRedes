@@ -5,7 +5,7 @@ description: La escalera del diagnóstico y la lógica para cazar cualquier aver
 
 <p><small>La escalera del diagnóstico y la lógica para cazar cualquier avería 🩺</small></p>
 
-> 🗺️ **Estás en:** 🚪 **U01 · Introducción** → 06 · Método de diagnóstico
+> 🗺️ **Estás en:** 🚪 **Introducción** → 06 · Método de diagnóstico
 
 ---
 
@@ -233,7 +233,7 @@ Significa que la **tarjeta de red del PC está rota o deshabilitada**. No es un 
 
 El PC del alumno hace `ping 127.0.0.1` y responde. El PC se respira aliviado: *"Al menos sigo vivo"*. Luego hace `ping` al gateway: *"¡Llego hasta la puerta!"*. Luego a `8.8.8.8`: *"¡Salgo a la calle!"*. Y por fin a `google.com`: *"¡El DNS también funciona!"*. El PC sonríe: *"Todo va bien... hasta la próxima avería"*.
 
-**PRÓXIMAMENTE EN UD2:** Ethernet, medios y cableado — los cimientos físicos sobre los que se construye todo lo que hemos visto aquí. 📡
+**PRÓXIMAMENTE:** Ethernet, medios y cableado — los cimientos físicos sobre los que se construye todo lo que hemos visto aquí. 📡
 
 ---
 

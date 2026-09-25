@@ -5,7 +5,7 @@ description: El laboratorio NAT completo de principio a fin 🛠️
 
 <p><small>El laboratorio NAT completo de principio a fin 🛠️</small></p>
 
-> 🗺️ **Estás en:** 🌐 **UD9 · NAT y PAT** → 8 · Configuración completa
+> 🗺️ **Estás en:** 🌐 **NAT y PAT** → 8 · Configuración completa
 
 ---
 
@@ -114,7 +114,7 @@ El escenario viene con una trampa oculta (la encontrarás también en el ⚡ Lab
 
 ¿Qué ocurre? **NAT no traduce nada.** Los comandos de traducción existen, la access-list es correcta, el overload está puesto... pero el router no sabe qué tráfico es interno y cuál externo, así que no sabe qué paquetes debe traducir. La tabla NAT permanece vacía (`show ip nat translations` sin salida) y los PCs no salen a Internet.
 
-**El diagnóstico (de la práctica de UD1):**
+**El diagnóstico (de la práctica inicial):**
 
 ```
 1. ¿Ping al gateway?            → sí

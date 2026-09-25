@@ -1,9 +1,9 @@
 ---
-title: Boletín UD12 — Inicial (Resuelto)
+title: Boletín de Alta disponibilidad — Inicial (Resuelto)
 description: Soluciones de los ejercicios básicos de alta disponibilidad y redundancia
 ---
 
-# ✅ Boletín UD12 — Inicial (Resuelto)
+# ✅ Boletín de Alta disponibilidad — Inicial (Resuelto)
 
 ---
 

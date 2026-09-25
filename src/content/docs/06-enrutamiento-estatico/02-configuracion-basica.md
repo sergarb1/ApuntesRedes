@@ -5,7 +5,7 @@ description: Modos CLI, primeros comandos y la configuración mínima de un rout
 
 <p><small>Modos CLI, primeros comandos y la configuración mínima de un router 🛠️</small></p>
 
-> 🗺️ **Estás en:** 🧭 **UD6 · Enrutamiento estático** → 2 · Configuración básica
+> 🗺️ **Estás en:** 🧭 **Enrutamiento estático** → 2 · Configuración básica
 
 ---
 

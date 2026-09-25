@@ -1,9 +1,9 @@
 ---
-title: Boletín UD2 — Avanzado (Resuelto)
+title: Boletín de Ethernet y cableado — Avanzado (Resuelto)
 description: Soluciones de los ejercicios avanzados de Infraestructura Física, OSI y trama
 ---
 
-# ✅ Boletín UD2 — Avanzado (Resuelto)
+# ✅ Boletín de Ethernet y cableado — Avanzado (Resuelto)
 
 ---
 

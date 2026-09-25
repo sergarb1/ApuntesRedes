@@ -5,7 +5,7 @@ description: Enseñar al router el camino con ip route y una topología R1-R2 �
 
 <p><small>Enseñar al router el camino con ip route y una topología R1-R2 🗺️</small></p>
 
-> 🗺️ **Estás en:** 🧭 **UD6 · Enrutamiento estático** → 3 · Rutas estáticas
+> 🗺️ **Estás en:** 🧭 **Enrutamiento estático** → 3 · Rutas estáticas
 
 ---
 
@@ -13,7 +13,7 @@ description: Enseñar al router el camino con ip route y una topología R1-R2 �
 
 > Una **ruta estática** es un camino que el administrador le escribe al router a mano con `ip route`: no aprende, no se adapta, pero es **predecible, segura y sin consumo de ancho de banda**.
 
-En el punto 2 dejaste al router con sus interfaces y su IP. Pero "tener interfaces" no es "saber llegar a las redes ajenas": el router solo conoce **directamente** las redes conectadas a sus puertos. Para el resto, o le enseñas tú (ruta estática) o que aprenda él (routing dinámico, UD7). Aquí mandamos nosotros.
+En el punto 2 dejaste al router con sus interfaces y su IP. Pero "tener interfaces" no es "saber llegar a las redes ajenas": el router solo conoce **directamente** las redes conectadas a sus puertos. Para el resto, o le enseñas tú (ruta estática) o que aprenda él (routing dinámico, más adelante). Aquí mandamos nosotros.
 
 ---
 
@@ -117,7 +117,7 @@ Lo que debes saber leer:
 | **C** | Conectada | La interfaz con IP y `no shutdown` |
 | **L** | Local | La propia IP de la interfaz |
 | **S** | Estática | Tu comando `ip route` |
-| **D / O / R** | Dinámicas (EIGRP/OSPF/RIP) | Protocolos de routing (UD7) |
+| **D / O / R** | Dinámicas (EIGRP/OSPF/RIP) | Protocolos de routing |
 
 La línea `S 192.168.2.0/24 [1/0] via 10.0.0.2` significa: ruta **S**tática hacia la LAN de R2, con **distancia administrativa [1]** y métrica [0], que se alcanza vía el vecino `10.0.0.2`. Si no aparece ninguna `S`, comprueba: ¿la IP de la interfaz está bien?, ¿el vecino es alcanzable?, ¿la máscara es correcta?
 

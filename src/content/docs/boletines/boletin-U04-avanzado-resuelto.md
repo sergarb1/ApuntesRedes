@@ -1,9 +1,9 @@
 ---
-title: Boletín UD4 — Avanzado (Resuelto)
+title: Boletín de Switching y VLAN — Avanzado (Resuelto)
 description: Soluciones de los ejercicios avanzados de Switching y STP
 ---
 
-# ✅ Boletín UD4 — Avanzado (Resuelto)
+# ✅ Boletín de Switching y VLAN — Avanzado (Resuelto)
 
 ---
 

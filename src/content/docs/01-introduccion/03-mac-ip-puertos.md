@@ -5,7 +5,7 @@ description: El DNI, el domicilio y el despacho de tus dispositivos 📮
 
 <p><small>El DNI, el domicilio y el despacho de tus dispositivos 📮</small></p>
 
-> 🗺️ **Estás en:** 🚪 **U01 · Introducción** → 03 · MAC, IP y Puertos
+> 🗺️ **Estás en:** 🚪 **Introducción** → 03 · MAC, IP y Puertos
 
 ---
 

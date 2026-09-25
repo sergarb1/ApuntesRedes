@@ -1,9 +1,9 @@
 ---
-title: Boletín UD5 — Avanzado (Resuelto)
+title: Boletín de Trunking e inter-VLAN — Avanzado (Resuelto)
 description: Soluciones ejercicios avanzados de VLANs
 ---
 
-# ✅ Boletín UD5 — Avanzado (Resuelto)
+# ✅ Boletín de Trunking e inter-VLAN — Avanzado (Resuelto)
 
 ---
 
@@ -81,7 +81,7 @@ d) **ACLs para limitar Dirección** (se aplican en la subinterfaz del router de 
    access-list 101 permit ip 192.168.60.0 0.0.0.255 192.168.20.0 0.0.0.255
    access-list 101 deny ip 192.168.60.0 0.0.0.255 any
    ```
-   Aplicar con `ip access-group 101 in` en la subinterfaz `Fa0/0.60`. (Detalles finos de ACLs en la UD6.)
+   Aplicar con `ip access-group 101 in` en la subinterfaz `Fa0/0.60`. (Detalles finos de ACLs, más adelante.)
 
 ## 4. VTP disaster recovery
 

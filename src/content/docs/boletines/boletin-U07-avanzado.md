@@ -1,9 +1,9 @@
 ---
-title: Boletín UD7 — Avanzado
+title: Boletín de OSPF — Avanzado
 description: Ejercicios avanzados de Routing Dinámico
 ---
 
-# 📝 Boletín UD7 — Avanzado
+# 📝 Boletín de OSPF — Avanzado
 
 > Ejercicios que requieren aplicar conceptos de OSPF de forma más profunda.
 

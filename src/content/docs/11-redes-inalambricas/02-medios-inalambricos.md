@@ -5,7 +5,7 @@ description: La señal que se estira, se enfoca y se pierde 📡
 
 <p><small>La señal que se estira, se enfoca y se pierde 📡</small></p>
 
-> 🗺️ **Estás en:** 📶 **UD11 · Redes inalámbricas** → 02 · Medios y antenas
+> 🗺️ **Estás en:** 📶 **Redes inalámbricas** → 02 · Medios y antenas
 
 ---
 
@@ -13,7 +13,7 @@ description: La señal que se estira, se enfoca y se pierde 📡
 
 > La antena no crea señal: **reparte** la que le da el transceptor entre energía que se expande (omnidireccional) o energía que se concentra (direccional), y esa elección —junto a la altura, la potencia y los obstáculos— decide si tu enlace llega, se cae o espía el vecino.
 
-En la [UD2](/ApuntesRedes/02-ethernet-cableado) viste el aire como "el medio flexible pero impredecible". Este punto es su manual de instrucciones: cómo orientar la energía, cuánta potencia es legal (y útil) y cómo unir dos edificios sin zanjas.
+En la [unidad de Ethernet y cableado](/ApuntesRedes/02-ethernet-cableado) viste el aire como "el medio flexible pero impredecible". Este punto es su manual de instrucciones: cómo orientar la energía, cuánta potencia es legal (y útil) y cómo unir dos edificios sin zanjas.
 
 ---
 

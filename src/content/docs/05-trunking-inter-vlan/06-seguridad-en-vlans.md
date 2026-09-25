@@ -5,7 +5,7 @@ description: VACL, PVLAN y defensa contra el VLAN hopping 🛡️
 
 <p><small>VACL, PVLAN y defensa contra el VLAN hopping 🛡️</small></p>
 
-> 🗺️ **Estás en:** 🌉 **UD5 · Trunking y enrutamiento inter-VLAN** → 6 · Seguridad en VLANs
+> 🗺️ **Estás en:** 🌉 **Trunking y enrutamiento inter-VLAN** → 6 · Seguridad en VLANs
 
 ---
 

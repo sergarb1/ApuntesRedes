@@ -5,7 +5,7 @@ description: La red que converge en segundos, no en minutos ⚡
 
 <p><small>La red que converge en segundos, no en minutos ⚡</small></p>
 
-> 🗺️ **Estás en:** 🔀 **UD4 · Switching y VLAN** → 7 · RSTP y PortFast
+> 🗺️ **Estás en:** 🔀 **Switching y VLAN** → 7 · RSTP y PortFast
 
 ---
 

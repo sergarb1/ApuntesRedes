@@ -5,7 +5,7 @@ description: La luz que se ríe de los 100 metros y de la interferencia ✨
 
 <p><small>La luz que se ríe de los 100 metros y de la interferencia ✨</small></p>
 
-> 🗺️ **Estás en:** 📡 **UD2 · Ethernet y cableado** → 5 · Fibra óptica
+> 🗺️ **Estás en:** 📡 **Ethernet y cableado** → 5 · Fibra óptica
 
 ---
 

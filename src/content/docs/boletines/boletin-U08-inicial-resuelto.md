@@ -1,9 +1,9 @@
 ---
-title: Boletín UD8 — Inicial (Resuelto)
+title: Boletín de ACL y seguridad — Inicial (Resuelto)
 description: Soluciones de los ejercicios básicos de ACLs y seguridad de red
 ---
 
-# ✅ Boletín UD8 — Inicial (Resuelto)
+# ✅ Boletín de ACL y seguridad — Inicial (Resuelto)
 
 ---
 

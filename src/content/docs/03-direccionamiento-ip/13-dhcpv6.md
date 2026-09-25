@@ -5,7 +5,7 @@ description: Stateless vs stateful y cómo leer los flags M y O de un Router Adv
 
 <p><small>Stateless vs stateful y cómo leer los flags M y O de un Router Advertisement 📋</small></p>
 
-> 🗺️ **Estás en:** 🧮 **UD3 · Direccionamiento IP y subnetting** → 13 · DHCPv6
+> 🗺️ **Estás en:** 🧮 **Direccionamiento IP y subnetting** → 13 · DHCPv6
 
 ---
 

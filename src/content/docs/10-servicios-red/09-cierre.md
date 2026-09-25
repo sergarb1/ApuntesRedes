@@ -1,11 +1,11 @@
 ---
 title: "09 — Cierre: consolida lo aprendido"
-description: El cierre práctico de la U10, con DORA, dominios y relojes en hora 🗄️
+description: El cierre práctico, con DORA, dominios y relojes en hora 🗄️
 ---
 
-<p><small>El cierre práctico de la U10, con DORA, dominios y relojes en hora 🗄️</small></p>
+<p><small>El cierre práctico, con DORA, dominios y relojes en hora 🗄️</small></p>
 
-> 🗺️ **Estás en:** 🗄️ **UD10 · Servicios de red: DHCP, DNS y NTP** → 09 · Cierre
+> 🗺️ **Estás en:** 🗄️ **Servicios de red: DHCP, DNS y NTP** → 09 · Cierre
 
 ---
 
@@ -210,7 +210,7 @@ Existen alternativas (SNTP en dispositivos simples, PTP para precisión de micro
 
 El portátil recién estrenado consigue su IP, aprende a pronunciar nombres ajenos y, tras una pelea con el reloj, consigue poner en hora su vida. Su usuario solo sabe que "todo funciona". CONRAD, desde la consola, murmuró: *"Ese usuario no sabe lo que ha tenido que pasar por DORA, una jerarquía DNS y un stratum para poder ver gatos en Internet. Y lo peor es que no quiere saberlo. Somos los invisibles del invisible."*
 
-**PRÓXIMAMENTE EN U11:** Redes inalámbricas: SSIDs, canales, estándares y por qué tu vecino es tu peor enemigo. Ahora que la red da servicios, toca liberar los cables… y pagar el precio en interferencias.
+**PRÓXIMAMENTE:** Redes inalámbricas: SSIDs, canales, estándares y por qué tu vecino es tu peor enemigo. Ahora que la red da servicios, toca liberar los cables… y pagar el precio en interferencias.
 
 ---
 
@@ -227,4 +227,4 @@ El portátil recién estrenado consigue su IP, aprende a pronunciar nombres ajen
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/10-servicios-red) · **Anterior:** [08 · Diagnóstico de servicios](/ApuntesRedes/10-servicios-red/08-diagnostico-servicios) · **Siguiente:** [UD11 · Redes inalámbricas](/ApuntesRedes/11-redes-inalambricas)
+📚 [Volver al índice de la unidad](/ApuntesRedes/10-servicios-red) · **Anterior:** [08 · Diagnóstico de servicios](/ApuntesRedes/10-servicios-red/08-diagnostico-servicios) · **Siguiente:** [Redes inalámbricas](/ApuntesRedes/11-redes-inalambricas)

@@ -5,7 +5,7 @@ description: Sin relojes sincronizados, no hay confianza ⏰
 
 <p><small>Sin relojes sincronizados, no hay confianza ⏰</small></p>
 
-> 🗺️ **Estás en:** 🗄️ **UD10 · Servicios de red: DHCP, DNS y NTP** → 06 · NTP: la hora es sagrada
+> 🗺️ **Estás en:** 🗄️ **Servicios de red: DHCP, DNS y NTP** → 06 · NTP: la hora es sagrada
 
 ---
 

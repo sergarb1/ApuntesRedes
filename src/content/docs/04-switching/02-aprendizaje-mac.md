@@ -5,7 +5,7 @@ description: La tabla CAM, cómo el switch memoriza quién vive en cada puerto �
 
 <p><small>La tabla CAM, cómo el switch memoriza quién vive en cada puerto 🧠</small></p>
 
-> 🗺️ **Estás en:** 🔀 **UD4 · Switching y VLAN** → 2 · Aprendizaje de MACs
+> 🗺️ **Estás en:** 🔀 **Switching y VLAN** → 2 · Aprendizaje de MACs
 
 ---
 

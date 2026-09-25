@@ -5,7 +5,7 @@ description: Exponer un servicio interno al mundo 🚪
 
 <p><small>Exponer un servicio interno al mundo 🚪</small></p>
 
-> 🗺️ **Estás en:** 🌐 **UD9 · NAT y PAT** → 5 · NAT destino (port forwarding)
+> 🗺️ **Estás en:** 🌐 **NAT y PAT** → 5 · NAT destino (port forwarding)
 
 ---
 

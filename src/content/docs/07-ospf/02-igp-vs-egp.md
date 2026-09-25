@@ -5,7 +5,7 @@ description: Protocolos de dentro y de fuera, y por qué OSPF le gana a RIP 🌍
 
 <p><small>Protocolos de dentro y de fuera, y por qué OSPF le gana a RIP 🌍</small></p>
 
-> 🗺️ **Estás en:** 🗣️ **UD7 · Enrutamiento dinámico con OSPF** → 2 · IGP vs EGP y RIP vs OSPF
+> 🗺️ **Estás en:** 🗣️ **Enrutamiento dinámico con OSPF** → 2 · IGP vs EGP y RIP vs OSPF
 
 ---
 

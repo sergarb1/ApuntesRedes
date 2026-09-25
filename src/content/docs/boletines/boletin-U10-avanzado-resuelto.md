@@ -1,9 +1,9 @@
 ---
-title: Boletín UD10 — Avanzado (Resuelto)
+title: Boletín de Servicios de red — Avanzado (Resuelto)
 description: Soluciones de los ejercicios avanzados de servicios de red (DHCP, DNS y NTP)
 ---
 
-# ✅ Boletín UD10 — Avanzado (Resuelto)
+# ✅ Boletín de Servicios de red — Avanzado (Resuelto)
 
 ---
 

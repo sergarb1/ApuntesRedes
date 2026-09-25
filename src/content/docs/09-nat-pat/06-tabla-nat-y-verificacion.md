@@ -5,7 +5,7 @@ description: Leer la tabla NAT y saber si NAT trabaja 🔍
 
 <p><small>Leer la tabla NAT y saber si NAT trabaja 🔍</small></p>
 
-> 🗺️ **Estás en:** 🌐 **UD9 · NAT y PAT** → 6 · Tabla NAT y verificación
+> 🗺️ **Estás en:** 🌐 **NAT y PAT** → 6 · Tabla NAT y verificación
 
 ---
 

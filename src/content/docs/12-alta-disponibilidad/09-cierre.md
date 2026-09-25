@@ -1,11 +1,11 @@
 ---
 title: "09 — Cierre: consolida lo aprendido"
-description: El cierre práctico de la U12, donde la red aprende a caer de pie 🔁
+description: El cierre práctico, donde la red aprende a caer de pie 🔁
 ---
 
-<p><small>El cierre práctico de la U12, donde la red aprende a caer de pie 🔁</small></p>
+<p><small>El cierre práctico, donde la red aprende a caer de pie 🔁</small></p>
 
-> 🗺️ **Estás en:** 🔁 **UD12 · Alta disponibilidad y redundancia** → 09 · Cierre
+> 🗺️ **Estás en:** 🔁 **Alta disponibilidad y redundancia** → 09 · Cierre
 
 ---
 

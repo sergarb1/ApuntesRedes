@@ -5,7 +5,7 @@ description: Estática en PC y router, verificación y práctica en Packet Trace
 
 <p><small>Estática en PC y router, verificación y práctica en Packet Tracer ⚙️</small></p>
 
-> 🗺️ **Estás en:** 🧮 **UD3 · Direccionamiento IP y subnetting** → 16 · Configuración IPv6
+> 🗺️ **Estás en:** 🧮 **Direccionamiento IP y subnetting** → 16 · Configuración IPv6
 
 ---
 

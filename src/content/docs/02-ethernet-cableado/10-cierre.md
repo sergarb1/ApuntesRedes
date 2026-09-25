@@ -1,11 +1,11 @@
 ---
 title: "10 — Cierre: consolida lo aprendido"
-description: El cierre práctico de la UD2, con cables, luz y caos controlado 🔌
+description: El cierre práctico, con cables, luz y caos controlado 🔌
 ---
 
-<p><small>El cierre práctico de la UD2, con cables, luz y caos controlado 🔌</small></p>
+<p><small>El cierre práctico, con cables, luz y caos controlado 🔌</small></p>
 
-> 🗺️ **Estás en:** 📡 **UD2 · Ethernet y cableado** → 10 · Cierre: consolida lo aprendido
+> 🗺️ **Estás en:** 📡 **Ethernet y cableado** → 10 · Cierre: consolida lo aprendido
 
 ---
 
@@ -237,7 +237,7 @@ El hub opera en capa 1 (física): repite la señal por todos los puertos sin nin
 
 Un cable Cat6 transporta 1 Gbps sin problemas hasta que una silla pasa por encima. El impacto físico daña el par 3-6, provocando errores CRC y retransmisiones continuas. El comprobador de cables revela una falta de continuidad en el pin 3. El cable debe ser reemplazado. Lección aprendida: la capa física es la base de todo; si falla, nada funciona. Y CONRAD, desde el fondo del rack, añade: *"El cable lo dice todo. Cuando el paquete se rompe, mirad los pines antes que el router."*
 
-**PRÓXIMAMENTE EN UD3:** Direccionamiento IPv4, subredes, máscaras y por qué 192.168.1.256 no existe. Ahora que los bits ya viajan por un buen cable, toca darles una dirección que no se pierda.
+**PRÓXIMAMENTE:** Direccionamiento IPv4, subredes, máscaras y por qué 192.168.1.256 no existe. Ahora que los bits ya viajan por un buen cable, toca darles una dirección que no se pierda.
 
 ---
 
@@ -250,10 +250,10 @@ Un cable Cat6 transporta 1 Gbps sin problemas hasta que una silla pasa por encim
 | a) | Estándares para redes cableadas | ✅ Categorías, T568A/B, Auto MDI-X (puntos 2-3) |
 | b) | Montaje de cables | ✅ Laboratorio de crimpado (⚡) |
 | c) | Comprobadores de conectividad | ✅ Tester de cables, LEDs, split pair (puntos 4 y 7) |
-| d) | Direccionamiento lógico IP | ✅ (Introducción — se verá en UD3) |
+| d) | Direccionamiento lógico IP | ✅ (Introducción — se verá más adelante) |
 | e) | Estándares inalámbricos | ✅ WiFi 4/5/6/7 (punto 6) |
 | f) | Integración de dispositivos | ✅ Cableado estructurado (punto 7) |
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/02-ethernet-cableado) · **Anterior:** [9 · La trama Ethernet](/ApuntesRedes/02-ethernet-cableado/09-trama-ethernet) · **Siguiente:** [UD3 · Direccionamiento IP y subnetting](/ApuntesRedes/03-direccionamiento-ip)
+📚 [Volver al índice de la unidad](/ApuntesRedes/02-ethernet-cableado) · **Anterior:** [9 · La trama Ethernet](/ApuntesRedes/02-ethernet-cableado/09-trama-ethernet) · **Siguiente:** [Direccionamiento IP y subnetting](/ApuntesRedes/03-direccionamiento-ip)

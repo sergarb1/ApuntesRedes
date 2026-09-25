@@ -5,7 +5,7 @@ description: Datos, nativa, voz y gestión; estática frente a dinámica 🗂️
 
 <p><small>Datos, nativa, voz y gestión; estática frente a dinámica 🗂️</small></p>
 
-> 🗺️ **Estás en:** 🔀 **UD4 · Switching y VLAN** → 9 · Tipos de VLAN
+> 🗺️ **Estás en:** 🔀 **Switching y VLAN** → 9 · Tipos de VLAN
 
 ---
 

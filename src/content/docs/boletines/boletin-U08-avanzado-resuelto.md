@@ -1,9 +1,9 @@
 ---
-title: Boletín UD8 — Avanzado (Resuelto)
+title: Boletín de ACL y seguridad — Avanzado (Resuelto)
 description: Soluciones de los ejercicios avanzados de ACLs y seguridad de red
 ---
 
-# ✅ Boletín UD8 — Avanzado (Resuelto)
+# ✅ Boletín de ACL y seguridad — Avanzado (Resuelto)
 
 ---
 

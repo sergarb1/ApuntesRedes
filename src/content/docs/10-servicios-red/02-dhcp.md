@@ -5,7 +5,7 @@ description: Cuatro mensajes y una dirección servida 📦
 
 <p><small>Cuatro mensajes y una dirección servida 📦</small></p>
 
-> 🗺️ **Estás en:** 🗄️ **UD10 · Servicios de red: DHCP, DNS y NTP** → 02 · DHCP: el repartidor de IPs
+> 🗺️ **Estás en:** 🗄️ **Servicios de red: DHCP, DNS y NTP** → 02 · DHCP: el repartidor de IPs
 
 ---
 
@@ -13,7 +13,7 @@ description: Cuatro mensajes y una dirección servida 📦
 
 > **DHCP** (*Dynamic Host Configuration Protocol*) asigna automáticamente a cada cliente su configuración IP —dirección, máscara, gateway y DNS— mediante un diálogo de cuatro mensajes que debes conocer de memoria: **DORA**.
 
-En la [UD3](/ApuntesRedes/03-direccionamiento-ip) viste qué es DHCP y para qué sirve. Aquí vamos a abrir la caja: cómo negocia el cliente, qué contiene una concesión (lease) y qué decisiones toma el servidor. Es el mismo protocolo si el servidor es un router Cisco, un Windows Server o el router de tu casa.
+En la [unidad de dirección IP](/ApuntesRedes/03-direccionamiento-ip) viste qué es DHCP y para qué sirve. Aquí vamos a abrir la caja: cómo negocia el cliente, qué contiene una concesión (lease) y qué decisiones toma el servidor. Es el mismo protocolo si el servidor es un router Cisco, un Windows Server o el router de tu casa.
 
 ---
 

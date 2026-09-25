@@ -1,9 +1,9 @@
 ---
-title: "Boletín UD1 — Avanzado"
-description: "Ejercicios de nivel avanzado de la Unidad 01: razonar, diagnosticar y diseñar"
+title: "Boletín de Introducción — Avanzado"
+description: "Ejercicios de nivel avanzado: razonar, diagnosticar y diseñar"
 ---
 
-# 📝 Boletín UD1 — Avanzado
+# 📝 Boletín de Introducción — Avanzado
 
 > Ejercicios que piden razonar, diagnosticar y defender ideas. No buscan memorizar: buscan que pienses como un administrador de redes.
 
@@ -49,7 +49,7 @@ c) La palabra "HOLA" tiene 4 letras y ocupa 4 bytes. ¿Cuántos bits son?
 
 ## 7. El mapa del curso
 
-Estamos en la Unidad 01, justo antes de meternos con switches, routers, IP y NAT. Da 2 motivos por los que el curso arranca con estos conceptos (qué es una red, sus componentes, el método de diagnóstico) antes de configurar ningún dispositivo.
+Estamos al principio del curso, justo antes de meternos con switches, routers, IP y NAT. Da 2 motivos por los que el curso arranca con estos conceptos (qué es una red, sus componentes, el método de diagnóstico) antes de configurar ningún dispositivo.
 
 **Pista:** sin saber qué es una red, no sabrías para qué configuras cada aparato.
 

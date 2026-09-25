@@ -5,7 +5,7 @@ description: Una IP, dos routers, cero drama 🎭
 
 <p><small>Una IP, dos routers, cero drama 🎭</small></p>
 
-> 🗺️ **Estás en:** 🔁 **UD12 · Alta disponibilidad y redundancia** → 05 · FHRP: el gateway redundante
+> 🗺️ **Estás en:** 🔁 **Alta disponibilidad y redundancia** → 05 · FHRP: el gateway redundante
 
 ---
 
@@ -17,7 +17,7 @@ description: Una IP, dos routers, cero drama 🎭
 
 ## 😱 El problema: el gateway es un SPOF
 
-Todo tu conocimiento de la UD3 aplica: cada cliente de una subred tiene como gateway la IP del router. Si ese router muere:
+Todo tu conocimiento de dirección IP aplica: cada cliente de una subred tiene como gateway la IP del router. Si ese router muere:
 
 - Los clientes **no cambian de gateway solos**: su configuración (estática o DHCP) sigue apuntando a la IP muerta.
 - La red local funciona (switches, servidores internos), pero **nadie sale**.

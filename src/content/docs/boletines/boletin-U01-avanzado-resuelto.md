@@ -1,9 +1,9 @@
 ---
-title: "Boletín UD1 — Avanzado (Resuelto)"
-description: Soluciones de los ejercicios avanzados de la Unidad 01
+title: "Boletín de Introducción — Avanzado (Resuelto)"
+description: Soluciones de los ejercicios avanzados
 ---
 
-# 💪 Boletín UD1 — Avanzado (Resuelto)
+# 💪 Boletín de Introducción — Avanzado (Resuelto)
 
 ---
 
@@ -21,7 +21,7 @@ Deducción: en cuanto un peldaño falla, **ahí está el problema**. No necesita
 
 ## 2. La historia de un paquete
 
-1. **Capa de enlace (Ethernet):** el PC encapsula el paquete en una trama Ethernet. Necesita la MAC del gateway (la obtiene con ARP si no la tiene). La trama viaja por el cable hasta el switch, que la reenvía al router根据la MAC destino.
+1. **Capa de enlace (Ethernet):** el PC encapsula el paquete en una trama Ethernet. Necesita la MAC del gateway (la obtiene con ARP si no la tiene). La trama viaja por el cable hasta el switch, que la reenvía al router según la MAC destino.
 2. **Capa de red (IP):** el router lee el sobre IP, ve que el destino (`142.250.185.78`) no está en su subred, y consulta su tabla de rutas para decidir por dónde enviarlo. El paquete salta de router en router hasta llegar a la red de Google.
 3. **Capa de transporte (TCP):** TCP se asegura de que el paquete llega completo y en orden. Si se pierde uno, lo reenvía. Abre una conexión (handshake) antes de empezar.
 4. **Capa de aplicación (HTTP):** el navegador envía una petición HTTP GET al servidor de Google. El servidor responde con el HTML de la página, que viaja de vuelta en múltiples paquetes.
@@ -67,7 +67,7 @@ c) 4 letras = 4 bytes; 4 × 8 = **32 bits**.
 ## 7. El mapa del curso
 
 1. **Sin saber qué es una red, no sabrías para qué configuras cada aparato.** Si no conoces las 4 piezas (dispositivos finales, de interconexión, medio, protocolos), configurar un switch o un router sería como girar una llave sin saber qué puerta abre.
-2. **El método de diagnóstico en capas lo usarás en cada laboratorio del curso.** Desde la UD1 hasta la UD1, cada vez que algo falle, volverás a la escalera del ping. Aprenderlo primero te da una herramienta que acompaña todo el curso.
+2. **El método de diagnóstico en capas lo usarás en cada laboratorio del curso.** Durante todo el curso, cada vez que algo falle, volverás a la escalera del ping. Aprenderlo primero te da una herramienta que acompaña todo el curso.
 
 ## 8. El entorno de trabajo: Preparación del taller virtual
 

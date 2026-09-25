@@ -5,7 +5,7 @@ description: "Blindar los puertos: quién puede conectarse y quién no 🔒"
 
 <p><small>Blindar los puertos: quién puede conectarse y quién no 🔒</small></p>
 
-> 🗺️ **Estás en:** 🛡️ **UD8 · ACLs y seguridad de red** → 5 · Port Security
+> 🗺️ **Estás en:** 🛡️ **ACLs y seguridad de red** → 5 · Port Security
 
 ---
 
@@ -136,4 +136,4 @@ Switch# show mac address-table secure
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/08-acl-seguridad) · **Anterior:** [4 · ACL extendida y nombrada](/ApuntesRedes/08-acl-seguridad/04-acl-extendida-y-nombrada) · **Siguiente:** [UD9 · NAT y PAT](/ApuntesRedes/09-nat-pat)
+📚 [Volver al índice de la unidad](/ApuntesRedes/08-acl-seguridad) · **Anterior:** [4 · ACL extendida y nombrada](/ApuntesRedes/08-acl-seguridad/04-acl-extendida-y-nombrada) · **Siguiente:** [NAT y PAT](/ApuntesRedes/09-nat-pat)

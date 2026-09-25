@@ -5,7 +5,7 @@ description: El edificio cableado como Dios manda, con patch panels y keystones 
 
 <p><small>El edificio cableado como Dios manda, con patch panels y keystones 🏗️</small></p>
 
-> 🗺️ **Estás en:** 📡 **UD2 · Ethernet y cableado** → 7 · Cableado estructurado
+> 🗺️ **Estás en:** 📡 **Ethernet y cableado** → 7 · Cableado estructurado
 
 ---
 

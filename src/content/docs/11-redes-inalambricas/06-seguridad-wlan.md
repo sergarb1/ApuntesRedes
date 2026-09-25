@@ -5,7 +5,7 @@ description: Del candado roto de WEP al WPA3 de verdad 🔐
 
 <p><small>Del candado roto de WEP al WPA3 de verdad 🔐</small></p>
 
-> 🗺️ **Estás en:** 📶 **UD11 · Redes inalámbricas** → 06 · Seguridad WLAN
+> 🗺️ **Estás en:** 📶 **Redes inalámbricas** → 06 · Seguridad WLAN
 
 ---
 
@@ -42,7 +42,7 @@ Reglas prácticas:
 
 - **Casa / PYME pequeña:** WPA3-Personal (o WPA2 con AES si hay clientes viejos).
 - **Empresa / centro educativo:** WPA2/WPA3-Enterprise con RADIUS; si no hay infraestructura de identidad, PSK distintos **por SSID y por grupo**, con la red de invitados aislada.
-- **Invitados:** SSID aparte, PSK rotatoria o portal cautivo, y **aislamiento de clientes** + acceso solo a Internet (¡ACLs/firewall! lo de la UD8 sirve).
+- **Invitados:** SSID aparte, PSK rotatoria o portal cautivo, y **aislamiento de clientes** + acceso solo a Internet (¡ACLs/firewall! lo de seguridad sirve).
 
 > 💡 **El SSID oculto no es seguridad:** ocultar el beacon solo impide que aparezca en la lista; el SSID viaja en claro en las asociaciones de los clientes y cualquier herramienta lo muestra en segundos. Y el **filtrado por MAC**, lo mismo: se clona en un clic. Ambos son decoración, no barreras.
 
@@ -65,7 +65,7 @@ Reglas prácticas:
 
 Las piezas clave:
 
-1. **Un SSID por propósito**, cada uno con su VLAN: corporativo, invitados, IoT/dispositivos. El AP solo "puentea" el WiFi al cable; la segregación real la hacen las VLANs (UD4-UD5) y las ACLs (UD8).
+1. **Un SSID por propósito**, cada uno con su VLAN: corporativo, invitados, IoT/dispositivos. El AP solo "puentea" el WiFi al cable; la segregación real la hacen las VLANs y las ACLs.
 2. **802.1X + RADIUS** para el SSID corporativo: identidad real, logs reales.
 3. **Invitados en VLAN propia**, aislados entre sí y solo con salida a Internet.
 4. **Gestión del AP aparte**: interfaz de administración solo desde la VLAN de gestión, con credenciales propias (nada de dejar admin/admin).

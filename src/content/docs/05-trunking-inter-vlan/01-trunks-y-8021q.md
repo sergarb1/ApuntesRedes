@@ -5,7 +5,7 @@ description: El etiquetado que lleva varias VLANs por un mismo cable 🏷️
 
 <p><small>El etiquetado que lleva varias VLANs por un mismo cable 🏷️</small></p>
 
-> 🗺️ **Estás en:** 🌉 **UD5 · Trunking y enrutamiento inter-VLAN** → 1 · Trunks y 802.1Q
+> 🗺️ **Estás en:** 🌉 **Trunking y enrutamiento inter-VLAN** → 1 · Trunks y 802.1Q
 
 ---
 

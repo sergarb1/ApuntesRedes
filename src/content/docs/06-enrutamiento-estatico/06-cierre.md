@@ -1,11 +1,11 @@
 ---
 title: "06 — Cierre: consolida lo aprendido"
-description: El cierre práctico de la U06, con rutas, next-hops y tablas 🧭
+description: El cierre práctico, con rutas, next-hops y tablas 🧭
 ---
 
-<p><small>El cierre práctico de la U06, con rutas, next-hops y tablas 🧭</small></p>
+<p><small>El cierre práctico, con rutas, next-hops y tablas 🧭</small></p>
 
-> 🗺️ **Estás en:** 🧭 **UD6 · Enrutamiento estático** → 06 · Cierre
+> 🗺️ **Estás en:** 🧭 **Enrutamiento estático** → 06 · Cierre
 
 ---
 
@@ -40,7 +40,7 @@ Has terminado la teoría: conoces las tripas del router, sabes moverte por la CL
 
 **Dinámica (OSPF):** — Y cuando un enlace muere, ¿quién te avisa? ¿El administrador, a las tres de la madrugada? Yo reconverjo solo: retiro la ruta rota y publication la alternativa en segundos.
 
-**Estática:** — En redes pequeñas y en el borde (hacia Internet, hacia un solo ISP), yo mando: es lo que firma el contrato con el operador. Además, con rutas flotantes y SLA me apaño hasta en HA (ya lo verás en la U12).
+**Estática:** — En redes pequeñas y en el borde (hacia Internet, hacia un solo ISP), yo mando: es lo que firma el contrato con el operador. Además, con rutas flotantes y SLA me apaño hasta en HA (ya lo verás al final del curso).
 
 **Dinámica:** — Y en una red de 30 routers, ¿escribes 900 rutas a mano? Yo aprendo la topología y me adapto. Tu memoria no escala.
 
@@ -201,7 +201,7 @@ Puede, y es común en el router de casa (`0.0.0.0/0 → dialer/WAN`). En Etherne
 
 > ❓ **¿Qué pasa si pongo dos rutas por defecto con la misma AD?**
 
-Se convierten en un ECMP: el router reparte flujos por ambas. Si eso no era tu intención, sube la AD de una (la conviertes en flotante) o deja solo una. Es, de hecho, el mecanismo de la redundancia en el borde de la U12.
+Se convierten en un ECMP: el router reparte flujos por ambas. Si eso no era tu intención, sube la AD de una (la conviertes en flotante) o deja solo una. Es, de hecho, el mecanismo de la redundancia en el borde que verás al final del curso.
 
 ---
 
@@ -209,7 +209,7 @@ Se convierten en un ECMP: el router reparte flujos por ambas. Si eso no era tu i
 
 El paquete turístico murió en R2 con un ICMP elegante y el administrador descubrió la ruta de retorno. En el laboratorio, tres routers susurraron su lección: *promesas por escrito, caminos de vuelta y traceroute antes de culpar al hardware*. CONRAD, desde el R1, cerró la sesión: *"Una ruta es una promesa. Una tabla es un mapa. Y un mapa sin caminos de vuelta es un puzzle. Configura los dos lados, chaval."*
 
-**PRÓXIMAMENTE EN U07:** Enrutamiento dinámico con OSPF: routers que se cuentan caminos entre sí y eligen rutas solos. Ahora que sabes escribir el mapa a mano, toca dejar que la red lo escriba ella.
+**PRÓXIMAMENTE:** Enrutamiento dinámico con OSPF: routers que se cuentan caminos entre sí y eligen rutas solos. Ahora que sabes escribir el mapa a mano, toca dejar que la red lo escriba ella.
 
 ---
 
@@ -227,4 +227,4 @@ El paquete turístico murió en R2 con un ICMP elegante y el administrador descu
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/06-enrutamiento-estatico) · **Anterior:** [05 · Cómo decide un router](/ApuntesRedes/06-enrutamiento-estatico/05-como-decide-el-router) · **Siguiente:** [UD7 · Enrutamiento dinámico con OSPF](/ApuntesRedes/07-ospf)
+📚 [Volver al índice de la unidad](/ApuntesRedes/06-enrutamiento-estatico) · **Anterior:** [05 · Cómo decide un router](/ApuntesRedes/06-enrutamiento-estatico/05-como-decide-el-router) · **Siguiente:** [Enrutamiento dinámico con OSPF](/ApuntesRedes/07-ospf)

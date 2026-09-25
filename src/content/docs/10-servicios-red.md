@@ -1,17 +1,17 @@
 ---
-title: "U10 — Servicios de red: DHCP, DNS y NTP"
+title: "Servicios de red: DHCP, DNS y NTP"
 description: Los tres mugrientos que hacen que todo funcione sin que nadie se dé cuenta 🗄️
 ---
 
 <p><small>Los tres mugrientos que hacen que todo funcione sin que nadie se dé cuenta 🗄️</small></p>
 
-> 🗺️ **El mapa del curso:** 🧭 Routing → 🗣️ OSPF → 🛡️ ACLs → 🌐 NAT → **🗄️ AQUÍ ESTÁS (U10)** → 📶 WiFi → 🔁 Alta disponibilidad
+> 🗺️ **El mapa del curso:** 🧭 Routing → 🗣️ OSPF → 🛡️ ACLs → 🌐 NAT → **🗄️ AQUÍ ESTÁS** → 📶 WiFi → 🔁 Alta disponibilidad
 
 ---
 
 *Un usuario conecta su portátil a la red de la empresa y, sin tocar nada, tiene IP, sabe dónde está el gateway, resuelve nombres de dominio y encima su reloj está en hora exacta. No hay magia: hay tres servicios trabajando en silencio. DHCP le dio dirección, DNS tradujo "www.ejemplo.es" en una IP y NTP puso en hora el reloj del sistema.*
 
-Bienvenido a la unidad de los servicios invisibles. Hasta ahora has construido la red: medios (UD2), direcciones (UD3), conmutación (UD4-UD5), enrutamiento (UD6-UD7), seguridad (UD8) y salida a Internet (UD9). Pero una red sin servicios es un edificio con luces y sin ascensor: funciona el esqueleto, pero nadie puede trabajar. Aquí despliegas los tres servicios críticos que toda red profesional necesita para que los usuarios ni se enteren de que la red existe.
+Bienvenido a la unidad de los servicios invisibles. Hasta ahora has construido la red: medios, direcciones, conmutación, enrutamiento, seguridad y salida a Internet. Pero una red sin servicios es un edificio con luces y sin ascensor: funciona el esqueleto, pero nadie puede trabajar. Aquí despliegas los tres servicios críticos que toda red profesional necesita para que los usuarios ni se enteren de que la red existe.
 
 Esta unidad se lee como un **libro de 9 capítulos**: los 8 primeros son teoría en progresión y el 9º es el aterrizaje práctico con laboratorio.
 
@@ -77,8 +77,8 @@ Al terminar, serás capaz de:
 
 ## 🚪 ¿Por dónde empiezo?
 
-- ¿Recuerdas el punto de DHCP de la [UD3](/ApuntesRedes/03-direccionamiento-ip)? Aquí lo llevamos del concepto al despliegue real en Cisco.
+- ¿Recuerdas el punto de DHCP de la [unidad de dirección IP](/ApuntesRedes/03-direccionamiento-ip)? Aquí lo llevamos del concepto al despliegue real en Cisco.
 - ¿Ya sabes lo básico? → Arranca directamente en el [punto 1](/ApuntesRedes/10-servicios-red/01-por-que-servicios).
 
 **📍 Primer punto:** [01 · Por qué necesitas servicios](/ApuntesRedes/10-servicios-red/01-por-que-servicios)  
-**⏭️ Al acabar la unidad, continúa en [UD11 · Redes inalámbricas](/ApuntesRedes/11-redes-inalambricas).**
+**⏭️ Al acabar la unidad, continúa en [Redes inalámbricas](/ApuntesRedes/11-redes-inalambricas).**

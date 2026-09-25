@@ -1,9 +1,9 @@
 ---
-title: Boletín UD3 — Avanzado
+title: Boletín de Direccionamiento IP — Avanzado
 description: Ejercicios avanzados de subnetting, VLSM, cabecera IPv4, ARP y fragmentación
 ---
 
-# 📝 Boletín UD3 — Avanzado
+# 📝 Boletín de Direccionamiento IP — Avanzado
 
 > Ejercicios que requieren aplicar subnetting, VLSM, DHCP, cabecera IPv4, ARP y fragmentación de forma más profunda.
 

@@ -5,7 +5,7 @@ description: Cuando los broadcasts rebotan sin fin y la red se ahoga 🌪️
 
 <p><small>Cuando los broadcasts rebotan sin fin y la red se ahoga 🌪️</small></p>
 
-> 🗺️ **Estás en:** 🔀 **UD4 · Switching y VLAN** → 4 · La tormenta de broadcast
+> 🗺️ **Estás en:** 🔀 **Switching y VLAN** → 4 · La tormenta de broadcast
 
 ---
 

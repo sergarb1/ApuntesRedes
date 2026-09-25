@@ -5,7 +5,7 @@ description: "Las listas de la compra del router: permitir, negar y dónde colga
 
 <p><small>Las listas de la compra del router: permitir, negar y dónde colgarlas 🛡️</small></p>
 
-> 🗺️ **Estás en:** 🛡️ **UD8 · ACLs y seguridad de red** → 2 · ACLs: concepto y tipos
+> 🗺️ **Estás en:** 🛡️ **ACLs y seguridad de red** → 2 · ACLs: concepto y tipos
 
 ---
 

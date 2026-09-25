@@ -1,9 +1,9 @@
 ---
-title: Boletín UD3 · IPv6 — Inicial
+title: Boletín de Direccionamiento IP · IPv6 — Inicial
 description: Ejercicios básicos de IPv6 y Transición
 ---
 
-# 📝 Boletín UD3 · IPv6 — Inicial
+# 📝 Boletín de Direccionamiento IP · IPv6 — Inicial
 
 > Ejercicios básicos para afianzar los conceptos de direccionamiento IPv6.
 

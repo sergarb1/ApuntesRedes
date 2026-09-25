@@ -5,7 +5,7 @@ description: Cuando el diseño no basta, el procedimiento salva 📋
 
 <p><small>Cuando el diseño no basta, el procedimiento salva 📋</small></p>
 
-> 🗺️ **Estás en:** 🔁 **UD12 · Alta disponibilidad y redundancia** → 08 · Plan de continuidad
+> 🗺️ **Estás en:** 🔁 **Alta disponibilidad y redundancia** → 08 · Plan de continuidad
 
 ---
 
@@ -63,11 +63,11 @@ El mínimo profesional que toda red debe tener:
 
 ---
 
-## 🏗️ Servicios duplicados: lo que aprendiste en UD10 aplicado
+## 🏗️ Servicios duplicados: lo que aprendiste antes, aplicado
 
 El plan de continuidad reutiliza todo el curso:
 
-- **DHCP:** dos servidores con rangos divididos (o failover coordinado). Recuerda la UD10: lease largo = red sobrevive a la caída del servidor durante horas.
+- **DHCP:** dos servidores con rangos divididos (o failover coordinado). Recuerda: lease largo = red sobrevive a la caída del servidor durante horas.
 - **DNS:** secundarios/zonas replicadas; el primario cae y los clientes siguen resolviendo.
 - **NTP:** varias fuentes (ya lo montaste).
 - **Ruteo:** OSPF interno + salida doble al borde (punto 7).

@@ -5,7 +5,7 @@ description: Ancho de banda, throughput, latencia, atenuación y diafonía 📐
 
 <p><small>Ancho de banda, throughput, latencia, atenuación y diafonía 📐</small></p>
 
-> 🗺️ **Estás en:** 📡 **UD2 · Ethernet y cableado** → 6 · Conceptos físicos clave
+> 🗺️ **Estás en:** 📡 **Ethernet y cableado** → 6 · Conceptos físicos clave
 
 ---
 

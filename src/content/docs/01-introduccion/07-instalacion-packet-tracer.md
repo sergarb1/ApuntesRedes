@@ -5,7 +5,7 @@ description: Prepara tu laboratorio virtual antes de tocar cables reales 🛠️
 
 <p><small>Prepara tu laboratorio virtual antes de tocar cables reales 🛠️</small></p>
 
-> 🗺️ **Estás en:** 🚪 **U01 · Introducción** → 07 · Instalación de Packet Tracer
+> 🗺️ **Estás en:** 🚪 **Introducción** → 07 · Instalación de Packet Tracer
 
 ---
 
@@ -130,7 +130,7 @@ Adivina qué herramienta de red soy:
 <summary>💡 Soluciones</summary>
 
 1. Porque permite **equivocarse sin consecuencias**: si configuras mal un switch en Packet Tracer, solo pulsas "nuevo"; si lo haces en un switch real, puede costar tiempo y dinero arreglarlo.
-2. Packet Tracer **no模拟a todo**: por ejemplo, no puedes ver LEDs物理icos, no puedes probar fibra óptica, y algunos protocolos avanzados no estánimplementados al 100%.
+2. Packet Tracer **no simula todo**: por ejemplo, no puedes ver LEDs físicos, no puedes probar fibra óptica, y algunos protocolos avanzados no están implementados al 100%.
 3. Cuando domines los conceptos básicos (IP, switch, router, ping), es buen momento para tocar hardware real y comprobar que lo que sabes funciona en la realidad.
 
 </details>
@@ -179,7 +179,7 @@ Vertical:
 
 > ❓ **¿Puedo usar Packet Tracer en Linux?**
 
-**Sí.** Cisco proporciona版本 para Windows y Linux. La instalación en Linux es igual de sencilla: descargas el paquete `.deb` o `.flatpak` y lo instalas con doble clic o desde terminal.
+**Sí.** Cisco proporciona versiones para Windows y Linux. La instalación en Linux es igual de sencilla: descargas el paquete `.deb` o `.flatpak` y lo instalas con doble clic o desde terminal.
 
 ---
 

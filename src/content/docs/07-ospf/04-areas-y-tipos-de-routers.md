@@ -5,7 +5,7 @@ description: El Área 0 como corazón y quién es quién en OSPF 🏙️
 
 <p><small>El Área 0 como corazón y quién es quién en OSPF 🏙️</small></p>
 
-> 🗺️ **Estás en:** 🗣️ **UD7 · Enrutamiento dinámico con OSPF** → 4 · Áreas y tipos de routers
+> 🗺️ **Estás en:** 🗣️ **Enrutamiento dinámico con OSPF** → 4 · Áreas y tipos de routers
 
 ---
 

@@ -1,9 +1,9 @@
 ---
-title: Boletín UD4 — Inicial
+title: Boletín de Switching y VLAN — Inicial
 description: Ejercicios básicos de Switching y STP
 ---
 
-# 📝 Boletín UD4 — Inicial
+# 📝 Boletín de Switching y VLAN — Inicial
 
 > Ejercicios básicos para afianzar los conceptos de switching y STP.
 

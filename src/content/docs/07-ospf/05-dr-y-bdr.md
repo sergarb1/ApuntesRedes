@@ -5,7 +5,7 @@ description: El portavoz que evita el caos en redes multiacceso 🗣️
 
 <p><small>El portavoz que evita el caos en redes multiacceso 🗣️</small></p>
 
-> 🗺️ **Estás en:** 🗣️ **UD7 · Enrutamiento dinámico con OSPF** → 5 · DR y BDR
+> 🗺️ **Estás en:** 🗣️ **Enrutamiento dinámico con OSPF** → 5 · DR y BDR
 
 ---
 

@@ -1,17 +1,17 @@
 ---
-title: U08 — ACLs y seguridad de red
+title: ACLs y seguridad de red
 description: El portero con lista y mal carácter 🛡️
 ---
 
 <p><small>El portero con lista y mal carácter 🛡️</small></p>
 
-> 🗺️ **El mapa del curso:** 🧭 Routing → 🗣️ OSPF → **🛡️ AQUÍ ESTÁS (U08)** → 🌐 NAT → 🗄️ Servicios
+> 🗺️ **El mapa del curso:** 🧭 Routing → 🗣️ OSPF → **🛡️ AQUÍ ESTÁS** → 🌐 NAT → 🗄️ Servicios
 
 ---
 
 *Un paquete llega al router de la empresa desde la red de invitados y pide paso hacia el servidor de nóminas. Antes de que la tabla de rutas decida por dónde, un guardián silencioso revisa su origen, su destino y el puerto que solicita. "Tu nombre no está en la lista." El paquete se desvanece y nadie, ni siquiera el remitente, recibirá confirmación.*
 
-Bienvenido a la unidad de la seguridad perimetral e interna. En la [UD6](/ApuntesRedes/06-enrutamiento-estatico) tu router aprendió a encaminar; aquí aprenderá a **decidir quién merece ser encaminado**. Las ACLs son el filtro más fundamental de la administración de redes: unas pocas líneas que definen qué tráfico pasa, cuándo pasa y por dónde deja de hacerlo.
+Bienvenido a la unidad de la seguridad perimetral e interna. En la [unidad de enrutamiento estático](/ApuntesRedes/06-enrutamiento-estatico) tu router aprendió a encaminar; aquí aprenderá a **decidir quién merece ser encaminado**. Las ACLs son el filtro más fundamental de la administración de redes: unas pocas líneas que definen qué tráfico pasa, cuándo pasa y por dónde deja de hacerlo.
 
 Esta unidad se lee como un **libro de 6 capítulos**: los 5 primeros son teoría en progresión y el 6º es el aterrizaje práctico con laboratorio.
 
@@ -72,8 +72,8 @@ Al terminar, serás capaz de:
 
 ## 🚪 ¿Por dónde empiezo?
 
-- ¿La tabla de rutas te suena lejana? Repasa el [flujo de decisión del router](/ApuntesRedes/06-enrutamiento-estatico/05-como-decide-el-router) de la UD6: aquí damos eso por sabido.
+- ¿La tabla de rutas te suena lejana? Repasa el [flujo de decisión del router](/ApuntesRedes/06-enrutamiento-estatico/05-como-decide-el-router) de la unidad de enrutamiento estático: aquí damos eso por sabido.
 - ¿Ya escribes ACLs? → Salta a [extendidas y nombradas](/ApuntesRedes/08-acl-seguridad/04-acl-extendida-y-nombrada), donde viven time-range y established.
 
 **📍 Primer punto:** [01 · De las rutas a las ACLs](/ApuntesRedes/08-acl-seguridad/01-enrutamiento-y-acls)  
-**⏭️ Al acabar la unidad, continúa en [UD9 · NAT y PAT](/ApuntesRedes/09-nat-pat).**
+**⏭️ Al acabar la unidad, continúa en [NAT y PAT](/ApuntesRedes/09-nat-pat).**

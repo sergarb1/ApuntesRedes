@@ -5,7 +5,7 @@ description: Cómo viajan los datos por la red y qué reglas siguen ✉️
 
 <p><small>Cómo viajan los datos por la red y qué reglas siguen ✉️</small></p>
 
-> 🗺️ **Estás en:** 🚪 **U01 · Introducción** → 04 · Paquetes y protocolos
+> 🗺️ **Estás en:** 🚪 **Introducción** → 04 · Paquetes y protocolos
 
 ---
 
@@ -99,7 +99,7 @@ Adivina qué concepto de red soy:
 
 > *CONRAD, nuestro switch cascarrabias, opina sobre los que creen que los archivos viajan de un tirón.*
 
-**CONRAD:** — ¡OTRA VEZ! Viene un alumno y me dice: *"CONRAD,当他envía un PDF por WhatsApp, ¿viaja entero por el cable?"* Y yo: **¡NO!** Nada viaja entero. Tu PDF se convierte en **bytes**, se trocea en **paquetes** de 1500 bytes como máximo, cada paquete lleva su sobre con IP origen y destino, y viajan **por separado** de router en router. Al llegar al destino, se reordenan y se vuelve a armar el PDF. ¿Te imaginas un PDF de 50 MB viajando de un tirón? ¡El cable explotaría!
+**CONRAD:** — ¡OTRA VEZ! Viene un alumno y me dice: *"CONRAD, cuando envío un PDF por WhatsApp, ¿viaja entero por el cable?"* Y yo: **¡NO!** Nada viaja entero. Tu PDF se convierte en **bytes**, se trocea en **paquetes** de 1500 bytes como máximo, cada paquete lleva su sobre con IP origen y destino, y viajan **por separado** de router en router. Al llegar al destino, se reordenan y se vuelve a armar el PDF. ¿Te imaginas un PDF de 50 MB viajando de un tirón? ¡El cable explotaría!
 
 **La lección:** la información siempre viaja troceada en paquetes. Nunca entera. Los routers manejan paquetes pequeños, no archivos gigantes.
 

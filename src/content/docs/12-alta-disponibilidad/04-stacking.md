@@ -5,7 +5,7 @@ description: Varios switches, un solo equipo 🧱
 
 <p><small>Varios switches, un solo equipo 🧱</small></p>
 
-> 🗺️ **Estás en:** 🔁 **UD12 · Alta disponibilidad y redundancia** → 04 · Stacking y chassis virtuales
+> 🗺️ **Estás en:** 🔁 **Alta disponibilidad y redundancia** → 04 · Stacking y chassis virtuales
 
 ---
 

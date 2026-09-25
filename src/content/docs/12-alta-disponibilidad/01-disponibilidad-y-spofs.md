@@ -5,7 +5,7 @@ description: Los nueves, el coste del parón y dónde se esconde el fracaso ⏱�
 
 <p><small>Los nueves, el coste del parón y dónde se esconde el fracaso ⏱️</small></p>
 
-> 🗺️ **Estás en:** 🔁 **UD12 · Alta disponibilidad y redundancia** → 01 · Disponibilidad y SPOFs
+> 🗺️ **Estás en:** 🔁 **Alta disponibilidad y redundancia** → 01 · Disponibilidad y SPOFs
 
 ---
 
@@ -82,7 +82,7 @@ El patrón universal de HA en redes es **duplicar por capas, sin crear bucles ni
 
 - **Capa 2:** EtherChannel y STP gestionan la redundancia de enlaces sin bucles.
 - **Capa 3:** HSRP da un gateway virtual; las rutas dinámicas o flotantes cubren caminos.
-- **Servicios:** DHCP/DNS duplicados (visto en la UD10).
+- **Servicios:** DHCP/DNS duplicados (visto en unidades anteriores).
 - **Energía:** SAI y, en serio, doble circuito.
 
 En las unidades siguientes desmontas cada pieza: [STP como aliado](/ApuntesRedes/12-alta-disponibilidad/02-stp-redundancia), [EtherChannel](/ApuntesRedes/12-alta-disponibilidad/03-etherchannel), [stacking](/ApuntesRedes/12-alta-disponibilidad/04-stacking), [HSRP](/ApuntesRedes/12-alta-disponibilidad/05-fhrp) y [rutas redundantes](/ApuntesRedes/12-alta-disponibilidad/07-redundancia-l3).

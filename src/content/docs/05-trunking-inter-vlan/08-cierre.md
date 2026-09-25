@@ -1,11 +1,11 @@
 ---
 title: "08 — Cierre: consolida lo aprendido"
-description: El cierre práctico de la U05, con trunks, VLANs y routers de por medio 🌉
+description: El cierre práctico, con trunks, VLANs y routers de por medio 🌉
 ---
 
-<p><small>El cierre práctico de la U05, con trunks, VLANs y routers de por medio 🌉</small></p>
+<p><small>El cierre práctico, con trunks, VLANs y routers de por medio 🌉</small></p>
 
-> 🗺️ **Estás en:** 🌉 **UD5 · Trunking y enrutamiento inter-VLAN** → 08 · Cierre
+> 🗺️ **Estás en:** 🌉 **Trunking y enrutamiento inter-VLAN** → 08 · Cierre
 
 ---
 
@@ -210,7 +210,7 @@ Para inter-VLAN, no (SVIs bastan). Pero el router (o firewall) sigue siendo el p
 
 El paquete de RRHH imprimió su acta de auditoría en la impresora de la VLAN 30 y volvió a su VLAN con la conciencia tranquila. En el trunk, una trama sin etiqueta se cruzó con él, y se saludaron como vecinos: una con etiqueta, otra sin ella, ambas en su sitio. CONRAD, desde la consola del switch, murmuró: *"Segmentado, etiquetado, enrutado. Así se ordena un edificio. Los humanos, con carpetas; los switches, con VLANs. Y todos los días alguien intenta ponerlo todo en la misma."*
 
-**PRÓXIMAMENTE EN U06:** Enrutamiento estático: componentes del router, configuración desde cero y cómo un router decide por dónde mandar tu paquete. Ahora que las VLANs se hablan entre sí, toca enseñar a los routers a hablar con redes enteras.
+**PRÓXIMAMENTE:** Enrutamiento estático: componentes del router, configuración desde cero y cómo un router decide por dónde mandar tu paquete. Ahora que las VLANs se hablan entre sí, toca enseñar a los routers a hablar con redes enteras.
 
 ---
 
@@ -224,4 +224,4 @@ El paquete de RRHH imprimió su acta de auditoría en la impresora de la VLAN 30
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/05-trunking-inter-vlan) · **Anterior:** [07 · DHCP por VLAN](/ApuntesRedes/05-trunking-inter-vlan/07-dhcp-por-vlan) · **Siguiente:** [UD6 · Enrutamiento estático](/ApuntesRedes/06-enrutamiento-estatico)
+📚 [Volver al índice de la unidad](/ApuntesRedes/05-trunking-inter-vlan) · **Anterior:** [07 · DHCP por VLAN](/ApuntesRedes/05-trunking-inter-vlan/07-dhcp-por-vlan) · **Siguiente:** [Enrutamiento estático](/ApuntesRedes/06-enrutamiento-estatico)

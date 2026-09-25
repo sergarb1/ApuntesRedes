@@ -1,9 +1,9 @@
 ---
-title: Boletín UD9 — Inicial
+title: Boletín de NAT y PAT — Inicial
 description: Ejercicios básicos de NAT
 ---
 
-# 📝 Boletín UD9 — Inicial
+# 📝 Boletín de NAT y PAT — Inicial
 
 > Ejercicios para practicar los fundamentos de NAT.
 

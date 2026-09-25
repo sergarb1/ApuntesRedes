@@ -5,7 +5,7 @@ description: Filtrar por IP origen con acceso-list y wildcards, colocándola cer
 
 <p><small>Filtrar por IP origen con acceso-list y wildcards, colocándola cerca del destino 🎯</small></p>
 
-> 🗺️ **Estás en:** 🛡️ **UD8 · ACLs y seguridad de red** → 3 · ACL estándar
+> 🗺️ **Estás en:** 🛡️ **ACLs y seguridad de red** → 3 · ACL estándar
 
 ---
 

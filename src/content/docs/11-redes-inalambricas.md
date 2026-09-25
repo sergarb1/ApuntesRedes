@@ -1,17 +1,17 @@
 ---
-title: U11 — Redes inalámbricas
+title: Redes inalámbricas
 description: Libertad sin cables, con vecinos incluidos 📶
 ---
 
 <p><small>Libertad sin cables, con vecinos incluidos 📶</small></p>
 
-> 🗺️ **El mapa del curso:** 🌐 NAT → 🗄️ Servicios → **📶 AQUÍ ESTÁS (U11)** → 🔁 Alta disponibilidad
+> 🗺️ **El mapa del curso:** 🌐 NAT → 🗄️ Servicios → **📶 AQUÍ ESTÁS** → 🔁 Alta disponibilidad
 
 ---
 
 *En el aire de una oficina caben una videollamada, veinte móviles, las impresoras, las cámaras y el router del piso de al lado. Todos gritando al mismo tiempo en las mismas frecuencias. Que el WiFi funcione no es magia: es ingeniería de radio, y esta unidad te enseña a hacerla.*
 
-Bienvenido a la unidad donde sueltas los cables. En la [UD2](/ApuntesRedes/02-ethernet-cableado) viste el medio inalámbrico como "el aire: flexible pero impredecible". Ahora lo domas: los estándares 802.11 y sus bandas, cómo se diseña una cobertura sin agujeros ni interferencias, cómo se configura un AP de verdad (SSID, VLANs, seguridad WPA2/WPA3) y cómo se integra todo en tu red cableada sin abrir agujeros de seguridad.
+Bienvenido a la unidad donde sueltas los cables. En la [unidad de Ethernet y cableado](/ApuntesRedes/02-ethernet-cableado) viste el medio inalámbrico como "el aire: flexible pero impredecible". Ahora lo domas: los estándares 802.11 y sus bandas, cómo se diseña una cobertura sin agujeros ni interferencias, cómo se configura un AP de verdad (SSID, VLANs, seguridad WPA2/WPA3) y cómo se integra todo en tu red cableada sin abrir agujeros de seguridad.
 
 Esta unidad se lee como un **libro de 9 capítulos**: los 8 primeros son teoría en progresión y el 9º es el aterrizaje práctico con laboratorio.
 
@@ -25,7 +25,7 @@ Al terminar, serás capaz de:
 - Diferenciar los estándares 802.11 (n/ac/ax) y elegir el adecuado para cada escenario.
 - Diseñar la cobertura de un edificio: colocación de APs, solapamiento, canales alternos y gestión de interferencias.
 - Configurar SSIDs, modos de un AP (autónomo, controlador, mesh) y el modo de trabajo (repetidor, bridge, workgroup bridge).
-- Integrar el WiFi en la red cableada mediante VLANs por SSID y trunks (todo lo de la UD5 servirá).
+- Integrar el WiFi en la red cableada mediante VLANs por SSID y trunks (todo lo de trunking servirá).
 - Aplicar seguridad WPA2-PSK/WPA3-SAE/WPA2-Enterprise, y explicar por qué WEP/WPA están muertos.
 - Diagnosticar redes WLAN: niveles de señal, ruido, solapamiento de canales y los comandos `show` de IOS.
 
@@ -75,8 +75,8 @@ Al terminar, serás capaz de:
 
 ## 🚪 ¿Por dónde empiezo?
 
-- ¿Vienes de la [UD2](/ApuntesRedes/02-ethernet-cableado)? El punto "WiFi" que viste allí era el aperitivo; aquí está el menú completo.
+- ¿Vienes de la [unidad de Ethernet y cableado](/ApuntesRedes/02-ethernet-cableado)? El punto "WiFi" que viste allí era el aperitivo; aquí está el menú completo.
 - ¿Ya conoces los estándares? → Salta a la [cobertura y diseño](/ApuntesRedes/11-redes-inalambricas/05-cobertura-y-diseno), que es donde se juega el examen de la vida real.
 
 **📍 Primer punto:** [01 · El medio inalámbrico](/ApuntesRedes/11-redes-inalambricas/01-medio-inalambrico)  
-**⏭️ Al acabar la unidad, continúa en [UD12 · Alta disponibilidad y redundancia](/ApuntesRedes/12-alta-disponibilidad).**
+**⏭️ Al acabar la unidad, continúa en [Alta disponibilidad y redundancia](/ApuntesRedes/12-alta-disponibilidad).**

@@ -5,7 +5,7 @@ description: El idioma materno de las redes, con pesos, conversión y AND 🔢
 
 <p><small>El idioma materno de las redes, con pesos, conversión y AND 🔢</small></p>
 
-> 🗺️ **Estás en:** 🧮 **UD3 · Direccionamiento IP y subnetting** → 2 · Binario y la operación AND
+> 🗺️ **Estás en:** 🧮 **Direccionamiento IP y subnetting** → 2 · Binario y la operación AND
 
 ---
 

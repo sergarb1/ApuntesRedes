@@ -8,7 +8,7 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
 </div>
 
 <div align="center" style="margin-bottom:2rem;">
-  <a href="/ApuntesRedes/01-introduccion" style="display:inline-block;padding:0.75rem 2rem;background:linear-gradient(135deg,#2563eb,#1a4060);color:#fff;border-radius:8px;text-decoration:none;font-weight:600;margin:0 0.5rem;">🚪 Empezar por la Unidad 01</a>
+  <a href="/ApuntesRedes/01-introduccion" style="display:inline-block;padding:0.75rem 2rem;background:linear-gradient(135deg,#2563eb,#1a4060);color:#fff;border-radius:8px;text-decoration:none;font-weight:600;margin:0 0.5rem;">🚪 Empezar por la introducción</a>
   <a href="https://github.com/sergarb1/ApuntesRedes" style="display:inline-block;padding:0.75rem 2rem;background:var(--sl-color-gray-5);color:var(--sl-color-white);border-radius:8px;text-decoration:none;font-weight:600;margin:0 0.5rem;">🐙 Ver en GitHub</a>
 </div>
 
@@ -29,13 +29,13 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
   </div>
 </div>
 
-## 🚪 Unidad 01 — Introducción
+## 🚪 Introducción
 
 <div class="unit-grid">
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Unidad 01</span>
+    <span class="num">Introducción</span>
   </div>
   <a href="/ApuntesRedes/01-introduccion" class="title-link">Introducción a las redes</a>
   <p class="desc">¿Empiezas de cero? 🚀 — Qué es una red, vocabulario básico, mapa del curso, herramientas y el método de diagnóstico.</p>
@@ -50,7 +50,7 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Unidad 02</span>
+    <span class="num">Ethernet</span>
     <span class="ra">RA1 · RA2</span>
   </div>
   <a href="/ApuntesRedes/02-ethernet-cableado" class="title-link">Ethernet, medios y cableado</a>
@@ -60,7 +60,7 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Unidad 03</span>
+    <span class="num">Dirección IP</span>
     <span class="ra">RA1 · RA2 · RA4 · RA6</span>
   </div>
   <a href="/ApuntesRedes/03-direccionamiento-ip" class="title-link">Direccionamiento IP y subnetting</a>
@@ -70,7 +70,7 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Unidad 04</span>
+    <span class="num">Switching</span>
     <span class="ra">RA3 · RA5</span>
   </div>
   <a href="/ApuntesRedes/04-switching" class="title-link">Switching y redes VLAN</a>
@@ -80,7 +80,7 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Unidad 05</span>
+    <span class="num">Trunking</span>
     <span class="ra">RA3 · RA4 · RA5</span>
   </div>
   <a href="/ApuntesRedes/05-trunking-inter-vlan" class="title-link">Trunking y enrutamiento inter-VLAN</a>
@@ -90,7 +90,7 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Unidad 06</span>
+    <span class="num">Enrutamiento</span>
     <span class="ra">RA4</span>
   </div>
   <a href="/ApuntesRedes/06-enrutamiento-estatico" class="title-link">Enrutamiento estático</a>
@@ -100,7 +100,7 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Unidad 07</span>
+    <span class="num">OSPF</span>
     <span class="ra">RA6</span>
   </div>
   <a href="/ApuntesRedes/07-ospf" class="title-link">Enrutamiento dinámico con OSPF</a>
@@ -110,7 +110,7 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Unidad 08</span>
+    <span class="num">ACL</span>
     <span class="ra">RA4</span>
   </div>
   <a href="/ApuntesRedes/08-acl-seguridad" class="title-link">ACL y seguridad básica de red</a>
@@ -120,7 +120,7 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Unidad 09</span>
+    <span class="num">NAT</span>
     <span class="ra">RA7</span>
   </div>
   <a href="/ApuntesRedes/09-nat-pat" class="title-link">NAT y PAT</a>
@@ -130,7 +130,7 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Unidad 10</span>
+    <span class="num">Servicios</span>
     <span class="ra">RA2</span>
   </div>
   <a href="/ApuntesRedes/10-servicios-red" class="title-link">Servicios de red: DHCP, DNS y NTP</a>
@@ -140,7 +140,7 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Unidad 11</span>
+    <span class="num">Inalámbricas</span>
     <span class="ra">RA1 · RA2 · RA3 · RA7</span>
   </div>
   <a href="/ApuntesRedes/11-redes-inalambricas" class="title-link">Redes inalámbricas</a>
@@ -150,7 +150,7 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Unidad 12</span>
+    <span class="num">Alta disponibilidad</span>
     <span class="ra">RA1 · RA3 · RA5 · RA6</span>
   </div>
   <a href="/ApuntesRedes/12-alta-disponibilidad" class="title-link">Alta disponibilidad y redundancia</a>
@@ -166,7 +166,7 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Unidad 01</span>
+    <span class="num">Introducción</span>
   </div>
   <div class="ejercicio-links">
     <a href="/ApuntesRedes/boletines/boletin-u01-inicial" class="elink">🟢 Inicial por resolver</a>
@@ -178,7 +178,7 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Unidad 02</span>
+    <span class="num">Ethernet</span>
   </div>
   <div class="ejercicio-links">
     <a href="/ApuntesRedes/boletines/boletin-u02-inicial" class="elink">🟢 Inicial por resolver</a>
@@ -190,7 +190,7 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Unidad 03</span>
+    <span class="num">Dirección IP</span>
   </div>
   <div class="ejercicio-links">
     <a href="/ApuntesRedes/boletines/boletin-u03-inicial" class="elink">🟢 Inicial por resolver</a>
@@ -206,7 +206,7 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Unidad 04</span>
+    <span class="num">Switching</span>
   </div>
   <div class="ejercicio-links">
     <a href="/ApuntesRedes/boletines/boletin-u04-inicial" class="elink">🟢 Inicial por resolver</a>
@@ -218,7 +218,7 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Unidad 05</span>
+    <span class="num">Trunking</span>
   </div>
   <div class="ejercicio-links">
     <a href="/ApuntesRedes/boletines/boletin-u05-inicial" class="elink">🟢 Inicial por resolver</a>
@@ -230,7 +230,7 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Unidad 06</span>
+    <span class="num">Enrutamiento</span>
   </div>
   <div class="ejercicio-links">
     <a href="/ApuntesRedes/boletines/boletin-u06-inicial" class="elink">🟢 Inicial por resolver</a>
@@ -242,7 +242,7 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Unidad 07</span>
+    <span class="num">OSPF</span>
   </div>
   <div class="ejercicio-links">
     <a href="/ApuntesRedes/boletines/boletin-u07-inicial" class="elink">🟢 Inicial por resolver</a>
@@ -254,7 +254,7 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Unidad 08</span>
+    <span class="num">ACL</span>
   </div>
   <div class="ejercicio-links">
     <a href="/ApuntesRedes/boletines/boletin-u08-inicial" class="elink">🟢 Inicial por resolver</a>
@@ -266,7 +266,7 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Unidad 09</span>
+    <span class="num">NAT</span>
   </div>
   <div class="ejercicio-links">
     <a href="/ApuntesRedes/boletines/boletin-u09-inicial" class="elink">🟢 Inicial por resolver</a>
@@ -278,7 +278,7 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Unidad 10</span>
+    <span class="num">Servicios</span>
   </div>
   <div class="ejercicio-links">
     <a href="/ApuntesRedes/boletines/boletin-u10-inicial" class="elink">🟢 Inicial por resolver</a>
@@ -290,7 +290,7 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Unidad 11</span>
+    <span class="num">Inalámbricas</span>
   </div>
   <div class="ejercicio-links">
     <a href="/ApuntesRedes/boletines/boletin-u11-inicial" class="elink">🟢 Inicial por resolver</a>
@@ -302,7 +302,7 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Unidad 12</span>
+    <span class="num">Alta disponibilidad</span>
   </div>
   <div class="ejercicio-links">
     <a href="/ApuntesRedes/boletines/boletin-u12-inicial" class="elink">🟢 Inicial por resolver</a>

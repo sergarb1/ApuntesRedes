@@ -5,7 +5,7 @@ description: El cierre práctico de la unidad, con subnetting, VLSM, DHCP y diag
 
 <p><small>El cierre práctico de la unidad, con subnetting, VLSM, DHCP y diagnóstico real 🧮</small></p>
 
-> 🗺️ **Estás en:** 🧮 **UD3 · Direccionamiento IP y subnetting** → 18 · Cierre: consolida lo aprendido
+> 🗺️ **Estás en:** 🧮 **Direccionamiento IP y subnetting** → 18 · Cierre: consolida lo aprendido
 
 ---
 
@@ -78,7 +78,7 @@ c) **Lo ignoras y sigues con tu vida** → También, porque la NIC filtra por MA
 2. **CIDR /24** — 255.255.255.0 = /24.
 3. **DHCP** — Dynamic Host Configuration Protocol.
 4. **VLSM** — Variable Length Subnet Mask.
-5. **OSPF** — Open Shortest Path First (lo verás a fondo en la UD7).
+5. **OSPF** — Open Shortest Path First (lo verás a fondo más adelante, en la unidad de OSPF).
 6. **Loopback** — 127.0.0.1, también llamado localhost.
 
 </details>
@@ -235,7 +235,7 @@ Ya se agotaron. La IANA asignó el último bloque de direcciones IPv4 en 2011. D
 
 Un host recibe la IP 10.0.1.10 mediante DHCP en una red privada. El tráfico viaja hacia Internet atravesando un router NAT, que traduce la IP privada a la IP pública del borde de red. En otra red corporativa, otro host tiene exactamente la misma IP privada 10.0.1.10, pero ambos conviven sin conflicto gracias a que el NAT aísla sus ámbitos. El direccionamiento privado (RFC 1918) permite la reutilización de direcciones a escala global y, sobre las subredes bien calculadas con VLSM, se levantan redes de cientos de oficinas sin desperdiciar ni una dirección.
 
-**PRÓXIMAMENTE EN UD4:** Switching y VLAN. Porque ya sabes *qué* dirección le toca a cada equipo; ahora toca aprender quién decide por dónde pasa la trama en la LAN y cómo se separan las redes en capa 2.
+**PRÓXIMAMENTE:** Switching y VLAN. Porque ya sabes *qué* dirección le toca a cada equipo; ahora toca aprender quién decide por dónde pasa la trama en la LAN y cómo se separan las redes en capa 2.
 
 ---
 
@@ -252,4 +252,4 @@ Un host recibe la IP 10.0.1.10 mediante DHCP en una red privada. El tráfico via
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/03-direccionamiento-ip) · **Anterior:** [17 · IPv8: la propuesta sin RFC](/ApuntesRedes/03-direccionamiento-ip/17-ipv8) · **Siguiente:** [UD4 · Switching y VLAN](/ApuntesRedes/04-switching)
+📚 [Volver al índice de la unidad](/ApuntesRedes/03-direccionamiento-ip) · **Anterior:** [17 · IPv8: la propuesta sin RFC](/ApuntesRedes/03-direccionamiento-ip/17-ipv8) · **Siguiente:** [Switching y VLAN](/ApuntesRedes/04-switching)

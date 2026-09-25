@@ -1,9 +1,9 @@
 ---
-title: Boletín UD9 — Inicial (Resuelto)
+title: Boletín de NAT y PAT — Inicial (Resuelto)
 description: Soluciones ejercicios básicos de NAT
 ---
 
-# ✅ Boletín UD9 — Inicial (Resuelto)
+# ✅ Boletín de NAT y PAT — Inicial (Resuelto)
 
 ---
 

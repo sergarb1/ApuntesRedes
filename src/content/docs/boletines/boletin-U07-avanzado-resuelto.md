@@ -1,9 +1,9 @@
 ---
-title: Boletín UD7 — Avanzado (Resuelto)
+title: Boletín de OSPF — Avanzado (Resuelto)
 description: Soluciones de los ejercicios avanzados de Routing Dinámico
 ---
 
-# ✅ Boletín UD7 — Avanzado (Resuelto)
+# ✅ Boletín de OSPF — Avanzado (Resuelto)
 
 ---
 

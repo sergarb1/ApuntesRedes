@@ -5,7 +5,7 @@ description: De los 11 Mbps aburridos a los 46 Gbps prometidos 🚀
 
 <p><small>De los 11 Mbps aburridos a los 46 Gbps prometidos 🚀</small></p>
 
-> 🗺️ **Estás en:** 📶 **UD11 · Redes inalámbricas** → 03 · Estándares 802.11
+> 🗺️ **Estás en:** 📶 **Redes inalámbricas** → 03 · Estándares 802.11
 
 ---
 
