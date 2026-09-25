@@ -77,7 +77,7 @@ ipconfig (Windows):
 **SLAAC** (*Stateless Address Autoconfiguration*, RFC 4862) permite a un dispositivo crear su IP sin ningún servidor central:
 
 1. El equipo manda un **RS (Router Solicitation)** al grupo de routers: "¿Hay alguien aquí que me dé un prefijo?".
-2. El router responde con un **RA (Router Advertisement)** que incluye el prefijo de red (`2001:DB8:1:2::/64`), los flags M y O ([punto 5](/ApuntesRedes/03-direccionamiento-ip/13-dhcpv6)) y otros parámetros.
+2. El router responde con un **RA (Router Advertisement)** que incluye el prefijo de red (`2001:DB8:1:2::/64`), los flags M y O ([punto 13](/ApuntesRedes/03-direccionamiento-ip/13-dhcpv6)) y otros parámetros.
 3. El equipo combina **prefijo + su EUI-64 (o su temporal)** y ya tiene IP.
 
 ```

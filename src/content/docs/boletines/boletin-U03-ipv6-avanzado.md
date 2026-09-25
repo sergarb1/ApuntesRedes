@@ -11,16 +11,13 @@ description: Ejercicios avanzados de IPv6 y Transición
 
 ## 1. Subnetting IPv6
 
-Te asignan el prefijo **2001:DB8:CAFE::/48** para tu empresa. Necesitas crear subredes para:
+Te asignan el prefijo **2001:DB8:CAFE::/48** para tu empresa. Necesitas subredes /64 para las LAN de las oficinas.
 
-- Oficina central: 1 subred /48 (la propia)
-- 5 sedes regionales: subredes del mismo tamaño dentro del /48
+a) ¿Cuántas subredes /64 caben dentro del /48?
+b) Escribe los prefijos de red de las 3 primeras subredes /64 (forma comprimida).
+c) ¿Por qué cada subred debe ser /64 y no, por ejemplo, /128?
 
-a) ¿Qué máscara usarías para las sedes?
-b) ¿Cuántas subredes /64 puedes crear dentro de /48?
-c) Escribe las primeras 3 subredes /64 (con sus prefijos completos)
-
-**Pista:** /48 a /64 = 16 bits de subred = 65536 subredes. Cada subred /64 tiene 2⁶⁴ direcciones.
+**Pista:** /48 → /64 son 16 bits de subred = 65.536 subredes. Cada subred /64 tiene 2⁶⁴ direcciones.
 
 ## 2. EUI-64
 

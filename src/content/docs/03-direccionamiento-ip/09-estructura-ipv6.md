@@ -13,7 +13,7 @@ description: Por qué IPv6 y cómo leer sus 128 bits en 8 grupos hexadecimales �
 
 > IPv6 es la versión 6 del protocolo IP con **direcciones de 128 bits** escritas en **8 grupos de 4 dígitos hexadecimales** separados por dos puntos: `2001:0DB8:0000:0000:0000:FF00:0042:8329`.
 
-Frente a los 32 bits de IPv4, 128 bits significan *muchísimas* más direcciones: unas **340 sextillones**. Tantos que se acabó la excusa de racionar. En este primer punto entendemos el *porqué* y aprendemos a *leer* una dirección IPv6. La compresión (que la harás más corta) llega en el [punto 2](/ApuntesRedes/03-direccionamiento-ip/10-compresion-y-prefijos).
+Frente a los 32 bits de IPv4, 128 bits significan *muchísimas* más direcciones: unas **340 sextillones**. Tantos que se acabó la excusa de racionar. En este primer punto entendemos el *porqué* y aprendemos a *leer* una dirección IPv6. La compresión (que la harás más corta) llega en el [punto 10](/ApuntesRedes/03-direccionamiento-ip/10-compresion-y-prefijos).
 
 ---
 
@@ -23,7 +23,7 @@ IPv4 tiene **32 bits**, lo que da exactamente **2³² = 4.294.967.296** direccio
 
 - Teléfonos, tablets, relojes, bombillas, cámaras, coches… cada dispositivo quiere su IP.
 - Los bloques se repartieron de forma desigual desde el principio (por la intervención de EE. UU.; Europa recibió la parte del león).
-- **2011:** la IANA repartió los últimos bloques grandes. **2019:** Europa (RIPE NCC) agotó su stock. Hoy el agotamiento es un hecho completado.
+- **2011:** la IANA repartió los últimos bloques grandes. **2019:** Europa (RIPE NCC) agotó su stock. Hoy el agotamiento es un hecho consumado.
 
 Por eso se diseñó **IPv6**: no es un parche ni una mejora de rendimiento, es la solución estructural a quedarse sin direcciones.
 
@@ -54,7 +54,7 @@ El rango total de direcciones es:
 ### 🚦 La notación en práctica
 
 - Las letras hexadecimales se pueden escribir en **mayúsculas o minúsculas** (es indistinto): `2001:db8:...` es lo mismo que `2001:DB8:...`. Los sistemas operativos dejan `ipconfig` en minúsculas y los manuales Cisco en mayúsculas.
-- Los primeros 3 bits de una dirección GUA (Global Unicast) fijan su prefijo, pero de eso hablamos en el [punto 3](/ApuntesRedes/03-direccionamiento-ip/11-tipos-de-direcciones).
+- Los primeros 3 bits de una dirección GUA (Global Unicast) fijan su prefijo, pero de eso hablamos en el [punto 11](/ApuntesRedes/03-direccionamiento-ip/11-tipos-de-direcciones).
 
 ---
 
@@ -70,7 +70,7 @@ Ethernet adapter Ethernet:
    Default Gateway......: fe80::1%12
 ```
 
-Fíjate en tres cosas: la dirección **Global Unicast** (la que empieza por `2001:`), la **Link-Local** (la `fe80::`) automática, y que el *Default Gateway* también es una Link-Local a la que se le añade `%12` (el Zone ID, que identifica qué interfaz física usar). Todo eso lo entenderás de verdad en los puntos 3 y 4.
+Fíjate en tres cosas: la dirección **Global Unicast** (la que empieza por `2001:`), la **Link-Local** (la `fe80::`) automática, y que el *Default Gateway* también es una Link-Local a la que se le añade `%12` (el Zone ID, que identifica qué interfaz física usar). Todo eso lo entenderás de verdad en los puntos 11 y 12.
 
 > ⚠️ **No te asustes con el `%n`:** en Windows el número tras el `%` es el *Zone ID* de la interfaz (en Linux se usa `%eth0` o `%ifindex`). Es necesario porque una misma dirección Link-Local `fe80::1` puede existir en varias interfaces a la vez.
 
@@ -81,10 +81,8 @@ Fíjate en tres cosas: la dirección **Global Unicast** (la que empieza por `200
 Piensa en las tres consecuencias prácticas de quedarte con 128 bits:
 
 - **Fin del racionamiento:** puedes asignar cada dispositivo con una dirección pública a la carta. Ya no hace falta NAT para esconderse detrás de una IP.
-- **Autoconfiguración sencilla:** con 64 bits reservados para el identificador de interfaz, el dispositivo puede generarse el final de su dirección solo (eso es EUI-64, [punto 4](/ApuntesRedes/03-direccionamiento-ip/12-eui64-y-slaac)).
+- **Autoconfiguración sencilla:** con 64 bits reservados para el identificador de interfaz, el dispositivo puede generarse el final de su dirección solo (eso es EUI-64, [punto 12](/ApuntesRedes/03-direccionamiento-ip/12-eui64-y-slaac)).
 - **Jerarquía de enrutamiento simple:** los prefijos largos (/48 o /32 para organizaciones) permiten agregar rutas sin que las tablas exploten.
-
-> ⚠️ **Ojo, que sobre si sobra:** se suele decir que hay "280 IPs por cada átomo del universo observable". Da igual el símil: la idea es que puedes dar direcciones de sobra incluso desperdiciando grupos enteros. De hecho, se desperdician a propósito — mira el punto 2.
 
 ---
 
@@ -117,7 +115,7 @@ Piensa en las tres consecuencias prácticas de quedarte con 128 bits:
 | IPv6 | Protocolo IP versión 6, direcciones de 128 bits |
 | Grupo (hexteto) | Bloque de 4 dígitos hexadecimales = 16 bits |
 | Nibble | 4 bits = 1 dígito hexadecimal |
-| Hexagonal | Base 16: dígitos 0-9 y letras A-F |
+| Hexadecimal | Base 16: dígitos 0-9 y letras A-F |
 | 2¹²⁸ | ≈ 3,4 × 10³⁸ direcciones distintas |
 
 ---

@@ -103,7 +103,7 @@ El prefijo se escribe igual que CIDR en IPv4: la dirección seguida de `/n` dond
 
 La IETF recomienda usar siempre **/64 para subredes** porque:
 
-- Los **64 bits inferiores** quedan reservados para el **identificador de interfaz**, que se construye con EUI-64 ([punto 4](/ApuntesRedes/03-direccionamiento-ip/12-eui64-y-slaac)) y habilita **SLAAC** sin servidor central.
+- Los **64 bits inferiores** quedan reservados para el **identificador de interfaz**, que se construye con EUI-64 ([punto 12](/ApuntesRedes/03-direccionamiento-ip/12-eui64-y-slaac)) y habilita **SLAAC** sin servidor central.
 - Con /64, cualquier prefijo más largo (por ejemplo /72) **rompe SLAAC estándar**: la autoconfiguración ya no encaja.
 
 > ⚠️ **Ojo:** aunque parezca un desperdicio gigantesco (¡2⁶⁴ direcciones por LAN!), en IPv6 eso da igual: hay de sobra. Desperdiciar a propósito asegura que SLAAC y EUI-64 funcionen sin fricción. Eso es lo que CONRAD llama "desperdicio elegante".

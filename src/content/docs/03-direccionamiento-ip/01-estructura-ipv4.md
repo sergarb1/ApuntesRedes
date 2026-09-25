@@ -94,6 +94,8 @@ Campos que de verdad importan en examen y en el día a día:
 | **Identificación + Flags + Offset** | 16 bits | Campos de la **fragmentación** (sigue abajo) |
 | **Checksum** | 16 bits | Integridad de la *cabecera* (no de los datos: eso lo hace TCP/UDP y el FCS de la trama) |
 
+![Campos clave de la cabecera IPv4](/ApuntesRedes/diagrams/u03-cabecera-ipv4.svg)
+
 > 🔗 **De la trama al paquete:** en la [UD2](/ApuntesRedes/02-ethernet-cableado/09-trama-ethernet) viste la trama Ethernet (MACs + EtherType + FCS). Si el EtherType es `0x0800`, el payload de esa trama es **este sobre IPv4**. Capa 2 entrega en la LAN; capa 3 decide hacia dónde va de punta a punta.
 
 > ⚠️ **No confundas checksums:** el **FCS** de la trama protege toda la trama en el enlace (capa 2). El **checksum de la cabecera IP** solo valida la cabecera en cada salto (capa 3). Los datos los protegen TCP/UDP (capa 4).
@@ -108,11 +110,11 @@ Cada medio tiene un **techo de tamaño**. En Ethernet ese techo es el **MTU de 1
 Paquete de 4000 B  →  MTU del enlace = 1500 B
         │
         ▼
-┌─────────────┐ ┌─────────────┐ ┌─────────────┐ ┌──────────┐
-│ frag 1      │ │ frag 2      │ │ frag 3      │ │ frag 4   │
-│ 1480 B datos│ │ 1480 B datos│ │ 1480 B datos│ │ 560 B    │
-│ MF=1, off=0 │ │ MF=1, off=… │ │ MF=1, off=… │ │ MF=0     │
-└─────────────┘ └─────────────┘ └─────────────┘ └──────────┘
+┌─────────────┐ ┌─────────────┐ ┌─────────────┐
+│ frag 1      │ │ frag 2      │ │ frag 3      │
+│ 1480 B datos│ │ 1480 B datos│ │ 1040 B datos│
+│ MF=1, off=0 │ │ MF=1, off=… │ │ MF=0        │
+└─────────────┘ └─────────────┘ └─────────────┘
         (20 B cabecera cada fragmento; 1480 = múltiplo de 8)
 ```
 
@@ -121,6 +123,8 @@ Paquete de 4000 B  →  MTU del enlace = 1500 B
 - **Fragment Offset:** desplazamiento del fragmento en múltiplos de **8 bytes**; permite reensamblar en orden aunque lleguen mezclados.
 - **¿Quién reensambla?** Solo el **host destino**. Los routers intermedios no se molestan.
 - **IPv6 es distinto:** solo fragmenta el **origen** (Path MTU Discovery); los routers **no** fragmentan. Lo verás en la parte IPv6.
+
+![Fragmentación de un paquete de 4000 B en tres fragmentos con MTU 1500](/ApuntesRedes/diagrams/u03-fragmentacion.svg)
 
 > 💡 **Regla práctica:** si en un `ping` grande "se pierde" pero un ping corto va bien, sospecha de MTU/fragmentación (o de Path MTU bloqueado por un firewall que no deja pasar ICMP "packet too big").
 

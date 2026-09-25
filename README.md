@@ -116,7 +116,7 @@ src/
 │   │   ├── 01-introduccion/      → Puntos (01-…, 08-mapa, 09-glosario, 10-preguntas)
 │   │   ├── 02-ethernet-cableado/ → UD2 (01-…07 teoría, 08 OSI, 09 trama, 10 cierre)
 │   │   ├── 03-direccionamiento-ip/ … 12-alta-disponibilidad/
-│   │   └── boletines/            → Ejercicios: inicial/avanzado + resueltos (texto puro, sin imágenes)
+│   │   └── boletines/            → Ejercicios: inicial/avanzado + resueltos (texto puro, sin imágenes); variante packettracer en U02–U03
 │   └── config.ts                 → Colecciones de contenido
 ├── styles/
 │   └── custom.css                → Tema azul + glassmorphism + print

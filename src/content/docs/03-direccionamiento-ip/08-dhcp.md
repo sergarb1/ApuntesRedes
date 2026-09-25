@@ -33,7 +33,9 @@ PC                         Servidor DHCP
 1. **DISCOVER:** el PC grita a la red buscando servidores DHCP (va a broadcast).
 2. **OFFER:** el servidor contesta con una IP "reservada en la caja" y sus extras (máscara, gateway, DNS).
 3. **REQUEST:** el PC acepta formalmente esa IP y se la reserva.
-4. **ACK:** el servidor confirma. Configuración aplicada. 
+4. **ACK:** el servidor confirma. Configuración aplicada.
+
+![Secuencia DORA: Discover, Offer, Request y ACK entre PC y servidor DHCP](/ApuntesRedes/diagrams/u03-dora.svg)
 
 > 💡 **¿Qué pasa si el DHCP no responde?** El PC asigna él mismo una **APIPA (169.254.0.0/16)** y queda "huérfano": habla con la red local pero no sale a Internet. Ese es el dolor de cabeza más típico del ejercicio 6 del [boletín inicial](/ApuntesRedes/boletines/boletin-u03-inicial).
 

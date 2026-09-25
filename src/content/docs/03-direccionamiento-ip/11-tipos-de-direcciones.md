@@ -55,7 +55,7 @@ Link-local IPv6..: fe80::21a:2bff:fe3c:4d5e%12           ← LLA automática
 Default Gateway..: fe80::1%12                            ← router (LLA)
 ```
 
-Cada prefijo te dice el tipo: la GUA empieza por `2001:`, la Link-Local por `fe80::`, y el gateway es la LLA del router. Y el *Temporary IPv6* es la dirección temporal de Privacy Extensions (RFC 4941), de la que hablaremos en el [punto 4](/ApuntesRedes/03-direccionamiento-ip/12-eui64-y-slaac). Tener varias direcciones a la vez es normal en IPv6.
+Cada prefijo te dice el tipo: la GUA empieza por `2001:`, la Link-Local por `fe80::`, y el gateway es la LLA del router. Y el *Temporary IPv6* es la dirección temporal de Privacy Extensions (RFC 4941), de la que hablaremos en el [punto 12](/ApuntesRedes/03-direccionamiento-ip/12-eui64-y-slaac). Tener varias direcciones a la vez es normal en IPv6.
 
 ---
 
@@ -70,7 +70,7 @@ Una dirección **multicast** identifica a un **grupo** de interfaces. El paquete
 | `FF02::1` | **Todos los nodos** IPv6 del enlace (≈ el broadcast de IPv4) |
 | `FF02::2` | **Todos los routers** del enlace |
 | `FF02::5` | Todos los routers OSPF |
-| `FF02::1:FFxx:xxxx` | **Solicited-node multicast**: grupo derivado de la propia IP, usado por NDP ([punto 6](/ApuntesRedes/03-direccionamiento-ip/14-icmpv6-y-ndp)) |
+| `FF02::1:FFxx:xxxx` | **Solicited-node multicast**: grupo derivado de la propia IP, usado por NDP ([punto 14](/ApuntesRedes/03-direccionamiento-ip/14-icmpv6-y-ndp)) |
 
 > ⚠️ **Ojo con el segundo bloque:** el `02` en `FF02::` indica el **ámbito** (scope): `02` = enlace local, `05` = sitio, `0E` = global. `FF02::1` solo afecta al cable local; no viaja.
 
@@ -99,7 +99,7 @@ Usuario → "¿DNS?" → 1.1.1.1
 
 1. Clasifica estas direcciones: `2001:DB8::1`, `FE80::1`, `FC00::1`, `::1`, `FF02::1`, `2001:DB8:1:2:21A:2BFF:FE3C:4D5E`.
 2. Una dirección Link-Local, ¿puede viajar hasta Internet? ¿Por qué?
-3. ¿Qué dirección cualquier cosa enviaría un servidor DNS anycast como 8.8.8.8 con IPv6?
+3. ¿Qué dirección usaría un cliente para contactar un servidor DNS anycast como 8.8.8.8 con IPv6?
 
 <details>
 <summary>🔄 Respuestas</summary>

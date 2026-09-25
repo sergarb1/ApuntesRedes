@@ -4,31 +4,32 @@ $ErrorActionPreference = "Stop"
 
 $unitSlugs = @(
   "01-introduccion",
-  "02-fundamentos-redes",
-  "03-modelos-osi-analisis",
-  "04-infraestructura-fisica",
-  "05-ipv4-subnetting",
-  "06-ipv6-transicion",
-  "07-switching-stp",
-  "08-vlans",
-  "09-routing-acls",
-  "10-routing-dinamico",
-  "11-nat-internet",
-  "12-diagnostico-monitorizacion",
-  "13-cloud-virtualizacion-futuro"
+  "02-ethernet-cableado",
+  "03-direccionamiento-ip",
+  "04-switching",
+  "05-trunking-inter-vlan",
+  "06-enrutamiento-estatico",
+  "07-ospf",
+  "08-acl-seguridad",
+  "09-nat-pat",
+  "10-servicios-red",
+  "11-redes-inalambricas",
+  "12-alta-disponibilidad"
 )
 
 $boletinesCodes = @(
   "01",
   "02", "03", "04", "05", "06", "07",
-  "08", "09", "10", "11", "12", "13"
+  "08", "09", "10", "11", "12"
 )
 
 $boletinSections = @(
   "inicial-resuelto",
   "inicial",
   "avanzado-resuelto",
-  "avanzado"
+  "avanzado",
+  "packettracer-resuelto",
+  "packettracer"
 )
 
 $metaTitle = "Apuntes PAR - Planificacion y Administracion de Redes"
@@ -70,6 +71,7 @@ function Add-MdFile {
   $content = $content.Trim()
   $content = $content -replace '/ApuntesRedes/cc-by-sa\.png', 'public/cc-by-sa.png'
   $content = $content -replace '/ApuntesRedes/diagrams/', 'public/diagrams/'
+  $content = $content -replace '/ApuntesRedes/photos/', 'public/photos/'
 
   $level = '#' * $HeadingLevel
   $null = $sb.AppendLine("$level $title")
@@ -112,6 +114,7 @@ foreach ($u in $unitSlugs) {
         $eContent = $eContent.Trim()
         $eContent = $eContent -replace '/ApuntesRedes/cc-by-sa\.png', 'public/cc-by-sa.png'
         $eContent = $eContent -replace '/ApuntesRedes/diagrams/', 'public/diagrams/'
+        $eContent = $eContent -replace '/ApuntesRedes/photos/', 'public/photos/'
         $eContent = $eContent -replace '(?m)^(#+)', '##$1'
 
         $null = $sb.AppendLine("## $eTitle")

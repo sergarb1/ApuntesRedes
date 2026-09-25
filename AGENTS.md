@@ -38,7 +38,7 @@ src/content/docs/09-nat-pat/…                → UD9 · NAT y PAT
 src/content/docs/10-servicios-red/…          → UD10 · Servicios: DHCP, DNS y NTP
 src/content/docs/11-redes-inalambricas/…     → UD11 · Redes inalámbricas
 src/content/docs/12-alta-disponibilidad/…    → UD12 · Alta disponibilidad
-src/content/docs/boletines/  → Ejercicios (inicial, avanzado + resueltos, por unidad U01–U12)
+src/content/docs/boletines/  → Ejercicios (inicial, avanzado + resueltos, por unidad U01–U12; variante `packettracer` en U02–U03)
 src/styles/custom.css        → CSS del tema (azul #2563eb + teal #4ecdc4, Geist Sans, glassmorphism)
 src/assets/logo.svg          → Logo
 scripts/                     → Scripts de exportación (PDF, EPUB, DOCX) y diagramas (D2)
@@ -258,6 +258,14 @@ Diagramas interactivos/visuales generados con **`mcp-excalidraw-server`** (canva
 | `u02-trama-ethernet` | `09-trama-ethernet.md` · Trama Ethernet II | MACs, EtherType, payload, FCS |
 | — | `10-cierre.md` | Cierre práctico: sin diagrama (actividades, no conceptos) |
 
+### Diagramas U03 existentes
+
+| Fichero | Sección `.md` | Contenido |
+|---|---|---|
+| `u03-cabecera-ipv4` | `01-estructura-ipv4.md` · Cabecera | Campos clave de la cabecera IPv4 (ver, IHL, TTL, protocolo, direcciones) |
+| `u03-fragmentacion` | `01-estructura-ipv4.md` · Fragmentación y MTU | Paquete 4000 B → 3 fragmentos (1480+1480+1040) con MF/offset |
+| `u03-dora` | `08-dhcp.md` · DORA | Secuencia Discover → Offer → Request → ACK (PC ↔ servidor) |
+
 ### Fotos stock (criterio por unidad)
 
 Las fotos **solo proceden cuando ilustran un objeto físico real** que el alumno debe reconocer (cable, conector, herramienta, panel, rack, AP…). **No** se usan para conceptos abstractos (subnetting, STP, OSPF, NAT, ACL, VLAN lógica…): ahí manda el diagrama Excalidraw o el esquema en código.
@@ -265,7 +273,7 @@ Las fotos **solo proceden cuando ilustran un objeto físico real** que el alumno
 - Fuentes: **Pexels** o **Unsplash** (uso libre; no exigen atribución, pero se cita origen en esta tabla).
 - Destino: `public/photos/uXX-nombre.jpg` (jpg, ~1260 px de ancho).
 - Inserción: `![alt es-ES](/ApuntesRedes/photos/uXX-nombre.jpg)` junto a la sección conceptual; alt en español de España.
-- **De momento solo UD2 tiene fotos** (4, en los puntos 02, 04, 05 y 07). Al ampliar otra unidad, evaluar caso a caso con la regla de arriba y no saturar: 1–2 fotos por página como máximo. **Los boletines nunca llevan fotos ni diagramas** (ver ⚠️ Notas, punto 6).
+- **De momento solo UD2 tiene fotos** (4, en los puntos 02, 04, 05 y 07). **UD3 no lleva fotos stock** (todo es abstracto: subnetting, DORA, cabeceras…). Al ampliar otra unidad, evaluar caso a caso con la regla de arriba y no saturar: 1–2 fotos por página como máximo. **Los boletines nunca llevan fotos ni diagramas** (ver ⚠️ Notas, punto 6).
 
 | Fichero | `.md` | Muestra | Origen |
 |---|---|---|---|
@@ -320,7 +328,7 @@ npx astro build   # Solo Astro (si D2 NO está instalado; npm run build ejecuta 
 3. **Siempre mantener las secciones obligatorias** — cada unidad debe tener todas las secciones enumeradas arriba.
 4. **Los ejercicios SIEMPRE con solución** en `<details>`.
 5. **Laboratorios SIEMPRE con fallo intencionado** — el 80% práctico es obligatorio.
-6. **Los boletines siguen el patrón:** `inicial` (fácil) y `avanzado` (difícil), cada uno con su `-resuelto`, en `src/content/docs/boletines/` con nombre `boletin-UXX-inicial(-resuelto).md` / `boletin-UXX-avanzado(-resuelto).md`. **Son texto puro por diseño: NO llevan diagramas ni fotos** (mismo criterio en las 56 hojas U01–U12; pegar el diagrama de la unidad bajo un ejercicio de recall regalaría la respuesta). La UD3 tiene además la variante `boletin-U03-ipv6-*`.
+6. **Los boletines siguen el patrón:** `inicial` (fácil) y `avanzado` (difícil), cada uno con su `-resuelto`, en `src/content/docs/boletines/` con nombre `boletin-UXX-inicial(-resuelto).md` / `boletin-UXX-avanzado(-resuelto).md`. **Son texto puro por diseño: NO llevan diagramas ni fotos** (mismo criterio en las 60 hojas U01–U12; pegar el diagrama de la unidad bajo un ejercicio de recall regalaría la respuesta). La UD3 tiene además la variante `boletin-U03-ipv6-*`. UD2 y UD3 tienen además la variante **`boletin-U02-packettracer-*` / `boletin-U03-packettracer-*`**: práctica guiada de nivel único (no es el par inicial/avanzado), 8 micro-prácticas + resuelto 1:1; se enlaza en el sidebar como grupo "· Packet Tracer" y en los índices de cada unidad.
 7. **El CSS no debe romperse** — probar con `npm run build` después de cambios.
 8. **CI/CD en rama `main`**.
 9. **Puppeteer** instalado para PDFs, pero con `PUPPETEER_SKIP_DOWNLOAD=true` en CI. En local, si la versión cacheada de Chrome falla, se usa el Chrome del sistema con `PUPPETEER_EXECUTABLE_PATH="C:\Program Files\Google\Chrome\Application\chrome.exe"`.
@@ -328,7 +336,7 @@ npx astro build   # Solo Astro (si D2 NO está instalado; npm run build ejecuta 
 11. **El build ejecuta `npm run build` que genera diagramas automáticamente** (prependido en el script).
 12. **PDF** se genera con `starlight-to-pdf` — un único PDF con todas las unidades y portada. Ver `scripts/pdf-*.html`.
 13. **EPUB** se genera con Pandoc — `scripts/generate-epub.ps1` + `scripts/epub.css`. El script reescribe las rutas `/ApuntesRedes/diagrams/` → `public/diagrams/` para que Pandoc encuentre los SVGs.
-14. **DOCX por unidad** — `scripts/generate-docx.mjs` (`npm run docx`, requiere Pandoc CLI en PATH). Crea `docx/<unidad>/` con un `.docx` de la unidad completa y un `.docx` suelto por cada boletín (incl. `-resuelto` y variantes `U03-ipv6-*`). **Sí va al repo** (no está en `.gitignore`). Tras editar contenido de unidades o boletines, regenerar con `npm run docx` y commitear los DOCX juntos. Mismas reescrituras de rutas que el EPUB (`/ApuntesRedes/…` → `public/…` para diagrams/photos).
+14. **DOCX por unidad** — `scripts/generate-docx.mjs` (`npm run docx`, requiere Pandoc CLI en PATH). Crea `docx/<unidad>/` con un `.docx` de la unidad completa y un `.docx` suelto por cada boletín (incl. `-resuelto` y variantes `U03-ipv6-*` y `U02/U03-packettracer-*`). **Sí va al repo** (no está en `.gitignore`). Tras editar contenido de unidades o boletines, regenerar con `npm run docx` y commitear los DOCX juntos. Mismas reescrituras de rutas que el EPUB (`/ApuntesRedes/…` → `public/…` para diagrams/photos).
 14b. **Pandoc 3.11** instalado en local con winget (`winget upgrade JohnMacFarlane.Pandoc`). Tras actualizar, refrescar el PATH de la shell (`$env:Path = [System.Environment]::GetEnvironmentVariable('Path','Machine') + ';' + [System.Environment]::GetEnvironmentVariable('Path','User')`) o abrir una terminal nueva.
 15. **Lenguaje es-ES obligatorio** — todo texto nuevo o editado cumple la sección 🗣️ Requisito lingüístico; hacer la comprobación lingüística antes de cerrar.
 15. **Excalidraw** — MCP + skill instalados; **recomendado reinstalar/actualizar la skill** si se cambia de entorno (`install-skill --dir …`); seguir workflow y reglas de la sección 📊; verificar con screenshot antes de exportar; NO subir sin comprobar solapes.
@@ -356,5 +364,5 @@ npx astro build   # Solo Astro (si D2 NO está instalado; npm run build ejecuta 
 - [ ] Sidebar actualizado en `astro.config.mjs`
 - [ ] 🗣️ Comprobación lingüística es-ES superada (sección Requisito lingüístico)
 - [ ] `npm run build` exitoso (o `npx astro build` si no hay D2)
-- [ ] Boletín creado (inicial + avanzado + resueltos)
+- [ ] Boletín creado (inicial + avanzado + resueltos; o variante `packettracer`/`ipv6` si aplica)
 - [ ] (Opcional) Diagrama Excalidraw: screenshot limpio → SVG en `public/diagrams/` + `![alt](/ApuntesRedes/diagrams/…)` en el `.md`

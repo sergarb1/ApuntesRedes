@@ -9,14 +9,14 @@ description: Soluciones ejercicios avanzados de IPv6 y Transición
 
 ## 1. Subnetting IPv6
 
-a) **Máscara para sedes:** /48 → para 5 sedes necesitas 3 bits extra (2³ = 8). Cada sede tendría /51. Pero en IPv6 lo estándar es dar /48 a cada sede (todas son /48 independientes). Si solo tienes un /48 global, entonces usas /52 para 16 subredes (2⁴ = 16).
+a) **Subredes /64 dentro de /48:** 64 − 48 = 16 bits → 2¹⁶ = **65.536 subredes** /64.
 
-b) **Subredes /64 dentro de /48:** 64 - 48 = 16 bits → 2¹⁶ = **65.536 subredes** /64.
+b) **Primeras 3 subredes /64:**
+   - `2001:DB8:CAFE::/64`
+   - `2001:DB8:CAFE:1::/64`
+   - `2001:DB8:CAFE:2::/64`
 
-c) **Primeras 3 subredes /64:**
-   - 2001:DB8:CAFE:0000::/64
-   - 2001:DB8:CAFE:0001::/64
-   - 2001:DB8:CAFE:0002::/64
+c) **Por qué /64:** es el estándar de la IETF porque deja los 64 bits inferiores para el identificador de interfaz (SLAAC/EUI-64, punto 12). Con /128 no habría espacio para hosts ni para autoconfiguración: solo cabría una dirección exacta.
 
 ## 2. EUI-64
 

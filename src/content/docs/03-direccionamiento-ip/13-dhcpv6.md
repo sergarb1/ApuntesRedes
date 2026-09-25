@@ -13,7 +13,7 @@ description: Stateless vs stateful y cómo leer los flags M y O de un Router Adv
 
 > **DHCPv6** es el DHCP de la era IPv6, pero con un giro: puede funcionar en modo **stateless** (solo da el "extra": DNS y demás, mientras SLAAC da la IP) o **stateful** (da IP + todo lo demás). El router decide pinchando los **flags M y O** de sus mensajes Router Advertisement.
 
-Del [punto 4](/ApuntesRedes/03-direccionamiento-ip/12-eui64-y-slaac) ya sabes que SLAAC puede dejar a un equipo *sin DNS*. Aquí está el complemento: DHCPv6.
+Del [punto 12](/ApuntesRedes/03-direccionamiento-ip/12-eui64-y-slaac) ya sabes que SLAAC puede dejar a un equipo *sin DNS*. Aquí está el complemento: DHCPv6.
 
 ---
 
