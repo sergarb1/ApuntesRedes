@@ -68,7 +68,7 @@ PC al encenderse:
   ③ PC configura GUA por SLAAC y gateway = FE80 del router
 ```
 
-Este RA es el que vimos en [SLAAC (punto 4)](/ApuntesRedes/03-direccionamiento-ip/12-eui64-y-slaac) y el que leen los flags M/O del [punto 5](/ApuntesRedes/03-direccionamiento-ip/13-dhcpv6).
+Este RA es el que vimos en [SLAAC (punto 12)](/ApuntesRedes/03-direccionamiento-ip/12-eui64-y-slaac) y el que leen los flags M/O del [punto 13](/ApuntesRedes/03-direccionamiento-ip/13-dhcpv6).
 
 ---
 

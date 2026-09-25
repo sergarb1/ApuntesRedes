@@ -1,15 +1,15 @@
 ---
-title: "17 — Cierre: consolida lo aprendido"
+title: "18 — Cierre: consolida lo aprendido"
 description: El cierre práctico de la unidad, con subnetting, VLSM, DHCP y diagnóstico real 🧮
 ---
 
 <p><small>El cierre práctico de la unidad, con subnetting, VLSM, DHCP y diagnóstico real 🧮</small></p>
 
-> 🗺️ **Estás en:** 🧮 **UD3 · Direccionamiento IP y subnetting** → 17 · Cierre: consolida lo aprendido
+> 🗺️ **Estás en:** 🧮 **UD3 · Direccionamiento IP y subnetting** → 18 · Cierre: consolida lo aprendido
 
 ---
 
-Has terminado la teoría. Este cierre es el aterrizaje: recorre lo aprendido con juegos, un laboratorio de direccionamiento de verdad y las preguntas que te harán en una entrevista. Léelo justo después del [punto 8](/ApuntesRedes/03-direccionamiento-ip/08-dhcp) y antes de abrir los boletines. Eso sí: deja la calculadora a mano... pero aprende a no necesitarla.
+Has terminado la teoría. Este cierre es el aterrizaje: recorre lo aprendido con juegos, un laboratorio de direccionamiento de verdad y las preguntas que te harán en una entrevista. Léelo justo después del [punto 17](/ApuntesRedes/03-direccionamiento-ip/17-ipv8) y antes de abrir los boletines. Eso sí: deja la calculadora a mano... pero aprende a no necesitarla.
 
 ---
 
@@ -56,9 +56,9 @@ c) **Lo ignoras y sigues con tu vida** → También, porque la NIC filtra por MA
 
 **Pública:** — *Touché.*
 
-**Privada:** — Y que conste que esto es temporal. En cuanto IPv6 (UD3) dé 128 bits a cada ser vivo, las públicas seréis de verdad para todos.
+**Privada:** — Y que conste que esto es temporal. Con IPv6, cada dispositivo ya tiene su dirección global de verdad.
 
-**Pública:** — Uy, toca madera. Que 128 bits de direcciones es otra historia... pero eso ya es otro episodio.
+**Pública:** — *Touché.* En cuanto se implante del todo, las tuyas quedan para dentro de casa.
 
 ---
 
@@ -227,7 +227,7 @@ La primera dirección de cada subred es la **dirección de red** (todos los bits
 
 > ❓ **¿Se pueden agotar las IPs IPv4?**
 
-Ya se agotaron. La IANA asignó el último bloque de direcciones IPv4 en 2011. Desde entonces, las nuevas redes usan IPv6 o dependen de NAT para compartir una IP pública entre muchos dispositivos. Por eso IPv6 es el futuro... y la próxima unidad.
+Ya se agotaron. La IANA asignó el último bloque de direcciones IPv4 en 2011. Desde entonces, las nuevas redes usan IPv6 o dependen de NAT para compartir una IP pública entre muchos dispositivos. Por eso IPv6 dejó de ser el futuro: ya lo has visto en los puntos 9 a 16.
 
 ---
 
@@ -235,7 +235,7 @@ Ya se agotaron. La IANA asignó el último bloque de direcciones IPv4 en 2011. D
 
 Un host recibe la IP 10.0.1.10 mediante DHCP en una red privada. El tráfico viaja hacia Internet atravesando un router NAT, que traduce la IP privada a la IP pública del borde de red. En otra red corporativa, otro host tiene exactamente la misma IP privada 10.0.1.10, pero ambos conviven sin conflicto gracias a que el NAT aísla sus ámbitos. El direccionamiento privado (RFC 1918) permite la reutilización de direcciones a escala global y, sobre las subredes bien calculadas con VLSM, se levantan redes de cientos de oficinas sin desperdiciar ni una dirección.
 
-**PRÓXIMAMENTE EN UD3:** IPv6. Porque 32 bits se quedaron pequeños y hubo que inventar 128 bits. Las IPs privadas son un apaño, no una solución definitiva: teléfonos, sensores, coches... todos con su propia dirección pública de verdad.
+**PRÓXIMAMENTE EN UD4:** Switching y VLAN. Porque ya sabes *qué* dirección le toca a cada equipo; ahora toca aprender quién decide por dónde pasa la trama en la LAN y cómo se separan las redes en capa 2.
 
 ---
 
@@ -245,9 +245,11 @@ Un host recibe la IP 10.0.1.10 mediante DHCP en una red privada. El tráfico via
 
 | CE | Criterio | Cubierto |
 |---|---|---|
-| d) | Direccionamiento lógico IP | ✅ IPv4, subredes, CIDR, máscaras, VLSM (puntos 1-7) |
-| g) | Conectividad entre dispositivos | ✅ DHCP y proceso DORA (punto 8) + ⚡ Laboratorio Packet Tracer |
+| d) | Direccionamiento lógico IP | ✅ IPv4 e IPv6, subredes, CIDR, máscaras, VLSM (puntos 1-7 y 9-12) |
+| g) | Conectividad entre dispositivos | ✅ DHCP/DORA (8), SLAAC/DHCPv6 (12-13) + ⚡ Laboratorio Packet Tracer |
+| c) | Subredes y diseño lógico (RA1) | ✅ CIDR y VLSM (puntos 5-7) |
+| — | Fundamentos de encaminamiento (RA6) | ✅ Cabecera, ARP y máscaras/redes (puntos 1-2 y 5) |
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/03-direccionamiento-ip) · **Anterior:** [16 · Configuración IPv6](/ApuntesRedes/03-direccionamiento-ip/16-configuracion-ipv6) · **Siguiente:** [UD4 · Switching y VLAN](/ApuntesRedes/04-switching)
+📚 [Volver al índice de la unidad](/ApuntesRedes/03-direccionamiento-ip) · **Anterior:** [17 · IPv8: la propuesta sin RFC](/ApuntesRedes/03-direccionamiento-ip/17-ipv8) · **Siguiente:** [UD4 · Switching y VLAN](/ApuntesRedes/04-switching)

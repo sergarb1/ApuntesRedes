@@ -75,7 +75,8 @@ const unidadesExpandidas = {
     { slug: '03-direccionamiento-ip/14-icmpv6-y-ndp', label: '14 · ICMPv6 y NDP' },
     { slug: '03-direccionamiento-ip/15-mecanismos-de-transicion', label: '15 · Mecanismos de transición' },
     { slug: '03-direccionamiento-ip/16-configuracion-ipv6', label: '16 · Configuración IPv4/IPv6' },
-    { slug: '03-direccionamiento-ip/17-cierre', label: '17 · Cierre' },
+    { slug: '03-direccionamiento-ip/17-ipv8', label: '17 · IPv8 (propuesta sin RFC)' },
+    { slug: '03-direccionamiento-ip/18-cierre', label: '18 · Cierre' },
   ],
   '04-switching': [
     { slug: '04-switching/01-que-es-un-switch', label: '1 · ¿Qué es un switch?' },
@@ -195,6 +196,16 @@ const boletinItems = (code) => [
 
 const boletinCodes = Array.from({ length: 12 }, (_, i) => String(i + 1).padStart(2, '0'));
 
+// Variante práctica de nivel único (no sigue inicial/avanzado)
+const packetTracerGroup = (code, i, emojis) => ({
+  label: `${emojis[i]} Unidad ${code} · Packet Tracer`,
+  collapsed: true,
+  items: [
+    { link: `/boletines/boletin-u${code}-packettracer`, label: '🖥️ Packet Tracer por resolver' },
+    { link: `/boletines/boletin-u${code}-packettracer-resuelto`, label: '✅ Packet Tracer resuelto' },
+  ],
+});
+
 const boletinesGroups = boletinCodes.flatMap((code, i) => {
   const groups = [
     {
@@ -203,6 +214,9 @@ const boletinesGroups = boletinCodes.flatMap((code, i) => {
       items: boletinItems(code),
     },
   ];
+  if (code === '02' || code === '03') {
+    groups.push(packetTracerGroup(code, i, emojis));
+  }
   // La unidad 03 tiene además boletines específicos de IPv6
   if (code === '03') {
     groups.push({

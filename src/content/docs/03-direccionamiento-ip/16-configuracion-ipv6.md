@@ -22,7 +22,7 @@ Este punto es el 80% práctico de la unidad: comandos de verdad, tal cual los ej
 En IPv4 pondrías IP, máscara y gateway. En IPv6, dirección **y prefijo** (el `X/64`):
 
 **Windows (GUI):**
-- Panel de control → Red → Adapter → IPv6 → propiedades.
+- Panel de control → Red → Adaptador → IPv6 → propiedades.
 - Marcar "Usar la siguiente dirección IPv6", introducir por ejemplo `2001:DB8:1::10` con prefijo `/64` y el gateway `2001:DB8:1::1`.
 
 **Windows (netsh):**
@@ -58,7 +58,7 @@ router(config-if)# ipv6 address 2001:DB8:2::1/64
 router(config-if)# no shutdown
 ```
 
-Resultado: el router conoce la subred `2001:DB8:1::/64` por G0/0 y `2001:DB8:2::/64` por G0/1. Con eso ya puede encaminar entre ellas (y anunciar los prefijos si activamos el SLAAC del punto 4).
+Resultado: el router conoce la subred `2001:DB8:1::/64` por G0/0 y `2001:DB8:2::/64` por G0/1. Con eso ya puede encaminar entre ellas (y anunciar los prefijos si activamos el SLAAC del [punto 12](/ApuntesRedes/03-direccionamiento-ip/12-eui64-y-slaac)).
 
 **Rutas estáticas IPv6 (si hubiera más saltos):**
 ```
@@ -86,7 +86,7 @@ Success rate is 100 percent (5/5)
 
 En un **PC**, equivalentes: `ipconfig /all` (Windows, dirección IPv6 + gateway LLA) o `ip -6 addr` y `ip -6 route` (Linux). El `ping` IPv6 se llama `ping -6` en Windows y `ping6` en algunos Linux.
 
-> 💡 **Regla de diagnóstico:** si `show ipv6 interface brief` no muestra la dirección que configuraste en una interfaz, es que la config no "entró" o la interfaz está shutdown. Es exactamente el fallo del ⚡ Laboratorio del [punto 9](/ApuntesRedes/03-direccionamiento-ip/17-cierre).
+> 💡 **Regla de diagnóstico:** si `show ipv6 interface brief` no muestra la dirección que configuraste en una interfaz, es que la config no "entró" o la interfaz está shutdown. Es exactamente el fallo del ⚡ Laboratorio del [punto 18](/ApuntesRedes/03-direccionamiento-ip/18-cierre).
 
 ---
 
@@ -133,4 +133,4 @@ En un **PC**, equivalentes: `ipconfig /all` (Windows, dirección IPv6 + gateway 
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/03-direccionamiento-ip) · **Anterior:** [15 · Mecanismos de transición](/ApuntesRedes/03-direccionamiento-ip/15-mecanismos-de-transicion) · **Siguiente:** [17 · Cierre: consolida lo aprendido](/ApuntesRedes/03-direccionamiento-ip/17-cierre)
+📚 [Volver al índice de la unidad](/ApuntesRedes/03-direccionamiento-ip) · **Anterior:** [15 · Mecanismos de transición](/ApuntesRedes/03-direccionamiento-ip/15-mecanismos-de-transicion) · **Siguiente:** [17 · IPv8: la propuesta sin RFC](/ApuntesRedes/03-direccionamiento-ip/17-ipv8)

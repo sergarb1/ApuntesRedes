@@ -79,18 +79,6 @@ Cuando tu red es **solo IPv6** (sin IPv4 en el cliente) pero quieres acceder a s
 
 ---
 
-## 🧭 ¿Y cuál elijo? (guía rápida de decisión)
-
-| Situación | Mecanismo |
-|---|---|
-| El ISP ya ofrece IPv6 nativo | **Dual Stack** |
-| Sede con IPv6 ↔ Sede con IPv6 separadas por WAN solo-IPv4 | **Túnel GRE** (o 6to4 puntual) |
-| Cliente móvil tras NAT, sin IPv6 de ningún tipo | **Teredo** (última bala) |
-| Red corporativa solo-IPv6 que debe hablar con Internet IPv4 | **NAT64 + DNS64** |
-| Laboratorio de pruebas a corto plazo | Cualquiera, pero documenta qué cambias |
-
----
-
 ## 🧠 Mini-chequeo
 
 1. ¿Qué registro DNS elige IPv6 en un PC dual stack? ¿Y si no existe?

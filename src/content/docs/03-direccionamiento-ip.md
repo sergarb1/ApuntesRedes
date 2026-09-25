@@ -13,7 +13,7 @@ description: La calculadora maldita, ahora con IPv6 🧮
 
 Bienvenido a la unidad que convierte binario en oficio. Primero dominas IPv4: estructura de la dirección y de la cabecera, ARP, fragmentación, clases, máscaras, CIDR, VLSM y el subnetting clásico con papel y boli. Después saltas al futuro: IPv6, su notación, sus tipos de dirección, SLAAC, DHCPv6 y los mecanismos que permiten que ambos mundos convivan. DHCP aparece aquí en versión introductoria; en la [UD10](/ApuntesRedes/10-servicios-red) lo despliega a fondo. ARP, la cabecera y la fragmentación cierran el puente con la trama de la [UD2](/ApuntesRedes/02-ethernet-cableado/09-trama-ethernet).
 
-Esta unidad se lee como un **libro de 17 capítulos**: los 16 primeros son teoría en progresión y el 17º es el aterrizaje práctico.
+Esta unidad se lee como un **libro de 18 capítulos**: los 17 primeros son teoría en progresión (el último es actualidad pura: IPv8) y el 18º es el aterrizaje práctico.
 
 ---
 
@@ -52,15 +52,16 @@ Al terminar, serás capaz de:
 | [14 · ICMPv6 y NDP](/ApuntesRedes/03-direccionamiento-ip/14-icmpv6-y-ndp) | El ARP del mundo IPv6 | Clave |
 | [15 · Mecanismos de transición](/ApuntesRedes/03-direccionamiento-ip/15-mecanismos-de-transicion) | Dual stack, túneles, traducción | Todos |
 | [16 · Configuración IPv4/IPv6](/ApuntesRedes/03-direccionamiento-ip/16-configuracion-ipv6) | Práctica de direccionamiento | Práctico |
-| [17 · Cierre](/ApuntesRedes/03-direccionamiento-ip/17-cierre) | Sé el Paquete, Fireside, Laboratorio, Crucigrama… | Todos |
+| [17 · IPv8 (propuesta sin RFC)](/ApuntesRedes/03-direccionamiento-ip/17-ipv8) | 64 bits retrocompatible, solo Internet-Draft | Actualidad |
+| [18 · Cierre](/ApuntesRedes/03-direccionamiento-ip/18-cierre) | Sé el Paquete, Fireside, Laboratorio, Crucigrama… | Todos |
 
-> 📖 **Flujo de lectura:** los 16 primeros puntos son teoría en progresión. El 17º es el aterrizaje práctico: léelo justo después del 16º y antes de abrir los boletines.
+> 📖 **Flujo de lectura:** los 17 primeros puntos son teoría en progresión. El 18º es el aterrizaje práctico: léelo justo después del 17º y antes de abrir los boletines.
 
 ---
 
 ## 📝 Boletines de la unidad
 
-> Esta unidad tiene dos pares de boletines: uno de IPv4/subnetting y otro específico de IPv6.
+> Esta unidad tiene dos pares de boletines: uno de IPv4/subnetting y otro específico de IPv6. Además, una variante práctica de nivel único en Packet Tracer.
 
 <div class="ejercicio-links">
   <a href="/ApuntesRedes/boletines/boletin-u03-inicial" class="elink">🟢 IPv4 inicial por resolver</a>
@@ -71,6 +72,8 @@ Al terminar, serás capaz de:
   <a href="/ApuntesRedes/boletines/boletin-u03-ipv6-inicial-resuelto" class="elink">✅ IPv6 inicial resuelto</a>
   <a href="/ApuntesRedes/boletines/boletin-u03-ipv6-avanzado" class="elink">⭐ IPv6 avanzado por resolver</a>
   <a href="/ApuntesRedes/boletines/boletin-u03-ipv6-avanzado-resuelto" class="elink">💪 IPv6 avanzado resuelto</a>
+  <a href="/ApuntesRedes/boletines/boletin-u03-packettracer" class="elink">🖥️ Packet Tracer por resolver</a>
+  <a href="/ApuntesRedes/boletines/boletin-u03-packettracer-resuelto" class="elink">✅ Packet Tracer resuelto</a>
 </div>
 
 ---
@@ -79,7 +82,7 @@ Al terminar, serás capaz de:
 
 | CE | Criterio | Dónde se cubre |
 |---|---|---|
-| RA2·d) | Direccionamiento lógico IPv4/IPv6 | ✅ Puntos 1-5 y 9-12 + ⚡ Laboratorio (punto 17) |
+| RA2·d) | Direccionamiento lógico IPv4/IPv6 | ✅ Puntos 1-5 y 9-12 + ⚡ Laboratorio (punto 18) |
 | RA1·c) | Subredes y diseño lógico | ✅ Puntos 5-7 (CIDR/VLSM) |
 | RA2·g) | Servicios de configuración automática | ✅ Puntos 8 y 12-13 |
 | RA6 | Fundamentos para el encaminamiento | ✅ Puntos 1-2 y 5 (cabecera, ARP, máscaras/redes) |

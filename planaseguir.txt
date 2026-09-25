@@ -1,0 +1,58 @@
+# planseguir.txt — Trabajo pendiente sobre diagramas Excalidraw UD3, fuentes y topologías PT
+
+Estado: F1 (diagramas UD3) COMPLETADA y commiteada. El resto (F2–F5) sigue pendiente.
+Servidor Excalidraw propio en puerto 3001: todos los comandos CLI llevan
+`$env:EXPRESS_SERVER_URL = 'http://127.0.0.1:3001'` (el 3000 lo usa otra instancia; no tocar).
+Si la pestaña del navegador se cierra: `Start-Process "http://127.0.0.1:3001/"` y reintentar (exit 4 = pestaña requerida).
+
+## Hecho (commiteado)
+
+- 4 diagramas UD3 creados y exportados (svg + .excalidraw) en `public/diagrams/`:
+  `u03-mascara-bits` (cascadia, 18/18 textos fam3), `u03-subnetting-bloque` (flecha vertical arreglada),
+  `u03-arp` (request broadcast → reply unicast), `u03-transicion` (3 carriles: Dual Stack / túnel / NAT64+DNS64).
+- Regenerados 3 SVGs rotos: `u03-cabecera-ipv4`, `u03-fragmentacion`, `u03-dora`.
+- Ficheros des-cruzados verificados (máscara vs subnetting).
+- Boletines Packet Tracer U02/U03 (por resolver + resuelto) + sidebar en `astro.config.mjs`.
+- Contenido UD3 ampliado: `17-ipv8.md` nuevo, `18-cierre.md` (antes `17-cierre`), índices actualizados.
+- EPUB y DOCX regenerados; script EPUB actualizado a slugs reales y variantes packettracer.
+
+## Pendiente
+
+### F2 — Fuentes cascadia en TODOS los diagramas
+1. Script Node que recorra `public/diagrams/*.excalidraw` y ponga `fontFamily: 3` en todo texto (hoy casi todo es Virgil fam1, OSI mezcla fam 1/2/5).
+2. Re-exportar TODOS los SVGs en bucle SECUENCIAL (nunca en paralelo):
+   `clear --yes` → `import <fichero> --replace` → `Start-Sleep 3` → `screenshot --format svg --out <svg>` → verificar >1 KB.
+3. Padding dudoso: `u02-modelo-osi` (texto `tcpip-body` bottom≈10) y `u02-tres-medios` (5). Subir esos textos dentro de la caja.
+
+### F3 — Checker de calidad
+- Crear `scripts/check-diagrams.mjs` + script npm `check:diagrams` (estilo `scripts/check-links.mjs`):
+  fontFamily ∈ {3}, fontSize ≥ 16, texto DENTRO de su rectángulo (margen ≥15% top/bottom), solapes AABB
+  texto↔texto, SVG > 1 KB, título libre ≈ nombre base, paleta (stroke #2563eb/#4ecdc4, fondo #eff6ff/#f0fdf4).
+- Iterar hasta 0 fallos.
+
+### F4 — 2 topologías PT (1 por boletín)
+- `u02-pt-topologia` y `u03-pt-topologia` con iconos de `docs/excalidraw-icons.md`
+  (copiar JSON, desplazar x/y, regenerar ids; cajas ≥120×60, gaps 40–80, cascadia).
+- Insertar al inicio de `boletin-U02-packettracer-resuelto.md` y `boletin-U03-packettracer-resuelto.md`.
+- Excepción en AGENTS.md: los boletines `-packettracer-resuelto` SÍ llevan topología (los demás, no).
+
+### F5 — Inserción de refs + cierre
+1. Insertar 1 ref por fichero en UD3 (hoy NO están; grep confirmó 0):
+   - `05-mascaras-y-cidr.md` → `![…](/ApuntesRedes/diagrams/u03-mascara-bits.svg)`
+   - `06-subnetting-paso-a-paso.md` → `u03-subnetting-bloque.svg`
+   - `01-estructura-ipv4.md` → `u03-arp.svg` (junto a la sección ARP)
+   - `15-mecanismos-de-transicion.md` → `u03-transicion.svg`
+   (Los otros 3 de UD3 — cabecera, fragmentación, dora — ya referenciados; verificar.)
+2. Actualizar `AGENTS.md`: estándar cascadia (fam3), tabla de diagramas U03 con los 4 nuevos, checker, excepción PT.
+3. Build y exportes: `npx astro build` (reintentar si EPERM de OneDrive) → `npm run docx` → `npm run epub`.
+4. Grep final: sin `.tmp-*`, sin refs rotas; comprobación lingüística es-ES.
+5. Commit final + push.
+
+## Reglas aprendidas (no romper)
+
+- NUNCA paralelizar clear/import/export (ficheros cruzados y SVGs de 256 B vacíos).
+- Esperar ~3 s tras `add` antes del screenshot (si no, texto desplazado por carga de fuentes).
+- En `add`, los campos dentro de `label:{...}` se stripean → `text/fontSize/fontFamily/textAlign/verticalAlign` a nivel de rect (hereda el label); color del label hereda `strokeColor` del contenedor.
+- Flechas: requieren `x`,`y` (y `points`) aunque tengan `startElementId/endElementId`.
+- Borrar temporales (convención `.tmp-*` en `public/diagrams/`); NO usar `rg`.
+- Prohibido modificar `astro.config.mjs`/CSS sin necesidad; build después de tocar markdown.

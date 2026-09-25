@@ -43,22 +43,6 @@ Originalmente la dirección se *leía* en los primeros bits: según cómo empeza
 
 > 💡 **El problema histórico:** una clase A era una pasada de grande para casi cualquiera (16 millones de hosts) y una clase C demasiado pequeña para la mayoría. Si tenías 50.000 hosts, "tocaba" una clase B entera y desaprovechabas miles de IPs. Ese desperdicio aceleró el agotamiento del espacio IPv4.
 
-### Identificar la clase "al vuelo" sin calculadora
-
-Truco infalible con el primer octeto en decimal:
-
-```
- 0  - 127  → A   128 - 191 → B   192 - 223 → C
-224 - 239  → D (multicast)   240 - 255 → E (experimental)
-```
-
-| Ejemplo | Primer octeto | Clase |
-|---|---|---|
-| 10.0.0.5 | 10 | A |
-| 172.16.0.1 | 172 | B |
-| 192.168.1.1 | 192 | C |
-| 224.0.0.5 | 224 | D (multicast, OSPF) |
-
 ### ¿Y qué pasa con la clase D y la E?
 
 - **D** no se usa para equipos: es la reserva del **multicast** (envío de "uno a muchos dentro de un grupo"). Ahí viven OSPF y otros protocolos que verás en la UD7.
