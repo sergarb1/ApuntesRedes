@@ -81,21 +81,45 @@ El contenido de las unidades **no lleva números de unidad** (`UD3`, `U05`, `Uni
 
 Verificación: `node scripts/check-uds.mjs` (scanner de referencias en el Markdown de `src/content/docs/` — landing y mapa incluidos — y en el texto de los SVG de `public/diagrams/`) tras cualquier edición masiva.
 
-### Secciones obligatorias (en este orden)
+### Secciones obligatorias (nombres reales del contenido)
 
-1. **Mapa viaje / ruta del paquete** — barra de progreso con emojis
-2. **📚 Contenidos** — lista de temas
-3. **⭐ Sé el Paquete** — escenario interactivo con opciones múltiples
-4. **🔥 Fireside Chat** — debate entre dos conceptos
-5. **🕵️ ¿Quién Soy?** — adivinanzas con `<details>` para solución
-6. **🤬 CONRAD VS EL MUNDO** — error típico explicado con humor
-7. **⚡ Laboratorio de tortura** — práctica Packet Tracer con fallos intencionados
-8. **🧠 Atrévete a pensar** — ejercicios con `<details>` solución
-9. **🧩 Crucigrama de bits** — con `<details>` solución
-10. **💬 Entrevista de trabajo** — preguntas reales
-11. **🤷 No hay preguntas tontas** — FAQ (con CONRAD)
-12. **🎬 Poscréditos** — escena cómica con "PRÓXIMAMENTE EN U0X"
-13. **✅ CEs cubiertos** — tabla de criterios de evaluación
+Las secciones viven repartidas entre el **índice** (`src/content/docs/NN-unidad.md`), los **puntos** y el **cierre** (`NN-cierre.md`). Estos son los nombres exactos que existe hoy en el contenido:
+
+**Índice de las unidades 02–12** (5 secciones, en este orden):
+
+1. `## 🎯 Objetivo de la unidad`
+2. `## 🗺️ Mapa de la unidad` — la lista de contenidos (tabla que enlaza cada punto)
+3. `## 📝 Boletines de la unidad` — enlaces `<a href>` con el slug en minúsculas (`boletin-u05-inicial`)
+4. `## ✅ Criterios de evaluación cubiertos (RAx)` — tabla de CEs (los RA del índice y los del cierre deben coincidir)
+5. `## 🚪 ¿Por dónde empiezo?`
+
+*(El índice de la introducción sigue su propio patrón: `👋 ¿Empiezas aquí?`, `📚 Qué encontrarás en este tema`, `🧭 Cómo usar estos apuntes`, `🏆 Logros de la unidad`… — pendiente de decisión: aún no tiene la sección de Criterios.)*
+
+**Bloques obligatorios por unidad** (agregados índice + puntos + cierre; al menos uno de cada uno en la unidad):
+
+- `## ⭐ …` — bloque de rol-play del cierre. Por defecto `⭐ Sé el Paquete`; variantes temáticas permitidas: `⭐ Sé el Bit` (Ethernet), `⭐ Sé el Router OSPF`, `⭐ Sé el NAT`
+- `## 🔥 Fireside Chat` — debate entre dos conceptos
+- `## 🕵️ ¿Quién Soy?` — adivinanzas con `<details>` para solución
+- `## 🤬 CONRAD VS EL MUNDO` — error típico explicado con humor
+- `## ⚡ Laboratorio de tortura` — práctica con fallo intencionado (siempre)
+- `## 🧠 Atrévete a pensar` — ejercicios con `<details>` solución
+- `## 🧩 Crucigrama de bits` — con `<details>` solución
+- `## 💬 Preguntas de entrevista de trabajo` (variante corta: `## 💬 Entrevista de trabajo`) — preguntas reales
+- `## 🤷 No hay preguntas tontas` — FAQ (con CONRAD)
+- `## 🎬 Poscréditos` — escena cómica con "PRÓXIMAMENTE EN…" (sin números de unidad)
+- `✅ Criterios de evaluación cubiertos` — tabla en el índice (repetida en el cierre)
+
+**Plantilla de cada punto** (unidades 02–12):
+
+1. Frontmatter (`title`, `description`) + `<p><small>…</small></p>` + breadcrumb `> 🗺️ **Estás en:** **Nombre de la unidad** → n · Título`
+2. `## 📬 La idea en una frase` — apertura
+3. Desarrollo con `##` temáticos
+4. Cierre del punto: `## 🧠 Mini-chequeo`, `## ✅ Resumen en 3 frases`, `## 🐛 Vocabulario rápido`
+5. Pie de navegación: `📚 [Volver al índice…] · **Anterior:** […] · **Siguiente:** […]`
+
+**La introducción tiene plantilla propia:** cada punto lleva su bloque de juegos completo (Fireside, ¿Quién Soy?, CONRAD, Laboratorio, Atrévete, Crucigrama, Entrevista, No hay preguntas tontas, Poscréditos) y la unidad no tiene bloque ⭐ ni cierre de unidad.
+
+**Verificación estructural:** `npm run check:unidad [unidad|all]` (`scripts/check-unidad.mjs`): FALLO = incumple la convención; AVISO = inconsistencia que se decide en la sesión de revisión de esa unidad.
 
 ### Secciones opcionales
 
@@ -334,6 +358,7 @@ npm run docx      # Generar DOCX por unidad → docx/
 npm run export    # PDF + EPUB + DOCX
 npm run diagrams  # Generar diagramas con D2 (Terrastruct)
 npm run check:diagrams  # Calidad de los diagramas Excalidraw (7 reglas)
+npm run check:unidad    # Estructura de una unidad: secciones, enlaces, pie, boletines (usa: npm run check:unidad 03 | all)
 node scripts/fix-fonts.mjs       # Unificar fuente Cascadia y tamaño mínimo 16
 node scripts/fix-text-align.mjs  # Textos sueltos a textAlign left
 npx astro build   # Solo Astro (si D2 NO está instalado; npm run build ejecuta diagrams antes)
@@ -378,6 +403,7 @@ npx astro build   # Solo Astro (si D2 NO está instalado; npm run build ejecuta 
 
 - [ ] Frontmatter (title, description con emoji)
 - [ ] Sin números de unidad en prosa ni títulos (`node scripts/check-uds.mjs`)
+- [ ] `npm run check:unidad <unidad>` sin FALLOs
 - [ ] 🗺️ Ruta del paquete actualizada
 - [ ] 📚 Contenidos listados
 - [ ] ⭐ Sé el Paquete con 2-3 opciones
