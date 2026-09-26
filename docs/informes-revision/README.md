@@ -1,38 +1,50 @@
 # Informes de revisión docente — Apuntes PAR
 
-Revisión unidad a unidad del curso completo (U01–U13), enfocada en **orden docente**, **calidad de la explicación**, **contenido**, **boletines**, **coherencia** y **convenciones**. Realizada con subagentes de revisión pedagógica por unidad.
+Revisión **tema a tema** del curso vigente (estructura de **12 unidades**) para dejar el temario **coherente internamente en cada unidad y en bloque entre unidades**: contenido duplicado, contenido fuera de lugar (mover/quitar), huecos, desorden y desviaciones de las convenciones.
 
-## Ranking global
+## Revisión vigente — estado por unidad
 
-| Unidad | Nota | Juicio |
-|---|---|---|
-| U07 · Switching y STP | 5/5 | Orden impecable; única laguna: tabla de costes STP ausente en teoría |
-| U08 · VLANs | 5/5 | Orden ideal, explicaciones memorables, boletines sobresalientes |
-| U09 · Routing y ACLs | 5/5 | Óptimo; solo matices de presentación |
-| U01 · Introducción | 4,5/5 | Excelente; pulido editorial |
-| U05 · IPv4 y subnetting | 4,5/5 | Todos los cálculos correctos; pulido |
-| U12 · Diagnóstico y monitorización | 4,5/5 | Muy sólida; caso práctico solo reactivo |
-| U02 · Fundamentos de redes | 4/5 | Orden 04/05 invertible + error de conteo en boletín |
-| U03 · Modelos OSI y análisis | 4/5 | Adelantos pedagógicos + 2 defectos de acabado |
-| U04 · Infraestructura física | 4/5 | Erratas de acabado + cobre a 200m en boletín |
-| U06 · IPv6 y transición | 4/5 | Técnicamente impecable; boletín avanzado ambiguo |
-| U10 · Routing dinámico OSPF | 4/5 | Pista errónea de timers + incoherencias menores |
-| U11 · NAT y acceso a Internet | 4/5 | Tabla NAT truncada + IPsec AH/ESP impreciso |
-| U13 · Cloud, virtualización y futuro | 4/5 | Gran cierre; tabla CE UMTS/HSDPA contradictoria |
+Orden de revisión: **1 → 12** (introducción primero). Alcance por sesión: **teoría (.md) + boletines** de la unidad (diagramas: pasada aparte en el cierre transversal).
 
-## Problemas sistémicos detectados
+| # | Unidad | Estado | Informe |
+|---|---|---|---|
+| 01 | Introducción | ⏳ pendiente | — |
+| 02 | Ethernet y cableado | ⏳ pendiente | — |
+| 03 | Direccionamiento IP | ⏳ pendiente | — |
+| 04 | Switching y VLAN | ⏳ pendiente | — |
+| 05 | Trunking e inter-VLAN | ⏳ pendiente | — |
+| 06 | Enrutamiento estático | ⏳ pendiente | — |
+| 07 | OSPF | ⏳ pendiente | — |
+| 08 | ACL y seguridad | ⏳ pendiente | — |
+| 09 | NAT y PAT | ⏳ pendiente | — |
+| 10 | Servicios de red | ⏳ pendiente | — |
+| 11 | Redes inalámbricas | ⏳ pendiente | — |
+| 12 | Alta disponibilidad | ⏳ pendiente | — |
+| — | Cierre transversal | ⏳ pendiente | — |
 
-1. **Enlaces de boletines rotos en los índices** (sin prefijo `boletin-`): afectaba a U02-U13. **Corregido.**
-2. Falta de **pistas en los boletines iniciales** de varias unidades (U01, U02, U03, U04, U05, U06, U11).
-3. Algunos **crucigramas con conteos de letras erróneos** (U02, U03, U04, U05, U11).
+Los informes de la revisión vigente se nombran `revision-UXX-<nombre>.md` (los de la estructura antigua eran `informe-UXX.md`: **no confundir su numeración**).
 
-## Recomendaciones transversales
+## Ciclo por sesión (una unidad)
 
-- Unificar la ubicación de **ARP** (capa 2) en todo el curso (U02, U03).
-- Añadir pistas a los boletines iniciales donde falten.
-- Revisar los conteos de letras de los crucigramas.
-- Corregir los matices factuales marcados en cada informe (AH/ESP, pool /29, tabla STP de costes, UMTS/HSDPA, tabla NAT truncada, timers OSPF).
+1. Auditoría automática: `npm run check:unidad <unidad>` + `node scripts/check-uds.mjs` + `check-links` + `npm run check:diagrams` + build.
+2. Lectura completa de los puntos: orden docente, coherencia interna, datos técnicos, ejercicios/soluciones.
+3. Boletines de la unidad: nivel, soluciones, crucigramas, sin spoilers ni imágenes.
+4. Fronteras con otras unidades → candidatos a mover/quitar (🔴).
+5. Informe con hallazgos `fichero:línea` etiquetados: 🔴 mover/quitar (decisión del profe) · 🟡 corregir ya · 🔵 ampliar · ⚪ dejar.
+6. Aplicar 🟡 (+ 🔴 aprobados), regenerar DOCX, verificar, commit `Revisión UXX: …`.
+7. Actualizar la matriz de solapamientos y esta tabla de estado.
 
-## Estado de corrección
+## Hallazgos transversales del baseline (F0)
 
-Los hallazgos identificados se aplican en la Fase E (corrección). Ver `git log` para el commit de revisión.
+Detectados con `check-unidad` antes de empezar (referencia para las sesiones):
+
+- **01 Introducción**: índice sin sección de Criterios de evaluación; `01-que-es-una-red.md` sin pie `Anterior`; índice no enlaza sus boletines; sin bloque ⭐ (¿exento?).
+- **RA índice ≠ RA cierre**: 02 (RA1/RA2 vs RA2), 03 (RA1/RA2/RA4/RA6 vs RA2), 04 (RA3/RA5 vs RA5).
+- **Nombres de sección con variantes** (documentadas en AGENTS): `Sé el Paquete/Bit/Router OSPF/NAT`; `Entrevista de trabajo` vs `Preguntas de entrevista de trabajo`.
+- Ver también [matriz-solapamientos.md](matriz-solapamientos.md).
+
+## Revisión histórica (estructura antigua de 13 unidades)
+
+En [`historico/`](historico/) están los informes de una revisión anterior, cuando el curso tenía **13 unidades con otra numeración** (allí U07 = Switching y STP, hoy 07 = OSPF): sirven como checklist de estilo, **no como mapa del temario actual**.
+
+Problemas sistémicos de aquella revisión (ya corregidos entonces): enlaces de boletines rotos en los índices, pistas ausentes en boletines iniciales y conteos de crucigrama erróneos en varias unidades.

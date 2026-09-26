@@ -13,6 +13,7 @@
     "epub": "pwsh -NoProfile -File scripts/generate-epub.ps1",
     "docx": "node scripts/generate-docx.mjs",
     "check:diagrams": "node scripts/check-diagrams.mjs",
+    "check:unidad": "node scripts/check-unidad.mjs",
     "export": "npm run pdf && npm run epub && npm run docx"
   },
   "dependencies": {
