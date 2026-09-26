@@ -35,7 +35,7 @@ La regla de oro: **cada capa solo habla con la suya** (por encima y por debajo).
 | 2 | **Enlace** | Entrega en la red local por MAC | **Trama** | Ethernet, switches |
 | 1 | **Física** | Bits por el medio (cable, fibra, aire) | **Bits** | Cable UTP, fibra, radio |
 
-> 💡 **Truco de los tres abajo:** **1** = bits, **2** = trama, **3** = paquete. Si recuerdas esa escalera, ya puedes situar cualquier fallo con la [escalera del ping](/ApuntesRedes/01-introduccion/06-metodo-diagnostico).
+> 💡 **Truco de los tres abajo:** **1** = bits, **2** = trama, **3** = paquete. Si recuerdas esa escalera, ya puedes situar cualquier fallo con la [escalera del ping](/ApuntesRedes/01-introduccion/07-metodo-diagnostico).
 
 ![Modelo OSI de 7 capas con la marca de dónde estamos: las capas 1 y 2](/ApuntesRedes/diagrams/u02-modelo-osi.svg)
 

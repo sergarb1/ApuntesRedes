@@ -22,15 +22,15 @@ Y si ya sabes algo de redes, igualmente vale la pena una pasada rápida: aquí d
 | Punto | Qué aprenderás | A quién va dirigido |
 |---|---|---|
 | [01 · ¿Qué es una red?](/ApuntesRedes/01-introduccion/01-que-es-una-red) | Qué es, para qué sirve y sus piezas básicas | Todos |
-| [02 · Los aparatitos](/ApuntesRedes/01-introduccion/02-aparatitos) | Módem, router, AP, switch vs router, cable vs WiFi | Todos |
-| [03 · MAC, IP y Puertos](/ApuntesRedes/01-introduccion/03-mac-ip-puertos) | Las direcciones de red y los puertos lógicos | Todos |
-| [04 · Paquetes y protocolos](/ApuntesRedes/01-introduccion/04-paquetes-y-protocolos) | Cómo viajan los datos y qué reglas siguen | Todos |
-| [05 · DNS y DHCP](/ApuntesRedes/01-introduccion/05-dns-y-dhcp) | Los servicios invisibles que hacen Internet usable | Todos |
-| [06 · Método de diagnóstico](/ApuntesRedes/01-introduccion/06-metodo-diagnostico) | La escalera del ping y la lógica del diagnóstico | Todos |
-| [07 · Instalación de Packet Tracer](/ApuntesRedes/01-introduccion/07-instalacion-packet-tracer) | Prepara tu laboratorio virtual de bolsillo | Todos |
-| [08 · Mapa del curso](/ApuntesRedes/01-introduccion/08-mapa-del-curso) | El viaje de 12 paradas y para qué sirve cada etapa | Todos |
-| [09 · Glosario](/ApuntesRedes/01-introduccion/09-glosario) | Tus términos clave de referencia rápida | Todos |
-| [10 · Preguntas tontas](/ApuntesRedes/01-introduccion/10-preguntas-tontas) | Las dudas que nadie se atreve a hacer en voz alta | Todos |
+| [02 · Instalación de Packet Tracer](/ApuntesRedes/01-introduccion/02-instalacion-packet-tracer) | Prepara tu laboratorio virtual de bolsillo | Todos |
+| [03 · Los aparatitos](/ApuntesRedes/01-introduccion/03-aparatitos) | Módem, router, AP, switch vs router, cable vs WiFi | Todos |
+| [04 · MAC, IP y Puertos](/ApuntesRedes/01-introduccion/04-mac-ip-puertos) | Las direcciones de red y los puertos lógicos | Todos |
+| [05 · Paquetes y protocolos](/ApuntesRedes/01-introduccion/05-paquetes-y-protocolos) | Cómo viajan los datos y qué reglas siguen | Todos |
+| [06 · DNS y DHCP](/ApuntesRedes/01-introduccion/06-dns-y-dhcp) | Los servicios invisibles que hacen Internet usable | Todos |
+| [07 · Método de diagnóstico](/ApuntesRedes/01-introduccion/07-metodo-diagnostico) | La escalera del ping y la lógica del diagnóstico | Todos |
+| [08 · Glosario](/ApuntesRedes/01-introduccion/08-glosario) | Tus términos clave de referencia rápida | Todos |
+| [09 · Preguntas tontas](/ApuntesRedes/01-introduccion/09-preguntas-tontas) | Las dudas que nadie se atreve a hacer en voz alta | Todos |
+| [10 · Mapa del curso](/ApuntesRedes/01-introduccion/10-mapa-del-curso) | El viaje de 12 paradas y para qué sirve cada etapa | Todos |
 
 ---
 

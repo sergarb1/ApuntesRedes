@@ -5,7 +5,7 @@ description: El DNI, el domicilio y el despacho de tus dispositivos 📮
 
 <p><small>El DNI, el domicilio y el despacho de tus dispositivos 📮</small></p>
 
-> 🗺️ **Estás en:** 🚪 **Introducción** → 03 · MAC, IP y Puertos
+> 🗺️ **Estás en:** 🚪 **Introducción** → 04 · MAC, IP y Puertos
 
 ---
 
@@ -205,8 +205,8 @@ Con el protocolo **ARP** (Address Resolution Protocol). Cuando tu PC quiere habl
 
 La MAC y la IP se encuentran en la cola del supermercado. La MAC mira alrededor y dice: *"¿Estamos en la misma red?"*. La IP responde: *"Depende... ¿cuál es tu subred?"*. Si no encajan, la MAC no puede entregar la carta. Y si la IP está duplicada... el cartero se vuelve loco.
 
-**PRÓXIMAMENTE EN 04:** Paquetes y protocolos — cómo se troce la información y qué reglas siguen las máquinas para entenderse. ✉️
+**PRÓXIMAMENTE EN 05:** Paquetes y protocolos — cómo se troce la información y qué reglas siguen las máquinas para entenderse. ✉️
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/01-introduccion) · **Anterior:** [02 · Los aparatitos](/ApuntesRedes/01-introduccion/02-aparatitos) · **Siguiente:** [04 · Paquetes y protocolos](/ApuntesRedes/01-introduccion/04-paquetes-y-protocolos)
+📚 [Volver al índice de la unidad](/ApuntesRedes/01-introduccion) · **Anterior:** [03 · Los aparatitos](/ApuntesRedes/01-introduccion/03-aparatitos) · **Siguiente:** [05 · Paquetes y protocolos](/ApuntesRedes/01-introduccion/05-paquetes-y-protocolos)

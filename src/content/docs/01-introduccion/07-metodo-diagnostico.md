@@ -5,7 +5,7 @@ description: La escalera del diagnóstico y la lógica para cazar cualquier aver
 
 <p><small>La escalera del diagnóstico y la lógica para cazar cualquier avería 🩺</small></p>
 
-> 🗺️ **Estás en:** 🚪 **Introducción** → 06 · Método de diagnóstico
+> 🗺️ **Estás en:** 🚪 **Introducción** → 07 · Método de diagnóstico
 
 ---
 
@@ -233,8 +233,8 @@ Significa que la **tarjeta de red del PC está rota o deshabilitada**. No es un 
 
 El PC del alumno hace `ping 127.0.0.1` y responde. El PC se respira aliviado: *"Al menos sigo vivo"*. Luego hace `ping` al gateway: *"¡Llego hasta la puerta!"*. Luego a `8.8.8.8`: *"¡Salgo a la calle!"*. Y por fin a `google.com`: *"¡El DNS también funciona!"*. El PC sonríe: *"Todo va bien... hasta la próxima avería"*.
 
-**PRÓXIMAMENTE EN 07:** Instalación de Packet Tracer — tu taller virtual de bolsillo, donde todo lo que hemos visto se toca sin miedo. 🖥️
+**PRÓXIMAMENTE EN 08:** El glosario — tus términos clave de referencia rápida, para que ninguna palabra te suene a chino. 📖
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/01-introduccion) · **Anterior:** [05 · DNS y DHCP](/ApuntesRedes/01-introduccion/05-dns-y-dhcp) · **Siguiente:** [07 · Instalación de Packet Tracer](/ApuntesRedes/01-introduccion/07-instalacion-packet-tracer)
+📚 [Volver al índice de la unidad](/ApuntesRedes/01-introduccion) · **Anterior:** [06 · DNS y DHCP](/ApuntesRedes/01-introduccion/06-dns-y-dhcp) · **Siguiente:** [08 · Glosario](/ApuntesRedes/01-introduccion/08-glosario)

@@ -5,7 +5,7 @@ description: Cómo viajan los datos por la red y qué reglas siguen ✉️
 
 <p><small>Cómo viajan los datos por la red y qué reglas siguen ✉️</small></p>
 
-> 🗺️ **Estás en:** 🚪 **Introducción** → 04 · Paquetes y protocolos
+> 🗺️ **Estás en:** 🚪 **Introducción** → 05 · Paquetes y protocolos
 
 ---
 
@@ -206,8 +206,8 @@ Depende del protocolo: **TCP** detecta la pérdida y reenvía el paquete automá
 
 Un paquete de 1500 bytes se prepara para salir de tu portátil. Se mira alrededor: *"¿Cuántos saltos me quedan?"*. Un router le responde: *"Depende de tu TTL"*. El paquete se asusta: *"¿Mi TTL? ¿Eso es cuántos routers puedo cruzar antes de que me descarten?"*. *"Exacto"*, dice el router. *"Y si llegas a cero... adiós"*.
 
-**PRÓXIMAMENTE EN 05:** DNS y DHCP — la agenda telefónica y el recepcionista que nadie ve pero todos necesitan. 📖
+**PRÓXIMAMENTE EN 06:** DNS y DHCP — la agenda telefónica y el recepcionista que nadie ve pero todos necesitan. 📖
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/01-introduccion) · **Anterior:** [03 · MAC, IP y Puertos](/ApuntesRedes/01-introduccion/03-mac-ip-puertos) · **Siguiente:** [05 · DNS y DHCP](/ApuntesRedes/01-introduccion/05-dns-y-dhcp)
+📚 [Volver al índice de la unidad](/ApuntesRedes/01-introduccion) · **Anterior:** [04 · MAC, IP y Puertos](/ApuntesRedes/01-introduccion/04-mac-ip-puertos) · **Siguiente:** [06 · DNS y DHCP](/ApuntesRedes/01-introduccion/06-dns-y-dhcp)

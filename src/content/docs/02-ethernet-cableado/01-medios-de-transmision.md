@@ -13,7 +13,7 @@ description: Cobre, fibra o aire, elige tu herramienta 🗼
 
 > Los datos pueden viajar por **tres medios físicos**: el cobre (cables), la fibra óptica (luz) y el aire (ondas de radio). Cada uno tiene su velocidad, su distancia y su precio, y elegir bien es la primera decisión de todo administrador.
 
-En la [unidad de introducción](/ApuntesRedes/01-introduccion/04-paquetes-y-protocolos) viste que la capa 1 del modelo OSI se encarga de transmitir **bits**: series de 1 y 0 que, al final, tienen que atravesar algo físico. Ese "algo" es el medio de transmisión. Y como cada medio tiene sus reglas del juego, esta unidad entera consiste en conocerlas.
+En la [unidad de introducción](/ApuntesRedes/01-introduccion/05-paquetes-y-protocolos) viste que la capa 1 del modelo OSI se encarga de transmitir **bits**: series de 1 y 0 que, al final, tienen que atravesar algo físico. Ese "algo" es el medio de transmisión. Y como cada medio tiene sus reglas del juego, esta unidad entera consiste en conocerlas.
 
 ---
 

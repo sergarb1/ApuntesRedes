@@ -60,7 +60,7 @@ Etiquetas: 🟡 corregir ya · 🔵 ampliar · ⚪ dejar · 🔵/🔴 decisión.
 
 ### 🔵 Ampliar / ⚪ dejar (sin tocar)
 
-- 🔵 **`08-mapa-del-curso.md` no tiene NINGÚN bloque de juegos** (Fireside, ¿Quién Soy?, CONRAD, Laboratorio, Atrévete, Crucigrama, Entrevista, FAQ, Poscréditos), cuando la plantilla de la introducción dice que *cada punto lleva su bloque de juegos completo*. Es contenido nuevo (≈8 bloques) → decisión del profe.
+- 🔵 ~~**`08-mapa-del-curso.md` no tiene NINGÚN bloque de juegos**~~ → **decidido (Q3):** se queda sin juegos, con excepción documentada en `AGENTS.md`; el mapa es la página de navegación y los juegos ya viven en los otros 9 puntos (tras el reordenado es `10-mapa-del-curso.md`).
 - 🔵 **Glosario (`09`)**: se puede ampliar con los términos que el propio curso cita ya (VLAN, ACL, OSPF); ahora solo aparecen en el CONRAD como "palabras que llegarán".
 - ⚪ **DNS caído explicado 3 veces** (CONRAD + laboratorio de `05`, escalera de `06`, Atrévete 1 de `10`): es refuerzo deliberado en registros distintos; se deja.
 - ⚪ **CONRAD de `09` y el mapa citan VLAN/ACL/OSPF**: son menciones de vocabulario a futuro, sin desarrollo → legítimas.
@@ -82,15 +82,33 @@ No hay candidatos a mover/quitar entre unidades en la introducción (los duplica
 - Par `inicial` + `avanzado` con su `-resuelto` (4 ficheros), sin imágenes ni diagramas ✅, soluciones en `<details>` ✅.
 - **Crucigramas: 22 conteos corregidos en 8 puntos** (`01`, `02`, `03`, `04`, `05`, `06`, `07`, `10`); `09` correcto; `08` sin crucigrama (ver 🔵 de §2). Verificación cruzada pista↔solución de las 42 pistas: 0 problemas.
 
-## 5. Decisiones pendientes del profe 🔴
+## 5. Decisiones del profe — APLICADAS en la sesión de reordenado
 
-- [ ] **Q1 — Orden de la introducción**: el sidebar (`astro.config.mjs:45-47` → `8 Glosario · 9 Preguntas · 10 Mapa`) contradice a índice/breadcrumbs/ficheros (`8 Mapa · 9 Glosario · 10 Preguntas`). En función de la respuesta habrá que arreglar pies de 07/09/10, poscrédito de 07 y el sidebar (los pies de 01–06 y 08 ya son coherentes con el orden de ficheros).
-- [ ] **Q2 — Posición del punto `07-instalacion-packet-tracer`**: ¿moverlo a la posición 2 (renombrar 10 ficheros = URLs cambian) o dejarlo donde está?
-- [ ] **Q3 (🔵) — `08-mapa-del-curso`**: ¿añadir el bloque de juegos completo de la plantilla de la introducción?
+- [x] **Q1 — Orden de la introducción**: el canónico es el **orden del sidebar** (`8 Glosario · 9 Preguntas · 10 Mapa`); el sidebar ya estaba bien y se reordenaron los ficheros a su vez.
+- [x] **Q2 — `07-instalacion-packet-tracer` movido a la posición 2** (renombrado a `02-instalacion-packet-tracer`).
+- [x] **Q3 — `10-mapa-del-curso` se queda sin bloque de juegos**: excepción documentada en `AGENTS.md` ("página de navegación; no replicar").
+
+### Nuevo orden de los puntos (canonical)
+
+| # | Fichero | Antiguo |
+|---|---|---|
+| 01 | `01-que-es-una-red` | igual |
+| 02 | `02-instalacion-packet-tracer` | era 07 |
+| 03 | `03-aparatitos` | era 02 |
+| 04 | `04-mac-ip-puertos` | era 03 |
+| 05 | `05-paquetes-y-protocolos` | era 04 |
+| 06 | `06-dns-y-dhcp` | era 05 |
+| 07 | `07-metodo-diagnostico` | era 06 |
+| 08 | `08-glosario` | era 09 |
+| 09 | `09-preguntas-tontas` | era 10 |
+| 10 | `10-mapa-del-curso` | era 08 |
+
+Se actualizaron: sidebar (`astro.config.mjs`), tabla del índice, breadcrumbs, pies (cadena completa; `10-mapa` ahora cierra con **Siguiente:** *Ethernet y cableado*), poscréditos (los 10 teasers apuntan al nuevo sucesor; `09-preguntas` gana teaser de EN 10), enlaces cruzados desde `02-ethernet-cableado` (3), prosa (`06-dns`: "En el punto de MAC, IP y puertos" en vez de número), árbol de estructura de `README.md` y `AGENTS.md`, y tabla de diagramas de `AGENTS.md`. Los nombres viejos siguen en las tablas históricas de este informe a propósito.
 
 ## 6. Verificación y commit
 
 - [x] `check:unidad 01` 0/0 · `check-uds` 0 · `check-links` 0 · build 183 · `check:diagrams` = baseline (55)
+- [x] Reordenado Q1/Q2/Q3 aplicado y re-verificado: mismos checks en verde con los nuevos slugs (las 10 URLs nuevas existen en `dist/01-introduccion/`)
 - [x] Comprobación lingüística es-ES
 - [x] DOCX regenerado (`npm run docx`)
 - [x] Commit `Revisión U01: …`

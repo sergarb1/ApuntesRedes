@@ -13,7 +13,7 @@ description: El sobre de la capa 2, en cobre, fibra y en el aire 📦
 
 > La **trama** (*frame*) es la **PDU de la capa 2**: un "sobre" con **MACs de origen y destino**, un **EtherType** que dice qué lleva dentro y un **FCS** que comprueba que no se ha estropeado en el viaje — ya sea por **cable o por el aire**.
 
-En el [punto anterior](/ApuntesRedes/02-ethernet-cableado/08-modelo-osi) viste que la capa 2 entrega en la red local. Aquí abrimos ese sobre como si fuera la ficha técnica que luego verás en [Wireshark](/ApuntesRedes/01-introduccion/04-paquetes-y-protocolos).
+En el [punto anterior](/ApuntesRedes/02-ethernet-cableado/08-modelo-osi) viste que la capa 2 entrega en la red local. Aquí abrimos ese sobre como si fuera la ficha técnica que luego verás en [Wireshark](/ApuntesRedes/01-introduccion/05-paquetes-y-protocolos).
 
 ---
 

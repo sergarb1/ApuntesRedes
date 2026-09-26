@@ -5,7 +5,7 @@ description: La agenda telefónica y el recepcionista que nadie ve 📖
 
 <p><small>La agenda telefónica y el recepcionista que nadie ve 📖</small></p>
 
-> 🗺️ **Estás en:** 🚪 **Introducción** → 05 · DNS y DHCP
+> 🗺️ **Estás en:** 🚪 **Introducción** → 06 · DNS y DHCP
 
 ---
 
@@ -31,7 +31,7 @@ Sin DNS, Internet seguiría funcionando perfectamente, pero para entrar en cualq
 
 ## 🏨 DHCP (Dynamic Host Configuration Protocol): El recepcionista
 
-En el punto 3 vimos que, al llevar tu portátil del instituto a tu casa, tu dirección IP cambia. ¿Pero quién te la cambia? No hay un señor dentro del cable escribiendo números.
+En el punto de MAC, IP y puertos vimos que, al llevar tu portátil del instituto a tu casa, tu dirección IP cambia. ¿Pero quién te la cambia? No hay un señor dentro del cable escribiendo números.
 
 Ahí entra el protocolo DHCP. Piensa en él como el recepcionista de un hotel:
 
@@ -206,8 +206,8 @@ Vertical:
 
 El DNS y el DHCP están sentados en la cafetería del servidor. De repente, el DNS se pone pálido: *"Me he caído... 300 usuarios no pueden acceder a ninguna web"*. El DHCP le da una palmada en la espalda: *"Tranquilo, yo reparto IPs mientras te recuperas. Pero si me caigo yo... nadie tiene IP nueva"*. Se miran: *"Somos los héroes invisibles"*.
 
-**PRÓXIMAMENTE EN 06:** La mente del administrador — diagnóstico de averías con la escalera del ping. 🔧
+**PRÓXIMAMENTE EN 07:** La mente del administrador — diagnóstico de averías con la escalera del ping. 🔧
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/01-introduccion) · **Anterior:** [04 · Paquetes y protocolos](/ApuntesRedes/01-introduccion/04-paquetes-y-protocolos) · **Siguiente:** [06 · Método de diagnóstico](/ApuntesRedes/01-introduccion/06-metodo-diagnostico)
+📚 [Volver al índice de la unidad](/ApuntesRedes/01-introduccion) · **Anterior:** [05 · Paquetes y protocolos](/ApuntesRedes/01-introduccion/05-paquetes-y-protocolos) · **Siguiente:** [07 · Método de diagnóstico](/ApuntesRedes/01-introduccion/07-metodo-diagnostico)
