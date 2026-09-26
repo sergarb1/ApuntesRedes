@@ -110,16 +110,16 @@ Adivina qué concepto de red soy:
 > **Duración estimada:** 20 minutos
 > **Herramienta:** Packet Tracer
 
-**El escenario:** Tienes 2 PC conectados a un switch. PC-A hace `ping` a PC-B. Todo funciona.
+**El escenario:** Tienes 2 PC conectados a un switch: PC-A (`192.168.1.10`) y PC-B (`192.168.1.20`), ambas con máscara `/24`. PC-A hace `ping` a PC-B. Todo funciona.
 
-**Fallo intencionado:** Cambias la máscara de PC-A a `/16` (`255.255.0.0`) y la de PC-B a `/24` (`255.255.255.0`). Ahora el ping falla.
+**Fallo intencionado:** Cambias la máscara de PC-A a `/28` (`255.255.255.240`) sin tocar la de PC-B. Ahora el ping falla.
 
 **Tu tarea:** Diagnosticar por qué no llegan los paquetes.
 
 **Pistas (no antes de intentar):**
 
-1. ¿Las IPs están en la misma subred? *Depende de la máscara: con `/16`, PC-A cree que toda la `192.168.x.x` es local; con `/24`, PC-B cree que solo `192.168.1.x` es local.*
-   <details><summary>¿Y si sigo atascado?</summary>Calcula la subred de cada PC con su máscara. Si no coinciden, los paquetes van al gateway (que no existe).</details>
+1. ¿Las IPs están en la misma subred? *Depende de la máscara: con `/28`, la red de PC-A es `192.168.1.0` y solo alcanza hasta `192.168.1.14`; la IP de PC-B (`.20`) se queda fuera.*
+   <details><summary>¿Y si sigo atascado?</summary>Calcula la subred de PC-A con su máscara. Si PC-B queda fuera, los paquetes van al gateway (que no existe).</details>
 
 2. El problema es que **las máscaras no coinciden**: cada PC "ve" la red de un modo distinto y los paquetes se pierden porque una de las dos no puede localizar a la otra.
 
@@ -158,9 +158,9 @@ Adivina qué concepto de red soy:
 
 ```
 Horizontal:
-1. Sobre virtual que lleva los datos con IP origen y destino (8 letras)
+1. Sobre virtual que lleva los datos con IP origen y destino (7 letras)
 3. Reglas que aceptan dos máquinas para entenderse (9 letras)
-5. Versión segura de HTTP (4+1+3+4+3+1+3 letras)
+5. Versión segura de HTTP (5 letras)
 
 Vertical:
 2. Sobre de datos a nivel IP (9 letras)

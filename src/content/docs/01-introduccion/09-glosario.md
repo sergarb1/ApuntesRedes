@@ -67,7 +67,7 @@ Coge el glosario e intenta explicar cada término a un compañero de clase sin m
 
 **Técnico:** — Claro, pero si el alumno solo me mira a ti y no toca un switch, no aprende nada. Las palabras suenan bonitas, pero sin práctica son papel mojado.
 
-**Glosario:** — ¿Paper mojado? ¡Yo explico todo!
+**Glosario:** — ¿Papel mojado? ¡Yo explico todo!
 
 **Técnico:** — Tú explicas. Pero el alumno necesita **hacer**. Que configure una IP, que haga ping, que rompa algo y lo arregle. Entonces sí que entiende lo que significa cada palabra.
 
@@ -117,7 +117,7 @@ Adivina qué término del glosario soy:
 4. Paquete
 5. Gateway
 
-Si en alguno te trabas, anótalo: es el que necesitas repasar.
+Si en alguno te atascas, anótalo: es el que necesitas repasar.
 
 ---
 

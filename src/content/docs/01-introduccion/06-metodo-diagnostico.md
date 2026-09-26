@@ -49,7 +49,7 @@ Una vez que vemos la lucecita encendida, usaremos tu mejor amigo a partir de hoy
 
 ---
 
-## 🪜 La Escalera del Ping (Tus 4 peldaños de diagnóstico)
+## 🪜 La Escalera del Ping (Los 5 peldaños, del 0 al 4)
 
 Cuando alguien te diga *"no tengo Internet"*, abre la terminal y sube esta escalera usando tu "sonar". En cuanto un peldaño no devuelva eco, **ahí está tu avería** y no necesitas mirar los peldaños de arriba.
 
@@ -138,7 +138,7 @@ Adivina qué paso del diagnóstico soy:
 
 **Fallo intencionado (doble):**
 1. El **cable** entre el PC y el switch está mal (sin conectar en un extremo).
-2. El **DNS** del PC está configurado a `8.8.8.9` (una IP que no existe).
+2. El **DNS** del PC está configurado a `8.8.8.9` (que no es un servidor DNS).
 
 **Tu tarea:** Diagnosticar y arreglar ambos fallos.
 
@@ -186,12 +186,12 @@ Adivina qué paso del diagnóstico soy:
 ```
 Horizontal:
 1. Comando que envía un pulso de sonido por la red (4 letras)
-3. Primero mira las luces del puerto de red (7+7+3+4+2+4+4 letras)
+3. Primero mira las luces del puerto de red (11+2+5+1+6 letras)
 5. El switch cascarrabias del curso (6 letras)
 
 Vertical:
-2. Peldaño 1: ping a una IP de 7 dígitos (5+3+3+1+1+1+1 letras)
-4. Cambiar solo una cosa cada vez (5+6+3+6+4+4+3 letras)
+2. Peldaño 1: ping a una IP de 6 dígitos (3+1+1+1 letras)
+4. Cambiar solo una cosa cada vez (6+3+4+1+2+3 letras)
 ```
 
 <details>
@@ -233,8 +233,8 @@ Significa que la **tarjeta de red del PC está rota o deshabilitada**. No es un 
 
 El PC del alumno hace `ping 127.0.0.1` y responde. El PC se respira aliviado: *"Al menos sigo vivo"*. Luego hace `ping` al gateway: *"¡Llego hasta la puerta!"*. Luego a `8.8.8.8`: *"¡Salgo a la calle!"*. Y por fin a `google.com`: *"¡El DNS también funciona!"*. El PC sonríe: *"Todo va bien... hasta la próxima avería"*.
 
-**PRÓXIMAMENTE:** Ethernet, medios y cableado — los cimientos físicos sobre los que se construye todo lo que hemos visto aquí. 📡
+**PRÓXIMAMENTE EN 07:** Instalación de Packet Tracer — tu taller virtual de bolsillo, donde todo lo que hemos visto se toca sin miedo. 🖥️
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/01-introduccion) · **Anterior:** [05 · DNS y DHCP](/ApuntesRedes/01-introduccion/05-dns-y-dhcp) · **Siguiente:** [07 · Glosario](/ApuntesRedes/01-introduccion/09-glosario)
+📚 [Volver al índice de la unidad](/ApuntesRedes/01-introduccion) · **Anterior:** [05 · DNS y DHCP](/ApuntesRedes/01-introduccion/05-dns-y-dhcp) · **Siguiente:** [07 · Instalación de Packet Tracer](/ApuntesRedes/01-introduccion/07-instalacion-packet-tracer)

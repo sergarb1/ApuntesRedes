@@ -28,9 +28,22 @@ Y si ya sabes algo de redes, igualmente vale la pena una pasada rápida: aquí d
 | [05 · DNS y DHCP](/ApuntesRedes/01-introduccion/05-dns-y-dhcp) | Los servicios invisibles que hacen Internet usable | Todos |
 | [06 · Método de diagnóstico](/ApuntesRedes/01-introduccion/06-metodo-diagnostico) | La escalera del ping y la lógica del diagnóstico | Todos |
 | [07 · Instalación de Packet Tracer](/ApuntesRedes/01-introduccion/07-instalacion-packet-tracer) | Prepara tu laboratorio virtual de bolsillo | Todos |
-| [08 · Mapa del curso](/ApuntesRedes/01-introduccion/08-mapa-del-curso) | Las 12 etapas del viaje y para qué sirve cada una | Todos |
+| [08 · Mapa del curso](/ApuntesRedes/01-introduccion/08-mapa-del-curso) | El viaje de 12 paradas y para qué sirve cada etapa | Todos |
 | [09 · Glosario](/ApuntesRedes/01-introduccion/09-glosario) | Tus términos clave de referencia rápida | Todos |
 | [10 · Preguntas tontas](/ApuntesRedes/01-introduccion/10-preguntas-tontas) | Las dudas que nadie se atreve a hacer en voz alta | Todos |
+
+---
+
+## 📝 Boletines de la unidad
+
+> Practica con los pares del curso: empieza siempre por el resuelto para ver el estilo y luego intenta el por-resolver.
+
+<div class="ejercicio-links">
+  <a href="/ApuntesRedes/boletines/boletin-u01-inicial" class="elink">🟢 Inicial por resolver</a>
+  <a href="/ApuntesRedes/boletines/boletin-u01-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
+  <a href="/ApuntesRedes/boletines/boletin-u01-avanzado" class="elink">⭐ Avanzado por resolver</a>
+  <a href="/ApuntesRedes/boletines/boletin-u01-avanzado-resuelto" class="elink">💪 Avanzado resuelto</a>
+</div>
 
 ---
 

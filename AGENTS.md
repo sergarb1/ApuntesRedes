@@ -93,7 +93,7 @@ Las secciones viven repartidas entre el **índice** (`src/content/docs/NN-unidad
 4. `## ✅ Criterios de evaluación cubiertos (RAx)` — tabla de CEs (los RA del índice y los del cierre deben coincidir)
 5. `## 🚪 ¿Por dónde empiezo?`
 
-*(El índice de la introducción sigue su propio patrón: `👋 ¿Empiezas aquí?`, `📚 Qué encontrarás en este tema`, `🧭 Cómo usar estos apuntes`, `🏆 Logros de la unidad`… — pendiente de decisión: aún no tiene la sección de Criterios.)*
+*(El índice de la introducción sigue su propio patrón: `👋 ¿Empiezas aquí?`, `📚 Qué encontrarás en este tema`, `📝 Boletines de la unidad`, `🧭 Cómo usar estos apuntes`, `🏆 Logros de la unidad`… — **exento de la tabla de ✅ Criterios de evaluación (decisión de revisión: "sin CEs") y sin bloque ⭐**; `check-unidad` lo trata como excepción y sí exige la sección de boletines.)*
 
 **Bloques obligatorios por unidad** (agregados índice + puntos + cierre; al menos uno de cada uno en la unidad):
 

@@ -66,7 +66,7 @@ Que ambos reclaman el mismo "domicilio" y se genera un **conflicto de IP**.
 
 ## 🕵️‍♂️ Si uso el "Modo Incógnito", ¿el administrador de la red puede ver dónde entro?
 
-**Sí.** El modo incógnito de tu navegador solo sirve para que tu propio ordenador no guarde el historial localmente. Pero recuerda el "Punto 5": para entrar a cualquier web, tu equipo tiene que pedirle al **servidor DNS** del instituto o de la empresa que le traduzca el nombre. El administrador de la red o el firewall del router pueden ver perfectamente hacia qué dominios viajan tus paquetes, por muy en incógnito que estés.
+**Sí.** El modo incógnito de tu navegador solo sirve para que tu propio ordenador no guarde el historial localmente. Pero recuerda lo del DNS: para entrar a cualquier web, tu equipo tiene que pedirle al **servidor DNS** del instituto o de la empresa que le traduzca el nombre. El administrador de la red o el firewall del router pueden ver perfectamente hacia qué dominios viajan tus paquetes, por muy en incógnito que estés.
 
 ---
 
@@ -78,7 +78,7 @@ Siempre, por norma general, el **cable**. El Wi-Fi usa ondas de radio que viajan
 
 ## 📱 ¿Por qué mi móvil a veces dice "Conectado, sin Internet"?
 
-Esto te pasará mucho. Significa que tu teléfono ha conseguido conectarse perfectamente al **Punto de Acceso (la antena Wi-Fi)** y le han dado una IP local, pero ese Punto de Acceso (o el router al que está conectado) ha perdido su conexión con la calle (el operador telefónico). Tienes "red local", pero no tienes salida al exterior. (¡Acuérdate del error de novato del Punto 2: Wi-Fi no es lo mismo que Internet!).
+Esto te pasará mucho. Significa que tu teléfono ha conseguido conectarse perfectamente al **Punto de Acceso (la antena Wi-Fi)** y le han dado una IP local, pero ese Punto de Acceso (o el router al que está conectado) ha perdido su conexión con la calle (el operador telefónico). Tienes "red local", pero no tienes salida al exterior. (¡Acuérdate del aviso del punto de los aparatitos: el Wi-Fi no es lo mismo que Internet!).
 
 ---
 
@@ -94,7 +94,7 @@ Esto te pasará mucho. Significa que tu teléfono ha conseguido conectarse perfe
 
 > *Un alumno tímido y un profesor conversan después de clase.*
 
-**Alumno:** — Profe, tengo una pregunta... pero es que es medio tonta.
+**Alumno:** — Profe, tengo una pregunta... pero es que es media tonta.
 
 **Profesor:** — No hay preguntas tontas. Hay preguntas que no se hacen, y esas son las peores. Porque si no la haces, te la quedas con la duda y luego no entiendes lo que viene después.
 
@@ -104,7 +104,7 @@ Esto te pasará mucho. Significa que tu teléfono ha conseguido conectarse perfe
 
 **Alumno:** — Ah... pues ahora lo entiendo.
 
-**Profesor:** — Ves? No era tonta. Era fundamental.
+**Profesor:** — ¿Ves? No era tonta. Era fundamental.
 
 ---
 
@@ -155,19 +155,30 @@ Adivina cuál es la respuesta correcta:
 - Piensa en qué ve el administrador de red y qué ve tu navegador.
 - Piensa en el diagnóstico con método vs. el reinicio a ciegas.
 
+<details>
+<summary>🔄 Respuestas</summary>
+
+1. **Falso.** El WiFi te conecta con el punto de acceso (la antena); para llegar a Internet, ese punto necesita salida al operador. Puedes tener cobertura perfecta y cero Internet.
+2. **Falso.** El modo incógnito solo impide que tu propio ordenador guarde el historial. El administrador ve los dominios que consultas (vía DNS) y el firewall ve las conexiones.
+3. **Falso.** A veces lo arregla, pero es lanzar una moneda al aire: sin diagnosticar no sabes qué ha pasado ni si volverá a pasar. Primero la escalera del ping, después el reinicio.
+4. **Verdadero (con matices).** En igualdad de condiciones, el cable no sufre interferencias ni comparte el medio, así que gana en velocidad y estabilidad; el WiFi gana en comodidad.
+5. **Verdadero.** Dos equipos con la misma IP generan un conflicto: el switch no sabe a cuál entregar y uno de los dos se queda sin conexión.
+
+</details>
+
 ---
 
 ## 🧠 Atrévete a pensar
 
-1. **Un usuario te dice: "No me va la web, pero sí me va el correo".** ¿Qué puede estar pasando?
-2. **¿Por qué el cable es más rápido que el WiFi?** Explica la razón física en una frase.
+1. **Un compañero dice: "Mi PC no va a Internet", pero `ping 8.8.8.8` responde perfecto.** ¿Le va Internet o no? ¿Qué le contestas?
+2. **Un compañero tiene IP configurada pero "no le va nada", ni siquiera el gateway.** Según la escalera del diagnóstico, ¿en qué peldaño se queda y por dónde empiezas?
 3. **Un compañero dice: "Si uso VPN, nadie puede ver lo que hago".** ¿Es verdad?
 
 <details>
 <summary>💡 Soluciones</summary>
 
-1. Puede ser un **problema de DNS** (el correo usa IP directa o tiene su propia resolución) o que el **puerto 80/443 esté bloqueado** pero el de correo no.
-2. El WiFi usa ondas de radio que sufren **interferencias** (paredes, microondas, vecinos); el cable es un canal **cerrado y directo** sin interferencias externas.
+1. **La red funciona; el fallo está más arriba.** El `ping 8.8.8.8` no necesita DNS, así que sube entero por la escalera. Si `ping google.com` falla, el problema está en la resolución de nombres (DNS caído o dominio filtrado): te va Internet, pero no te va la agenda.
+2. **Se queda en los peldaños bajos.** Mira primero las luces (peldaño 0) y el loopback (`ping 127.0.0.1`); si eso va bien, revisa cable, switch y configuración de IP/máscara (peldaños 1 y 2). No subas al DNS ni a Internet hasta que el gateway responda.
 3. **No completamente.** La VPN cifra el tráfico entre tu equipo y el servidor VPN, pero el administrador de la red local puede ver que estás usando una VPN y hacia qué IP te conectas.
 
 </details>
@@ -178,12 +189,12 @@ Adivina cuál es la respuesta correcta:
 
 ```
 Horizontal:
-1. Error cuando dos PC tienen la misma IP (9+6+6 letras)
-3. Modo del navegador que no guarda historial (4+3+4+7+4 letras)
+1. Error cuando dos PC tienen la misma IP (9+2+2 letras)
+3. Modo del navegador que no guarda historial (4+9 letras)
 
 Vertical:
-2. "Tengo WiFi pero no Internet" significa que... (3+3+7+3+4+3+4+3+8 letras)
-4. El cable es más rápido que el WiFi porque... (13+13+11+9+7+10 letras)
+2. "Tengo WiFi pero no Internet" significa que... (2+5+6+1+8 letras)
+4. El cable es más rápido que el WiFi porque... (2+4+5+14 letras)
 ```
 
 <details>
@@ -223,7 +234,7 @@ Vertical:
 
 ## 🎬 Poscréditos
 
-Un alumno se acerca tímidamente a Conrad después de clase: *"CONRAD, tengo una pregunta tonta..."*. Conrad se enciende: *"¿TONTA? ¡No hay preguntas tontas! ¡Preguntar es de listos! ¡Los que no preguntan son los que luego tocan cables sin saber y me rompen!"*. El alumno sonríe: *"Pues... ¿el WiFi es lo mismo que Internet?"*. Conrad responde: *"¡POR FIN UNA BUENA PREGUNTA! No, no es lo mismo. Y ya puedes irte a casa sabiendo algo que el 90% de los usuarios no sabe."*
+Un alumno se acerca tímidamente a CONRAD después de clase: *"CONRAD, tengo una pregunta tonta..."*. CONRAD se enciende: *"¿TONTA? ¡No hay preguntas tontas! ¡Preguntar es de listos! ¡Los que no preguntan son los que luego tocan cables sin saber y me rompen!"*. El alumno sonríe: *"Pues... ¿el WiFi es lo mismo que Internet?"*. CONRAD responde: *"¡POR FIN UNA BUENA PREGUNTA! No, no es lo mismo. Y ya puedes irte a casa sabiendo algo que el 90% de los usuarios no sabe."*
 
 Y con esta pregunta "tonta" termina la unidad. Has llegado hasta aquí, y eso significa que ya sabes qué es una red, cómo se monta, cómo se diagnostica y qué palabras clave necesitas. **Estás listo para la siguiente unidad.**
 

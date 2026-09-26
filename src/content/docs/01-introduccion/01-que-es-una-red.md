@@ -68,7 +68,7 @@ Hay dos palabras que van a aparecer constantemente durante el curso. Apúntalas 
 
 Llegamos al error clásico número uno del principiante: confundir tu red local con Internet.
 
-- **Una red local** son tus equipos conectados entre sí. ¡No necesitas Internet para que funcione!. Puedes tener una red perfectamente válida en clase, con 20 ordenadores conectados a un switch, pasándose archivos a toda velocidad sin tener salida al exterior.
+- **Una red local** son tus equipos conectados entre sí. ¡No necesitas Internet para que funcione! Puedes tener una red perfectamente válida en clase, con 20 ordenadores conectados a un switch, pasándose archivos a toda velocidad sin tener salida al exterior.
 - **Internet** es "la red de redes". Es la gigantesca infraestructura mundial que aparece cuando decides unir *tu* red local con el resto del planeta.
 
 ---
@@ -89,11 +89,11 @@ Llegamos al error clásico número uno del principiante: confundir tu red local 
 
 **WiFi:** — Claro, pero estás atado como un perro con correa. Yo vuelo por los aires. Llego a donde tú no puedes: al sofá, al jardín, al móvil que llevas en el bolsillo. ¿Quién es más libre?
 
-**Cable UTP:** — ¿Libre? Si te pones una pared en medio, te hacesPuerto o te pones a 10 metros, te desplomas. Yo aguanto 100 metros sin despeinarme. Además, si alguien quiere espiarme, tiene que tocar mi cable. Tú, con una antena, puedes ser escuchado desde la calle.
+**Cable UTP:** — ¿Libre? Si te pones una pared en medio, te apagas; y si te pones a 10 metros con un armario de por medio, te desplomas. Yo aguanto 100 metros sin despeinarme. Además, si alguien quiere espiarme, tiene que tocar mi cable. Tú, con una antena, puedes ser escuchado desde la calle.
 
-**WiFi:** — Vale, vale... pero yo instalo en 5 minutos. Sin perforar, sin.catalogar, sin pasar cables por el techo. Para lo que se mueve, yo gano.
+**WiFi:** — Vale, vale... pero yo instalo en 5 minutos. Sin perforar, sin canalizar, sin pasar cables por el techo. Para lo que se mueve, yo gano.
 
-**Cable UTP:** — *suspiro* Para lo que se mueve, vale. Para todo lo demás... follows sus normas.
+**Cable UTP:** — *suspiro* Para lo que se mueve, vale. Para todo lo demás, mando yo.
 
 ---
 
@@ -120,7 +120,7 @@ Adivina qué componente de red soy:
 
 > *CONRAD, nuestro switch veterano y cascarrabias, se enciende solo.*
 
-**CONRAD:** — ¡OTRA VEZ! Viene un alumno y me dice: *"CONRAD, ¿para qué me sirve una red si tengo Internet?"* Y yo: vale, ¿has visto algún día una LAN sin router? ¡Pues eso! **Una red local ES el cableado y los switches que hay en el instituto**. Internet aparece DESPUÉS, cuando unes tu red al mundo exterior. Pero si te desconectas del operador, tu red local sigue funcionando: pasas archivos, usas la impresora y te conectas al servidor del centro. **Internet no es la red; Internet es el servicio que aparece cuando tu red se conecta con el mundo.**
+**CONRAD:** — ¡OTRA VEZ! Viene un alumno y me dice: *"CONRAD, ¿para qué me sirve una red si tengo Internet?"* Y yo: vale, ¿has visto alguna vez una LAN funcionando sin salir a Internet? ¡Pues eso! **Una red local ES el cableado y los switches que hay en el instituto**. Internet aparece DESPUÉS, cuando unes tu red al mundo exterior. Pero si te desconectas del operador, tu red local sigue funcionando: pasas archivos, usas la impresora y te conectas al servidor del centro. **Internet no es la red; Internet es el servicio que aparece cuando tu red se conecta con el mundo.**
 
 **La lección:** no confundas la red (el cableado y los dispositivos locales) con el servicio (Internet). Es como confundir las calles de tu barrio con la autopista que sale de la ciudad.
 
@@ -180,12 +180,12 @@ Adivina qué componente de red soy:
 ```
 Horizontal:
 1. Dispositivo que une redes distintas y decide la ruta (6 letras)
-3. Canal por donde viajan los datos (4+4 letras)
+3. Canal por donde viajan los datos (5+3 letras)
 5. Las reglas que respetan todas las máquinas para entenderse (9 letras)
 
 Vertical:
 2. Dispositivo que conecta los equipos de una LAN (6 letras)
-4. El que pide un servicio en la arquitectura cliente-servidor (8 letras)
+4. El que pide un servicio en la arquitectura cliente-servidor (7 letras)
 ```
 
 <details>
@@ -231,4 +231,4 @@ Un paquete de datos se prepara para salir de tu portátil hacia `google.com`. An
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/01-introduccion) · **Siguiente:** [02 · Los aparatitos](/ApuntesRedes/01-introduccion/02-aparatitos)
+📚 [Volver al índice de la unidad](/ApuntesRedes/01-introduccion) · **Anterior:** [Índice de la unidad](/ApuntesRedes/01-introduccion) · **Siguiente:** [02 · Los aparatitos](/ApuntesRedes/01-introduccion/02-aparatitos)

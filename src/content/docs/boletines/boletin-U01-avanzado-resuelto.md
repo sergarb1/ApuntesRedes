@@ -48,7 +48,7 @@ Sin ARP, la capa 2 (Ethernet) no puede funcionar porque no sabe a quién enviar 
 **Topología:** estrella (todos los PC conectados a un switch central).
 
 **Dispositivos necesarios:**
-- **1 switch de 48 puertos** (con 30 PC + 1 impresora = 31 puertos, sobran 17 para crecimiento). Un switch de 24 puertos no alcanza; necesitarías dos, lo que complica la instalación.
+- **1 switch de 48 puertos** (30 PC + 1 impresora + 1 router = 32 puertos, sobran 16 para crecimiento). Un switch de 24 puertos no alcanza; necesitarías dos, lo que complica la instalación.
 - **1 router** conectado a un puerto del switch para la salida a Internet.
 - **Cable UTP Cat6** desde cada PC hasta el switch.
 
@@ -73,4 +73,4 @@ c) 4 letras = 4 bytes; 4 × 8 = **32 bits**.
 
 a) **Por qué usar un simulador:** Packet Tracer es el entorno virtual gratuito para estudiantes que nos permite arrastrar dispositivos, simular tráfico y probar configuraciones complejas sin el riesgo de apagar una red real, romper hardware costoso o interrumpir el trabajo de otros usuarios. Es la herramienta indispensable para aprender aplicando la regla de oro: primero hazlo, luego entiéndelo.
 
-b) **Protocolo ante incidencias de instalación:** Si el simulador no arranca o da problemas al iniciar sesión con la cuenta de la Cisco Networking Academy, el administrador no recurre al azar ni formatea el equipo. El procedimiento consiste en: verificar los requisitos del sistema operativo, comprobar la conexión a Internet que valida las credenciales y, en caso de persistir el error, documentar el mensaje exacto de la excepción y compartirlo de forma estructurada en el Foro de la Unidad de la plataforma para solucionarlo de manera colaborativa y asíncrona.
+b) **Protocolo ante incidencias de instalación:** Si el simulador no arranca o da problemas al iniciar sesión con la cuenta de la Cisco Networking Academy, el administrador no recurre al azar ni formatea el equipo. El procedimiento consiste en: verificar los requisitos del sistema operativo, comprobar la conexión a Internet que valida las credenciales y, en caso de persistir el error, documentar el mensaje exacto de la excepción con captura de pantalla y los pasos que diste hasta el fallo, y pedir ayuda con todo eso delante (al profesor o en el foro del aula virtual), para que quien te ayude pueda reproducirlo sin preguntarte lo mismo dos veces.

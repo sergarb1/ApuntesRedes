@@ -96,7 +96,7 @@ Adivina qué concepto de red soy:
 
 > *CONRAD, nuestro switch cascarrabias, explota cuando alguien confunde IP y MAC.*
 
-**CONRAD:** — ¡OTRA VEZ! Viene un alumno y me dice: *"CONRAD, la MAC y la IP son lo mismo, ¿no?"* Y yo: **¡NO!** Son como la matrícula de tu coche y la dirección de tu casa. La **MAC** es la matrícula: no cambia nunca, está grabada de fábrica en la tarjeta de red. La **IP** es la dirección: si te mudas de casa, te dan una nueva. ¿Has visto alguna vez que te cambien la matrícula cuando te cambias de piso? ¡Pues eso! La IP cambia; la MAC no. Las dos viajan juntas en cada paquete, pero hacen cosas **distintas**.
+**CONRAD:** — ¡OTRA VEZ! Viene un alumno y me dice: *"CONRAD, la MAC y la IP son lo mismo, ¿no?"* Y yo: **¡NO!** Son como la matrícula de tu coche y la dirección de tu casa. La **MAC** es la matrícula: no cambia nunca, está grabada de fábrica en la tarjeta de red. La **IP** es la dirección: si te mudas de casa, te dan una nueva. ¿Has visto alguna vez que te cambien la matrícula cuando te cambias de piso? ¡Pues eso! La IP cambia; la MAC no. Las dos viajan juntas en cada trama, pero hacen cosas **distintas**.
 
 **La lección:** IP = domicilio (cambia); MAC = identidad (no cambia). Las dos son imprescindibles, pero no son lo mismo.
 
@@ -162,8 +162,8 @@ Horizontal:
 5. Número virtual que identifica un servicio (6 letras)
 
 Vertical:
-2. Dispositivo que asigna IPs automáticamente (5+3+4+3+4+2+6 letras)
-4. Cuando dos PC tienen la misma IP (9+6+6 letras)
+2. Dispositivo que asigna IPs automáticamente (8+4 letras)
+4. Cuando dos PC tienen la misma IP (9+2+2 letras)
 ```
 
 <details>

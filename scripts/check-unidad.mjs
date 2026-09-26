@@ -26,14 +26,15 @@ const SECC_OBLIG = [
   ['Poscréditos', /##\s*🎬 Poscréditos/],
 ];
 
+// La introducción no tiene tabla de CEs (decisión de revisión: "sin CEs")
+// ni bloque ⭐; sí exige la sección de boletines en su índice.
 function indexSecciones(dir) {
-  const comunes = ['Criterios de evaluación cubiertos'];
   if (dir.startsWith('01-')) {
     return [
       '## 👋 ¿Empiezas aquí?',
       '## 📚 Qué encontrarás en este tema',
+      '## 📝 Boletines de la unidad',
       '## 🧭 Cómo usar estos apuntes',
-      ...comunes.map((c) => '✅ ' + c),
     ];
   }
   return [
@@ -115,9 +116,8 @@ function auditarUnidad(dir) {
   const todo = idx + '\n' + puntos.map((p) => md(join(ROOT, dir, p))).join('\n');
   for (const [label, re] of SECC_OBLIG) {
     if (!re.test(todo)) {
-      if (label.startsWith('Bloque') && dir.startsWith('01-'))
-        A('unidad sin bloque ⭐ (¿exento por ser la introducción?)');
-      else F('unidad: falta la sección «' + label + '»');
+      if (label.startsWith('Bloque') && dir.startsWith('01-')) continue; // introducción: sin bloque ⭐ (exenta)
+      F('unidad: falta la sección «' + label + '»');
     }
   }
 

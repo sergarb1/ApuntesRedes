@@ -29,6 +29,6 @@ Veredictos: ✅ mención legítima · ↪️ mover a … · ❌ quitar · ⏳ po
 ## Estado
 
 - [x] Baseline F0 (conteo por unidad)
-- [ ] Sesión 01 · introducción
+- [x] Sesión 01 · introducción — sin candidatos a mover/quitar: sus menciones de DHCP/DNS/ARP/WiFi/VLAN/OSPF/NAT son vocabulario o puente; los duplicados eran internos (05↔10 y FAQ↔Atrévete del punto 10) y están resueltos. Ver [revision-U01-introduccion.md](revision-U01-introduccion.md).
 - [ ] Sesiones 02–12
 - [ ] Cierre transversal
