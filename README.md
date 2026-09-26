@@ -114,7 +114,7 @@ src/
 │   ├── docs/                     → 12 unidades en Markdown
 │   │   ├── index.md              → Portada con hero + cards
 │   │   ├── 01-introduccion.md …  → Índice de cada unidad
-│   │   ├── 01-introduccion/      → Puntos (01-…, 08-mapa, 09-glosario, 10-preguntas)
+│   │   ├── 01-introduccion/      → Puntos (01-…, 10-mapa, 08-glosario, 09-preguntas)
 │   │   ├── 02-ethernet-cableado/ → Ethernet (01-…07 teoría, 08 OSI, 09 trama, 10 cierre)
 │   │   ├── 03-direccionamiento-ip/ … 12-alta-disponibilidad/
 │   │   └── boletines/            → Ejercicios: inicial/avanzado + resueltos (texto puro, sin imágenes); variante packettracer en Ethernet y dirección IP

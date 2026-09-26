@@ -5,7 +5,7 @@ description: Desmitificando el hardware que hay en tu salón 🔧
 
 <p><small>Desmitificando el hardware que hay en tu salón 🔧</small></p>
 
-> 🗺️ **Estás en:** 🚪 **Introducción** → 02 · Los aparatitos
+> 🗺️ **Estás en:** 🚪 **Introducción** → 03 · Los aparatitos
 
 ---
 
@@ -208,8 +208,8 @@ Vertical:
 
 El módem-router-AP de la oficina del profesor se está calentando otra vez. El switch del armario lo mira con desdén: *"Si te quitaras las tres funciones a la vez, no te pondrías tan nervioso..."*. El router le responde: *"Al menos yo no me cuelgo cuando conectan 30 PC a la vez..."*.
 
-**PRÓXIMAMENTE EN 03:** El DNI, el domicilio y el despacho — MAC, IP y Puertos explicados con el servicio de correos. 📮
+**PRÓXIMAMENTE EN 04:** El DNI, el domicilio y el despacho — MAC, IP y Puertos explicados con el servicio de correos. 📮
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/01-introduccion) · **Anterior:** [01 · ¿Qué es una red?](/ApuntesRedes/01-introduccion/01-que-es-una-red) · **Siguiente:** [03 · MAC, IP y Puertos](/ApuntesRedes/01-introduccion/03-mac-ip-puertos)
+📚 [Volver al índice de la unidad](/ApuntesRedes/01-introduccion) · **Anterior:** [02 · Instalación de Packet Tracer](/ApuntesRedes/01-introduccion/02-instalacion-packet-tracer) · **Siguiente:** [04 · MAC, IP y Puertos](/ApuntesRedes/01-introduccion/04-mac-ip-puertos)

@@ -5,7 +5,7 @@ description: Tu chuleta rápida de términos de red 📖
 
 <p><small>Tu chuleta rápida de términos de red 📖</small></p>
 
-> 🗺️ **Estás en:** 🚪 **Introducción** → 09 · Glosario
+> 🗺️ **Estás en:** 🚪 **Introducción** → 08 · Glosario
 
 ---
 
@@ -189,8 +189,8 @@ Búscalo en la web o en los apuntes de la unidad correspondiente. Si lo necesita
 
 El glosario se siente orgulloso: *"Al menos alguien me lee"*. Pero el técnico le responde: *"Leer no basta; tienes que entender cada palabra con un cable en la mano"*. El glosario asiente: *"Tienes razón. Soy el mapa, pero el viaje lo haces tú."*
 
-**PRÓXIMAMENTE EN 10:** Preguntas tontas — las dudas que nadie se atreve a hacer en voz alta. 😅
+**PRÓXIMAMENTE EN 09:** Preguntas tontas — las dudas que nadie se atreve a hacer en voz alta. 😅
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/01-introduccion) · **Anterior:** [07 · Instalación de Packet Tracer](/ApuntesRedes/01-introduccion/07-instalacion-packet-tracer) · **Siguiente:** [09 · Preguntas tontas](/ApuntesRedes/01-introduccion/10-preguntas-tontas)
+📚 [Volver al índice de la unidad](/ApuntesRedes/01-introduccion) · **Anterior:** [07 · Método de diagnóstico](/ApuntesRedes/01-introduccion/07-metodo-diagnostico) · **Siguiente:** [09 · Preguntas tontas](/ApuntesRedes/01-introduccion/09-preguntas-tontas)

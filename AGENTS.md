@@ -26,7 +26,7 @@ Apuntes del módulo **PAR** (Planificación y Administración de Redes) para CFG
 
 ```
 src/content/docs/            → Secciones en Markdown (raíz, índices de unidad)
-src/content/docs/01-introduccion/… → 10 puntos (01-…, 08-mapa, 09-glosario, 10-preguntas-tontas)
+src/content/docs/01-introduccion/… → 10 puntos (01-…, 10-mapa, 08-glosario, 09-preguntas-tontas)
 src/content/docs/02-ethernet-cableado/…      → UD2 · Ethernet, medios y cableado (10 puntos: 01–07 teoría, 08 modelo OSI, 09 trama, 10 cierre)
 src/content/docs/03-direccionamiento-ip/…    → UD3 · Direccionamiento IP y subnetting (IPv4 + IPv6)
 src/content/docs/04-switching/…              → UD4 · Switching y VLAN
@@ -117,7 +117,7 @@ Las secciones viven repartidas entre el **índice** (`src/content/docs/NN-unidad
 4. Cierre del punto: `## 🧠 Mini-chequeo`, `## ✅ Resumen en 3 frases`, `## 🐛 Vocabulario rápido`
 5. Pie de navegación: `📚 [Volver al índice…] · **Anterior:** […] · **Siguiente:** […]`
 
-**La introducción tiene plantilla propia:** cada punto lleva su bloque de juegos completo (Fireside, ¿Quién Soy?, CONRAD, Laboratorio, Atrévete, Crucigrama, Entrevista, No hay preguntas tontas, Poscréditos) y la unidad no tiene bloque ⭐ ni cierre de unidad.
+**La introducción tiene plantilla propia:** cada punto lleva su bloque de juegos completo (Fireside, ¿Quién Soy?, CONRAD, Laboratorio, Atrévete, Crucigrama, Entrevista, No hay preguntas tontas, Poscréditos) y la unidad no tiene bloque ⭐ ni cierre de unidad. **Excepción:** `10-mapa-del-curso` (el mapa, página de navegación) no lleva bloque de juegos — decisión de revisión; no replicar en otras unidades.
 
 **Verificación estructural:** `npm run check:unidad [unidad|all]` (`scripts/check-unidad.mjs`): FALLO = incumple la convención; AVISO = inconsistencia que se decide en la sesión de revisión de esa unidad.
 
@@ -289,8 +289,8 @@ Tres scripts en `scripts/` (idempotentes; se pueden repetir):
 | Fichero | Sección `.md` | Contenido |
 |---|---|---|
 | `u01-4-piezas` | `01-que-es-una-red.md` · Las 4 piezas | Topología real: Finales → Medio → Interconexión; **4. Protocolos abajo** (base) + pie con analogía del barrio |
-| `u01-escalera-ping` | `06-metodo-diagnostico.md` · Escalera del Ping | 5 peldaños 0–4 de abajo arriba + caja roja de avería |
-| `u01-mapa-curso` | `08-mapa-del-curso.md` · 12 etapas | 2 bandas de cuatrimestre, las etapas del curso con flechas |
+| `u01-escalera-ping` | `07-metodo-diagnostico.md` · Escalera del Ping | 5 peldaños 0–4 de abajo arriba + caja roja de avería |
+| `u01-mapa-curso` | `10-mapa-del-curso.md` · 12 etapas | 2 bandas de cuatrimestre, las etapas del curso con flechas |
 
 ### Diagramas de la unidad de Ethernet existentes
 

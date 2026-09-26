@@ -5,7 +5,7 @@ description: Las 12 etapas para pasar de cero a administrador de redes 🗺️
 
 <p><small>Las 12 etapas para pasar de cero a administrador de redes 🗺️</small></p>
 
-> 🗺️ **Estás en:** 🚪 **Introducción** → 08 · El mapa del curso
+> 🗺️ **Estás en:** 🚪 **Introducción** → 10 · Mapa del curso
 
 ---
 
@@ -145,4 +145,4 @@ Un mapa no se memoriza: se consulta. Tres usos de verdad para este plano:
 2. Dos mitades: **montar** la red (del cableado al enrutamiento) y **conectarla y cuidarla** (de OSPF a la alta disponibilidad).
 3. El hilo conductor es el viaje del paquete: nace en tu PC, cruza switches y routers, sale a Internet por NAT y vuelve con la respuesta.
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/01-introduccion) · **Anterior:** [07 · Instalación de Packet Tracer](/ApuntesRedes/01-introduccion/07-instalacion-packet-tracer) · **Siguiente:** [09 · Glosario](/ApuntesRedes/01-introduccion/09-glosario)
+📚 [Volver al índice de la unidad](/ApuntesRedes/01-introduccion) · **Anterior:** [09 · Preguntas tontas](/ApuntesRedes/01-introduccion/09-preguntas-tontas) · **Siguiente:** [Ethernet y cableado](/ApuntesRedes/02-ethernet-cableado)

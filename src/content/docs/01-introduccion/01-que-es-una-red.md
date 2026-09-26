@@ -227,8 +227,8 @@ El **switch** conecta los equipos que están en la misma red (mismo edificio, mi
 
 Un paquete de datos se prepara para salir de tu portátil hacia `google.com`. Antes de meterse en el cable, se detiene un segundo a mirar alrededor: *"¿Quién es mi gateway? ¿Quién me ha dado esta IP?"*. La respuesta está en dos servicios invisibles que apenas hemos mencionado... y que van a aparecer más adelante.
 
-**PRÓXIMAMENTE EN 02:** Los "Aparatitos" — el modem, el router y el punto de acceso, desmontados y explicados. 🔧
+**PRÓXIMAMENTE EN 02:** Instalación de Packet Tracer — tu taller virtual de bolsillo, donde todo lo que hemos visto se toca sin miedo. 🖥️
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/01-introduccion) · **Anterior:** [Índice de la unidad](/ApuntesRedes/01-introduccion) · **Siguiente:** [02 · Los aparatitos](/ApuntesRedes/01-introduccion/02-aparatitos)
+📚 [Volver al índice de la unidad](/ApuntesRedes/01-introduccion) · **Anterior:** [Índice de la unidad](/ApuntesRedes/01-introduccion) · **Siguiente:** [02 · Instalación de Packet Tracer](/ApuntesRedes/01-introduccion/02-instalacion-packet-tracer)

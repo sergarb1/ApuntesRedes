@@ -5,7 +5,7 @@ description: Prepara tu laboratorio virtual antes de tocar cables reales 🛠️
 
 <p><small>Prepara tu laboratorio virtual antes de tocar cables reales 🛠️</small></p>
 
-> 🗺️ **Estás en:** 🚪 **Introducción** → 07 · Instalación de Packet Tracer
+> 🗺️ **Estás en:** 🚪 **Introducción** → 02 · Instalación de Packet Tracer
 
 ---
 
@@ -187,8 +187,8 @@ Vertical:
 
 Packet Tracer se abre por primera vez en tu ordenador. Un PC virtual aparece en el lienzo y dice: *"¿Esto es todo? ¿Dónde están los cables reales?"*. Un switch virtual le responde: *"Tranquilo, aquí no hay cables que desconectar. Pero cuando aprendas, allá fuera te esperan los de verdad."*.
 
-**PRÓXIMAMENTE EN 08:** El mapa del curso — las 12 etapas del viaje de PAR. 🗺️
+**PRÓXIMAMENTE EN 03:** Los "Aparatitos" — el modem, el router y el punto de acceso, desmontados y explicados. 🔧
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/01-introduccion) · **Anterior:** [06 · Método de diagnóstico](/ApuntesRedes/01-introduccion/06-metodo-diagnostico) · **Siguiente:** [08 · Glosario](/ApuntesRedes/01-introduccion/09-glosario)
+📚 [Volver al índice de la unidad](/ApuntesRedes/01-introduccion) · **Anterior:** [01 · ¿Qué es una red?](/ApuntesRedes/01-introduccion/01-que-es-una-red) · **Siguiente:** [03 · Los aparatitos](/ApuntesRedes/01-introduccion/03-aparatitos)

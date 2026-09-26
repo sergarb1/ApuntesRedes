@@ -5,7 +5,7 @@ description: Las dudas que nadie se atreve a hacer en voz alta 😅
 
 <p><small>Las dudas que nadie se atreve a hacer en voz alta 😅</small></p>
 
-> 🗺️ **Estás en:** 🚪 **Introducción** → 10 · Preguntas tontas
+> 🗺️ **Estás en:** 🚪 **Introducción** → 09 · Preguntas tontas
 
 ---
 
@@ -236,8 +236,10 @@ Vertical:
 
 Un alumno se acerca tímidamente a CONRAD después de clase: *"CONRAD, tengo una pregunta tonta..."*. CONRAD se enciende: *"¿TONTA? ¡No hay preguntas tontas! ¡Preguntar es de listos! ¡Los que no preguntan son los que luego tocan cables sin saber y me rompen!"*. El alumno sonríe: *"Pues... ¿el WiFi es lo mismo que Internet?"*. CONRAD responde: *"¡POR FIN UNA BUENA PREGUNTA! No, no es lo mismo. Y ya puedes irte a casa sabiendo algo que el 90% de los usuarios no sabe."*
 
-Y con esta pregunta "tonta" termina la unidad. Has llegado hasta aquí, y eso significa que ya sabes qué es una red, cómo se monta, cómo se diagnostica y qué palabras clave necesitas. **Estás listo para la siguiente unidad.**
+Y con esta pregunta "tonta" cerramos los juegos de la introducción. Ya sabes qué es una red, cómo se monta, cómo se diagnostica y qué palabras clave necesitas. **Solo queda asomarte al mapa del viaje que te espera.**
+
+**PRÓXIMAMENTE EN 10:** El mapa del curso — las 12 etapas del viaje de PAR. 🗺️
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/01-introduccion) · **Anterior:** [08 · Glosario](/ApuntesRedes/01-introduccion/09-glosario) · **Siguiente:** [10 · Mapa del curso](/ApuntesRedes/01-introduccion/08-mapa-del-curso)
+📚 [Volver al índice de la unidad](/ApuntesRedes/01-introduccion) · **Anterior:** [08 · Glosario](/ApuntesRedes/01-introduccion/08-glosario) · **Siguiente:** [10 · Mapa del curso](/ApuntesRedes/01-introduccion/10-mapa-del-curso)
