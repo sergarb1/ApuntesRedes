@@ -24,6 +24,8 @@ f) El servidor de Moodle del instituto
 
 Un amigo te dice: *"He reiniciado el router de mi casa porque no me llegaba bien el Wi-Fi a la habitación"*. Sabiendo lo que hemos estudiado, ¿qué tres aparatos reales tiene dentro esa caja y cuál es el que realmente le estaba fallando a tu amigo?
 
+**Pista:** sigue el recorrido de la señal: desde la calle, hacia dentro de tu red y de ahí por el aire hasta tu habitación.
+
 ## 3. Verdadero o falso (Edición Conrad)
 
 Conrad, nuestro switch cascarrabias, ha corregido estas afirmaciones. Justifica las falsas.
@@ -51,6 +53,8 @@ Relaciona cada concepto técnico con su analogía en el mundo real:
 | DNS | | e) La centralita que comunica a los vecinos de un mismo edificio |
 | DHCP | | f) El control de aduanas que te saca de tu barrio hacia otras redes |
 
+**Pista:** una dirección que cambia si te mudas, y una matrícula grabada en el coche: cada concepto tiene su pareja.
+
 ## 5. ¿Cliente o Servidor?
 
 Indica qué rol está asumiendo el equipo en las siguientes situaciones:
@@ -63,6 +67,8 @@ d) Tu PC cuando le instalas un programa para alojar una página web y que tus co
 ## 6. Ordena los pasos: La Mente del Administrador
 
 Un compañero te grita desde la otra punta del aula: *"¡Profe, no tengo Internet, voy a reiniciar todo y cambiar los cables!"*. Ordena del 1 al 5 los pasos que debes obligarle a dar aplicando la Escalera del Ping y la regla de la lucecita:
+
+**Pista:** empieza por lo físico: si no hay luces, nada de lo demás funciona.
 
 - [ ] ping `www.google.com`
 - [ ] ping `<IP del router>`
@@ -80,3 +86,5 @@ Aplicas la escalera del ejercicio anterior y ocurre lo siguiente:
 - Pero cuando haces ping `www.google.com`, te da error.
 
 ¿Qué servicio invisible está fallando y por qué?
+
+**Pista:** los cuatro primeros peldaños responden; el quinto usa un nombre, no un número.

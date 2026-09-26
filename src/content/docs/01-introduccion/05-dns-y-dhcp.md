@@ -82,7 +82,7 @@ Lo que ha ocurrido es que sí tiene conexión a Internet, pero su servidor DNS s
 
 Adivina qué servicio de red soy:
 
-1. **Traduzco nombres a números.** Sin mí, tendrías que memorizar IP's para entrar a cualquier web.
+1. **Traduzco nombres a números.** Sin mí, tendrías que memorizar IPs para entrar a cualquier web.
 2. **Reparto direcciones.** Cuando llegas a una red nueva, yo te doy una IP para que puedas hablar.
 3. **Me confunden con "no tengo Internet".** Pero en realidad el problema soy yo, no la conexión.
 
@@ -101,7 +101,7 @@ Adivina qué servicio de red soy:
 
 > *CONRAD, nuestro switch cascarrabias, opina sobre el diagnóstico más típico.*
 
-**CONRAD:** — ¡OTRA VEZ! Viene un alumno y me dice: *"CONRAD, no me va Internet, no carga ninguna web."* Y yo: vale, ¿has probado a hacer `ping 8.8.8.8`? *Sí, responde*. ¿Y `ping google.com`? *No, no responde*. ¡Pues **tu DNS está caído**, tontín! Tienes Internet, pero tu equipo no sabe traducir nombres a IPs. No es que no tengasInternet; es que tu agenda telefónica está rota. Configura otro DNS (como `8.8.8.8` de Google o `1.1.1.1` de Cloudflare) y verás cómo todo vuelve a la vida.
+**CONRAD:** — ¡OTRA VEZ! Viene un alumno y me dice: *"CONRAD, no me va Internet, no carga ninguna web."* Y yo: vale, ¿has probado a hacer `ping 8.8.8.8`? *Sí, responde*. ¿Y `ping google.com`? *No, no responde*. ¡Pues **tu DNS está caído**, tontín! Tienes Internet, pero tu equipo no sabe traducir nombres a IPs. No es que no tengas Internet; es que tu agenda telefónica está rota. Configura otro DNS (como `8.8.8.8` de Google o `1.1.1.1` de Cloudflare) y verás cómo todo vuelve a la vida.
 
 **La lección:** "No carga ninguna web" no siempre es "no hay Internet". Haz `ping 8.8.8.8` primero; si responde, el problema es DNS, no la conexión.
 
@@ -114,7 +114,7 @@ Adivina qué servicio de red soy:
 
 **El escenario:** Tienes 1 PC conectado a un router. El PC tiene IP estática (`192.168.1.10/24`), gateway `192.168.1.1` y DNS `8.8.8.8`. Haces `ping google.com` y funciona.
 
-**Fallo intencionado:** Cambias la IP del DNS a `8.8.8.9` (una IP que no existe). Ahora `ping 8.8.8.8` funciona, pero `ping google.com` falla.
+**Fallo intencionado:** Cambias la IP del DNS a `8.8.8.9` (que no es un servidor DNS). Ahora `ping 8.8.8.8` funciona, pero `ping google.com` falla.
 
 **Tu tarea:** Diagnosticar por qué "no funciona Internet" (aunque la conexión física está bien).
 
@@ -160,11 +160,11 @@ Adivina qué servicio de red soy:
 ```
 Horizontal:
 1. Servicio que traduce nombres a IPs (3 letras)
-3. Protocolo que reparte IPs automáticamente (4+2+3+2+4+2+4+2+6+3+4 letras)
+3. Protocolo que reparte IPs automáticamente (4 letras)
 
 Vertical:
-2. Nombre que escribes en el navegador (7+3 letras)
-4. Dirección IP que usa Google como DNS (1+1+1+1+1+1 letras)
+2. Nombre que escribes en el navegador (7 letras)
+4. Dirección IP que usa Google como DNS (1+1+1+1 letras)
 ```
 
 <details>

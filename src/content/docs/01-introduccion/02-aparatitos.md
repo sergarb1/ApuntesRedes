@@ -72,7 +72,7 @@ Cuando el móvil tiene el icono del Wi-Fi a tope pero los mensajes de WhatsApp n
 
 **Router doméstico:** — Mira, yo hago todo: módem, router, AP, firewall, DHCP... soy un juntaTODO. El usuario me enchufa y le doy WiFi en toda la casa.
 
-**Router empresarial:** — *suspiro* Todo en una cajita de plástico, ¿eh? Yo soy módulo: cada pieza va por separado. Un switch de 48 puertos aquí, un firewall de chapa acá, un AP en cada planta. ¿Sabes por qué? Porque cuando tu cajita se calienta y se cuelga, el cliente llama gritando. Cuando yo falla un módulo, el resto sigue funcionando.
+**Router empresarial:** — *suspiro* Todo en una cajita de plástico, ¿eh? Yo soy módulo: cada pieza va por separado. Un switch de 48 puertos aquí, un firewall de chapa aquí, un AP en cada planta. ¿Sabes por qué? Porque cuando tu cajita se calienta y se cuelga, el cliente llama gritando. Cuando me falla un módulo, el resto sigue funcionando.
 
 **Router doméstico:** — Pero soy barato.
 
@@ -162,11 +162,11 @@ Adivina qué dispositivo de red soy:
 Horizontal:
 1. Traduce la señal del operador a datos digitales (5 letras)
 3. Une redes distintas y decide la ruta (6 letras)
-5. Convierte el cable en señal inalámbrica (2+2+1+4 letras)
+5. Convierte el cable en señal inalámbrica (5+2+6 letras)
 
 Vertical:
 2. Dispositivo que conecta equipos en la misma LAN (6 letras)
-4. La cajita todo-en-uno que instala la operadora (6+3 letras)
+4. La cajita todo-en-uno que instala la operadora (5+6 letras)
 ```
 
 <details>

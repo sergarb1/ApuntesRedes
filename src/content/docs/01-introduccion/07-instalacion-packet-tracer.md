@@ -39,7 +39,7 @@ Si durante el proceso de registro o instalación te surge alguna pequeña duda v
 
 1. Packet Tracer es gratuito para estudiantes y se descarga desde la web oficial de Cisco Networking Academy.
 2. La instalación es estándar: descargar, ejecutar y seguir los pasos sin configurar nada raro.
-3. Si te trabas con el registro o los menús, hay tutoriales en YouTube que te guían paso a paso.
+3. Si te atasca con el registro o los menús, hay tutoriales en YouTube que te guían paso a paso.
 
 ---
 
@@ -99,7 +99,7 @@ Adivina qué herramienta de red soy:
 2. Descarga Packet Tracer para tu sistema operativo.
 3. Instálalo con la configuración por defecto.
 4. Ábrelo y comprueba que puedes arrastrar un PC y un switch al lienzo.
-5. Conecta el PC al switch con un cableEthernet (automático).
+5. Conecta el PC al switch con un cable Ethernet (automático).
 6. Asigna una IP al PC (`192.168.1.10/24`) y comprueba que el LED del puerto se enciende.
 
 **Si todo funciona:** ¡enhorabuena! Tu laboratorio virtual está listo para el curso.
@@ -123,7 +123,7 @@ Adivina qué herramienta de red soy:
 ## 🧠 Atrévete a pensar
 
 1. **¿Por qué se recomienda Packet Tracer en vez de tocar hardware real** al principio del curso?
-2. **¿Qué Limitaciones tiene Packet Tracer** respecto al hardware real? (Pista: piensa en lo que no puedes hacer con un simulador.)
+2. **¿Qué limitaciones tiene Packet Tracer** respecto al hardware real? (Pista: piensa en lo que no puedes hacer con un simulador.)
 3. **¿En qué momento del curso pasarías de Packet Tracer a hardware real?** ¿Por qué?
 
 <details>
@@ -141,12 +141,12 @@ Adivina qué herramienta de red soy:
 
 ```
 Horizontal:
-1. Herramienta gratuita de Cisco para simular redes (6+7+8 letras)
-3. El hardware donde aprendes "de verdad" (7+4+4+4+5+5 letras)
+1. Herramienta gratuita de Cisco para simular redes (6+6 letras)
+3. El hardware donde aprendes "de verdad" (8+4 letras)
 
 Vertical:
-2. El simulador donde equivocarse sin miedo (6+7+8 letras)
-4. La herramienta que captura paquetes reales (9+9+7+5+4+5 letras)
+2. El simulador donde equivocarse sin miedo (6+6 letras)
+4. La herramienta que captura paquetes reales (9 letras)
 ```
 
 <details>

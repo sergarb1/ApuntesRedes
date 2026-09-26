@@ -1,5 +1,6 @@
 // Comprueba que todos los enlaces internos /ApuntesRedes/ apuntan a páginas existentes
-import { readFileSync, readdirSync, statSync } from 'node:fs';
+// (los enlaces a assets —diagrams/photos/pdf— se comprueban contra public/)
+import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 
 const DOCS = 'src/content/docs';
@@ -30,6 +31,10 @@ for (const f of files) {
   const txt = readFileSync(f, 'utf8');
   const links = [...txt.matchAll(/\]\((\/ApuntesRedes\/[^)#\s]*)/g)].map(m => m[1].replace('/ApuntesRedes/', '').replace(/\/$/, '').toLowerCase());
   for (const l of links) {
+    if (/\.(svg|png|jpe?g|gif|webp|pdf|epub|mp4)$/i.test(l)) {
+      if (!existsSync(join('public', l))) { console.log(`ROTO: ${f} -> ${l}`); bad++; }
+      continue;
+    }
     if (!slugs.has(l)) { console.log(`ROTO: ${f} -> ${l}`); bad++; }
   }
 }

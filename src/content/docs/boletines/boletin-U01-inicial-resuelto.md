@@ -44,7 +44,7 @@ e) **Falso.** El puerto 80 es un número lógico virtual que identifica al servi
 ## 5. ¿Cliente o Servidor?
 
 a) **Cliente** — tu navegador está pidiendo la web.
-b) **Servidor** — está esperando peticiones para entregar los boletines.
+b) **Servidor** — guarda las notas de todos y espera a que alguien pida consultarlo.
 c) **Cliente** — pide datos a los servidores de Meta.
 d) **Servidor** — tu equipo pasa a "servir" contenido a los demás.
 
