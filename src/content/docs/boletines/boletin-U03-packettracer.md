@@ -39,7 +39,7 @@ Añade un **Router** al switch, conecta G0/0 a la red, dale `192.168.10.1/24` a 
 
 Apaga o desconfigura el servicio DHCP del router (o desconecta el router). Renueva la IP de una PC en DHCP y comprueba la dirección que obtiene. ¿Qué rango es? ¿Puede salir a Internet en este laboratorio?
 
-> 💡 **Pista:** el rango lo viste en el punto 1 de la teoría de esta UD.
+> 💡 **Pista:** el rango lo viste en el punto 1 de la teoría de esta unidad.
 
 ## 6. Wireshark: el baile DORA
 
@@ -55,7 +55,7 @@ Con la topología del ejercicio 1, borra la caché ARP de `PC0` (`arp -d *`) y h
 
 ## 8. IPv6 en PT: estático o SLAAC
 
-En *Config → IPv6 Configuration* de las PCs, prueba **ambos** caminos: (a) dirección estática `2001:DB8:1::10/64` + gateway; (b) *Autoconfig* / SLAAC si el router anuncia prefijo (habilita `ipv6 unicast-routing` y da una `ipv6 address …/64` a G0/0). Comprueba con `ping` IPv6 entre PCs o hacia el router.
+En *Desktop → IPv6 Configuration* de las PCs, prueba **ambos** caminos: (a) dirección estática `2001:DB8:1::10/64` + gateway; (b) *Autoconfig* / SLAAC si el router anuncia prefijo (habilita `ipv6 unicast-routing` y da una `ipv6 address …/64` a G0/0). Comprueba con `ping` IPv6 entre PCs o hacia el router.
 
 > 💡 **Pista:** recuerda el comando global que no puede faltar en el router (punto 16 de la unidad).
 

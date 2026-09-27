@@ -32,9 +32,9 @@ PC con Dual Stack:
 
 - El **registro AAAA** es la IPv6 del dominio; el **registro A** es su IPv4. Un dominio "dual" tiene ambos.
 - ✅ **Ventaja:** funciona con todo, sin encapsulación ni traducción extra; si una pila falla, la otra sigue.
-- ❌ **Desventaja:** hay que configurar y mantener el doble (routing, DNS, firewalls); más overhead en el plano de control.
+- ❌ **Desventaja:** hay que configurar y mantener el doble (routing, DNS, firewalls); más sobrecarga en el plano de control.
 
-> 💡 **Regla de oro:** ante cualquier proyecto de migración, "Dual Stack si hay IPv6 nativo" es la respuesta que espera el entrevistador (lo verás en el cierre).
+> 💡 **Regla de oro:** ante cualquier proyecto de migración, "Dual Stack si hay IPv6 nativo" es la respuesta que espera el entrevistador (el [boletín avanzado de IPv6](/ApuntesRedes/boletines/boletin-u03-ipv6-avanzado) te monta un diseño completo).
 
 ---
 
@@ -54,7 +54,7 @@ Cuando *el camino* intermedio solo habla IPv4, encapsulamos el paquete IPv6 **de
 | **GRE** | Túnel punto a punto configurado a mano | Redes corporativas ambos extremos IPv6 |
 | **ISATAP** | Túnel sobre la **LAN IPv4 interna** | Transiciones dentro del campus/empresa |
 
-> ⚠️ **Ojo mental:** los túneles automáticos (6to4, Teredo) están de capa caída por problemas de seguridad y fiabilidad; hoy se prefiere Dual Stack o túneles GRE/manuales si no hay alternativa.
+> ⚠️ **Ojo mental:** los túneles automáticos (6to4, Teredo) han caído en desuso por problemas de seguridad y fiabilidad; hoy se prefiere Dual Stack o túneles GRE/manuales si no hay alternativa.
 
 ---
 
@@ -68,7 +68,7 @@ Cuando tu red es **solo IPv6** (sin IPv4 en el cliente) pero quieres acceder a s
 ```
 
 - **DNS64** inventa **direcciones IPv6 sintéticas** para los registros A (IPv4): el cliente IPv6 resuelve el nombre sin problema.
-- **NAT64** traduce el tráfico real: IPv6→IPv4 hacia fuera y la respuesta IPv4→IPv6 hacia dentro. Es el *NAT inverso* de la unidad de NAT.
+- **NAT64** traduce el tráfico real: IPv6→IPv4 hacia fuera y la respuesta IPv4→IPv6 hacia dentro. Es el "NAT" de la transición: traduce entre familias de direcciones, no entre rangos privados y públicos (eso, a fondo, en la unidad de NAT).
 
 ```
   PC:  "¿example.com?"        → DNS64 genera 64:FF9B::C000:0201 (IPv6 sintética)

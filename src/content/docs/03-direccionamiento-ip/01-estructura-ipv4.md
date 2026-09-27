@@ -107,7 +107,7 @@ Campos que de verdad importan en examen y en el día a día:
 Cada medio tiene un **techo de tamaño**. En Ethernet ese techo es el **MTU de 1500 bytes** de payload (lo viste en unidades anteriores). Si un paquete IP es más grande que el MTU del siguiente enlace, **alguien lo parte**: eso es **fragmentación**.
 
 ```
-Paquete de 4000 B  →  MTU del enlace = 1500 B
+Paquete con 4000 B de payload  →  MTU del enlace = 1500 B
         │
         ▼
 ┌─────────────┐ ┌─────────────┐ ┌─────────────┐
@@ -124,7 +124,7 @@ Paquete de 4000 B  →  MTU del enlace = 1500 B
 - **¿Quién reensambla?** Solo el **host destino**. Los routers intermedios no se molestan.
 - **IPv6 es distinto:** solo fragmenta el **origen** (Path MTU Discovery); los routers **no** fragmentan. Lo verás en la parte IPv6.
 
-![Fragmentación de un paquete de 4000 B en tres fragmentos con MTU 1500](/ApuntesRedes/diagrams/u03-fragmentacion.svg)
+![Fragmentación de un paquete con 4000 B de payload en tres fragmentos con MTU 1500](/ApuntesRedes/diagrams/u03-fragmentacion.svg)
 
 > 💡 **Regla práctica:** si en un `ping` grande "se pierde" pero un ping corto va bien, sospecha de MTU/fragmentación (o de Path MTU bloqueado por un firewall que no deja pasar ICMP "packet too big").
 
@@ -190,7 +190,7 @@ PC .10                                PC .20
 2. ¿Cuántas direcciones IPv4 existen en total con los 32 bits?
 3. Identifica qué tipo de dirección especial es cada una: `127.0.0.1`, `169.254.0.5`, `255.255.255.255`.
 4. En una cabecera IPv4, ¿qué campo impide un bucle de rutas y qué valor codifica "viene TCP"?
-5. Un paquete de 3000 B llega a un enlace con MTU 1500. ¿Cuántos fragmentos IPv4 salen como mínimo y qué bit indica al destino que aún faltan?
+5. Un datagrama con **3000 B de payload** llega a un enlace con MTU 1500. ¿Cuántos fragmentos IPv4 salen como mínimo y qué bit indica al destino que aún faltan?
 6. ¿Qué mensaje ARP se manda en broadcast y cuál responde en unicast? ¿Qué guarda el PC al terminar?
 
 <details>

@@ -76,8 +76,9 @@ a) ¿Qué método de asignación de IPs deben usar los clientes?
 b) ¿Quién da la IP? ¿Quién da el DNS?
 c) Si un cliente solo entiende SLAAC, ¿podrá obtener DNS?
 d) ¿Qué cambiaría si M Flag = 1?
+e) ¿De dónde saca el cliente la dirección del gateway por defecto?
 
-**Pista:** M Flag = Managed (DHCPv6 stateful), O Flag = Other (DHCPv6 stateless).
+**Pista:** M Flag = Managed (DHCPv6 stateful), O Flag = Other (DHCPv6 stateless). Fíjate además en la dirección de origen del propio RA.
 
 ## 6. NDP en acción
 
@@ -120,7 +121,7 @@ Completa la tabla comparativa:
 | Multicast de listeners | IGMP | |
 | Configuración automática | DHCP | |
 | Loopback | 127.0.0.1 | |
-| Fragmentación | La hacen cualquier router intermedio | |
+| Fragmentación | Los routers intermedios la hacen | |
 | Seguridad / NAT | NAT compartido para las privadas | |
 
 **Pista:** piensa en *qué sustituye a qué* en cada fila. Y recuerda: NAT no es seguridad, solo un ocultador de direcciones.

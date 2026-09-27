@@ -93,7 +93,7 @@ La primera IP fuera del rango excluido confirma que el pool reparte. Ping al gat
 
 **Solución:**
 
-1. En el router: `no ip service dhcp` (o desconecta G0/0 / apaga el router).
+1. En el router: `no service dhcp` (o desconecta G0/0 / apaga el router).
 2. En la PC: *IP Configuration → DHCP* (o `ipconfig /renew`).
 
 **Esperado:**
@@ -117,7 +117,7 @@ Subnet Mask . . . . . . : 255.255.0.0
 
 **Esperado, en orden:**
 
-| # | Mensión | Direcciones | En una frase |
+| # | Mensaje | Direcciones | En una frase |
 |---|---|---|---|
 | 1 | **DHCP Discover** | origen 0.0.0.0 → 255.255.255.255 | “¿Alguien reparte IPs?” |
 | 2 | **DHCP Offer** | servidor → cliente | “Toma 192.168.10.6” |
@@ -156,7 +156,7 @@ ping 192.168.10.11
 **Solución (a) — estático:**
 
 1. Router: `ipv6 unicast-routing`; en G0/0: `ipv6 address 2001:DB8:1::1/64` y `no shutdown`.
-2. PCs en *Config → IPv6*:
+2. PCs en *Desktop → IPv6 Configuration*:
    - `PC0`: `2001:DB8:1::10`, prefix `/64`, gateway `2001:DB8:1::1` (o la LLA del router).
    - `PC1`: `2001:DB8:1::11`.
 3. `ping 2001:DB8:1::11` (o hacia el router).

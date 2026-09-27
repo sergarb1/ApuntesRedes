@@ -30,7 +30,7 @@ Has terminado la teoría. Este cierre es el aterrizaje: recorre lo aprendido con
 
 a) **Lo aceptas** → ❌ No, 10.0.0.5 no está en tu red /24. Es otro vecindario.
 b) **Lo envías al gateway** → ✅ Correcto. Si no está en tu subred, va al router.
-c) **Lo ignoras y sigues con tu vida** → También, porque la NIC filtra por MAC y ni siquiera ves ese paquete. Pero conceptualmente, el SO sabe que debe ir al gateway.
+c) **Lo devuelves al emisor** → ❌ Tampoco: devolver paquetes es cosa de routers, no de hosts. Tu SO no tiene por dónde: o va al gateway o se queda en casa.
 
 > 💡 **Ese cálculo es la prueba del AND en acción:** con tus bits de red fijos (/24), cualquier IP que comparta los 24 primeros bits es vecina. Todo lo demás, al gateway. Olvida este micro-cálculo en una entrevista y verás caras largas.
 
@@ -87,9 +87,9 @@ c) **Lo ignoras y sigues con tu vida** → También, porque la NIC filtra por MA
 
 ## 🤬 CONRAD VS EL MUNDO: Subnetting
 
-**CONRAD:** — "Viene un alumno y me dice: *CONRAD, ¿por qué necesito subredes?* Pues mira, porque si pones 500 PCs en una sola red /24, te quedas sin IPs (#NoAlcancen). Y si los pones todos en la misma red, el tráfico broadcast es como un megáfono en una biblioteca: todo el mundo se entera de todo y nadie trabaja."
+**CONRAD:** — "Viene un alumno y me dice: *CONRAD, ¿por qué necesito subredes?* Pues mira, porque si pones 500 PCs en una sola red /24, te quedas sin IPs (#NoAlcanzan). Y si los pones todos en la misma red, el tráfico broadcast es como un megáfono en una biblioteca: todo el mundo se entera de todo y nadie trabaja."
 
-**CONRAD:** — "Y luego dicen *es que subnetting es difícil*. ¡Claro! Porque te empeñas en hacerlo decimal. Hazlo en binario. 192.168.1.0/24 → /26 es agarrar 2 bits de host. ¡2 BITS! No es magia, es AND lógico. La calculadora de Windows también sirve, pero entiende lo que haces, no solo aprietes botones."
+**CONRAD:** — "Y luego dicen *es que subnetting es difícil*. ¡Claro! Porque te empeñas en hacerlo decimal. Hazlo en binario. 192.168.1.0/24 → /26 es prestar 2 bits de host. ¡2 BITS! No es magia, es AND lógico. La calculadora de Windows también sirve, pero entiende lo que haces, no solo aprietes botones."
 
 **CONRAD:** — "Y el colmo: *¿para qué sirve excluir IPs en DHCP?* ¡Para no duplicar direcciones! Que luego llega un servidor con IP estática repetida y me montan un conflicto de IP para llorar. Excluye, excluye y excluye."
 
@@ -110,13 +110,14 @@ Eres el administrador de redes de una empresa con:
 - **Dirección:** 5 dispositivos
 - **Enlaces entre routers:** 2 IPs por enlace (3 enlaces)
 
-Te dan la red **10.0.0.0/24**. ¿Cabe todo? **Sí, justo**: Ventas 100 → /25 (128), RRHH 30 → /27 (32), IT 20 → /27 (32), Dirección 5 → /29 (8) y 3 enlaces /30 (12) suman 212 de 256. Pero no queda margen de crecimiento. Te dan **172.16.0.0/16**. Ahora sí, con aire de sobra.
+Te dan la red **10.0.0.0/24**. ¿Cabe todo? **Sí, justo**: Ventas 100 → /25 (128), RRHH 30 → /27 (32), IT 20 → /27 (32), Dirección 5 → /29 (8) y 3 enlaces /30 (12) suman 212 de 256: solo quedan **44 direcciones libres** (de la 212 a la 255) para crecer. Te dan **172.16.0.0/16**. Ahora sí, con aire de sobra.
 
 **Tareas:**
 1. Diseña el VLSM para que cada departamento tenga su subred con el menor desperdicio posible.
 2. Asigna IPs a los routers para los enlaces entre sedes (usa /30).
 3. Configura DHCP para Ventas y RRHH (rango dinámico). IT y Dirección usarán IPs estáticas.
-4. Configura rutas estáticas para que todas las subredes se vean entre sí.
+4. Conecta las subredes entre sí para que todas se vean entre sí (rutas estáticas en los routers: el *cómo* se configuran lo verás a fondo en la unidad de enrutamiento estático; aquí lo que importa es que el diseño funcione).
+5. Deja la red **dual stack**: en el router de Ventas, `ipv6 unicast-routing` + `ipv6 address 2001:DB8:10::1/64` en la interfaz de la LAN, y en sus PCs una IPv6 estática (`2001:DB8:10::10/64` con su gateway) o SLAAC. Verifica con `show ipv6 interface brief` y un `ping -6`.
 
 **Fallo intencionado 1 (segmentación):** Pon **dos departamentos en la MISMA subred** (por ejemplo, IT y Dirección compartiendo el mismo rango).
 
@@ -125,12 +126,19 @@ Te dan la red **10.0.0.0/24**. ¿Cabe todo? **Sí, justo**: Ventas 100 → /25 (
 - Revisa las **tablas de enrutamiento** de cada router: si en las rutas aparecen solo 3 subredes en vez de 4, dos departamentos están "fusionados" sin querer.
 - Calcula de nuevo el VLSM en papel: el patrón *encadenado* (cada subred arranca donde terminó la anterior) te delata dónde se solapan.
 
-**Fallo intencionado 2 (seguridad):** Configura un **ACL que bloquee el tráfico de Ventas a Dirección**, pero **mal escrito: permites todo sin querer**.
+**Fallo intencionado 2 (DHCP sin excluir):** En el pool de Ventas **olvida el `ip dhcp excluded-address`**: el rango de reparto incluye la IP del propio router, y el primer cliente DHCP que llega se queda con la dirección del gateway.
 
 **Pistas para diagnosticar el fallo 2:**
-- La ACL clásica del "permit all": una línea `permit ip any any` colocada antes de la regla que querías hace que todo pase. Comprueba el **orden** de las líneas: las ACL se evalúan en cascada, de arriba abajo, y la primera coincidencia gana.
-- Verifica con **`show access-lists`** si la regla de bloqueo tiene contadores de coincidencias (todos en cero = nunca se aplica).
-- Haz un ping desde Ventas a la IP de Dirección: si responde, esa regla no está bloqueando nada. El filtro no funciona y nadie lo nota... hasta el día de la auditoría.
+- En el cliente, `ipconfig`: si la IP del equipo coincide con la del gateway (o con la de otro equipo), has repartido una dirección ya ocupada — el "conflicto de IP" del que te advirtió CONRAD.
+- En el router, **`show ip dhcp binding`** y **`show ip dhcp conflict`**: una asignación donde no toca, o una entrada en la tabla de conflictos.
+- Revisa `show run`: falta la línea **`ip dhcp excluded-address`**, que aparta el gateway y las IPs estáticas antes de empezar a repartir. Excluye, excluye y excluye.
+
+**Fallo intencionado 3 (IPv6 silencioso):** En el router de Ventas, configura la dirección IPv6 `2001:DB8:10::1/64` en la **interfaz del enlace** (hacia el router vecino) en vez de en la de la **LAN**. El IPv4 va perfecto, pero el `ping -6` desde las PCs de Ventas no responde.
+
+**Pistas para diagnosticar el fallo 3:**
+- `show ipv6 interface brief` en la interfaz de la LAN: no muestra la dirección que configuraste (o aparece `shutdown`). La config no "entró" donde debía.
+- `show ipv6 route`: te falta la ruta *connected* `2001:DB8:10::/64` apuntando a la interfaz de la LAN.
+- Recuerda además `ipv6 unicast-routing`: sin él el router ni reenvía ni anuncia nada, aunque las direcciones estén bien puestas.
 
 ---
 
@@ -166,7 +174,7 @@ Te dan la red **10.0.0.0/24**. ¿Cabe todo? **Sí, justo**: Ventas 100 → /25 (
    - 30 hosts → /27 (30 hosts) → 192.168.0.64/27
    - 10 hosts → /28 (14 hosts) → 192.168.0.96/28
    - Sobrante: 192.168.0.112/28 en adelante
-6. **Conflicto de IP.** El segundo dispositivo en conectarse no podrá comunicarse (o el primero pierde conectividad). Los switches y routers mostrarán errores de "duplicate IP". DHCP evita esto, pero con IPs estáticas puedes causarlo accidentalmente (y sin exclusiones, el propio DHCP se lo crea él solito).
+6. **Conflicto de IP.** El segundo dispositivo en conectarse no podrá comunicarse (o el primero pierde conectividad). Los switches y routers mostrarán errores de "duplicate IP". DHCP evita esto, pero con IPs estáticas puedes causarlo accidentalmente (y sin exclusiones, el propio DHCP se lo reparte él solito).
 
 </details>
 
@@ -207,13 +215,13 @@ Vertical:
 5. **"Explica el proceso DORA de DHCP. ¿Qué pasa si el servidor DHCP no responde?"**
 6. **"¿Qué es VLSM y por qué es importante en el diseño de redes modernas?"**
 
-> 💡 **Cómo encararlas:** la 6 es la que remata la entrevista. Empieza por la regla de oro (ordenar de mayor a menor, `2ʰ − 2 ≥ hosts`) y acompáñala de un mini-ejemplo mental (100→/25, 30→/27, 2→/30). Y en la 1, cuidado con la trampa: 3 subredes de 50 hosts **no** se resuelven con /25 a lo loco; busca la máscara justa para cada una y menciona que se puede afinar con VLSM.
+> 💡 **Cómo encararlas:** la 6 es la que remata la entrevista. Empieza por la regla de oro (ordenar de mayor a menor, `2ʰ − 2 ≥ hosts`) y acompáñala de un mini-ejemplo mental (100→/25, 30→/27, 2→/30). Y en la 1, cuidado con la trampa: con /25 solo caben 2 subredes y necesitas 3, así que pide 2 bits (4 subredes de 62 hosts en /26) y la cuarta sobra. Si encima los tamaños son distintos, ahí sí hay que afinar con VLSM.
 
 ---
 
 ## 🤷 No hay preguntas tontas
 
-> ❓ **¿Si dos dispositivos en redes diferentes usan la misma IP privada, ¿cómo evitan conflictos?**
+> ❓ **Si dos dispositivos en redes diferentes usan la misma IP privada, ¿cómo evitan conflictos?**
 
 Las IPs privadas (definidas en RFC 1918: 10.0.0.0/8, 172.16.0.0/12 y 192.168.0.0/16) solo son válidas dentro de una red local. Dos redes diferentes pueden usar las mismas direcciones privadas sin conflicto porque el router NAT (Network Address Translation) traduce esas direcciones a una IP pública única al salir a Internet. Es como dos personas llamadas "Juan" en ciudades distintas: dentro de cada ciudad no hay confusión, y al viajar al extranjero se identifican con su pasaporte (la IP pública).
 
@@ -239,16 +247,17 @@ Un host recibe la IP 10.0.1.10 mediante DHCP en una red privada. El tráfico via
 
 ---
 
-## ✅ Criterios de evaluación cubiertos (RA2)
+## ✅ Criterios de evaluación cubiertos (RA1/RA2/RA4/RA6)
 
 **RA2: Integra ordenadores y periféricos en redes cableadas e inalámbricas.**
 
 | CE | Criterio | Cubierto |
 |---|---|---|
-| d) | Direccionamiento lógico IP | ✅ IPv4 e IPv6, subredes, CIDR, máscaras, VLSM (puntos 1-7 y 9-12) |
-| g) | Conectividad entre dispositivos | ✅ DHCP/DORA (8), SLAAC/DHCPv6 (12-13) + ⚡ Laboratorio Packet Tracer |
-| c) | Subredes y diseño lógico (RA1) | ✅ CIDR y VLSM (puntos 5-7) |
-| — | Fundamentos de encaminamiento (RA6) | ✅ Cabecera, ARP y máscaras/redes (puntos 1-2 y 5) |
+| RA2·d) | Direccionamiento lógico IPv4/IPv6 | ✅ Puntos 1-5 y 9-12 + ⚡ Laboratorio (punto 18) |
+| RA1·c) | Subredes y diseño lógico | ✅ Puntos 5-7 (CIDR/VLSM) |
+| RA2·g) | Servicios de configuración automática | ✅ Puntos 8 y 12-13 + ⚡ Laboratorio (punto 18) |
+| RA4·d) | Comandos de configuración | ✅ Punto 16 (interfaces IPv6) + ⚡ Laboratorio (punto 18) |
+| RA6 | Fundamentos para el encaminamiento | ✅ Puntos 1-2 y 5 (cabecera, ARP, máscaras/redes) |
 
 ---
 
