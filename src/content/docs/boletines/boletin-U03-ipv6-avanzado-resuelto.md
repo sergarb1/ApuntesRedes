@@ -62,6 +62,8 @@ c) **No.** SLAAC puro no da DNS. Si el cliente solo soporta SLAAC, necesitaría 
 
 d) **Si M Flag = 1:** DHCPv6 Stateful. El servidor DHCPv6 da tanto la IP como el DNS. SLAAC no se usa para la IP. Esto es más parecido al DHCP de IPv4.
 
+e) **Del origen del propio RA:** el cliente toma como gateway la dirección Link-Local (`fe80::…`) desde la que llegó el Router Advertisement. Por eso el RA viaja siempre desde la LLA del router y por eso no necesitas DHCPv6 para el gateway.
+
 ## 6. NDP en acción
 
 a) **Neighbor Solicitation (NS):** "¿Quién tiene 2001:DB8::20?"
@@ -82,7 +84,7 @@ a) **Firewall del PC destino (o del propio PC-A) bloqueando ICMPv6 hacia la GUA.
    - *Verificación:* intenta ping desde un tercer equipo; o desactiva temporalmente el firewall del PC destino y repite el ping. Si entonces funciona, es el firewall.
 
 b) **La GUA destino está duplicada o no es la activa.** Si el PC destino tiene varios adaptadores, o SLAAC le dio un prefijo distinto, la dirección que pingueas puede estar asignada en otra interfaz o marcada como *tentative* (durante DAD). El host simplemente no responde en esa dirección en la interfaz que esperas.
-   - *Verificación:* en el destino ejecuta `ipconfig /all` (Windows) o `ip -6 addr show` (Linux) y comprueba que `2001:DB8:1::10` exista y esté marcada como activa en esa interfaz (estado *preferred*). Prueba también `ping -6 2001:DB8:1::10%<id-interfaz>`.
+   - *Verificación:* en el destino ejecuta `ipconfig /all` (Windows) o `ip -6 addr show` (Linux) y comprueba que `2001:DB8:1::10` exista y esté marcada como activa en esa interfaz (estado *preferred*). Prueba también `ping -6 2001:DB8:1::10` desde la misma interfaz.
 
 c) **Prefijo/ámbito fuera de la subred (on-link).** Para un *origen* con un prefijo distinto o sin ruta hacia `2001:DB8:1::/64`, esa GUA NO es *on-link*: el tráfico saldría al router (gateway), no resolvería la MAC por NDP local. Si la LAN es realmente `2001:DB8:1::/64` pero el PC-A o el switch han sido configurados con otro prefijo, el ping "no tiene a quién preguntar".
    - *Verificación:* revisa que el prefijo del origen (`2001:db8:1:...`) y el destino compartan el mismo /64, y que el gateway `fe80::1` enrute correctamente. Un `pathping`/`tracert` IPv6 te dice si el salto intenta salir por el router o se queda en el enlace.
@@ -101,7 +103,7 @@ c) **Prefijo/ámbito fuera de la subred (on-link).** Para un *origen* con un pre
 | Multicast de listeners | IGMP | **MLD** (Multicast Listener Discovery) |
 | Configuración automática | DHCP | **SLAAC + DHCPv6** (stateless/stateful, flags M/O) |
 | Loopback | 127.0.0.1 | **`::1`** |
-| Fragmentación | La hacen cualquier router intermedio | **Solo la hace el origen** (Path MTU Discovery) |
+| Fragmentación | Los routers intermedios la hacen | **Solo la hace el origen** (Path MTU Discovery) |
 | Seguridad / NAT | NAT compartido para las privadas | **Sin NAT**: extremo a extremo; firewall y (opcional) IPsec |
 
 > 💡 La fila de *fragmentación* y la de *NAT* suelen ser las que más sorprende: en IPv6 los routers ya no fragmentan (lo hace el origen), y el NAT, además de feo, era una falsa sensación de seguridad. Se acabó el escondite.

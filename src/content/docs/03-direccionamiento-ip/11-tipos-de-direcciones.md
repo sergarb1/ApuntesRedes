@@ -42,7 +42,7 @@ FF02::1                           →  Multicast (primer grupo FF, el FF es la m
 
 ### 🏠 Link-Local: la que nunca falta
 
-Cada interfaz IPv6 tiene **automáticamente** una dirección Link-Local, la generes o no. Son los "DNS" internos: los routers las usan para NDP y SLAAC (un RA viene de `FE80::…`, no de la GUA del router). No se pueden enrutar: un router nunca las reenvía fuera del enlace. Por eso dos PCs en el mismo switch **sí pueden hablarse** con sus LLA sin que nadie configure nada, pero no pueden llegar a Internet con ellas.
+Cada interfaz IPv6 tiene **automáticamente** una dirección Link-Local, la generes o no. Son las direcciones "de casa": los routers las usan para NDP y SLAAC (un RA viene de `FE80::…`, no de la GUA del router). No se pueden enrutar: un router nunca las reenvía fuera del enlace. Por eso dos PCs en el mismo switch **sí pueden hablarse** con sus LLA sin que nadie configure nada, pero no pueden llegar a Internet con ellas.
 
 ### 🖥️ Lectura de un `ipconfig` real
 

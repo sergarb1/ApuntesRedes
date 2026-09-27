@@ -22,7 +22,7 @@ Red base: 172.16.0.0/24 (256 direcciones totales)
 | WAN 2 | 2 (2) | /30 | 172.16.0.116 | .117 - .118 | .119 |
 | WAN 3 | 2 (2) | /30 | 172.16.0.120 | .121 - .122 | .123 |
 
-**Sobran:** 172.16.0.124 - 172.16.0.255 = **132 direcciones** (132 - 2 = 130 hosts útiles).
+**Sobran:** 172.16.0.124 - 172.16.0.255 = **132 direcciones**. Ojo: ese hueco no es una subred alineada; la mayor subred alineada que cabe entera dentro es **172.16.0.128/25** (126 hosts útiles) y las direcciones .124-.127 se quedarían sin aprovechar por no estar alineadas.
 
 ## 2. Diagnóstico DHCP
 
@@ -129,13 +129,13 @@ Red base: 192.168.1.0/24 (256 direcciones, 254 hosts útiles)
 | Soporte | 2ʰ−2 ≥ 10 → h=4 (14) | /28 | 192.168.1.96 | .97 - .110 | .111 |
 | Enlace WAN | 2ʰ−2 ≥ 2 → h=2 (2) | /30 | 192.168.1.112 | .113 - .114 | .115 |
 
-b) **Queda libre** desde 192.168.1.116 hasta 192.168.1.255 = **140 direcciones** (138 hosts útiles en /24).
+b) **Queda libre** desde 192.168.1.116 hasta 192.168.1.255 = **140 direcciones**. Ojo otra vez con la alineación: dentro de ese hueco la mayor subred alineada es **192.168.1.128/25** (126 hosts útiles) y las direcciones .116-.127 no se pueden aprovechar sin romper la alineación.
 
 **Comprobación del encadenado:** Producción acaba en .63 → Comercial arranca en .64. Comercial acaba en .95 → Soporte arranca en .96. Soporte acaba en .111 → el enlace WAN arranca en .112.
 
 ## 8. Conflicto de IP
 
-a) **Qué ocurre:** cuando el PC pide IP por DHCP recibe 192.168.1.20, pero la impresora ya la tiene en uso. Hay **duplicado de dirección**: uno de los dos (o ambos, según el momento) pierde conectividad, aparecen errores de "duplicate address", y el tráfico hacia esa IP puede ir a uno o a otro. El servidor DHCP puede detectarlo *antes* de conceder la IP haciendo un ping/ARProbe a la dirección; si hay respuesta, la descarta y la registra en la tabla de conflictos.
+a) **Qué ocurre:** cuando el PC pide IP por DHCP recibe 192.168.1.20, pero la impresora ya la tiene en uso. Hay **duplicado de dirección**: uno de los dos (o ambos, según el momento) pierde conectividad, aparecen errores de "duplicate address", y el tráfico hacia esa IP puede ir a uno o a otro. El servidor DHCP puede detectarlo *antes* de conceder la IP haciendo un ping o un ARP probe a la dirección; si hay respuesta, la descarta y la registra en la tabla de conflictos.
 
 b) **Cómo lo detecta:** en el router, el comando:
 
@@ -143,7 +143,7 @@ b) **Cómo lo detecta:** en el router, el comando:
 show ip dhcp conflict
 ```
 
-Muestra las direcciones que el servidor DHCP encontró en conflicto (con el método de detección y la fecha). Si la impresora estática sigue borrada del pool, verás la entrada y podrás actuar.
+Muestra las direcciones que el servidor DHCP encontró en conflicto (con el método de detección y la fecha). Si la impresora estática sigue dentro del rango sin excluir, verás la entrada y podrás actuar.
 
 c) **Cómo prevenirlo:** desde el diseño, **excluir las IPs estáticas** del pool DHCP antes de que reparta nada:
 
@@ -155,21 +155,21 @@ Así el router nunca concede las direcciones fijas (impresoras, servidores, el p
 
 ## 9. Fragmentación real (túnel y MTU)
 
-a) Payload útil en el WAN: 1000 − 20 = **980 bytes**… pero 980 **no** es múltiplo de 8; el mayor múltiplo de 8 ≤ 980 es **976**.  
-   Datos totales: 5000 → **6 fragmentos** (5 × 976 + 120).
+a) **Frag 1 (salto Gigabit, MTU 1500):** payload por fragmento = 1500 − 20 = 1480 (ya múltiplo de 8) → 5000 B → **4 fragmentos**: 1480 + 1480 + 1480 + 560.
 
-b)
+b) **Refragmentación en el WAN (MTU 1000):** payload útil = 1000 − 20 = 980… pero 980 **no** es múltiplo de 8; el mayor múltiplo de 8 ≤ 980 es **976**. Los fragmentos 1-3 (1480 B) no caben: cada uno se trocea en 976 + 504. El fragmento 4 (560 B) ya cabe entero. Total: **7 fragmentos**.
 
 | Frag | Datos | MF | Offset (×8) |
 |---|---|---|---|
-| 1 | 976 | 1 | 0 |
-| 2 | 976 | 1 | 122 (976/8) |
-| 3 | 976 | 1 | 244 |
-| 4 | 976 | 1 | 366 |
-| 5 | 976 | 1 | 488 |
-| 6 | 120 | **0** | 610 |
+| 1a | 976 | 1 | 0 |
+| 1b | 504 | 1 | 122 (976/8) |
+| 2a | 976 | 1 | 185 |
+| 2b | 504 | 1 | 307 (2456/8) |
+| 3a | 976 | 1 | 370 |
+| 3b | 504 | 1 | 492 (3936/8) |
+| 4 | 560 | **0** | 555 |
 
-(5×976 = 4880; 5000 − 4880 = 120 en el último.)
+(Comprobación: 3 × (976 + 504) + 560 = 3 × 1480 + 560 = **5000 B** ✓. El offset de cada pieza = byte absoluto que empieza a contar ÷ 8, así que el trozo 1b arranca en el byte 976 → 122.)
 
 c) Síntoma clásico: **el ping pequeño va y el grande se corta o da "Packet needs to be fragmented but DF set"**; con `tracert` los saltos intermedios pueden no responder si el problema es de encapsulado/túnel. En Windows: `ping -f -l 1472` (prueba de Path MTU) fallando en el salto problemático.
 

@@ -77,14 +77,14 @@ Este RA es el que vimos en [SLAAC (punto 12)](/ApuntesRedes/03-direccionamiento-
 En IPv4, ARP usaba **broadcast**: iba a *todos*, y todos tenían que procesarlo aunque no les importara. En IPv6:
 
 1. El NS va a una **solicited-node multicast** (`FF02::1:FFxx:xxxx`): solo los equipos cuyo último 24 bits coincidan con el IID de la IP objetivo lo procesan.
-2. Resultado: **menos interrupciones**, menos CPU gastada, menos tráfico de fondo en redes grandes (los switches no inundan el grupo pretendido).
+2. Resultado: **menos interrupciones**, menos CPU gastada, menos tráfico de fondo en redes grandes (las NICs solo despiertan para su grupo; y con MLD snooping, el switch ni siquiera reparte el multicast a puertos sin oyentes).
 
 ```
 IPv4 broadcast:  ARP → FF:FF:FF:FF:FF:FF  → todo el switch procesa
 IPv6 multicast:  NS  → 33:33:FF:xx:xx:xx  → solo el grupo interesado
 ```
 
-> 💡 **Y el ABC de la lección:** el multicast de IPv6 no es un lujo, es la razón de que redes con miles de equipos no se ahoguen en tráfico de descubrimiento. En el plano de redes es lo que hace escalable al [punto de transición](/ApuntesRedes/03-direccionamiento-ip/15-mecanismos-de-transicion).
+> 💡 **Y el ABC de la lección:** el multicast de IPv6 no es un lujo: es la razón de que redes con miles de equipos no se ahoguen en tráfico de descubrimiento. Siguiente parada: los mecanismos de [transición](/ApuntesRedes/03-direccionamiento-ip/15-mecanismos-de-transicion).
 
 ---
 

@@ -6,20 +6,20 @@ Veredictos: ✅ mención legítima · ↪️ mover a … · ❌ quitar · ⏳ po
 
 | Concepto | Unidades (menciones) | Veredicto |
 |---|---|---|
-| **DHCP** | introducción (9) · IP (11) · trunking (7) · servicios (10) · switching (2) · NAT (3) · AD (5) · inalámbricas (3) | ⏳ ¿intro/IP explican y servicios detallan? ¿`07-dhcp-por-vlan` duplica el de servicios? |
-| **DNS** | introducción (9) · IP (9) · servicios (10) · NAT (2) · inalámbricas (3) | ⏳ frontera intro/IP ↔ servicios |
-| **ARP** | ethernet (1) · IP (5) · switching (2) · trunking (3) · enrutamiento (3) · AD (2) · introducción (1) | ✅ sesión 02: puente en Ethernet (solo EtherType 0x0806 + enlace a IP) → desarrollo en IP |
+| **DHCP** | introducción (9) · IP (11) · trunking (7) · servicios (10) · switching (2) · NAT (3) · AD (5) · inalámbricas (3) | ✅ sesión 03 (lado IP): IP es la casa del DORA, la config en router, exclusiones y DHCPv6 (punto 8 y 13, lab y boletines); servicios aportará el lado de servidor. Queda el cruce con trunking (`07-dhcp-por-vlan`) ↔ servicios en la sesión 10 |
+| **DNS** | introducción (9) · IP (9) · servicios (10) · NAT (2) · inalámbricas (3) | ✅ sesión 03 (lado IP): solo como opción DHCP, "máquina DNS" y DNS64 (transición); el servidor DNS va en servicios. Frontera intro ↔ servicios pendiente |
+| **ARP** | ethernet (1) · IP (5) · switching (2) · trunking (3) · enrutamiento (3) · AD (2) · introducción (1) | ✅ sesión 02: puente en Ethernet (solo EtherType 0x0806 + enlace a IP) → desarrollo en IP (cadena verificada en la sesión 03) |
 | **STP** | switching (7) · AD (7) · **ethernet (3)** · introducción (1) · inalámbricas (1) | ✅ sesión 02: falso positivo en ethernet = cable *apantallado* (Shielded Twisted Pair), no Spanning Tree |
 | **802.11 / WiFi** | ethernet (2+3) · inalámbricas (6+9) · NAT (2+3) · introducción (6) | ✅ sesión 02: mención a nivel de capa 1 y de trama (puntos 1 y 9), enlaza a inalámbricas; sin canales/seguridad propios |
-| **Ruta por defecto** | enrutamiento (5) · OSPF (4) · IP (1) | ⏳ ¿06 enseña y 07 solo repite o recalcula? |
+| **Ruta por defecto** | enrutamiento (5) · OSPF (4) · IP (1) | ✅ sesión 03: IP solo la menciona una vez (sin desarrollo); el peso es de enrutamiento/OSPF |
 | **Port Security** | ACL (5) · switching (1) | ⏳ ¿va con ACL o con switching? |
 | **VLAN** | switching (11) · trunking (9) · AD (6) · introducción (5) · inalámbricas (5) · servicios (3) | ⏳ reparto switching ↔ trunking |
 | **HSRP** | AD (8) · **inalámbricas (1)** | ⏳ ¿por qué HSRP en inalámbricas? |
-| **NAT** | NAT (10) · IP (6) · introducción (2) · ACL (3) · resto: 1–2 (referencias) | ⏳ |
-| **OSPF** | OSPF (10) · enrutamiento (5) · IP (4) · AD (3) · resto (1–2) | ⏳ puentes de enrutamiento |
-| **ICMP** | IP (5) · ACL (2) · enrutamiento (2) · boletines (14) | ⏳ |
-| **MTU** | ethernet (2) · IP (2) | ✅ sesión 02: en Ethernet solo "techo de la trama 1500 y fragmenta la capa 3" con enlace a IP (regla cumplida) |
-| **IPv6** | IP (10 ficheros propios) | ⏳ ¿la unidad de IP está desequilibrada (18 ficheros, 10 IPv6)? |
+| **NAT** | NAT (10) · IP (6) · introducción (2) · ACL (3) · resto: 1–2 (referencias) | ✅ sesión 03 (lado IP): privadas como motivo de RFC1918 + NAT64/DNS64 como transición (ya sin "NAT inverso"); detalle en la unidad de NAT |
+| **OSPF** | OSPF (10) · enrutamiento (5) · IP (4) · AD (3) · resto (1–2) | ✅ sesión 03 (lado IP): las 4 menciones de IP son puentes forward sin desarrollo |
+| **ICMP** | IP (5) · ACL (2) · enrutamiento (2) · boletines (14) | ✅ sesión 03: ICMPv4 solo en TTL/Time Exceeded/traceroute; ICMPv6+NDP tienen punto propio; el resto son usos operativos |
+| **MTU** | ethernet (2) · IP (2) | ✅ sesión 02: en Ethernet solo "techo de la trama 1500 y fragmenta la capa 3" con enlace a IP; sesión 03 confirma el desarrollo en `01-estructura-ipv4` |
+| **IPv6** | IP (10 ficheros propios) | ✅ sesión 03: 8 de 17 puntos (09-16) es el peso del RA2·d "IPv4/IPv6" y esta es la única unidad que cubre IPv6 — equilibrio justificado, se mantiene |
 
 ## Fronteras ya documentadas en AGENTS
 
@@ -31,5 +31,6 @@ Veredictos: ✅ mención legítima · ↪️ mover a … · ❌ quitar · ⏳ po
 - [x] Baseline F0 (conteo por unidad)
 - [x] Sesión 01 · introducción — sin candidatos a mover/quitar: sus menciones de DHCP/DNS/ARP/WiFi/VLAN/OSPF/NAT son vocabulario o puente; los duplicados eran internos (05↔10 y FAQ↔Atrévete del punto 10) y están resueltos. Ver [revision-U01-introduccion.md](revision-U01-introduccion.md).
 - [x] Sesión 02 · ethernet y cableado — sin candidatos a mover/quitar: ARP solo como EtherType (puente a IP), MTU solo como techo de trama, WiFi a nivel de capas 1–2 con enlace a inalámbricas; STP en esta unidad es cable apantallado (falso positivo). Ver [revision-U02-ethernet-cableado.md](revision-U02-ethernet-cableado.md).
-- [ ] Sesiones 03–12
+- [x] Sesión 03 · direccionamiento IP — sin candidatos a mover/quitar: rutas estáticas solo como referencia adelantada en el lab, ACL fuera del lab (sustituidas por un fallo DHCP propio), NAT/OSPF solo puentes forward, ICMPv6 con punto propio. Cerradas las filas DHCP/DNS/NAT/OSPF/ICMP/IPv6/MTU/Ruta por defecto (lado IP). Ver [revision-U03-direccionamiento-ip.md](revision-U03-direccionamiento-ip.md).
+- [ ] Sesiones 04–12
 - [ ] Cierre transversal

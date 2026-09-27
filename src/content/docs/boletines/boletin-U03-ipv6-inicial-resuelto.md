@@ -12,7 +12,7 @@ description: Soluciones ejercicios básicos de IPv6 y Transición
 a) `2001:DB8::1`
 b) `FE80::2AA:FF:FE9A:4CA2`
 c) `::1`
-d) `2001:DB8::ABCD:0:0:1234` (solo un ::, la secuencia de ceros más larga)
+d) `2001:DB8::ABCD:0:0:1234` (empate: hay dos secuencias de 2 ceros, el :: se lleva la primera y la segunda queda escrita como `0:0`)
 
 ## 2. Identifica el tipo
 
@@ -35,7 +35,7 @@ e) **NDP** (Neighbor Discovery Protocol) reemplaza a ARP en IPv6.
 a) **Falso.** Las Link-Local solo funcionan en el mismo enlace. No son enrutables.
 b) **Verdadero.** SLAAC se basa en Router Advertisements del router. Sin servidor central.
 c) **Falso.** :: solo puede usarse UNA vez por dirección. Si no, el router no sabe cuántos grupos cero hay.
-d) **Verdadero básicamente**, pero DHCPv6 tiene dos modos (stateless y stateful) que no existen en IPv4.
+d) **Falso.** No es una copia del DHCP de IPv4: DHCPv6 tiene dos modos (stateless, que solo da parámetros extra como el DNS, y stateful, que da la IP), no da "máscara" (en IPv6 manda el prefijo /64) y el **default gateway no lo da DHCPv6**: lo entrega el Router Advertisement.
 e) **Verdadero.** Dual Stack ejecuta ambas pilas de protocolos simultáneamente.
 
 ## 5. NDP

@@ -125,12 +125,12 @@ c) ¿Cómo se **previene** este problema desde el diseño?
 
 Un PC manda un datagrama IPv4 de **datos 5000 B** (cabecera 20 B). Primero cruza un enlace Gigabit (MTU 1500) y luego un enlace WAN de **MTU 1000**.
 
-a) ¿Cuántos fragmentos genera el **primer** router (o el origen) al salir por el WAN de 1000?
-b) Indica para cada fragmento: bytes de datos, flag MF y offset (en múltiplos de 8).
+a) ¿Cuántos fragmentos genera el PC al salir por el enlace Gigabit (MTU 1500)?
+b) Cuando esos fragmentos llegan al router y salen por el WAN (MTU 1000), los vuelve a trocear. Indica cuántos fragmentos salen en total y, para cada uno: bytes de datos, MF y offset (en múltiplos de 8).
 c) Si el Path MTU Discovery falla porque un firewall bloquea ICMP, ¿qué síntoma típico ves con `ping -l 5000` y con un `tracert`?
 d) En IPv6, ¿podría este mismo router intermedio fragmentar? Justifica en una frase.
 
-**Pista:** payload útil = MTU − 20; el offset va en múltiplos de 8; MF=0 solo en el último.
+**Pista:** payload útil = MTU − 20 (y si no es múltiplo de 8, baja al múltiplo de 8 inferior); el offset va en múltiplos de 8; MF=0 solo en el último. Ojo: los fragmentos que salen del origen ya llevan su offset asignado; en el WAN solo se vuelven a trocear los que sigan siendo más grandes que el payload cabible.
 
 ## 10. ARP, Wireshark y capas
 

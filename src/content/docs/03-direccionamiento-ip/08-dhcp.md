@@ -71,7 +71,7 @@ Desgranando:
 En Packet Tracer tienes tres caminos para montar un servidor DHCP:
 
 1. **Router** → con `ip dhcp pool` en CLI, como arriba.
-2. **Servidor dedicado** → en la pestaña *Config → DHCP*: seleccionas el servicio, defines la red, la IP por defecto (gateway), el DNS y el rango máximo de usuarios.
+2. **Servidor dedicado** → en la pestaña *Services → DHCP*: seleccionas el servicio, defines la red, la IP por defecto (gateway), el DNS y el rango máximo de usuarios.
 3. **Switch multicapa** → con comandos similares a los del router si tiene capacidades de capa 3.
 
 > ⚠️ **En Packet Tracer, primero la estrella:** verifica los LEDs y las VLAN antes de culpar al DHCP. Un PC que se queda en APIPA suele ser porque el servidor DHCP está en otra VLAN sin DHCP relay, no porque el pool esté mal.

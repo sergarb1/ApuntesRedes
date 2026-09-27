@@ -87,7 +87,7 @@ No es un ejercicio de sadismo académico:
 - **Reduce el dominio de broadcast:** la "megafonía" de la red ya no llega a todos, solo a la subred. Menos ruido, mejor rendimiento.
 - **Segmenta por funciones:** contabilidad, ventas e IT en islas separadas, con filtros y seguridad entre ellas.
 
-> ⚠️ **Trampa favorita de examen:** "Necesito 4 subredes con 50 hosts cada una en 192.168.1.0/24". Meten la pregunta de *subredes iguales* cuando la respuesta correcta exige **VLSM** (el [punto 7](/ApuntesRedes/03-direccionamiento-ip/07-vlsm)). Fíjate bien: con /26 tienes 4 subredes de 62 hosts… y si pidieran tamaños distintos, /26 ya no vale.
+> ⚠️ **Trampa favorita de examen:** "Necesito 4 subredes con 50 hosts cada una en 192.168.1.0/24". Ojo: aquí **no** hace falta VLSM — al ser subredes iguales, una /26 lo cumple de sobra (4 subredes de 62 hosts, y hasta te sobra una). La trampa real está en los tamaños distintos: si dijeran 200, 50 y 10 hosts, ahí cada subred pide su máscara y toca VLSM (el [punto 7](/ApuntesRedes/03-direccionamiento-ip/07-vlsm)).
 
 ---
 

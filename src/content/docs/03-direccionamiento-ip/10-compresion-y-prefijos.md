@@ -11,7 +11,7 @@ description: Las dos reglas para acortar direcciones y por qué /64 manda ✂️
 
 ## 📬 La idea en una frase
 
-> Escribir 32 caracteres hexadecimales es un coñazo, así que IPv6 define **dos reglas** para comprimir direcciones: omitir ceros a la izquierda y sustituir la cadena más larga de grupos cero por `::` (una sola vez).
+> Escribir los 32 caracteres hexadecimales completos es un rollo, así que IPv6 define **dos reglas** para comprimir direcciones: omitir ceros a la izquierda y sustituir la cadena más larga de grupos cero por `::` (una sola vez).
 
 Y el prefijo: lo que era una máscara en IPv4 aquí se escribe igual que CIDR (`/32`, `/48`, `/64`), con **/64 como estándar**.
 
@@ -50,9 +50,10 @@ FE80:0:0:0:2AA:FF:FE9A:4CA2   →   FE80::2AA:FF:FE9A:4CA2
                 3 grupos cero            :: (una sola vez)
 
 2001:DB8::ABCD:0:0:1234        →   no se comprime más
-         │         └──2 ceros──┘   la cadena más larga ya
-         │                          se llevó el :: (el par
-         └── cadena mayor ya usada   de ceros se queda '0:0')
+
+  Hay dos cadenas de 2 ceros (empate): el :: se lleva la
+  primera, y la segunda cadena queda escrita como 0:0.
+  Un segundo :: sería ilegal.
 ```
 
 ### 🎯 Ejemplos famosos
