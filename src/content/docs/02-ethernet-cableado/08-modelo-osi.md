@@ -82,7 +82,7 @@ En la práctica:
 
 1. ¿Qué PDU viaja en la capa 1, en la 2 y en la 3?
 2. ¿En qué capas "vive" esta unidad y por qué?
-3. ¿ OSI y TCP/IP son protocolos o modelos? ¿Cuál se usa de verdad en Internet?
+3. ¿OSI y TCP/IP son protocolos o modelos? ¿Cuál se usa de verdad en Internet?
 
 <details>
 <summary>🔄 Respuestas</summary>

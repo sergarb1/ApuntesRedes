@@ -21,11 +21,11 @@ En el [punto 1](/ApuntesRedes/02-ethernet-cableado/01-medios-de-transmision) vis
 
 | Ventaja | Qué significa en la práctica |
 |---|---|
-| **Mayor velocidad** | Hasta 400 Gbps y más; el cobre se asfixia en 10 |
+| **Mayor velocidad** | Hasta 400 Gbps y más; el cobre se queda en 25-40 Gbps (Cat8) y solo a 30 m |
 | **Mayor distancia** | Kilómetros sin repetidor; el cobre muere a 100 m |
 | **Inmunidad electromagnética** | Motores, fluorescentes, rayos: a la luz le da igual |
 | **Seguridad** | Interceptar un pulso de luz sin ser detectado es muy difícil |
-| **Peso y envergadura** | Lleva mucha más capacidad en un cable más fino |
+| **Peso y tamaño** | Lleva mucha más capacidad en un cable más fino |
 
 La contrapartida: **coste**. Conectores de precisión, herramienta de empalme (fusion splicer) y mano de obra especializada. Por eso la fibra se reserva para los enlaces que lo merecen.
 
@@ -38,8 +38,8 @@ La pregunta estrella de la fibra: ¿qué fibra necesito?
 | Característica | Monomodo (SMF) | Multimodo (MMF) |
 |---|---|---|
 | Núcleo | 9 µm (muy fino) | 50-62,5 µm (más grueso) |
-| Fuente de luz | Láser | LED |
-| Distancia máx | 40+ km | 550 m (a 10 Gbps) |
+| Fuente de luz | Láser | LED (OM1/OM2) o VCSEL (OM3/OM4) |
+| Distancia máx | 40+ km | 550 m (OM4; OM3 llega a 300 m) |
 | Coste | Más caro (láser + conectores de precisión) | Más barato |
 | Uso típico | WAN, ISP, larga distancia | LAN, datacenter, campus |
 
@@ -90,7 +90,7 @@ En las cajas de bobinas verás tres letras: **OM** (*Optical Multimode*) u **OS*
 | OM4 | Multimodo (láser optimizado) | 10 Gbps hasta 550 m (datacenter y campus) |
 | OS1 / OS2 | Monomodo | 10-400 Gbps, distancias de kilómetros (WAN, ISP) |
 
-> 💡 **Truco de compra:** para un campus actual pide **OM4** (550 m a 10 Gbps) si la distancia lo permite, y **OS2** cuando toque ir "lejos". Todo lo demás son clases con migas o legacy.
+> 💡 **Truco de compra:** para un campus actual pide **OM4** (550 m a 10 Gbps) si la distancia lo permite, y **OS2** cuando toque ir "lejos". Todo lo demás son clases antiguas o de gama baja.
 
 ---
 

@@ -62,8 +62,8 @@ show mac address-table
 ```
 Vlan    Mac Address       Type        Ports
 ----    -----------       --------    -----
-   1    00D0.xxxx.xxA     DYNAMIC     Fa0/1
-   1    00D0.xxxx.xxB     DYNAMIC     Fa0/2
+   1    00D0.aaaa.bbbb    DYNAMIC     Fa0/1
+   1    00D0.aaaa.cccc    DYNAMIC     Fa0/2
 ```
 
 Cada MAC aprendida apunta al puerto de la PC correspondiente. Si está vacía: haz `ping` otra vez y repite el `show`.
@@ -75,7 +75,7 @@ Cada MAC aprendida apunta al puerto de la PC correspondiente. Si está vacía: h
 **Solución:**
 
 1. Selecciona el cable de `PC0` y bórralo (o en la interfaz de la PC: *Config → FastEthernet → Off*).
-2. `ping 192.168.1.11` desde **`PC1`** (no depende del cable de PC0): debe responder igual.
+2. `ping 192.168.1.12` desde **`PC1`** (no depende del cable de PC0): debe responder igual.
 3. `ping 192.168.1.11` desde **`PC0`**: falla.
 
 **Interpretación:**
@@ -96,7 +96,7 @@ Cada MAC aprendida apunta al puerto de la PC correspondiente. Si está vacía: h
 
 **Esperado (flujo típico):**
 
-1. PC0 encapsula ICMP en **Ethernet**: origen MAC de PC0, destino MAC del switch (broadcast ARP antes, si no hay cache).
+1. Si no hay caché ARP, PC0 manda primero un **ARP request** en broadcast (EtherType `0x0806`) para resolver la MAC de PC1. Después, PC0 encapsula ICMP en **Ethernet**: origen MAC de PC0, destino MAC de **PC1** (el switch es transparente: la trama no lleva su MAC).
 2. Switch recibe, mira su tabla MAC, sale por el puerto de PC1.
 3. PC1 contesta: ICMP reply con MACs invertidas.
 
@@ -117,7 +117,7 @@ En cada sobre, pestaña *Outbound PDU details*: confirma **EtherType** y direcci
 
 | Campo | Valor típico |
 |---|---|
-| Destination | MAC de `PC1` (o del switch en el 1er salto) |
+| Destination | MAC de `PC1` (o broadcast `FF:FF:FF:FF:FF:FF` si capturaste el ARP previo) |
 | Source | MAC de `PC0` |
 | Type | **IPv4 (0x0800)** |
 

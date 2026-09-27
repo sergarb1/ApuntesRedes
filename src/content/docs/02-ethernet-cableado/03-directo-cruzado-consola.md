@@ -42,7 +42,7 @@ Ambas son válidas para Ethernet: solo intercambian los pares 2 y 3 (naranja y v
 
 ## ➡️ Cable directo (straight-through)
 
-**Ambos extremos con la misma norma** (T568B y T568B, o T568A y T568A). Conecta dispositivos de **distinto tipo** — en realidad, dispositivos que usan el mismo par para enviar que para recibir... simplificando: los que NO son "iguales entre sí":
+**Ambos extremos con la misma norma** (T568B y T568B, o T568A y T568A). Conecta dispositivos de **distinto tipo**, cuyos pines de envío y de recepción ya son complementarios: el que transmite por unos pines, el otro escucha por esos mismos. En la práctica, los que NO son "iguales entre sí":
 
 | Cable directo conecta | Ejemplo |
 |---|---|
@@ -63,6 +63,9 @@ Es el cable que fabricas y compras de serie. Si vas a crimpar un solo tipo de ca
 | PC ↔ PC | Comunicación directa entre dos equipos |
 | Switch ↔ Switch | Unir dos switches sin uplink automático |
 | Router ↔ Router | Enlace directo entre routers |
+| PC ↔ Router | Router con puerto Ethernet sin Auto MDI-X (caso clásico de examen) |
+
+Ojo con PC ↔ Router: son "distintos", pero los dos transmiten por los mismos pines, así que necesitan cruzado (el mismo razonamiento que con dos switches).
 
 > 💡 **Auto MDI-X:** los switches modernos detectan automáticamente si el cable es directo o cruzado y ajustan sus puertos. Desde 2006, prácticamente todos lo soportan, así que un cruzado entre PC y switch también funciona. Pero en **routers y PCs antiguos** —y en ciertos laboratorios de examen— el cable cruzado sigue siendo necesario para conexiones directas entre iguales. No lo olvides: el cruce de pares 2 y 3 es la firma del crossover.
 
@@ -88,7 +91,7 @@ Cuando tengas que sacar de la caja un switch Cisco nuevo y meterle `enable`, est
 | Tipo | Extremo A | Extremo B | Conecta |
 |---|---|---|---|
 | **Directo** | T568B | T568B | PC ↔ Switch, Router ↔ Switch |
-| **Cruzado** | T568A | T568B | PC ↔ PC, Switch ↔ Switch, Router ↔ Router |
+| **Cruzado** | T568A | T568B | PC ↔ PC, Switch ↔ Switch, Router ↔ Router, PC ↔ Router |
 | **Consola** | Rollover (1→8) | Rollover (8→1) | PC ↔ Consola de switch/router |
 
 > ⚠️ **El fallo clásico de examen:** conectas un PC a un switch con un cable cruzado y "no funciona". La respuesta no es "el cable está mal" en el 95% de los casos: es que **Auto MDI-X** de ambos extremos lo resolvió hace años. En scripts antiguos o simuladores estrictos, sí, el cruzado muestra su cara.
@@ -105,7 +108,7 @@ Cuando tengas que sacar de la caja un switch Cisco nuevo y meterle `enable`, est
 <summary>🔄 Respuestas</summary>
 
 1. T568A y T568B **intercambian los pares 2 y 3** (naranja y verde). Los pares azul y marrón ocupan los mismos pines en ambas.
-2. **En un simulador antiguo no funcionará de forma fiable y podría haber problemas de enlace**: dos switches son del mismo tipo y necesitan pares intercambiados. Usarías un **cable cruzado** (T568A en un extremo, T568B en el otro).
+2. **No: no llegan a enlazar**, porque los dos switches transmiten por los mismos pines. Necesitas un **cable cruzado** (T568A en un extremo, T568B en el otro), que intercambia los pares 2 y 3 para que lo que uno transmite lo reciba el otro.
 3. Para la **configuración inicial** del switch o router: conecta el puerto serie/USB del PC al **puerto de consola** del equipo Cisco. Sin IP, sin Ethernet: puerto serie a bajo nivel.
 </details>
 

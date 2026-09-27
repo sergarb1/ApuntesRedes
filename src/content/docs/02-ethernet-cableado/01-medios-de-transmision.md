@@ -13,7 +13,7 @@ description: Cobre, fibra o aire, elige tu herramienta 🗼
 
 > Los datos pueden viajar por **tres medios físicos**: el cobre (cables), la fibra óptica (luz) y el aire (ondas de radio). Cada uno tiene su velocidad, su distancia y su precio, y elegir bien es la primera decisión de todo administrador.
 
-En la [unidad de introducción](/ApuntesRedes/01-introduccion/05-paquetes-y-protocolos) viste que la capa 1 del modelo OSI se encarga de transmitir **bits**: series de 1 y 0 que, al final, tienen que atravesar algo físico. Ese "algo" es el medio de transmisión. Y como cada medio tiene sus reglas del juego, esta unidad entera consiste en conocerlas.
+La capa 1 del modelo OSI (la verás a fondo en el [punto del modelo OSI](/ApuntesRedes/02-ethernet-cableado/08-modelo-osi)) se encarga de transmitir **bits**: series de 1 y 0 que, al final, tienen que atravesar algo físico. Ese "algo" es el medio de transmisión. Y como cada medio tiene sus reglas del juego, esta unidad entera consiste en conocerlas.
 
 ---
 
@@ -39,7 +39,7 @@ El cobre (que en la práctica significa cable UTP o STP) es el medio más usado 
 
 - **Barato** y fácil de conseguir: cualquier ferretería tiene metro a metro.
 - **Crimpable por cualquiera**: con una crimpadora y diez minutos, un técnico novato fabrica su latiguillo.
-- **Límite de 100 metros**: la señal se atenúa con la distancia, y a partir de ahí los errores se disparan (lo verás en el [punto 7](/ApuntesRedes/02-ethernet-cableado/06-conceptos-fisicos)).
+- **Límite de 100 metros**: la señal se atenúa con la distancia, y a partir de ahí los errores se disparan (lo verás en el [punto 6](/ApuntesRedes/02-ethernet-cableado/06-conceptos-fisicos)).
 
 **¿Cuándo elegirlo?** Cuando necesitas conectar puestos de trabajo, impresoras y switches dentro del mismo edificio: distancias cortas, presupuesto ajustado y mantenimiento sencillo. Es el pan de cada día del cableado horizontal.
 
@@ -67,7 +67,7 @@ El medio inalámbrico (WiFi, radio) no usa conductor físico: envía ondas elect
 - **El canal se comparte:** cuantos más dispositivos, menos ancho de banda para cada uno.
 - **Obstrucciones y vecinos:** paredes, muebles y los routers del piso de al lado degradan la señal.
 
-**¿Cuándo elegirlo?** Cuando el cable no llega o no es práctico: zonas de paso, salas de reuniones, clientes móviles. Como regla general, **el WiFi complementa al cable, no lo sustituye**: los puestos fijos y de alta demanda deben ir por cobre. Lo profundizas en el [punto 6](/ApuntesRedes/11-redes-inalambricas/02-medios-inalambricos).
+**¿Cuándo elegirlo?** Cuando el cable no llega o no es práctico: zonas de paso, salas de reuniones, clientes móviles. Como regla general, **el WiFi complementa al cable, no lo sustituye**: los puestos fijos y de alta demanda deben ir por cobre. Lo profundizas en la [unidad de redes inalámbricas](/ApuntesRedes/11-redes-inalambricas/02-medios-inalambricos).
 
 ---
 
