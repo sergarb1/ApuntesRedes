@@ -51,7 +51,7 @@ R1(config)# ip route 0.0.0.0 0.0.0.0 10.0.0.2        # AD=1 (primaria, la que ma
 R1(config)# ip route 0.0.0.0 0.0.0.0 10.0.1.2 5      # AD=5 (respaldo, en remojo)
 ```
 
-La **distancia administrativa (AD)** es la nota de confianza que le da el router a cada tipo de ruta: cuánto menor, más fiable y preferida.
+La **distancia administrativa (AD)** es la nota de confianza que le da el router a cada tipo de ruta: cuanto menor, más fiable y preferida.
 
 | Fuente de ruta | AD por defecto |
 |---|---|
@@ -78,7 +78,7 @@ La comprobación no puede ser más directa:
 
 ```bash
 R1# show ip route 0.0.0.0        → Ver qué ruta por defecto está activa ahora
-R1# show ip route static         → Ver ambas, marcadas como candidate
+R1# show ip route static         → Ver las rutas estáticas instaladas (la de respaldo, sin instalar, no aparece)
 ```
 
 > 💡 **Truco de laboratorio:** si quieres forzar que el respaldo se active para probarlo, apaga la interfaz del enlace primario (`shutdown`) y observa cómo la tabla cambia de vecino. Luego vuelve a encender.
@@ -96,7 +96,7 @@ R1# show ip route static         → Ver ambas, marcadas como candidate
 
 1. La **estrella** indica que es el *candidate default route*: el camino por defecto activo al que irá todo lo que no tenga ruta específica.
 2. `ip route 0.0.0.0 0.0.0.0 10.0.1.2 5`.
-3. Solo la de **AD=1** (via 10.0.0.2). La de AD=5 queda instalada "en frío" hasta que la primaria pierda su siguiente salto, momento en el que se activa.
+3. Solo la de **AD=1** (via 10.0.0.2). La de AD=5 queda en espera hasta que la primaria pierda su siguiente salto, momento en el que se activa.
 </details>
 
 ---

@@ -38,6 +38,17 @@ La regla de oro que debes grabarte:
 
 ---
 
+## 💡 Los LEDs: el estado a simple vista
+
+Delante del router hay un pequeño panel de LEDs que cuenta la historia sin abrir la consola:
+
+- **LED de sistema (SYS / power):** el router está vivo; mientras parpadea al encender, sigue en el POST.
+- **LEDs de cada interfaz (link/act):** enlace estable y tráfico pasando. Si la interfaz está en `shutdown`, su LED se apaga aunque tengas el cable puesto.
+
+En el rack los LEDs te dicen por dónde va el viento antes de teclear; la confirmación formal siempre es `show ip interface brief`.
+
+---
+
 ## ⚡ Secuencia de arranque (y por qué importa)
 
 Cuando le das corriente a un router, ocurre esto en un abrir y cerrar de ojos:

@@ -21,12 +21,12 @@ Esta unidad se lee como un **libro de 6 capítulos**: los 5 primeros son teoría
 
 Al terminar, serás capaz de:
 
-- Identificar los componentes de un router (CPU, RAM, NVRAM, Flash, ROM) y su secuencia de arranque.
+- Identificar los componentes de un router (CPU, RAM, NVRAM, Flash, ROM), leer sus LEDs y describir la secuencia de arranque.
 - Acceder a la CLI por consola, auxiliar, Telnet y SSH, y aplicar una configuración básica segura.
 - Configurar rutas estáticas con next-hop o interfaz de salida y saber cuándo conviene cada una.
 - Crear y entender la ruta por defecto (0.0.0.0/0) como último recurso.
 - Explicar cómo decide un router: longest prefix match, distancia administrativa y métrica.
-- Verificar y depurar el enrutamiento con `show ip route`, `show ip interface brief` y traceroute.
+- Verificar el enrutamiento con `show ip route`, `show ip interface brief` y traceroute.
 
 ---
 
@@ -47,7 +47,7 @@ Al terminar, serás capaz de:
 
 ## 📝 Boletines de la unidad
 
-> Practica con los pares del curso: empezar siempre el resuelto para ver el estilo y luego intentar el por-resolver.
+> Practica con los pares del curso: mira 1-2 resueltos para coger el formato, luego intenta el por-resolver; consulta el resuelto solo cuando te atasques.
 
 <div class="ejercicio-links">
   <a href="/ApuntesRedes/boletines/boletin-u06-inicial" class="elink">🟢 Inicial por resolver</a>
@@ -64,7 +64,7 @@ Al terminar, serás capaz de:
 
 | CE | Criterio | Dónde se cubre |
 |---|---|---|
-| a) | LEDs y componentes del router | ✅ Punto 1 |
+| a) | Componentes y LEDs del router | ✅ Punto 1 |
 | b) | Acceso a la configuración | ✅ Punto 2 |
 | c) | Secuencia de arranque | ✅ Punto 1 |
 | d) | Comandos de configuración | ✅ Puntos 2-3 + ⚡ Laboratorio (punto 6) |

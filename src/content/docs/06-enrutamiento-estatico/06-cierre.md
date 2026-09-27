@@ -38,7 +38,7 @@ Has terminado la teoría: conoces las tripas del router, sabes moverte por la CL
 
 **Estática:** — Yo soy determinista: la escribes, la ves, la entiendes. Sin vecinos, sin hellos, sin sorpresas. Y no consumo CPU contando historias con otros routers.
 
-**Dinámica (OSPF):** — Y cuando un enlace muere, ¿quién te avisa? ¿El administrador, a las tres de la madrugada? Yo reconverjo solo: retiro la ruta rota y publication la alternativa en segundos.
+**Dinámica (OSPF):** — Y cuando un enlace muere, ¿quién te avisa? ¿El administrador, a las tres de la madrugada? Yo reconverjo solo: retiro la ruta rota y publico la alternativa en segundos.
 
 **Estática:** — En redes pequeñas y en el borde (hacia Internet, hacia un solo ISP), yo mando: es lo que firma el contrato con el operador. Además, con rutas flotantes y SLA me apaño hasta en HA (ya lo verás al final del curso).
 
@@ -48,7 +48,7 @@ Has terminado la teoría: conoces las tripas del router, sabes moverte por la CL
 
 **Dinámica:** — Y tú tienes la última palabra cuando el diseño exige control absoluto. Somos el bisturí y el sistema inmunitario.
 
-**Estática:** — El buen administrador usa los dos: dinamica dentro, estática en el borde, y documentación siempre.
+**Estática:** — El buen administrador usa los dos: dinámica dentro, estática en el borde, y documentación siempre.
 
 ---
 
@@ -78,7 +78,7 @@ Has terminado la teoría: conoces las tripas del router, sabes moverte por la CL
 
 **Administrador:** — He configurado `ip route 10.20.0.0 255.255.0.0 172.16.0.2` y los PCs no llegan. ¿El IOS está roto?
 
-**CONRAD:** — ¿Y en el R2, que recibe tu paquete, hay ruta de vuelta a la 192.168.1.0? ¿No? Eso es el clásico de los clásicos: el paquete va y no vuelve. El enrutamiento es IDA y VUELTA: por cada camino, su regreso. Sin ruta de retorno, tu paquete es unOne-Way a la nada.
+**CONRAD:** — ¿Y en el R2, que recibe tu paquete, hay ruta de vuelta a la 192.168.1.0? ¿No? Eso es el clásico de los clásicos: el paquete va y no vuelve. El enrutamiento es IDA y VUELTA: por cada camino, su regreso. Sin ruta de retorno, tu paquete se convierte en un viaje de ida sin vuelta a la nada.
 
 **CONRAD:** — Y de propina: ¿la interfaz del next-hop está up? ¿La ruta está en la tabla (`show ip route`)? ¿Hay otra ruta más específica que la tape? Cuatro comprobaciones, un minuto, en lugar de culpar al equipo.
 
@@ -96,28 +96,29 @@ Has terminado la teoría: conoces las tripas del router, sabes moverte por la CL
 PC-A ── R1 ── R2 ── R3 ── PC-B
        (red A)  (red B)  (red C)
 ```
-Redes: 192.168.1.0/24 (A), 172.16.12.0/30 (R1-R2), 172.16.23.0/30 (R2-R3), 10.20.0.0/24 (C).
+**Redes:** A = 192.168.1.0/24 (PC-A, con su gateway en R1), B = 192.168.2.0/24 (la LAN de R2), C = 10.20.0.0/24 (PC-B, con su gateway en R3). **Enlaces:** R1-R2 = 172.16.12.0/30 (R1 `.1`, R2 `.2`) y R2-R3 = 172.16.23.0/30 (R2 `.1`, R3 `.2`).
 
 **Configura al inicio:**
-1. Interfaces con sus IPs y `no shutdown`.
-2. R1: rutas estáticas a la red C vía R2 y a la red B; R2: rutas a A y C; R3: rutas a A y B.
-3. Ruta por defecto en R1 y R3 hacia el centro (o revisa qué pasa sin ella).
-4. Verifica: PC-A pinge a PC-B y viceversa. `show ip route` en los tres.
+1. Interfaces con sus IPs (los dos /30 de arriba y las de las LANs) y `no shutdown`.
+2. R1: rutas a C y a B vía 172.16.12.2; R2: rutas a A (vía 172.16.12.1) y a C (vía 172.16.23.2); R3: rutas a A y a B (ambas vía 172.16.23.1).
+3. Verifica: PC-A pinge a PC-B y viceversa. `show ip route` en los tres.
 
 **Ahora, SIN MIRAR, tu profesor introduce TRES fallos:**
 - Fallo A: quita la ruta de retorno en R3 (red A).
 - Fallo B: `shutdown` en la interfaz LAN de R3.
-- Fallo C: añade en R1 una ruta estática incorrecta: `ip route 10.20.0.0 255.255.255.0 172.16.23.3` (saltándose R2).
+- Fallo C: sustituye en R1 la ruta a la red C —borra la buena con `no ip route 10.20.0.0 255.255.255.0 172.16.12.2`— por una que se salte a R2: `ip route 10.20.0.0 255.255.255.0 172.16.23.2` (la IP de R3).
 
 **Reto:** diagnosticar cada fallo con pings por saltos (PC → gateway → siguiente router), `show ip route` y `show ip interface brief`. Documenta síntoma → causa → solución.
 
 **Fallo intencionado extra:** el profesor configura en R1 `ip route 10.20.0.0 255.255.0.0 172.16.12.2` con **máscara 255.255.0.0** en vez de 255.255.255.0. El ping a 10.20.0.50 funciona, pero el a 10.20.1.50 (otra subred del mismo /16 que no existe) se pierde de forma "rara". Diagnóstico: ¿qué le dice el longest prefix match cuando hay una ruta /16 y otra /24?
 
+> **Extra (cuando ya hayas diagnosticado los tres fallos):** monta ahora la ruta por defecto — R1: `ip route 0.0.0.0 0.0.0.0 172.16.12.2` y R3: `ip route 0.0.0.0 0.0.0.0 172.16.23.1`, ambas hacia el centro — y comprueba que las rutas concretas siguen mandando sobre la default (longest prefix). Si después borras en R1 la ruta concreta a la red C, la default la cubre: ese es exactamente su trabajo.
+
 > **Pista 1 (fallo A):** el paquete llega a PC-B… y la respuesta no vuelve. Haz ping desde R3 a la red A: si falla, mira `show ip route` de R3.
 >
 > **Pista 2 (fallo B):** `show ip interface brief` + `show ip route`: la red conectada desaparece de la tabla cuando la interfaz se cae.
 >
-> **Pista 3 (fallo C):** traceroute desde PC-A: verás dónde muere el paquete (¿en R1? ¿en R2?). La ruta mal puesta manda el tráfico a un next-hop que no sabe qué hacer.
+> **Pista 3 (fallo C):** `show ip route` en R1: la ruta a la red C **ni siquiera aparece** — su next-hop (172.16.23.2, la IP de R3) no es alcanzable desde R1, así que el IOS no la instala. El tráfico a la sucursal muere en R1; el traceroute desde PC-A se corta en el primer salto.
 
 ---
 
@@ -222,8 +223,8 @@ El paquete turístico murió en R2 con un ICMP elegante y el administrador descu
 | a) | Componentes y LEDs del router | ✅ Punto 1 |
 | b) | Acceso a la configuración | ✅ Punto 2 |
 | c) | Secuencia de arranque | ✅ Punto 1 |
-| d) | Comandos de configuración | ✅ Punto 2 + ⚡ Laboratorio (punto 6) |
-| f) | Rutas estáticas y por defecto | ✅ Puntos 3-5 + 🧠 Atrévete (punto 6) |
+| d) | Comandos de configuración | ✅ Puntos 2-3 + ⚡ Laboratorio (punto 6) |
+| f) | Rutas estáticas y por defecto | ✅ Puntos 3-5 + 🧠 Atrévete a pensar (punto 6) |
 
 ---
 

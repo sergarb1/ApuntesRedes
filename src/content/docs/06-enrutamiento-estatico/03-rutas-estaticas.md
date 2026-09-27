@@ -36,7 +36,7 @@ ip route {red_destino} {máscara} {siguiente_salto | interfaz_salida}
 
 ---
 
-## 🏞️ La topología pomo de la unidad: R1-R2
+## 🏞️ La topología de cabecera de la unidad: R1-R2
 
 Todo este punto gira alrededor de dos routers unidos por un enlace WAN:
 
@@ -71,8 +71,8 @@ Y el último recurso, la ruta hacia fuera:
 # En R1: TODO lo que no tenga ruta concreta, que salga por el vecino
 R1(config)# ip route 0.0.0.0 0.0.0.0 10.0.0.2   # Default (punto 4)
 
-# En R2: hacia el ISP, usando interfaz de salida
-R2(config)# ip route 0.0.0.0 0.0.0.0 10.0.0.2
+# En R2: hacia el ISP (el next-hop que te da el proveedor)
+R2(config)# ip route 0.0.0.0 0.0.0.0 203.0.113.1
 ```
 
 El `0.0.0.0 0.0.0.0` es la **ruta por defecto**: atrapa todo lo que no tenga un camino más específico. En el punto 4 la trituramos a fondo.
@@ -104,7 +104,6 @@ R1# show ip route
      10.0.0.0/30 is subnetted, 1 subnets
 C       10.0.0.0/30 is directly connected, GigabitEthernet0/1
 L       10.0.0.1/32 is directly connected, GigabitEthernet0/1
-     192.168.1.0/24 is directly connected, GigabitEthernet0/0
 C       192.168.1.0/24 is directly connected, GigabitEthernet0/0
 L       192.168.1.1/32 is directly connected, GigabitEthernet0/0
 S       192.168.2.0/24 [1/0] via 10.0.0.2
