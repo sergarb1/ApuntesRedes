@@ -59,7 +59,7 @@ Switch A (puerto Fa0/24, trunk) ──── Switch B (puerto Fa0/24, trunk)
    VLAN 30 (IT)                        VLAN 30 (IT)
 ```
 
-Sin el trunk, las VLANs de Ventas a un lado del edificio no llegarían a las del otro. Con él, un cable sostiene todas las VLANs del edificio. El mismo concepto se usa entre switch y router (punto 4) o entre switch y switch para los enlaces de core.
+Sin el trunk, las VLANs de Ventas a un lado del edificio no llegarían a las del otro. Con él, un cable sostiene todas las VLANs del edificio. El mismo concepto se usa entre switch y router ([punto 3](/ApuntesRedes/05-trunking-inter-vlan/03-inter-vlan-routing)) o entre switch y switch para los enlaces de core.
 
 ---
 
@@ -110,7 +110,7 @@ native VLAN: 99                   native VLAN: 1
 trama sin etiqueta →  "VLAN 99"   trama sin etiqueta → "VLAN 1" ❌ MISMATCH
 ```
 
-> ⚠️ **Síntoma del mismatch:** el switch ladra por el log *"Native VLAN mismatch discovered on Fa0/24"* y el tráfico de DHCP/ARP entre VLANs "va y viene a ratos". La solución es una línea: que ambos extremos declaren la **misma** native VLAN. Lo compruebas con `show interface trunk`.
+> ⚠️ **Síntoma del mismatch:** el switch ladra por el log *"Native VLAN mismatch discovered on Fa0/24"* y el tráfico de DHCP/ARP entre VLANs "va y viene a ratos". La solución es una línea: que ambos extremos declaren la **misma** native VLAN. Lo compruebas con `show interfaces trunk`.
 
 ---
 
@@ -137,7 +137,7 @@ Switch# show running-config interface fa0/24   # la config exacta del puerto
 <details>
 <summary>🔄 Respuestas</summary>
 
-1. Añade **4 bytes** entre la MAC origen y el EtherType: **TPID** (0x8100) + **TCI** (PRI 3 bits + CFI 1 bit + VLAN ID 12 bits), 802.1p) y **VLAN ID** (12 bits).
+1. Añade **4 bytes** entre la MAC origen y el EtherType: **TPID** (2 bytes, `0x8100`) y **TCI** (2 bytes: PRI 3 bits + CFI 1 bit + VLAN ID 12 bits).
 2. El **access** pertenece a una sola VLAN, sin etiquetar; el **trunk** transporta varias VLANs, todas etiquetadas salvo la native.
 3. Aparece el mensaje *"Native VLAN mismatch"* y las tramas sin etiquetar caen en la VLAN equivocada en cada extremo. Se detecta con **`show interfaces trunk`**, que muestra la native de cada lado. Se arregla declarando la **misma** native en ambos.
 
@@ -147,7 +147,7 @@ Switch# show running-config interface fa0/24   # la config exacta del puerto
 
 ## ✅ Resumen en 3 frases
 
-- El **802.1Q** mete **4 bytes** (TPID + PRI + VLAN ID) dentro de cada trama para que viajen muchas VLANs por un único cable.
+- El **802.1Q** mete **4 bytes** (TPID + TCI) dentro de cada trama para que viajen muchas VLANs por un único cable.
 - Un **trunk** es el enlace que transporta todas las VLANs permitidas, controladas con `switchport mode trunk` y `switchport trunk allowed vlan`.
 - La **native VLAN** no se etiqueta y debe ser **idéntica en ambos extremos**, y su desajuste es la incidencia clásica de los trunks.
 

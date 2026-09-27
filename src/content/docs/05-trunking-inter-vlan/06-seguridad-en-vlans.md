@@ -90,7 +90,7 @@ Secuencia del **double tagging** (el sofisticado):
 4. El segundo switch la ve como tráfico legítimo de VLAN 20 y la entrega al objetivo.
 ```
 
-No hagas túneles mentales: lo importante es que **si la native VLAN transporta datos y todos usan la 1, el doble etiquetado es gratis**. Por eso el hardening del punto 3 (cambiar la native) no es un capricho.
+No hagas túneles mentales: lo importante es que **si la native VLAN transporta datos y todos usan la 1, el doble etiquetado es gratis**. Por eso cambiar la native (el paso 3 de la checklist de abajo) no es un capricho.
 
 ---
 
@@ -108,6 +108,7 @@ El "ritual" para dejar un switch de VLANs a prueba de balas (y de pentesters):
 | 6 | **VACL** para tráfico sensible dentro de VLAN | `vlan access-map` + `vlan filter` |
 | 7 | **PVLAN** para hoteles/campus/ISP (aislar entre clientes) | `private-vlan` config |
 | 8 | Deshabilitar **VTP** (o VTPv3 off) | `vtp mode transparent` / `vtp mode off` |
+| 9 | **VLAN de gestión** dedicada (IP del switch, lejos de los datos) | `interface vlan 999` + `ip address …` + `ip default-gateway` |
 
 > ⚠️ **CONRAD zanja:** "¿Cuál es el mejor firewall de VLANs? Configurar bien el switch. La mitad de los 'ataques a la VLAN' se resuelven con `switchport mode access` y `nonegotiate`. El resto, con native VLAN cambiada y VTP apagado. No inventes."
 
@@ -134,7 +135,7 @@ El "ritual" para dejar un switch de VLANs a prueba de balas (y de pentesters):
 
 - La **VACL** filtra dentro de la VLAN y la **PVLAN** aísla puertos entre sí (promiscuous, isolated, community).
 - El **VLAN hopping** aprovecha DTP y el doble etiquetado: apaga DTP y cambia la native VLAN.
-- Un **hardening** en 8 pasos (access, nonegotiate, native alta, VLAN 1 prohibida, sin VTP) cierra los frentes clásicos.
+- Un **hardening** en 9 pasos (access, nonegotiate, native alta, VLAN 1 prohibida, gestión aparte, sin VTP) cierra los frentes clásicos.
 
 ## 🐛 Vocabulario rápido
 

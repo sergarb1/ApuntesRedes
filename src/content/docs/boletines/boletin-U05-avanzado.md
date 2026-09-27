@@ -33,7 +33,7 @@ a) ¿Qué problemas puede causar esta discrepancia?
 b) ¿Qué comando usarías para diagnosticarlo?
 c) ¿Cómo arreglarlo sin perder conectividad?
 
-**Pista:** `show interface trunk` muestra la native VLAN de cada extremo.
+**Pista:** `show interfaces trunk` muestra la native VLAN de cada extremo.
 
 ## 3. Diseño de VLANs corporativas
 
@@ -87,10 +87,10 @@ Enumera 3 riesgos de seguridad específicos de VLANs y cómo mitigarlos:
 
 ## 7. VLAN hopping y hardening
 
-a) Describe **3 vectores de ataque** que permiten a un atacante salirse de su VLAN (VLAN hopping), explicando cómo funciona cada uno.
+a) Describe los **2 vectores de ataque** principales que permiten a un atacante salirse de su VLAN (VLAN hopping), explicando cómo funciona cada uno.
 b) Propón **3 mitigaciones concretas** de hardening con sus comandos.
 
-**Pista:** piensa en DTP/negociación de trunks, en el double tagging sobre la native VLAN y en el etiquetado 802.1Q aplicado a tramas que no deberían llevarlo. Las mitigaciones están en el punto 6 de seguridad: `switchport nonegotiate`, native VLAN ≠ 1, `allowed vlan`, VTP.
+**Pista:** piensa en la negociación de trunks por DTP y en el double tagging sobre la native VLAN. Las mitigaciones están en el punto 6 de seguridad: `switchport nonegotiate`, native VLAN ≠ 1, `allowed vlan`, VTP.
 
 ## 8. Inter-VLAN con SVI paso a paso
 

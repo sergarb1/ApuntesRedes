@@ -23,7 +23,6 @@ Switch1(config-if-range)# switchport mode access
 Switch1(config-if-range)# switchport access vlan 20
 Switch1(config)# interface fa0/23
 Switch1(config-if)# switchport mode trunk
-Switch1(config-if)# switchport trunk native vlan 99
 Switch1(config-if)# switchport trunk allowed vlan 10,20
 Switch1(config)# interface fa0/24
 Switch1(config-if)# switchport mode trunk
@@ -119,10 +118,9 @@ c) **Con GigabitEthernet:** 120 Mbps sobre 1000 Mbps = **12 % de uso**, sin cuel
 
 ## 7. VLAN hopping y hardening
 
-a) **Tres vectores de ataque:**
+a) **Los dos vectores de ataque:**
    1. **Negociación de trunk por DTP:** un portátil conectado a un puerto en modo `dynamic desirable` (o `dynamic auto` si el portátil pide) tramita el protocolo DTP y consigue que el puerto se convierta en **trunk**. A partir de ahí, todas las VLANs que cruzan el trunk quedan a su alcance.
    2. **Double tagging:** el atacante envía una trama con **dos etiquetas 802.1Q** (a menudo con la native VLAN). El primer switch elimina la primera etiqueta (la trata como native) y la reenvía por el trunk; el segundo switch ve la segunda etiqueta y la entrega en la **VLAN objetivo**. El atacante nunca llega a ser trunk ni a hablar directamente: salta a la VLAN objetivo de forma encubierta.
-   3. **Tráfico mislabeled / native VLAN vulnerable:** si la native VLAN transporta datos y es la VLAN 1, todo el tráfico sin etiquetar (o mal etiquetado) acaba en la VLAN por defecto, donde pueden mezclarse con otras VLANs mal configuradas (o con el double tagging del vector anterior gratuitamente).
 
 b) **Tres mitigaciones concretas:**
    1. **Apagar DTP en puertos de usuario:** `switchport mode access` + `switchport nonegotiate` (y `shutdown` en los puertos no usados) → el atacante no puede negociar un trunk.

@@ -12,7 +12,7 @@ Orden de revisión: **1 → 12** (introducción primero). Alcance por sesión: *
 | 02 | Ethernet y cableado | ✅ revisada | [revision-U02-ethernet-cableado.md](revision-U02-ethernet-cableado.md) |
 | 03 | Direccionamiento IP | ✅ revisada | [revision-U03-direccionamiento-ip.md](revision-U03-direccionamiento-ip.md) |
 | 04 | Switching y VLAN | ✅ revisada | [revision-U04-switching-vlan.md](revision-U04-switching-vlan.md) |
-| 05 | Trunking e inter-VLAN | ⏳ pendiente | — |
+| 05 | Trunking e inter-VLAN | ✅ revisada | [revision-U05-trunking-inter-vlan.md](revision-U05-trunking-inter-vlan.md) |
 | 06 | Enrutamiento estático | ⏳ pendiente | — |
 | 07 | OSPF | ⏳ pendiente | — |
 | 08 | ACL y seguridad | ⏳ pendiente | — |

@@ -50,7 +50,7 @@ Al terminar, serás capaz de:
 
 ## 📝 Boletines de la unidad
 
-> Practica con los pares del curso: empezar siempre el resuelto para ver el estilo y luego intentar el por-resolver.
+> Practica con los pares del curso: mira 1-2 resueltos para coger el formato, luego intenta el por-resolver; consulta el resuelto solo cuando te atasques.
 
 <div class="ejercicio-links">
   <a href="/ApuntesRedes/boletines/boletin-u05-inicial" class="elink">🟢 Inicial por resolver</a>
@@ -66,8 +66,11 @@ Al terminar, serás capaz de:
 | CE | Criterio | Dónde se cubre |
 |---|---|---|
 | RA3 | Administración de conmutadores (enlaces y segmentación) | ✅ Puntos 1-2, 5 y 7 + ⚡ Laboratorio (punto 8) |
-| RA4 | Encaminamiento entre redes | ✅ Puntos 3-4 y 7 (relay) + 🧠 Atrévete a pensar (punto 8) |
-| RA5 | Segmentación lógica y aislamiento | ✅ Puntos 1, 3 y 6 + 💬 Entrevista (punto 8) |
+| RA4·d) | Comandos de configuración | ✅ Puntos 3-4 y 7 (relay) + 🧠 Atrévete a pensar (punto 8) |
+| RA5·c) | Diagnóstico de incidencias | ✅ Punto 2 + ⚡ Laboratorio (punto 8) |
+| RA5·d) | Enlaces troncales | ✅ Puntos 1-2 y 6 + 🤬 CONRAD y 💬 Entrevista (punto 8) |
+| RA5·e) | Inter-VLAN con router | ✅ Puntos 3-4 + ⭐ y 🕵️ (punto 8) |
+| RA5·f) | Protocolos centralizados (VTP) | ✅ Punto 5 + 🕵️ (punto 8) |
 
 ---
 

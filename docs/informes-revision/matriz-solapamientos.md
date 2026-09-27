@@ -6,7 +6,7 @@ Veredictos: ✅ mención legítima · ↪️ mover a … · ❌ quitar · ⏳ po
 
 | Concepto | Unidades (menciones) | Veredicto |
 |---|---|---|
-| **DHCP** | introducción (9) · IP (11) · trunking (7) · servicios (10) · switching (2) · NAT (3) · AD (5) · inalámbricas (3) | ✅ sesión 03 (lado IP): IP es la casa del DORA, la config en router, exclusiones y DHCPv6 (punto 8 y 13, lab y boletines); servicios aportará el lado de servidor. Queda el cruce con trunking (`07-dhcp-por-vlan`) ↔ servicios en la sesión 10 |
+| **DHCP** | introducción (9) · IP (11) · trunking (7) · servicios (10) · switching (2) · NAT (3) · AD (5) · inalámbricas (3) | ✅ sesión 03 (lado IP) + ✅ sesión 05 (lado trunking): IP es la casa del DORA, la config en router, exclusiones y DHCPv6 (punto 8 y 13, lab y boletines); trunking (`07-dhcp-por-vlan`) es la casa del escenario con VLANs (pool por VLAN + `ip helper-address`). Queda solo el lado servidor en la sesión 10 |
 | **DNS** | introducción (9) · IP (9) · servicios (10) · NAT (2) · inalámbricas (3) | ✅ sesión 03 (lado IP): solo como opción DHCP, "máquina DNS" y DNS64 (transición); el servidor DNS va en servicios. Frontera intro ↔ servicios pendiente |
 | **ARP** | ethernet (1) · IP (5) · switching (2) · trunking (3) · enrutamiento (3) · AD (2) · introducción (1) | ✅ sesión 02: puente en Ethernet (solo EtherType 0x0806 + enlace a IP) → desarrollo en IP (cadena verificada en la sesión 03) |
 | **STP** | switching (7) · AD (7) · **ethernet (3)** · introducción (1) · inalámbricas (1) | ✅ sesión 02: falso positivo en ethernet = cable *apantallado* (Shielded Twisted Pair), no Spanning Tree |
@@ -33,5 +33,6 @@ Veredictos: ✅ mención legítima · ↪️ mover a … · ❌ quitar · ⏳ po
 - [x] Sesión 02 · ethernet y cableado — sin candidatos a mover/quitar: ARP solo como EtherType (puente a IP), MTU solo como techo de trama, WiFi a nivel de capas 1–2 con enlace a inalámbricas; STP en esta unidad es cable apantallado (falso positivo). Ver [revision-U02-ethernet-cableado.md](revision-U02-ethernet-cableado.md).
 - [x] Sesión 03 · direccionamiento IP — sin candidatos a mover/quitar: rutas estáticas solo como referencia adelantada en el lab, ACL fuera del lab (sustituidas por un fallo DHCP propio), NAT/OSPF solo puentes forward, ICMPv6 con punto propio. Cerradas las filas DHCP/DNS/NAT/OSPF/ICMP/IPv6/MTU/Ruta por defecto (lado IP). Ver [revision-U03-direccionamiento-ip.md](revision-U03-direccionamiento-ip.md).
 - [x] Sesión 04 · switching y VLAN — candidato a mover resuelto: los 2 ejercicios de Port Security del boletín avanzado → boletín avanzado de ACL (lado ACL ya cerrado: su sesión cubrirá el resto). Cerradas las filas Port Security y VLAN (reparto switching ↔ trunking); el "Puente al DHCP" del punto 8 de VLAN es puente legítimo (la fila DHCP queda con el cruce trunking ↔ servicios de la sesión 10). Ver [revision-U04-switching-vlan.md](revision-U04-switching-vlan.md).
-- [ ] Sesiones 05–12
+- [x] Sesión 05 · trunking e inter-VLAN — sin candidatos a mover/quitar: VLAN = reparto ya cerrado en la sesión 04; DHCP con el lado trunking cerrado (queda solo el lado servidor, sesión 10); ACL solo como puente (VACL propia y "más adelante" en un boletín). CEs de la unidad alineados con letras oficiales (RA4·d, RA5·c–f). Ver [revision-U05-trunking-inter-vlan.md](revision-U05-trunking-inter-vlan.md).
+- [ ] Sesiones 06–12
 - [ ] Cierre transversal

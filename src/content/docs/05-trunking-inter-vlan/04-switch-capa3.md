@@ -13,7 +13,7 @@ description: Routing a velocidad de hardware dentro del propio switch ⚡
 
 > Un **switch de capa 3** (multicapa) puede enrutar entre VLANs **sin router externo**: crea una interfaz virtual por VLAN llamada **SVI** (*Switch Virtual Interface*) y activa `ip routing`. El resultado es routing a **velocidad de hardware**, sin el cuello de botella del router-on-a-stick.
 
-En el punto 4 el router-on-a-stick hacía todo el trabajo de capa 3, pero toda la oficina se aferraba a una sola interfaz. En redes con cientos de usuarios eso cruje. Aquí llega la alternativa de los campus modernos: el propio switch se convierte en router.
+En el [punto 3](/ApuntesRedes/05-trunking-inter-vlan/03-inter-vlan-routing) el router-on-a-stick hacía todo el trabajo de capa 3, pero toda la oficina se aferraba a una sola interfaz. En redes con cientos de usuarios eso cruje. Aquí llega la alternativa de los campus modernos: el propio switch se convierte en router.
 
 ---
 
@@ -28,7 +28,7 @@ Un switch multicapa (como un 3560 o un 3650) hace dos trabajos en el mismo apara
 
 La clave está en que **ambos hacen forwarding en hardware**: el *routing* no pasa por la CPU ni por un cable externo, así que el rendimiento es brutal comparado con un router-on-a-stick de una interfaz.
 
-> 💡 **Razonamiento de fondo:** el cuello de botella del punto 4 no era el router en sí, era la **interfaz única** por la que pasaba TODO. El switch de capa 3 enruta internamente, sin ningún cable físico entre VLANs: cada VLAN "se conecta" a una interfaz virtual interna.
+> 💡 **Razonamiento de fondo:** el cuello de botella del router-on-a-stick no era el router en sí, era la **interfaz única** por la que pasaba TODO. El switch de capa 3 enruta internamente, sin ningún cable físico entre VLANs: cada VLAN "se conecta" a una interfaz virtual interna.
 
 ---
 
@@ -99,7 +99,7 @@ Switch(config-if)# no shutdown
 
 ## 🔌 Para qué más sirve un switch capa 3: la gestión
 
-El SVI de la VLAN de gestión es donde pones la IP del switch para administrarlo. Este truco lo verás también en el punto 8:
+El SVI de la VLAN de gestión es donde pones la IP del switch para administrarlo. Este truco lo recoge también la checklist del [punto 6](/ApuntesRedes/05-trunking-inter-vlan/06-seguridad-en-vlans):
 
 ```bash
 Switch(config)# interface vlan 999
