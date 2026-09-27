@@ -98,7 +98,7 @@ e) **Falso.** El router necesita una ruta conectada (o aprendida) a la subred de
 
 ## 6. Diseño de rutas para una sede
 
-a) **Cuatro:** dos rutas estáticas (LAN de R2 y LAN de R3) + la ruta por defecto a Internet. Las redes de enlace (10.0.0.0/30 y 10.0.0.4/30) no necesitan rutas en R1 porque son conectadas.
+a) **Tres:** dos rutas estáticas (LAN de R2 y LAN de R3) + la ruta por defecto a Internet. Las redes de enlace (10.0.0.0/30 y 10.0.0.4/30) no necesitan rutas en R1 porque son conectadas.
 
 b) **En R1:**
 ```bash
@@ -115,7 +115,7 @@ Todo lo que no sea su propia LAN se lo entrega a R1, que ya sabe encaminarlo (su
 
 ## 7. Interferencia con rutas conectadas
 
-**No pasa nada dramático:** la ruta estática se configura pero NO gana. En `show ip route` verías ambas entradas: la `C` (conectada, AD 0) activa y la `S` (estática, AD 1) entre corchetes como alternativa menos fiable. El router siempre prefiere la de menor AD para el mismo prefijo, así que el encaminamiento local sigue funcionando. Eso sí: es una config descuidada — sobra y conviene quitarla con `no ip route ...`.
+**No pasa nada dramático:** la ruta estática se configura pero **no llega a instalarse**. En `show ip route` verías solo la `C` (conectada, AD 0): con el mismo prefijo, la conectada gana a la estática (AD 1), así que el encaminamiento local sigue funcionando sin interferencias. Eso sí: es una config descuidada — sobra y conviene quitarla con `no ip route ...`.
 
 ## 8. Escenario completo de diagnóstico
 

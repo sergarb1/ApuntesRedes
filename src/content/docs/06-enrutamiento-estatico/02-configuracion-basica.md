@@ -45,6 +45,8 @@ Router> enable
 Router# configure terminal
 Router(config)# hostname R1
 R1(config)# enable secret MiClaveSegura
+R1(config)# username administrador secret ClaveFuerte9
+R1(config)# banner motd #Acceso restringido al personal autorizado#
 
 R1(config)# line console 0
 R1(config-line)# password consola123
@@ -52,9 +54,12 @@ R1(config-line)# login
 R1(config-line)# exit
 
 R1(config)# line vty 0 4
-R1(config-line)# password ssh123
-R1(config-line)# login
+R1(config-line)# login local
 R1(config-line)# transport input ssh
+R1(config-line)# exit
+
+R1(config)# ip domain-name apuntes.local
+R1(config)# crypto key generate rsa   # te preguntará el tamaño: 2048
 
 R1(config)# interface gigabitethernet 0/0
 R1(config-if)# ip address 192.168.1.1 255.255.255.0
@@ -72,12 +77,16 @@ R1(config)# ip route 192.168.2.0 255.255.255.0 10.0.0.2
 
 Desmenucemos lo importante:
 
-- `enable secret MiClaveSegura`: la contraseña para pasar a modo privilegiado, **almacenada cifrada**. Nunca uses `enable password`, que viaja en claro.
+- `enable secret MiClaveSegura`: la contraseña para pasar a modo privilegiado, **almacenada cifrada**. Nunca uses `enable password`, que se guarda casi en claro en la configuración.
+- `username administrador secret …`: el usuario con el que entrarás por SSH; con `login local` en las VTY la validación se hace contra esa base de usuarios, en lugar de una contraseña compartida en la línea.
+- `banner motd`: el aviso que ve todo el que se conecta — en centros y empresas es obligatorio (y te cubre de sorpresas).
 - `line console 0`: protege el puerto de consola (el cable físico). `password` + `login` obliga a pedirla.
-- `line vty 0 4`: las 5 sesiones de **acceso remoto** (telnet/SSH). `transport input ssh` hace que SOLO acepte SSH, no telnet. Seguridad barata y muy efectiva.
+- `ip domain-name` + `crypto key generate rsa`: **sin estas dos órdenes SSH no arranca** (el router necesita un dominio y sus claves para cifrar). Si las olvidas, con `transport input ssh` te quedas sin acceso remoto de ningún tipo.
+- `line vty 0 4`: las 5 sesiones de acceso remoto — hoy solo SSH (Telnet viaja en claro y por eso lo vetamos). `login local` + `transport input ssh` dejan fuera cualquier cosa que no sea SSH autenticado con tu usuario.
+- El router tiene además un puerto **auxiliar (AUX)**: una segunda consola por serie para gestionarlo cuando la principal está ocupada. Ya casi no se usa, pero en el examen aparece.
 - `no shutdown`: sin esto, la interfaz queda *administratively down* y el enlace no funciona. La mitad de los "no me enruta nada" del mundo vienen de aquí.
 
-Ves arriba `192.168.1.1/24` en G0/0 (tu LAN) y `10.0.0.1/30` en G0/1 (el enlace hacia el otro router). Las rutas `ip route` ya las configuré para adelantar el punto 3 — no corras todavía.
+Ves arriba `192.168.1.1/24` en G0/0 (tu LAN) y `10.0.0.1/30` en G0/1 (el enlace hacia el otro router). Las rutas `ip route` del final las retomaremos en el punto 3; ahora solo míralas.
 
 ---
 
@@ -136,7 +145,7 @@ R1# traceroute 8.8.8.8          → Traza la ruta hasta el destino
 <summary>🔄 Respuestas</summary>
 
 1. `configure terminal` entra en configuración global (`config#`), y desde ahí `interface g0/1` te baja a `config-if#`.
-2. El `no shutdown` (o la interfaz está apagada con `shutdown`). Adminstrativamente abajo = el router la tiene apagada por configuración.
+2. El `no shutdown` (o la interfaz está apagada con `shutdown`). Administrativamente abajo = el router la tiene apagada por configuración.
 3. Para que el acceso remoto acepte **solo SSH** y no telnet: la contraseña viaja cifrada y nadie puede entrar en claro.
 </details>
 

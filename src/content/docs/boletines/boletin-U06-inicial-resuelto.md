@@ -49,7 +49,7 @@ e) **Verdadero.** `show ip route` muestra las rutas del router.
 ip route 192.168.2.0 255.255.255.0 10.0.0.2
 ```
 
-Red destino + máscara + next-hop. Sin el `via`: en IOS el next-hop se escribe tal cual al final del comando.
+Red destino + máscara + next-hop. En `show ip route` la ruta aparece con `via 10.0.0.2`, pero al configurar no hay ninguna palabra clave: el next-hop va tal cual al final del comando.
 
 ## 7. ¿Ruta por defecto o ruta específica?
 
@@ -58,5 +58,5 @@ Red destino + máscara + next-hop. Sin el `via`: en IOS el next-hop se escribe t
 ## 8. Verificación
 
 1. `show running-config | include ip route` → ¿está escrita la ruta? (fallo típico: errata en la IP)
-2. `show ip route` → ¿aparece con una `S`? Si no aparece, el next-hop es inalcanzable: mira `show ip interface brief` (punto 3).
+2. `show ip route` → ¿aparece con una `S`? Si no aparece, el next-hop es inalcanzable: mira `show ip interface brief` (paso 3).
 3. `show ip interface brief` → ¿la interfaz de salida está Up/Up? Si está down/down (cable) o administratively down (falta `no shutdown`), la ruta no se instala.

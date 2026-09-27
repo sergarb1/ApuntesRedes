@@ -36,7 +36,7 @@ Paquete llega → ¿destino local? ──sí──▶ entrégalo a la interfaz
                              └no── ▶ descarta + ICMP "Destination Net Unreachable"
 ```
 
-> 💡 **La lección del laboratorio:** sin rutas, un router no es más que un switch caro. La frase del ⭐ Sé el Router del primer borrador de esta unidad sigue siendo cierta: *"Sin rutas, un router no es más que un switch caro."*
+> 💡 **La lección del laboratorio:** sin rutas, un router no es más que un switch caro — el ⭐ Sé el Router del cierre lo pone en escena.
 
 ---
 
@@ -61,12 +61,12 @@ Aquí está el corazón del asunto. Una tabla de rutas puede tener varias rutas 
 
 > **Regla del longest prefix match:** el router elige la ruta cuya máscara tenga **más bits a 1** (la coincidencia más larga y específica). No es "la que se configuró primero": es la matemáticamente más precisa.
 
-Ejemplo con dos rutas que coinciden sobre el mismo destino:
+Ejemplo con un fragmento de la tabla, con dos rutas que coinciden sobre el mismo destino:
 
 ```bash
-R1# show ip route 192.168.1.66
-     192.168.1.0/24 is directly connected, GigabitEthernet0/0
-     192.168.1.64/26 is directly connected, GigabitEthernet0/1
+R1# show ip route
+C       192.168.1.0/24 is directly connected, GigabitEthernet0/0
+C       192.168.1.64/26 is directly connected, GigabitEthernet0/1
 ```
 
 Un paquete hacia `192.168.1.66` coincide con **ambas**: la /24 y la /26. Como /26 => 26 bits, coincidencia más larga, **sale por G0/1**. La /24 solo le gana a destinos que estén fuera de las subredes más específicas.
@@ -76,8 +76,8 @@ Tabla resumida de la jerarquía:
 | Red | Máscara | Bits específicos | Gana cuando el destino... |
 |---|---|---|---|
 | 192.168.0.0/16 | /16 | 16 | ...no coincide con ninguna más específica |
-| 192.168.1.0/24 | /24 | 24 | ...está en 192.168.1.x pero fuera de /28 |
-| 192.168.1.16/28 | /28 | 28 | ...está entre .16 y .31 (¡hemos entrado en la subred!) |
+| 192.168.1.0/24 | /24 | 24 | ...está en 192.168.1.x pero fuera de /26 |
+| 192.168.1.64/26 | /26 | 26 | ...está entre .64 y .127 (¡aquí está el .66!) |
 
 Y entre **dos rutas de la misma máscara** hacia el mismo destino, ya no decide el prefix: decide la **AD** (y si empatan, la métrica). El router jamás reparte: elige una y la usa.
 
