@@ -1,6 +1,6 @@
 ---
 title: Boletín de Switching y VLAN — Inicial (Resuelto)
-description: Soluciones de los ejercicios básicos de Switching y STP
+description: Soluciones de los ejercicios básicos de Switching, STP y VLAN
 ---
 
 # ✅ Boletín de Switching y VLAN — Inicial (Resuelto)
@@ -20,6 +20,7 @@ b) **Falso.** Los switches no segmentan dominios de broadcast. Eso lo hacen los 
 c) **Verdadero.** STP bloquea puertos redundantes para romper bucles.
 d) **Verdadero.** RSTP (IEEE 802.1w) converge en 1-3 segundos frente a los 30-50 de STP.
 e) **Falso.** La tabla MAC se llama tabla MAC o CAM table. La tabla ARP está en los hosts, no en los switches.
+f) **Verdadero.** Cada VLAN es un dominio de broadcast propio: el broadcast de una no pasa a la otra.
 
 ## 3. Estados STP
 
@@ -41,7 +42,7 @@ c) **Alternate Port** — Puerto bloqueado como respaldo.
 1 → c (`show mac address-table`)
 2 → a (`show spanning-tree`)
 3 → b (`spanning-tree portfast`)
-4 → d (`switchport port-security`)
+4 → d (`switchport access vlan 10`)
 
 ## 6. Tormenta de broadcast
 

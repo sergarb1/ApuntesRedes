@@ -1,11 +1,11 @@
 ---
 title: Boletín de Switching y VLAN — Inicial
-description: Ejercicios básicos de Switching y STP
+description: Ejercicios básicos de Switching, STP y VLAN
 ---
 
 # 📝 Boletín de Switching y VLAN — Inicial
 
-> Ejercicios básicos para afianzar los conceptos de switching y STP.
+> Ejercicios básicos para afianzar los conceptos de switching, STP y VLAN.
 
 ---
 
@@ -26,6 +26,7 @@ b) Un switch segmenta los dominios de broadcast.
 c) STP evita bucles en redes conmutadas.
 d) RSTP converge más rápido que STP.
 e) La tabla MAC de un switch se llama tabla ARP.
+f) Cada VLAN creada en el switch es un dominio de broadcast independiente.
 
 ## 3. Estados STP
 
@@ -53,7 +54,7 @@ Relaciona el comando con su función:
 | 1. `show mac address-table` | a) Ver estado STP |
 | 2. `show spanning-tree` | b) Configurar PortFast |
 | 3. `spanning-tree portfast` | c) Ver tabla MAC del switch |
-| 4. `switchport port-security` | d) Activar seguridad de puerto |
+| 4. `switchport access vlan 10` | d) Asignar el puerto a la VLAN 10 |
 
 ## 6. Tormenta de broadcast
 

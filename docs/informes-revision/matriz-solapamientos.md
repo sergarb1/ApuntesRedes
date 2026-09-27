@@ -12,8 +12,8 @@ Veredictos: ✅ mención legítima · ↪️ mover a … · ❌ quitar · ⏳ po
 | **STP** | switching (7) · AD (7) · **ethernet (3)** · introducción (1) · inalámbricas (1) | ✅ sesión 02: falso positivo en ethernet = cable *apantallado* (Shielded Twisted Pair), no Spanning Tree |
 | **802.11 / WiFi** | ethernet (2+3) · inalámbricas (6+9) · NAT (2+3) · introducción (6) | ✅ sesión 02: mención a nivel de capa 1 y de trama (puntos 1 y 9), enlaza a inalámbricas; sin canales/seguridad propios |
 | **Ruta por defecto** | enrutamiento (5) · OSPF (4) · IP (1) | ✅ sesión 03: IP solo la menciona una vez (sin desarrollo); el peso es de enrutamiento/OSPF |
-| **Port Security** | ACL (5) · switching (1) | ⏳ ¿va con ACL o con switching? |
-| **VLAN** | switching (11) · trunking (9) · AD (6) · introducción (5) · inalámbricas (5) · servicios (3) | ⏳ reparto switching ↔ trunking |
+| **Port Security** | ACL (5) · switching (1) | ✅ sesión 04: switching solo el punta de `02-aprendizaje-mac` (defensa del CAM flooding, con enlace); concepto, violaciones, errdisable y recovery = ACL (punto 5). Los 2 ejercicios de Port Security que tenía el boletín avanzado de switching se han **movido** al boletín avanzado de ACL (sin duplicar) |
+| **VLAN** | switching (11) · trunking (9) · AD (6) · introducción (5) · inalámbricas (5) · servicios (3) | ✅ sesión 04 (reparto switching ↔ trunking): switching = casa del concepto (índice + puntos 8-9 + config mínima nueva + lab de segmentación); trunking = 802.1Q, configuración de trunks, VTP/DTP y seguridad (sus puntos 1-6); AD, inalámbricas y servicios = sus propias sesiones |
 | **HSRP** | AD (8) · **inalámbricas (1)** | ⏳ ¿por qué HSRP en inalámbricas? |
 | **NAT** | NAT (10) · IP (6) · introducción (2) · ACL (3) · resto: 1–2 (referencias) | ✅ sesión 03 (lado IP): privadas como motivo de RFC1918 + NAT64/DNS64 como transición (ya sin "NAT inverso"); detalle en la unidad de NAT |
 | **OSPF** | OSPF (10) · enrutamiento (5) · IP (4) · AD (3) · resto (1–2) | ✅ sesión 03 (lado IP): las 4 menciones de IP son puentes forward sin desarrollo |
@@ -32,5 +32,6 @@ Veredictos: ✅ mención legítima · ↪️ mover a … · ❌ quitar · ⏳ po
 - [x] Sesión 01 · introducción — sin candidatos a mover/quitar: sus menciones de DHCP/DNS/ARP/WiFi/VLAN/OSPF/NAT son vocabulario o puente; los duplicados eran internos (05↔10 y FAQ↔Atrévete del punto 10) y están resueltos. Ver [revision-U01-introduccion.md](revision-U01-introduccion.md).
 - [x] Sesión 02 · ethernet y cableado — sin candidatos a mover/quitar: ARP solo como EtherType (puente a IP), MTU solo como techo de trama, WiFi a nivel de capas 1–2 con enlace a inalámbricas; STP en esta unidad es cable apantallado (falso positivo). Ver [revision-U02-ethernet-cableado.md](revision-U02-ethernet-cableado.md).
 - [x] Sesión 03 · direccionamiento IP — sin candidatos a mover/quitar: rutas estáticas solo como referencia adelantada en el lab, ACL fuera del lab (sustituidas por un fallo DHCP propio), NAT/OSPF solo puentes forward, ICMPv6 con punto propio. Cerradas las filas DHCP/DNS/NAT/OSPF/ICMP/IPv6/MTU/Ruta por defecto (lado IP). Ver [revision-U03-direccionamiento-ip.md](revision-U03-direccionamiento-ip.md).
-- [ ] Sesiones 04–12
+- [x] Sesión 04 · switching y VLAN — candidato a mover resuelto: los 2 ejercicios de Port Security del boletín avanzado → boletín avanzado de ACL (lado ACL ya cerrado: su sesión cubrirá el resto). Cerradas las filas Port Security y VLAN (reparto switching ↔ trunking); el "Puente al DHCP" del punto 8 de VLAN es puente legítimo (la fila DHCP queda con el cruce trunking ↔ servicios de la sesión 10). Ver [revision-U04-switching-vlan.md](revision-U04-switching-vlan.md).
+- [ ] Sesiones 05–12
 - [ ] Cierre transversal

@@ -62,7 +62,7 @@ Vlan    Mac Address       Type        Ports
 | Type | DYNAMIC (aprendida), STATIC (configurada) o SECURE (port security) |
 | Ports | El puerto por el que se alcanza esa MAC |
 
-También existen las MACs **estáticas**: se configuran a mano (por ejemplo, la de un servidor) y no caducan. La entrada `FFFF.FFFF.FFFF` apuntando a la CPU es la del **broadcast**: el switch siempre la procesa internamente además de reenviarla.
+También existen las MACs **estáticas**: se configuran a mano (por ejemplo, la de un servidor) y no caducan. En la tabla verás además entradas con puerto **CPU**: son multicast de control que procesa el propio switch (por ejemplo, el tráfico de gestión). Fíjate en lo que **no** aparece: `FFFF.FFFF.FFFF` nunca se aprende, porque el broadcast no se memoriza en la tabla: se inunda por todos los puertos de la VLAN por definición.
 
 ---
 
@@ -81,7 +81,7 @@ Memoria CAM:     MAC    → puerto al instante (rápido)
 | Capacidad | Limitada (ej. 8.000 entradas en switches pequeños) |
 | ¿Qué pasa si se llena? | El switch no puede aprender más y **empieza a inundar** |
 
-> ⚠️ **Cuidado con el llenado de la CAM:** si un atacante llena la tabla con MACs falsas (ataque de *CAM flooding*), el switch deja de aprender y reenvía todo por inundación, convirtiéndose en un hub gigante que permite esnifar el tráfico ajeno. La defensa es la **Port Security** del [punto 8](/ApuntesRedes/08-acl-seguridad/05-port-security).
+> ⚠️ **Cuidado con el llenado de la CAM:** si un atacante llena la tabla con MACs falsas (ataque de *CAM flooding*), el switch deja de aprender y reenvía todo por inundación, convirtiéndose en un hub gigante que permite esnifar el tráfico ajeno. La defensa es la **Port Security** del [punto 5 de ACL y seguridad](/ApuntesRedes/08-acl-seguridad/05-port-security).
 
 ---
 

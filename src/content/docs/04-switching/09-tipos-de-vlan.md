@@ -13,7 +13,7 @@ description: Datos, nativa, voz y gestión; estática frente a dinámica 🗂️
 
 > No toda VLAN sirve para lo mismo: hay VLANs que transportan datos de usuario, una que viaja **sin etiquetar** por los trunks, una reservada para teléfonos IP y otra para administrar el propio switch. Además, puedes asignar los puertos **a mano** (estática) o dejar que el switch **decida por la MAC** (dinámica).
 
-En el punto 1 viste el concepto y la motivación. Aquí te llevas el mapa completo de qué tipos de VLAN existen y cuándo usar cada uno. Este vocabulario es oro en una entrevista: "¿cuál es la diferencia entre una VLAN de datos y una nativa?" es pregunta estrella.
+En el punto 8 viste el concepto y la motivación. Aquí te llevas el mapa completo de qué tipos de VLAN existen y cuándo usar cada uno. Este vocabulario es oro en una entrevista: "¿cuál es la diferencia entre una VLAN de datos y una nativa?" es pregunta estrella.
 
 ---
 
@@ -34,7 +34,7 @@ Es la que transporta el tráfico del día a día: navegación, correo, impresora
 
 ### VLAN nativa
 
-Es la VLAN especial del trunk (punto 3). En un enlace troncal, **todas** las tramas se etiquetan con 802.1Q… excepto las de la native VLAN, que viajan tal cual, sin etiqueta. Por defecto es la VLAN 1. Si en cada extremo del trunk usas VLANs nativas distintas, las tramas sin etiquetar "caen" en VLANs diferentes a cada lado y se producen fallos de conectividad (o ataques de double tagging).
+Es la VLAN especial del trunk (la ves en [trunking e inter-VLAN](/ApuntesRedes/05-trunking-inter-vlan/01-trunks-y-8021q)). En un enlace troncal, **todas** las tramas se etiquetan con 802.1Q… excepto las de la native VLAN, que viajan tal cual, sin etiqueta. Por defecto es la VLAN 1. Si en cada extremo del trunk usas VLANs nativas distintas, las tramas sin etiquetar "caen" en VLANs diferentes a cada lado y se producen fallos de conectividad (o ataques de double tagging).
 
 ### VLAN de voz
 
@@ -81,7 +81,7 @@ Planificar la numeración es un arte. El esquema habitual en oficinas:
 - **VLAN de datos:** siempre que haya tráfico de usuarios o servidores que deba separarse (departamentos, servicios, invitados).
 - **VLAN nativa:** únicamente en trunks; elige un número distinto de la VLAN de datos (jamás la 1) y que coincida en ambos extremos.
 - **VLAN de voz:** en cualquier despliegue con telefonía IP, para proteger y priorizar el audio.
-- **VLAN de gestión:** siempre que ataques SSH/SNMP; aíslala del tráfico de usuario y limita el acceso con ACL.
+- **VLAN de gestión:** siempre que actives SSH/SNMP; aíslala del tráfico de usuario y limita el acceso con ACL.
 - **VLAN dinámica:** solo en redes grandes con movilidad constante y servidor VMPS; en el 90% de los casos, estática y a otra cosa.
 
 ---

@@ -27,7 +27,7 @@ Imagina una empresa con tres departamentos y un único switch de 48 puertos. Sin
 | **Seguridad** | Cualquiera puede olfatear el tráfico de los demás | Los unicasts de una VLAN no se reenvían a otras |
 | **Flexibilidad** | Reorganizar departamentos = mover cables o comprar switches | Cambiar la VLAN de un puerto es una línea de configuración |
 
-La tabla de ventajas que presentó la unidad anterior sigue siendo la carta de presentación de las VLANs:
+Estas son las ventajas que convierten a la segmentación en la carta de presentación de las VLANs:
 
 | Ventaja | Descripción |
 |---|---|
@@ -82,7 +82,7 @@ Todos los switches Cisco traen creada la **VLAN 1** y todos los puertos arrancan
 |---|---|
 | VLAN por defecto | VLAN 1 (siempre existe, no se puede borrar) |
 | Puerto por defecto | Todos los puertos arrancan como access en VLAN 1 |
-| Native VLAN por defecto | VLAN 1 (la verás en el punto 3 de trunks) |
+| Native VLAN por defecto | VLAN 1 (la verás en [trunking e inter-VLAN](/ApuntesRedes/05-trunking-inter-vlan/01-trunks-y-8021q)) |
 | Buena práctica | **No usar VLAN 1 para datos** |
 
 > ⚠️ **CONRAD dice:** "VLAN 1 es el camino de entrada de todo el que no ha configurado nada. Clientes, intrudores y novatos comparten la misma VLAN sin darse cuenta. Cambia la native VLAN, desactiva DTP y usa VLANs numeradas para cada cosa. Y si alguien te pregunta por qué, diles que CONRAD se lo dijo."
@@ -91,9 +91,26 @@ Varias marcas usan VLANs numeradas como estándar para evitar la VLAN 1 (Cisco r
 
 ---
 
+## 🛠️ Crear una VLAN en tres líneas
+
+Para que la segmentación sea real hay que crear las VLANs y decirle a cada puerto a cuál pertenece. En un switch Cisco el proceso entero cabe en dos pasos:
+
+```bash
+Switch(config)# vlan 10
+Switch(config-vlan)# name Ventas
+Switch(config-vlan)# exit
+Switch(config)# interface range fa0/1-5
+Switch(config-if-range)# switchport mode access
+Switch(config-if-range)# switchport access vlan 10
+```
+
+El comando que no puede faltar es `switchport access vlan 10`: sin él, el puerto se queda en la VLAN por defecto (la 1). Para comprobarlo, `show vlan brief` lista todas las VLANs del switch y qué puertos tiene asignados cada una. Con eso ya tienes una VLAN funcionando; sacarla fuera del switch (trunks) llega en la unidad siguiente.
+
+---
+
 ## 🏷️ Los tipos de VLAN a vista de pájaro
 
-Hay más de un tipo de VLAN y cada uno tiene un trabajo. Esta tabla es un adelanto; el [punto 2](/ApuntesRedes/04-switching/08-que-es-una-vlan) la desarrolla:
+Hay más de un tipo de VLAN y cada uno tiene un trabajo. Esta tabla es un adelanto; el [punto 9](/ApuntesRedes/04-switching/09-tipos-de-vlan) la desarrolla:
 
 | Tipo | Función | Ejemplo |
 |---|---|---|
@@ -117,7 +134,7 @@ Hay más de un tipo de VLAN y cada uno tiene un trabajo. Esta tabla es un adelan
 
 1. Una **VLAN** es una red lógica dentro de un switch físico: cada VLAN constituye su propio dominio de broadcast y su propia tabla MAC. El switch trata cada VLAN como un switch virtual independiente.
 2. Porque es la **VLAN por defecto**: todos los puertos arrancan en ella, se usa como native VLAN y suele quedar fuera de los hardening. Es el primer objetivo de un atacante y donde acaba todo el tráfico mal etiquetado.
-3. **No.** Las VLANs aíslan en capa 2: el switch no reenvía tramas entre VLANs. Para comunicarse necesitan un router o un switch de capa 3 (lo verás en los puntos 4 y 5).
+3. **No.** Las VLANs aíslan en capa 2: el switch no reenvía tramas entre VLANs. Para comunicarse necesitan un router o un switch de capa 3 (lo verás en [trunking e inter-VLAN](/ApuntesRedes/05-trunking-inter-vlan/03-inter-vlan-routing)).
 
 </details>
 

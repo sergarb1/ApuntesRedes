@@ -13,7 +13,7 @@ description: BPDUs, Root Bridge y el árbol sin bucles 🌳
 
 > **STP** (*Spanning Tree Protocol*, IEEE 802.1D) es el protocolo que convierte una red con bucles en un **árbol** sin caminos redundantes activos: los switches eligen un **Root Bridge** y bloquean los puertos que crearían bucles, desbloqueándolos si el camino principal falla.
 
-Es la pieza que nos faltaba del punto anterior: la tormenta de broadcast (punto 4) tiene cura, y esta es la vacuna.
+Es la pieza que nos faltaba del punto anterior: la tormenta de broadcast ([punto 4](/ApuntesRedes/04-switching/04-tormenta-de-broadcast)) tiene cura, y esta es la vacuna.
 
 ---
 

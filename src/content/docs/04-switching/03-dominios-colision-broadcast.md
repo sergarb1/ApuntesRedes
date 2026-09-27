@@ -76,7 +76,7 @@ Reglas de oro para contarlos:
   → 1 dominio de colisión, 2 dominios de broadcast
 ```
 
-> ⚠️ **Trampa clásica:** un switch conectado a otro switch NO crea un dominio de broadcast nuevo: siguen siendo uno solo. Solo el router (o un switch de capa 3 con SVIs, como verás en la [unidad de switching](/ApuntesRedes/04-switching/08-que-es-una-vlan)) divide dominios de broadcast.
+> ⚠️ **Trampa clásica:** un switch conectado a otro switch NO crea un dominio de broadcast nuevo: siguen siendo uno solo. Solo el router (o un switch de capa 3 con SVIs, como verás en [trunking e inter-VLAN](/ApuntesRedes/05-trunking-inter-vlan/04-switch-capa3)) divide dominios de broadcast.
 
 ---
 
