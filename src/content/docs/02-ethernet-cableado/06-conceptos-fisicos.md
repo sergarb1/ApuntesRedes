@@ -11,7 +11,7 @@ description: Ancho de banda, throughput, latencia, atenuación y diafonía 📐
 
 ## 📬 La idea en una frase
 
-> La capa física no solo se mide en "va rápido o va lento": se gobierna con **ancho de banda** (capacidad teórica), **throughput** (capacidad real), **latencia** (el tiempo de viaje), **atenuación** (pérdida de señal con la distancia) y **diafonía** (interferencia entre hilos). Cinco conceptos que explican el 90% de los diagnósticos.
+> La capa física no solo se mide en "va rápido o va lento": se rige con **ancho de banda** (capacidad teórica), **throughput** (capacidad real), **latencia** (el tiempo de viaje), **atenuación** (pérdida de señal con la distancia) y **diafonía** (interferencia entre hilos). Cinco conceptos que explican el 90% de los diagnósticos.
 
 Estos conceptos son el puente entre la teoría y los [fallos del punto 4](/ApuntesRedes/02-ethernet-cableado/04-crimpado-y-comprobacion) y el [cableado del edificio](/ApuntesRedes/02-ethernet-cableado/07-cableado-estructurado). Si los dominas, todo lo demás encaja.
 
@@ -68,7 +68,7 @@ Pérdida de intensidad de la señal con la distancia. En cables de cobre, la ate
 
 ---
 
-## 📳 Diafonía (Crosstalk): luz de gas entre pares
+## 📳 Diafonía (Crosstalk): cuando un par pisa a otro
 
 Interferencia de un par de hilos sobre otro par adyacente. Como viste con el [trenzado del punto 2](/ApuntesRedes/02-ethernet-cableado/02-cable-utp), los pares se influyen entre sí. Los tipos que cita la normativa:
 
@@ -94,7 +94,7 @@ Dos conceptos más completan el cuadro de la capa física:
 | Síntoma en la práctica | Concepto culpable |
 |---|---|
 | Descarga lenta aunque el enlace es "rápido" | Throughput < ancho de banda |
-| Ping alto y estable | Latencia alta (la variación, también llamada jitter) |
+| Ping alto y estable | **Latencia** alta |
 | Ping que sube y baja sin control | **Jitter** |
 | El cable pasa el tester pero hay CRC | **Diafonía** / SNR pobre |
 | El cable funciona a 90 m y a 110 m no | **Atenuación** |

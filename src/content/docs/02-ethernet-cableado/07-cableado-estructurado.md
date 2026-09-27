@@ -13,7 +13,7 @@ description: El edificio cableado como Dios manda, con patch panels y keystones 
 
 > El **cableado estructurado** es la forma profesional de cablear un edificio: sigue el estándar **TIA/EIA-568** y separa el cable que va empotrado (**cable horizontal**, de los patch panels a los keystones) de los **latiguillos** flexibles que conectan PC y switch. Así, el 90% de los cambios se resuelven moviendo un latiguillo, no el edificio.
 
-Es el broche de la unidad: los conceptos físicos del [punto 7](/ApuntesRedes/02-ethernet-cableado/06-conceptos-fisicos) y la anatomía del [punto 2](/ApuntesRedes/02-ethernet-cableado/02-cable-utp) se juntan aquí en un sistema pensado para durar y mantenerse.
+Es el broche de la unidad: los conceptos físicos del [punto 6](/ApuntesRedes/02-ethernet-cableado/06-conceptos-fisicos) y la anatomía del [punto 2](/ApuntesRedes/02-ethernet-cableado/02-cable-utp) se juntan aquí en un sistema pensado para durar y mantenerse.
 
 ---
 
@@ -86,7 +86,7 @@ El cableado estructurado se siente a medias si no se documenta. Tres hábitos qu
 
 ¿Por qué no basta con "tirar cables largos" de un PC a otro sin tanta ceremonia? Haz la cuenta de cinco años:
 
-| Aspecto | Cableado impro (directo a switch) | Cableado estructurado |
+| Aspecto | Cableado improvisado (directo de PC a switch) | Cableado estructurado |
 |---|---|---|
 | Cambio de mesa | Rehacer tramos, pelar, crimpar, tiempo | Mover un latiguillo: 2 minutos |
 | Fallo detectado | "No sé qué cable es este" | Puertos etiquetados y localizables |
@@ -94,13 +94,13 @@ El cableado estructurado se siente a medias si no se documenta. Tres hábitos qu
 | Crecimiento ordenado | Mar de cables en el rack | Patch panels y etiquetas: todo en su sitio |
 | Certificación | Imposible | Ruta clara para certificar categoría |
 
-La inversión extra del cableado estructurado se paga en la **primera mudanza de mesa** y se multiplica con cada cambio posterior. Y el rack sigue siendo afición limpia, que también cuenta.
+La inversión extra del cableado estructurado se paga en la **primera mudanza de mesa** y se multiplica con cada cambio posterior. Y un rack ordenado también es una satisfacción personal, que también cuenta.
 
 ---
 
 ## 🧠 Mini-chequeo
 
-1. Enumera los 4 componentes que separan un PC de un switch en cableado estructurado.
+1. Enumera los 4 tipos de componente que recorre la señal del PC al switch (ojo, uno se repite).
 2. Un usuario cambia de mesa en la misma oficina. ¿Qué hay que tocar físicamente? ¿Por qué?
 3. ¿Por qué el estándar TIA/EIA-568 define una topología en estrella?
 
@@ -108,7 +108,7 @@ La inversión extra del cableado estructurado se paga en la **primera mudanza de
 <summary>🔄 Respuestas</summary>
 
 1. **Latiguillo** (PC → keystone), **keystone/roseta**, **cable horizontal** (empotrado), **patch panel** y otro **latiguillo** (patch panel → switch).
-2. Solo **moverse con un latiguillo nuevo** en el mismo punto de red, y si cambia de roseta, cambiar el latiguillo del patch panel al puerto correspondiente. La obra (cable horizontal) queda intacta: esa es la ventaja de separar lo fijo de lo flexible.
+2. Nada de obra: se enchufa un **latiguillo nuevo** en la roseta de la mesa nueva y, si hace falta, se mueve en el rack el latiguillo al puerto del switch correspondiente. La obra (cable horizontal) queda intacta: esa es la ventaja de separar lo fijo de lo flexible.
 3. En estrella cada toma llega directamente a su patch panel: **fácil de etiquetar, fácil de diagnosticar y fácil de ampliar**. Las topologías en cadena o bus (como en los hub antiguos) son un dolor para localizar fallos.
 </details>
 

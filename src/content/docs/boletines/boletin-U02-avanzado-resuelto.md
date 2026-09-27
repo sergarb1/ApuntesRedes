@@ -54,7 +54,7 @@ a) **200 m:** Fibra multimodo (el cobre Cat6a se queda en 100 m)
    **500 m:** Fibra multimodo (el cobre no llega a 500 m)
    **2000 m:** Fibra monomodo (obligatorio para 2 km)
 
-b) **200-500 m:** Fibra multimodo OM3/OM4 (10 Gbps, hasta 550 m)
+b) **200-500 m:** Fibra multimodo OM4 (500 m a 10 Gbps; si fuera 1 Gbps, también llega la OM3)
    **2000 m:** Fibra monomodo OS2 (10 Gbps, hasta 40 km)
 
 c) **Conectores:** LC (estándar en SFP)
@@ -68,7 +68,7 @@ a) **Falla el pin 3** (el tercer LED no se enciende: posición 3 de 8).
 
 b) **Par 3-6** (blanco/verde y verde en T568B, o blanco/naranja y naranja en T568A). El pin 3 forma parte del par transmisión/recepción junto con el pin 6.
 
-c) **Funcionará parcialmente.** 100Base-TX solo necesita los pares 1-2 y 3-6. Como falla el par 3-6, el cable **no funcionará ni a 100 Mbps**. Para Gigabit (que necesita los 4 pares), tampoco funcionará.
+c) **No: no hay enlace.** El pin 3 pertenece al par 3-6, que usan 10BASE-T, 100BASE-TX y Gigabit; con ese par roto, el cable no negocia ni a 100 Mbps. (Ojo: si el que fallara fuera el par 7-8, sí caerías a 100 Mbps.)
 
 ## 6. Diseña el latiguillo perfecto
 
@@ -107,10 +107,10 @@ c) **Campus de 3 edificios:**
 
 ## 8. Diagnóstico por capas (OSI en acción)
 
-**Síntoma A → Capa 2 (trama).** El medio está bien (LED + tester = capa 1 OK). FCS erróneo = trama descartada en la red local; el ping falla de forma intermitente (basura en el cable, interferencia cerca, crimpado marginal que el tester simple no caza). Herramienta: Wireshark (contar CRC/errors) + tester de categoría/certificador.
+**Síntoma A → alerta en la capa 1 que la capa 2 delata.** El FCS es la capa 2 quien lo detecta, pero casi siempre la causa es física: señal marginal (atenuación, diafonía, EMI o un crimpado flojo) que el tester de continuidad no mide, y por eso el ping falla de forma intermitente. Herramientas: probar un cable conocido bueno, revisar el cableado y, si persiste, un certificador de categoría; Wireshark para contar los errores.
 
 **Síntoma B → Capa 1 (física).** LED apagado = no hay enlace: sin negociación no hay bits. Revisa el cable, el conector, el puerto del switch y la NIC del PC.
 
 **Síntoma C → Capa 1 (física).** Par partido = no hay enlace: sin LED no hay negociación, no hay bits. Repelar/crimpar o sustituir el tramo.
 
-> 💡 **Clave de examen:** si hay LED y el tester pasa, la capa 1 local funciona; si no hay LED, ni mires Wireshark.
+> 💡 **Clave de examen:** si no hay LED, ni mires Wireshark: el problema es de capa 1. Y si hay LED, el tester pasa pero aparecen FCS erróneos, no descartes la capa 1: el tester solo mide continuidad, no calidad de señal.

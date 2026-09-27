@@ -13,7 +13,7 @@ description: El sobre de la capa 2, en cobre, fibra y en el aire 📦
 
 > La **trama** (*frame*) es la **PDU de la capa 2**: un "sobre" con **MACs de origen y destino**, un **EtherType** que dice qué lleva dentro y un **FCS** que comprueba que no se ha estropeado en el viaje — ya sea por **cable o por el aire**.
 
-En el [punto anterior](/ApuntesRedes/02-ethernet-cableado/08-modelo-osi) viste que la capa 2 entrega en la red local. Aquí abrimos ese sobre como si fuera la ficha técnica que luego verás en [Wireshark](/ApuntesRedes/01-introduccion/05-paquetes-y-protocolos).
+En el [punto anterior](/ApuntesRedes/02-ethernet-cableado/08-modelo-osi) viste que la capa 2 entrega en la red local. Aquí abrimos ese sobre campo a campo, como si fuera su ficha técnica, y al final del punto lo abres de verdad con Wireshark.
 
 ---
 
@@ -51,7 +51,7 @@ Sobre el **cobre (UTP)** y la **fibra**, Ethernet (IEEE 802.3) usa la trama clá
 | **Dest MAC** | 6 bytes | ¿Para quién es esta trama en la LAN? |
 | **Src MAC** | 6 bytes | Quién la envió (el switch la aprende de aquí) |
 | **EtherType** | 2 bytes | Qué protocolo hay dentro: **0x0800** = IPv4, **0x86DD** = IPv6, **0x0806** = ARP |
-| **Payload** | 46–1500 bytes | El "carta" que viaja (el **MTU 1500** es el techo) |
+| **Payload** | 46–1500 bytes | La "carta" que viaja (el **MTU 1500** es el techo) |
 | **FCS** | 4 bytes | CRC de integridad: si no cuadra → trama **descartada** |
 
 - **MTU 1500:** no es magia de IP; es el **máximo payload que acepta la trama Ethernet**. Si los datos de arriba mandan más, la capa 3 (IPv4) **fragmenta**: lo verás en el [punto 1 de dirección IP](/ApuntesRedes/03-direccionamiento-ip/01-estructura-ipv4).
@@ -73,13 +73,13 @@ El WiFi **también es capa 2**: sin trama no hay entrega local, con cable o sin 
 | Capa | 2 (la misma) | 2 (la misma) |
 | Direcciones MAC | Origen y destino (2) | Hasta **4** (receptor, transmisor, receptor final…) |
 | Cabecera | Corta (MACs + EtherType) | Más larga: *Frame Control*, duración, secuencias… |
-| Campo tipo | **EtherType** (0x0800…) | *Type / Length* y tipos de trama (datos, management…) |
+| Campo tipo | **EtherType** (0x0800…) | *Type/Subtype* del *Frame Control* (datos, management, control…) |
 | Medio | Cobertura fija: cable | Canal de radio **compartido** (colisiones, interferencias) |
 | Quién "cambia" la trama | El switch reenvía | El AP puede cifrar/descifrar (WPA2/WPA3) en el borde |
 
 **Lo que no cambia:** al otro lado, la tarjeta de red (o el chip WiFi) **reconstruye una trama válida** para entregarla a la capa 3. Arriba de 802.11, el mundo IP ni se entera de si venías de un RJ45 o de una antena.
 
-> 🔗 Los detalles de 802.11 (canales, asociación, seguridad) están en la [unidad de redes inalámbricas](/ApuntesRedes/11-redes-inalambricas/01-medio-inalambrico). Aquí solo te queda la idea: **misma capa, diferente trama**.
+> 🔗 Los detalles de 802.11 (canales, asociación, seguridad) están en la [unidad de redes inalámbricas](/ApuntesRedes/11-redes-inalambricas). Aquí solo te queda la idea: **misma capa, diferente trama**.
 
 ---
 

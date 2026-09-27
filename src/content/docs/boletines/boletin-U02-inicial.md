@@ -55,7 +55,7 @@ f) Crimpar con la crimpadora
 | 3. Ancho de banda | c) Tiempo de ida y vuelta de un paquete |
 | 4. Latencia | d) Pérdida de intensidad de la señal con la distancia |
 
-## 6. Sopa de letras de conectores
+## 6. Conectores: nómbralos
 
 Nombra estos conectores y el medio en el que se usan:
 
@@ -114,5 +114,5 @@ e) ¿Quién calcula y quién comprueba el FCS en un cableado con switch?
 
 V/F:
 
-f) El payload mínimo de una trama Ethernet es de 46 bytes (60 con cabecera+FCS).
+f) El payload mínimo de una trama Ethernet es de 46 bytes (64 bytes de trama en total con cabecera y FCS).
 g) El WiFi (802.11) NO es capa 2 porque no hay cable.

@@ -43,7 +43,7 @@ e) **Falso.** La diafonía (crosstalk) es la interferencia entre pares. La pérd
 3 → b (Ancho de banda)
 4 → c (Latencia)
 
-## 6. Sopa de letras de conectores
+## 6. Conectores: nómbralos
 
 a) **RJ45** — Conector de 8 pines para cable UTP (cobre)
 b) **LC** — Conector de fibra óptica, pequeño, tipo push-pull
@@ -81,11 +81,11 @@ d) **Verdadero.** "Capa 3", "capa Red" y "capa de red" apuntan a lo mismo (IP, r
 
 a) **Dest MAC (6 B), Src MAC (6 B) y EtherType (2 B).**
 b) **IPv4** (0x0800).
-c) **Mínimo 46 bytes** de payload (60 en total con cabecera+FCS) y **máximo 1500** (MTU); con cabeceras, la trama clásica se queda en **1518 bytes**.
+c) **Mínimo 46 bytes** de payload (64 bytes de trama en total: cabecera 14 + payload 46 + FCS 4) y **máximo 1500** (MTU); con cabeceras, la trama clásica se queda en **1518 bytes**.
 d) **FCS** = CRC de 4 bytes de integridad (capa 2). Si no cuadra → la trama se **descarta** (errores CRC).
 e) La calcula quien **envía** (la NIC o el switch al reenviar) y la comprueba quien la **recibe**; si falla, el receptor la descarta sin subirla.
 
 **V/F:**
 
-f) **Verdadero.** El mínimo de payload es 46 bytes (60 totales con cabecera de 14 y FCS de 4).
+f) **Verdadero.** El mínimo de payload es 46 bytes (64 bytes de trama en total: 14 de cabecera + 46 + 4 de FCS).
 g) **Falso.** El WiFi **también es capa 2**: entrega local por MAC; el aire es solo el medio (capa 1).

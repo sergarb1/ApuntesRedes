@@ -40,7 +40,7 @@ La tabla de colores depende de la **norma de crimpado** que uses al final del ca
 
 > 💡 **Diferencia clave:** T568B intercambia los pares 2 y 3 respecto a T568A. El estándar más común en Europa es **T568B** (pin 1 = naranja). En EE.UU. es más frecuente T568A, y es obligatorio en instalaciones gubernamentales.
 
-Observa el patrón: los pares 1 y 4 (azul y marrón) ocupan los **mismos pines en las dos normas**; solo cambian los pares 2 y 3 (naranja y verde). El orden está pensado para que cada par cancelativo use pines adyacentes (1-2, 3-6, 4-5, 7-8).
+Observa el patrón: los pares 1 y 4 (azul y marrón) ocupan los **mismos pines en las dos normas**; solo cambian los pares 2 y 3 (naranja y verde). El orden asigna a cada par una pareja de pines fija (1-2, 3-6, 4-5 y 7-8); fíjate en que 3-6 "salta" sobre 4-5, justo la particularidad que aprovecha un split pair para despistar al tester.
 
 ---
 
@@ -52,7 +52,7 @@ Esta es la pregunta que define si entiendes la capa física o solo la memorizas.
 
 **2. Reducción de diafonía (crosstalk).** Cada par se trenza con un **paso diferente** (más o menos vueltas por metro). Así, un par que transmite no "acopla" su señal de forma regular sobre el vecino, y la interferencia entre pares se dispersa en vez de sumarse.
 
-> 💡 **Analogía del ascensor:** si dos parejas suben a la vez en un ascensor lleno, se pisan los pies. Si una vez sube trenzada y otra destrenzada... en fin, cada pareja con su "paso" es menos probable que pisen al otro. Eso es el paso de trenzado.
+> 💡 **Analogía del paso de trenzado:** si dos coches van en paralelo con el mismo ritmo de balizas, sus señales se acoplan y se suman; si cada uno marca un ritmo distinto, las señales nunca coinciden en el mismo punto y el acoplamiento se dispersa. Eso hace cada par con su número de vueltas por metro.
 
 ---
 

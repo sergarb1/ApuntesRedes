@@ -45,7 +45,7 @@ En la topología del ejercicio 1, activa el **Simulation mode** (junto al timer)
 
 Captura tráfico en la interfaz de una PC (o exporta la captura de PT) mientras haces un `ping 192.168.1.11`. Filtra por ICMP y abre una trama Ethernet: identifica **MAC origen**, **MAC destino** y el campo **EtherType** (`0x0800` = IPv4).
 
-> 💡 **Pista:** si no ves Wireshark, en PT: *Add Complex → Add Simple PDU* o la pestaña *Simulation* con detalle de capas.
+> 💡 **Pista:** si tu PT no integra Wireshark, usa *Simulation mode*: haz clic en el sobre del evento → pestaña *Details* / *Outbound PDU details*, donde aparece la cabecera *Ethernet II* con MACs y *Type*.
 
 ## 7. Wireshark: ¿dónde está el ARP?
 

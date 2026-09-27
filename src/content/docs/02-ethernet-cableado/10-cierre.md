@@ -96,7 +96,9 @@ Has terminado la teoría: sabes por qué se trenza el cobre, cómo se crimpa un 
 
 ## 🤬 CONRAD VS EL MUNDO: "El LED del switch se enciende pero no hay conectividad"
 
-**CONRAD:** — Me encanta este clásico. Usuario: *El LED del switch se enciende, así que el cable funciona*. CONRAD: *Te enciendo una bombilla y te digo que Internet funciona. El LED solo indica que hay voltaje en el circuito, NO que los datos pasen correctamente.*
+**CONRAD:** — Me encanta este clásico.
+**Usuario:** — *El LED del switch se enciende, así que el cable funciona.*
+**CONRAD:** — *Te enciendo una bombilla y te digo que Internet funciona. El LED solo indica que hay voltaje en el circuito, NO que los datos pasen correctamente.*
 
 **CONRAD:** — Y no me vengas con el "pero si el LED parpadea, la luz verde está preciosa". El "link LED" te dice: *hay dos extremos que se ven y han negociado una velocidad*. Nada más. Puedes tener la luz más bonita del rack y estar transportando basura por dentro.
 
@@ -178,7 +180,7 @@ Has terminado la teoría: sabes por qué se trenza el cobre, cómo se crimpa un 
 
 ```
 Horizontal:
-1. Conector de 8 pines para UTP (4 letras + número)
+1. Conector de 8 pines para UTP (2 letras + número)
 4. Herramienta que verifica la continuidad del cable (6 letras)
 5. Tipo de cable trenzado sin apantallar (3 letras)
 7. Estándar WiFi de 5 GHz con 3,5 Gbps (2 letras, sigla)
@@ -186,7 +188,7 @@ Horizontal:
 
 Vertical:
 2. Fenómeno de pérdida de señal con la distancia (10 letras)
-3. Norma de crimpado con naranja primero (letra + número)
+3. Norma de crimpado con naranja primero (letra, números y letra)
 6. Medida del tiempo de ida y vuelta de un paquete (8 letras)
 ```
 
@@ -241,18 +243,18 @@ Un cable Cat6 transporta 1 Gbps sin problemas hasta que una silla pasa por encim
 
 ---
 
-## ✅ Criterios de evaluación cubiertos (RA2)
+## ✅ Criterios de evaluación cubiertos (RA1/RA2)
 
 **RA2: Integra ordenadores y periféricos en redes cableadas e inalámbricas.**
 
 | CE | Criterio | Cubierto |
 |---|---|---|
-| a) | Estándares para redes cableadas | ✅ Categorías, T568A/B, Auto MDI-X (puntos 2-3) |
-| b) | Montaje de cables | ✅ Laboratorio de crimpado (⚡) |
-| c) | Comprobadores de conectividad | ✅ Tester de cables, LEDs, split pair (puntos 4 y 7) |
-| d) | Direccionamiento lógico IP | ✅ (Introducción — se verá más adelante) |
-| e) | Estándares inalámbricos | ✅ WiFi 4/5/6/7 (punto 6) |
-| f) | Integración de dispositivos | ✅ Cableado estructurado (punto 7) |
+| RA1·b) | Medios de transmisión | ✅ Puntos 1, 2 y 5 |
+| RA2·a) | Estándares para redes cableadas | ✅ Puntos 2-3 y 7 |
+| RA2·b) | Montaje de cables | ✅ Punto 4 + ⚡ Laboratorio (punto 10) |
+| RA2·c) | Comprobadores de conectividad | ✅ Puntos 4 y 6 |
+| RA1·d) | Trama y encapsulación Ethernet | ✅ Puntos 8–9 + 🧠 Atrévete a pensar (punto 10) |
+| RA2·f) | Integración de dispositivos | ✅ Cableado estructurado (punto 7) + ⚡ Laboratorio (punto 10) |
 
 ---
 

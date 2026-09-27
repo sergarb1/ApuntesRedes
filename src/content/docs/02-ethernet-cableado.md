@@ -13,7 +13,7 @@ description: Donde todo viaje empieza por un cable 📡
 
 Bienvenido a la primera unidad de contenidos. Aquí estudias el mundo físico que sostiene todo lo demás: los medios guiados (cobre, fibra) y no guiados (radio), las normas de cableado, cómo se crimpa un RJ45, cómo se organiza el cableado de un edificio y, como broche, la trama Ethernet: el sobre que envuelve todos los datos de tu red local.
 
-Esta unidad se lee como un **libro de 10 capítulos**: los 9 primeros son teoría en progresión y el 10º es el aterrizaje práctico con laboratorio.
+Esta unidad son 10 puntos: 9 de teoría en progresión y el 10º, aterrizaje práctico.
 
 ---
 
@@ -29,7 +29,7 @@ Al terminar, serás capaz de:
 - Aplicar conceptos físicos clave: atenuación, diafonía, anchura de banda vs velocidad.
 - Diseñar el cableado estructurado de un edificio (TIA/EIA-568): rack, patch panel, horizontal.
 - Situar las capas 1 y 2 en el modelo OSI (y distinguirlo de TCP/IP como modelo real).
-- Analizar la trama Ethernet: MACs, EtherType, MTU y FCS; comparar 802.3 (guiado) y 802.11 (no guiado).
+- Analizar la trama Ethernet: MACs, EtherType, payload y FCS; comparar 802.3 (guiado) y 802.11 (no guiado).
 
 ---
 
@@ -54,7 +54,7 @@ Al terminar, serás capaz de:
 
 ## 📝 Boletines de la unidad
 
-> Practica con los pares del curso: empezar siempre el resuelto para ver el estilo y luego intentar el por-resolver.
+> Practica con los pares del curso: mira 1-2 resueltos para coger el formato, luego intenta el por-resolver; consulta el resuelto solo cuando te atasques.
 
 <div class="ejercicio-links">
   <a href="/ApuntesRedes/boletines/boletin-u02-inicial" class="elink">🟢 Inicial por resolver</a>
@@ -76,6 +76,7 @@ Al terminar, serás capaz de:
 | RA2·b) | Montaje de cables | ✅ Punto 4 + ⚡ Laboratorio (punto 10) |
 | RA2·c) | Comprobadores de conectividad | ✅ Puntos 4 y 6 |
 | RA1·d) | Trama y encapsulación Ethernet | ✅ Puntos 8–9 + 🧠 Atrévete a pensar (punto 10) |
+| RA2·f) | Integración de dispositivos | ✅ Cableado estructurado (punto 7) + ⚡ Laboratorio (punto 10) |
 
 ---
 

@@ -66,7 +66,7 @@ Extremo B: 1 2 3 4 5 6 7 8
 
 a) ¿Qué pin falla?
 b) ¿Qué par de hilos está afectado?
-c) ¿El cable funcionará parcialmente? ¿A qué velocidad?
+c) ¿Enlaza el cable? ¿A qué velocidad negociará?
 
 **Pista:** Localiza qué par (1-2, 3-6, 4-5, 7-8) corresponde al pin que falla.
 
@@ -103,6 +103,6 @@ Para cada síntoma:
 
 a) ¿En qué capa OSI (1, 2 o 3) sitúas el fallo? Justifica con la PDU afectada (bits, trama, paquete).
 b) ¿Qué comando o herramienta usarías primero?
-c) En el Síntoma A, ¿por qué el fallo NO está en la capa 1 si el tester ha pasado?
+c) En el Síntoma A, el tester ha pasado al 100%. ¿Puedes descartar ya la capa 1? Justifica.
 
 **Pista:** escalera 1→2→3 de la unidad inicial; si hay LED y tester OK, la capa 1 local funciona y el problema sube a la trama o más arriba.

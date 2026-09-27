@@ -22,7 +22,7 @@ En el [punto 3](/ApuntesRedes/02-ethernet-cableado/03-directo-cruzado-consola) d
 - **Crimpadora RJ45** (con cuchilla de pelado y corte incorporadas casi siempre).
 - **Pelacables** o la cuchilla de la propia crimpadora.
 - **Conectores RJ45** (mejor con pasador para funda).
-- **Cable UTP** (Cat5e/Cat6, según categoría que quieras).
+- **Cable UTP** (Cat5e/Cat6, según la categoría que uses).
 - **Comprobador de cables (tester)** para verificar el resultado.
 
 > 💡 **Regla de oro del material:** compra conectores compatibles con el diámetro de tu cable (los hay de Cat6 con pasador reforzado). Un conector barato arruina un cable bueno.
@@ -34,7 +34,7 @@ En el [punto 3](/ApuntesRedes/02-ethernet-cableado/03-directo-cruzado-consola) d
 ## 👷 El crimpado paso a paso (norma T568B)
 
 1. **Pelar:** retira unos **2 cm de funda** exterior con el pelacables, con cuidado de no cortar los hilos internos. Desenrolla suavemente.
-2. **Ordenar:** ordena los 8 hilos según **T568B**, de izquierda a derecha con el clip del conector hacia abajo: Blanco/Naranja, Naranja, Blanco/Verde, Azul, Blanco/Azul, Verde, Blanco/Marrón, Marrón. Termina **aplanando** los pares 4-5 (azul) tras los 1-2, con el blanco/azul a la derecha del azul, para que el orden quede limpio y plano.
+2. **Ordenar:** ordena los 8 hilos según **T568B**, de izquierda a derecha con el clip del conector hacia abajo: Blanco/Naranja, Naranja, Blanco/Verde, Azul, Blanco/Azul, Verde, Blanco/Marrón, Marrón. Fíjate en que el par verde va **partido** (blanco/verde en el pin 3 y verde en el 6, con el par azul 4-5 en medio): es correcto, no lo "arregles" juntando parejas. Termina **aplanando** los hilos bien parallelos.
 3. **Cortar:** con la cuchilla, corta los hilos **rectos y a escuadra**, dejando ~1 cm desde la funda.
 4. **Insertar:** empuja los hilos en el conector RJ45 hasta ver sus puntas asomar por el frente (los contactos dorados). La funda debe quedar **dentro del conector**, sujeta por el pasador.
 5. **Crimpar:** introduce el conector en la crimpadora y aprieta firmemente hasta oír el clic. Los contactos deben hundirse uniformemente.
@@ -59,21 +59,21 @@ El comprobador de cables tiene dos módulos conectados por los extremos del cabl
 | LEDs 1-8 en orden pero en el lateral destino el orden es 8-1 | **Cable de consola** (rollover) |
 | LEDs 1-6 pero no 7-8 | Solo 3 pares conectados: **negociación a 100 Mbps**, no a 1 Gbps |
 
-> 🌡️ **El tester no mide todo:** un tester básico solo comprueba continuidad y orden. No detecta atenuación ni interferencias: para eso están los certificadores (caros, de empresa certificadora) y los [conceptos del punto 7](/ApuntesRedes/02-ethernet-cableado/06-conceptos-fisicos).
+> 🌡️ **El tester no mide todo:** un tester básico solo comprueba continuidad y orden. No detecta atenuación ni interferencias: para eso están los certificadores (caros, de empresa certificadora) y los [conceptos del punto 6](/ApuntesRedes/02-ethernet-cableado/06-conceptos-fisicos).
 
 ---
 
 ## 💥 Fallos típicos y cómo los delata el tester
 
-**1. Split pair (par dividido).** El caso más traicionero: los 8 hilos están conectados, pero **no respetan los pares cancelativos** (ej. Blanco/Naranja va al pin 3 en lugar de al 1). El tester básico a veces muestra todo en orden —porque hay continuidad— y el cable parece funcionar... a baja velocidad y con errores intermitentes. Ethernet sobre cables así da problemas difíciles de pillar.
+**1. Split pair (par dividido).** El caso más traicionero: los 8 hilos están conectados, pero **no respetan los pares cancelativos** (ej. ordenaste los hilos por parejas contiguas y el par azul quedó en los pines 3-4 en vez del 4-5). El tester básico a veces muestra todo en orden —porque hay continuidad de pin a pin— y el cable parece funcionar... a baja velocidad y con errores intermitentes. Ethernet sobre cables así da problemas difíciles de pillar.
 
 **2. Hilo sin conectar.** Un hilo no llegó a insertarse del todo. El tester muestra un LED apagado. Si es un hilo de un par crítico, el enlace cae o pierde velocidad.
 
-**3. Pares invertidos.** En un extremo metes Naranja donde iba Blanco/Naranja y viceversa. Los LEDs 1-2 aparecen intercambiados en uno de los módulos. Funciona como crossover accidental y puede dar problemas según los dispositivos.
+**3. Pares invertidos.** En un extremo metes Naranja donde iba Blanco/Naranja y viceversa. Los LEDs 1-2 aparecen intercambiados en uno de los módulos. Eso es una **inversión de polaridad** en ese par (no un crossover): algunos equipos la corrigen solos y otros no, así que el enlace puede ser inestable.
 
 **4. Funda sin entrar (roto de sujeción).** No lo ves en el tester: es el fallo mecánico. El cable funciona en el banco y falla en cuanto alguien toca el RJ45.
 
-> 💡 **Truco de diagnóstico:** si un cable "funciona a 100 en vez de a 1000", sospecha de **faltan pares** (hilos 7-8 muertos) o de un **split pair**. El tester lo caza: repasa los LEDs 7-8 y el orden completo.
+> 💡 **Truco de diagnóstico:** si un cable "funciona a 100 en vez de a 1000", sospecha de pares faltantes (hilos 7-8 muertos) o de un **split pair**. El tester lo caza: repasa los LEDs 7-8 y el orden completo.
 
 ---
 
@@ -91,7 +91,7 @@ El tester dice *continuidad*, pero la red exige más. La prueba definitiva de un
 
 ## 🧠 Mini-chequeo
 
-1. Enuncia los 6 pasos esenciales del crimpado (pelar, ordenar, cortar, insertar, crimpar, comprobar).
+1. Enuncia los 6 pasos esenciales del crimpado.
 2. El tester muestra los 8 LEDs en orden en ambos extremos pero el cable da errores intermitentes. ¿Qué sospechas y cómo lo descartas?
 3. ¿Qué indica un tester donde los LEDs 7 y 8 no encienden en el extremo B?
 
