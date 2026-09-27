@@ -13,7 +13,7 @@ description: Cómo hacer que VLANs aisladas se hablen gracias a un router 🧭
 
 > Las VLANs aíslan en **capa 2**, pero los departamentos necesitan hablarse (el servidor de Ventas está en VLAN 10, el de RRHH en VLAN 20). La solución es el **inter-VLAN routing**: un router (o switch de capa 3) enruta el tráfico entre VLANs en **capa 3**.
 
-En los puntos 1 y 3 conseguiste **aislar** el tráfico: Ventas no ve a RRHH. Pero una oficina real necesita que RRHH consulte la nómina del servidor de Ventas y que IT administre todo. Aislar sin un plan de interconexión es dispararte en el pie.
+En la unidad de switching conseguiste **aislar** el tráfico: Ventas no ve a RRHH. Pero una oficina real necesita que RRHH consulte la nómina del servidor de Ventas y que IT administre todo. Aislar sin un plan de interconexión es dispararte en el pie.
 
 ---
 
@@ -58,7 +58,7 @@ Router Fa0/0.30 → VLAN 30 (192.168.30.1/24)
       [Switch]
 ```
 
-Ventajas: mínimo hardware (un puerto), fácil de entender y perfecto para redes pequeñas. Desventaja: **una sola interfaz es un cuello de botella** (todos los inter-VLAN atraviesan el mismo cable), algo que ataca el switch de capa 3 del punto 5.
+Ventajas: mínimo hardware (un puerto), fácil de entender y perfecto para redes pequeñas. Desventaja: **una sola interfaz es un cuello de botella** (todos los inter-VLAN atraviesan el mismo cable), algo que ataca el switch de capa 3 del [punto 4](/ApuntesRedes/05-trunking-inter-vlan/04-switch-capa3).
 
 ---
 

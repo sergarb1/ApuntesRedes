@@ -13,7 +13,7 @@ description: Los protocolos que propagan VLANs... y los riesgos que traen 🎭
 
 > **VTP** (*VLAN Trunking Protocol*) propaga la base de datos de VLANs entre switches automáticamente, y **DTP** (*Dynamic Trunking Protocol*) negocia si un puerto es trunk o access. Ambos "te hacen la vida fácil"... y ambos son la puerta de entrada a desastres de seguridad y VLANs que desaparecen.
 
-En los puntos 3 y 4 te creaste las VLANs a mano en cada switch. Estos dos protocolos prometen automatizarlo. Aquí verás por qué la industria moderna te recomienda **apagarlos o usarlos con muchísimo cuidado**.
+Ya te creaste las VLANs a mano en cada switch (la unidad de switching y el punto anterior). Estos dos protocolos prometen automatizarlo. Aquí verás por qué la industria moderna te recomienda **apagarlos o usarlos con muchísimo cuidado**.
 
 ---
 
@@ -74,7 +74,7 @@ DTP decide automáticamente si un puerto se convierte en trunk. Con `switchport 
 
 ### El riesgo de seguridad de DTP
 
-Un atacante con un PC conectado a un puerto en `dynamic desirable` puede **negociar un trunk** y, si el trunk transporta todas las VLANs, leer/u olfatear el tráfico de todas ellas desde el pasillo. Es el vector principal del *VLAN hopping* (punto 7).
+Un atacante con un PC conectado a un puerto en `dynamic desirable` puede **negociar un trunk** y, si el trunk transporta todas las VLANs, leer/u olfatear el tráfico de todas ellas desde el pasillo. Es el vector principal del *VLAN hopping* (el [punto 6](/ApuntesRedes/05-trunking-inter-vlan/06-seguridad-en-vlans) lo desmonta).
 
 Mitigación en una línea:
 
@@ -108,7 +108,7 @@ Switch# show dtp interface fa0/24    # estado de negociación DTP del puerto
 <details>
 <summary>🔄 Respuestas</summary>
 
-1. Porque VTP `propaga la base de datos del switch con mayor revision number`. Si un switch con revisión 500 (y base vacía) se conecta a una red cuyo server tiene revisión 100, impone la suya y todas las VLANs desaparecen.
+1. Porque VTP **propaga la base de datos del switch con mayor revision number**. Si un switch con revisión 500 (y base vacía) se conecta a una red cuyo server tiene revisión 100, impone la suya y todas las VLANs desaparecen.
 2. **Transparent** no participa (tiene sus VLANs locales) pero **sí reenvía** anuncios ajenos; **VTPv3 mode off** no procesa ni propaga anuncios: es una isla total. El *off* es más seguro.
 3. DTP permite a un portátil **negociar un trunk** (si el puerto está en `dynamic desirable`) y acceder a todas las VLANs. Se mitiga con `switchport mode access` + `switchport nonegotiate` (y `shutdown` en puertos libres).
 

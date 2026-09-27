@@ -99,7 +99,7 @@ Has terminado la teoría: sabes cómo un trunk transporta todas las VLANs, por q
 
 **Configura al inicio:**
 1. VLANs 10 (Ventas) y 20 (RRHH) creadas y asignadas a puertos.
-2. Trunk entre switch y router/SVL con native 99 y DTP desactivado (`switchport nonegotiate`).
+2. Trunk entre switch y router/SVI con la native por defecto en ambos extremos y DTP desactivado (`switchport nonegotiate`).
 3. Gateways correctos en los PCs (192.168.10.1 y 192.168.20.1).
 4. Verifica: PC de VLAN 10 pinge a PC de VLAN 20 y viceversa.
 
@@ -198,7 +198,7 @@ El trunk lleva tramas de todas las VLANs permitidas, vengan de puertos access o 
 
 > ❓ **¿Cuántas VLANs puede tener un switch? ¿Y cuántas "reales" en un trunk?**
 
-En Cisco, el rango tradicional es 1-1005 y con VLAN extendidas hasta 4094 (limite del campo 802.1Q de 12 bits). En un trunk concreto, "reales" son las que permites y usas: Buen diseño no apila 300 VLANs "por si acaso" porque cada una es un dominio de broadcast y una entrada de rutas/SVIs si enrutas.
+En Cisco, el rango tradicional es 1-1005 y con VLAN extendidas hasta 4094 (limite del campo 802.1Q de 12 bits). En un trunk concreto, "reales" son las que permites y usas: buen diseño no apila 300 VLANs "por si acaso" porque cada una es un dominio de broadcast y una entrada de rutas/SVIs si enrutas.
 
 > ❓ **Si el switch capa 3 enruta entre VLANs, ¿necesito aún router?**
 
@@ -216,11 +216,18 @@ El paquete de RRHH imprimió su acta de auditoría en la impresora de la VLAN 30
 
 ## ✅ Criterios de evaluación cubiertos (RA3/RA4/RA5)
 
+**RA4: Administra las funciones básicas de un router estableciendo opciones de configuración.**
+
+**RA5: Configura redes locales virtuales identificando su campo de aplicación.**
+
 | CE | Criterio | Cubierto |
 |---|---|---|
-| RA3 | Administración de conmutadores | ✅ Puntos 1-2 y 7 + ⚡ Laboratorio |
-| RA4 | Enrutamiento entre redes | ✅ Puntos 3-4 + 🧠 Atrévete (punto 8) |
-| RA5 | Segmentación y aislamiento de tráfico | ✅ Puntos 1, 5 y 6 + 💬 Entrevista (punto 8) |
+| RA3 | Administración de conmutadores (enlaces y segmentación) | ✅ Puntos 1-2, 5 y 7 + ⚡ Laboratorio (punto 8) |
+| RA4·d) | Comandos de configuración | ✅ Puntos 3-4 y 7 (relay) + 🧠 Atrévete a pensar (punto 8) |
+| RA5·c) | Diagnóstico de incidencias | ✅ Punto 2 + ⚡ Laboratorio (punto 8) |
+| RA5·d) | Enlaces troncales | ✅ Puntos 1-2 y 6 + 🤬 CONRAD y 💬 Entrevista (punto 8) |
+| RA5·e) | Inter-VLAN con router | ✅ Puntos 3-4 + ⭐ y 🕵️ (punto 8) |
+| RA5·f) | Protocolos centralizados (VTP) | ✅ Punto 5 + 🕵️ (punto 8) |
 
 ---
 
