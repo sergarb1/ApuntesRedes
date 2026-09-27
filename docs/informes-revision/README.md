@@ -14,7 +14,7 @@ Orden de revisión: **1 → 12** (introducción primero). Alcance por sesión: *
 | 04 | Switching y VLAN | ✅ revisada | [revision-U04-switching-vlan.md](revision-U04-switching-vlan.md) |
 | 05 | Trunking e inter-VLAN | ✅ revisada | [revision-U05-trunking-inter-vlan.md](revision-U05-trunking-inter-vlan.md) |
 | 06 | Enrutamiento estático | ✅ revisada | [revision-U06-enrutamiento-estatico.md](revision-U06-enrutamiento-estatico.md) |
-| 07 | OSPF | ⏳ pendiente | — |
+| 07 | OSPF | ✅ revisada | [revision-U07-ospf.md](revision-U07-ospf.md) |
 | 08 | ACL y seguridad | ⏳ pendiente | — |
 | 09 | NAT y PAT | ⏳ pendiente | — |
 | 10 | Servicios de red | ⏳ pendiente | — |

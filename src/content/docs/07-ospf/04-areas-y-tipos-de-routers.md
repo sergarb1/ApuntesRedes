@@ -72,12 +72,12 @@ Es el **núcleo** del sistema OSPF. Reglas de oro:
   └──────┘   (ABR)    └──────┘
       │                  │
     R0 ─── (red estática 172.16.0.0/16)
-    (ASBR: redistribuye esa red a OSPF)
+    (Área 0 · ASBR: redistribuye esa red a OSPF)
 ```
 
 - R1 y R3 → **internos** (R3 en Área 1, R1 en Área 0).
 - R2 → **ABR** (conecta Área 0 y Área 1) y además *backbone router*.
-- R0 → **ASBR** (introduce la ruta estática en OSPF) y backbone router.
+- R0 → **ASBR** (introduce la ruta estática en OSPF); como está en el Área 0, también es *backbone router*.
 
 ---
 

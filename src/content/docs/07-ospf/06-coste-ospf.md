@@ -42,7 +42,7 @@ El valor de referencia **10^8 = 100 Mbps** es el "coste 1" por defecto. A partir
         │ 5     │ 2
         │       │
         C ───── D
-           1
+           1        (costes: A-C=5, A-B=5, B-D=2, C-D=1)
 ```
 
 - A → B → D = 5 + 2 = **7**
@@ -61,7 +61,7 @@ A veces quieres que OSPF prefiera (o evite) un enlace aunque físicamente sea el
 
 2. **Cambiar el ancho de banda de referencia** (global):
    ```bash
-   R1(config-router)# auto-cost reference-bandwidth 1000   ; 1 Gbps como coste 1
+   R1(config-router)# auto-cost reference-bandwidth 1000   # 1 Gbps como coste 1
    ```
 
 > 💡 **¿Cómo ver el coste de una ruta?** Con `show ip ospf interface` verás el coste de cada interfaz, y `show ip route` muestra la métrica (coste total) de cada ruta OSPF.
@@ -73,22 +73,25 @@ A veces quieres que OSPF prefiera (o evite) un enlace aunque físicamente sea el
 Montemos una mini-red y calculemos qué decide OSPF. R1 quiere llegar a la LAN de R3 y tiene **dos caminos**:
 
 ```
-                    R2
-              ┌──────────┐
-LAN ── R1 ─┤ FastEth ├── R3 ── LAN
-               │  100Mbps │  100Mbps
-              └──────────┘
-   R1 ─── R4 ─── R3     (todo el camino por 10 Mbps)
+        Camino A · FastEthernet 100 Mbps (coste 1 por enlace)
+
+   LAN ── R1 ─────────── R2 ─────────── R3 ── LAN
+                      100 Mbps      100 Mbps
+
+        Camino B · Serial 10 Mbps (coste 10 por enlace)
+
+   R1 ─────────── R4 ─────────── R3
+               10 Mbps      10 Mbps
 ```
 
 **Camino A: R1 → R2 → R3 (FastEthernet 100 Mbps):** coste por enlace = 1 → total = **1 + 1 = 2**.
 **Camino B: R1 → R4 → R3 (Serial 10 Mbps):** coste por enlace = 10 → total = **10 + 10 = 20**.
 
-OSPF elige el **Camino A** (coste 2 < 20), aunque los dos caminos tengan el mismo número de saltos. Y ahora el truco del administrador: si la fibra de R2 está saturada y queremos mover tráfico por R4 aunque sea lento, subimos el coste de las interfaces de R2:
+OSPF elige el **Camino A** (coste 2 < 20), aunque los dos caminos tengan el mismo número de saltos. Y ahora el truco del administrador: si el enlace de R2 está saturado y queremos mover tráfico por R4 aunque sea lento, subimos el coste de las interfaces de R2:
 
 ```bash
-R1(config-if)# interface gigabitethernet 0/0
-R1(config-if)# ip ospf cost 50          ; Camino A pasa a coste 50+1 = 51 > 20
+R1(config)# interface gigabitethernet 0/0
+R1(config-if)# ip ospf cost 50          # Camino A pasa a coste 50+1 = 51 > 20
 ```
 
 Con el coste tocado, OSPF recorre su SPF, ve 51 frente a 20 y **redirige el tráfico a R4**. Ese mismo mecanismo es el que usarás en el [Laboratorio de tortura](/ApuntesRedes/07-ospf/09-cierre) para "forzar una ruta alternativa".

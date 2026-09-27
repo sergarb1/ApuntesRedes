@@ -64,11 +64,11 @@ Relaciona el tipo de router OSPF con su función:
 
 ## 7. Dinámico vs estático
 
-a) Clasifica cada protocolo como IGP o EGP: **OSPF**, **RIP**, **BGP**, **EIGRP**.
+a) Explica qué es la **convergencia** y por qué el enrutamiento dinámico la consigue solo, mientras que en el estático depende del administrador.
 
 b) Enumera **3 ventajas** del routing dinámico frente al estático y pon un caso donde convenga usar estático.
 
-**Pista:** IGP enruta dentro de un AS y EGP entre AS (BGP). Dinámico = autoaprendizaje, convergencia automática y menos error humano; estático = determinista, útil en enlaces stub o redes muy pequeñas.
+**Pista:** Dinámico = autoaprendizaje, convergencia automática y menos error humano; estático = determinista, útil en enlaces stub o redes muy pequeñas.
 
 ## 8. Coste OSPF: tabla de velocidades
 
