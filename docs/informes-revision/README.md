@@ -11,7 +11,7 @@ Orden de revisión: **1 → 12** (introducción primero). Alcance por sesión: *
 | 01 | Introducción | ✅ revisada | [revision-U01-introduccion.md](revision-U01-introduccion.md) |
 | 02 | Ethernet y cableado | ✅ revisada | [revision-U02-ethernet-cableado.md](revision-U02-ethernet-cableado.md) |
 | 03 | Direccionamiento IP | ✅ revisada | [revision-U03-direccionamiento-ip.md](revision-U03-direccionamiento-ip.md) |
-| 04 | Switching y VLAN | ⏳ pendiente | — |
+| 04 | Switching y VLAN | ✅ revisada | [revision-U04-switching-vlan.md](revision-U04-switching-vlan.md) |
 | 05 | Trunking e inter-VLAN | ⏳ pendiente | — |
 | 06 | Enrutamiento estático | ⏳ pendiente | — |
 | 07 | OSPF | ⏳ pendiente | — |
@@ -39,7 +39,7 @@ Los informes de la revisión vigente se nombran `revision-UXX-<nombre>.md` (los 
 Detectados con `check-unidad` antes de empezar (referencia para las sesiones):
 
 - **01 Introducción**: índice sin sección de Criterios de evaluación; `01-que-es-una-red.md` sin pie `Anterior`; índice no enlaza sus boletines; sin bloque ⭐ (¿exento?).
-- **RA índice ≠ RA cierre**: 02 (RA1/RA2 vs RA2), 03 (RA1/RA2/RA4/RA6 vs RA2), 04 (RA3/RA5 vs RA5).
+- **RA índice ≠ RA cierre**: 02 (RA1/RA2 vs RA2), 03 (RA1/RA2/RA4/RA6 vs RA2), 04 (RA3/RA5 vs RA5) — los tres resueltos en sus sesiones (02, 03 y 04); alineadas además las tablas CE con el patrón de letras oficial (RA5·a–f en la sesión 04).
 - **Nombres de sección con variantes** (documentadas en AGENTS): `Sé el Paquete/Bit/Router OSPF/NAT`; `Entrevista de trabajo` vs `Preguntas de entrevista de trabajo`.
 - Ver también [matriz-solapamientos.md](matriz-solapamientos.md).
 

@@ -97,7 +97,38 @@ c) Escribe la configuración completa y el comando para ver el estado.
 
 **Pista:** `switchport port-security violation restrict` + `logging` integrado.
 
-## 8. Mini-caso final
+## 8. Diagnóstico de port security
+
+Un administrador configuró port security en un puerto:
+
+```
+Switch(config-if)# switchport port-security maximum 1
+Switch(config-if)# switchport port-security violation shutdown
+```
+
+Un usuario se conecta con su portátil y funciona. Luego conecta otro portátil (el suyo y el de un compañero) usando un switch no administrado. El puerto se deshabilita.
+
+a) ¿Por qué ocurrió?
+b) ¿Qué dos cambios harías en la configuración para permitir esta situación sin perder seguridad?
+c) ¿Cómo recuperas el puerto?
+
+## 9. Laboratorio: Port Security en la sala de profesores
+
+Configura el puerto Fa0/24 del switch (donde se enchufa el PC de la sala de profesores) para que:
+
+a) Solo permita 1 MAC aprendida automáticamente y permanente (sticky).
+b) Si aparece una segunda MAC, el puerto se deshabilite (violación shutdown).
+c) Escribe los comandos completos y verifica con el comando de comprobación adecuado.
+
+Después, un profe desenchufa su PC y conecta su portátil personal. El puerto entra en errdisable.
+
+d) ¿Por qué ha ocurrido la violación si solo hay UN dispositivo conectado?
+e) ¿Qué dos comandos ejecutarías para recuperar el puerto?
+f) ¿Cómo evitarías el problema sin perder seguridad (piensa en el envejecimiento de la MAC sticky)?
+
+**Pista:** la MAC sticky NO caduca aunque el PC se desenchufe; si cambias de equipo, hay dos MACs distintas "conocidas" en el puerto y se supera el máximo. Para recuperar errdisable: `shutdown` + `no shutdown`. Para expirar la sticky cuando el dispositivo se desenchufa, configura el envejecimiento de la port security (`switchport port-security aging`).
+
+## 10. Mini-caso final
 
 Un instituto pide: "la sala de profesores (192.168.10.0/24) no puede usar el WiFi de alumnos (192.168.20.0/24), pero ambos deben salir a Internet (G0/2 del router) y los profesores acceden al servidor de notas (10.0.0.5) por HTTPS".
 

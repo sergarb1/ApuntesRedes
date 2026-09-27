@@ -1,11 +1,11 @@
 ---
 title: Boletín de Switching y VLAN — Avanzado
-description: Ejercicios avanzados de Switching y STP
+description: Ejercicios avanzados de Switching, STP y VLAN
 ---
 
 # 📝 Boletín de Switching y VLAN — Avanzado
 
-> Ejercicios que requieren aplicar los conceptos de switching y STP de forma más profunda.
+> Ejercicios que requieren aplicar los conceptos de switching, STP y VLAN de forma más profunda.
 
 ---
 
@@ -14,9 +14,9 @@ description: Ejercicios avanzados de Switching y STP
 Configura un switch Cisco desde cero con:
 
 a) Hostname: SW-OFICINA-01
-b) IP de gestión en VLAN 1: 192.168.1.10/24, gateway 192.168.1.1
-c) Puertos Fa0/1-10 como access, seguridad de puerto con máximo 2 MACs
-d) Puertos Fa0/11-12 como trunk
+b) VLAN de gestión 999 con SVI y dirección 192.168.99.10/24, gateway 192.168.99.1
+c) VLAN 10 (Ventas) y VLAN 20 (RRHH); puertos Fa0/1-10 en la VLAN 10 y Fa0/11-12 en la VLAN 20
+d) Verificación: ¿qué comando confirma que las VLANs existen y que los puertos están asignados?
 
 Escribe los comandos necesarios.
 
@@ -37,35 +37,31 @@ b) ¿Cuántos Root Ports hay en total?
 c) ¿Cuántos Designated Ports hay?
 d) Si Switch C falla, ¿qué cambios ocurren en la topología?
 
-## 3. Diagnóstico de port security
+## 3. Diagnóstico de VLAN
 
-Un administrador configuró port security en un puerto:
+En una oficina montan VLANs por primera vez en un switch de 24 puertos: VLAN 10 para Ventas (Fa0/1-12) y VLAN 20 para RRHH (Fa0/13-24). Al terminar, los equipos de RRHH funcionan, pero el PC de Ana, enchufado en Fa0/9 (debería ser Ventas), no obtiene IP por DHCP ni ve al resto de Ventas; su compañero, en Fa0/10, sí funciona.
 
-```
-Switch(config-if)# switchport port-security maximum 1
-Switch(config-if)# switchport port-security violation shutdown
-```
+a) ¿Qué comando miras primero para comprobar en qué VLAN está el puerto de Ana?
+b) ¿Cuál es la causa más probable? ¿Cómo la confirmas?
+c) ¿Cómo lo arreglas? ¿Y por qué falla también el DHCP?
+d) Si cada semana se reorganizan las mesas, ¿qué buena práctica te ahorra repetir el diagnóstico?
 
-Un usuario se conecta con su portátil y funciona. Luego conecta otro portátil (el suyo y el de un compañero) usando un switch no administrado. El puerto se deshabilita.
-
-a) ¿Por qué ocurrió?
-b) ¿Qué dos cambios harías en la configuración para permitir esta situación sin perder seguridad?
-c) ¿Cómo recuperas el puerto?
+**Pista:** la VLAN decide el dominio de broadcast; si el puerto no está en la suya, el equipo queda fuera de casa.
 
 ## 4. Diseño de red redundante
 
-Diseña una red con 4 switches (SW1, SW2, SW3, SW4) y 2 enlaces redundantes entre cada par. Debe tener:
+Diseña la red de una oficina con 4 switches (SW1, SW2, SW3, SW4) y 50 PCs, con esta topología y STP activo:
 
-- 50 PCs distribuidos
-- Redundancia: si cualquier switch o enlace individual falla, la red sigue funcionando
-- STP activo
+- Anillo: SW1–SW2–SW3–SW4–SW1
+- Enlace extra directo entre SW1 y SW3
+- Requisito: si falla un enlace o un switch individual, la red sigue funcionando
 
-a) Dibuja la topología conceptual
-b) ¿Cuántos puertos quedarán bloqueados por STP?
+a) Dibuja la topología conceptual y marca qué puertos bloqueará STP
+b) ¿Cuántos puertos quedarán bloqueados? Razona la respuesta
 c) ¿Qué prioridad asignarías para forzar a SW1 como Root Bridge?
 d) ¿Qué pasa si SW1 falla? ¿Cuánto tarda la red en recuperarse con STP? ¿Y con RSTP?
 
-## 5. CAM table analysis
+## 5. Análisis de la tabla CAM
 
 Observa esta tabla MAC:
 
@@ -77,12 +73,11 @@ Vlan    Mac Address       Type        Ports
    1    0050.7966.6802    DYNAMIC     Fa0/3
    1    00D0.BC96.1A01    DYNAMIC     Fa0/4
    1    00D0.BC96.1A02    DYNAMIC     Fa0/4
-   1    FFFF.FFFF.FFFF    STATIC     CPU
 ```
 
 a) ¿Cuántos dispositivos hay conectados al puerto Fa0/4? ¿Cómo lo sabes?
 b) ¿Cuántos puertos del switch tienen dispositivos conectados?
-c) La entrada FFFF.FFFF.FFFF en la CPU: ¿qué es?
+c) ¿Aparece la dirección de broadcast `FFFF.FFFF.FFFF` en la tabla? Si no aparece, ¿qué hace el switch con un broadcast?
 d) Si llega una trama con destino 00D0.BC96.1A03, ¿qué hace el switch?
 
 ## 6. STP: cálculo de costes
@@ -122,18 +117,14 @@ e) ¿Qué papel juegan los puertos del Root Bridge?
 
 **Pista:** el Root Bridge es el de menor Bridge ID; todos sus puertos son Designated. Los switches no-root tienen 1 Root Port cada uno, y el enlace redundante SW2-SW3 crea un Alternate Port en el extremo con mayor coste acumulado hacia el Root.
 
-## 8. Laboratorio: Port Security en la sala de profesores
+## 8. Laboratorio: segmentación en un switch
 
-Configura el puerto Fa0/24 del switch (donde se enchufa el PC de la sala de profesores) para que:
+Monta esto en un switch (o en Packet Tracer): tres PCs con IPs de la misma subred (192.168.10.0/24): PC1 en Fa0/1, PC2 en Fa0/2 y PC3 en Fa0/9.
 
-a) Solo permita 1 MAC aprendida automáticamente y permanente (sticky).
-b) Si aparece una segunda MAC, el puerto se deshabilite (violación shutdown).
-c) Escribe los comandos completos y verifica con el comando de comprobación adecuado.
+a) Crea la VLAN 10 (Ventas) y la VLAN 20 (RRHH); asigna Fa0/1-8 a la VLAN 10 y Fa0/9-16 a la VLAN 20.
+b) Verifica con `show vlan brief`: ¿en qué VLAN aparecen los tres puertos? ¿Y la MAC de PC1 en `show mac address-table`?
+c) Prueba ping de PC1 → PC2 y de PC1 → PC3. ¿Cuál funciona? ¿Es un fallo el que no funcione? ¿Por qué?
+d) Sin tocar las IPs, mueve Fa0/9 a la VLAN 10 y repite el ping PC1 → PC3. ¿Ahora va? ¿Qué conclusión sacas sobre lo que hace una VLAN?
+e) Un compañero insiste: "si están en la misma red IP, se verán aunque estén en VLANs distintas". ¿Le crees? ¿Qué le respondes?
 
-Después, un profe desenchufa su PC y conecta su portátil personal. El puerto entra en errdisable.
-
-d) ¿Por qué ha ocurrido la violación si solo hay UN dispositivo conectado?
-e) ¿Qué dos comandos ejecutarías para recuperar el puerto?
-f) ¿Cómo evitarías el problema sin perder seguridad (piensa en el envejecimiento de la MAC sticky)?
-
-**Pista:** la MAC sticky NO caduca aunque el PC se desenchufe; si cambias de equipo, hay dos MACs distintas "conocidas" en el puerto y se supera el máximo. Para recuperar errdisable: `shutdown` + `no shutdown`. Para expirar la sticky cuando el dispositivo se desenchufa, configura el envejecimiento de la port security (`switchport port-security aging`).
+**Pista:** la VLAN manda antes que la IP: en capa 2 el switch decide qué puertos hablan entre sí.

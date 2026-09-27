@@ -79,13 +79,13 @@ Has terminado la teoría. Este cierre es el aterrizaje: recorre lo aprendido con
 
 ## 🤬 CONRAD VS EL MUNDO: "He configurado VLANs y ahora nadie se ve"
 
-**CONRAD:** — *Risa malvada.* Clásico. Configuras VLAN10 en el Switch1 y VLAN20 en el Switch2. Conectas los switches por un puerto normal (access). Los de VLAN10 no ven a los de VLAN20. ¡LÓGICO! Necesitas un TRUNK para que las VLANs viajen entre switches. Y no olvides el 802.1Q.
+**CONRAD:** — *Risa malvada.* Clásico. Configuras VLAN 10 en el Switch1 y VLAN 20 en el Switch2. Conectas los switches por un puerto normal (access). Los de VLAN 10 no ven a los de VLAN 20. ¡LÓGICO! Necesitas un TRUNK para que las VLANs viajen entre switches. Y no olvides el 802.1Q.
 
 **CONRAD:** — "Y luego: *es que configuré el trunk y sigue sin funcionar*. ¿Seguro que los dos extremos tienen la misma native VLAN? ¿Seguro que permites las VLANs correctas en `allowed vlan`? ¡Ah! Y si tienes VTP, cuidado con el revision number. Que cuando borras todas las VLANs sin querer... acuérdate de mí."
 
 **CONRAD:** — "Y no me habléis de los del `dynamic desirable`. Dejáis el puerto con DTP por defecto y un portátil cualquiera negocia un trunk y os pasea por todas las VLANs. ¿Que es mucho lío? No, es una línea: `switchport mode access` + `switchport nonegotiate`. Y ya."
 
-**La lección:** La configuración de VLANs es un guion de 3 actos: **VLANs creadas** → **trunk bien hecho** (native igual y `allowed` correcto) → **routing** para cruzar de VLAN. Si algo falla, recuerda el orden de diagnóstico del punto 8: `show vlan brief` → `show interfaces trunk` → `show ip interface brief`.
+**La lección:** La configuración de VLANs es un guion de 3 actos: **VLANs creadas** → **trunk bien hecho** (native igual y `allowed` correcto) → **routing** para cruzar de VLAN. Si algo falla, recuerda el orden de diagnóstico del [punto 2 de trunking e inter-VLAN](/ApuntesRedes/05-trunking-inter-vlan/02-configuracion-y-verificacion): `show vlan brief` → `show interfaces trunk` → `show ip interface brief`.
 
 ---
 
@@ -103,16 +103,16 @@ Has terminado la teoría. Este cierre es el aterrizaje: recorre lo aprendido con
 **Tareas:**
 1. Configura las VLANs en ambos switches.
 2. Configura el trunk entre switches.
-3. Configura el router con subinterfaces (VLAN10 y VLAN20).
+3. Configura el router con subinterfaces (VLAN 10 y VLAN 20).
 4. Verifica que PCs de distintas VLANs se vean (a través del router).
 
-**Fallo intencionado:** Configura el trunk pero con native VLAN diferente en cada extremo: **Switch1 native 99, Switch2 native 1**. Verás que algunos paquetes se pierden o llegan a la VLAN incorrecta. El diagnóstico: `show interface trunk` muestra la discrepancia.
+**Fallo intencionado:** Configura el trunk pero con native VLAN diferente en cada extremo: **Switch1 native 99, Switch2 native 1**. Verás que algunos paquetes se pierden o llegan a la VLAN incorrecta. El diagnóstico: `show interfaces trunk` muestra la discrepancia.
 
-> **Pista 1:** tras configurarlo, ejecuta `show interface trunk` en **ambos** switches. Busca la línea *"Native VLAN mismatch discovered on Fa0/24"*. Ahí está toda la incidencia.
+> **Pista 1:** tras configurarlo, ejecuta `show interfaces trunk` en **ambos** switches. Busca la línea *"Native VLAN mismatch discovered on Fa0/24"*. Ahí está toda la incidencia.
 >
 > **Pista 2:** fíjate en qué tramas se rompen: las de la VLAN nativa (tráfico de control, DHCP de esa VLAN) "van y vienen a ratos". Las VLANs **etiquetadas** (10 y 20) suelen sobrevivir: por eso el síntoma es sutil.
 >
-> **Pista 3:** el arreglo es una sola línea en el Switch2: `switchport trunk native vlan 99`. Repite `show interface trunk` y comprueba que ambos extremos declaran 99.
+> **Pista 3:** el arreglo es una sola línea en el Switch2: `switchport trunk native vlan 99`. Repite `show interfaces trunk` y comprueba que ambos extremos declaran 99.
 
 ---
 
@@ -121,7 +121,7 @@ Has terminado la teoría. Este cierre es el aterrizaje: recorre lo aprendido con
 | Logro | Cómo conseguirlo |
 |---|---|
 | 🏅 **VLAN Architect** | Diseñar e implementar VLANs para 4 departamentos en Packet Tracer |
-| 🏅 **Trunk Master** | Configurar un trunk 802.1Q y verificar con `show interface trunk` |
+| 🏅 **Trunk Master** | Configurar un trunk 802.1Q y verificar con `show interfaces trunk` |
 | 🏅 **Router-on-a-stick** | Configurar inter-VLAN routing con subinterfaces y verificar conectividad |
 | 🏅 **Troubleshooter** | Diagnosticar y arreglar un problema de native VLAN mal configurada |
 
@@ -138,10 +138,10 @@ Has terminado la teoría. Este cierre es el aterrizaje: recorre lo aprendido con
 <details>
 <summary>💡 Soluciones</summary>
 
-1. El estándar 802.1Q dedica **12 bits** al VLAN ID → 4096 IDs posibles, reservadas 0 y 4095 → **4094 VLANs** como máximo. Pero los switches económicos soportan menos (100-1000 activas a la vez): consulta las especificaciones del modelo. **Dato contexto:** el número no es el problema de diseño habitual: son los límites de la tabla MAC y de STP/RSTP por instancia.
-2. **No se comunicarán entre switches.** Los puertos access no transportan etiquetas VLAN: la trama sale de Ventas en el Switch1 y, al cruzar por un puerto no-trunk, llega como "VLAN por defecto". Necesitas un **trunk** con `allowed vlan` (punto 3) para que la VLAN 10 de un lado llegue a la del otro.
+1. El estándar 802.1Q dedica **12 bits** al VLAN ID → 4096 IDs posibles, reservadas 0 y 4095 → **4094 VLANs** como máximo. Pero los switches económicos soportan menos (100-1000 activas a la vez): consulta las especificaciones del modelo. **Dato de contexto:** el número no es el problema de diseño habitual: son los límites de la tabla MAC y de STP/RSTP por instancia.
+2. **No se comunicarán entre switches.** Los puertos access no transportan etiquetas VLAN: la trama sale de Ventas en el Switch1 y, al cruzar por un puerto no-trunk, llega como "VLAN por defecto". Necesitas un **trunk** con `allowed vlan` ([trunking e inter-VLAN](/ApuntesRedes/05-trunking-inter-vlan/01-trunks-y-8021q)) para que la VLAN 10 de un lado llegue a la del otro.
 3. Por el símil de **una sola interfaz física ("el palo") con varias subinterfaces lógicas ("las pelotas") girando alrededor** para distintas VLANs. La alternativa es el **switch de capa 3 con SVIs**, que enruta en hardware sin el cuello de botella de la interfaz única.
-4. Cuando **el tráfico entre VLANs es intenso** (decenas o cientos de VLANs o altas tasas): el router-on-a-stick se ve limitado por una única interfaz (punto 4 y 5). En oficinas pequeñas, el router-on-a-stick basta y es más barato.
+4. Cuando **el tráfico entre VLANs es intenso** (decenas o cientos de VLANs o altas tasas): el router-on-a-stick se ve limitado por una única interfaz (en [trunking e inter-VLAN](/ApuntesRedes/05-trunking-inter-vlan/03-inter-vlan-routing), puntos 3 y 4). En oficinas pequeñas, el router-on-a-stick basta y es más barato.
 5. **VTP puede borrar toda la base de datos de VLANs de la red.** Si conectas un switch con *revision number* más alto que el server actual, su base de datos (posiblemente vacía) se propaga a todos los switches y las VLANs desaparecen. Mitigación: VTP transparent / VTPv3 off y comprobar `show vtp status` antes de conectar equipo usado.
 
 </details>
@@ -154,13 +154,13 @@ Has terminado la teoría. Este cierre es el aterrizaje: recorre lo aprendido con
 Horizontal:
 1. Estándar de etiquetado VLAN (número + letra)
 4. Enlace que transporta múltiples VLANs (5 letras)
-5. Switch que puede enrutar entre VLANs (4+3 letras)
+5. Switch que puede enrutar entre VLANs (5 letras)
 7. VLAN que no se etiqueta en el trunk (6 letras)
-8. Comando para la native VLAN (6 letras)
+8. Primera palabra del comando de la native VLAN (10 letras)
 
 Vertical:
 2. Protocolo de administración centralizada de VLANs (3 letras)
-3. Configuración router para inter-VLAN con una interfaz (4+2+4 letras, con guiones)
+3. Configuración router para inter-VLAN con una interfaz (6+2+1+5 letras, con guiones)
 6. Bits del campo VLAN ID en 802.1Q (2 dígitos)
 ```
 
@@ -198,7 +198,7 @@ Con `show vlan brief` en el switch: muestra todas las VLANs y qué puertos está
 
 > ❓ **¿VLAN 1 es insegura?**
 
-No es insegura intrínsecamente, pero es la **VLAN por defecto**: todos los puertos arrancan en ella y se usa como native VLAN, así que concentra todo el tráfico "mal clasificado". Por seguridad: **cambia la native** a un número no estándar (por ejemplo 99 o 999), **deshabilita DTP** y **no uses VLAN 1 para datos** (punto 7). Así un double tagging o un mismatch no te alcanza tan fácil.
+No es insegura intrínsecamente, pero es la **VLAN por defecto**: todos los puertos arrancan en ella y se usa como native VLAN, así que concentra todo el tráfico "mal clasificado". Por seguridad: **cambia la native** a un número no estándar (por ejemplo 99 o 999), **deshabilita DTP** y **no uses VLAN 1 para datos** ([punto 6 de trunking e inter-VLAN](/ApuntesRedes/05-trunking-inter-vlan/06-seguridad-en-vlans)). Así un double tagging o un mismatch no te alcanza tan fácil.
 
 > ❓ **¿Puedo tener 5000 VLANs en un switch?**
 
@@ -214,18 +214,20 @@ Las VLANs segmentan la red de forma efectiva: el tráfico de Ventas no es visibl
 
 ---
 
-## ✅ Criterios de evaluación cubiertos (RA5)
+## ✅ Criterios de evaluación cubiertos (RA3/RA5)
 
 **RA5: Configura redes locales virtuales identificando su campo de aplicación.**
 
 | CE | Criterio | Cubierto |
 |---|---|---|
-| a) | Ventajas de VLANs | ✅ Motivación, tabla de ventajas y dominios de broadcast (puntos 1-2) |
-| b) | Implementación de VLANs | ✅ Configuración access/trunk en el ⚡ Laboratorio y puntos 2 y 8 |
-| c) | Diagnóstico de incidencias | ✅ Fallo intencionado de native VLAN + `show interfaces trunk` |
-| d) | Enlaces troncales | ✅ Trunk 802.1Q y native VLAN (puntos 3 y 8) |
-| e) | Inter-VLAN con router | ✅ Router-on-a-stick y SVI en el ⚡ Laboratorio |
-| f) | Protocolos centralizados (VTP) | ✅ Modos, revision number y riesgos (punto 6) |
+| RA3 | Administración de conmutadores | ✅ Puntos 1-2, 5-7 + ⚡ Laboratorio (punto 10) |
+| RA3·c) | Redundancia sin bucles (STP) | ✅ Puntos 4-7 + 💬 Entrevista (punto 10) |
+| RA5·a) | Ventajas de VLANs | ✅ Puntos 3-4 y 8 (dominios y ventajas) + 🧠 Atrévete a pensar (punto 10) |
+| RA5·b) | Implementación de VLANs | ✅ Puntos 8-9 + ⚡ Laboratorio (punto 10) |
+| RA5·c) | Diagnóstico de incidencias | ✅ Fallo intencionado de native VLAN (punto 10) |
+| RA5·d) | Enlaces troncales | ✅ Punto 9 (nativa) + ⭐ y 🤬 CONRAD (punto 10) |
+| RA5·e) | Inter-VLAN con router | ✅ ⚡ Laboratorio, 🕵️ y 🧠 (punto 10) |
+| RA5·f) | Protocolos centralizados (VTP) | ✅ 🕵️, 🧠 y 💬 (punto 10) |
 
 ---
 

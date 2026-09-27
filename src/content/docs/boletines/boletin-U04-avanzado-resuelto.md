@@ -1,6 +1,6 @@
 ---
 title: Boletín de Switching y VLAN — Avanzado (Resuelto)
-description: Soluciones de los ejercicios avanzados de Switching y STP
+description: Soluciones de los ejercicios avanzados de Switching, STP y VLAN
 ---
 
 # ✅ Boletín de Switching y VLAN — Avanzado (Resuelto)
@@ -13,24 +13,34 @@ description: Soluciones de los ejercicios avanzados de Switching y STP
 Switch> enable
 Switch# configure terminal
 Switch(config)# hostname SW-OFICINA-01
-SW-OFICINA-01(config)# interface vlan 1
-SW-OFICINA-01(config-if)# ip address 192.168.1.10 255.255.255.0
-SW-OFICINA-01(config-if)# no shutdown
-SW-OFICINA-01(config-if)# exit
-SW-OFICINA-01(config)# ip default-gateway 192.168.1.1
+
+SW-OFICINA-01(config)# vlan 10
+SW-OFICINA-01(config-vlan)# name Ventas
+SW-OFICINA-01(config-vlan)# exit
+SW-OFICINA-01(config)# vlan 20
+SW-OFICINA-01(config-vlan)# name RRHH
+SW-OFICINA-01(config-vlan)# exit
+SW-OFICINA-01(config)# vlan 999
+SW-OFICINA-01(config-vlan)# name Gestion
+SW-OFICINA-01(config-vlan)# exit
 
 SW-OFICINA-01(config)# interface range fa0/1-10
 SW-OFICINA-01(config-if-range)# switchport mode access
-SW-OFICINA-01(config-if-range)# switchport port-security
-SW-OFICINA-01(config-if-range)# switchport port-security maximum 2
-SW-OFICINA-01(config-if-range)# switchport port-security mac-address sticky
-SW-OFICINA-01(config-if-range)# switchport port-security violation shutdown
+SW-OFICINA-01(config-if-range)# switchport access vlan 10
+SW-OFICINA-01(config-if-range)# exit
+SW-OFICINA-01(config)# interface range fa0/11-12
+SW-OFICINA-01(config-if-range)# switchport mode access
+SW-OFICINA-01(config-if-range)# switchport access vlan 20
 SW-OFICINA-01(config-if-range)# exit
 
-SW-OFICINA-01(config)# interface range fa0/11-12
-SW-OFICINA-01(config-if-range)# switchport mode trunk
-SW-OFICINA-01(config-if-range)# exit
+SW-OFICINA-01(config)# interface vlan 999
+SW-OFICINA-01(config-if)# ip address 192.168.99.10 255.255.255.0
+SW-OFICINA-01(config-if)# no shutdown
+SW-OFICINA-01(config-if)# exit
+SW-OFICINA-01(config)# ip default-gateway 192.168.99.1
 ```
+
+d) `show vlan brief` — lista las VLANs 10, 20 y 999 y qué puertos tiene asignados cada una.
 
 ## 2. Análisis de topología STP
 
@@ -43,45 +53,45 @@ c) **Designated Ports:** 1 por segmento. Hay 3 segmentos (A-B, B-C, C-A) → **3
 d) Si **Switch C falla**:
    - Switches A y B pierden su Root Bridge
    - Se inicia una nueva elección. Con la misma prioridad (32768), gana Switch A (MAC más baja)
-   - Todos los puertos pasan por los estados STP (blocking → listening → learning → forwarding)
-   - Convergencia: ~50 segundos con STP, ~3 segundos con RSTP
+   - Los puertos necesarios pasan por listening y learning antes de reenviar (los que estaban bloqueados esperan además a que se resuelva la topología)
+   - Convergencia: ~30-50 segundos con STP, ~1-3 segundos con RSTP
 
-## 3. Diagnóstico de port security
+## 3. Diagnóstico de VLAN
 
-a) **Ocurrió porque** el usuario conectó un switch no administrado. Los PCs de ambos usuarios tienen MACs diferentes, y el switch de red ve más de 1 MAC en el puerto, superando el límite (maximum 1).
+a) `show vlan brief` — lista todas las VLANs del switch y los puertos de cada una. (También sirve `show interfaces fa0/9 switchport` si quieres mirar solo ese puerto.)
 
-b) **Dos cambios:**
-   1. Aumentar `maximum` a un valor razonable (ej. 5-10) si es un puerto compartido
-   2. Cambiar `violation` a `restrict` (descarta tráfico extra pero no deshabilita el puerto) o `protect` (descarta silenciosamente)
+b) El puerto Fa0/9 **no se asignó a la VLAN 10** (se quedó en la VLAN 1 de fábrica). Se confirma con `show vlan brief`: Fa0/9 aparece listado en la VLAN 1, mientras Fa0/10 aparece en la VLAN 10.
 
-c) **Recuperar el puerto:**
-   ```bash
-   SW-OFICINA-01(config)# interface fa0/1
-   SW-OFICINA-01(config-if)# shutdown
-   SW-OFICINA-01(config-if)# no shutdown
-   ```
-   O configurar `errdisable recovery cause psecure-violation` para recuperación automática.
+c)
+
+```bash
+Switch(config)# interface fa0/9
+Switch(config-if)# switchport access vlan 10
+```
+
+El DHCP fallaba porque el DISCOVER de Ana es un broadcast y se queda en la VLAN 1: no llega al dominio de broadcast de la VLAN 10, donde están el resto de Ventas y su servidor DHCP.
+
+d) Etiquetar físicamente los puertos y los cables (VLAN 10 / VLAN 20) y mantener el mismo reparto de rangos en todos los switches: lo que no está etiquetado se olvida.
 
 ## 4. Diseño de red redundante
 
-a) **Topología conceptual:** Malla parcial. SW1 (core) conectado a SW2, SW3, SW4. SW2 conectado a SW3 y SW4. Sin bucles directos SW3-SW4 para limitar redundancia.
+a) **Topología:** anillo con diagonal. Enlaces SW1–SW2, SW2–SW3, SW3–SW4, SW4–SW1 y SW1–SW3 (5 enlaces en total). STP deja activos solo los enlaces de un árbol que conecte los 4 switches y bloquea el resto.
 
-b) **Puertos bloqueados:** Depende del Root Bridge. Si SW1 es Root, sus puertos son Designated. Los switches no-root tendrán Root Ports y Alternate Ports bloqueados. Con 3 conexiones alternativas por switch, aproximadamente 3 puertos bloqueados.
+b) **2 puertos bloqueados.** Para conectar 4 switches sin bucles hacen falta 3 enlaces activos (n − 1 = 3); hay 5, así que STP bloquea 2 (uno por cada enlace sobrante). Cuáles exactos dependen del Root Bridge y de los costes, pero el número es siempre 2.
 
-c) **Prioridad para SW1 como Root:** `spanning-tree vlan 1 priority 4096` (o 0 para forzarlo absolutamente).
+c) `spanning-tree vlan 1 priority 4096` (la prioridad debe ser múltiplo de 4096; con 4096 le gana a los 32768 por defecto).
 
-d) **Si SW1 falla:**
-   - Se elige un nuevo Root Bridge (el de menor Bridge ID entre SW2, SW3, SW4)
-   - **Con STP:** ~50 segundos de convergencia
+d) **Sí, la red sigue conectada:** al caer SW1 desaparecen sus tres enlaces (SW1–SW2, SW4–SW1 y SW1–SW3), pero quedan SW2–SW3 y SW3–SW4, que encadenan a los tres switches supervivientes (SW2 → SW3 → SW4).
+   - **Con STP:** ~30-50 segundos de convergencia
    - **Con RSTP:** ~1-3 segundos
 
-## 5. CAM table analysis
+## 5. Análisis de la tabla CAM
 
 a) **Dos dispositivos** en Fa0/4: 00D0.BC96.1A01 y 00D0.BC96.1A02. La tabla muestra ambas MACs en el mismo puerto.
 
-b) **4 puertos** con dispositivos: Fa0/1, Fa0/2, Fa0/3, Fa0/4.
+b) **4 puertos** con dispositivos: Fa0/1, Fa0/2, Fa0/3 y Fa0/4.
 
-c) **FFFF.FFFF.FFFF en CPU:** Es la dirección MAC de broadcast. Está en la CPU porque el switch procesa los broadcasts internamente (además de reenviarlos).
+c) **No aparece.** La dirección de broadcast no se aprende en la tabla (no es la MAC de ningún equipo): el switch inunda el broadcast por todos los puertos del VLAN por definición.
 
 d) **Si llega una trama con destino 00D0.BC96.1A03:** Es una MAC desconocida (no está en la tabla). El switch **inunda** la trama por todos los puertos excepto el de origen.
 
@@ -89,16 +99,16 @@ d) **Si llega una trama con destino 00D0.BC96.1A03:** Es una MAC desconocida (no
 
 a) **Root Port de Switch C:** Depende del coste acumulado hacia el Root Bridge.
 
-   **Camino A → C directo (Fa0/3):** coste = 19
-   **Camino A → B → C (Fa0/1 → Fa0/2):** coste = 19 + 19 = 38
+   **Camino C → A directo (Fa0/3):** coste = 19
+   **Camino C → B → A (Fa0/2 → Fa0/1):** coste = 19 + 19 = 38
 
    Fa0/3 tiene **menor coste total** (19 < 38), así que **Fa0/3 es el Root Port**.
 
-b) **Costes:** A→C directo = 19. A→B→C = 38.
+b) **Costes:** C→A directo = 19. C→B→A = 38.
 
 c) **Alternate Port:** Fa0/2 (el puerto del camino más caro que queda en discarding como respaldo).
 
-d) **Si el coste de Fa0/3 se cambia a 4:** El coste total por Fa0/3 baja a 4, reforzando aún más que Fa0/3 sea el Root Port. Si en cambio el coste de Fa0/3 subiera a 100, entonces el Root Port pasaría a ser por el camino A→B→C (coste 38 < 100).
+d) **Si el coste de Fa0/3 se cambia a 4:** El coste total por Fa0/3 baja a 4, reforzando aún más que Fa0/3 sea el Root Port. Si en cambio el coste de Fa0/3 subiera a 100, entonces el Root Port pasaría a ser el del camino C→B→A (coste 38 < 100).
 
 ## 7. Topología STP/RSTP bajo análisis
 
@@ -112,39 +122,30 @@ d) **Con RSTP:** la red converge en **1-3 segundos** (handshake propuesta/acuerd
 
 e) Los puertos del Root Bridge son todos **Designated**: son el "punto de referencia" del árbol y nunca se bloquean.
 
-## 8. Laboratorio: Port Security en la sala de profesores
+## 8. Laboratorio: segmentación en un switch
 
-a) y b) Configuración completa:
-
-```bash
-Switch(config)# interface fa0/24
-Switch(config-if)# switchport mode access
-Switch(config-if)# switchport port-security
-Switch(config-if)# switchport port-security maximum 1
-Switch(config-if)# switchport port-security mac-address sticky
-Switch(config-if)# switchport port-security violation shutdown
-```
-
-c) Verificación: `Switch# show port-security interface fa0/24` (muestra el máximo, las MACs seguras y el estado del puerto).
-
-d) La violación ocurre porque la **MAC sticky del PC original NO caduca**: aunque el PC se desenchufe, su MAC permanece aprendida como permanente. Al conectar el portátil, su MAC nueva hace un total de 2 MACs en el puerto y se supera el máximo (1) → violación shutdown → errdisable.
-
-e) Recuperar el puerto:
+a)
 
 ```bash
-Switch(config)# interface fa0/24
-Switch(config-if)# shutdown
-Switch(config-if)# no shutdown
+Switch(config)# vlan 10
+Switch(config-vlan)# name Ventas
+Switch(config-vlan)# exit
+Switch(config)# vlan 20
+Switch(config-vlan)# name RRHH
+Switch(config-vlan)# exit
+Switch(config)# interface range fa0/1-8
+Switch(config-if-range)# switchport mode access
+Switch(config-if-range)# switchport access vlan 10
+Switch(config-if-range)# exit
+Switch(config)# interface range fa0/9-16
+Switch(config-if-range)# switchport mode access
+Switch(config-if-range)# switchport access vlan 20
 ```
 
-(O configurar `errdisable recovery cause psecure-violation`.)
+b) `show vlan brief` → Fa0/1 y Fa0/2 en la VLAN 10, Fa0/9 en la VLAN 20. En `show mac address-table` la MAC de PC1 aparece en la columna Vlan con el valor 10.
 
-f) Sin perder seguridad, puedes:
-   - Aumentar `maximum` a 2 si es un puerto compartido.
-   - Configurar el **envejecimiento de la port security** para que la MAC sticky expire si el dispositivo se desenchufa (las sticky necesitan `aging static` para poder caducar):
-     ```bash
-     Switch(config-if)# switchport port-security aging time 5
-     Switch(config-if)# switchport port-security aging type inactivity
-     Switch(config-if)# switchport port-security aging static
-     ```
-   - O usar `violation restrict` (descarta el tráfico extra sin deshabilitar el puerto), aunque es menos estricto.
+c) PC1 → PC2 **funciona** (misma VLAN y misma subred). PC1 → PC3 **no funciona**, y no es un fallo: aunque compartan subred IP, el switch no reenvía tramas entre VLAN distintas.
+
+d) Tras `switchport access vlan 10` en Fa0/9, el ping PC1 → PC3 **funciona**: los tres quedan en el mismo dominio de broadcast. Una VLAN decide quién se habla en capa 2; la IP no salva la conversación si la VLAN los separa.
+
+e) No: la subred IP no cruza el aislamiento de capa 2. Para que VLANs distintas se comuniquen hace falta un router (o un switch de capa 3) entre ellas — el siguiente paso del curso, en trunking e inter-VLAN.

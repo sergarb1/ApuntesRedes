@@ -11,7 +11,7 @@ description: El switch que aprende y la red que se divide 🔀
 
 *Conectas cuatro equipos a un switch, cada uno por su cable, y ninguno pisa a nadie. Un año después, ese mismo switch tiene 48 equipos, tres departamentos que no deberían verse entre sí y una tormenta de broadcasts a punto de subir por los cables. Bienvenido al mundo de la conmutación, donde el orden se construye en capa 2.*
 
-Bienvenido a la unidad del switch. En la [unidad de dirección IP](/ApuntesRedes/03-direccionamiento-ip) diste a los equipos direcciones; aquí el switch aprende a entregarlas trama a trama: cómo aprende MACs, qué son los dominios de colisión y broadcast, por qué STP salva la red de sí misma y cómo las VLANs parten un switch físico en varios lógicos. La primera mitad del curso se cierra aquí; la [unidad de trunking e inter-VLAN](/ApuntesRedes/05-trunking-inter-vlan) llevará esas VLANs entre switches y las hará hablar.
+Bienvenido a la unidad del switch. En la [unidad de dirección IP](/ApuntesRedes/03-direccionamiento-ip) diste a los equipos direcciones; aquí el switch aprende a entregarlas trama a trama: cómo aprende MACs, qué son los dominios de colisión y broadcast, por qué STP salva la red de sí misma y cómo las VLANs parten un switch físico en varios lógicos. Los fundamentos del switch se cierran aquí; la [unidad de trunking e inter-VLAN](/ApuntesRedes/05-trunking-inter-vlan) llevará esas VLANs entre switches y las hará hablar.
 
 Esta unidad se lee como un **libro de 10 capítulos**: los 9 primeros son teoría en progresión y el 10º es el aterrizaje práctico con laboratorio.
 
@@ -53,7 +53,7 @@ Al terminar, serás capaz de:
 
 ## 📝 Boletines de la unidad
 
-> Practica con los pares del curso: empezar siempre el resuelto para ver el estilo y luego intentar el por-resolver.
+> Practica con los pares del curso: mira 1-2 resueltos para coger el formato, luego intenta el por-resolver; consulta el resuelto solo cuando te atasques.
 
 <div class="ejercicio-links">
   <a href="/ApuntesRedes/boletines/boletin-u04-inicial" class="elink">🟢 Inicial por resolver</a>
@@ -69,8 +69,13 @@ Al terminar, serás capaz de:
 | CE | Criterio | Dónde se cubre |
 |---|---|---|
 | RA3 | Administración de conmutadores | ✅ Puntos 1-2, 5-7 + ⚡ Laboratorio (punto 10) |
-| RA5 | Segmentación y reducción de dominios | ✅ Puntos 3-4 y 8-9 + 🧠 Atrévete a pensar (punto 10) |
 | RA3·c) | Redundancia sin bucles (STP) | ✅ Puntos 4-7 + 💬 Entrevista (punto 10) |
+| RA5·a) | Ventajas de VLANs | ✅ Puntos 3-4 y 8 (dominios y ventajas) + 🧠 Atrévete a pensar (punto 10) |
+| RA5·b) | Implementación de VLANs | ✅ Puntos 8-9 + ⚡ Laboratorio (punto 10) |
+| RA5·c) | Diagnóstico de incidencias | ✅ Fallo intencionado de native VLAN (punto 10) |
+| RA5·d) | Enlaces troncales | ✅ Punto 9 (nativa) + ⭐ y 🤬 CONRAD (punto 10) |
+| RA5·e) | Inter-VLAN con router | ✅ ⚡ Laboratorio, 🕵️ y 🧠 (punto 10) |
+| RA5·f) | Protocolos centralizados (VTP) | ✅ 🕵️, 🧠 y 💬 (punto 10) |
 
 ---
 

@@ -115,7 +115,60 @@ show port-security interface g0/1
 show port-security address
 ```
 
-## 8. Mini-caso final
+## 8. Diagnóstico de port security
+
+a) **Ocurrió porque** el usuario conectó un switch no administrado. Los PCs de ambos usuarios tienen MACs diferentes, y el switch de red ve más de 1 MAC en el puerto, superando el límite (maximum 1).
+
+b) **Dos cambios:**
+   1. Aumentar `maximum` a un valor razonable (ej. 5-10) si es un puerto compartido
+   2. Cambiar `violation` a `restrict` (descarta tráfico extra pero no deshabilita el puerto) o `protect` (descarta silenciosamente)
+
+c) **Recuperar el puerto:**
+   ```bash
+   Switch(config)# interface fa0/1
+   Switch(config-if)# shutdown
+   Switch(config-if)# no shutdown
+   ```
+   O configurar `errdisable recovery cause psecure-violation` para recuperación automática.
+
+## 9. Laboratorio: Port Security en la sala de profesores
+
+a) y b) Configuración completa:
+
+```bash
+Switch(config)# interface fa0/24
+Switch(config-if)# switchport mode access
+Switch(config-if)# switchport port-security
+Switch(config-if)# switchport port-security maximum 1
+Switch(config-if)# switchport port-security mac-address sticky
+Switch(config-if)# switchport port-security violation shutdown
+```
+
+c) Verificación: `Switch# show port-security interface fa0/24` (muestra el máximo, las MACs seguras y el estado del puerto).
+
+d) La violación ocurre porque la **MAC sticky del PC original NO caduca**: aunque el PC se desenchufe, su MAC permanece aprendida como permanente. Al conectar el portátil, su MAC nueva hace un total de 2 MACs en el puerto y se supera el máximo (1) → violación shutdown → errdisable.
+
+e) Recuperar el puerto:
+
+```bash
+Switch(config)# interface fa0/24
+Switch(config-if)# shutdown
+Switch(config-if)# no shutdown
+```
+
+(O configurar `errdisable recovery cause psecure-violation`.)
+
+f) Sin perder seguridad, puedes:
+   - Aumentar `maximum` a 2 si es un puerto compartido.
+   - Configurar el **envejecimiento de la port security** para que la MAC sticky expire si el dispositivo se desenchufa (las sticky necesitan `aging static` para poder caducar):
+     ```bash
+     Switch(config-if)# switchport port-security aging time 5
+     Switch(config-if)# switchport port-security aging type inactivity
+     Switch(config-if)# switchport port-security aging static
+     ```
+   - O usar `violation restrict` (descarta el tráfico extra sin deshabilitar el puerto), aunque es menos estricto.
+
+## 10. Mini-caso final
 
 a) **Diseño mínimo (extendidas, cerca del origen):**
 
