@@ -50,11 +50,7 @@ d) `show ip ospf neighbor`
 
 ## 7. Dinámico vs estático
 
-a)
-- **OSPF → IGP**
-- **RIP → IGP**
-- **BGP → EGP**
-- **EIGRP → IGP** (interior, aunque propietario de Cisco)
+a) La **convergencia** es el proceso por el que todos los routers llegan a una visión coherente de la red tras un cambio (enlace caído, red nueva…). El dinámico la consigue solo: OSPF detecta el cambio, inunda los LSAs y recalcula; en el estático, cada cambio hay que detectarlo y reconfigurarlo a mano, router por router.
 
 b) **Ventajas del dinámico:**
 1. **Autoaprendizaje:** las redes nuevas se comparten solas, sin ir router por router.

@@ -9,7 +9,7 @@ description: El router que habla con sus vecinos y elige solo 🗣️
 
 ---
 
-*Tu red crece: ya no hay dos routers, hay doce, con enlaces que se caen, caminos alternativos y planes de sucursales nuevas. Escribir rutas estáticas a mano se convierte en un trabajo de titánico con errores garantizados. ¿Y si los routers se contaran entre sí dónde está cada red y eligieran sus caminos solos? Eso es el enrutamiento dinámico, y OSPF es su estándar de facto en redes de empresa.*
+*Tu red crece: ya no hay dos routers, hay doce, con enlaces que se caen, caminos alternativos y planes de sucursales nuevas. Escribir rutas estáticas a mano se convierte en un trabajo titánico con errores garantizados. ¿Y si los routers se contaran entre sí dónde está cada red y eligieran sus caminos solos? Eso es el enrutamiento dinámico, y OSPF es su estándar de facto en redes de empresa.*
 
 Bienvenido a la unidad donde los routers aprenden a hablar. Partes de lo que sabes de la [unidad de enrutamiento estático](/ApuntesRedes/06-enrutamiento-estatico) (AD, métricas, tablas) y descubres el protocolo de enlace de estado: vecinos, adyacencias, LSAs, áreas, DR/BDR y coste. Al final, configuras OSPF de verdad y dejas que la red se cure sola de un enlace muerto.
 
@@ -52,7 +52,7 @@ Al terminar, serás capaz de:
 
 ## 📝 Boletines de la unidad
 
-> Practica con los pares del curso: empezar siempre el resuelto para ver el estilo y luego intentar el por-resolver.
+> Practica con los pares del curso: mira 1-2 resueltos para coger el formato, luego intenta el por-resolver; consulta el resuelto solo cuando te atasques.
 
 <div class="ejercicio-links">
   <a href="/ApuntesRedes/boletines/boletin-u07-inicial" class="elink">🟢 Inicial por resolver</a>
@@ -65,15 +65,13 @@ Al terminar, serás capaz de:
 
 ## ✅ Criterios de evaluación cubiertos (RA6)
 
-**RA6: Aplica protocolos de encaminamiento dinámico en redes IP.**
+**RA6: Realiza tareas avanzadas de administración de red analizando y utilizando protocolos dinámicos de encaminamiento.**
 
 | CE | Criterio | Dónde se cubre |
 |---|---|---|
-| a) | Ventajas del enrutamiento dinámico | ✅ Punto 1 |
-| b) | Clasificación de protocolos (IGP/EGP, estado de enlace) | ✅ Punto 2 |
-| c) | Funcionamiento de OSPF | ✅ Puntos 3-6 + ⚡ Laboratorio (punto 9) |
-| d) | Configuración de OSPF | ✅ Puntos 7-8 + ⚡ Laboratorio (punto 9) |
-| e) | Verificación y diagnóstico | ✅ Punto 8 + 🧠 Atrévete a pensar (punto 9) |
+| g) | Configuración y uso de OSPF en un router | ✅ Puntos 6-7 + ⚡ Laboratorio (punto 9) |
+| h) | Ruta por defecto con OSPF | ✅ Punto 8 + ⚡ Laboratorio (punto 9) |
+| i) | Diagnóstico de incidencias en el encaminamiento | ✅ Punto 8 + 🧠 Atrévete a pensar (punto 9) |
 
 ---
 

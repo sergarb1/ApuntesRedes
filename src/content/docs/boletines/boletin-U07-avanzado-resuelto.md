@@ -62,7 +62,7 @@ b) **2WAY/DROTHER:** El vecino 4.4.4.4 no es DR ni BDR (DROTHER). La adyacencia 
 
 c) **Porque no es necesario.** En redes multiacceso, los DROTHERS solo forman adyacencia FULL con el DR y BDR. Entre DROTHERS se quedan en 2WAY.
 
-d) **No se ve directamente.** Pero por contexto, si este router tiene vecinos en G0/0 y G0/1, su Router ID podría ser otro (el más alto de sus loopbacks o interfaces físicas).
+d) **No aparece en esa salida** (los `Neighbor ID` son los de los vecinos): no es 3.3.3.3 ni 4.4.4.4, y a juzgar por los estados este router es **DROTHER** — si fuera BDR, el vecino 4.4.4.4 estaría en FULL con él, no en 2WAY. El tuyo lo ves con `show ip ospf`.
 
 ## 3. Redistribución OSPF
 
@@ -70,11 +70,11 @@ a) `redistribute static subnets` inyecta las rutas estáticas configuradas en el
 
 b) **Dos rutas:** la ruta por defecto (0.0.0.0/0) y la ruta estática 10.100.0.0/16.
 
-c) **Sí.** La redistribución + `default-information originate` propaga ambas rutas a todos los routers OSPF en todas las áreas.
+c) **Sí.** `redistribute static subnets` inyecta en OSPF las dos estáticas de la tabla (tanto la 10.100.0.0/16 como la 0.0.0.0/0) y `default-information originate` se asegura de anunciar además la ruta por defecto como externa E2: entre los dos comandos, todos los routers OSPF terminan aprendiendo las dos rutas.
 
 ## 4. Cambio de coste OSPF
 
-a) **Camino A** (R1→R2→R3, 2 enlaces Gigabit) tiene coste **1+1 = 2**. El **Camino B** (R1→R4→R5→R3, 3 enlaces FastEthernet) tiene coste **1+1+1 = 3**. OSPF elige el camino con menor coste total: **el Camino A**. el mismo coste si todos los enlaces son del mismo tipo. Si ambos tienen coste 1+1+1 vs 1+1+1+1, gana el de 3 saltos (menos coste).
+a) **Camino A** (R1→R2→R3, 2 enlaces Gigabit) tiene coste **1 + 1 = 2**. El **Camino B** (R1→R4→R5→R3, 3 enlaces FastEthernet) tiene coste **1 + 1 + 1 = 3**. OSPF elige el de menor coste total: **el Camino A**.
 
 b) Para forzar el Camino B, aumentar el coste en los enlaces de A:
    ```bash
@@ -87,13 +87,11 @@ c) `show ip ospf interface` o `show ip route` muestra el coste de cada ruta.
 
 a) **DR: R3** (prioridad 10, la más alta). **BDR: R4** (prioridad 5, segunda más alta).
 
-b) Prioridad **0** significa que el router **no participa** en la elección de DR/BDR. Nunca será DR ni BDR.
-
-c) Cambiar la **prioridad** de R1 a un valor más alto que 10:
+b) Cambiar la **prioridad** de R1 a un valor más alto que 10:
    ```bash
    R1(config-if)# ip ospf priority 20
    ```
-   (Nota: la elección solo ocurre al iniciar OSPF o al reiniciar el proceso)
+   (Nota: la elección se hace al iniciar OSPF, al reiniciar el proceso o si falla el DR: el BDR asciende y se elige otro)
 
 ## 6. Troubleshooting OSPF
 
@@ -120,7 +118,7 @@ b) **R-D** tiene prioridad **0**: no participa en la elección. Solo actuará co
 
 c) **R-B** — con prioridades empatadas (1 = 1), el desempate lo hace el **Router ID más alto** (10.0.0.2 > 10.0.0.1). La prioridad manda primero; el Router ID solo decide empates.
 
-d) **No cambia.** La elección de DR/BDR solo ocurre al arrancar OSPF o al reiniciar el proceso; subir la prioridad de R-C a 255 no destrona al DR ya elegido (R-B). Para que cambie tendrías que **reiniciar el proceso OSPF** (o el router) en los routers del segmento, y entonces R-C (prioridad 255) ganaría.
+d) **No cambia.** La elección de DR/BDR se hace al arrancar OSPF, al reiniciar el proceso o si falla el DR (el BDR asciende); subir la prioridad de R-C a 255 no destrona al DR ya elegido (R-B). Para que cambie tendrías que **reiniciar el proceso OSPF** (o el router) en los routers del segmento, y entonces R-C (prioridad 255) ganaría.
 
 ## 8. La adyacencia que no levanta
 

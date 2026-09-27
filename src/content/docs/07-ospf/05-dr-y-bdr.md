@@ -29,7 +29,7 @@ Con DR (contando solo las adyacencias con el DR): N-1 adyacencias. Si contamos t
 Con 5 routers:
 
 ```
-Sin DR → 5*4/2 = 10 adyacencias       Con DR → 5-1 = 4 adyacencias
+Sin DR → 5*4/2 = 10 adyacencias       Con DR y BDR → 2*5-3 = 7 adyacencias
    R1─R2                                 R1   R2   R3   R4
    R1─R3                                 │    │    │    │
    R1─R4                                 └────┴─┐──┴────┘
@@ -65,7 +65,7 @@ Cuando un segmento arranca, OSPF elige DR y BDR con estas reglas, en orden:
 **Detalles que salen en el examen:**
 
 - Prioridad **0** = el router **no participa** en la elección: nunca será DR ni BDR.
-- **La elección solo ocurre al arrancar** OSPF (o al reiniciar el proceso). Cambiar prioridades a mitad de partida no destrona al DR existente: hay que reiniciar.
+- **La elección se hace al arrancar OSPF, al reiniciar el proceso o cuando falla el DR** (entonces el BDR asciende y se elige un nuevo BDR). Cambiar prioridades a mitad de partida no destrona al DR existente: hay que reiniciar.
 - El DR/BDR se eligen **por segmento**, no por router: un router puede ser DR en un enlace y DROTHER en otro.
 
 > ⚠️ **Trampa típica:** el DR y el BDR son roles **en ese segmento**. En un router con varias interfaces Ethernet, cada red multiacceso tiene su propia elección independiente.
@@ -104,7 +104,7 @@ Reset ALL OSPF processes? [no]: yes
 <details>
 <summary>🔄 Respuestas</summary>
 
-1. **Con solo el DR, 5 adyacencias** (N-1); contando también el BDR, 2N-3 = 9 (cada router con el DR y con el BDR). La cuenta clásica de examen es 2N-3.ctica son con DR y BDR).
+1. **9 adyacencias** (2N−3 con N = 6): cada router forma adyacencia con el DR y con el BDR. Si solo contaras las adyacencias del DR serían N−1 = 5.
 2. Que **no participa**: prioridad 0 impide ser DR o BDR (solo actúa como DROTHER).
 3. **R3** — mayor prioridad (10 > 5).
 </details>
@@ -113,7 +113,7 @@ Reset ALL OSPF processes? [no]: yes
 
 ## ✅ Resumen en 3 frases
 
-- El **DR** (con su respaldo **BDR**) reduce las adyacencias de N(N-1)/2 a N-1 en cada segmento multiacceso.
+- El **DR** (con su respaldo **BDR**) reduce las adyacencias de N(N-1)/2 a **2N-3** con DR y BDR en cada segmento multiacceso.
 - La elección la decide la **prioridad** y, en empate, el **Router ID** más alto; prioridad 0 queda fuera.
 - La elección se hace **por segmento** y solo al inicio o reinicio: cambiar prioridades no derriba al DR ya elegido.
 

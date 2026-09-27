@@ -111,7 +111,7 @@ Has terminado la teoría. Este cierre es el aterrizaje: recorre lo aprendido con
 3. **Propaga una ruta por defecto** desde un router conectado a Internet: pon una `ip route 0.0.0.0 0.0.0.0` en R4 y anúnciala con `default-information originate`. Comprueba en R3 con `show ip route ospf` que la ruta por defecto llega (prefijo `O*E2`).
 4. **Cambia el coste de una interfaz** para forzar una ruta alternativa: usa `ip ospf cost` en una interfaz de R1 y verifica con `show ip ospf interface` y `show ip route` que el camino preferido cambia.
 
-**Fallo intencionado:** Desconecta el enlace del Área 2 con el Área 0 y conecta directamente R4 (Área 2) con R3 (Área 1). ¿Funciona OSPF entre áreas? **No.** Las rutas inter-área **siempre** deben pasar por el Área 0: sin conexión al backbone, los routers de las áreas 1 y 2 no intercambiarán rutas entre sí, aunque sean vecinos directos en el enlace físico. Verás los vecinos en el enlace directo (R3-R4) en estado FULL, pero sin rutas de la otra área en la tabla (`show ip route ospf`).
+**Fallo intencionado:** Desconecta el enlace del Área 2 con el Área 0 y conecta directamente R4 (Área 2) con R3 (Área 1). ¿Funciona OSPF entre áreas? **No.** Las rutas inter-área **siempre** deben pasar por el Área 0. Además, como cada extremo queda declarado en un área distinta, **ni siquiera forman vecindad**: `show ip ospf neighbor` no mostrará al otro router en ese enlace. Y si algún listo declara ambos extremos en la misma área para "arreglarlo" y llegan a FULL, seguirá sin haber intercambio: el Área 2 no vuelca sus rutas en el Área 1 sin pasar por el backbone. Compruébalo con `show ip route ospf`: no verás las rutas de la otra área.
 
 > **Pista 1:** si dos áreas están conectadas sin pasar por el Área 0, recuerda la regla del [punto 4](/ApuntesRedes/07-ospf/04-areas-y-tipos-de-routers): el backbone es el único punto de paso válido.
 >
@@ -200,7 +200,7 @@ No. Un solo router o dos routers con OSPF pueden vivir todos en el **Área 0** s
 
 > ❓ **¿El DR elige siempre el mismo router aunque tenga prioridad más baja?**
 
-Sí, mientras no se reinicie el proceso. La elección de DR/BDR solo ocurre **al arrancar OSPF o al reiniciarlo** (lo viste en el [punto 5](/ApuntesRedes/07-ospf/05-dr-y-bdr)). Si subes la prioridad a un router en marcha, el DR actual se mantiene hasta el reinicio. Por eso en producción se planifican las prioridades antes de arrancar.
+Sí, mientras no se reinicie el proceso ni caiga el DR. La elección de DR/BDR se decide **al arrancar OSPF, al reiniciar el proceso o cuando falla el DR** (entonces el BDR asciende y se elige un nuevo BDR) (lo viste en el [punto 5](/ApuntesRedes/07-ospf/05-dr-y-bdr)). Si subes la prioridad a un router en marcha, el DR actual se mantiene hasta el reinicio. Por eso en producción se planifican las prioridades antes de arrancar.
 
 ---
 

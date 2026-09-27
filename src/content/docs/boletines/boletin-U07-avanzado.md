@@ -80,8 +80,7 @@ En una red con 4 routers OSPF en el mismo segmento Ethernet:
 | R4 | 5 | 4.4.4.4 |
 
 a) ¿Quién es el DR? ¿Quién el BDR?
-b) ¿Por qué R2 (prioridad 0) no puede ser DR/BDR?
-c) ¿Cómo forzarías a R1 como DR sin cambiar Router ID?
+b) ¿Cómo forzarías a R1 como DR sin cambiar Router ID?
 
 ## 6. Troubleshooting OSPF
 
@@ -100,10 +99,10 @@ En un segmento Ethernet nuevo compiten 4 routers OSPF:
 
 a) ¿Quién es el DR y quién el BDR?
 b) ¿Qué papel juega R-D y por qué?
-c) R-A y R-B empiezan con la misma prioridad (1) pero R-B tiene el Router ID más alto. ¿Quién ganaría en ese caso, y por qué?
+c) Si R-A y R-B tuvieran la misma prioridad (1), ¿quién ganaría y por qué?
 d) La elección ya ha ocurrido y el DR es R-B. Si ahora subes la prioridad de R-C a 255, ¿cambia el DR? ¿Qué tendrías que hacer para que cambie?
 
-**Pista:** la elección se decide por prioridad y, en empate, por el Router ID más alto. Prioridad 0 queda fuera. La elección solo ocurre al arrancar o reiniciar el proceso OSPF.
+**Pista:** la elección se decide por prioridad y, en empate, por el Router ID más alto. Prioridad 0 queda fuera. La elección se hace al arrancar, al reiniciar el proceso o si falla el DR (el BDR asciende).
 
 ## 8. La adyacencia que no levanta
 

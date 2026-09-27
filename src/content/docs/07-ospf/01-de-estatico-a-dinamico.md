@@ -69,10 +69,10 @@ Que el dinámico mande no significa que el estático se jubile. Dos usos que se 
 
 - **Ruta de respaldo (`floating static`):** la ruta principal la aprende el protocolo dinámico (p. ej. OSPF, AD 110); el respaldo es una estática con *administrative distance* más alta, que solo se activa si la dinámica desaparece:
   ```bash
-  ; Ruta principal: 0.0.0.0/0 aprendida por OSPF (AD 110, ver [punto 8](/ApuntesRedes/07-ospf/08-ruta-por-defecto-y-diagnostico))
-  R1(config)# ip route 0.0.0.0 0.0.0.0 10.0.0.254 150      ; respaldo estático, AD 150 > 110
+  # Ruta principal: 0.0.0.0/0 aprendida por OSPF (AD 110)
+  R1(config)# ip route 0.0.0.0 0.0.0.0 10.0.0.254 150      # respaldo estático, AD 150 > 110
   ```
-  Mientras el enlace principal viva, OSPF gana (menor AD) y el respaldo espera en silencio. Si cae, la estática entra sola.
+  Mientras el enlace principal viva, OSPF gana (menor AD) y el respaldo espera en silencio; si cae, la estática entra sola (el detalle de la default por OSPF está en el [punto 8](/ApuntesRedes/07-ospf/08-ruta-por-defecto-y-diagnostico)).
 - **Enlace stub:** la red de una sucursal con una única salida no necesita protocolo: una `ip route` de una línea y listo. Añadir OSPF ahí sería como contratar un empleado para que abra una puerta ya abierta.
 
 ---

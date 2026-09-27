@@ -30,7 +30,7 @@ Tres piezas que debes entender bien:
 
 - **`router ospf 1`**: arranca el proceso OSPF con **process ID** local (el `1` no tiene que coincidir entre routers; es como el nombre del proceso en ese equipo).
 - **`router-id 1.1.1.1`**: fija el Router ID a mano (recuerda el [punto 3](/ApuntesRedes/07-ospf/03-conceptos-ospf): único y estable). Se recomienda configurarlo siempre.
-- **`network ... wildcard ... area ...`**: la red se declara con **wildcard** (máscara invertida: `0.0.0.255` = /24) y su **área**. OSPF activará OSPF en las interfaces que caigan dentro de esa red.
+- **`network ... wildcard ... area ...`**: la red se declara con **wildcard** (máscara invertida: `0.0.0.255` = /24) y su **área**. OSPF activará la negociación en las interfaces cuyas direcciones caigan dentro de esa red.
 
 > ⚠️ **Cuidado con la wildcard:** es la máscara *invertida*, no la normal. `255.255.255.0` es una máscara, pero en OSPF se escribe `0.0.0.255`. Confundirlas es el clásico "no levanta vecindad".
 

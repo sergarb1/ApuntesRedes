@@ -22,9 +22,9 @@ Este punto cierra la teoría: cómo dar a toda la red una **puerta de salida ún
 En la [unidad de enrutamiento estático](/ApuntesRedes/06-enrutamiento-estatico) configuraste rutas por defecto con `ip route 0.0.0.0 0.0.0.0`. Ahora toca **compartirla con el resto de routers OSPF**. En el router que conecta con Internet (el borde, normalmente un ASBR):
 
 ```bash
-R3(config)# ip route 0.0.0.0 0.0.0.0 serial 0/0/0    ; ruta por defecto local
+R3(config)# ip route 0.0.0.0 0.0.0.0 serial 0/0/0    # ruta por defecto local
 R3(config)# router ospf 1
-R3(config-router)# default-information originate     ; la anuncia a OSPF
+R3(config-router)# default-information originate     # la anuncia a OSPF
 ```
 
 **Qué pasa después:** R3 inyecta la ruta por defecto como una ruta externa (tipo E2) en OSPF, y todos los routers de todas las áreas aprenden que "para salir a Internet, ve hacia el ASBR". Es la diferencia entre configurar 20 routers a mano y configurar uno.
@@ -83,13 +83,13 @@ Cuando hagas `show ip route ospf`, el prefijo te cuenta la historia:
 |---|---|
 | `O` | Ruta **interna** al área (la calcula tu propio SPF) |
 | `O IA` | Ruta **inter-área** (aprendida a través de un ABR) |
-| `O*E2` | Ruta **externa** (la ruta por defecto del ASBR: predeterminada E2) |
+| `O*E2` | Ruta externa con `*` de **candidata a ruta por defecto** (la default que anuncia el ASBR, tipo E2) |
 | `O E1` / `O E2` | Ruta externa redistribuida (E1 suma el coste interno; E2 no) |
 
 **Ejemplo real de `show ip route`:**
 ```
 R3# show ip route ospf
-     10.1.0.0/24 [110/2] via 10.0.0.2, 00:12:03, GigabitEthernet0/0
+O    10.1.0.0/24 [110/2] via 10.0.0.2, 00:12:03, GigabitEthernet0/0
 O IA 10.2.0.0/24 [110/3] via 10.0.1.2, 00:09:41, Serial0/1/0
 O*E2 0.0.0.0/0   [110/1] via 10.0.1.2, 00:05:12, Serial0/1/0
 ```
