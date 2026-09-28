@@ -79,6 +79,20 @@ NAT-T:  UDP | ESP | payload  →  NAT traduce UDP sin problema, IPsec intacto
 
 ---
 
+## 📡 Bonus: WAN heredada (CE d)
+
+El resultado de aprendizaje también pide describir **Frame Relay, RDSI y ADSL**: tres tecnologías de área amplia que, aunque jubiladas o a punto, siguen en inventarios, en redes que no se tocan desde hace años y en cualquier examen que se precie:
+
+| Tecnología | Qué era | Por qué se fue |
+|---|---|---|
+| **RDSI** (ISDN) | Red digital de conmutación de circuitos: canales B de 64 kbps (dos para 128 kbps) y uno D para señalización | Cara y lenta: 128 kbps máximos frente a cualquier ADSL |
+| **Frame Relay** | Conmutación de paquetes sobre enlace dedicado, con PVC y un CIR que el operador prometía (y a veces cumplía) | Sustituida por MPLS y Ethernet de extremo a extremo |
+| **ADSL** | Banda ancha **asimétrica** sobre el cobre de la línea telefónica (un splitter separa voz y datos) | Ganada por la fibra (FTTH); el cobre aún da algún servicio |
+
+> 💡 **Hilo con la unidad:** las tres conectan "aquí" con "allá" a través de una WAN, y en las tres NAT es quien deja que muchas IPs privadas compartan una única dirección pública en el enlace — justo lo que estás practicando.
+
+---
+
 ## 📶 Bonus: WiFi vs WiMax (CE e)
 
 El resultado de aprendizaje de esta unidad incluye distinguir **WiFi** de **WiMax**, dos tecnologías de acceso inalámbrico que suenan parecidas y no lo son:
@@ -100,6 +114,19 @@ Los **estándares 802.11** que verás en cualquier router actual:
 | 802.11be | WiFi 7 | 2,4 + 5 + 6 GHz | ~46 Gbps |
 
 > 💡 **Dato rápido:** el "6E" que ves en muchos routers (WiFi 6E) significa *WiFi 6 extendido*: la novedad es que abre la banda de **6 GHz**, con más espectro libre de interferencias. Es la pista del crucigrama del cierre.
+
+---
+
+## 📱 Bonus: móvil 3G y 3.5G (CE f)
+
+Y el último aperitivo del resultado de aprendizaje: describir **UMTS y HSDPA**, el tramo del acceso móvil que enseñó a los teléfonos a navegar de verdad:
+
+| Tecnología | Generación | Velocidad típica | Nota |
+|---|---|---|---|
+| **UMTS** | 3G | Hasta 384 kbps en móvil, 2 Mbps fijo | Heredera de GSM; convivió con EDGE (2.75G) |
+| **HSDPA** | 3.5G (*High Speed Downlink Packet Access*) | Hasta 14,4 Mbps bajando | Evolución de UMTS con conmutación de paquetes: el "3.5G" de los carteles |
+
+> 💡 **Relación con la unidad:** HSDPA es *downlink*: acelera la bajada, no la subida — por eso el 3.5G navegaba bien pero subía fotos a cámara lenta. Y sí, otra vez NAT: si tu operador te asigna una IP de su red móvil detrás de su propio NAT, vuelves a estar en el mismo escenario, ahora en 3G.
 
 ---
 

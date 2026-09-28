@@ -1,5 +1,5 @@
 ---
-title: 09 — Glosario
+title: 08 — Glosario
 description: Tu chuleta rápida de términos de red 📖
 ---
 

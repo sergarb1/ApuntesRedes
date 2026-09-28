@@ -75,7 +75,7 @@ R1(config)# interface g0/1
 R1(config-if)# ip nat outside
 ```
 
-La **access-list** define *quién* puede traducirse (la red 192.168.1.0/24) y el **pool** define *con qué* IPs públicas. Si el pool se agota, los siguientes equipos se quedan sin salida hasta que se libere una dirección. (De paso: acabas de escribir una ACL en una línea — la verás a fondo en la unidad de seguridad.)
+La **access-list** define *quién* puede traducirse (la red 192.168.1.0/24) y el **pool** define *con qué* IPs públicas. Si el pool se agota, los siguientes equipos se quedan sin salida hasta que se libere una dirección. (De paso: acabas de escribir una ACL en una línea — [la verás a fondo en la unidad de seguridad](/ApuntesRedes/10-acl-seguridad).)
 
 ---
 

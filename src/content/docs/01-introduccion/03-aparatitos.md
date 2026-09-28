@@ -1,5 +1,5 @@
 ---
-title: 02 — Los aparatitos
+title: 03 — Los aparatitos
 description: Desmitificando el hardware que hay en tu salón 🔧
 ---
 

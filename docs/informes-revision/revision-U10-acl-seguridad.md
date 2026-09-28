@@ -71,11 +71,11 @@ Par inicial/avanzado (+resueltos), sin imágenes, soluciones en `<details>`, cru
 
 - [ ] **CE `b)` eliminado de las tablas** (hallazgo 16) — alineado con el temario unificado histórico (RA4 = a, b, c, d, f, i, j con b) = "Acceso a configuración", hoy unidad de enrutamiento estático). Si prefieres conservar una fila de seguridad propia, habría que inventarle cobertura sin letra oficial (vetable).
 - [ ] **Fallo B del laboratorio reescrito** (hallazgo 15) — era el candidato 🔴 técnico de la sesión (mezcla wildcard/puertos y `eq 20` ≠ FTP). Si lo prefieres, variantes posibles: dejar el fallo original pero corregido a "deny de FTP mal colocado", o el actual (regla general subida arriba).
-- [ ] (🔵) **Hipervincular el forward pointer de NAT** (`03-nat-estatico-y-dinamico.md:78`: "la verás a fondo en la unidad de seguridad") → enlazar a la unidad de ACL. Se deja para la sesión de NAT salvo que se apruebe ahora.
+- [x] (🔵) **Hipervincular el forward pointer de NAT** — ✅ **aplicado en la pasada de decisiones:** `03-nat-estatico-y-dinamico.md:78` enlaza ahora a `/ApuntesRedes/10-acl-seguridad`.
 
 ## 6. Verificación y commit
 
-- [x] `check:unidad 10` sin FALLOs · `check-uds` en 0 · `check-links` OK · `check:diagrams` 55 (baseline) · build 183
+- [x] `check:unidad 10` sin FALLOs · `check-uds` en 0 · `check-links` OK · `check:diagrams` 54 (nuevo baseline; era 55) · build 183 — re-verificado tras la pasada de decisiones (enlace NAT→ACL aplicado)
 - [x] DOCX regenerado (`npm run docx`, 68/68)
 - [x] Comprobación lingüística es-ES
 - [x] Matriz de solapamientos + README de estado actualizados (ACL = ✅ revisada; nota de renumeración ampliada: las revisiones nuevas ya usan la numeración vigente)

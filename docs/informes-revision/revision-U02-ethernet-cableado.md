@@ -109,11 +109,11 @@ Sin candidatos a mover/quitar.
 
 ## 5. Decisiones pendientes del profe 🔴
 
-- [ ] **Q1 — Tabla de CEs del cierre**: se ha alineado con el índice (RA1/RA2) y se han **omitido RA2·d) (IP) y RA2·e) (inalámbricos)** por no estar cubiertos aquí (los cubren IP e inalámbricas). Si prefieres listarlos con "→ se verá en UD3/UD11", es un cambio de una fila.
+- [x] **Q1 — Tabla de CEs del cierre**: ✅ **aplicado** — se han añadido las filas `RA2·d)` y `RA2·e)` en índice y cierre con el marcador "→ se verá en la unidad de dirección IP / redes inalámbricas" (sin números de unidad en prosa). Los textos oficiales de a), b) ya estaban.
 
 ## 6. Verificación y commit
 
-- [x] `check:unidad 02` 0/0 · `check-uds` 0 · `check-links` 0 · build 183 · `check:diagrams` = baseline (55)
+- [x] `check:unidad 02` 0/0 · `check-uds` 0 · `check-links` 0 · build 183 · `check:diagrams` = 54 (nuevo baseline tras Q1 de U03; era 55) — re-verificado tras la pasada de decisiones
 - [x] Comprobación lingüística es-ES
 - [x] DOCX regenerado (`npm run docx`): 68 generados, 0 fallos
 - [ ] Commit `Revisión U02: …`

@@ -1,5 +1,5 @@
 ---
-title: 05 — DNS y DHCP
+title: 06 — DNS y DHCP
 description: La agenda telefónica y el recepcionista que nadie ve 📖
 ---
 

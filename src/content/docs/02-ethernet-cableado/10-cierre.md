@@ -254,6 +254,8 @@ Un cable Cat6 transporta 1 Gbps sin problemas hasta que una silla pasa por encim
 | RA2·b) | Montaje de cables | ✅ Punto 4 + ⚡ Laboratorio (punto 10) |
 | RA2·c) | Comprobadores de conectividad | ✅ Puntos 4 y 6 |
 | RA1·d) | Trama y encapsulación Ethernet | ✅ Puntos 8–9 + 🧠 Atrévete a pensar (punto 10) |
+| RA2·d) | Direccionamiento lógico IP | → Se verá en la unidad de dirección IP |
+| RA2·e) | Adaptadores de red | → Se verá en dirección IP y en redes inalámbricas |
 | RA2·f) | Integración de dispositivos | ✅ Cableado estructurado (punto 7) + ⚡ Laboratorio (punto 10) |
 
 ---

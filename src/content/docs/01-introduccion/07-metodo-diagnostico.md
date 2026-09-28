@@ -1,5 +1,5 @@
 ---
-title: 06 — Método de diagnóstico
+title: 07 — Método de diagnóstico
 description: La escalera del diagnóstico y la lógica para cazar cualquier avería 🩺
 ---
 

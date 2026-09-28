@@ -84,7 +84,7 @@ Al terminar, serás capaz de:
 |---|---|---|
 | RA2·d) | Direccionamiento lógico IPv4/IPv6 | ✅ Puntos 1-5 y 9-12 + ⚡ Laboratorio (punto 18) |
 | RA1·c) | Subredes y diseño lógico | ✅ Puntos 5-7 (CIDR/VLSM) |
-| RA2·g) | Servicios de configuración automática | ✅ Puntos 8 y 12-13 + ⚡ Laboratorio (punto 18) |
+| RA4·h) | Router como servidor de direcciones IP dinámicas | ✅ Puntos 8 y 13 + ⚡ Laboratorio (punto 18) |
 | RA4·d) | Comandos de configuración | ✅ Punto 16 (interfaces IPv6) + ⚡ Laboratorio (punto 18) |
 | RA6 | Fundamentos para el encaminamiento | ✅ Puntos 1-2 y 5 (cabecera, ARP, máscaras/redes) |
 

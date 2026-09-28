@@ -67,11 +67,14 @@ Al terminar, serás capaz de:
 
 | CE | Criterio | Dónde se cubre |
 |---|---|---|
-| a) | Ventajas e inconvenientes de NAT | ✅ Teoría (puntos 1-2) + 🔥 Fireside Chat (punto 9) |
-| b) | NAT estático | ✅ Punto 3 + ⚡ Laboratorio (punto 9) |
-| c) | NAT dinámico/PAT | ✅ Puntos 3-4 + ⚡ Laboratorio (punto 9) |
-| d) | Port forwarding | ✅ Punto 5 + ⚡ Laboratorio (punto 9, NAT destino) |
-| e) | WiFi vs WiMax | ✅ Punto 7 (estándares 802.11) |
+| a) | Se han descrito las ventajas e inconvenientes del uso de la traducción de direcciones de red (NAT) | ✅ Teoría (puntos 1-2) + 🔥 Fireside Chat (punto 9) |
+| b) | Se ha utilizado NAT para realizar la traducción estática de direcciones de red | ✅ Punto 3 + ⚡ Laboratorio (punto 9) |
+| c) | Se ha utilizado NAT para realizar la traducción dinámica de direcciones de red | ✅ Puntos 3-4 + ⚡ Laboratorio (punto 9) |
+| d) | Se han descrito las características de las tecnologías «Frame Relay», RDSI y ADSL | ✅ Punto 7 (WAN heredada) |
+| e) | Se han descrito las analogías y diferencias entre las tecnologías «Wifi» y «Wimax» | ✅ Punto 7 (estándares 802.11) |
+| f) | Se han descrito las características de las tecnologías UMTS y HSDPA | ✅ Punto 7 (móvil 3G/3.5G) |
+
+> ℹ️ El **port forwarding** (punto 5 + ⚡ Laboratorio, NAT destino) es contenido de la unidad — el bloque «NAT destino» —, no un CE: la letra d) oficial corresponde a las WAN heredadas.
 
 ---
 

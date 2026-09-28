@@ -62,16 +62,14 @@ Al terminar, serás capaz de:
 
 ---
 
-## ✅ Criterios de evaluación cubiertos (RA2)
-
-**RA2: Integra ordenadores y periféricos en redes cableadas e inalámbricas.**
+## ✅ Criterios de evaluación cubiertos (RA2/RA4)
 
 | CE | Criterio | Dónde se cubre |
 |---|---|---|
-| d) | Direccionamiento lógico IP (automatizado) | ✅ Puntos 2-3 + ⚡ Laboratorio (punto 9) |
-| g) | Servicios de configuración automática | ✅ Puntos 2-3 + 🧠 Atrévete (punto 9) |
-| h) | Servicios de resolución de nombres | ✅ Puntos 4-5 + 💬 Entrevista (punto 9) |
-| i) | Servicios de infraestructura de red | ✅ Puntos 6-7 + ⚡ Laboratorio (punto 9, NTP) |
+| RA2·d) | Se ha utilizado el sistema de direccionamiento lógico IP para asignar direcciones de red y máscaras de subred | ✅ Puntos 2-3 (rangos y pools DHCP) + ⚡ Laboratorio (punto 9) |
+| RA4·h) | Se ha configurado el «router» como servidor de direcciones IP dinámicas | ✅ Puntos 2-3 + 🧠 Atrévete a pensar (punto 9) |
+
+> ℹ️ **DNS** (puntos 4-5 + 💬 Entrevista) y **NTP** (puntos 6-7 + ⚡ Laboratorio) también se cubren en la unidad, pero son **ampliación sin CE propio** en el PAR oficial: DNS figura como contenido y NTP no aparece.
 
 ---
 

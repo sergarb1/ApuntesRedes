@@ -72,7 +72,7 @@ Etiquetas: 🟡 corregir ya · 🔵 ampliar · ⚪ dejar · 🔴 mover/quitar (r
 
 ## 5. Decisiones pendientes del profe 🔴
 
-- [ ] **R1 · Tablas CE de la unidad: texto oficial.** Verificado hoy (BOE RD 1629/2009 + todofp.es + ticarte + BOJA + Xunta). Oficial:
+- [x] **R1 · Tablas CE de la unidad: texto oficial.** ✅ **Aprobada A y aplicada:** las dos tablas usan los **títulos RA oficiales literales** (RA1/RA3/RA5/RA6) con mapeo honesto de puntos (RA3 → puntos 2-4+lab; RA5 → STP/gateways por VLAN; RA6 → redundancia con OSPF + Atrévete; RA1 → puntos 1,8+Entrevista) y nota de que la alta disponibilidad no tiene CE propio. El análisis de las fuentes queda como histórico.
   - **RA1** «Reconoce la estructura de las redes de datos identificando sus elementos y principios de funcionamiento.»
   - **RA3** «Administra conmutadores estableciendo opciones de configuración para su integración en la red.» (CE i) STP verificado, j) puente raíz, l) copia/restauración de config → encaja con HA de L2)
   - **RA5** «Configura redes locales virtuales identificando su campo de aplicación.»
@@ -85,7 +85,7 @@ Etiquetas: 🟡 corregir ya · 🔵 ampliar · ⚪ dejar · 🔴 mover/quitar (r
 
 ## 6. Verificación y commit
 
-- [x] `check:unidad 12` sin FALLOs · `check-uds` en 0 · `check-links` OK · build 183 páginas
+- [x] `check:unidad 12` sin FALLOs · `check-uds` en 0 · `check-links` OK · `check:diagrams` 54 (nuevo baseline; era 55) · build 183 páginas — re-verificado tras la pasada de decisiones (R1)
 - [x] DOCX regenerado (`npm run docx`, 68/68)
 - [x] Comprobación lingüística es-ES (escaneo post-edición: solo quedan marcas exentas — relleno de índice/cierre y "(2 palabras)" de IP SLA)
 - [ ] Commit `Revisión U12: …` (tras confirmación)

@@ -66,10 +66,12 @@ Al terminar, serás capaz de:
 
 | CE | Criterio | Dónde se cubre |
 |---|---|---|
-| RA3 | Administración de conmutadores con tolerancia a fallos | ✅ Puntos 2, 3 y 4 + ⚡ Laboratorio (punto 9) |
-| RA5 | Segmentación segura y continua de la red | ✅ Puntos 2-5 |
-| RA6 | Encaminamiento con redundancia | ✅ Puntos 5, 6 y 7 + 🧠 Atrévete a pensar (punto 9) |
-| RA1 | Estructura de red tolerante a fallos | ✅ Puntos 1 y 8 + 💬 Entrevista (punto 9) |
+| RA3 | Administra conmutadores estableciendo opciones de configuración para su integración en la red | ✅ Puntos 2, 3 y 4 + ⚡ Laboratorio (punto 9) |
+| RA5 | Configura redes locales virtuales identificando su campo de aplicación | ✅ Puntos 2, 5 y 6 (STP por VLAN y gateways por VLAN) |
+| RA6 | Realiza tareas avanzadas de administración de red analizando y utilizando protocolos dinámicos de encaminamiento | ✅ Punto 7 (redundancia con OSPF) + 🧠 Atrévete a pensar (punto 9) |
+| RA1 | Reconoce la estructura de las redes de datos identificando sus elementos y principios de funcionamiento | ✅ Puntos 1 y 8 + 💬 Entrevista (punto 9) |
+
+> ℹ️ **FHRP, stacking, EtherChannel y el plan de continuidad** son la práctica de alta disponibilidad de la unidad: el PAR oficial no tiene CE de HA propio; las filas anteriores son los CEs oficiales con los que se relacionan.
 
 ---
 
