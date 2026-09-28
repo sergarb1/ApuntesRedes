@@ -44,7 +44,7 @@ Al terminar, serás capaz de:
 | [06 · El coste OSPF](/ApuntesRedes/08-ospf/06-coste-ospf) | Cómo se eligen los caminos | Clave |
 | [07 · Configuración OSPF](/ApuntesRedes/08-ospf/07-configuracion-ospf) | `router ospf`, `network`, router-id | Práctico |
 | [08 · Ruta por defecto y diagnóstico](/ApuntesRedes/08-ospf/08-ruta-por-defecto-y-diagnostico) | default-information originate y show | Avanzado |
-| [09 · Cierre](/ApuntesRedes/08-ospf/09-cierre) | Sé el Paquete, Fireside, Laboratorio, Crucigrama… | Todos |
+| [09 · Cierre](/ApuntesRedes/08-ospf/09-cierre) | Sé el Router OSPF, Fireside, Laboratorio, Crucigrama… | Todos |
 
 > 📖 **Flujo de lectura:** los 8 primeros puntos son teoría en progresión. El 9º es el aterrizaje práctico: léelo justo después del 8º y antes de abrir los boletines.
 
@@ -69,9 +69,10 @@ Al terminar, serás capaz de:
 
 | CE | Criterio | Dónde se cubre |
 |---|---|---|
-| g) | Configuración y uso de OSPF en un router | ✅ Puntos 6-7 + ⚡ Laboratorio (punto 9) |
-| h) | Ruta por defecto con OSPF | ✅ Punto 8 + ⚡ Laboratorio (punto 9) |
-| i) | Diagnóstico de incidencias en el encaminamiento | ✅ Punto 8 + 🧠 Atrévete a pensar (punto 9) |
+| g) | Se ha habilitado y configurado OSPF en un «router» | ✅ Puntos 6-7 + ⚡ Laboratorio (punto 9) |
+| h) | Se ha establecido y propagado una ruta por defecto usando OSPF | ✅ Punto 8 + ⚡ Laboratorio (punto 9) |
+
+> ℹ️ El **diagnóstico de incidencias** (punto 8) es contenido oficial de la unidad, pero no tiene CE propio: el c) de diagnóstico del PAR es específico de RIP, y el i) de algunos listados es de protocolos propietarios (fuera del alcance de estos apuntes).
 
 ---
 

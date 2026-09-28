@@ -1,5 +1,5 @@
 ---
-title: 07 — Instalación de Packet Tracer
+title: 02 — Instalación de Packet Tracer
 description: Prepara tu laboratorio virtual antes de tocar cables reales 🛠️
 ---
 

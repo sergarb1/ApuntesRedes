@@ -82,7 +82,7 @@ Etiquetas: 🟡 corregir ya · 🔵 ampliar · ⚪ dejar · 🔴 mover/quitar (r
 
 ## 5. Decisiones pendientes del profe 🔴
 
-- [ ] **R1 · CEs oficiales de RA7 — tabla actual ≠ oficial.** Verificado por 5 fuentes independientes (BOE RD 1629/2009, centro con el PDF de criterios, AAPRI, cursodeinstalador, IES Aldebarán). Oficial:
+- [x] **R1 · CEs oficiales de RA7 — tabla actual ≠ oficial.** ✅ **Aprobada A y aplicada:** la tabla de índice y cierre usa el **texto oficial literal a)–f)** (con d) "«Frame Relay», RDSI y ADSL" y f) "UMTS y HSDPA", más nota de que el port forwarding no es el CE d) y el borrado del antiguo "CE inventado") y el punto 7 tiene los dos bloques nuevos — *WAN heredada* (CE d) y *móvil 3G/3.5G* (CE f) — junto al bonus WiFi/WiMax. El análisis de las 5 fuentes queda como histórico. Verificación de la pasada: `check:unidad 09` sin FALLOs, `check-uds` 0, `check-links` 0, build 183, `check:diagrams` 54 (nuevo baseline), DOCX 68/68.
   - a) ventajas e inconvenientes del uso de NAT ✅ (la tabla la tiene, como paráfrasis)
   - b) traducción estática ✅ · c) traducción dinámica ✅
   - **d) características de «Frame Relay», RDSI y ADSL** — la tabla dice **"Port forwarding"** (CE inventado en `00ca5d4`; el port forwarding sí es contenido oficial del BC7 "NAT destino", pero no es el CE d)
@@ -95,7 +95,7 @@ Etiquetas: 🟡 corregir ya · 🔵 ampliar · ⚪ dejar · 🔴 mover/quitar (r
 
 ## 6. Verificación y commit
 
-- [x] `check:unidad 09` sin FALLOs · `check-uds` en 0 · `check-links` OK · build 183 páginas
+- [x] `check:unidad 09` sin FALLOs · `check-uds` en 0 · `check-links` OK · `check:diagrams` 54 (nuevo baseline; era 55) · build 183 páginas — re-verificado tras la pasada de decisiones (R1 + cross-units)
 - [x] DOCX regenerado (`npm run docx`, 68/68)
 - [x] Comprobación lingüística es-ES (textos nuevos: es-ES natural, sin LatAM ni anglicismos)
 - [ ] Commit `Revisión U09: …` (tras confirmación)

@@ -1,11 +1,11 @@
 ---
-title: "9 — Cierre: consolida lo aprendido"
+title: "09 — Cierre: consolida lo aprendido"
 description: El cierre práctico de OSPF, con laboratorio y diagnóstico real 🧠
 ---
 
 <p><small>El cierre práctico de OSPF, con laboratorio y diagnóstico real 🧠</small></p>
 
-> 🗺️ **Estás en:** 🗣️ **Enrutamiento dinámico con OSPF** → 9 · Cierre: consolida lo aprendido
+> 🗺️ **Estás en:** 🗣️ **Enrutamiento dinámico con OSPF** → 09 · Cierre: consolida lo aprendido
 
 ---
 
@@ -222,10 +222,11 @@ Sí, mientras no se reinicie el proceso ni caiga el DR. La elección de DR/BDR s
 
 | CE | Criterio | Cubierto |
 |---|---|---|
-| g) | Configuración y uso de OSPF en un router | ✅ Configuración OSPF (puntos 6-7) + ⚡ Laboratorio |
-| h) | Ruta por defecto con OSPF | ✅ Propagación con `default-information originate` (punto 8) + ⚡ Laboratorio |
-| i) | Diagnóstico de incidencias en el encaminamiento | ✅ Escalera de diagnóstico (punto 8) + ⚡ Laboratorio con fallo intencionado |
+| g) | Se ha habilitado y configurado OSPF en un «router» | ✅ Configuración OSPF (puntos 6-7) + ⚡ Laboratorio |
+| h) | Se ha establecido y propagado una ruta por defecto usando OSPF | ✅ Propagación con `default-information originate` (punto 8) + ⚡ Laboratorio |
+
+> ℹ️ El **diagnóstico de incidencias** (punto 8) es contenido oficial de la unidad, pero no tiene CE propio: el c) de diagnóstico del PAR es específico de RIP, y el i) de algunos listados es de protocolos propietarios (fuera del alcance de estos apuntes).
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/08-ospf) · **Anterior:** [8 · Ruta por defecto y diagnóstico](/ApuntesRedes/08-ospf/08-ruta-por-defecto-y-diagnostico) · **Siguiente:** [NAT y PAT](/ApuntesRedes/09-nat-pat)
+📚 [Volver al índice de la unidad](/ApuntesRedes/08-ospf) · **Anterior:** [08 · Ruta por defecto y diagnóstico](/ApuntesRedes/08-ospf/08-ruta-por-defecto-y-diagnostico) · **Siguiente:** [NAT y PAT](/ApuntesRedes/09-nat-pat)

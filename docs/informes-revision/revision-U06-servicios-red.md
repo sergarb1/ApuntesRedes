@@ -73,15 +73,15 @@ Líneas referidas al estado **pre-edición**.
 
 ## 5. Decisiones pendientes del profe 🔴
 
-- [ ] **CEs de la tabla de evaluación (asunto principal).** Las letras g) h) i) —y la d) con el añadido "(automatizado)"— de nuestras tablas **no existen en el Real Decreto oficial del título**: **RD 1629/2009** (BOE-A-2009-18355). El RA2 oficial es *"Integra ordenadores y periféricos en redes cableadas e inalámbricas, evaluando su funcionamiento y prestaciones"* con CEs **a)–k)** que **no incluyen servicios de red**: el más cercano es **d) "Direccionamiento lógico IP (direcciones y máscaras)"**. Para DHCP existe CE oficial en **RA4·h: "Se ha configurado el router como servidor de direcciones IP dinámicas"** (cubierto de lleno por el punto 3). **DNS solo aparece como "concepto" en los contenidos y NTP no tiene CE ni contenido oficial en PAR** (es ampliación de la casa). ⚠️ Errata de referencia: en sesiones anteriores se citó el "RD 1575/2011", que es del *Técnico en Construcción* — el correcto es **RD 1629/2009**.
+- [x] **CEs de la tabla de evaluación (asunto principal).** ✅ **Aprobada O1 y aplicada:** la tabla de índice y cierre usa el CE oficial **RA2·d)** con texto literal, respaldo en **RA4·h** y nota de que DNS/NTP son ampliación sin CE propio en PAR. (El resto de la decisión, con el análisis completo del RD 1629/2009, queda como histórico.) Las letras g) h) i) —y la d) con el añadido "(automatizado)"— de nuestras tablas **no existen en el Real Decreto oficial del título**: **RD 1629/2009** (BOE-A-2009-18355). El RA2 oficial es *"Integra ordenadores y periféricos en redes cableadas e inalámbricas, evaluando su funcionamiento y prestaciones"* con CEs **a)–k)** que **no incluyen servicios de red**: el más cercano es **d) "Direccionamiento lógico IP (direcciones y máscaras)"**. Para DHCP existe CE oficial en **RA4·h: "Se ha configurado el router como servidor de direcciones IP dinámicas"** (cubierto de lleno por el punto 3). **DNS solo aparece como "concepto" en los contenidos y NTP no tiene CE ni contenido oficial en PAR** (es ampliación de la casa). ⚠️ Errata de referencia: en sesiones anteriores se citó el "RD 1575/2011", que es del *Técnico en Construcción* — el correcto es **RD 1629/2009**.
   - **O1 (recomendada):** reescribir la tabla con el CE oficial **d)** de RA2 + nota de que DHCP se respalda en **RA4·h** y que DNS/NTP son ampliación sin CE propio en PAR.
   - **O2:** mantener los textos actuales pero etiquetar la tabla como *"criterios propios de programación del módulo"* (no oficiales).
   - **O3:** dejar como está (con la desviación documentada).
-- [ ] **Misma familia en otras unidades** (si se aprueba O1): U03 cita RA2·g no oficial; U11 (pendiente) usa RA2·e/g desviados; U08 (ya revisada) tiene una fila RA6·i inexistente (el RA6 oficial llega a h). Abrir el mini-fix en cada sesión correspondiente.
+- [x] **Misma familia en otras unidades** ✅ **aplicado en la pasada de decisiones:** U03 (fila `RA2·g` → `RA4·h` oficial en índice y cierre), U08 (fila `RA6·i` eliminada, g)/h) con texto oficial + nota de que el diagnóstico no tiene CE propio), U11 (resuelto con su R1), U09 y U12 (resueltos con sus R1).
 
 ## 6. Verificación y commit
 
-- [x] `check:unidad 06` sin FALLOs · `check-uds` en 0 · `check-links` OK · build 183 · diagrams 55 (baseline)
+- [x] `check:unidad 06` sin FALLOs · `check-uds` en 0 · `check-links` OK · build 183 · diagrams 54 (nuevo baseline tras Q1 de U03; era 55) — re-verificado tras la pasada de decisiones
 - [x] DOCX regenerado (`npm run docx` → 68/68)
 - [x] Comprobación lingüística es-ES ("voluntarios", "colección de relojes…", "solicitadas"; `syslog`/`w32tm`/`nslookup` como términos técnicos)
 - [x] Matriz de solapamientos + README de estado actualizados

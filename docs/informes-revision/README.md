@@ -26,6 +26,18 @@ Los informes de la revisión vigente se nombran `revision-UXX-<nombre>.md` (los 
 
 > ⚠️ **Nota de renumeración (sesión de reorganización del temario):** el orden del curso cambió — Servicios pasó de la 10 a la **6**, Enrutamiento estático de la 6 a la **7**, OSPF de la 7 a la **8** y ACL de la 8 a la **10** (NAT se mantiene en la 9). Los ficheros `revision-UXX-*` **conservan la numeración con la que se escribieron**: `revision-U06-enrutamiento-estatico.md` corresponde hoy a la unidad 07 y `revision-U07-ospf.md` a la unidad 08. Las revisiones escritas **después** de la reorganización usan ya la numeración vigente (empezando por `revision-U10-acl-seguridad.md` = ACL). Esta tabla refleja la numeración vigente.
 
+## Pasada de decisiones aprobadas (28/09/2026)
+
+Se aplicaron de golpe las decisiones 🔴 recomendadas de las sesiones de revisión (aprobar "A en todo"):
+
+- **Tablas CE con texto oficial literal** (RD 1629/2009): O1 de **U06** (RA2·d + RA4·h, nota DNS/NTP), A de **U09** (RA7 a)–f) + bloques *WAN heredada* y *móvil 3G/3.5G* en el punto 7), A de **U11** (RA2·a/e/f/g + RA1·b, seguridad WLAN sin CE), A de **U12** (títulos RA oficiales + mapeo honesto + nota HA sin CE).
+- **Mini-fix de la familia**: U03 (`RA2·g` → `RA4·h`) e U08 (fila `RA6·i` fuera; g)/h) oficiales + nota de que el diagnóstico no tiene CE propio).
+- **R2-A**: los 9 `title:` de la introducción permutados a su número de fichero/sidebar (canónico = `astro.config.mjs`).
+- **Cross-units**: cierre de U08 (relleno `08 ·`, desc "Sé el Router OSPF", footer) y U07 ("Sé el Router" → "Sé el Paquete del cierre").
+- **Menores**: U02 filas `RA2·d)`/`RA2·e)` con "→ se verá en…"; enlace de `03-nat-estatico-y-dinamico` a la unidad de ACL; U03-Q1 (diagrama de fragmentación reetiquetado, `u03-frag-hdr` resuelto → `check:diagrams` 55 → **54**, nuevo baseline).
+- Verificación: `check:unidad` 0 FALLOs (10 unidades) · `check-uds` 0 · `check-links` 0 · build 183 · DOCX 68/68.
+- Quedan 2 decisiones menores de **U10** (CE `b)` y variante del Fallo B) y el cierre transversal.
+
 ## Ciclo por sesión (una unidad)
 
 1. Auditoría automática: `npm run check:unidad <unidad>` + `node scripts/check-uds.mjs` + `check-links` + `npm run check:diagrams` + build.

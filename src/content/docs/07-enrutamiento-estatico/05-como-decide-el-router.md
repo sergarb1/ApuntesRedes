@@ -36,7 +36,7 @@ Paquete llega → ¿destino local? ──sí──▶ entrégalo a la interfaz
                              └no── ▶ descarta + ICMP "Destination Net Unreachable"
 ```
 
-> 💡 **La lección del laboratorio:** sin rutas, un router no es más que un switch caro — el ⭐ Sé el Router del cierre lo pone en escena.
+> 💡 **La lección del laboratorio:** sin rutas, un router no es más que un switch caro — el ⭐ Sé el Paquete del cierre lo pone en escena.
 
 ---
 

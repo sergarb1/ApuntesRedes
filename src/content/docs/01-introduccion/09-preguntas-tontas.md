@@ -1,5 +1,5 @@
 ---
-title: 10 — Preguntas tontas
+title: 09 — Preguntas tontas
 description: Las dudas que nadie se atreve a hacer en voz alta 😅
 ---
 

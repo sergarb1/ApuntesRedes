@@ -113,12 +113,12 @@ Sin candidatos a mover/quitar (🔴 resueltos: tarea 4 reencuadrada y fallo 2 su
 
 ## 5. Decisiones pendientes del profe 🔴
 
-- [ ] **Q1 — Diagrama de fragmentación**: para la pasada transversal, reetiquetar `u03-fragmentacion.svg` ("original = 4000 B" → "de payload") y su fallo `u03-frag-hdr` (ya en baseline). Los textos ya no chocan.
-- [ ] **Q2 — Tarea 4 del lab**: se ha reencuadrado como referencia adelantada a enrutamiento estático en vez de quitarse. Si prefieres un lab 100 % autocontenido, la eliminación es de una línea.
+- [x] **Q1 — Diagrama de fragmentación**: ✅ **aplicado** — la etiqueta del paquete original ahora dice "Paquete IPv4 con 4000 B de payload (MTU del enlace = 1500 B)" y el texto `u03-frag-hdr` se parte en dos líneas para caber en la zona. `check:diagrams` → **54 fallos (nuevo baseline; el fallo `u03-frag-hdr` queda resuelto)**.
+- [x] **Q2 — Tarea 4 del lab**: se mantiene la decisión de reencuadrar como referencia adelantada a enrutamiento estático (no se elimina).
 
 ## 6. Verificación y commit
 
-- [x] `check:unidad 03` 0/0 · `check-uds` 0 · `check-links` 0 · build 183 · `check:diagrams` = baseline (55)
+- [x] `check:unidad 03` 0/0 · `check-uds` 0 · `check-links` 0 · build 183 · `check:diagrams` = **54 (nuevo baseline tras Q1; era 55)**
 - [x] Comprobación lingüística es-ES (sin LatAM ni "UD" en prosa; números con formato es-ES)
 - [x] DOCX regenerado (`npm run docx`): 68 generados, 0 fallos
 - [ ] Commit `Revisión U03: …`

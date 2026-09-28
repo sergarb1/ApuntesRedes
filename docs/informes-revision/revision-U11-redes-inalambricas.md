@@ -85,7 +85,7 @@ Etiquetas: 🟡 corregir ya · 🔵 ampliar · ⚪ dejar · 🔴 mover/quitar (r
 
 ## 5. Decisiones pendientes del profe 🔴
 
-- [ ] **R1 · Tablas CE de la unidad: letras oficiales.** Verificado por 5 fuentes (BOE RD 1629/2009, noticias.juridicas, todofp.es, Salesianas León, IES Cieerva/LexNavarra). Oficial:
+- [x] **R1 · Tablas CE de la unidad: letras oficiales.** ✅ **Aprobada A y aplicada:** las dos tablas (índice y cierre) usan el **texto oficial literal** de RA2·a/e/f/g + RA1·b (con "sobre distintas configuraciones" en g) y nota de que la seguridad WLAN es contenido de la unidad sin CE propio). El análisis de las 5 fuentes queda como histórico.
   - **RA2** «Integra ordenadores y periféricos en redes cableadas e inalámbricas…»: **a)** identificar estándares cableados e inalámbricos · **e)** configurar adaptadores cableados e inalámbricos bajo distintos SO · **f)** integrar dispositivos en redes cableadas e inalámbricas · **g)** comprobar la conectividad entre dispositivos y adaptadores inalámbricos · (j) IPv6 · (k) ARP/RARP.
   - **RA1** «Reconoce la estructura…»: **b)** «Se han diferenciado los distintos medios de transmisión utilizados en las redes» ✓ (la atribución RA1·b actual es correcta).
   - La tabla actual dice **RA2·e) = "Estándares"** (en realidad es el **a)** oficial) y **RA2·g) = "Seguridad en redes inalámbricas"** (el g) oficial es **comprobar conectividad inalámbrica**; la seguridad WLAN **no es CE oficial** de PAR). El **f) sí coincide** con el oficial.
@@ -94,13 +94,11 @@ Etiquetas: 🟡 corregir ya · 🔵 ampliar · ⚪ dejar · 🔴 mover/quitar (r
     - **B**: dejar las letras actuales (familia de CEs no oficiales ya abierta en la sesión U06 y en U09).
     - **C**: corregir solo las dos letras erróneas (e→a, g→"conectividad") sin cambiar el resto.
   - Nota: este R1 comparte decisión con el R1 de la sesión U06 (tablas "g)/h)/i)" no oficiales) y con el R1 de U09 (CE d)/f) de RA7).
-- [ ] **R2 · Títulos de la introducción (U01).** Permuta de numeración en los H1 de 9 ficheros (ver §3). Opciones:
-    - **A (recomendada)**: corregir ahora (9 líneas mecánicas: `title:` de cada fichero a su número de fichero/sidebar); riesgo nulo, arregla el H1 visible de 9 páginas.
-    - **B**: dejarlo para una re-revisión puntual de la introducción.
+- [x] **R2 · Títulos de la introducción (U01).** ✅ **Aprobada A y aplicada:** los 9 `title:` de `01-introduccion` permutados a su número de fichero/sidebar (canónico = `astro.config.mjs`).
 
 ## 6. Verificación y commit
 
-- [x] `check:unidad 11` sin FALLOs · `check-uds` en 0 · `check-links` OK · build 183 páginas
+- [x] `check:unidad 11` sin FALLOs · `check-uds` en 0 · `check-links` OK · `check:diagrams` 54 (nuevo baseline; era 55) · build 183 páginas — re-verificado tras la pasada de decisiones (R1 + R2)
 - [x] DOCX regenerado (`npm run docx`, 68/68)
 - [x] Comprobación lingüística es-ES (23 textos corregidos revisados: no quedan "laptop" en prosa, anglicismos ni acentos sueltos)
 - [ ] Commit `Revisión U11: …` (tras confirmación)

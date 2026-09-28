@@ -66,10 +66,13 @@ Al terminar, serás capaz de:
 
 | CE | Criterio | Dónde se cubre |
 |---|---|---|
-| RA2·e) | Estándares para redes inalámbricas | ✅ Puntos 1, 3 y 5 |
-| RA2·f) | Integración de equipos inalámbricos | ✅ Puntos 4, 7 y 8 + ⚡ Laboratorio (punto 9) |
-| RA1·b) | Medios de transmisión (no guiados) | ✅ Puntos 1 y 2 |
-| RA2·g) | Seguridad en redes inalámbricas | ✅ Punto 6 + 🧠 Atrévete a pensar (punto 9) |
+| RA2·a) | Se han identificado los estándares para redes cableadas e inalámbricas | ✅ Puntos 1, 3 y 5 |
+| RA2·e) | Se han configurado adaptadores de red cableados e inalámbricos bajo distintos sistemas operativos | ✅ Punto 8 (adaptadores) + ⚡ Laboratorio (punto 9) |
+| RA2·f) | Se han integrado dispositivos en redes cableadas e inalámbricas | ✅ Puntos 4, 7 y 8 + ⚡ Laboratorio (punto 9) |
+| RA2·g) | Se ha comprobado la conectividad entre diversos dispositivos y adaptadores inalámbricos sobre distintas configuraciones | ✅ Punto 8 (verificación) + ⚡ Laboratorio (punto 9) |
+| RA1·b) | Se han diferenciado los distintos medios de transmisión utilizados en las redes | ✅ Puntos 1 y 2 |
+
+> ℹ️ La **seguridad WLAN** (punto 6 + 🧠 Atrévete a pensar) es contenido propio de la unidad: el g) oficial de RA2 no es seguridad, sino comprobar conectividad inalámbrica.
 
 ---
 
