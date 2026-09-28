@@ -21,7 +21,7 @@ c) ¿Qué pasa si el router no soporta time-range? ¿Alternativa?
 
 ## 2. Diagnóstico de ACL
 
-Un administrador aplica esta ACL en G0/0 de un router (LAN 192.168.1.0/24):
+Un administrador aplica esta ACL en G0/0 de un router (LAN 192.168.1.0/24), sentido **in** (hacia el router):
 
 ```
 access-list 10 deny 192.168.1.10
@@ -41,10 +41,11 @@ Diseña una ACL para un router de borde que protege una red interna (192.168.1.0
 1. Permitir HTTP/HTTPS saliente (cualquier destino)
 2. Permitir DNS saliente (UDP 53)
 3. Bloquear SSH saliente (TCP 22)
-4. Permitir todo el tráfico entrante de conexiones establecidas (tráfico de retorno)
-5. Denegar el resto
+4. Permitir el retorno de las conexiones TCP establecidas (tráfico de retorno)
+5. Permitir también las respuestas DNS entrantes (UDP con puerto de origen 53)
+6. Denegar el resto
 
-**Pista:** Usa `established` para permitir tráfico de retorno de conexiones iniciadas internamente.
+**Pista:** Usa `established` para el retorno TCP; las respuestas DNS no son TCP y necesitan su propia línea UDP.
 
 ## 4. ACL nombrada para horario
 
@@ -75,7 +76,7 @@ b) ¿Qué principio rompe la ACL B?
 
 ## 6. ACL con error clásico
 
-Quieres permitir solo SSH a un servidor (10.0.0.50) desde la red de administración (192.168.100.0/24). Un compañero escribe:
+Quieres permitir solo SSH a un servidor (10.0.0.50) desde la red de administración (192.168.100.0/24), sin cortar el ping de diagnóstico. Un compañero escribe:
 
 ```
 access-list 110 permit tcp 192.168.100.0 0.0.0.255 host 10.0.0.50 eq 22
@@ -99,7 +100,7 @@ c) Escribe la configuración completa y el comando para ver el estado.
 
 ## 8. Diagnóstico de port security
 
-Un administrador configuró port security en un puerto:
+Un administrador configuró port security en el puerto Fa0/1:
 
 ```
 Switch(config-if)# switchport port-security maximum 1

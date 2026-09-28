@@ -64,9 +64,8 @@ Al terminar, serás capaz de:
 
 | CE | Criterio | Dónde se cubre |
 |---|---|---|
-| i) | Filtrado de tráfico | ✅ Puntos 1-3 + ⚡ Laboratorio (punto 6) |
+| i) | Filtrado de tráfico (ACLs) | ✅ Puntos 1-4 + ⚡ Laboratorio (punto 6) |
 | j) | Listas de control de acceso | ✅ Puntos 2-4 + 🧠 Atrévete a pensar (punto 6) |
-| b) | Gestión segura del equipo | ✅ Puntos 1 y 5 + 💬 Entrevista (punto 6) |
 
 ---
 

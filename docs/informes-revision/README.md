@@ -17,14 +17,14 @@ Orden de revisión: **1 → 12** (introducción primero). Alcance por sesión: *
 | 07 | Enrutamiento estático | ✅ revisada | [revision-U06-enrutamiento-estatico.md](revision-U06-enrutamiento-estatico.md) |
 | 08 | OSPF | ✅ revisada | [revision-U07-ospf.md](revision-U07-ospf.md) |
 | 09 | NAT y PAT | ⏳ pendiente | — |
-| 10 | ACL y seguridad | ⏳ pendiente | — |
+| 10 | ACL y seguridad | ✅ revisada | [revision-U10-acl-seguridad.md](revision-U10-acl-seguridad.md) |
 | 11 | Redes inalámbricas | ⏳ pendiente | — |
 | 12 | Alta disponibilidad | ⏳ pendiente | — |
 | — | Cierre transversal | ⏳ pendiente | — |
 
 Los informes de la revisión vigente se nombran `revision-UXX-<nombre>.md` (los de la estructura antigua eran `informe-UXX.md`: **no confundir su numeración**).
 
-> ⚠️ **Nota de renumeración (sesión de reorganización del temario):** el orden del curso cambió — Servicios pasó de la 10 a la **6**, Enrutamiento estático de la 6 a la **7**, OSPF de la 7 a la **8** y ACL de la 8 a la **10** (NAT se mantiene en la 9). Los ficheros `revision-UXX-*` **conservan la numeración con la que se escribieron**: `revision-U06-enrutamiento-estatico.md` corresponde hoy a la unidad 07 y `revision-U07-ospf.md` a la unidad 08. Esta tabla refleja la numeración vigente.
+> ⚠️ **Nota de renumeración (sesión de reorganización del temario):** el orden del curso cambió — Servicios pasó de la 10 a la **6**, Enrutamiento estático de la 6 a la **7**, OSPF de la 7 a la **8** y ACL de la 8 a la **10** (NAT se mantiene en la 9). Los ficheros `revision-UXX-*` **conservan la numeración con la que se escribieron**: `revision-U06-enrutamiento-estatico.md` corresponde hoy a la unidad 07 y `revision-U07-ospf.md` a la unidad 08. Las revisiones escritas **después** de la reorganización usan ya la numeración vigente (empezando por `revision-U10-acl-seguridad.md` = ACL). Esta tabla refleja la numeración vigente.
 
 ## Ciclo por sesión (una unidad)
 

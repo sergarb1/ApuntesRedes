@@ -55,7 +55,7 @@ No existe ninguna etapa de "solo teoría": cada unidad trae su boletín y su lab
 
 ## ⛓️ El mapa de dependencias: qué exige cada unidad
 
-Si la tabla de las 12 etapas era el plano, este mapa de puentes te dice cuándo una unidad se sostiene literalmente sobre la anterior. No es para memorizarlo, es para no sorprenderte:
+Si la tabla de las 11 etapas era el plano, este mapa de puentes te dice cuándo una unidad se sostiene literalmente sobre la anterior. No es para memorizarlo, es para no sorprenderte:
 
 | Para llegar a… | Necesitas dominar… | Por qué |
 |---|---|---|
