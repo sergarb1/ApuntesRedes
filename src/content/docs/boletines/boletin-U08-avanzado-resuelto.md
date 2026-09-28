@@ -1,187 +1,135 @@
 ---
-title: Boletín de ACL y seguridad — Avanzado (Resuelto)
-description: Soluciones de los ejercicios avanzados de ACLs y seguridad de red
+title: Boletín de OSPF — Avanzado (Resuelto)
+description: Soluciones de los ejercicios avanzados de Routing Dinámico
 ---
 
-# ✅ Boletín de ACL y seguridad — Avanzado (Resuelto)
+# ✅ Boletín de OSPF — Avanzado (Resuelto)
 
 ---
 
-## 1. ACL extendida: YouTube blocker
+## 1. Configuración OSPF multiárea
 
-a) **ACL con time-range:**
+**R1:**
 ```bash
-time-range LABORAL
- periodic weekdays 9:00 to 18:00
-
-ip access-list extended BLOQUEAR_YT
- deny tcp any 173.194.0.0 0.0.255.255 eq 80 time-range LABORAL
- deny tcp any 173.194.0.0 0.0.255.255 eq 443 time-range LABORAL
- permit ip any any
-```
-
-b) **Aplicar:** Outbound en G0/1 (hacia Internet), para filtrar tráfico saliente.
-
-c) **Alternativa sin time-range:** no se puede definir "9 a 18" con la ACL pura; habría que cambiar manualmente la ACL cada mañana y cada tarde (desastrosamente manual) o gestionarlo con un script/programación externa que alterne las versiones de política. Por eso `time-range` existe.
-
-## 2. Diagnóstico de ACL
-
-a) **Sí, es normal.** La línea 1 deniega explícitamente 192.168.1.10. La línea 2 permite al resto de la red. El deny any implícito está al final.
-
-b) **Sí, 192.168.1.20 puede** porque coincide con la línea 2 (permit 192.168.1.0/24).
-
-c) `show access-lists 10` — Muestra los contadores de hits de cada línea.
-
-d) **No afecta.** La ACL está en G0/1 (outbound). El tráfico entre PCs de la misma LAN no pasa por el router, solo por el switch. Las ACLs en interfaces del router solo afectan al tráfico que pasa por el router.
-
-## 3. ACL de firewall básico
-
-```bash
-ip access-list extended FIREWALL_INTERNO
- permit tcp 192.168.1.0 0.0.0.255 any eq 80
- permit tcp 192.168.1.0 0.0.0.255 any eq 443
- permit udp 192.168.1.0 0.0.0.255 any eq 53
- deny tcp 192.168.1.0 0.0.0.255 any eq 22
- deny ip any any
-
+interface loopback 0
+ ip address 1.1.1.1 255.255.255.255
+interface g0/0
+ ip address 192.168.1.1 255.255.255.0
 interface g0/1
- ip access-group FIREWALL_INTERNO out
+ ip address 192.168.2.1 255.255.255.0
+interface g0/2
+ ip address 10.0.0.1 255.255.255.252
+router ospf 1
+ router-id 1.1.1.1
+ network 192.168.1.0 0.0.0.255 area 0
+ network 192.168.2.0 0.0.0.255 area 0
+ network 10.0.0.0 0.0.0.3 area 0
+```
 
-ip access-list extended FIREWALL_RETORNO
- permit tcp any 192.168.1.0 0.0.0.255 established
- deny ip any any
-
+**R2 (ABR):**
+```bash
+interface loopback 0
+ ip address 2.2.2.2 255.255.255.255
+interface g0/0
+ ip address 10.0.0.2 255.255.255.252
 interface g0/1
- ip access-group FIREWALL_RETORNO in
+ ip address 10.0.0.5 255.255.255.252
+router ospf 1
+ router-id 2.2.2.2
+ network 10.0.0.0 0.0.0.3 area 0
+ network 10.0.0.4 0.0.0.3 area 1
 ```
 
-## 4. ACL nombrada para horario
-
+**R3:**
 ```bash
-time-range LABORAL_DIARIO
- periodic daily 9:00 to 18:00
-
-ip access-list extended BLOQUEAR_STREAMING
- deny tcp 192.168.1.0 0.0.0.255 any eq 443 time-range LABORAL_DIARIO
- permit ip any any
-
+interface loopback 0
+ ip address 3.3.3.3 255.255.255.255
+interface g0/0
+ ip address 192.168.3.1 255.255.255.0
 interface g0/1
- ip access-group BLOQUEAR_STREAMING out
+ ip address 10.0.0.6 255.255.255.252
+router ospf 1
+ router-id 3.3.3.3
+ network 192.168.3.0 0.0.0.255 area 1
+ network 10.0.0.4 0.0.0.3 area 1
 ```
 
-**Lectura:** de 9 a 18 todos los días, el tráfico HTTPS originado en la red interna se deniega; el resto de horario (y el resto de tráfico, como el puerto 80) pasa. El `permit ip any any` + el deny implícito se encargan del resto.
+## 2. Diagnóstico OSPF
 
-## 5. El orden de las líneas importa
+a) **FULL/DR:** El vecino 3.3.3.3 es el DR y la adyacencia está completa (FULL). Es normal en Ethernet.
 
-a) **ACL A:** deniega todo el tráfico de 192.168.1.0/24 y deja pasar el resto.
-**ACL B:** la primera línea `permit any` coincide con TODO (incluida 192.168.1.0/24), así que la segunda línea jamás se evalúa: la ACL permite absolutamente todo y la denegación es letra muerta.
+b) **2WAY/DROTHER:** El vecino 4.4.4.4 no es DR ni BDR (DROTHER). La adyacencia está en 2WAY, que es el estado normal entre DROTHERS (no intercambian LSAs directamente, solo con el DR).
 
-b) **Rompe el principio de "primera coincidencia gana"** (y el de ordenar primero lo más específico). Las ACLs no son un listado de intenciones: son una cadena de evaluación secuencial.
+c) **Porque no es necesario.** En redes multiacceso, los DROTHERS solo forman adyacencia FULL con el DR y BDR. Entre DROTHERS se quedan en 2WAY.
 
-## 6. ACL con error clásico
+d) **No aparece en esa salida** (los `Neighbor ID` son los de los vecinos): no es 3.3.3.3 ni 4.4.4.4, y a juzgar por los estados este router es **DROTHER** — si fuera BDR, el vecino 4.4.4.4 estaría en FULL con él, no en 2WAY. El tuyo lo ves con `show ip ospf`.
 
-a) **No.** La línea `deny ip any any` está en medio: al evaluarla, todo lo que no sea SSH de administración (incluido ICMP) muere ahí. El `permit icmp` de abajo nunca se consulta: la ACL se detiene en la primera coincidencia.
+## 3. Redistribución OSPF
 
-b) **En una ACL numerada no se puede reordenar ni insertar en medio**: hay que borrarla (`no access-list 110`) y reescribirla en el orden correcto, o usar ACL nombrada con número de secuencia:
+a) `redistribute static subnets` inyecta las rutas estáticas configuradas en el router al proceso OSPF, para que otros routers OSPF aprendan esas rutas.
 
-```bash
-ip access-list extended 110
- no 20
- 5 permit icmp any any
-```
+b) **Dos rutas:** la ruta por defecto (0.0.0.0/0) y la ruta estática 10.100.0.0/16.
 
-(Con secuencias puedes insertar antes de la línea 20 sin borrar la ACL.)
+c) **Sí.** `redistribute static subnets` inyecta en OSPF las dos estáticas de la tabla (tanto la 10.100.0.0/16 como la 0.0.0.0/0) y `default-information originate` se asegura de anunciar además la ruta por defecto como externa E2: entre los dos comandos, todos los routers OSPF terminan aprendiendo las dos rutas.
 
-c) **No es necesaria.** El `deny ip any any` implícito del final ya hace ese trabajo. Escribirla solo aporta legibilidad explícita (y contadores visibles).
+## 4. Cambio de coste OSPF
 
-## 7. Port Security
+a) **Camino A** (R1→R2→R3, 2 enlaces Gigabit) tiene coste **1 + 1 = 2**. El **Camino B** (R1→R4→R5→R3, 3 enlaces FastEthernet) tiene coste **1 + 1 + 1 = 3**. OSPF elige el de menor coste total: **el Camino A**.
 
-a) y b) y c) **Configuración completa:**
-```bash
-interface g0/1
- switchport mode access
- switchport port-security
- switchport port-security maximum 1
- switchport port-security mac-address sticky
- switchport port-security violation restrict
-```
-
-- **sticky:** la MAC aprendida se escribe en la running-config (guárdala con `copy run start` para hacerla permanente).
-- **restrict:** descarta los paquetes del infractor, genera mensajes de log y contadores, pero el puerto sigue activo para la MAC legítima (a diferencia de `shutdown`, que tumba el puerto entero).
-
-**Verificación:**
-```bash
-show port-security interface g0/1
-show port-security address
-```
-
-## 8. Diagnóstico de port security
-
-a) **Ocurrió porque** el usuario conectó un switch no administrado. Los PCs de ambos usuarios tienen MACs diferentes, y el switch de red ve más de 1 MAC en el puerto, superando el límite (maximum 1).
-
-b) **Dos cambios:**
-   1. Aumentar `maximum` a un valor razonable (ej. 5-10) si es un puerto compartido
-   2. Cambiar `violation` a `restrict` (descarta tráfico extra pero no deshabilita el puerto) o `protect` (descarta silenciosamente)
-
-c) **Recuperar el puerto:**
+b) Para forzar el Camino B, aumentar el coste en los enlaces de A:
    ```bash
-   Switch(config)# interface fa0/1
-   Switch(config-if)# shutdown
-   Switch(config-if)# no shutdown
+   R1(config-if)# ip ospf cost 10
    ```
-   O configurar `errdisable recovery cause psecure-violation` para recuperación automática.
 
-## 9. Laboratorio: Port Security en la sala de profesores
+c) `show ip ospf interface` o `show ip route` muestra el coste de cada ruta.
 
-a) y b) Configuración completa:
+## 5. DR/BDR election
 
-```bash
-Switch(config)# interface fa0/24
-Switch(config-if)# switchport mode access
-Switch(config-if)# switchport port-security
-Switch(config-if)# switchport port-security maximum 1
-Switch(config-if)# switchport port-security mac-address sticky
-Switch(config-if)# switchport port-security violation shutdown
-```
+a) **DR: R3** (prioridad 10, la más alta). **BDR: R4** (prioridad 5, segunda más alta).
 
-c) Verificación: `Switch# show port-security interface fa0/24` (muestra el máximo, las MACs seguras y el estado del puerto).
+b) Cambiar la **prioridad** de R1 a un valor más alto que 10:
+   ```bash
+   R1(config-if)# ip ospf priority 20
+   ```
+   (Nota: la elección se hace al iniciar OSPF, al reiniciar el proceso o si falla el DR: el BDR asciende y se elige otro)
 
-d) La violación ocurre porque la **MAC sticky del PC original NO caduca**: aunque el PC se desenchufe, su MAC permanece aprendida como permanente. Al conectar el portátil, su MAC nueva hace un total de 2 MACs en el puerto y se supera el máximo (1) → violación shutdown → errdisable.
+## 6. Troubleshooting OSPF
 
-e) Recuperar el puerto:
+**Paso 1:** Verificar conectividad capa 3 → `ping` entre routers vecinos. Si no hay ping, el problema está en capa 1 o 2.
 
-```bash
-Switch(config)# interface fa0/24
-Switch(config-if)# shutdown
-Switch(config-if)# no shutdown
-```
+**Paso 2:** Verificar que las interfaces están activas → `show ip interface brief`. Buscar "up/up".
 
-(O configurar `errdisable recovery cause psecure-violation`.)
+**Paso 3:** Verificar que OSPF está configurado → `show ip protocols`. Debe mostrar OSPF con Router ID y redes declaradas.
 
-f) Sin perder seguridad, puedes:
-   - Aumentar `maximum` a 2 si es un puerto compartido.
-   - Configurar el **envejecimiento de la port security** para que la MAC sticky expire si el dispositivo se desenchufa (las sticky necesitan `aging static` para poder caducar):
-     ```bash
-     Switch(config-if)# switchport port-security aging time 5
-     Switch(config-if)# switchport port-security aging type inactivity
-     Switch(config-if)# switchport port-security aging static
-     ```
-   - O usar `violation restrict` (descarta el tráfico extra sin deshabilitar el puerto), aunque es menos estricto.
+**Paso 4:** Verificar vecinos → `show ip ospf neighbor`. Si no hay vecinos, comprobar:
+- `network` declarada correctamente (wildcard, área)
+- Hello/Dead timers coinciden (por defecto 10/40 en broadcast)
+- No hay ACL bloqueando protocolo 89 (OSPF)
 
-## 10. Mini-caso final
+**Paso 5:** Verificar LSDB → `show ip ospf database`. Debe haber LSAs de todos los routers.
 
-a) **Diseño mínimo (extendidas, cerca del origen):**
+**Paso 6:** Verificar tabla de rutas → `show ip route ospf`. Las rutas deben aparecer con prefijo O (OSPF).
 
-```bash
-ip access-list extended PROFES
- deny ip 192.168.10.0 0.0.0.255 192.168.20.0 0.0.0.255
- permit tcp 192.168.10.0 0.0.0.255 host 10.0.0.5 eq 443
- permit ip 192.168.10.0 0.0.0.255 any
-```
-Aplicada **in** en la interfaz VLAN/interfaz de la red de profesores (donde entra su tráfico al router).
+## 7. Elección DR/BDR en otro segmento
 
-**Nota:** no hace falta ACL para "el WiFi de alumnos no accede a profesores": con la primera línea de PROFES ya se corta el ida; para el corte completo bidireccional se añadiría una ACL espejo en la red de alumnos (`deny ip 192.168.20.0 0.0.0.255 192.168.10.0 0.0.0.255` + `permit ip any any`).
+a) **DR: R-B** (prioridad 200, la más alta). **BDR: R-C** (prioridad 150, segunda más alta).
 
-b) **El retorno del servidor (10.0.0.5 → 192.168.10.x) no cruza la ACL de PROFES** (esa solo filtra el tráfico *originado* en profesores, aplicada in en su interfaz). El retorno llega por G0/0/servidores y lo encamina el router normalmente. Si hubiéramos puesto una ACL en la interfaz del servidor, sí tendríamos que prever el retorno.
+b) **R-D** tiene prioridad **0**: no participa en la elección. Solo actuará como **DROTHER**, sincronizándose con el DR y el BDR sin poder ser elegido.
 
-c) **Reflexión:** una ACL por IP es una herramienta burda para bloquear YouTube: CDN compartidas con otros servicios, apps que cambian de IPs, HTTPS que impide ver dominios... Para eso hay proxies/filtros DNS (o firewalls de siguiente generación). Las ACLs sirven para políticas simples por red/puerto; para "bloquear YouTube" honestamente mejor un filtro DNS o un proxy. Es una conversación de expectativas, no de comandos.
+c) **R-B** — con prioridades empatadas (1 = 1), el desempate lo hace el **Router ID más alto** (10.0.0.2 > 10.0.0.1). La prioridad manda primero; el Router ID solo decide empates.
+
+d) **No cambia.** La elección de DR/BDR se hace al arrancar OSPF, al reiniciar el proceso o si falla el DR (el BDR asciende); subir la prioridad de R-C a 255 no destrona al DR ya elegido (R-B). Para que cambie tendrías que **reiniciar el proceso OSPF** (o el router) en los routers del segmento, y entonces R-C (prioridad 255) ganaría.
+
+## 8. La adyacencia que no levanta
+
+a) Al funcionar el ping, queda **descartado el plano físico/enlace y la capa 3** del enlace: las IPs se alcanzan. El problema está en el **plano OSPF** (configuración lógica del protocolo), no en la conectividad.
+
+b) **Orden de diagnóstico:**
+1. `show ip protocols` → comprobar que OSPF arranca en ambos, que el **Router ID** no está duplicado y que las redes declaradas incluyen el enlace Serial.
+2. `show ip ospf interface` → confirmar en ambos routers que la interfaz **participa** en OSPF, y comparar **área**, **wildcard** y **timers** (Hello/Dead). Si no aparece, la red no está declarada o la wildcard está mal.
+3. Verificar que el **área** coincide en los dos lados del enlace (revisar el `network ... area X`).
+4. Comparar los **timers Hello/Dead** en ambos lados con `show ip ospf interface`: deben coincidir (por defecto 10/40 en broadcast y punto a punto Serial; solo en redes NBMA son 30/120). Si uno quedó con valores distintos, no forman vecindad.
+5. `show access-lists` (y contadores en la interfaz) → descartar una **ACL** que bloquee el **protocolo 89 (OSPF)** en el sentido de entrada/salida.
+6. Solo si todo lo anterior está bien, subir un nivel: `debug ip ospf events` (con cuidado) para ver por qué se rechaza el Hello.
+
+c) `show ip ospf interface <interfaz>`: si la interfaz aparece listada con su área y sus timers, está **participando en OSPF sin ambigüedad**. Si no sale, OSPF no la tiene declarada (falta `network` o wildcard incorrecta).

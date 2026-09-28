@@ -1,76 +1,80 @@
 ---
-title: Boletín de Servicios de red — Inicial
-description: Ejercicios básicos de servicios de red (DHCP, DNS y NTP)
+title: Boletín de ACL y seguridad — Inicial
+description: Ejercicios básicos de ACLs y seguridad de red
 ---
 
-# 📝 Boletín de Servicios de red — Inicial
+# 📝 Boletín de ACL y seguridad — Inicial
 
-> Ejercicios básicos para afianzar los conceptos de DHCP, DNS y NTP.
+> Ejercicios básicos para afianzar los conceptos de ACLs y seguridad de red.
 
 ---
 
-## 1. ¿Qué servicio soy?
+## 1. Verdadero o falso
 
-Adivina el servicio por su descripción:
+a) Las ACLs estándar filtran solo por IP origen.
+b) Al final de toda ACL hay un permit any implícito.
+c) Una ACL extendida puede filtrar por protocolo y puerto.
+d) Una ACL sin ninguna línea `permit` bloquea todo el tráfico que le llega.
+e) `show access-lists` muestra las ACLs configuradas y sus contadores.
 
-a) Reparto direcciones IP a los equipos que se conectan a la red.
-b) Traduzco nombres de dominio en direcciones IP.
-c) Mantengo sincronizado el reloj de todos los dispositivos de la red.
-d) Me mencionas cada vez que escribes `www.google.com` en el navegador.
+## 2. Números de ACL
 
-## 2. Las cuatro fases de DHCP
+¿Qué rango de números usan las ACLs estándar y extendidas?
 
-Ordena las fases de la negociación DORA:
-
-a) Request
-b) Offer
-c) Discover
-d) Acknowledge
-
-## 3. Verdadero o falso
-
-a) DHCP entrega una IP durante un tiempo limitado llamado concesión (lease).
-b) Un registro A de DNS relaciona un nombre con una dirección IPv6.
-c) NTP usa el puerto UDP 123.
-d) Si falla DHCP, puedes configurar la IP a mano pero no la puerta de enlace.
-e) El servidor DHCP puede entregar también máscara, gateway y servidores DNS.
-
-## 4. ¿Qué registro DNS?
-
-Relaciona cada situación con el registro adecuado:
-
-| Situación | Registro |
+| Tipo | Rango |
 |---|---|
-| 1. dominio.com → 203.0.113.10 | a) CNAME |
-| 2. www → dominio.com (alias) | b) MX |
-| 3. dominio.com → 2001:db8::10 | c) A |
-| 4. El servidor de correo del dominio | d) AAAA |
-| 5. Saber quién es dueño de un dominio | e) PTR |
-| 6. 203.0.113.10 → dominio.com (inverso) | f) SOA/NS |
+| Estándar | |
+| Extendida | |
 
-## 5. ¿Qué comando?
+## 3. ¿Qué comando?
 
 Relaciona el comando con su función:
 
 | Comando | Función |
 |---|---|
-| 1. `ipconfig /renew` | a) Ver la caché DNS del equipo |
-| 2. `nslookup www.ejemplo.es` | b) Forzar nueva petición DHCP |
-| 3. `ipconfig /displaydns` | c) Consultar un servidor DNS concreto |
-| 4. `ipconfig /flushdns` | d) Vaciar la caché DNS |
+| 1. `ip access-group 10 out` | a) Crear ACL nombrada extendida |
+| 2. `access-list 10 permit ...` | b) Aplicar ACL a interfaz |
+| 3. `ip access-list extended MI_ACL` | c) Ver las ACLs y sus contadores |
+| 4. `show access-lists` | d) Crear ACL numerada estándar |
 
-## 6. El reloj y los logs
+## 4. Wildcard masks
 
-El switch del centro guarda sus logs, pero al revisarlos a las 9:00 aparece todo con fecha del día anterior y una hora sin sentido. ¿Qué servicio falta y por qué importa para diagnosticar incidencias?
+Las ACLs usan *wildcard masks*, el inverso de la máscara de subred. Para cada máscara de subred, escribe su wildcard y qué representa (qué bits quedan libres para cualquier valor):
 
-## 7. DHCP helper
+| Máscara de subred | Wildcard | ¿Qué representa? |
+|---|---|---|
+| 255.255.255.0 | | |
+| 255.255.255.255 | | |
+| 255.255.0.0 | | |
 
-Un servidor DHCP está en la VLAN 10 (192.168.10.5). Los equipos de la VLAN 20 no reciben IP. ¿Qué falta configurar y en qué dispositivo?
+## 5. ACL básica
 
-## 8. Verifica tu red
+Escribe los comandos para:
 
-En tu portátil, ejecuta `ipconfig /all` (o `ip addr` en Linux) e identifica:
+a) Crear una ACL estándar que permita la red 192.168.1.0/24
+b) Aplicarla a la interfaz G0/1 en sentido outbound
 
-a) ¿Tu IP es DHCP o estática? ¿Cómo lo sabes?
-b) ¿Cuándo expira tu concesión?
-c) ¿Qué servidores DNS te han asignado?
+## 6. Estándar o extendida
+
+¿Qué tipo de ACL usarías en cada caso y por qué?
+
+a) Bloquear a un host concreto de la LAN que hace escaneos.
+b) Permitir solo HTTP/HTTPS de la VLAN 30 hacia el servidor web interno.
+c) Filtrar por IP origen en un router antiguo con muy poca CPU.
+
+## 7. ¿Dónde aplico la ACL?
+
+Regla práctica: la estándar se coloca **cerca del destino** y la extendida **cerca del origen**. En este escenario (PC1 en LAN-A, servidor en LAN-B, R1 en medio), ¿dónde aplicarías cada ACL y en qué sentido?
+
+a) ACL estándar que bloquea a PC1 llegar al servidor.
+b) ACL extendida que permite solo HTTP de LAN-A al servidor.
+
+## 8. Comandos de verificación
+
+Relaciona cada comando de verificación con su utilidad:
+
+| Comando | Utilidad |
+|---|---|
+| 1. `show access-lists` | a) Ver qué ACL está aplicada a cada interfaz y sentido |
+| 2. `show ip interface` | b) Ver contadores de matches por línea de la ACL |
+| 3. `show running-config` | c) Ver las líneas exactas de la ACL tal como se configuraron |

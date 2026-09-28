@@ -1,7 +1,7 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
-const emojis = ['🚪','📡','🧮','🔀','🌉','🧭','🗣️','🛡️','🌐','🗄️','📶','🔁'];
+const emojis = ['🚪','📡','🧮','🔀','🌉','🗄️','🧭','🗣️','🌐','🛡️','📶','🔁'];
 
 const unitSlugs = [
   '01-introduccion',
@@ -9,11 +9,11 @@ const unitSlugs = [
   '03-direccionamiento-ip',
   '04-switching',
   '05-trunking-inter-vlan',
-  '06-enrutamiento-estatico',
-  '07-ospf',
-  '08-acl-seguridad',
+  '06-servicios-red',
+  '07-enrutamiento-estatico',
+  '08-ospf',
   '09-nat-pat',
-  '10-servicios-red',
+  '10-acl-seguridad',
   '11-redes-inalambricas',
   '12-alta-disponibilidad',
 ];
@@ -24,11 +24,11 @@ const unitLabels = [
   'Direccionamiento IP y subnetting',
   'Switching y VLAN',
   'Trunking e inter-VLAN',
+  'Servicios de red: DHCP, DNS y NTP',
   'Enrutamiento estático',
   'Enrutamiento dinámico (OSPF)',
-  'ACLs y seguridad de red',
   'NAT y PAT',
-  'Servicios de red: DHCP, DNS y NTP',
+  'ACLs y seguridad de red',
   'Redes inalámbricas',
   'Alta disponibilidad y redundancia',
 ];
@@ -100,32 +100,32 @@ const unidadesExpandidas = {
     { slug: '05-trunking-inter-vlan/07-dhcp-por-vlan', label: '7 · DHCP por VLAN' },
     { slug: '05-trunking-inter-vlan/08-cierre', label: '8 · Cierre' },
   ],
-  '06-enrutamiento-estatico': [
-    { slug: '06-enrutamiento-estatico/01-componentes-del-router', label: '1 · Componentes del router' },
-    { slug: '06-enrutamiento-estatico/02-configuracion-basica', label: '2 · Configuración básica' },
-    { slug: '06-enrutamiento-estatico/03-rutas-estaticas', label: '3 · Rutas estáticas' },
-    { slug: '06-enrutamiento-estatico/04-ruta-por-defecto', label: '4 · Ruta por defecto' },
-    { slug: '06-enrutamiento-estatico/05-como-decide-el-router', label: '5 · Cómo decide un router' },
-    { slug: '06-enrutamiento-estatico/06-cierre', label: '6 · Cierre' },
+  '07-enrutamiento-estatico': [
+    { slug: '07-enrutamiento-estatico/01-componentes-del-router', label: '1 · Componentes del router' },
+    { slug: '07-enrutamiento-estatico/02-configuracion-basica', label: '2 · Configuración básica' },
+    { slug: '07-enrutamiento-estatico/03-rutas-estaticas', label: '3 · Rutas estáticas' },
+    { slug: '07-enrutamiento-estatico/04-ruta-por-defecto', label: '4 · Ruta por defecto' },
+    { slug: '07-enrutamiento-estatico/05-como-decide-el-router', label: '5 · Cómo decide un router' },
+    { slug: '07-enrutamiento-estatico/06-cierre', label: '6 · Cierre' },
   ],
-  '07-ospf': [
-    { slug: '07-ospf/01-de-estatico-a-dinamico', label: '1 · De estático a dinámico' },
-    { slug: '07-ospf/02-igp-vs-egp', label: '2 · IGP vs EGP y RIP vs OSPF' },
-    { slug: '07-ospf/03-conceptos-ospf', label: '3 · Conceptos OSPF' },
-    { slug: '07-ospf/04-areas-y-tipos-de-routers', label: '4 · Áreas y tipos de routers' },
-    { slug: '07-ospf/05-dr-y-bdr', label: '5 · DR y BDR' },
-    { slug: '07-ospf/06-coste-ospf', label: '6 · El coste OSPF' },
-    { slug: '07-ospf/07-configuracion-ospf', label: '7 · Configuración OSPF' },
-    { slug: '07-ospf/08-ruta-por-defecto-y-diagnostico', label: '8 · Ruta por defecto y diagnóstico' },
-    { slug: '07-ospf/09-cierre', label: '9 · Cierre' },
+  '08-ospf': [
+    { slug: '08-ospf/01-de-estatico-a-dinamico', label: '1 · De estático a dinámico' },
+    { slug: '08-ospf/02-igp-vs-egp', label: '2 · IGP vs EGP y RIP vs OSPF' },
+    { slug: '08-ospf/03-conceptos-ospf', label: '3 · Conceptos OSPF' },
+    { slug: '08-ospf/04-areas-y-tipos-de-routers', label: '4 · Áreas y tipos de routers' },
+    { slug: '08-ospf/05-dr-y-bdr', label: '5 · DR y BDR' },
+    { slug: '08-ospf/06-coste-ospf', label: '6 · El coste OSPF' },
+    { slug: '08-ospf/07-configuracion-ospf', label: '7 · Configuración OSPF' },
+    { slug: '08-ospf/08-ruta-por-defecto-y-diagnostico', label: '8 · Ruta por defecto y diagnóstico' },
+    { slug: '08-ospf/09-cierre', label: '9 · Cierre' },
   ],
-  '08-acl-seguridad': [
-    { slug: '08-acl-seguridad/01-enrutamiento-y-acls', label: '1 · De las rutas a las ACLs' },
-    { slug: '08-acl-seguridad/02-acls-conceptos', label: '2 · ACLs: concepto y tipos' },
-    { slug: '08-acl-seguridad/03-acl-estandar', label: '3 · ACL estándar' },
-    { slug: '08-acl-seguridad/04-acl-extendida-y-nombrada', label: '4 · ACL extendida y nombrada' },
-    { slug: '08-acl-seguridad/05-port-security', label: '5 · Port Security' },
-    { slug: '08-acl-seguridad/06-cierre', label: '6 · Cierre' },
+  '10-acl-seguridad': [
+    { slug: '10-acl-seguridad/01-enrutamiento-y-acls', label: '1 · De las rutas a las ACLs' },
+    { slug: '10-acl-seguridad/02-acls-conceptos', label: '2 · ACLs: concepto y tipos' },
+    { slug: '10-acl-seguridad/03-acl-estandar', label: '3 · ACL estándar' },
+    { slug: '10-acl-seguridad/04-acl-extendida-y-nombrada', label: '4 · ACL extendida y nombrada' },
+    { slug: '10-acl-seguridad/05-port-security', label: '5 · Port Security' },
+    { slug: '10-acl-seguridad/06-cierre', label: '6 · Cierre' },
   ],
   '09-nat-pat': [
     { slug: '09-nat-pat/01-que-es-nat', label: '1 · ¿Qué es NAT?' },
@@ -138,16 +138,16 @@ const unidadesExpandidas = {
     { slug: '09-nat-pat/08-configuracion-completa', label: '8 · Configuración completa' },
     { slug: '09-nat-pat/09-cierre', label: '9 · Cierre' },
   ],
-  '10-servicios-red': [
-    { slug: '10-servicios-red/01-por-que-servicios', label: '1 · Por qué necesitas servicios' },
-    { slug: '10-servicios-red/02-dhcp', label: '2 · DHCP: el repartidor de IPs' },
-    { slug: '10-servicios-red/03-dhcp-cisco', label: '3 · DHCP en Cisco y helper' },
-    { slug: '10-servicios-red/04-dns', label: '4 · DNS: la guía telefónica' },
-    { slug: '10-servicios-red/05-registros-dns', label: '5 · Registros y zonas DNS' },
-    { slug: '10-servicios-red/06-ntp', label: '6 · NTP: la hora es sagrada' },
-    { slug: '10-servicios-red/07-ntp-cisco', label: '7 · NTP en Cisco' },
-    { slug: '10-servicios-red/08-diagnostico-servicios', label: '8 · Diagnóstico de servicios' },
-    { slug: '10-servicios-red/09-cierre', label: '9 · Cierre' },
+  '06-servicios-red': [
+    { slug: '06-servicios-red/01-por-que-servicios', label: '1 · Por qué necesitas servicios' },
+    { slug: '06-servicios-red/02-dhcp', label: '2 · DHCP: el repartidor de IPs' },
+    { slug: '06-servicios-red/03-dhcp-cisco', label: '3 · DHCP en Cisco y helper' },
+    { slug: '06-servicios-red/04-dns', label: '4 · DNS: la guía telefónica' },
+    { slug: '06-servicios-red/05-registros-dns', label: '5 · Registros y zonas DNS' },
+    { slug: '06-servicios-red/06-ntp', label: '6 · NTP: la hora es sagrada' },
+    { slug: '06-servicios-red/07-ntp-cisco', label: '7 · NTP en Cisco' },
+    { slug: '06-servicios-red/08-diagnostico-servicios', label: '8 · Diagnóstico de servicios' },
+    { slug: '06-servicios-red/09-cierre', label: '9 · Cierre' },
   ],
   '11-redes-inalambricas': [
     { slug: '11-redes-inalambricas/01-medio-inalambrico', label: '1 · El medio inalámbrico' },

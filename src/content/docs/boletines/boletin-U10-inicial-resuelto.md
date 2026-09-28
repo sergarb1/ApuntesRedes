@@ -1,64 +1,62 @@
 ---
-title: Boletín de Servicios de red — Inicial (Resuelto)
-description: Soluciones de los ejercicios básicos de servicios de red (DHCP, DNS y NTP)
+title: Boletín de ACL y seguridad — Inicial (Resuelto)
+description: Soluciones de los ejercicios básicos de ACLs y seguridad de red
 ---
 
-# ✅ Boletín de Servicios de red — Inicial (Resuelto)
+# ✅ Boletín de ACL y seguridad — Inicial (Resuelto)
 
 ---
 
-## 1. ¿Qué servicio soy?
+## 1. Verdadero o falso
 
-a) **DHCP** — Dynamic Host Configuration Protocol.
-b) **DNS** — Domain Name System.
-c) **NTP** — Network Time Protocol.
-d) **DNS** — el navegador pregunta primero por el nombre antes de conectar.
+a) **Verdadero.** Solo IP origen (o rechaza todo lo demás). Para origen+destino+puerto, extendida.
+b) **Falso.** Al final hay un **deny any** implícito, no permit.
+c) **Verdadero.** Protocolo (IP, TCP, UDP, ICMP…), IP origen/destino y puerto de origen/destino.
+d) **Verdadero.** Con solo líneas deny, el deny any implícito del final rechaza todo: la ACL corta el 100% del tráfico que evalúa.
+e) **Verdadero.** Y con contadores de matches por línea, muy útil para diagnosticar.
 
-## 2. Las cuatro fases de DHCP
+## 2. Números de ACL
 
-1. c) Discover → 2. b) Offer → 3. a) Request → 4. d) Acknowledge
+| Tipo | Rango |
+|---|---|
+| Estándar | **1-99, 1300-1999** |
+| Extendida | **100-199, 2000-2699** |
 
-El cliente grita "¿hay algún servidor?" (Discover), el servidor ofrece una IP (Offer), el cliente la reclama (Request) y el servidor la confirma (Ack).
+## 3. ¿Qué comando?
 
-## 3. Verdadero o falso
+1 → b (`ip access-group` = aplicar ACL a interfaz)
+2 → d (`access-list` numerada estándar)
+3 → a (`ip access-list extended` = ACL nombrada extendida)
+4 → c (`show access-lists` = ACLs y contadores)
 
-a) **Verdadero.** La concesión se renueva a mitad de plazo si el cliente sigue activo.
-b) **Falso.** Un registro A relaciona nombre con IPv4; para IPv6 es el registro **AAAA**.
-c) **Verdadero.** NTP escucha y habla por UDP/123.
-d) **Falso.** Una configuración manual completa necesita IP, máscara, gateway y DNS: sin DNS ni gateway no llegarías ni a Internet.
-e) **Verdadero.** La oferta DHCP incluye opciones: máscara, gateway por defecto, DNS, dominio, TFTP…
+## 4. Wildcard masks
 
-## 4. ¿Qué registro DNS?
+La wildcard es el **inverso** de la máscara de subred (restando cada octeto a 255):
 
-1 → c (A: nombre → IPv4)
-2 → a (CNAME: alias de otro nombre)
-3 → d (AAAA: nombre → IPv6)
-4 → b (MX: servidor de correo del dominio)
-5 → f (SOA/NS: autoridad y servidores del dominio)
-6 → e (PTR: resolución inversa IP → nombre)
+| Máscara de subred | Wildcard | ¿Qué representa? |
+|---|---|---|
+| 255.255.255.0 | `0.0.0.255` | Los 24 primeros bits fijos: una red /24 |
+| 255.255.255.255 | `0.0.0.0` | Todos los bits fijos: **solo esa IP** (host exacto) |
+| 255.255.0.0 | `0.0.255.255` | Los 16 primeros bits fijos: una red /16 |
 
-## 5. ¿Qué comando?
+## 5. ACL básica
 
-1 → b (`/renew` fuerza nueva negociación DHCP)
-2 → c (nslookup consulta un servidor DNS)
-3 → a (`/displaydns` muestra la caché)
-4 → d (`/flushdns` la vacía)
+a) `access-list 10 permit 192.168.1.0 0.0.0.255`
+b) `interface g0/1` → `ip access-group 10 out`
 
-## 6. El reloj y los logs
+## 6. Estándar o extendida
 
-Falta **NTP**. Si el reloj del dispositivo no está sincronizado, las marcas de tiempo de los logs no sirven para reconstruir una incidencia: no puedes comparar "el switch avisó a las 08:59" con "el servidor registró el error a las 09:00" si cada uno lleva su hora. Con NTP todos los equipos apuntan a la misma fuente y los logs cuadran.
+a) **Estándar.** Solo filtra por origen, y solo hay un origen que bloquear: el host escaneador. Además la estándar es más ligera.
+b) **Extendida.** Filtra protocolo (TCP) y puerto (80/443), cosa que la estándar no puede.
+c) **Estándar.** Es el escenario clásico de la estándar: menos CPU y solo interesa el origen.
 
-## 7. DHCP helper
+## 7. ¿Dónde aplico la ACL?
 
-Falta el **ip helper-address** en el router (o switch capa 3) de la VLAN 20. DHCP Discover es un broadcast y los broadcasts no cruzan VLANs: el agente de reenvío del router convierte ese broadcast en un unicast hacia 192.168.10.5:
+a) **Cerca del destino**: en R1, interfaz hacia LAN-B, sentido **out**. (Otra opción correcta: en la interfaz que recibe el tráfico de PC1, sentido in.) La estándar se coloca cerca del destino para no filtrar de más en el camino.
+b) **Cerca del origen**: en R1, interfaz hacia LAN-A, sentido **in**. La extendida filtra con precisión (protocolo+puerto), así que conviene cortar el tráfico lo antes posible y no consumir ancho de banda en vano.
 
-```bash
-interface vlan 20
- ip helper-address 192.168.10.5
-```
+## 8. Comandos de verificación
 
-## 8. Verifica tu red
-
-a) Si aparece "DHCP habilitado: Sí" y una línea "Concesión obtenida / Concesión expira", es DHCP. Si no hay concesión y la IP la escribiste tú, es estática.
-b) En la línea "Concesión expira" (típico: 24 horas en redes domésticas).
-c) En "Servidores DNS": normalmente la IP del router de casa o las DNS del operador (y en muchas redes, un DNS interno de la empresa o del centro).
+1 → b (`show access-lists` muestra contadores de matches por línea)
+2 → a (`show ip interface` indica la ACL aplicada y el sentido)
+3 → c (`show running-config` muestra las líneas tal como las escribiste)

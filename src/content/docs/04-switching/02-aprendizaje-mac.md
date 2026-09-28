@@ -81,7 +81,7 @@ Memoria CAM:     MAC    → puerto al instante (rápido)
 | Capacidad | Limitada (ej. 8.000 entradas en switches pequeños) |
 | ¿Qué pasa si se llena? | El switch no puede aprender más y **empieza a inundar** |
 
-> ⚠️ **Cuidado con el llenado de la CAM:** si un atacante llena la tabla con MACs falsas (ataque de *CAM flooding*), el switch deja de aprender y reenvía todo por inundación, convirtiéndose en un hub gigante que permite esnifar el tráfico ajeno. La defensa es la **Port Security** del [punto 5 de ACL y seguridad](/ApuntesRedes/08-acl-seguridad/05-port-security).
+> ⚠️ **Cuidado con el llenado de la CAM:** si un atacante llena la tabla con MACs falsas (ataque de *CAM flooding*), el switch deja de aprender y reenvía todo por inundación, convirtiéndose en un hub gigante que permite esnifar el tráfico ajeno. La defensa es la **Port Security** del [punto 5 de ACL y seguridad](/ApuntesRedes/10-acl-seguridad/05-port-security).
 
 ---
 

@@ -68,7 +68,7 @@ PC autorizado:   ── no envía BPDUs ──▶ puerto feliz (forwarding)
 Switch pirata:   ── envía BPDUs ────▶ puerto bloqueado (errdisable)
 ```
 
-> 💡 **errdisable:** cuando un puerto entra en errdisable se desactiva automáticamente. Para recuperarlo: `shutdown` + `no shutdown`, o configurar recuperación automática con `errdisable recovery`. Lo vemos de nuevo en el [punto 5 de ACL y seguridad](/ApuntesRedes/08-acl-seguridad/05-port-security).
+> 💡 **errdisable:** cuando un puerto entra en errdisable se desactiva automáticamente. Para recuperarlo: `shutdown` + `no shutdown`, o configurar recuperación automática con `errdisable recovery`. Lo vemos de nuevo en el [punto 5 de ACL y seguridad](/ApuntesRedes/10-acl-seguridad/05-port-security).
 
 ---
 

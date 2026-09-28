@@ -1,62 +1,64 @@
 ---
-title: Boletín de Enrutamiento estático — Inicial (Resuelto)
-description: Soluciones de los ejercicios básicos de enrutamiento estático
+title: Boletín de Servicios de red — Inicial (Resuelto)
+description: Soluciones de los ejercicios básicos de servicios de red (DHCP, DNS y NTP)
 ---
 
-# ✅ Boletín de Enrutamiento estático — Inicial (Resuelto)
+# ✅ Boletín de Servicios de red — Inicial (Resuelto)
 
 ---
 
-## 1. Componentes del router
+## 1. ¿Qué servicio soy?
 
-1 → b (RAM: configuración activa, tabla de rutas)
-2 → c (NVRAM: startup-config)
-3 → a (Flash: IOS)
-4 → d (ROM: ROMMON)
+a) **DHCP** — Dynamic Host Configuration Protocol.
+b) **DNS** — Domain Name System.
+c) **NTP** — Network Time Protocol.
+d) **DNS** — el navegador pregunta primero por el nombre antes de conectar.
 
-## 2. Verdadero o falso
+## 2. Las cuatro fases de DHCP
 
-a) **Verdadero.** Las rutas estáticas se configuran con `ip route`.
-b) **Verdadero.** 0.0.0.0/0 es la ruta de último recurso.
-c) **Falso.** Si el next-hop es inalcanzable, la ruta NO se instala en la tabla de rutas (aunque la tengas escrita en la config).
-d) **Verdadero.** Las rutas estáticas tienen AD 1 y métrica 0.
-e) **Verdadero.** `show ip route` muestra las rutas del router.
+1. c) Discover → 2. b) Offer → 3. a) Request → 4. d) Acknowledge
 
-## 3. ¿Qué comando?
+El cliente grita "¿hay algún servidor?" (Discover), el servidor ofrece una IP (Offer), el cliente la reclama (Request) y el servidor la confirma (Ack).
 
-1 → c (`ip route 0.0.0.0 0.0.0.0` = ruta por defecto)
-2 → b (`show ip route` = tabla de rutas)
-3 → a (`show ip interface brief` = estado de interfaces)
-4 → d (`ip route` con red específica = ruta estática)
+## 3. Verdadero o falso
 
-## 4. Modos del router
+a) **Verdadero.** La concesión se renueva a mitad de plazo si el cliente sigue activo.
+b) **Falso.** Un registro A relaciona nombre con IPv4; para IPv6 es el registro **AAAA**.
+c) **Verdadero.** NTP escucha y habla por UDP/123.
+d) **Falso.** Una configuración manual completa necesita IP, máscara, gateway y DNS: sin DNS ni gateway no llegarías ni a Internet.
+e) **Verdadero.** La oferta DHCP incluye opciones: máscara, gateway por defecto, DNS, dominio, TFTP…
 
-1. b) Usuario (`Router>`)
-2. d) Privilegiado (`Router#`)
-3. a) Configuración global (`Router(config)#`)
-4. c) Configuración de interfaz (`Router(config-if)#`)
+## 4. ¿Qué registro DNS?
 
-## 5. Anatomía de una ruta
+1 → c (A: nombre → IPv4)
+2 → a (CNAME: alias de otro nombre)
+3 → d (AAAA: nombre → IPv6)
+4 → b (MX: servidor de correo del dominio)
+5 → f (SOA/NS: autoridad y servidores del dominio)
+6 → e (PTR: resolución inversa IP → nombre)
 
-- `S` → origen estático (aprendida con `ip route`)
-- `192.168.3.0/24` → red destino y su prefijo
-- `[1/0]` → distancia administrativa 1 / métrica 0
-- `via 10.0.0.2` → next-hop: a quién le paso el paquete
+## 5. ¿Qué comando?
 
-## 6. Tu primera ruta estática
+1 → b (`/renew` fuerza nueva negociación DHCP)
+2 → c (nslookup consulta un servidor DNS)
+3 → a (`/displaydns` muestra la caché)
+4 → d (`/flushdns` la vacía)
+
+## 6. El reloj y los logs
+
+Falta **NTP**. Si el reloj del dispositivo no está sincronizado, las marcas de tiempo de los logs no sirven para reconstruir una incidencia: no puedes comparar "el switch avisó a las 08:59" con "el servidor registró el error a las 09:00" si cada uno lleva su hora. Con NTP todos los equipos apuntan a la misma fuente y los logs cuadran.
+
+## 7. DHCP helper
+
+Falta el **ip helper-address** en el router (o switch capa 3) de la VLAN 20. DHCP Discover es un broadcast y los broadcasts no cruzan VLANs: el agente de reenvío del router convierte ese broadcast en un unicast hacia 192.168.10.5:
 
 ```bash
-ip route 192.168.2.0 255.255.255.0 10.0.0.2
+interface vlan 20
+ ip helper-address 192.168.10.5
 ```
 
-Red destino + máscara + next-hop. En `show ip route` la ruta aparece con `via 10.0.0.2`, pero al configurar no hay ninguna palabra clave: el next-hop va tal cual al final del comando.
+## 8. Verifica tu red
 
-## 7. ¿Ruta por defecto o ruta específica?
-
-**Ruta por defecto.** Con una única salida, cualquier destino que no sea la LAN propia va a ese next-hop: `ip route 0.0.0.0 0.0.0.0 <ip_salida>`. Cincuenta rutas específicas serían 50 líneas que mantener a mano para cubrir lo mismo.
-
-## 8. Verificación
-
-1. `show running-config | include ip route` → ¿está escrita la ruta? (fallo típico: errata en la IP)
-2. `show ip route` → ¿aparece con una `S`? Si no aparece, el next-hop es inalcanzable: mira `show ip interface brief` (paso 3).
-3. `show ip interface brief` → ¿la interfaz de salida está Up/Up? Si está down/down (cable) o administratively down (falta `no shutdown`), la ruta no se instala.
+a) Si aparece "DHCP habilitado: Sí" y una línea "Concesión obtenida / Concesión expira", es DHCP. Si no hay concesión y la IP la escribiste tú, es estática.
+b) En la línea "Concesión expira" (típico: 24 horas en redes domésticas).
+c) En "Servidores DNS": normalmente la IP del router de casa o las DNS del operador (y en muchas redes, un DNS interno de la empresa o del centro).

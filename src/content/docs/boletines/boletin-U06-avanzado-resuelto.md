@@ -1,132 +1,129 @@
 ---
-title: Boletín de Enrutamiento estático — Avanzado (Resuelto)
-description: Soluciones de los ejercicios avanzados de enrutamiento estático
+title: Boletín de Servicios de red — Avanzado (Resuelto)
+description: Soluciones de los ejercicios avanzados de servicios de red (DHCP, DNS y NTP)
 ---
 
-# ✅ Boletín de Enrutamiento estático — Avanzado (Resuelto)
+# ✅ Boletín de Servicios de red — Avanzado (Resuelto)
 
 ---
 
-## 1. Configuración multi-router
+## 1. DHCP en el router Cisco
 
-**R1:**
+a)
 ```bash
+ip dhcp excluded-address 192.168.1.1 192.168.1.20
+ip dhcp pool LAN1
+ network 192.168.1.0 255.255.255.0
+ default-router 192.168.1.1
+ dns-server 8.8.8.8 1.1.1.1
+ lease 3
+```
+
+b) Secuencia de diagnóstico:
+1. `show running-config | section dhcp` → ¿existe el pool y las exclusiones?
+2. `show ip dhcp binding` → ¿ha entregado alguna dirección alguna vez? Si nadie tiene concesión, el problema es de alcance (VLAN/helper) o de pool.
+3. `show ip interface brief` → ¿la interfaz de la LAN está Up/Up con su IP? (si está down, el pool no sirve)
+4. En el PC: `ipconfig /renew` y mira si llega Offer; si no llega, comprueba que PC y servidor comparten red o que existe `ip helper-address` en la VLAN.
+5. Repasa exclusiones: si por error excluyes toda la subred, el pool no tiene nada que ofrecer.
+
+## 2. DNS jerárquico
+
+a) Recorrido:
+1. El resolver del PC pregunta al DNS configurado (p. ej. el router o el DNS del centro).
+2. Si ese resolver no tiene la respuesta en caché, pregunta a un **servidor raíz**: "¿quién es la autoridad de `.es`?"
+3. El raíz responde con los servidores del **TLD** `.es`.
+4. El resolver pregunta al TLD, que le da los servidores **autoritativos** de `ejemplo.es`.
+5. El autoritativo responde el registro A de `www.ejemplo.es`.
+6. El resolver entrega la IP al PC y la guarda en su caché.
+
+b) La segunda vez la respuesta sale de la **caché** del resolver (y probablemente también de la del propio PC): ni raíz ni TLD ni autoritativo se consultan.
+
+c) El **TTL** define cuántos segundos puede reutilizarse una respuesta cacheada. TTL corto = cambios rápidos pero más consultas; TTL largo = menos tráfico pero cambios lentos en propagarse.
+
+## 3. Selección de registros para un mini-proyecto
+
+a)
+```
+instituto.edu.      A      198.51.100.10
+instituto.edu.      AAAA   2001:db8::10
+www                 A      198.51.100.10
+www                 AAAA   2001:db8::10
+aulas               CNAME  www.instituto.edu.
+instituto.edu.      MX 10  mail.proveedor.com.
+```
+(En los registros MX el nombre del servidor de correo debe tener su propio A/AAAA.)
+
+b) El **MX** del dominio apuntando a `mail.proveedor.com.` (con punto final), más el A/AAAA de ese host si no lo gestiona el proveedor.
+
+c) **No.** La RFC prohíbe CNAME en el apex del dominio (convive con SOA/NS). Para el raíz se usan registros A/AAAA directos, o ALIAS/ANAME donde el proveedor lo ofrezca.
+
+## 4. Diagnóstico con nslookup
+
+a) El **servidor DNS configurado no responde** (timeout). La consulta no se resuelve: problema de alcance o del propio servidor 192.168.1.1.
+
+b) Consulta correcta: `www` es un **CNAME** hacia `web.ejemplo.es`, que resuelve a 203.0.113.99. Todo normal: la cadena de alias termina en un A.
+
+c) El **DNS funciona pero el navegador no**: prueba caché del navegador corrupta (vaciarla), un proxy configurado, un archivo hosts con una entrada vieja, o un firewall local. El DNS es una capa; la navegación depende de más cosas.
+
+## 5. NTP con jerarquía
+
+a) **Diseño:**
+- R1 (borde) sincroniza con servidores públicos (p. ej. `pool.ntp.org` o el NTP del proveedor) → quedará en estrato 2 o 3.
+- S1 sincroniza con R1 → estrato 3 o 4.
+- Los switches de acceso y demás equipos sincronizan con S1 (o con R1 si la red es pequeña) → un estrato más abajo.
+Nunca todos los equipos contra Internet: peor control, más tráfico y menos consistencia interna.
+
+b)
+```bash
+! R1 (borde)
+ntp server pool.ntp.org
+! (opcional) ntp master 3  si no hay acceso público garantizado
+
+! S1
+ntp server <ip_de_R1>
+```
+
+c)
+```bash
+show ntp status
+show ntp associations
+```
+En `show ntp status` buscas la línea de sincronización y el estrato; en `associations`, el peer elegido (marcado con `*`), su IP y su estrato.
+
+## 6. Los tres servicios en un solo caso
+
+a) **DHCP** caído o inalcanzable. El rango 169.254.0.0/16 es **APIPA** (Automatic Private IP Addressing): el PC se autoasigna una IP de ese rango cuando nadie le contesta al Discover.
+
+b) DHCP Discover es un **broadcast**, y los broadcasts no cruzan VLANs (ni routers). Si el PC está en otra VLAN distinta a la del servidor DHCP sin un `ip helper-address` en el router de esa VLAN, la petición nunca llega.
+
+c) Ahora falla **DNS**. Compruebas con `nslookup` (o `Resolve-DnsName` en PowerShell): si `nslookup www.google.com 8.8.8.8` funciona pero con el DNS asignado no, el problema es el servidor DNS asignado por DHCP (o su helper). Complementa con `ping 8.8.8.8` para confirmar que hay salida a Internet.
+
+d) El PC estaba bien porque los **PCs ya sincronizaban su reloj** (con NTP interno o con Windows por Internet cuando hubo red). El switch, sin embargo, lleva su reloj propio sin fuente NTP configurada: tras el corte eléctrico perdió la hora (los switches sin NTP arrancan con fecha por defecto). De ahí la importancia de configurar NTP en los equipos de red, no solo en los PCs.
+
+## 7. DHCPv6 y doble pila
+
+a) **SLAAC:** el PC construye su propia dirección a partir del prefijo que anuncia el router (RA) + su identificador de interfaz (EUI-64 o aleatorio), sin servidor que lleve registro. **Stateful DHCPv6:** un servidor DHCPv6 asigna y registra las direcciones, como DHCPv4 pero en IPv6.
+
+b) **SLAAC + stateless DHCPv6:** los RA anuncian el prefijo (flag O=1, M=0) y el DHCPv6 solo entrega "otra información": DNS, dominio, NTP.
+
+c)
+```bash
+ipv6 unicast-routing
 interface g0/0
- ip address 192.168.1.1 255.255.255.0
- no shutdown
-interface g0/1
- ip address 10.0.0.1 255.255.255.252
- no shutdown
-ip route 192.168.2.0 255.255.255.0 10.0.0.2
-ip route 192.168.3.0 255.255.255.0 10.0.0.2
-ip route 0.0.0.0 0.0.0.0 10.0.0.2
-```
-
-**R2:**
-```bash
+ ipv6 address fe80::1 link-local
+ ipv6 address 2001:db8:ab::1/64
+ ipv6 nd other-config-flag
+ipv6 dhcp pool CLIENTES
+ dns-server 2001:4860:4860::8888
+ domain-name instituto.edu
 interface g0/0
- ip address 10.0.0.2 255.255.255.252
- no shutdown
-interface g0/1
- ip address 10.0.0.5 255.255.255.252
- no shutdown
-interface g0/2
- ip address 192.168.2.1 255.255.255.0
- no shutdown
-ip route 192.168.1.0 255.255.255.0 10.0.0.1
-ip route 192.168.3.0 255.255.255.0 10.0.0.6
+ ipv6 dhcp server CLIENTES
 ```
 
-**R3:**
-```bash
-interface g0/0
- ip address 10.0.0.6 255.255.255.252
- no shutdown
-interface g0/1
- ip address 192.168.3.1 255.255.255.0
- no shutdown
-ip route 192.168.1.0 255.255.255.0 10.0.0.5
-ip route 192.168.2.0 255.255.255.0 10.0.0.5
-ip route 0.0.0.0 0.0.0.0 10.0.0.5
-```
+## 8. El "no tiene Internet" clásico
 
-## 2. Rutas flotantes
+a) **Sano:** DHCP (IP y gateway correctos), routing básico (llega a 1.1.1.1, si nslookup contra 1.1.1.1 funciona hay salida a Internet). **Roto:** el **DNS configurado** en el equipo (el asignado no responde; uno externo sí).
 
-a) **Comandos:**
-```bash
-ip route 0.0.0.0 0.0.0.0 10.0.0.2        # AD=1 (por defecto)
-ip route 0.0.0.0 0.0.0.0 10.0.1.2 5      # AD=5 (respaldo)
-ip route 192.168.100.0 255.255.255.0 10.0.0.2
-```
+b) 1) Arreglar/renombrar el servidor DNS configurado (por ejemplo poner 1.1.1.1 u 8.8.8.8 a mano) y 2) corregir de raíz el DNS que entrega el DHCP del router del centro (opción `dns-server` en el pool) o el propio servidor DNS caído.
 
-b) **Cuándo se activa:** Cuando la ruta primaria (10.0.0.2) desaparece de la tabla (el siguiente salto deja de ser accesible). Entonces la ruta con AD=5 aparece en la tabla.
-
-c) **Verificación:** `show ip route 0.0.0.0` muestra qué ruta por defecto está activa. Si aparece la de 10.0.1.2, la primaria ha fallado.
-
-## 3. Resolución de problemas de rutas
-
-a) **No funciona.** La interfaz G0/1 está `shutdown` (administratively down). La ruta por defecto apunta a 10.0.0.2, que está en G0/1. Si la interfaz está caída, la ruta no se instala en la tabla.
-
-b) `show ip route` — 0.0.0.0/0 no aparecerá. `show ip interface brief` — G0/1 aparece como "administratively down".
-
-c) **Cambiar:**
-```bash
-interface g0/1
- no shutdown
-```
-Y verificar que el enlace esté físicamente conectado.
-
-## 4. Longest prefix match
-
-a) **192.168.1.30 → via 10.0.0.10** (la /28 cubre de .16 a .31: es la coincidencia más larga).
-
-b) **192.168.1.200 → via 10.0.0.6** (cae en la /24; la /28 no la cubre y pesa más que la /16).
-
-c) **192.168.3.44 → via 10.0.0.2** (solo la /16 la abarca: ni la /24 ni la /28 llegan a .3.x).
-
-d) **192.168.1.15 → via 10.0.0.6** (está en la /24 pero fuera de la /28, que empieza en .16).
-
-**Regla:** a mayor máscara (28 > 24 > 16), coincidencia más específica y elegida primero.
-
-## 5. V/F con matices
-
-a) **Falso.** La sintaxis es válida y el IOS la acepta en la config; lo que pasa es que no se *instala* en la tabla porque el next-hop es inalcanzable. Comprueba `show ip route` e interfaces.
-b) **Verdadero.** En multiacceso (Ethernet con varios vecinos) una ruta con interfaz de salida hace que el router pregunte por ARP a cualquiera: solo es segura en punto a punto.
-c) **Verdadero.** Es exactamente una ruta flotante: gana la de menor AD, la otra espera en la configuración.
-d) **Verdadero.** Es la ruta de último recurso: solo se consulta cuando el longest prefix match no encuentra nada más específico.
-e) **Falso.** El router necesita una ruta conectada (o aprendida) a la subred del next-hop; si no, la estática no se instala.
-
-## 6. Diseño de rutas para una sede
-
-a) **Tres:** dos rutas estáticas (LAN de R2 y LAN de R3) + la ruta por defecto a Internet. Las redes de enlace (10.0.0.0/30 y 10.0.0.4/30) no necesitan rutas en R1 porque son conectadas.
-
-b) **En R1:**
-```bash
-ip route 192.168.2.0 255.255.255.0 10.0.0.2
-ip route 192.168.3.0 255.255.255.0 10.0.0.6
-ip route 0.0.0.0 0.0.0.0 <ip_del_proveedor>
-```
-
-c) **Una ruta por defecto al router central:**
-```bash
-ip route 0.0.0.0 0.0.0.0 10.0.0.1
-```
-Todo lo que no sea su propia LAN se lo entrega a R1, que ya sabe encaminarlo (sucursales) o lo manda a Internet.
-
-## 7. Interferencia con rutas conectadas
-
-**No pasa nada dramático:** la ruta estática se configura pero **no llega a instalarse**. En `show ip route` verías solo la `C` (conectada, AD 0): con el mismo prefijo, la conectada gana a la estática (AD 1), así que el encaminamiento local sigue funcionando sin interferencias. Eso sí: es una config descuidada — sobra y conviene quitarla con `no ip route ...`.
-
-## 8. Escenario completo de diagnóstico
-
-a) **A R2 le faltan las rutas de vuelta** hacia 192.168.1.0/24 (y hacia 10.0.0.0/30 no hace falta: es conectada). Sin ruta de retorno, el paquete de ping llega pero la respuesta se pierde:
-```bash
-ip route 192.168.1.0 255.255.255.0 10.0.0.1
-```
-
-b) **A R1 le falta la ruta hacia 192.168.2.0/24:**
-```bash
-ip route 192.168.2.0 255.255.255.0 10.0.0.2
-```
-
-c) Porque el **traceroute usa respuestas ICMP time-exceeded** (o UDP con puerto inalcanzable) que algún router intermedio no genera o filtra. El forwarding puede estar perfecto y aun así el traceroute no pintar el último salto: no siempre es un problema de rutas.
+c) **NTP** solo sincroniza relojes; **DHCP** está funcionando (hay IP y gateway); **routing** hay: las consultas a 1.1.1.1 van y vuelven. El único servicio que falla es la resolución de nombres con el servidor asignado.

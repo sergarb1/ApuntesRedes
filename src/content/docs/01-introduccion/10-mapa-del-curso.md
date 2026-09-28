@@ -25,11 +25,11 @@ Antes de escribir una sola línea de configuración, vas a ver el plano completo
 | 2 | 🧮 **Direccionamiento IP y subnetting** | Calcular subredes con VLSM y convivir con IPv6 | Las IPs y el medio (Ethernet y cableado) |
 | 3 | 🔀 **Switching y VLAN** | Configurar switches, entender la tabla MAC y segmentar con VLANs | Qué hace un switch (introducción) y las IPs (dirección IP) |
 | 4 | 🏢 **Trunking e inter-VLAN** | Montar trunks 802.1Q y hacer que las VLANs se hablen | Switching y VLANs |
-| 5 | 🧭 **Enrutamiento estático** | Configurar un router y escribir sus rutas a mano | Subredes (dirección IP) y routers entre VLANs (trunking) |
-| 6 | 🗣️ **OSPF** | Dejar que los routers se hablen entre ellos y elijan la mejor ruta | Enrutamiento estático |
-| 7 | 🛡️ **ACL y seguridad** | Filtrar el tráfico y blindar el acceso a los dispositivos | IPs y subredes (dirección IP) y routing (estático y OSPF) |
+| 5 | 🗄️ **Servicios de red** | Desplegar DHCP, DNS y NTP y diagnosticarlos | IPs (dirección IP), switches y VLANs (switching) y trunks (trunking) |
+| 6 | 🧭 **Enrutamiento estático** | Configurar un router y escribir sus rutas a mano | Subredes (dirección IP) y routers entre VLANs (trunking) |
+| 7 | 🗣️ **OSPF** | Dejar que los routers se hablen entre ellos y elijan la mejor ruta | Enrutamiento estático |
 | 8 | 🌍 **NAT y PAT** | Dar salida a Internet a una red privada con una sola IP pública | Routing (estático y OSPF) y subredes (dirección IP) |
-| 9 | 🗄️ **Servicios de red** | Desplegar DHCP, DNS y NTP y diagnosticarlos | IPs (dirección IP) y routing (estático) |
+| 9 | 🛡️ **ACL y seguridad** | Filtrar el tráfico y blindar el acceso a los dispositivos | IPs y subredes (dirección IP) y routing (estático y OSPF) |
 | 10 | 📶 **Redes inalámbricas** | Diseñar una WLAN: canales, cobertura y seguridad | Cableado (Ethernet), IPs (dirección IP) y VLANs (switching) |
 | 11 | 🔁 **Alta disponibilidad** | Montar redes que aguanten la caída de un equipo | Switching, trunks y routing (estático) |
 
@@ -64,7 +64,7 @@ Si la tabla de las 12 etapas era el plano, este mapa de puentes te dice cuándo 
 | Trunking | VLANs | Un trunk lleva varias VLANs: sin entender la VLAN, el trunk es magia |
 | OSPF | Enrutamiento estático | El enrutamiento dinámico amplía el estático, no lo reemplaza sin más |
 | NAT | Dirección IP + Enrutamiento estático | Se necesita saber qué subredes usas para poder disfrazarlas |
-| Servicios | Dirección IP + Enrutamiento estático | DHCP reparte IPs y DNS resuelve nombres: sin routing no llegan a nadie |
+| Servicios | Dirección IP + Switching y trunking | DHCP reparte direcciones y DNS resuelve nombres: sin switch, VLANs y trunk no hay a quién servir |
 | Alta disponibilidad | Switching + Trunking + Enrutamiento estático | Redundancia es repetir lo que ya funciona: switches, trunks y routers |
 
 > 🧠 **La regla de oro del repetidor:** si una unidad te suena a "de otro universo", casi nunca es que sea imposible, sino que te falta un puente de la lista de arriba. Baja un peldaño, refuerza, y vuelve a subir. Eso es estudiar, no un acto de fe.
@@ -77,12 +77,12 @@ Para no perderte en las 12 paradas, recuerda que el curso se organiza en **dos g
 
 | Hito | Etapas | La idea en una frase |
 |---|---|---|
-| 🏗️ **Primer cuatrimestre: montar la red** | Ethernet → Enrutamiento estático | De cero a una red local funcionando: cables, IPs, switches, VLANs y routers |
-| 🌍 **Segundo cuatrimestre: conectarla y cuidarla** | OSPF → Alta disponibilidad | OSPF, ACLs, NAT, servicios, WiFi y redundancia: tu red habla con el mundo y no se cae |
+| 🏗️ **Primer cuatrimestre: montar la red** | Ethernet → Servicios de red | De cero a una red local funcionando: cables, IPs, switches, VLANs, trunks y servicios |
+| 🌍 **Segundo cuatrimestre: conectarla y cuidarla** | Enrutamiento estático → Alta disponibilidad | Rutas, OSPF, NAT, ACLs, WiFi y redundancia: tu red habla con el mundo y no se cae |
 
-**Primer cuatrimestre (del cableado al enrutamiento estático).** Construimos desde los cimientos: qué cables sostienen la red, cómo se direccionan los paquetes, cómo los switches las mantienen ordenadas y separadas en VLANs y cómo los routers las encaminan. Al terminar serás capaz de **montar y dejar funcionando la red local de un centro educativo pequeño**, con sus equipos, su cableado y sus VLANs.
+**Primer cuatrimestre (del cableado a los servicios).** Construimos desde los cimientos: qué cables sostienen la red, cómo se direccionan los paquetes, cómo los switches las mantienen ordenadas y separadas en VLANs, cómo los trunks las unen y cómo DHCP, DNS y NTP dan de comer a la red. Al terminar serás capaz de **montar y dejar funcionando la red local de un centro educativo pequeño**, con sus equipos, su cableado, sus VLANs y sus servicios.
 
-**Segundo cuatrimestre (de OSPF a la alta disponibilidad).** Es el momento de abrir puertas y cerrar grietas: los routers aprenden rutas solos (OSPF), filtramos quién entra y quién sale (ACLs), conectamos todo a Internet con una sola IP pública (NAT), desplegamos los servicios que hacen que la red sea útil (DHCP, DNS, NTP), llevamos la red al aire (WiFi) y la blindamos contra averías (alta disponibilidad). Aquí tu "red de edificio" se convierte en "un ciudadano del mundo que nunca se cae".
+**Segundo cuatrimestre (del enrutamiento a la alta disponibilidad).** Es el momento de abrir puertas y cerrar grietas: el router toma el mando (CLI, rutas estáticas y ruta por defecto), los routers aprenden rutas solos (OSPF), conectamos todo a Internet con una sola IP pública (NAT), filtramos quién entra y quién sale (ACLs), llevamos la red al aire (WiFi) y la blindamos contra averías (alta disponibilidad). Aquí tu "red de edificio" se convierte en "un ciudadano del mundo que nunca se cae".
 
 La ventaja de las dos mitades es que te sirven para **hablar de ti en una entrevista de trabajo** o en un proyecto: "monté la red local de un centro" (cuatrimestre 1) y "la conecté al mundo y la hago tolerante a fallos" (cuatrimestre 2). Si algún día te preguntan "¿qué sabes hacer?", ya tienes la respuesta preparada en dos frases.
 
@@ -142,7 +142,7 @@ Un mapa no se memoriza: se consulta. Tres usos de verdad para este plano:
 ## ✅ Resumen en 3 frases
 
 1. El curso es un viaje en orden: 12 unidades donde cada una se apoya en la anterior y los saltos se pagan caros.
-2. Dos mitades: **montar** la red (del cableado al enrutamiento) y **conectarla y cuidarla** (de OSPF a la alta disponibilidad).
+2. Dos mitades: **montar** la red (del cableado a los servicios) y **conectarla y cuidarla** (del enrutamiento a la alta disponibilidad).
 3. El hilo conductor es el viaje del paquete: nace en tu PC, cruza switches y routers, sale a Internet por NAT y vuelve con la respuesta.
 
 📚 [Volver al índice de la unidad](/ApuntesRedes/01-introduccion) · **Anterior:** [09 · Preguntas tontas](/ApuntesRedes/01-introduccion/09-preguntas-tontas) · **Siguiente:** [Ethernet y cableado](/ApuntesRedes/02-ethernet-cableado)

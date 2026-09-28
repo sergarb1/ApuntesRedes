@@ -15,7 +15,7 @@ description: Reparte IPs automáticamente en cada VLAN y olvídate de configurar
 
 En la [unidad de dirección IP](/ApuntesRedes/03-direccionamiento-ip/08-dhcp) ya montaste un pool DHCP y viste el baile DORA. La diferencia aquí es de escenario: con VLANs, el servidor DHCP está en una subred concreta y los PCs de **otras** VLANs mandan un DISCOVER que es **broadcast**… y el broadcast no cruza un router. Resolver eso es el trabajo de este punto.
 
-> 💡 **Atajo pedagógico:** si el laboratorio tiene 6 PCs y tú tecleas 6 veces `ip address` + `subnet mask` + `default-router`, llevas media hora perdida. Con un pool por VLAN, cada PC encendida se configura sola. Por eso vemos DHCP aquí y no esperamos a la [unidad de servicios de red](/ApuntesRedes/10-servicios-red): **las VLANs sin DHCP convierten los prácticos en trámites de tecleo**.
+> 💡 **Atajo pedagógico:** si el laboratorio tiene 6 PCs y tú tecleas 6 veces `ip address` + `subnet mask` + `default-router`, llevas media hora perdida. Con un pool por VLAN, cada PC encendida se configura sola. Por eso vemos DHCP aquí y no esperamos a la [unidad de servicios de red](/ApuntesRedes/06-servicios-red): **las VLANs sin DHCP convierten los prácticos en trámites de tecleo**.
 
 ---
 

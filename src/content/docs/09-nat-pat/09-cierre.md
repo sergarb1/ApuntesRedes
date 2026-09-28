@@ -227,7 +227,7 @@ Depende del router y del tiempo de expiración. Teóricamente, con 65535 puertos
 
 *El paquete es descartado por falta de reglas de acceso.*
 
-**PRÓXIMAMENTE:** *Servicios de red: DHCP, DNS y NTP. Porque una red sin DHCP reparte IPs a mano, sin DNS navega por números y sin NTP ni sabe qué hora es. Tu NAT recién configurado necesita a los tres para no volverse loco.*
+**PRÓXIMAMENTE:** *Filtrado y seguridad. Las IPs viajan y los routers encaminan, pero ¿quién decide qué tráfico entra y cuál no? Necesitamos ACLs.*
 
 ---
 
@@ -245,4 +245,4 @@ Depende del router y del tiempo de expiración. Teóricamente, con 65535 puertos
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/09-nat-pat) · **Anterior:** [8 · Configuración completa](/ApuntesRedes/09-nat-pat/08-configuracion-completa) · **Siguiente:** [Servicios de red: DHCP, DNS y NTP](/ApuntesRedes/10-servicios-red)
+📚 [Volver al índice de la unidad](/ApuntesRedes/09-nat-pat) · **Anterior:** [8 · Configuración completa](/ApuntesRedes/09-nat-pat/08-configuracion-completa) · **Siguiente:** [ACLs y seguridad de red](/ApuntesRedes/10-acl-seguridad)

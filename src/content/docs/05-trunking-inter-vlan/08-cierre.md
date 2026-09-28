@@ -210,7 +210,7 @@ Para inter-VLAN, no (SVIs bastan). Pero el router (o firewall) sigue siendo el p
 
 El paquete de RRHH imprimió su acta de auditoría en la impresora de la VLAN 30 y volvió a su VLAN con la conciencia tranquila. En el trunk, una trama sin etiqueta se cruzó con él, y se saludaron como vecinos: una con etiqueta, otra sin ella, ambas en su sitio. CONRAD, desde la consola del switch, murmuró: *"Segmentado, etiquetado, enrutado. Así se ordena un edificio. Los humanos, con carpetas; los switches, con VLANs. Y todos los días alguien intenta ponerlo todo en la misma."*
 
-**PRÓXIMAMENTE:** Enrutamiento estático: componentes del router, configuración desde cero y cómo un router decide por dónde mandar tu paquete. Ahora que las VLANs se hablan entre sí, toca enseñar a los routers a hablar con redes enteras.
+**PRÓXIMAMENTE:** Servicios de red: DHCP, DNS y NTP — la IP que se reparte sola, los nombres que se traducen solos y los relojes que se ponen en hora solos. Ahora que las VLANs se hablan entre sí, toca dar de comer a la red.
 
 ---
 
@@ -231,4 +231,4 @@ El paquete de RRHH imprimió su acta de auditoría en la impresora de la VLAN 30
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/05-trunking-inter-vlan) · **Anterior:** [07 · DHCP por VLAN](/ApuntesRedes/05-trunking-inter-vlan/07-dhcp-por-vlan) · **Siguiente:** [Enrutamiento estático](/ApuntesRedes/06-enrutamiento-estatico)
+📚 [Volver al índice de la unidad](/ApuntesRedes/05-trunking-inter-vlan) · **Anterior:** [07 · DHCP por VLAN](/ApuntesRedes/05-trunking-inter-vlan/07-dhcp-por-vlan) · **Siguiente:** [Servicios de red: DHCP, DNS y NTP](/ApuntesRedes/06-servicios-red)

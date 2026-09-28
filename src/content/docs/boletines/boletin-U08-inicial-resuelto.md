@@ -1,62 +1,71 @@
 ---
-title: Boletín de ACL y seguridad — Inicial (Resuelto)
-description: Soluciones de los ejercicios básicos de ACLs y seguridad de red
+title: Boletín de OSPF — Inicial (Resuelto)
+description: Soluciones de los ejercicios básicos de Routing Dinámico
 ---
 
-# ✅ Boletín de ACL y seguridad — Inicial (Resuelto)
+# ✅ Boletín de OSPF — Inicial (Resuelto)
 
 ---
 
-## 1. Verdadero o falso
+## 1. IGP vs EGP
 
-a) **Verdadero.** Solo IP origen (o rechaza todo lo demás). Para origen+destino+puerto, extendida.
-b) **Falso.** Al final hay un **deny any** implícito, no permit.
-c) **Verdadero.** Protocolo (IP, TCP, UDP, ICMP…), IP origen/destino y puerto de origen/destino.
-d) **Verdadero.** Con solo líneas deny, el deny any implícito del final rechaza todo: la ACL corta el 100% del tráfico que evalúa.
-e) **Verdadero.** Y con contadores de matches por línea, muy útil para diagnosticar.
+a) OSPF → **IGP**
+b) BGP → **EGP**
+c) RIP → **IGP**
+d) EIGRP → **IGP** (propietario Cisco, pero interior)
 
-## 2. Números de ACL
+## 2. Verdadero o falso
 
-| Tipo | Rango |
-|---|---|
-| Estándar | **1-99, 1300-1999** |
-| Extendida | **100-199, 2000-2699** |
+a) **Verdadero.** OSPF usa SPF (Dijkstra) para calcular la ruta más corta.
+b) **Verdadero.** RIP máximo 15 saltos. 16 = inalcanzable.
+c) **Verdadero.** Todas las áreas deben conectarse al Área 0.
+d) **Verdadero.** El Router ID debe ser único o las adyacencias fallan.
+e) **Falso.** OSPF converge en segundos, RIP tarda minutos.
 
-## 3. ¿Qué comando?
+## 3. Relaciona
 
-1 → b (`ip access-group` = aplicar ACL a interfaz)
-2 → d (`access-list` numerada estándar)
-3 → a (`ip access-list extended` = ACL nombrada extendida)
-4 → c (`show access-lists` = ACLs y contadores)
+1 → b (LSA = Link State Advertisement)
+2 → c (LSDB = Link State Database)
+3 → a (ABR = Area Border Router)
+4 → d (SPF = Shortest Path First)
 
-## 4. Wildcard masks
+## 4. Coste OSPF
 
-La wildcard es el **inverso** de la máscara de subred (restando cada octeto a 255):
+a) 100 Mbps → **1** (10⁸ / 100×10⁶ = 1)
+b) 1 Gbps → **1** (el coste mínimo es 1)
+c) 1.544 Mbps → **64** (10⁸ / 1.544×10⁶ ≈ 64)
 
-| Máscara de subred | Wildcard | ¿Qué representa? |
+## 5. Completa
+
+a) `router ospf 1`
+b) `network 192.168.1.0 0.0.0.255 area 0`
+c) `default-information originate`
+d) `show ip ospf neighbor`
+
+## 6. Tipos de routers
+
+1 → c (Internal Router: misma área)
+2 → b (ABR: conecta áreas)
+3 → a (ASBR: rutas externas)
+
+## 7. Dinámico vs estático
+
+a) La **convergencia** es el proceso por el que todos los routers llegan a una visión coherente de la red tras un cambio (enlace caído, red nueva…). El dinámico la consigue solo: OSPF detecta el cambio, inunda los LSAs y recalcula; en el estático, cada cambio hay que detectarlo y reconfigurarlo a mano, router por router.
+
+b) **Ventajas del dinámico:**
+1. **Autoaprendizaje:** las redes nuevas se comparten solas, sin ir router por router.
+2. **Convergencia automática:** si cae un enlace, la red recalcula y se reencamina sin intervención.
+3. **Menos error humano:** la tabla de rutas la calcula el protocolo, no un administrador tecleando.
+
+**Caso para estático:** redes muy pequeñas (2-3 routers), un enlace **stub** con una única salida, o una ruta de respaldo a mano (`floating static`): ahí el dinámico solo añadiría tráfico y complejidad.
+
+## 8. Coste OSPF: tabla de velocidades
+
+| Velocidad | Cálculo | Coste OSPF |
 |---|---|---|
-| 255.255.255.0 | `0.0.0.255` | Los 24 primeros bits fijos: una red /24 |
-| 255.255.255.255 | `0.0.0.0` | Todos los bits fijos: **solo esa IP** (host exacto) |
-| 255.255.0.0 | `0.0.255.255` | Los 16 primeros bits fijos: una red /16 |
+| 10 Mbps | 10⁸ / 10⁷ | **10** |
+| 100 Mbps | 10⁸ / 10⁸ | **1** |
+| 1 Gbps | 10⁸ / 10⁹ = 0,1 | **1** (mínimo) |
+| 1.544 Mbps (T1) | 10⁸ / 1.544.000 ≈ 64,8 | **64** |
 
-## 5. ACL básica
-
-a) `access-list 10 permit 192.168.1.0 0.0.0.255`
-b) `interface g0/1` → `ip access-group 10 out`
-
-## 6. Estándar o extendida
-
-a) **Estándar.** Solo filtra por origen, y solo hay un origen que bloquear: el host escaneador. Además la estándar es más ligera.
-b) **Extendida.** Filtra protocolo (TCP) y puerto (80/443), cosa que la estándar no puede.
-c) **Estándar.** Es el escenario clásico de la estándar: menos CPU y solo interesa el origen.
-
-## 7. ¿Dónde aplico la ACL?
-
-a) **Cerca del destino**: en R1, interfaz hacia LAN-B, sentido **out**. (Otra opción correcta: en la interfaz que recibe el tráfico de PC1, sentido in.) La estándar se coloca cerca del destino para no filtrar de más en el camino.
-b) **Cerca del origen**: en R1, interfaz hacia LAN-A, sentido **in**. La extendida filtra con precisión (protocolo+puerto), así que conviene cortar el tráfico lo antes posible y no consumir ancho de banda en vano.
-
-## 8. Comandos de verificación
-
-1 → b (`show access-lists` muestra contadores de matches por línea)
-2 → a (`show ip interface` indica la ACL aplicada y el sentido)
-3 → c (`show running-config` muestra las líneas tal como las escribiste)
+> El coste mínimo es **1**: todos los enlaces de 100 Mbps en adelante valen lo mismo por defecto, salvo que subas el `auto-cost reference-bandwidth`.

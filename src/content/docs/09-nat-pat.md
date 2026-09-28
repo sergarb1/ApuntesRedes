@@ -5,13 +5,13 @@ description: Disfraces para salir a Internet 🌐
 
 <p><small>Disfraces para salir a Internet 🌐</small></p>
 
-> 🗺️ **El mapa del curso:** 🛡️ ACLs → **🌐 AQUÍ ESTÁS** → 🗄️ Servicios → 📶 WiFi
+> 🗺️ **El mapa del curso:** 🗣️ OSPF → **🌐 AQUÍ ESTÁS** → 🛡️ ACLs → 📶 WiFi
 
 ---
 
 *Tu oficina tiene 200 equipos con direcciones privadas (192.168.x.x) que Internet no sabe alcanzar. Aun así, todos navegan, sincronizan y videollaman con una sola IP pública. ¿Truco? No: NAT, el traductor de direcciones que convierte una limitación del mundo IPv4 en una infraestructura universal.*
 
-Bienvenido a la unidad donde tu red privada sale al mundo. Tras la seguridad de la [unidad de ACL](/ApuntesRedes/08-acl-seguridad), aquí juegas con la frontera: qué es NAT, sus tipos (estático, dinámico, PAT), cómo se configura en el router Cisco, cómo publicar servicios hacia fuera (port forwarding) y qué problemas trae de regalo. Todo lo que enseñaste al router se pone a trabajar en la puerta de casa.
+Bienvenido a la unidad donde tu red privada sale al mundo. Tras el enrutamiento dinámico de la [unidad de OSPF](/ApuntesRedes/08-ospf), aquí juegas con la frontera: qué es NAT, sus tipos (estático, dinámico, PAT), cómo se configura en el router Cisco, cómo publicar servicios hacia fuera (port forwarding) y qué problemas trae de regalo. Los routers ya saben por dónde ir; ahora les toca traducir la dirección para que Internet sepa devolver el camino.
 
 Esta unidad se lee como un **libro de 9 capítulos**: los 8 primeros son teoría en progresión y el 9º es el aterrizaje práctico con laboratorio.
 
@@ -80,4 +80,4 @@ Al terminar, serás capaz de:
 - ¿Ya conoces NAT de casa? El [punto 4 (PAT)](/ApuntesRedes/09-nat-pat/04-pat) es donde se explica de verdad cómo funciona tu router.
 
 **📍 Primer punto:** [01 · ¿Qué es NAT?](/ApuntesRedes/09-nat-pat/01-que-es-nat)  
-**⏭️ Al acabar la unidad, continúa en [Servicios de red: DHCP, DNS y NTP](/ApuntesRedes/10-servicios-red).**
+**⏭️ Al acabar la unidad, continúa en [ACLs y seguridad de red](/ApuntesRedes/10-acl-seguridad).**
