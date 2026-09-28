@@ -1,115 +1,111 @@
 ---
-title: Boletín de OSPF — Avanzado
-description: Ejercicios avanzados de Routing Dinámico
+title: Boletín de Enrutamiento estático — Avanzado
+description: Ejercicios avanzados de enrutamiento estático
 ---
 
-# 📝 Boletín de OSPF — Avanzado
+# 📝 Boletín de Enrutamiento estático — Avanzado
 
-> Ejercicios que requieren aplicar conceptos de OSPF de forma más profunda.
+> Ejercicios que requieren aplicar rutas estáticas con criterio. En los difíciles tienes pista.
 
 ---
 
-## 1. Configuración OSPF multiárea
+## 1. Configuración multi-router
 
-Configura OSPF para esta topología:
+Diseña la configuración para 3 routers en línea:
 
 ```
-R1 (Área 0) ──── R2 (ABR) ──── R3 (Área 1)
-  │                             │
-LAN1 (192.168.1.0/24)      LAN3 (192.168.3.0/24)
-LAN2 (192.168.2.0/24)
+R1 (192.168.1.0/24) ──── R2 ──── R3 (192.168.3.0/24)
+                          │
+                     (192.168.2.0/24)
 ```
 
 **Enlaces:**
 - R1-R2: 10.0.0.0/30
 - R2-R3: 10.0.0.4/30
 
-Escribe la configuración completa de OSPF en los 3 routers.
+Escribe la **configuración completa** de R1, R2 y R3 (interfaces, rutas estáticas, rutas por defecto). Nota: R2 es el router central sin salida externa, así que **no lleva ruta por defecto** (solo rutas específicas hacia R1 y R3).
 
-## 2. Diagnóstico OSPF
+## 2. Rutas flotantes
 
-Un router muestra esto en `show ip ospf neighbor`:
+Configura un router con:
+- Ruta por defecto primaria hacia 10.0.0.2 (AD=1)
+- Ruta por defecto de respaldo hacia 10.0.1.2 (AD=5)
+- Ruta estática hacia 192.168.100.0/24 vía 10.0.0.2
 
-```
-Neighbor ID     Pri   State           Dead Time   Address         Interface
-3.3.3.3         1    FULL/DR         00:00:35    10.0.0.2        GigabitEthernet0/0
-4.4.4.4         1    2WAY/DROTHER    00:00:37    10.0.0.6        GigabitEthernet0/1
-```
+a) Escribe los comandos
+b) ¿Cuándo se activa la ruta de respaldo?
+c) ¿Cómo verificarías que la ruta de respaldo está activa?
 
-a) ¿Qué significa FULL/DR?
-b) ¿Qué significa 2WAY/DROTHER?
-c) ¿Por qué el vecino 4.4.4.4 no está FULL?
-d) ¿Cuál es el Router ID de este router? (pista: no se muestra)
+**Pista:** la AD se escribe al final del `ip route`.
 
-## 3. Redistribución OSPF
+## 3. Resolución de problemas de rutas
 
 Un router tiene esta configuración:
 
 ```
-router ospf 1
- redistribute static subnets
- default-information originate
-!
-ip route 0.0.0.0 0.0.0.0 serial 0/0/0
-ip route 10.100.0.0 255.255.0.0 10.0.0.2
+interface g0/0
+ ip address 192.168.1.1 255.255.255.0
+ no shutdown
+interface g0/1
+ ip address 10.0.0.1 255.255.255.252
+ shutdown
+ip route 0.0.0.0 0.0.0.0 10.0.0.2
 ```
 
-a) ¿Qué hace `redistribute static subnets`?
-b) ¿Qué rutas estáticas se redistribuyen a OSPF?
-c) ¿Todos los routers OSPF recibirán la ruta 10.100.0.0/16?
+a) ¿Funciona la ruta por defecto? ¿Por qué?
+b) ¿Qué comando muestra el problema?
+c) ¿Qué cambiarías para que funcione?
 
-## 4. Cambio de coste OSPF
+## 4. Longest prefix match
 
-Tienes 2 caminos de R1 a R3:
-- Camino A: R1 → R2 → R3 (todos GigabitEthernet, coste 1 cada enlace)
-- Camino B: R1 → R4 → R5 → R3 (todos FastEthernet, coste 1 cada enlace)
+Un router tiene estas rutas en su tabla:
 
-a) ¿Qué camino elige OSPF? ¿Por qué?
-b) ¿Cómo forzarías OSPF a usar el Camino B?
-c) ¿Qué comando usarías para verificar el coste de cada ruta?
+```
+192.168.0.0/16  via 10.0.0.2
+192.168.1.0/24  via 10.0.0.6
+192.168.1.16/28 via 10.0.0.10
+```
 
-## 5. DR/BDR election
+Decide por cuál de los tres next-hops enviará el router cada paquete destinado a:
 
-En una red con 4 routers OSPF en el mismo segmento Ethernet:
+a) 192.168.1.30
+b) 192.168.1.200
+c) 192.168.3.44
+d) 192.168.1.15
 
-| Router | Prioridad | Router ID |
-|---|---|---|
-| R1 | 1 | 1.1.1.1 |
-| R2 | 0 | 2.2.2.2 |
-| R3 | 10 | 3.3.3.3 |
-| R4 | 5 | 4.4.4.4 |
+**Pista:** el *longest prefix match* manda: gana la ruta con la máscara más larga que coincida con la IP destino. La /28 solo cubre de 192.168.1.16 a 192.168.1.31.
 
-a) ¿Quién es el DR? ¿Quién el BDR?
-b) ¿Cómo forzarías a R1 como DR sin cambiar Router ID?
+## 5. V/F con matices
 
-## 6. Troubleshooting OSPF
+a) Si configuras una ruta estática y no aparece en `show ip route`, el IOS la descartó por un error de sintaxis.
+b) Una ruta estática con interfaz de salida en lugar de next-hop solo funciona bien en enlaces punto a punto.
+c) Dos rutas a la misma red con distinta AD: se instala la de menor AD y la otra queda como respaldo (flotante).
+d) La ruta por defecto se usa solo si no existe ninguna otra ruta más específica para el destino.
+e) Un `ip route` hacia un next-hop que está en una subred que el router no tiene configurada se instala sin problemas.
 
-Un administrador reporta que OSPF no funciona entre dos routers. Escribe el orden de diagnóstico que seguirías, incluyendo qué comandos usarías y qué esperarías ver en cada paso.
+## 6. Diseño de rutas para una sede
 
-## 7. Elección DR/BDR en otro segmento
+Tu empresa tiene un router central (R1) y dos sucursales (R2 y R3). R1-R2 usa 10.0.0.0/30, R1-R3 usa 10.0.0.4/30. Las LANs: R2 tiene 192.168.2.0/24 y R3 tiene 192.168.3.0/24. R1 tiene 192.168.1.0/24 y sale a Internet por G0/2.
 
-En un segmento Ethernet nuevo compiten 4 routers OSPF:
+a) ¿Cuántas rutas estáticas necesita R1 para llegar a todas las LANs y a Internet?
+b) Escribe las de R1.
+c) ¿Qué única ruta necesitan R2 y R3 para "verlo todo" (sucursales + Internet)? Escribe una para R2.
 
-| Router | Prioridad | Router ID |
-|---|---|---|
-| R-A | 1 | 10.0.0.1 |
-| R-B | 200 | 10.0.0.2 |
-| R-C | 150 | 10.0.0.3 |
-| R-D | 0 | 10.0.0.4 |
+## 7. Interferencia con rutas conectadas
 
-a) ¿Quién es el DR y quién el BDR?
-b) ¿Qué papel juega R-D y por qué?
-c) Si R-A y R-B tuvieran la misma prioridad (1), ¿quién ganaría y por qué?
-d) La elección ya ha ocurrido y el DR es R-B. Si ahora subes la prioridad de R-C a 255, ¿cambia el DR? ¿Qué tendrías que hacer para que cambie?
+Escribe en R1: `ip route 192.168.1.0 255.255.255.0 10.0.0.2`, siendo 192.168.1.0/24 la propia LAN de R1 conectada en G0/0. ¿Qué pasa? ¿Qué tipo de entrada verías en `show ip route` y por qué no rompe el encaminamiento local?
 
-**Pista:** la elección se decide por prioridad y, en empate, por el Router ID más alto. Prioridad 0 queda fuera. La elección se hace al arrancar, al reiniciar el proceso o si falla el DR (el BDR asciende).
+**Pista:** el IOS prioriza por AD: la conectada (0) manda sobre la estática (1).
 
-## 8. La adyacencia que no levanta
+## 8. Escenario completo de diagnóstico
 
-R1 y R2 están conectados por un enlace Serial, ambos con OSPF configurado, pero `show ip ospf neighbor` sale vacío en los dos. El ping entre las IPs del enlace **sí funciona**.
+Escenario: R1 y R2 conectados por 10.0.0.0/30. LAN R1: 192.168.1.0/24, LAN R2: 192.168.2.0/24. El PC de R1 hace ping a la LAN de R2 y falla. `show ip route` en R2 muestra:
 
-a) Como el ping funciona, ¿qué nivel queda descartado? ¿Por qué?
-b) Escribe el orden de diagnóstico completo que seguirías, con los comandos y qué esperarías ver en cada paso, para descartar, en orden: red no declarada o wildcard mal, área incorrecta, timers Hello/Dead distintos, y ACL que bloquea OSPF (protocolo 89).
-c) ¿Qué comando te confirmaría, sin ambigüedad, que una interfaz está participando en OSPF y con qué área?
+```
+C  10.0.0.0/30 is directly connected, G0/1
+C  192.168.2.0/24 is directly connected, G0/0
+```
 
-**Pista:** sigue la escalera de diagnóstico del punto 8 de la unidad: `show ip protocols`, `show ip ospf interface`, `show access-lists`. Los timers de Hello/Dead por defecto son 10/40 en broadcast y en punto a punto Serial; solo en redes NBMA (Frame Relay) son 30/120.
+a) ¿Qué le falta a R2?
+b) ¿Qué le falta a R1 (supón que R2 ya está arreglado)?
+c) El ping del PC ya llega a la LAN de R2 pero el traceroute se queda a medias. ¿Por qué puede pasar aunque el routing esté bien?

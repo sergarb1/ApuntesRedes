@@ -4,6 +4,8 @@ Conceptos que aparecen en **varias unidades**. Conteo = ficheros `.md` (índice 
 
 Veredictos: ✅ mención legítima · ↪️ mover a … · ❌ quitar · ⏳ por decidir.
 
+> ⚠️ **Nota de renumeración:** las "sesión NN" usan la numeración antigua con la que se revisó cada unidad (ver [README](README.md)): Enrutamiento estático = sesión 06 → hoy unidad 7, OSPF = sesión 07 → hoy unidad 8, ACL = sesión 08 (pendiente) → hoy unidad 10, NAT = sesión 09 (pendiente) → hoy unidad 9 y Servicios = sesión 10 (pendiente) → hoy unidad 6.
+
 | Concepto | Unidades (menciones) | Veredicto |
 |---|---|---|
 | **DHCP** | introducción (9) · IP (11) · trunking (7) · servicios (10) · switching (2) · NAT (3) · AD (5) · inalámbricas (3) | ✅ sesión 03 (lado IP) + ✅ sesión 05 (lado trunking): IP es la casa del DORA, la config en router, exclusiones y DHCPv6 (punto 8 y 13, lab y boletines); trunking (`07-dhcp-por-vlan`) es la casa del escenario con VLANs (pool por VLAN + `ip helper-address`). Queda solo el lado servidor en la sesión 10 |

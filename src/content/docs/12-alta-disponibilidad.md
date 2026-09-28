@@ -5,7 +5,7 @@ description: Diseñar para que fallar no importe 🔁
 
 <p><small>Diseñar para que fallar no importe 🔁</small></p>
 
-> 🗺️ **El mapa del curso:** 🗄️ Servicios → 📶 WiFi → **🔁 AQUÍ ESTÁS** → 🏁 Fin del viaje
+> 🗺️ **El mapa del curso:** 🌐 NAT → 🛡️ ACLs → **🔁 AQUÍ ESTÁS** → 🏁 Fin del viaje
 
 ---
 

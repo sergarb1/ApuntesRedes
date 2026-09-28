@@ -1,71 +1,62 @@
 ---
-title: Boletín de OSPF — Inicial (Resuelto)
-description: Soluciones de los ejercicios básicos de Routing Dinámico
+title: Boletín de Enrutamiento estático — Inicial (Resuelto)
+description: Soluciones de los ejercicios básicos de enrutamiento estático
 ---
 
-# ✅ Boletín de OSPF — Inicial (Resuelto)
+# ✅ Boletín de Enrutamiento estático — Inicial (Resuelto)
 
 ---
 
-## 1. IGP vs EGP
+## 1. Componentes del router
 
-a) OSPF → **IGP**
-b) BGP → **EGP**
-c) RIP → **IGP**
-d) EIGRP → **IGP** (propietario Cisco, pero interior)
+1 → b (RAM: configuración activa, tabla de rutas)
+2 → c (NVRAM: startup-config)
+3 → a (Flash: IOS)
+4 → d (ROM: ROMMON)
 
 ## 2. Verdadero o falso
 
-a) **Verdadero.** OSPF usa SPF (Dijkstra) para calcular la ruta más corta.
-b) **Verdadero.** RIP máximo 15 saltos. 16 = inalcanzable.
-c) **Verdadero.** Todas las áreas deben conectarse al Área 0.
-d) **Verdadero.** El Router ID debe ser único o las adyacencias fallan.
-e) **Falso.** OSPF converge en segundos, RIP tarda minutos.
+a) **Verdadero.** Las rutas estáticas se configuran con `ip route`.
+b) **Verdadero.** 0.0.0.0/0 es la ruta de último recurso.
+c) **Falso.** Si el next-hop es inalcanzable, la ruta NO se instala en la tabla de rutas (aunque la tengas escrita en la config).
+d) **Verdadero.** Las rutas estáticas tienen AD 1 y métrica 0.
+e) **Verdadero.** `show ip route` muestra las rutas del router.
 
-## 3. Relaciona
+## 3. ¿Qué comando?
 
-1 → b (LSA = Link State Advertisement)
-2 → c (LSDB = Link State Database)
-3 → a (ABR = Area Border Router)
-4 → d (SPF = Shortest Path First)
+1 → c (`ip route 0.0.0.0 0.0.0.0` = ruta por defecto)
+2 → b (`show ip route` = tabla de rutas)
+3 → a (`show ip interface brief` = estado de interfaces)
+4 → d (`ip route` con red específica = ruta estática)
 
-## 4. Coste OSPF
+## 4. Modos del router
 
-a) 100 Mbps → **1** (10⁸ / 100×10⁶ = 1)
-b) 1 Gbps → **1** (el coste mínimo es 1)
-c) 1.544 Mbps → **64** (10⁸ / 1.544×10⁶ ≈ 64)
+1. b) Usuario (`Router>`)
+2. d) Privilegiado (`Router#`)
+3. a) Configuración global (`Router(config)#`)
+4. c) Configuración de interfaz (`Router(config-if)#`)
 
-## 5. Completa
+## 5. Anatomía de una ruta
 
-a) `router ospf 1`
-b) `network 192.168.1.0 0.0.0.255 area 0`
-c) `default-information originate`
-d) `show ip ospf neighbor`
+- `S` → origen estático (aprendida con `ip route`)
+- `192.168.3.0/24` → red destino y su prefijo
+- `[1/0]` → distancia administrativa 1 / métrica 0
+- `via 10.0.0.2` → next-hop: a quién le paso el paquete
 
-## 6. Tipos de routers
+## 6. Tu primera ruta estática
 
-1 → c (Internal Router: misma área)
-2 → b (ABR: conecta áreas)
-3 → a (ASBR: rutas externas)
+```bash
+ip route 192.168.2.0 255.255.255.0 10.0.0.2
+```
 
-## 7. Dinámico vs estático
+Red destino + máscara + next-hop. En `show ip route` la ruta aparece con `via 10.0.0.2`, pero al configurar no hay ninguna palabra clave: el next-hop va tal cual al final del comando.
 
-a) La **convergencia** es el proceso por el que todos los routers llegan a una visión coherente de la red tras un cambio (enlace caído, red nueva…). El dinámico la consigue solo: OSPF detecta el cambio, inunda los LSAs y recalcula; en el estático, cada cambio hay que detectarlo y reconfigurarlo a mano, router por router.
+## 7. ¿Ruta por defecto o ruta específica?
 
-b) **Ventajas del dinámico:**
-1. **Autoaprendizaje:** las redes nuevas se comparten solas, sin ir router por router.
-2. **Convergencia automática:** si cae un enlace, la red recalcula y se reencamina sin intervención.
-3. **Menos error humano:** la tabla de rutas la calcula el protocolo, no un administrador tecleando.
+**Ruta por defecto.** Con una única salida, cualquier destino que no sea la LAN propia va a ese next-hop: `ip route 0.0.0.0 0.0.0.0 <ip_salida>`. Cincuenta rutas específicas serían 50 líneas que mantener a mano para cubrir lo mismo.
 
-**Caso para estático:** redes muy pequeñas (2-3 routers), un enlace **stub** con una única salida, o una ruta de respaldo a mano (`floating static`): ahí el dinámico solo añadiría tráfico y complejidad.
+## 8. Verificación
 
-## 8. Coste OSPF: tabla de velocidades
-
-| Velocidad | Cálculo | Coste OSPF |
-|---|---|---|
-| 10 Mbps | 10⁸ / 10⁷ | **10** |
-| 100 Mbps | 10⁸ / 10⁸ | **1** |
-| 1 Gbps | 10⁸ / 10⁹ = 0,1 | **1** (mínimo) |
-| 1.544 Mbps (T1) | 10⁸ / 1.544.000 ≈ 64,8 | **64** |
-
-> El coste mínimo es **1**: todos los enlaces de 100 Mbps en adelante valen lo mismo por defecto, salvo que subas el `auto-cost reference-bandwidth`.
+1. `show running-config | include ip route` → ¿está escrita la ruta? (fallo típico: errata en la IP)
+2. `show ip route` → ¿aparece con una `S`? Si no aparece, el next-hop es inalcanzable: mira `show ip interface brief` (paso 3).
+3. `show ip interface brief` → ¿la interfaz de salida está Up/Up? Si está down/down (cable) o administratively down (falta `no shutdown`), la ruta no se instala.

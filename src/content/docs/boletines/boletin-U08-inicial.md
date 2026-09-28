@@ -1,80 +1,84 @@
 ---
-title: Boletín de ACL y seguridad — Inicial
-description: Ejercicios básicos de ACLs y seguridad de red
+title: Boletín de OSPF — Inicial
+description: Ejercicios básicos de Routing Dinámico
 ---
 
-# 📝 Boletín de ACL y seguridad — Inicial
+# 📝 Boletín de OSPF — Inicial
 
-> Ejercicios básicos para afianzar los conceptos de ACLs y seguridad de red.
+> Ejercicios básicos para afianzar los conceptos de OSPF y routing dinámico.
 
 ---
 
-## 1. Verdadero o falso
+## 1. IGP vs EGP
 
-a) Las ACLs estándar filtran solo por IP origen.
-b) Al final de toda ACL hay un permit any implícito.
-c) Una ACL extendida puede filtrar por protocolo y puerto.
-d) Una ACL sin ninguna línea `permit` bloquea todo el tráfico que le llega.
-e) `show access-lists` muestra las ACLs configuradas y sus contadores.
+Clasifica cada protocolo como IGP o EGP:
 
-## 2. Números de ACL
+a) OSPF
+b) BGP
+c) RIP
+d) EIGRP
 
-¿Qué rango de números usan las ACLs estándar y extendidas?
+## 2. Verdadero o falso
 
-| Tipo | Rango |
+a) OSPF usa el algoritmo de Dijkstra (SPF).
+b) RIP tiene un límite de 15 saltos.
+c) OSPF necesita un área backbone (Área 0).
+d) El Router ID de OSPF debe ser único en la red.
+e) RIP converge más rápido que OSPF.
+
+## 3. Relaciona
+
+| Término | Descripción |
 |---|---|
-| Estándar | |
-| Extendida | |
+| 1. LSA | a) Router que conecta áreas |
+| 2. LSDB | b) Anuncio de estado de enlace |
+| 3. ABR | c) Base de datos de la topología |
+| 4. SPF | d) Algoritmo de cálculo de rutas |
 
-## 3. ¿Qué comando?
+## 4. Coste OSPF
 
-Relaciona el comando con su función:
+Calcula el coste OSPF para estas interfaces:
 
-| Comando | Función |
+a) FastEthernet (100 Mbps)
+b) GigabitEthernet (1 Gbps)
+c) Serial (1.544 Mbps)
+
+## 5. Completa
+
+Completa los comandos OSPF:
+
+a) `router ___ 1` (inicia el proceso OSPF)
+b) `network 192.168.1.0 0.0.0.255 area ___` (área backbone)
+c) `default-information ___` (propagar ruta por defecto)
+d) `show ip ospf ___` (ver vecinos)
+
+## 6. Tipos de routers
+
+Relaciona el tipo de router OSPF con su función:
+
+| Tipo | Función |
 |---|---|
-| 1. `ip access-group 10 out` | a) Crear ACL nombrada extendida |
-| 2. `access-list 10 permit ...` | b) Aplicar ACL a interfaz |
-| 3. `ip access-list extended MI_ACL` | c) Ver las ACLs y sus contadores |
-| 4. `show access-lists` | d) Crear ACL numerada estándar |
+| 1. Internal Router | a) Introduce rutas externas |
+| 2. ABR | b) Conecta Área 0 con otras áreas |
+| 3. ASBR | c) Todas sus interfaces en la misma área |
 
-## 4. Wildcard masks
+## 7. Dinámico vs estático
 
-Las ACLs usan *wildcard masks*, el inverso de la máscara de subred. Para cada máscara de subred, escribe su wildcard y qué representa (qué bits quedan libres para cualquier valor):
+a) Explica qué es la **convergencia** y por qué el enrutamiento dinámico la consigue solo, mientras que en el estático depende del administrador.
 
-| Máscara de subred | Wildcard | ¿Qué representa? |
+b) Enumera **3 ventajas** del routing dinámico frente al estático y pon un caso donde convenga usar estático.
+
+**Pista:** Dinámico = autoaprendizaje, convergencia automática y menos error humano; estático = determinista, útil en enlaces stub o redes muy pequeñas.
+
+## 8. Coste OSPF: tabla de velocidades
+
+Completa la tabla con el coste OSPF de cada velocidad usando la fórmula `coste = 10^8 / ancho_de_banda`:
+
+| Velocidad | Cálculo | Coste OSPF |
 |---|---|---|
-| 255.255.255.0 | | |
-| 255.255.255.255 | | |
-| 255.255.0.0 | | |
+| 10 Mbps | 10⁸ / 10⁷ | |
+| 100 Mbps | 10⁸ / 10⁸ | |
+| 1 Gbps | 10⁸ / 10⁹ | |
+| 1.544 Mbps (T1) | 10⁸ / 1.544.000 | |
 
-## 5. ACL básica
-
-Escribe los comandos para:
-
-a) Crear una ACL estándar que permita la red 192.168.1.0/24
-b) Aplicarla a la interfaz G0/1 en sentido outbound
-
-## 6. Estándar o extendida
-
-¿Qué tipo de ACL usarías en cada caso y por qué?
-
-a) Bloquear a un host concreto de la LAN que hace escaneos.
-b) Permitir solo HTTP/HTTPS de la VLAN 30 hacia el servidor web interno.
-c) Filtrar por IP origen en un router antiguo con muy poca CPU.
-
-## 7. ¿Dónde aplico la ACL?
-
-Regla práctica: la estándar se coloca **cerca del destino** y la extendida **cerca del origen**. En este escenario (PC1 en LAN-A, servidor en LAN-B, R1 en medio), ¿dónde aplicarías cada ACL y en qué sentido?
-
-a) ACL estándar que bloquea a PC1 llegar al servidor.
-b) ACL extendida que permite solo HTTP de LAN-A al servidor.
-
-## 8. Comandos de verificación
-
-Relaciona cada comando de verificación con su utilidad:
-
-| Comando | Utilidad |
-|---|---|
-| 1. `show access-lists` | a) Ver qué ACL está aplicada a cada interfaz y sentido |
-| 2. `show ip interface` | b) Ver contadores de matches por línea de la ACL |
-| 3. `show running-config` | c) Ver las líneas exactas de la ACL tal como se configuraron |
+**Pista:** el coste mínimo es 1: los enlaces a partir de 100 Mbps valen lo mismo por defecto. Los decimales se redondean hacia abajo.

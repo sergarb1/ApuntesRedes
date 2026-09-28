@@ -90,12 +90,22 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
 
 <div class="unit-card">
   <div class="unit-card-header">
+    <span class="num">Servicios</span>
+    <span class="ra">RA2</span>
+  </div>
+  <a href="/ApuntesRedes/06-servicios-red" class="title-link">Servicios de red: DHCP, DNS y NTP</a>
+  <p class="desc">La red como plataforma 🗄️ — DHCP,<code> DNS</code> y NTP desplegados y administrados.</p>
+  <a href="/ApuntesRedes/06-servicios-red" class="unit-link">👉 Ver unidad 👈</a>
+</div>
+
+<div class="unit-card">
+  <div class="unit-card-header">
     <span class="num">Enrutamiento</span>
     <span class="ra">RA4</span>
   </div>
-  <a href="/ApuntesRedes/06-enrutamiento-estatico" class="title-link">Enrutamiento estático</a>
+  <a href="/ApuntesRedes/07-enrutamiento-estatico" class="title-link">Enrutamiento estático</a>
   <p class="desc">El GPS del router 🧭 — Componentes del router,<code> rutas estáticas</code> y ruta por defecto.</p>
-  <a href="/ApuntesRedes/06-enrutamiento-estatico" class="unit-link">👉 Ver unidad 👈</a>
+  <a href="/ApuntesRedes/07-enrutamiento-estatico" class="unit-link">👉 Ver unidad 👈</a>
 </div>
 
 <div class="unit-card">
@@ -103,19 +113,9 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
     <span class="num">OSPF</span>
     <span class="ra">RA6</span>
   </div>
-  <a href="/ApuntesRedes/07-ospf" class="title-link">Enrutamiento dinámico con OSPF</a>
+  <a href="/ApuntesRedes/08-ospf" class="title-link">Enrutamiento dinámico con OSPF</a>
   <p class="desc">El router que habla solo 🗣️ — Vecinos, áreas,<code> coste</code> y configuración de OSPF.</p>
-  <a href="/ApuntesRedes/07-ospf" class="unit-link">👉 Ver unidad 👈</a>
-</div>
-
-<div class="unit-card">
-  <div class="unit-card-header">
-    <span class="num">ACL</span>
-    <span class="ra">RA4</span>
-  </div>
-  <a href="/ApuntesRedes/08-acl-seguridad" class="title-link">ACL y seguridad básica de red</a>
-  <p class="desc">El portero de la red 🛡️ — ACLs estándar y extendidas,<code> time-range</code> y Port Security.</p>
-  <a href="/ApuntesRedes/08-acl-seguridad" class="unit-link">👉 Ver unidad 👈</a>
+  <a href="/ApuntesRedes/08-ospf" class="unit-link">👉 Ver unidad 👈</a>
 </div>
 
 <div class="unit-card">
@@ -130,12 +130,12 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Servicios</span>
-    <span class="ra">RA2</span>
+    <span class="num">ACL</span>
+    <span class="ra">RA4</span>
   </div>
-  <a href="/ApuntesRedes/10-servicios-red" class="title-link">Servicios de red: DHCP, DNS y NTP</a>
-  <p class="desc">La red como plataforma 🗄️ — DHCP,<code> DNS</code> y NTP desplegados y administrados.</p>
-  <a href="/ApuntesRedes/10-servicios-red" class="unit-link">👉 Ver unidad 👈</a>
+  <a href="/ApuntesRedes/10-acl-seguridad" class="title-link">ACL y seguridad básica de red</a>
+  <p class="desc">El portero de la red 🛡️ — ACLs estándar y extendidas,<code> time-range</code> y Port Security.</p>
+  <a href="/ApuntesRedes/10-acl-seguridad" class="unit-link">👉 Ver unidad 👈</a>
 </div>
 
 <div class="unit-card">
@@ -230,7 +230,7 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Enrutamiento</span>
+    <span class="num">Servicios</span>
   </div>
   <div class="ejercicio-links">
     <a href="/ApuntesRedes/boletines/boletin-u06-inicial" class="elink">🟢 Inicial por resolver</a>
@@ -242,7 +242,7 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">OSPF</span>
+    <span class="num">Enrutamiento</span>
   </div>
   <div class="ejercicio-links">
     <a href="/ApuntesRedes/boletines/boletin-u07-inicial" class="elink">🟢 Inicial por resolver</a>
@@ -254,7 +254,7 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">ACL</span>
+    <span class="num">OSPF</span>
   </div>
   <div class="ejercicio-links">
     <a href="/ApuntesRedes/boletines/boletin-u08-inicial" class="elink">🟢 Inicial por resolver</a>
@@ -278,7 +278,7 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Servicios</span>
+    <span class="num">ACL</span>
   </div>
   <div class="ejercicio-links">
     <a href="/ApuntesRedes/boletines/boletin-u10-inicial" class="elink">🟢 Inicial por resolver</a>

@@ -5,7 +5,7 @@ description: Libertad sin cables, con vecinos incluidos 📶
 
 <p><small>Libertad sin cables, con vecinos incluidos 📶</small></p>
 
-> 🗺️ **El mapa del curso:** 🌐 NAT → 🗄️ Servicios → **📶 AQUÍ ESTÁS** → 🔁 Alta disponibilidad
+> 🗺️ **El mapa del curso:** 🌐 NAT → 🛡️ ACLs → **📶 AQUÍ ESTÁS** → 🔁 Alta disponibilidad
 
 ---
 

@@ -5,7 +5,7 @@ description: Un cable para todas las VLANs y una frontera entre ellas 🌉
 
 <p><small>Un cable para todas las VLANs y una frontera entre ellas 🌉</small></p>
 
-> 🗺️ **El mapa del curso:** 🔀 Switching → **🌉 AQUÍ ESTÁS** → 🧭 Routing estático → 🗣️ OSPF
+> 🗺️ **El mapa del curso:** 🔀 Switching → **🌉 AQUÍ ESTÁS** → 🗄️ Servicios → 🧭 Routing estático
 
 ---
 
@@ -80,4 +80,4 @@ Al terminar, serás capaz de:
 - ¿Ya conoces los trunks? → Salta al [enrutamiento inter-VLAN](/ApuntesRedes/05-trunking-inter-vlan/03-inter-vlan-routing), el corazón de la unidad.
 
 **📍 Primer punto:** [01 · Trunks y 802.1Q](/ApuntesRedes/05-trunking-inter-vlan/01-trunks-y-8021q)  
-**⏭️ Al acabar la unidad, continúa en [Enrutamiento estático](/ApuntesRedes/06-enrutamiento-estatico).**
+**⏭️ Al acabar la unidad, continúa en [Servicios de red: DHCP, DNS y NTP](/ApuntesRedes/06-servicios-red).**

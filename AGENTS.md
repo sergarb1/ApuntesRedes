@@ -31,11 +31,11 @@ src/content/docs/02-ethernet-cableado/…      → UD2 · Ethernet, medios y cab
 src/content/docs/03-direccionamiento-ip/…    → UD3 · Direccionamiento IP y subnetting (IPv4 + IPv6)
 src/content/docs/04-switching/…              → UD4 · Switching y VLAN
 src/content/docs/05-trunking-inter-vlan/…    → UD5 · Trunking e inter-VLAN
-src/content/docs/06-enrutamiento-estatico/…  → UD6 · Enrutamiento estático
-src/content/docs/07-ospf/…                   → UD7 · OSPF
-src/content/docs/08-acl-seguridad/…          → UD8 · ACL y seguridad básica
+src/content/docs/06-servicios-red/…          → UD6 · Servicios: DHCP, DNS y NTP
+src/content/docs/07-enrutamiento-estatico/…  → UD7 · Enrutamiento estático
+src/content/docs/08-ospf/…                   → UD8 · OSPF
 src/content/docs/09-nat-pat/…                → UD9 · NAT y PAT
-src/content/docs/10-servicios-red/…          → UD10 · Servicios: DHCP, DNS y NTP
+src/content/docs/10-acl-seguridad/…          → UD10 · ACL y seguridad básica
 src/content/docs/11-redes-inalambricas/…     → UD11 · Redes inalámbricas
 src/content/docs/12-alta-disponibilidad/…    → UD12 · Alta disponibilidad
 src/content/docs/boletines/  → Ejercicios (inicial, avanzado + resueltos, por unidad; variante `packettracer` en Ethernet y dirección IP)

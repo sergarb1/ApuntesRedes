@@ -17,7 +17,7 @@ description: Dos caminos a Internet y una decisión automática 🛣️
 
 ## 🛣️ Rutas flotantes: la ruta de emergencia
 
-Recuerda la [unidad de enrutamiento estático](/ApuntesRedes/06-enrutamiento-estatico): cada ruta tiene una **distancia administrativa** (AD). Dos rutas a la misma red con AD distinta no compiten: la de menor AD gana y la otra **duerme** hasta que la primera muere. Eso es una ruta flotante:
+Recuerda la [unidad de enrutamiento estático](/ApuntesRedes/07-enrutamiento-estatico): cada ruta tiene una **distancia administrativa** (AD). Dos rutas a la misma red con AD distinta no compiten: la de menor AD gana y la otra **duerme** hasta que la primera muere. Eso es una ruta flotante:
 
 ```
 R1(config)# ip route 0.0.0.0 0.0.0.0 203.0.113.1        ← ISP-1 (AD 1, la clásica)

@@ -1,102 +1,137 @@
 ---
-title: Boletín de Servicios de red — Avanzado
-description: Ejercicios avanzados de servicios de red (DHCP, DNS y NTP)
+title: Boletín de ACL y seguridad — Avanzado
+description: Ejercicios avanzados de ACLs y seguridad de red
 ---
 
-# 📝 Boletín de Servicios de red — Avanzado
+# 📝 Boletín de ACL y seguridad — Avanzado
 
-> Ejercicios que requieren aplicar DHCP, DNS y NTP de forma combinada. En los difíciles tienes pista.
+> Ejercicios que requieren aplicar ACLs con criterio. En los difíciles tienes pista.
 
 ---
 
-## 1. DHCP en el router Cisco
+## 1. ACL extendida: YouTube blocker
 
-Configura el router R1 como servidor DHCP para la LAN 192.168.1.0/24:
+El jefe quiere bloquear YouTube (173.194.0.0/16) en horario laboral (9:00-18:00). El resto del tráfico debe permitirse.
 
-- Rango excluido: .1 a .20 (infraestructura)
-- Gateway: 192.168.1.1
-- DNS: 8.8.8.8 y 1.1.1.1
-- Concesión de 3 días
+a) Escribe la ACL extendida (con time-range)
+b) ¿Dónde la aplicas (inbound/outbound, qué interfaz)?
+c) ¿Qué pasa si el router no soporta time-range? ¿Alternativa?
 
-a) Escribe la configuración completa.
-b) Un PC no recibe IP. Enumera tu secuencia de diagnóstico (comandos y qué buscas en cada uno).
+**Pista:** `time-range` y `absolute` o `periodic` para horarios.
 
-**Pista:** `ip dhcp excluded-address` + `ip dhcp pool`.
+## 2. Diagnóstico de ACL
 
-## 2. DNS jerárquico
+Un administrador aplica esta ACL en G0/0 de un router (LAN 192.168.1.0/24):
 
-Explica el recorrido completo de una consulta DNS para `www.ejemplo.es` la primera vez que la hace un equipo (cachés vacías):
-
-a) ¿Quién pregunta a quién? Enumera los pasos (resolver local → raíz → TLD → autoritativo).
-b) ¿Qué pasa la segunda vez, cinco minutos después?
-c) ¿Qué papel juega el TTL de los registros?
-
-## 3. Selección de registros para un mini-proyecto
-
-Tu centro va a publicar: web (`www.instituto.edu`), correo propio, y un alias corto `aulas` que apunta al mismo servidor que `www`. El servidor tiene IP 198.51.100.10 (IPv4) y 2001:db8::10 (IPv6). El correo lo gestiona un proveedor externo.
-
-a) Escribe los registros mínimos con sus tipos.
-b) ¿Qué registro necesitarías añadir para que `mail.proveedor.com` reciba el correo en nombre del instituto?
-c) Un compañero propone un registro CNAME para el dominio raíz `instituto.edu`. ¿Es buena idea?
-
-## 4. Diagnóstico con nslookup
-
-Interpreta estas salidas y di qué está pasando en cada caso:
-
-a)
 ```
-Servidor: UnKnown
-Address: 192.168.1.1
-
-*** No se puede encontrar el nombre del servidor: DNS request timed out.
-Nombre: www.ejemplo.es
+access-list 10 deny 192.168.1.10
+access-list 10 permit 192.168.1.0 0.0.0.255
 ```
 
-b)
+a) El PC 192.168.1.10 no puede acceder a Internet. ¿Es normal?
+b) ¿Y el PC 192.168.1.20? ¿Puede acceder a Internet?
+c) ¿Qué comando usarías para ver si la ACL está funcionando?
+d) Si la ACL se aplica outbound en G0/1 (hacia Internet), ¿cómo afecta al tráfico entre PCs de la misma LAN?
+
+## 3. ACL de firewall básico
+
+Diseña una ACL para un router de borde que protege una red interna (192.168.1.0/24):
+
+**Reglas:**
+1. Permitir HTTP/HTTPS saliente (cualquier destino)
+2. Permitir DNS saliente (UDP 53)
+3. Bloquear SSH saliente (TCP 22)
+4. Permitir todo el tráfico entrante de conexiones establecidas (tráfico de retorno)
+5. Denegar el resto
+
+**Pista:** Usa `established` para permitir tráfico de retorno de conexiones iniciadas internamente.
+
+## 4. ACL nombrada para horario
+
+Escribe una ACL nombrada `BLOQUEAR_STREAMING` que bloquee el puerto **443** (HTTPS) **cualquier día de 9:00 a 18:00** para la red interna 192.168.1.0/24, permitiendo el resto del tráfico. Incluye el `time-range`, la ACL y su aplicación en la interfaz hacia Internet (G0/1).
+
+**Pista:** usa `time-range` con `periodic daily`, referencia la regla con `time-range`, acaba con `permit ip any any` (recuerda el deny any implícito) y aplica la ACL outbound en G0/1.
+
+## 5. El orden de las líneas importa
+
+Estas dos ACLs tienen las mismas líneas en distinto orden. ¿Qué tráfico pasa en cada caso?
+
+**ACL A:**
 ```
-Nombre: www.ejemplo.es
-Address: 203.0.113.99
-Aliases: www.ejemplo.es
-          web.ejemplo.es
+access-list 20 deny 192.168.1.0 0.0.0.255
+access-list 20 permit any
 ```
 
-c) `nslookup www.ejemplo.es 8.8.8.8` responde correctamente, pero el navegador no abre la web.
+**ACL B:**
+```
+access-list 20 permit any
+access-list 20 deny 192.168.1.0 0.0.0.255
+```
 
-## 5. NTP con jerarquía
+a) ¿Qué hace cada una?
+b) ¿Qué principio rompe la ACL B?
 
-Tu red tiene un router de borde (R1), un switch de distribución (S1) y decenas de switches de acceso.
+**Pista:** el router evalúa las líneas **en orden** y para en la primera coincidencia.
 
-a) Diseña la jerarquía NTP: ¿de dónde toma la hora cada nivel? ¿Qué estrato quedaría aproximadamente en cada uno?
-b) Escribe la configuración de R1 y S1.
-c) ¿Qué comando usas en S1 para comprobar con quién está sincronizado y en qué estrato está?
+## 6. ACL con error clásico
 
-## 6. Los tres servicios en un solo caso
+Quieres permitir solo SSH a un servidor (10.0.0.50) desde la red de administración (192.168.100.0/24). Un compañero escribe:
 
-Escenario: tras una caída eléctrica, el aula de informática no navega. Un alumno apunta estos datos de su PC:
+```
+access-list 110 permit tcp 192.168.100.0 0.0.0.255 host 10.0.0.50 eq 22
+access-list 110 deny ip any any
+access-list 110 permit icmp any any
+```
 
-- IP: 169.254.18.42, máscara 255.255.0.0
-- DNS en blanco
-- La hora del equipo está bien
+a) ¿Funciona el ping hacia el servidor? ¿Por qué?
+b) ¿Cómo reordenas las líneas para conseguirlo? (pista: en una ACL numerada no puedes reordenar; ¿cómo se hace entonces?)
+c) ¿Es necesaria la línea `deny ip any any`?
 
-a) ¿Qué servicio está fallando? ¿Cómo se llama ese rango 169.254.x.x?
-b) El profesor comprueba el switch del aula y no está en la VLAN correcta. ¿Por qué eso explica el fallo de DHCP?
-c) Arreglada la VLAN, el PC navega por IP pero `www.google.com` sigue fallando. ¿Qué compruebas ahora y con qué comando?
-d) Al final del caso, ¿por qué el reloj del PC estaba bien? ¿Qué le pasó al switch, entonces?
+## 7. Port Security
 
-**Pista:** APIPA y su rango 169.254.0.0/16; y piensa quién da la hora a quién en cada dispositivo.
+Un switch tiene la interfaz G0/1 conectada al PC de recepción. Configura Port Security para que:
 
-## 7. DHCPv6 y doble pila
+a) Solo aprenda una MAC y la guarde en la running-config (sticky).
+b) Si llega otra MAC, descarte los paquetes infractores pero no apague el puerto y genere mensajes de log.
+c) Escribe la configuración completa y el comando para ver el estado.
 
-El centro quiere IPv6 en el aula: prefijo 2001:db8:ab::/64, gateway fe80::1, DNS 2001:4860:4860::8888.
+**Pista:** `switchport port-security violation restrict` + `logging` integrado.
 
-a) ¿Dos formas de dar dirección IPv6 a los clientes? Describe brevemente SLAAC y stateful DHCPv6.
-b) ¿Qué opción usarías si solo quieres repartir DNS y dominio (las direcciones las autoconfiguran los PCs)?
-c) Escribe la config de un router Cisco para la opción b).
+## 8. Diagnóstico de port security
 
-## 8. El "no tiene Internet" clásico
+Un administrador configuró port security en un puerto:
 
-Una usuaria llama: "no tengo Internet". Su PC muestra: IP correcta 192.168.1.50 (DHCP OK), gateway correcto, pero `nslookup www.elmundo.es` falla; `nslookup www.elmundo.es 1.1.1.1` funciona.
+```
+Switch(config-if)# switchport port-security maximum 1
+Switch(config-if)# switchport port-security violation shutdown
+```
 
-a) ¿Qué capa/servicio está sano y cuál roto?
-b) ¿Qué dos arreglos inmediatos propones?
-c) ¿Por qué NO es un problema de NTP, de DHCP ni de routing?
+Un usuario se conecta con su portátil y funciona. Luego conecta otro portátil (el suyo y el de un compañero) usando un switch no administrado. El puerto se deshabilita.
+
+a) ¿Por qué ocurrió?
+b) ¿Qué dos cambios harías en la configuración para permitir esta situación sin perder seguridad?
+c) ¿Cómo recuperas el puerto?
+
+## 9. Laboratorio: Port Security en la sala de profesores
+
+Configura el puerto Fa0/24 del switch (donde se enchufa el PC de la sala de profesores) para que:
+
+a) Solo permita 1 MAC aprendida automáticamente y permanente (sticky).
+b) Si aparece una segunda MAC, el puerto se deshabilite (violación shutdown).
+c) Escribe los comandos completos y verifica con el comando de comprobación adecuado.
+
+Después, un profe desenchufa su PC y conecta su portátil personal. El puerto entra en errdisable.
+
+d) ¿Por qué ha ocurrido la violación si solo hay UN dispositivo conectado?
+e) ¿Qué dos comandos ejecutarías para recuperar el puerto?
+f) ¿Cómo evitarías el problema sin perder seguridad (piensa en el envejecimiento de la MAC sticky)?
+
+**Pista:** la MAC sticky NO caduca aunque el PC se desenchufe; si cambias de equipo, hay dos MACs distintas "conocidas" en el puerto y se supera el máximo. Para recuperar errdisable: `shutdown` + `no shutdown`. Para expirar la sticky cuando el dispositivo se desenchufa, configura el envejecimiento de la port security (`switchport port-security aging`).
+
+## 10. Mini-caso final
+
+Un instituto pide: "la sala de profesores (192.168.10.0/24) no puede usar el WiFi de alumnos (192.168.20.0/24), pero ambos deben salir a Internet (G0/2 del router) y los profesores acceden al servidor de notas (10.0.0.5) por HTTPS".
+
+a) Diseña las ACLs mínimas (nómbralas) y di en qué interfaz/sentido las aplicas.
+b) ¿Qué pasa con el retorno del tráfico de profesores hacia el servidor con tu diseño?
+c) ¿Qué le dirías al director si pide "bloquear YouTube por completo"? (reflexiona: ACLs vs herramientas adecuadas)
