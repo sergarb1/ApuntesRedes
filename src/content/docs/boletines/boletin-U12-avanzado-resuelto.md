@@ -72,13 +72,13 @@ a) Bloquea **SW3** en el enlace SW2-SW3: SW3 ya tiene su puerto raíz hacia SW1 
 
 b) Cae el enlace SW1-SW3: SW3 pierde su puerto raíz; su puerto alternativo por SW2 pasa inmediatamente a raíz (con RSTP, casi instantáneo, sin esperar timers).
 
-c) **RSTP converge en segundos** (hanza shakeProposal/agreement, sin esperar 30-50 s de listening/learning del STP clásico 802.1D).
+c) **RSTP converge en segundos** (handshake *proposal/agreement*, sin esperar 30-50 s de listening/learning del STP clásico 802.1D).
 
 ## 6. Doble nodo con keepalives
 
 a) **Split-brain**: al perder el heartbeat, cada firewall cree que el otro ha muerto. Ambos reclaman la IP virtual y el rol de activo.
 
-b) Tablas ARP/dfg inconsistentes, tráfico por el nodo " equivocado", sesiones partidas, IPs duplicadas en la red y corte intermitente del servicio.
+b) Tablas ARP y de enrutamiento inconsistentes, tráfico por el nodo "equivocado", sesiones partidas, IPs duplicadas en la red y corte intermitente del servicio.
 
 c) Un **canal de heartbeats redundante** (dos interfaces dedicadas), monitorizar el estado con el sistema de HA del fabricante, y mecanismos tipo "quórum" o control de enlace WAN (que el failover dependa también de comprobar la salida, no solo el heartbeat).
 

@@ -1,11 +1,11 @@
 ---
-title: "02 — STP: redundancia sin bucles"
+title: "1 — STP: redundancia sin bucles"
 description: El guardián que bloquea para que la red viva 🌉
 ---
 
 <p><small>El guardián que bloquea para que la red viva 🌉</small></p>
 
-> 🗺️ **Estás en:** 🔁 **Alta disponibilidad y redundancia** → 02 · STP: redundancia sin bucles
+> 🗺️ **Estás en:** 🔁 **Alta disponibilidad y redundancia** → 1 · STP: redundancia sin bucles
 
 ---
 
@@ -125,4 +125,4 @@ Con RSTP, los puertos hacia clientes configurados como **edge** (PortFast) pasan
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/12-alta-disponibilidad) · **Anterior:** [01 · Disponibilidad y SPOFs](/ApuntesRedes/12-alta-disponibilidad/01-disponibilidad-y-spofs) · **Siguiente:** [03 · EtherChannel](/ApuntesRedes/12-alta-disponibilidad/03-etherchannel)
+📚 [Volver al índice de la unidad](/ApuntesRedes/12-alta-disponibilidad) · **Anterior:** [1 · Disponibilidad y SPOFs](/ApuntesRedes/12-alta-disponibilidad/01-disponibilidad-y-spofs) · **Siguiente:** [3 · EtherChannel](/ApuntesRedes/12-alta-disponibilidad/03-etherchannel)

@@ -1,11 +1,11 @@
 ---
-title: 04 — Stacking y chassis virtuales
+title: 4 — Stacking y chassis virtuales
 description: Varios switches, un solo equipo 🧱
 ---
 
 <p><small>Varios switches, un solo equipo 🧱</small></p>
 
-> 🗺️ **Estás en:** 🔁 **Alta disponibilidad y redundancia** → 04 · Stacking y chassis virtuales
+> 🗺️ **Estás en:** 🔁 **Alta disponibilidad y redundancia** → 4 · Stacking y chassis virtuales
 
 ---
 
@@ -46,7 +46,7 @@ El stacking elimina esos tres: los miembros actúan como **un solo switch** con 
 | **Standby** | En algunos modelos, respaldo caliente del master |
 | **Enlaces de stack** | Los cables/buses dedicados que unen los miembros; en serio, forman un **anillo** |
 | **Anillo (ring)** | Si un enlace de stack muere, el anillo cierra por el otro lado y el stack no se rompe |
-| **StackWise / VSS / MLag** | Implementaciones de la misma idea según fabricante |
+| **StackWise / VSS / MLAG** | Implementaciones de la misma idea según fabricante |
 
 Puntos de diseño que importan:
 
@@ -96,7 +96,7 @@ Un stack sano: `show switch` muestra todos los miembros Ready, master estable y 
 
 **Administrador:** — Compré dos switches de acceso y puse uno arriba y otro abajo. Redundancia: conseguida.
 
-**CONRAD:** — ¿Y cómo los gestionas? ¿Dos IPs, dos configuraciones, dos veces el mismo error de VLAN? ¿Y qué pasa cuando STP decide bloquear el uplink del de abajo por el camino que tu neither-probaste? ¿Y el gateway: quién lo sirve, el router con dos cables?
+**CONRAD:** — ¿Y cómo los gestionas? ¿Dos IPs, dos configuraciones, dos veces el mismo error de VLAN? ¿Y qué pasa cuando STP decide bloquear el uplink del de abajo por el camino que nunca probaste? ¿Y el gateway: quién lo sirve, el router con dos cables?
 
 **CONRAD:** — Dos equipos sin plano común no son un sistema tolerante a fallos: son dos puntos de fallo que además se complican entre ellos. O los unes (stack, VSS, MLAG) y los gestionas como uno, o diseñas bien los dos con HSRP y STP explícitos. Pero "compré dos y los apilé en el rack" no es un diseño, es un decorado.
 
@@ -140,4 +140,4 @@ Un stack sano: `show switch` muestra todos los miembros Ready, master estable y 
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/12-alta-disponibilidad) · **Anterior:** [03 · EtherChannel](/ApuntesRedes/12-alta-disponibilidad/03-etherchannel) · **Siguiente:** [05 · FHRP: el gateway redundante](/ApuntesRedes/12-alta-disponibilidad/05-fhrp)
+📚 [Volver al índice de la unidad](/ApuntesRedes/12-alta-disponibilidad) · **Anterior:** [3 · EtherChannel](/ApuntesRedes/12-alta-disponibilidad/03-etherchannel) · **Siguiente:** [5 · FHRP: el gateway redundante](/ApuntesRedes/12-alta-disponibilidad/05-fhrp)

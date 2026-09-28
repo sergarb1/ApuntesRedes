@@ -1,11 +1,11 @@
 ---
-title: 06 — HSRP en Cisco
+title: 6 — HSRP en Cisco
 description: Manos a la IP virtual ⚙️
 ---
 
 <p><small>Manos a la IP virtual ⚙️</small></p>
 
-> 🗺️ **Estás en:** 🔁 **Alta disponibilidad y redundancia** → 06 · HSRP en Cisco
+> 🗺️ **Estás en:** 🔁 **Alta disponibilidad y redundancia** → 6 · HSRP en Cisco
 
 ---
 
@@ -87,10 +87,14 @@ VLAN 20 (192.168.20.0/24):  R2 activo del grupo 2
 
 ```
 R1(config)# interface gig 0/0.10
+R1(config-subif)# encapsulation dot1Q 10
+R1(config-subif)# ip address 192.168.10.2 255.255.255.0
 R1(config-subif)# standby 1 ip 192.168.10.1
 R1(config-subif)# standby 1 priority 110
 R1(config-subif)# standby 1 preempt
 R1(config)# interface gig 0/0.20
+R1(config-subif)# encapsulation dot1Q 20
+R1(config-subif)# ip address 192.168.20.2 255.255.255.0
 R1(config-subif)# standby 2 ip 192.168.20.1
    (sin priority alta: R2 será activo del grupo 2)
 ```
@@ -103,8 +107,8 @@ En R2, espejo: prioridad 110 en el grupo 2. Cada router es activo de su VLAN y r
 
 ```
 R1# show standby brief
-             P   Active        Standby       Virtual IP
-Gi0/0        110 Active        192.168.1.3   192.168.1.1
+             Interface   Grp  Pri  P State   Active        Standby       Virtual IP
+             Gi0/0       1    110  Y Active  local         192.168.1.3   192.168.1.1
 ```
 
 Prueba de fuego en Packet Tracer (o en producción, con valor):
@@ -171,4 +175,4 @@ Prueba de fuego en Packet Tracer (o en producción, con valor):
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/12-alta-disponibilidad) · **Anterior:** [05 · FHRP: el gateway redundante](/ApuntesRedes/12-alta-disponibilidad/05-fhrp) · **Siguiente:** [07 · Redundancia en capa 3](/ApuntesRedes/12-alta-disponibilidad/07-redundancia-l3)
+📚 [Volver al índice de la unidad](/ApuntesRedes/12-alta-disponibilidad) · **Anterior:** [5 · FHRP: el gateway redundante](/ApuntesRedes/12-alta-disponibilidad/05-fhrp) · **Siguiente:** [7 · Redundancia en capa 3](/ApuntesRedes/12-alta-disponibilidad/07-redundancia-l3)

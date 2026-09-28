@@ -1,11 +1,11 @@
 ---
-title: 07 — Redundancia en capa 3
+title: 7 — Redundancia en capa 3
 description: Dos caminos a Internet y una decisión automática 🛣️
 ---
 
 <p><small>Dos caminos a Internet y una decisión automática 🛣️</small></p>
 
-> 🗺️ **Estás en:** 🔁 **Alta disponibilidad y redundancia** → 07 · Redundancia en capa 3
+> 🗺️ **Estás en:** 🔁 **Alta disponibilidad y redundancia** → 7 · Redundancia en capa 3
 
 ---
 
@@ -154,4 +154,4 @@ Prueba de fuego: tira la interfaz del ISP-1 (`shutdown`), mira `show ip route` (
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/12-alta-disponibilidad) · **Anterior:** [06 · HSRP en Cisco](/ApuntesRedes/12-alta-disponibilidad/06-hsrp-cisco) · **Siguiente:** [08 · Plan de continuidad](/ApuntesRedes/12-alta-disponibilidad/08-plan-continuidad)
+📚 [Volver al índice de la unidad](/ApuntesRedes/12-alta-disponibilidad) · **Anterior:** [6 · HSRP en Cisco](/ApuntesRedes/12-alta-disponibilidad/06-hsrp-cisco) · **Siguiente:** [8 · Plan de continuidad](/ApuntesRedes/12-alta-disponibilidad/08-plan-continuidad)
