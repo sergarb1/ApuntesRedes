@@ -63,14 +63,15 @@ Al terminar, serás capaz de:
 
 ## ✅ Criterios de evaluación cubiertos (RA7)
 
-**RA7: Configura y administra el acceso de las redes locales a servicios exteriores.**
+**RA7: Conecta redes privadas a redes públicas identificando y aplicando diferentes tecnologías.**
 
 | CE | Criterio | Dónde se cubre |
 |---|---|---|
-| a) | Salida de redes privadas a públicas | ✅ Puntos 1-4 + ⚡ Laboratorio (punto 9) |
-| b) | NAT/PAT en el router | ✅ Puntos 3-4 y 8 + ⚡ Laboratorio (punto 9) |
-| c) | Publicación de servicios internos | ✅ Punto 5 + 🧠 Atrévete a pensar (punto 9) |
-| d) | Verificación y diagnóstico | ✅ Puntos 6-7 + 💬 Entrevista (punto 9) |
+| a) | Ventajas e inconvenientes de NAT | ✅ Teoría (puntos 1-2) + 🔥 Fireside Chat (punto 9) |
+| b) | NAT estático | ✅ Punto 3 + ⚡ Laboratorio (punto 9) |
+| c) | NAT dinámico/PAT | ✅ Puntos 3-4 + ⚡ Laboratorio (punto 9) |
+| d) | Port forwarding | ✅ Punto 5 + ⚡ Laboratorio (punto 9, NAT destino) |
+| e) | WiFi vs WiMax | ✅ Punto 7 (estándares 802.11) |
 
 ---
 

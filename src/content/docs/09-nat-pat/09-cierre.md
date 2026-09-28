@@ -233,14 +233,14 @@ Depende del router y del tiempo de expiración. Teóricamente, con 65535 puertos
 
 ## ✅ Criterios de evaluación cubiertos (RA7)
 
-**RA7: Conecta redes privadas a redes públicas.**
+**RA7: Conecta redes privadas a redes públicas identificando y aplicando diferentes tecnologías.**
 
 | CE | Criterio | Cubierto |
 |---|---|---|
-| a) | Ventajas e inconvenientes de NAT | ✅ Teoría (puntos 1-2) + 🔥 Fireside Chat |
-| b) | NAT estático | ✅ Punto 3 + ⚡ Laboratorio |
-| c) | NAT dinámico/PAT | ✅ Puntos 3-4 + ⚡ Laboratorio |
-| d) | Port forwarding | ✅ Punto 5 + ⚡ Laboratorio (NAT destino) |
+| a) | Ventajas e inconvenientes de NAT | ✅ Teoría (puntos 1-2) + 🔥 Fireside Chat (punto 9) |
+| b) | NAT estático | ✅ Punto 3 + ⚡ Laboratorio (punto 9) |
+| c) | NAT dinámico/PAT | ✅ Puntos 3-4 + ⚡ Laboratorio (punto 9) |
+| d) | Port forwarding | ✅ Punto 5 + ⚡ Laboratorio (punto 9, NAT destino) |
 | e) | WiFi vs WiMax | ✅ Punto 7 (estándares 802.11) |
 
 ---
