@@ -1,11 +1,11 @@
 ---
-title: "9 — Cierre: consolida lo aprendido"
+title: "09 — Cierre: consolida lo aprendido"
 description: "El cierre práctico de NAT: sé el router, laboratorio y entrevista 🧠"
 ---
 
 <p><small>El cierre práctico de NAT: sé el router, laboratorio y entrevista 🧠</small></p>
 
-> 🗺️ **Estás en:** 🌐 **NAT y PAT** → 9 · Cierre: consolida lo aprendido
+> 🗺️ **Estás en:** 🌐 **NAT y PAT** → 09 · Cierre: consolida lo aprendido
 
 ---
 
@@ -56,7 +56,7 @@ Has terminado la teoría. Este cierre es el aterrizaje: recorres lo aprendido co
 1. Traduzco una IP privada a una IP pública. Todos los PC comparten la misma IP pública con diferentes puertos.
 2. Traduzco siempre la misma IP privada a la misma IP pública. Útil para servidores.
 3. Traduzco tráfico entrante de un puerto público a un servidor interno.
-4. Soy el estándar WiFi más común hoy en día. 2,4 GHz, 5 GHz, hasta 1,3 Gbps.
+4. Soy un estándar WiFi que trabaja solo en 5 GHz, con velocidades de hasta 1,3 Gbps.
 5. Soy el protocolo que abre puertos automáticamente en el router. Cómodo pero inseguro.
 
 <details>
@@ -174,7 +174,7 @@ Horizontal:
 8. Comando que muestra la tabla NAT (4+2+3+12 letras, 4 palabras)
 
 Vertical:
-2. Técnica de traducción 1 a 1 fija (3+8 letras, 2 palabras)
+2. Traductor de IPs dentro del payload (3 letras)
 3. Protocolo que abre puertos automáticamente (4 letras)
 6. Interfaz que mira a la LAN en NAT (6 letras)
 ```
@@ -182,8 +182,8 @@ Vertical:
 <details>
 <summary>📝 Soluciones</summary>
 
-**Horizontal:** 1. PAT, 4. 6E, 5. VPN, 8. SHOWIPNATTRANSLATIONS
-**Vertical:** 2. NATESTATICO, 3. UPnP, 6. INSIDE
+**Horizontal:** 1. PAT, 4. 6E, 5. VPN, 7. NATESTATICO, 8. SHOWIPNATTRANSLATIONS
+**Vertical:** 2. ALG, 3. UPnP, 6. INSIDE
 
 </details>
 
@@ -213,7 +213,7 @@ NAT no es un firewall, pero da una falsa sensación de seguridad. Los dispositiv
 
 > ❓ **¿Cuántas conexiones puede manejar PAT simultáneamente?**
 
-Depende del router y del tiempo de expiración. Teóricamente, con 65535 puertos disponibles por IP pública, PAT puede manejar hasta ~65.000 conexiones simultáneas. En la práctica, los routers domésticos manejan unos pocos miles antes de saturarse.
+Depende del router y del tiempo de expiración. Teóricamente, con 65.535 puertos disponibles por IP pública, PAT puede manejar hasta ~65.000 conexiones simultáneas. En la práctica, los routers domésticos manejan unos pocos miles antes de saturarse.
 
 ---
 
@@ -245,4 +245,4 @@ Depende del router y del tiempo de expiración. Teóricamente, con 65535 puertos
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/09-nat-pat) · **Anterior:** [8 · Configuración completa](/ApuntesRedes/09-nat-pat/08-configuracion-completa) · **Siguiente:** [ACLs y seguridad de red](/ApuntesRedes/10-acl-seguridad)
+📚 [Volver al índice de la unidad](/ApuntesRedes/09-nat-pat) · **Anterior:** [08 · Configuración completa](/ApuntesRedes/09-nat-pat/08-configuracion-completa) · **Siguiente:** [ACLs y seguridad de red](/ApuntesRedes/10-acl-seguridad)

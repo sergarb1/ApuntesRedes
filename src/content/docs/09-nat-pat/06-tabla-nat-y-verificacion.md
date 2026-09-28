@@ -39,8 +39,8 @@ tcp 83.45.12.78:60001  192.168.1.10:54321  8.8.8.8:80         8.8.8.8:80
 
 ```
 Pro Inside global      Inside local       Outside local      Outside global
-udp   192.168.1.  8.8.8.8:53  8.8.8.8:53
-udp   192.168.1.  8.8.8.8:53  8.8.8.8:53
+udp 83.45.12.78:60001  192.168.1.10:54321  8.8.8.8:53         8.8.8.8:53
+udp 83.45.12.78:60002  192.168.1.20:54321  8.8.8.8:53         8.8.8.8:53
 ```
 
 Ambos PCs usan el puerto origen 54321 y van al mismo destino. ¿Cómo sabe el router quién es quién? Por el **Inside global**: el `60001` pertenece a 192.168.1.10 y el `60002` a 192.168.1.20. Es el mismo mecanismo que viste en PAT: el puerto global desambigua conexiones idénticas.

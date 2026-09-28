@@ -41,8 +41,8 @@ Un router NAT muestra la siguiente tabla:
 
 ```
 Pro Inside global      Inside local       Outside local      Outside global
-udp   192.168.1.  8.8.8.8:53  8.8.8.8:53
-udp   192.168.1.  8.8.8.8:53  8.8.8.8:53
+udp 83.45.12.78:50001  192.168.1.10:54321  8.8.8.8:53         8.8.8.8:53
+udp 83.45.12.78:50002  192.168.1.20:54321  8.8.8.8:53         8.8.8.8:53
 ```
 
 a) ¿Cuántos dispositivos están haciendo peticiones DNS?
@@ -67,7 +67,7 @@ Identifica el tipo de NAT que se aplica en cada escenario:
 | Escenario | Tipo de NAT |
 |---|---|
 | a) El servidor web de la empresa (192.168.1.10) siempre sale a Internet como 83.45.12.78 | |
-| b) La oficina tiene un pool de 4 IPs públicas (83.45.12.78-81) y cada usuario toma una al salir | |
+| b) La oficina tiene un pool de 4 IPs públicas (83.45.12.81-84) y cada usuario toma una al salir | |
 | c) 300 alumnos de un instituto salen todos por la misma IP pública del router | |
 | d) Un cliente de Internet visita 83.45.12.78:8080 y llega al servidor interno 192.168.1.10:80 | |
 
@@ -79,8 +79,8 @@ El router muestra esta tabla:
 
 ```
 Pro Inside global      Inside local       Outside local      Outside global
-udp   192.168.1.  8.8.8.8:53  8.8.8.8:53
-udp   192.168.1.  8.8.8.8:53  8.8.8.8:53
+udp 83.45.12.78:60001  192.168.1.10:54321  8.8.8.8:53         8.8.8.8:53
+udp 83.45.12.78:60002  192.168.1.20:54321  8.8.8.8:53         8.8.8.8:53
 tcp 83.45.12.78:60003  192.168.1.30:49152  142.250.184.4:443  142.250.184.4:443
 ```
 

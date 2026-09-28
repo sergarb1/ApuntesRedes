@@ -68,7 +68,7 @@ Cada ALG entiende un protocolo: hay ALG FTP, ALG SIP (VoIP), ALG TFTP... El prec
 
 ## 🛡️ NAT-T: el puente para IPsec
 
-**IPsec** puede romperse con NAT por dos vías: **AH** autentica la cabecera IP completa (cambiarla rompe la verificación), mientras que **ESP** no autentica la cabecera IP pero cifra los puertos, de modo que con PAT no hay forma de multiplexar. NAT-T lo resuelve encapsulando en UDP:4500.ridad **falla** y el paquete se descarta. Solución: **NAT-T (NAT Traversal)** encapsula los paquetes IPsec dentro de **UDP** (puerto 4500):
+**IPsec** choca con NAT por dos motivos: **AH** autentica la cabecera IP completa (cambiarla en el camino invalida la verificación) y **ESP** cifra los puertos de transporte, así que con PAT no hay forma de reescribirlos para distinguir conexiones. **Solución: NAT-T (NAT Traversal)** encapsula los paquetes IPsec dentro de **UDP** (puerto 4500):
 
 ```
 IPsec:  ESP | payload   →  falla al cambiar la IP
@@ -94,7 +94,7 @@ Los **estándares 802.11** que verás en cualquier router actual:
 
 | Estándar | Nombre comercial | Bandas | Velocidad máxima |
 |---|---|---|---|
-| 802.11n | WiFi 4 | 2,4 GHz | ~600 Mbps |
+| 802.11n | WiFi 4 | 2,4 y 5 GHz | ~600 Mbps |
 | 802.11ac | WiFi 5 | 5 GHz | ~1,3 Gbps (hasta 6,9 en multi-antena) |
 | 802.11ax | WiFi 6 | 2,4 + 5 GHz | ~9,6 Gbps |
 | 802.11be | WiFi 7 | 2,4 + 5 + 6 GHz | ~46 Gbps |
@@ -123,7 +123,7 @@ Los **estándares 802.11** que verás en cualquier router actual:
 
 - NAT rompe el extremo a extremo: FTP activo, VoIP, juegos y VPN necesitan ayudas para sobrevivir.
 - Los **ALGs** traducen IPs que viajan dentro del payload; **UPnP** automatiza puertos (con riesgo); **NAT-T** rescata a IPsec.
-- **WiFi** (802.11, metros) y **WiMax** (802.16, kilómetros) son primas, no hermanas: de n/ac/ax/be a la familia 802.11 le va muy bien.
+- **WiFi** (802.11, metros) y **WiMax** (802.16, kilómetros) son primas, no hermanas: WiFi va de la generación n a la be, y WiMax se quedó en su 802.16.
 
 ## 🐛 Vocabulario rápido
 

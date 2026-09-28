@@ -26,7 +26,7 @@ Al terminar, serás capaz de:
 - Identificar inside/outside, local/global en cada sentido del tráfico.
 - Configurar PAT en un router Cisco y verificarlo con `show ip nat translations`.
 - Publicar servicios internos hacia Internet (NAT de destino / port forwarding).
-- Diagnosticar problemas típicos: DNS roto tras NAT, aplicaciones que no funcionan, doble NAT.
+- Diagnosticar los problemas típicos de las aplicaciones detrás de NAT (FTP, VoIP, juegos, VPN) y sus soluciones.
 
 ---
 
@@ -38,11 +38,11 @@ Al terminar, serás capaz de:
 | [02 · Tipos de NAT](/ApuntesRedes/09-nat-pat/02-tipos-de-nat) | Estático, dinámico y PAT a vista de pájaro | Todos |
 | [03 · NAT estático y dinámico](/ApuntesRedes/09-nat-pat/03-nat-estatico-y-dinamico) | Uno a uno y por pool | Todos |
 | [04 · PAT (sobrecarga)](/ApuntesRedes/09-nat-pat/04-pat) | Puertos como identificador, tabla de traducciones | Clave |
-| [05 · NAT de destino](/ApuntesRedes/09-nat-pat/05-nat-destino) | Port forwarding: publicar servicios | Todos |
+| [05 · NAT destino (port forwarding)](/ApuntesRedes/09-nat-pat/05-nat-destino) | Port forwarding: publicar servicios | Todos |
 | [06 · Tabla NAT y verificación](/ApuntesRedes/09-nat-pat/06-tabla-nat-y-verificacion) | show ip nat translations/statistics | Práctico |
 | [07 · Problemas y soluciones](/ApuntesRedes/09-nat-pat/07-problemas-y-soluciones) | Lo que NAT rompe y cómo se arregla | Clave |
 | [08 · Configuración completa](/ApuntesRedes/09-nat-pat/08-configuracion-completa) | El laboratorio paso a paso | Práctico |
-| [09 · Cierre](/ApuntesRedes/09-nat-pat/09-cierre) | Sé el Paquete, Fireside, Laboratorio, Crucigrama… | Todos |
+| [09 · Cierre](/ApuntesRedes/09-nat-pat/09-cierre) | Sé el NAT, Fireside, Laboratorio, Crucigrama… | Todos |
 
 > 📖 **Flujo de lectura:** los 8 primeros puntos son teoría en progresión. El 9º es el aterrizaje práctico: léelo justo después del 8º y antes de abrir los boletines.
 

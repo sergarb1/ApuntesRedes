@@ -103,7 +103,7 @@ a) **Orden de comprobaciones (de básico a específico):**
    5. Revisar la access-list (¿permite la red correcta?) y el `overload` (¿está puesto?).
    6. Verificar las marcas `ip nat inside/outside` en las interfaces.
 
-b) **`show ip nat translations`.** Esperas ver entradas del tipo `tcp 83.45.12.78:puerto ... 192.168.1.X:puerto ...` en cuanto los PCs generen tráfico hacia fuera.
+b) **`show ip nat translations`.** Esperas ver entradas del tipo `tcp 203.0.113.2:puerto ... 192.168.1.X:puerto ...` en cuanto los PCs generen tráfico hacia fuera.
 
 c) Si la tabla está **vacía** con tráfico circulando:
    - La access-list no coincide con la red interna (red mal escrita o wildcard incorrecto).
