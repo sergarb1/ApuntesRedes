@@ -36,7 +36,7 @@ Se aplicaron de golpe las decisiones 🔴 recomendadas de las sesiones de revisi
 - **Cross-units**: cierre de U08 (relleno `08 ·`, desc "Sé el Router OSPF", footer) y U07 ("Sé el Router" → "Sé el Paquete del cierre").
 - **Menores**: U02 filas `RA2·d)`/`RA2·e)` con "→ se verá en…"; enlace de `03-nat-estatico-y-dinamico` a la unidad de ACL; U03-Q1 (diagrama de fragmentación reetiquetado, `u03-frag-hdr` resuelto → `check:diagrams` 55 → **54**, nuevo baseline).
 - Verificación: `check:unidad` 0 FALLOs (10 unidades) · `check-uds` 0 · `check-links` 0 · build 183 · DOCX 68/68.
-- Quedan 2 decisiones menores de **U10** (CE `b)` y variante del Fallo B) y el cierre transversal.
+- Queda solo el **cierre transversal** (diagramas y coherencia global); las 2 decisiones menores de **U10** (CE `b)` y Fallo B) se cerraron manteniendo lo aplicado.
 
 ## Ciclo por sesión (una unidad)
 

@@ -69,8 +69,8 @@ Par inicial/avanzado (+resueltos), sin imágenes, soluciones en `<details>`, cru
 
 ## 5. Decisiones pendientes del profe 🔴
 
-- [ ] **CE `b)` eliminado de las tablas** (hallazgo 16) — alineado con el temario unificado histórico (RA4 = a, b, c, d, f, i, j con b) = "Acceso a configuración", hoy unidad de enrutamiento estático). Si prefieres conservar una fila de seguridad propia, habría que inventarle cobertura sin letra oficial (vetable).
-- [ ] **Fallo B del laboratorio reescrito** (hallazgo 15) — era el candidato 🔴 técnico de la sesión (mezcla wildcard/puertos y `eq 20` ≠ FTP). Si lo prefieres, variantes posibles: dejar el fallo original pero corregido a "deny de FTP mal colocado", o el actual (regla general subida arriba).
+- [x] **CE `b)` eliminado de las tablas** (hallazgo 16) — ✅ **aprobado: se mantiene la eliminación** (índice y cierre con solo i) y j), idénticos). No se inventa una fila de seguridad propia sin letra oficial (era la única alternativa y quedaba vetable).
+- [x] **Fallo B del laboratorio reescrito** (hallazgo 15) — ✅ **aprobado: se mantiene el fallo actual** (regla general `permit ip … any` subida a la primera línea, con la pista 2 en espejo de la pista 1: A = todo bloqueado · B = todo pasa · C = interfaz errónea). La alternativa ("deny de FTP mal colocado") quedaba más floja técnicamente.
 - [x] (🔵) **Hipervincular el forward pointer de NAT** — ✅ **aplicado en la pasada de decisiones:** `03-nat-estatico-y-dinamico.md:78` enlaza ahora a `/ApuntesRedes/10-acl-seguridad`.
 
 ## 6. Verificación y commit
@@ -79,4 +79,4 @@ Par inicial/avanzado (+resueltos), sin imágenes, soluciones en `<details>`, cru
 - [x] DOCX regenerado (`npm run docx`, 68/68)
 - [x] Comprobación lingüística es-ES
 - [x] Matriz de solapamientos + README de estado actualizados (ACL = ✅ revisada; nota de renumeración ampliada: las revisiones nuevas ya usan la numeración vigente)
-- [ ] Commit `Revisión U10: …` (pendiente de confirmación)
+- [x] Commit `Revisión U10: …` (sesión original) · decisiones menores cerradas en la pasada posterior (commit de la pasada de decisiones)
