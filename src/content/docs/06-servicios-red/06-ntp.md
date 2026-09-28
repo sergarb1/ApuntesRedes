@@ -1,11 +1,11 @@
 ---
-title: "06 — NTP: la hora es sagrada"
+title: "6 — NTP: la hora es sagrada"
 description: Sin relojes sincronizados, no hay confianza ⏰
 ---
 
 <p><small>Sin relojes sincronizados, no hay confianza ⏰</small></p>
 
-> 🗺️ **Estás en:** 🗄️ **Servicios de red: DHCP, DNS y NTP** → 06 · NTP: la hora es sagrada
+> 🗺️ **Estás en:** 🗄️ **Servicios de red: DHCP, DNS y NTP** → 6 · NTP: la hora es sagrada
 
 ---
 
@@ -62,7 +62,7 @@ En producción no sincronizas contra "el reloj de Windows de alguien": apuntas a
 
 | Fuente | Ejemplo | Comentario |
 |---|---|---|
-| **NTP Pool español** | `es.pool.ntp.org` | Round-robin de servidores volunteering en España |
+| **NTP Pool español** | `es.pool.ntp.org` | Round-robin de servidores voluntarios en España |
 | **Observatorio Naval** | `hora.roa.es` | Fuente institucional oficial |
 | **Reloj del sistema del ISP** | La IP que entrega tu operador | Suele ser stratum 2-3 razonable |
 | **GPS/DCF77 local** | Antena en el rack | Cuando no quieres depender de Internet |
@@ -107,4 +107,4 @@ Buena práctica: configuras **varias fuentes** (al menos 3) para que NTP las com
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/06-servicios-red) · **Anterior:** [05 · Registros y zonas DNS](/ApuntesRedes/06-servicios-red/05-registros-dns) · **Siguiente:** [07 · NTP en Cisco: configuración y verificación](/ApuntesRedes/06-servicios-red/07-ntp-cisco)
+📚 [Volver al índice de la unidad](/ApuntesRedes/06-servicios-red) · **Anterior:** [5 · Registros y zonas DNS](/ApuntesRedes/06-servicios-red/05-registros-dns) · **Siguiente:** [7 · NTP en Cisco: configuración y verificación](/ApuntesRedes/06-servicios-red/07-ntp-cisco)

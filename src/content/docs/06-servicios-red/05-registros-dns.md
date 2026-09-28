@@ -1,11 +1,11 @@
 ---
-title: 05 — Registros y zonas DNS
+title: 5 — Registros y zonas DNS
 description: El directorio de tu dominio, fila a fila 📝
 ---
 
 <p><small>El directorio de tu dominio, fila a fila 📝</small></p>
 
-> 🗺️ **Estás en:** 🗄️ **Servicios de red: DHCP, DNS y NTP** → 05 · Registros y zonas DNS
+> 🗺️ **Estás en:** 🗄️ **Servicios de red: DHCP, DNS y NTP** → 5 · Registros y zonas DNS
 
 ---
 
@@ -95,4 +95,4 @@ En Packet Tracer, el servidor DNS integrado (pestaña Services → DNS) permite 
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/06-servicios-red) · **Anterior:** [04 · DNS: la guía telefónica de Internet](/ApuntesRedes/06-servicios-red/04-dns) · **Siguiente:** [06 · NTP: la hora es sagrada](/ApuntesRedes/06-servicios-red/06-ntp)
+📚 [Volver al índice de la unidad](/ApuntesRedes/06-servicios-red) · **Anterior:** [4 · DNS: la guía telefónica de Internet](/ApuntesRedes/06-servicios-red/04-dns) · **Siguiente:** [6 · NTP: la hora es sagrada](/ApuntesRedes/06-servicios-red/06-ntp)

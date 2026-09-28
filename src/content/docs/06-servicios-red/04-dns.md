@@ -1,11 +1,11 @@
 ---
-title: "04 — DNS: la guía telefónica de Internet"
+title: "4 — DNS: la guía telefónica de Internet"
 description: Nombres para humanos, IPs para máquinas 📖
 ---
 
 <p><small>Nombres para humanos, IPs para máquinas 📖</small></p>
 
-> 🗺️ **Estás en:** 🗄️ **Servicios de red: DHCP, DNS y NTP** → 04 · DNS: la guía telefónica de Internet
+> 🗺️ **Estás en:** 🗄️ **Servicios de red: DHCP, DNS y NTP** → 4 · DNS: la guía telefónica de Internet
 
 ---
 
@@ -135,4 +135,4 @@ Si un día un correo tuyo sale rechazado por "no reverse DNS", ya sabes: a tu IP
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/06-servicios-red) · **Anterior:** [03 · DHCP en Cisco y el agente de reenvío](/ApuntesRedes/06-servicios-red/03-dhcp-cisco) · **Siguiente:** [05 · Registros y zonas DNS](/ApuntesRedes/06-servicios-red/05-registros-dns)
+📚 [Volver al índice de la unidad](/ApuntesRedes/06-servicios-red) · **Anterior:** [3 · DHCP en Cisco y el agente de reenvío](/ApuntesRedes/06-servicios-red/03-dhcp-cisco) · **Siguiente:** [5 · Registros y zonas DNS](/ApuntesRedes/06-servicios-red/05-registros-dns)

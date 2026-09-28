@@ -37,11 +37,11 @@ Al terminar, serás capaz de:
 |---|---|---|
 | [01 · Por qué necesitas servicios](/ApuntesRedes/06-servicios-red/01-por-que-servicios) | La red como plataforma de servicios y el principio "todo automático" | Todos |
 | [02 · DHCP: el repartidor de IPs](/ApuntesRedes/06-servicios-red/02-dhcp) | DORA, pools, leases y opciones | Todos |
-| [03 · DHCP en Cisco y helper](/ApuntesRedes/06-servicios-red/03-dhcp-cisco) | Configuración IOS, exclusiones, reservas e ip helper-address | Todos |
-| [04 · DNS: la guía telefónica](/ApuntesRedes/06-servicios-red/04-dns) | Resolución jerárquica, recursiva vs iterativa, caché | Todos |
+| [03 · DHCP en Cisco y el agente de reenvío](/ApuntesRedes/06-servicios-red/03-dhcp-cisco) | Configuración IOS, exclusiones, reservas e ip helper-address | Todos |
+| [04 · DNS: la guía telefónica de Internet](/ApuntesRedes/06-servicios-red/04-dns) | Resolución jerárquica, recursiva vs iterativa, caché | Todos |
 | [05 · Registros y zonas DNS](/ApuntesRedes/06-servicios-red/05-registros-dns) | A, AAAA, CNAME, MX, NS, PTR y zonas directa/inversa | Clave |
 | [06 · NTP: la hora es sagrada](/ApuntesRedes/06-servicios-red/06-ntp) | Strata, drift, y por qué sin hora no hay logs ni certificados | Todos |
-| [07 · NTP en Cisco](/ApuntesRedes/06-servicios-red/07-ntp-cisco) | Configuración, autenticación y verificación | Avanzado |
+| [07 · NTP en Cisco: configuración y verificación](/ApuntesRedes/06-servicios-red/07-ntp-cisco) | Configuración, autenticación y verificación | Avanzado |
 | [08 · Diagnóstico de servicios](/ApuntesRedes/06-servicios-red/08-diagnostico-servicios) | nslookup, dig, debug dhcp y el método de los tres fallos | Clave |
 | [09 · Cierre](/ApuntesRedes/06-servicios-red/09-cierre) | Sé el Paquete, Fireside, Laboratorio, Crucigrama… | Todos |
 
@@ -68,10 +68,10 @@ Al terminar, serás capaz de:
 
 | CE | Criterio | Dónde se cubre |
 |---|---|---|
-| g) | Instalación de servidores DHCP/DNS | ✅ Puntos 2, 3, 4 y 5 + ⚡ Laboratorio (punto 9) |
-| h) | Resolución de nombres | ✅ Puntos 4 y 5 + 🧠 Atrévete a pensar (punto 9) |
-| i) | Servicios de infraestructura | ✅ Puntos 6 y 7 + 💬 Entrevista (punto 9) |
-| d) | Direccionamiento lógico | ✅ Puntos 2 y 3 (asignación automática) |
+| d) | Direccionamiento lógico IP (automatizado) | ✅ Puntos 2-3 + ⚡ Laboratorio (punto 9) |
+| g) | Servicios de configuración automática | ✅ Puntos 2-3 + 🧠 Atrévete (punto 9) |
+| h) | Servicios de resolución de nombres | ✅ Puntos 4-5 + 💬 Entrevista (punto 9) |
+| i) | Servicios de infraestructura de red | ✅ Puntos 6-7 + ⚡ Laboratorio (punto 9, NTP) |
 
 ---
 

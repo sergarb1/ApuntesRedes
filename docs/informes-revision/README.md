@@ -13,7 +13,7 @@ Orden de revisión: **1 → 12** (introducción primero). Alcance por sesión: *
 | 03 | Direccionamiento IP | ✅ revisada | [revision-U03-direccionamiento-ip.md](revision-U03-direccionamiento-ip.md) |
 | 04 | Switching y VLAN | ✅ revisada | [revision-U04-switching-vlan.md](revision-U04-switching-vlan.md) |
 | 05 | Trunking e inter-VLAN | ✅ revisada | [revision-U05-trunking-inter-vlan.md](revision-U05-trunking-inter-vlan.md) |
-| 06 | Servicios de red | ⏳ pendiente | — |
+| 06 | Servicios de red | ✅ revisada | [revision-U06-servicios-red.md](revision-U06-servicios-red.md) |
 | 07 | Enrutamiento estático | ✅ revisada | [revision-U06-enrutamiento-estatico.md](revision-U06-enrutamiento-estatico.md) |
 | 08 | OSPF | ✅ revisada | [revision-U07-ospf.md](revision-U07-ospf.md) |
 | 09 | NAT y PAT | ⏳ pendiente | — |

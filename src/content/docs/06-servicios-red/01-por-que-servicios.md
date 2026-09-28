@@ -1,11 +1,11 @@
 ---
-title: 01 — Por qué necesitas servicios
+title: 1 — Por qué necesitas servicios
 description: La red como plataforma, no como fin 🏗️
 ---
 
 <p><small>La red como plataforma, no como fin 🏗️</small></p>
 
-> 🗺️ **Estás en:** 🗄️ **Servicios de red: DHCP, DNS y NTP** → 01 · Por qué necesitas servicios
+> 🗺️ **Estás en:** 🗄️ **Servicios de red: DHCP, DNS y NTP** → 1 · Por qué necesitas servicios
 
 ---
 
@@ -104,4 +104,4 @@ Si un portátil "no navega", puede ser DNS caído… o DHCP que no entregó el D
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/06-servicios-red) · **Anterior:** [Índice de la unidad](/ApuntesRedes/06-servicios-red) · **Siguiente:** [02 · DHCP: el repartidor de IPs](/ApuntesRedes/06-servicios-red/02-dhcp)
+📚 [Volver al índice de la unidad](/ApuntesRedes/06-servicios-red) · **Anterior:** [Índice de la unidad](/ApuntesRedes/06-servicios-red) · **Siguiente:** [2 · DHCP: el repartidor de IPs](/ApuntesRedes/06-servicios-red/02-dhcp)
