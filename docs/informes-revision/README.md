@@ -18,7 +18,7 @@ Orden de revisión: **1 → 12** (introducción primero). Alcance por sesión: *
 | 08 | OSPF | ✅ revisada | [revision-U07-ospf.md](revision-U07-ospf.md) |
 | 09 | NAT y PAT | ✅ revisada | [revision-U09-nat-pat.md](revision-U09-nat-pat.md) |
 | 10 | ACL y seguridad | ✅ revisada | [revision-U10-acl-seguridad.md](revision-U10-acl-seguridad.md) |
-| 11 | Redes inalámbricas | ⏳ pendiente | — |
+| 11 | Redes inalámbricas | ✅ revisada | [revision-U11-redes-inalambricas.md](revision-U11-redes-inalambricas.md) |
 | 12 | Alta disponibilidad | ⏳ pendiente | — |
 | — | Cierre transversal | ⏳ pendiente | — |
 

@@ -1,11 +1,11 @@
 ---
-title: 03 — Estándares 802.11
+title: 3 — Estándares 802.11
 description: De los 11 Mbps aburridos a los 46 Gbps prometidos 🚀
 ---
 
 <p><small>De los 11 Mbps aburridos a los 46 Gbps prometidos 🚀</small></p>
 
-> 🗺️ **Estás en:** 📶 **Redes inalámbricas** → 03 · Estándares 802.11
+> 🗺️ **Estás en:** 📶 **Redes inalámbricas** → 3 · Estándares 802.11
 
 ---
 
@@ -101,4 +101,4 @@ Los saltos de velocidad no son magia: son técnicas concretas que conviene recon
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/11-redes-inalambricas) · **Anterior:** [02 · Medios y antenas](/ApuntesRedes/11-redes-inalambricas/02-medios-inalambricos) · **Siguiente:** [04 · Topologías y modos de trabajo](/ApuntesRedes/11-redes-inalambricas/04-topologias)
+📚 [Volver al índice de la unidad](/ApuntesRedes/11-redes-inalambricas) · **Anterior:** [2 · Medios y antenas](/ApuntesRedes/11-redes-inalambricas/02-medios-inalambricos) · **Siguiente:** [4 · Topologías y modos de trabajo](/ApuntesRedes/11-redes-inalambricas/04-topologias)

@@ -1,11 +1,11 @@
 ---
-title: 05 — Cobertura y diseño
+title: 5 — Cobertura y diseño
 description: Dónde poner cada AP y en qué canal 📐
 ---
 
 <p><small>Dónde poner cada AP y en qué canal 📐</small></p>
 
-> 🗺️ **Estás en:** 📶 **Redes inalámbricas** → 05 · Cobertura y diseño
+> 🗺️ **Estás en:** 📶 **Redes inalámbricas** → 5 · Cobertura y diseño
 
 ---
 
@@ -68,7 +68,7 @@ Cada AP en un canal no solapado, potencias moderadas, solapamiento en el pasillo
 El **site survey** es la medición real del emplazamiento. Dos variantes:
 
 - **Predictivo:** con un plano y un software (Ekahau, Hamina, hasta herramientas gratuitas) importas el plano, marcas paredes y materiales, y estimas APs y canales. Sirve para presupuestar.
-- **In situ (validación):** con la red montada (o con un AP portátil), recorres el suelo con una laptop/app midiendo RSSI, SNR y canales por zona. Es la verdad de la calle: el hormigón armado y las estanterías metálicas no leen presupuestos.
+- **In situ (validación):** con la red montada (o con un AP portátil), recorres el suelo con un portátil/app midiendo RSSI, SNR y canales por zona. Es la verdad de la calle: el hormigón armado y las estanterías metálicas no leen presupuestos.
 
 Qué documentar en un survey:
 
@@ -129,4 +129,4 @@ Qué documentar en un survey:
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/11-redes-inalambricas) · **Anterior:** [04 · Topologías y modos de trabajo](/ApuntesRedes/11-redes-inalambricas/04-topologias) · **Siguiente:** [06 · Seguridad WLAN](/ApuntesRedes/11-redes-inalambricas/06-seguridad-wlan)
+📚 [Volver al índice de la unidad](/ApuntesRedes/11-redes-inalambricas) · **Anterior:** [4 · Topologías y modos de trabajo](/ApuntesRedes/11-redes-inalambricas/04-topologias) · **Siguiente:** [6 · Seguridad WLAN](/ApuntesRedes/11-redes-inalambricas/06-seguridad-wlan)

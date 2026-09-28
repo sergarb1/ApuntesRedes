@@ -1,11 +1,11 @@
 ---
-title: 06 — Seguridad WLAN
+title: 6 — Seguridad WLAN
 description: Del candado roto de WEP al WPA3 de verdad 🔐
 ---
 
 <p><small>Del candado roto de WEP al WPA3 de verdad 🔐</small></p>
 
-> 🗺️ **Estás en:** 📶 **Redes inalámbricas** → 06 · Seguridad WLAN
+> 🗺️ **Estás en:** 📶 **Redes inalámbricas** → 6 · Seguridad WLAN
 
 ---
 
@@ -120,4 +120,4 @@ Las piezas clave:
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/11-redes-inalambricas) · **Anterior:** [05 · Cobertura y diseño](/ApuntesRedes/11-redes-inalambricas/05-cobertura-y-diseno) · **Siguiente:** [07 · APs y controladores](/ApuntesRedes/11-redes-inalambricas/07-aps-y-wlc)
+📚 [Volver al índice de la unidad](/ApuntesRedes/11-redes-inalambricas) · **Anterior:** [5 · Cobertura y diseño](/ApuntesRedes/11-redes-inalambricas/05-cobertura-y-diseno) · **Siguiente:** [7 · APs y controladores](/ApuntesRedes/11-redes-inalambricas/07-aps-y-wlc)

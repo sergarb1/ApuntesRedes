@@ -38,7 +38,7 @@ Ordena de peor a mejor: WEP, WPA3, WPA, WPA2, red abierta.
 
 ## 5. WiFi 4 → WiFi 7
 
-Relaciona cada marketing-name con su estándar IEEE:
+Relaciona cada nombre comercial con su estándar IEEE:
 
 | Marketing | IEEE |
 |---|---|

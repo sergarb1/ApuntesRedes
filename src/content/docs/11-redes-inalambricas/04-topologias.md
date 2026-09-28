@@ -1,11 +1,11 @@
 ---
-title: 04 — Topologías y modos de trabajo
+title: 4 — Topologías y modos de trabajo
 description: BSS, ESS, ad-hoc, repetidores y mallas 🕸️
 ---
 
 <p><small>BSS, ESS, ad-hoc, repetidores y mallas 🕸️</small></p>
 
-> 🗺️ **Estás en:** 📶 **Redes inalámbricas** → 04 · Topologías y modos de trabajo
+> 🗺️ **Estás en:** 📶 **Redes inalámbricas** → 4 · Topologías y modos de trabajo
 
 ---
 
@@ -24,7 +24,7 @@ Estos términos son el idioma de las redes inalámbricas; caen en examen y en en
 | **BSS** (Basic Service Set) | Un AP + sus clientes asociados | El WiFi de tu casa |
 | **BSSID** | La MAC del AP (identifica la BSS) | La MAC de la radio del AP |
 | **SSID** | El nombre lógico de la red | "Empresa-WiFi" |
-| **ESS** (Extended SS) | Varios APs con el mismo SSID, unidos por cable | El WiFi de todo el edificio |
+| **ESS** (Extended Service Set) | Varios APs con el mismo SSID, unidos por cable | El WiFi de todo el edificio |
 | **IBSS / ad-hoc** | Clientes hablándose directamente, sin AP | Dos portátiles compartiendo archivos |
 | **DS** (Distribution System) | La red cableada que une los APs del ESS | El switch y los trunks ya vistos |
 
@@ -108,4 +108,4 @@ Si tu ESS está mal diseñado, el "roaming" se convierte en "desconexión de 5 s
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/11-redes-inalambricas) · **Anterior:** [03 · Estándares 802.11](/ApuntesRedes/11-redes-inalambricas/03-estandares-80211) · **Siguiente:** [05 · Cobertura y diseño](/ApuntesRedes/11-redes-inalambricas/05-cobertura-y-diseno)
+📚 [Volver al índice de la unidad](/ApuntesRedes/11-redes-inalambricas) · **Anterior:** [3 · Estándares 802.11](/ApuntesRedes/11-redes-inalambricas/03-estandares-80211) · **Siguiente:** [5 · Cobertura y diseño](/ApuntesRedes/11-redes-inalambricas/05-cobertura-y-diseno)

@@ -1,11 +1,11 @@
 ---
-title: 08 — Configuración y verificación
+title: 8 — Configuración y verificación
 description: Manos al aire, con cable de red debajo 🛠️
 ---
 
 <p><small>Manos al aire, con cable de red debajo 🛠️</small></p>
 
-> 🗺️ **Estás en:** 📶 **Redes inalámbricas** → 08 · Configuración y verificación
+> 🗺️ **Estás en:** 📶 **Redes inalámbricas** → 8 · Configuración y verificación
 
 ---
 
@@ -42,7 +42,13 @@ Router(dhcp-config)# default-router 192.168.10.1
 Router(config)# ip dhcp pool VLAN99
 Router(dhcp-config)# network 192.168.99.0 255.255.255.0
 Router(dhcp-config)# default-router 192.168.99.1
+Router(config)# access-list 110 deny ip 192.168.99.0 0.0.0.255 192.168.10.0 0.0.0.255
+Router(config)# access-list 110 permit ip any any
+Router(config)# interface gigabitEthernet 0/0.99
+Router(config-subif)# ip access-group 110 in
 ```
+
+> 💡 La ACL 110 es la que hace real el aislamiento de `INVITADOS`: sin ella, el router enruta entre las dos VLANs y los invitados pingen a la VLAN 10. La montas a fondo en la [unidad de ACL y seguridad](/ApuntesRedes/10-acl-seguridad).
 
 ### Paso 2: el switch, trunk hacia el AP
 
@@ -63,7 +69,7 @@ En el AP doméstico (Home Wireless), pestaña Config → Wireless:
 | Seguridad | WPA2-PSK con AES | WPA2-PSK con AES |
 | Frase | Cl4veC0rp2026 | bienv3nido2026 |
 
-En APs con varias SSIDs se asigna cada SSID a su VLAN en la configuración; en los AP domésticos de Packet Tracer trabaja con una SSID principal, así que para el laboratorio multissid usa un AP profesional o dos APs (uno por SSID/VLAN), conectando cada uno a un puerto access de su VLAN.
+En APs con varias SSIDs se asigna cada SSID a su VLAN en la configuración; en los AP domésticos de Packet Tracer solo se trabaja con una SSID principal, así que para el laboratorio multissid usa un AP profesional o dos APs (uno por SSID/VLAN), conectando cada uno a un puerto access de su VLAN.
 
 > ⚠️ **Detalle clásico del laboratorio:** el portátil no trae antena inalámbrica por defecto. Apágalo (botón de encendido), cambia el módulo por un **WPC300N** y vuelve a encenderlo. El "no ve redes" de principiante casi siempre es eso.
 
@@ -93,6 +99,7 @@ AP(config)# interface dot11Radio 0
 AP(config-if)# ssid CORP
 AP(config-if)# channel 1
 AP(config-if)# power local 50       ← potencia moderada
+AP(config)# interface dot11Radio 0.10
 AP(config-subif)# encapsulation dot1Q 10
 ```
 
@@ -109,7 +116,7 @@ La estructura mental: **SSID → VLAN → subinterfaz radio + subinterfaz Ethern
 | PC Wireless → Link Information | Cliente | Señal, velocidad, calidad |
 | `ipconfig /all` | Cliente | ¿Recibió IP por DHCP? ¿Gateway correcto? |
 | `ping gateway` | Cliente | ¿Llega al router? |
-| WiFi analyzer (móvil/laptop) | In situ | Canales en uso, redes vecinas, ruido |
+| WiFi analyzer (móvil/portátil) | In situ | Canales en uso, redes vecinas, ruido |
 
 Fallos típicos y su escalera:
 
@@ -160,7 +167,7 @@ Fallos típicos y su escalera:
 
 | Término | Idea general |
 |---|---|
-| WPC300N | Adaptador inalámbrico de laptop en Packet Tracer |
+| WPC300N | Adaptador inalámbrico de portátil en Packet Tracer |
 | guest-mode | SSID difundido en beacon (visible) |
 | Subinterfaz radio | Equivalente "por el aire" del router-on-a-stick |
 | WiFi analyzer | App de medición de canales y señal |
@@ -168,4 +175,4 @@ Fallos típicos y su escalera:
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/11-redes-inalambricas) · **Anterior:** [07 · APs y controladores](/ApuntesRedes/11-redes-inalambricas/07-aps-y-wlc) · **Siguiente:** [09 · Cierre](/ApuntesRedes/11-redes-inalambricas/09-cierre)
+📚 [Volver al índice de la unidad](/ApuntesRedes/11-redes-inalambricas) · **Anterior:** [7 · APs y controladores](/ApuntesRedes/11-redes-inalambricas/07-aps-y-wlc) · **Siguiente:** [9 · Cierre](/ApuntesRedes/11-redes-inalambricas/09-cierre)
