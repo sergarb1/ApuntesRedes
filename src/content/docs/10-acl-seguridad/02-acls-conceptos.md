@@ -62,7 +62,7 @@ La ACL no funciona sola: hay que **colgarla de una interfaz** con `ip access-gro
 | **Inbound** | Antes de que el router enrute (a la entrada de la interfaz) | Filtrar tráfico que entra a tu red desde el exterior |
 | **Outbound** | Después de que el router enrute, antes de salir por la interfaz | Restringir qué sale de tu red hacia fuera |
 
-La diferencia práctica importa para el byte en cuestión de eficiencia:
+La diferencia práctica se resume en la eficiencia:
 
 - **Inbound** ahorra trabajo de CPU: el paquete se descarta **antes** de que el router pierda tiempo enrutándolo.
 - **Outbound** evalúa después de la decisión de ruta, pero permite saber *hacia dónde* va el tráfico.
@@ -73,7 +73,7 @@ R1(config-if)# ip access-group 10 out      → ACL estándar 10 en salida
 R1(config-if)# ip access-group 101 in      → ACL extendida 101 en entrada
 ```
 
-> ⚠️ **CONRAD:** "Una ACL por sentido por interfaz. DOS ACLs por interfaz (una in + una out) un día te darán sorpresas: evalúan en sitios distintos de la cadena. Piensa si quieres trocear antes o después de enrutar."
+> ⚠️ **CONRAD:** "Una ACL por sentido por interfaz: que convivan la in y la out de una interfaz es normal. Lo que sí debes perder de vista es que evalúan en sitios distintos de la cadena. Piensa si quieres trocear antes o después de enrutar."
 
 ---
 
@@ -91,7 +91,7 @@ Si alguna vez un instructor te pregunta "¿dónde aplico esta ACL?", responde co
 
 1. ¿Cuál es la línea que "todas las ACLs llevan escondida al final"?
 2. ¿Qué direcciones filtra una ACL estándar? ¿Y una extendida?
-3. ¿En qué se diferencian paran "inbound" y "outbound" respecto al trabajo del router?
+3. ¿Qué diferencia hay entre "inbound" y "outbound" respecto al trabajo del router?
 
 <details>
 <summary>🔄 Respuestas</summary>

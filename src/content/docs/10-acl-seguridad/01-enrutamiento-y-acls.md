@@ -1,11 +1,11 @@
 ---
-title: 01 — De las rutas a las ACLs
+title: 1 — De las rutas a las ACLs
 description: Antes de filtrar, saber por dónde viaja 🗺️
 ---
 
 <p><small>Antes de filtrar, saber por dónde viaja 🗺️</small></p>
 
-> 🗺️ **Estás en:** 🛡️ **ACLs y seguridad de red** → 01 · De las rutas a las ACLs
+> 🗺️ **Estás en:** 🛡️ **ACLs y seguridad de red** → 1 · De las rutas a las ACLs
 
 ---
 
@@ -99,4 +99,4 @@ Esta unidad se centra en la capa media (ACLs + hardening básico del router), co
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/10-acl-seguridad) · **Anterior:** [Índice de la unidad](/ApuntesRedes/10-acl-seguridad) · **Siguiente:** [02 · ACLs: concepto y tipos](/ApuntesRedes/10-acl-seguridad/02-acls-conceptos)
+📚 [Volver al índice de la unidad](/ApuntesRedes/10-acl-seguridad) · **Anterior:** [Índice de la unidad](/ApuntesRedes/10-acl-seguridad) · **Siguiente:** [2 · ACLs: concepto y tipos](/ApuntesRedes/10-acl-seguridad/02-acls-conceptos)

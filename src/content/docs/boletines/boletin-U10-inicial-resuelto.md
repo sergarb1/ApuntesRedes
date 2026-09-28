@@ -52,7 +52,7 @@ c) **Estándar.** Es el escenario clásico de la estándar: menos CPU y solo int
 
 ## 7. ¿Dónde aplico la ACL?
 
-a) **Cerca del destino**: en R1, interfaz hacia LAN-B, sentido **out**. (Otra opción correcta: en la interfaz que recibe el tráfico de PC1, sentido in.) La estándar se coloca cerca del destino para no filtrar de más en el camino.
+a) **Cerca del destino**: en R1, interfaz hacia LAN-B, sentido **out**. La estándar se coloca cerca del destino para no filtrar de más en el camino.
 b) **Cerca del origen**: en R1, interfaz hacia LAN-A, sentido **in**. La extendida filtra con precisión (protocolo+puerto), así que conviene cortar el tráfico lo antes posible y no consumir ancho de banda en vano.
 
 ## 8. Comandos de verificación

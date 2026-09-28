@@ -19,7 +19,7 @@ Has terminado la teoría: sabes cómo un paquete cruza las dos aduanas del route
 
 **Paso 1:** Salgo de la VLAN de invitados (192.168.99.50) con destino 192.168.1.1 (el router), puerto TCP 23. Llego por el trunk hasta el router, por su subinterfaz G0/0.99.
 
-**Paso 2:** El router consulta: ¿hay ACL **in** en G0/0.99? Sí: `access-list 120 deny tcp 192.168.99.0 0.0.0.255 any eq 23`. Coincido: origen mi red, destino cualquiera, puerto 23. **Deny.** Descartado en la aduana de entrada.
+**Paso 2:** El router consulta: ¿hay ACL **in** en G0/0.99? Sí: `access-list 120 deny tcp 192.168.99.0 0.0.0.255 any eq 23` y, justo debajo, `access-list 120 permit tcp 192.168.99.0 0.0.0.255 any`. Coincido con la primera: origen mi red, destino cualquiera, puerto 23. **Deny.** Descartado en la aduana de entrada.
 
 **Paso 3:** ¿Y si en vez de telnet fuera SSH (22)? La ACL solo niega el 23; la siguiente línea permite el resto. El router me deja pasar… pero la línea VTY del router solo acepta 192.168.1.0/24 (otra ACL), así que acabaría rechazado igual. Dos capas, dos aduanas, cero acceso.
 
@@ -40,7 +40,7 @@ Has terminado la teoría: sabes cómo un paquete cruza las dos aduanas del route
 
 **Extendida (100-199):** — Y para "que la contabilidad salga a Internet pero sin FTP, y que nadie de invitados toque el puerto 23", me necesitas a mí: origen, destino, protocolo y puerto.
 
-**Estándar:** — Pero ¿dónde te colocan? Cerca del **origen**, para no dejar viajar tráfico que luego se descarta. Eso te hace consumir recursos del router en todo el camino.
+**Estándar:** — Pero ¿dónde te colocan? Cerca del **origen**, para descartar lo antes posible y no dejar viajar tráfico que luego se tira. Si te pusieran cerca del destino, ese tráfico habría consumido recursos del router en todo el camino para acabar descartado igual.
 
 **Extendida:** — Y ¿a ti dónde te colocan? Cerca del **destino**, porque si te pones cerca del origen, cortas tráfico que no querías cortar: tú solo distingues por origen, y cualquier destino se te escapa del filtro.
 
@@ -104,7 +104,7 @@ Has terminado la teoría: sabes cómo un paquete cruza las dos aduanas del route
 
 **Ahora, SIN MIRAR, tu profesor introduce TRES fallos:**
 - Fallo A: añade en la ACL de invitados una primera línea `deny ip any any` (arriba de los permits).
-- Fallo B: invierte el orden: `permit ... eq ftp` después del deny tcp con wildcard `any eq 20`.
+- Fallo B: sube a la primera línea de la ACL de invitados un `permit ip 192.168.99.0 0.0.0.255 any` (la regla general tapa a las específicas).
 - Fallo C: aplica la ACL de invitados en la interfaz **errónea** (out en G0/0.20 en vez de in en G0/0.99).
 
 **Reto:** con pings, navegador y `show access-lists` (mira los contadores de matches), diagnosticar cada fallo y corregir. Documenta síntoma → causa → solución.
@@ -113,7 +113,7 @@ Has terminado la teoría: sabes cómo un paquete cruza las dos aduanas del route
 
 > **Pista 1 (fallo A):** contadores en `show access-lists`: la primera línea hace match con TODO y ni un paquete pasa. El orden es sentido único.
 >
-> **Pista 2 (fallo B):** el deny con wildcard `0.0.0.255 eq 20` (rango de puertos, no solo 20) hace match antes del permit específico. Lee la ACL línea a línea en orden.
+> **Pista 2 (fallo B):** la línea general de arriba hace match con TODO antes de que los denies lleguen a contar: lee la ACL línea a línea (lo específico arriba, lo general abajo).
 >
 > **Pista 3 (fallo C):** los contadores de la ACL correcta no hacen match: ¿en qué interfaz y dirección está aplicada? `show ip interface` te lo dice.
 
@@ -223,9 +223,8 @@ El paquete curioso de invitados volvió a casa con dos puertas en la cara (la AC
 
 | CE | Criterio | Cubierto |
 |---|---|---|
-| i) | Filtrado de tráfico | ✅ Puntos 2-3 y ⚡ Laboratorio |
-| j) | Listas de control de acceso | ✅ Puntos 2-4 + 🧠 Atrévete (punto 6) |
-| b) | Acceso y gestión segura del equipo | ✅ Puntos 1 y 5 + 💬 Entrevista (punto 6) |
+| i) | Filtrado de tráfico (ACLs) | ✅ Puntos 1-4 + ⚡ Laboratorio (punto 6) |
+| j) | Listas de control de acceso | ✅ Puntos 2-4 + 🧠 Atrévete a pensar (punto 6) |
 
 ---
 

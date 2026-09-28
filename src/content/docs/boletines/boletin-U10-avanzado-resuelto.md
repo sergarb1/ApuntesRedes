@@ -49,11 +49,14 @@ interface g0/1
 
 ip access-list extended FIREWALL_RETORNO
  permit tcp any 192.168.1.0 0.0.0.255 established
+ permit udp any eq 53 192.168.1.0 0.0.0.255 any
  deny ip any any
 
 interface g0/1
  ip access-group FIREWALL_RETORNO in
 ```
+
+(Las respuestas DNS no son TCP: si solo dejas el `established`, la consulta sale pero la respuesta muere en el `deny ip any any`. Por eso la línea UDP con puerto de origen 53.)
 
 ## 4. ACL nombrada para horario
 
@@ -82,15 +85,16 @@ b) **Rompe el principio de "primera coincidencia gana"** (y el de ordenar primer
 
 a) **No.** La línea `deny ip any any` está en medio: al evaluarla, todo lo que no sea SSH de administración (incluido ICMP) muere ahí. El `permit icmp` de abajo nunca se consulta: la ACL se detiene en la primera coincidencia.
 
-b) **En una ACL numerada no se puede reordenar ni insertar en medio**: hay que borrarla (`no access-list 110`) y reescribirla en el orden correcto, o usar ACL nombrada con número de secuencia:
+b) **En una ACL numerada no se puede reordenar ni insertar en medio**: la solución canónica es borrarla y reescribirla en el orden correcto:
 
 ```bash
-ip access-list extended 110
- no 20
- 5 permit icmp any any
+no access-list 110
+access-list 110 permit icmp any any
+access-list 110 permit tcp 192.168.100.0 0.0.0.255 host 10.0.0.50 eq 22
+access-list 110 deny ip any any
 ```
 
-(Con secuencias puedes insertar antes de la línea 20 sin borrar la ACL.)
+(Si la política va a crecer, en la próxima escríbela como ACL **nombrada**: `ip access-list extended SOLO_SSH`… allí sí puedes insertar, borrar y reordenar líneas con sus números de secuencia.)
 
 c) **No es necesaria.** El `deny ip any any` implícito del final ya hace ese trabajo. Escribirla solo aporta legibilidad explícita (y contadores visibles).
 

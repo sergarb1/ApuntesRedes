@@ -49,7 +49,7 @@ Switch(config-if)# switchport port-security violation shutdown
 | `maximum` | Nº máximo de MACs permitidas en el puerto (**por defecto 1**) |
 | `mac-address sticky` | Aprende la MAC automáticamente y la **guarda en la config** (no caduca) |
 | `violation shutdown` | **Deshabilita el puerto** si se supera el máximo (por defecto) |
-| `violation restrict` | Descarta el tráfico extra pero **no deshabilita** el puerto |
+| `violation restrict` | Descarta el tráfico extra, genera log y contadores, pero **no deshabilita** el puerto |
 | `violation protect` | Descarta el tráfico extra **sin notificar** (silencioso) |
 
 > 💡 **Sticky MAC:** con `mac-address sticky`, la primera MAC que aprende el puerto se convierte en permanente (queda escrita en la configuración en ejecución). Si reinicias el switch **sin guardar** (`copy running-config startup-config`), esa MAC se pierde; guarda la configuración si quieres que sobreviva al reinicio.

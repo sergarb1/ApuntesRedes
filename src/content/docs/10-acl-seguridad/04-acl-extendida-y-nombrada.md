@@ -25,7 +25,7 @@ Fíjate en cómo se multiplican los campos respecto a la estándar:
 access-list {número} [permit | deny] [protocolo] [origen wildcard] [destino wildcard] [eq puerto]
 ```
 
-Los números van del **100 al 199** (y ampliados **2000-2699**). Y lee este ejemplo del archivo original: el clásico "web solo hacia Google DNS".
+Los números van del **100 al 199** (y ampliados **2000-2699**). Un ejemplo clásico: solo web y DNS hacia donde tú digas.
 
 ```bash
 R1(config)# access-list 101 permit tcp 192.168.1.0 0.0.0.255 host 8.8.8.8 eq 80
@@ -63,7 +63,7 @@ R1(config-if)# ip access-group BLOQUEAR_YOUTUBE out
 Observa:
 
 - Se entra a un **submodo** propio (`config-ext-nacl#`): a partir de ahí escribes solo reglas, sin repetir `access-list 101` en cada línea.
-- `173.194.0.0` sin wildcard más que la de host... espera: aquí sería `host 173.194.0.0` (esa IP concreta) o `173.194.0.0 0.0.0.255` si quieres todo el bloque de Google. En el ejemplo, cuidado: poner `host` limita a una sola IP — en producción querrías `173.194.0.0 0.0.255.255` para el rango completo de YouTube.
+- En el ejemplo se usa `host 173.194.0.0` (una sola IP concreta). Para el rango completo de YouTube/Google hace falta su wildcard: `173.194.0.0 0.0.255.255` — menos líneas, misma idea.
 - La aplicación es idéntica: `ip access-group NOMBRE out`.
 
 ---
@@ -100,7 +100,7 @@ Un clásico de los routers de borde: quieres bloquear el tráfico entrante, pero
 ```bash
 R1(config)# ip access-list extended FIREWALL
 R1(config-ext-nacl)# permit tcp any 192.168.1.0 0.0.0.255 established
-R1(config-ext-nacl)# permit udp ... (los retornos UDP van por puertos efímeros, otra historia)
+R1(config-ext-nacl)# permit udp ...       → los retornos UDP vuelven a puertos efímeros (otra historia)
 ```
 
 El parámetro `established` deja pasar paquetes TCP cuyo **flag ACK está activo**: es decir, tráfico de una conversación ya iniciada, no de una petición entrante nueva (esas viajan con SYN). No es un firewall de estado completo, pero es el mecanismo ACL clásico para una política de retorno.
@@ -119,7 +119,7 @@ Los mismos comandos de siempre, con un truco extra debajo:
 ```bash
 R1# show access-lists                → Todas las ACLs con contadores
 R1# show access-lists 101            → La numerada 101
-R1# show access-lists BLOQUEAR_YT    → La nombrada
+R1# show access-lists BLOQUEAR_YT_LABORAL    → La nombrada
 R1# show ip interface g0/1           → ACLs aplicadas a la interfaz
 R1# debug ip packet ...              → Ver paquetes en acción (¡con cuidado! alto consumo)
 ```

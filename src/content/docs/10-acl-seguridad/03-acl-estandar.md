@@ -13,7 +13,7 @@ description: Filtrar por IP origen con acceso-list y wildcards, colocándola cer
 
 > Una **ACL estándar** es una lista numerada que filtra el tráfico **solo por dirección IP de origen** usando una wildcard mask, y por eso se aplica **lo más cerca posible del destino**.
 
-En el punto 6 viste el mapa de los tipos. Ahora toca ensuciarse las manos con la más sencilla: la estándar. Su limitación (solo mira el origen) es la que define su colocación y sus peligros. Manejarla bien es el primer nivel de destreza ACL.
+En el punto 2 viste el mapa de los tipos. Ahora toca ensuciarse las manos con la más sencilla: la estándar. Su limitación (solo mira el origen) es la que define su colocación y sus peligros. Manejarla bien es el primer nivel de destreza ACL.
 
 ---
 
@@ -25,7 +25,7 @@ La sintaxis de una ACL estándar es solo dos palabras y una IP (con su wildcard)
 access-list {número} [permit | deny] {origen} {wildcard}
 ```
 
-Pero hay un trampa con la **wildcard mask**: es el **inverso** de la máscara de subred. Donde la subred dice "1 = fijo", la wildcard pone "0 = fijo"; donde la subred dice "0 = libre", la wildcard pone "1 = cualquier valor". Es el espejo:
+Pero hay una trampa con la **wildcard mask**: es el **inverso** de la máscara de subred. Donde la subred dice "1 = fijo", la wildcard pone "0 = fijo"; donde la subred dice "0 = libre", la wildcard pone "1 = cualquier valor". Es el espejo:
 
 | Máscara de subred | Wildcard equivalente | Qué coincide |
 |---|---|---|
@@ -36,7 +36,7 @@ Pero hay un trampa con la **wildcard mask**: es el **inverso** de la máscara de
 
 Para pasarlas sin sufrimiento: **resta cada octeto a 255** (o imagina el espejo de la máscara). `255.255.255.0` → `0.0.0.255`. Sencillo y mecánico.
 
-> ⚠️ **CONRAD:** "¿Crees que en `access-list` pones la máscara de subred normal? Estás invitado a ver cómo no bloquea nada de lo que creías. La ACL habla en wildcards. La máscara normal es cosa de `ip route` (punto 3). Dos mundos, dos vocabularios."
+> ⚠️ **CONRAD:** "¿Crees que en `access-list` pones la máscara de subred normal? Estás invitado a ver cómo no bloquea nada de lo que creías. La ACL habla en wildcards. La máscara normal es cosa de `ip route`, en la unidad de enrutamiento estático. Dos mundos, dos vocabularios."
 
 ---
 
