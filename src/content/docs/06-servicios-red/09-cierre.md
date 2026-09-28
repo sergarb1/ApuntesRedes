@@ -24,7 +24,7 @@ Has terminado la teoría: sabes cómo un cliente consigue IP con DORA, cómo se 
 **Paso 3:** Aceptas con REQUEST, confirmas con el ACK y, ya con identidad, tu navegador pregunta por `intranet.empresa.local`. El resolver responde con la 10.0.0.20. Pero hay un detalle raro: tu reloj marca 2019 y el servidor de la intranet te rechaza el acceso.
 
 **¿Qué ha pasado?**
-1. **El DORA fue correcto pero el NTP está sin configurar** → ✅ ¡Correcto! IP y nombres fluyen, pero la hora desajustada rompe la autenticación con el servidor. Toque final: `ntp server` en el portátil.
+1. **El DORA fue correcto pero el NTP está sin configurar** → ✅ ¡Correcto! IP y nombres fluyen, pero la hora desajustada rompe la autenticación con el servidor. Toque final: pon el portátil en hora con el servidor NTP.
 2. **El DHCP entregó una IP equivocada** → ❌ Si la IP fuera errónea, ni siquiera habrías resuelto el nombre de la intranet. El síntoma no está en el escalón 1 sino en el 5.
 3. **El DNS está caído** → ❌ El nombre resolvió (te dio la IP). El rechazo es posterior y temporal: es hora, no nombres.
 
@@ -101,7 +101,7 @@ Has terminado la teoría: sabes cómo un cliente consigue IP con DORA, cómo se 
 
 **Configura al inicio:**
 1. Router como gateway 192.168.1.1 y **servidor DHCP** (pool .101-.150, excluye .1-.100).
-2. Servidor con DNS activado: registro `www.empresa.local` → 192.168.1.200, y NTP activado como stratum 4.
+2. Servidor con DNS activado: registro `www.empresa.local` → 192.168.1.200, y NTP activado.
 3. Router sincronizado con el servidor NTP (`ntp server 192.168.1.200`).
 4. Comprueba que los 3 PCs obtienen IP y resuelven `www.empresa.local` en el navegador.
 
@@ -220,10 +220,10 @@ El portátil recién estrenado consigue su IP, aprende a pronunciar nombres ajen
 
 | CE | Criterio | Cubierto |
 |---|---|---|
-| d) | Direccionamiento lógico IP (automatizado) | ✅ Puntos 2-3 y ⚡ Laboratorio |
+| d) | Direccionamiento lógico IP (automatizado) | ✅ Puntos 2-3 + ⚡ Laboratorio (punto 9) |
 | g) | Servicios de configuración automática | ✅ Puntos 2-3 + 🧠 Atrévete (punto 9) |
 | h) | Servicios de resolución de nombres | ✅ Puntos 4-5 + 💬 Entrevista (punto 9) |
-| i) | Servicios de infraestructura de red | ✅ Puntos 6-7 + ⚡ Laboratorio (NTP) |
+| i) | Servicios de infraestructura de red | ✅ Puntos 6-7 + ⚡ Laboratorio (punto 9, NTP) |
 
 ---
 

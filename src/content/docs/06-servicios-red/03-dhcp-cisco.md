@@ -1,11 +1,11 @@
 ---
-title: 03 — DHCP en Cisco y el agente de reenvío
+title: 3 — DHCP en Cisco y el agente de reenvío
 description: Un pool, unas exclusiones y un helper 🧰
 ---
 
 <p><small>Un pool, unas exclusiones y un helper 🧰</small></p>
 
-> 🗺️ **Estás en:** 🗄️ **Servicios de red: DHCP, DNS y NTP** → 03 · DHCP en Cisco y el agente de reenvío
+> 🗺️ **Estás en:** 🗄️ **Servicios de red: DHCP, DNS y NTP** → 3 · DHCP en Cisco y el agente de reenvío
 
 ---
 
@@ -84,7 +84,7 @@ CLIENTE                    ROUTER SUCURSAL                SERVIDOR 10.0.0.5
    |─ REQUEST (broadcast) ──────►|   … y así hasta el ACK       |
 ```
 
-> 💡 **`ip helper-address` no es solo DHCP:** reenvía por defecto otros broadcasts útiles (TFTP, DNS antiguo, NetBIOS, TFTP…). Si quieres afinar, existe `ip forward-protocol` para elegir qué dejar pasar.
+> 💡 **`ip helper-address` no es solo DHCP:** reenvía por defecto otros broadcasts útiles (TFTP, DNS, NetBIOS, syslog…). Si quieres afinar, existe `ip forward-protocol` para elegir qué dejar pasar.
 
 ---
 
@@ -110,7 +110,7 @@ Con los SVIs de la [unidad de trunking e inter-VLAN](/ApuntesRedes/05-trunking-i
 | Comando | Qué te cuenta |
 |---|---|
 | `show ip dhcp binding` | Concesiones activas: MAC → IP, fecha de expiración |
-| `show ip dhcp pool` | Uso de cada pool: direcciones ofrecidas, Solicitado, expiradas |
+| `show ip dhcp pool` | Uso de cada pool: direcciones ofrecidas, solicitadas, expiradas |
 | `show ip dhcp conflict` | Conflictos detectados (dos equipos con la misma IP) |
 | `debug ip dhcp server events` | El DORA en vivo (¡con cuidado en producción!) |
 
@@ -170,4 +170,4 @@ Flujo de diagnóstico rápido:
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/06-servicios-red) · **Anterior:** [02 · DHCP: el repartidor de IPs](/ApuntesRedes/06-servicios-red/02-dhcp) · **Siguiente:** [04 · DNS: la guía telefónica de Internet](/ApuntesRedes/06-servicios-red/04-dns)
+📚 [Volver al índice de la unidad](/ApuntesRedes/06-servicios-red) · **Anterior:** [2 · DHCP: el repartidor de IPs](/ApuntesRedes/06-servicios-red/02-dhcp) · **Siguiente:** [4 · DNS: la guía telefónica de Internet](/ApuntesRedes/06-servicios-red/04-dns)

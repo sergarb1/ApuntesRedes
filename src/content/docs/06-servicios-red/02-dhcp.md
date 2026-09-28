@@ -1,11 +1,11 @@
 ---
-title: "02 — DHCP: el repartidor de IPs"
+title: "2 — DHCP: el repartidor de IPs"
 description: Cuatro mensajes y una dirección servida 📦
 ---
 
 <p><small>Cuatro mensajes y una dirección servida 📦</small></p>
 
-> 🗺️ **Estás en:** 🗄️ **Servicios de red: DHCP, DNS y NTP** → 02 · DHCP: el repartidor de IPs
+> 🗺️ **Estás en:** 🗄️ **Servicios de red: DHCP, DNS y NTP** → 2 · DHCP: el repartidor de IPs
 
 ---
 
@@ -128,4 +128,4 @@ La reserva (o *asignación manual* en la jerga RFC) es la práctica recomendada:
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/06-servicios-red) · **Anterior:** [01 · Por qué necesitas servicios](/ApuntesRedes/06-servicios-red/01-por-que-servicios) · **Siguiente:** [03 · DHCP en Cisco y el agente de reenvío](/ApuntesRedes/06-servicios-red/03-dhcp-cisco)
+📚 [Volver al índice de la unidad](/ApuntesRedes/06-servicios-red) · **Anterior:** [1 · Por qué necesitas servicios](/ApuntesRedes/06-servicios-red/01-por-que-servicios) · **Siguiente:** [3 · DHCP en Cisco y el agente de reenvío](/ApuntesRedes/06-servicios-red/03-dhcp-cisco)

@@ -1,11 +1,11 @@
 ---
-title: "07 — NTP en Cisco: configuración y verificación"
+title: "7 — NTP en Cisco: configuración y verificación"
 description: Manos al reloj del router ⚙️
 ---
 
 <p><small>Manos al reloj del router ⚙️</small></p>
 
-> 🗺️ **Estás en:** 🗄️ **Servicios de red: DHCP, DNS y NTP** → 07 · NTP en Cisco: configuración y verificación
+> 🗺️ **Estás en:** 🗄️ **Servicios de red: DHCP, DNS y NTP** → 7 · NTP en Cisco: configuración y verificación
 
 ---
 
@@ -87,7 +87,7 @@ Si alguien te impone la hora, te impone tus logs. Un atacante que haga de "servi
 
 ```
 Router-Core(config)# ntp authenticate
-Router-Core(config)# ntp authentication-key 1 md7 Cl4veNTP2026
+Router-Core(config)# ntp authentication-key 1 md5 Cl4veNTP2026
 Router-Core(config)# ntp trusted-key 1
 Router-Core(config)# ntp master 3
 ```
@@ -96,12 +96,12 @@ Y en cada cliente:
 
 ```
 Switch(config)# ntp authenticate
-Switch(config)# ntp authentication-key 1 md7 Cl4veNTP2026
+Switch(config)# ntp authentication-key 1 md5 Cl4veNTP2026
 Switch(config)# ntp trusted-key 1
 Switch(config)# ntp server 10.0.0.1 key 1
 ```
 
-Así el cliente solo acepta sincronización firmada con la clave 1. En Packet Tracer la sintaxis `md5` (o `md7` en versiones modernas, que cifra la clave en la config) funciona entre routers y switches igual.
+Así el cliente solo acepta sincronización firmada con la clave 1. En Packet Tracer la sintaxis `md5` funciona entre routers y switches igual.
 
 > 💡 **NTP vs SNTP:** SNTP es la versión simplificada del protocolo (mismo formato de paquete, menos disciplina de reloj) que usan cámaras, impresoras y dispositivos embebidos. Tu router habla NTP completo; la cámara de vigilancia, probablemente SNTP. No es "peor": para un dispositivo que solo quiere estar en hora, sobra.
 
@@ -120,13 +120,13 @@ Salida esperada de un cliente bien sincronizado:
 
 ```
 Router# show ntp status
-Clock is synchronized, stratum 3, reference is 10.0.0.1
+Clock is synchronized, stratum 4, reference is 10.0.0.1
 nominal freq is 250.0000 Hz, actual freq is 249.9995 Hz, precision is 2**10
 ...
 
 Router# show ntp associations
   address         ref clock       st   when   poll reach  delay  offset   disp
- ~10.0.0.1        .INIT.          16      -     64     0  0.000   0.000  15937
+ *10.0.0.1        127.127.1.0      3      18    128   377  2.150  -0.085   0.21
  * sys.peer, # selected, + candidate, - outlier
 ```
 
@@ -138,7 +138,7 @@ El símbolo `*` delante de la IP indica el **sys.peer**: la fuente elegida. El c
 
 **Administrador:** — Sincronizar qué va, puse `clock set` en los tres routers y listo. ¿Para qué más?
 
-**CONRAD:** — A ver, genio. ¿Y el reloj interno del router es un reloj de pulsera Suizo? No. Es un cristal barato que deriva. En dos semanas esos tres routers tienen tres horas distintas. Felicidades: tu red es ahora un testigo de la mancomunidad de horarios impossibles.
+**CONRAD:** — A ver, genio. ¿Y el reloj interno del router es un reloj de pulsera Suizo? No. Es un cristal barato que deriva. En dos semanas esos tres routers tienen tres horas distintas. Felicidades: tu red es ahora una colección de relojes que no se ponen de acuerdo.
 
 **CONRAD:** — Y encima me dices que los logs los tienes en el syslog server. Claro, con tres horas distintas, cuando el atacante entró a las 10:00 en el router A y a las 10:01 en el firewall B, tus logs dicen 10:00 y 13:01. Perfecto para la auditoría. ¡Enhorabuena!
 
@@ -182,4 +182,4 @@ El símbolo `*` delante de la IP indica el **sys.peer**: la fuente elegida. El c
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/06-servicios-red) · **Anterior:** [06 · NTP: la hora es sagrada](/ApuntesRedes/06-servicios-red/06-ntp) · **Siguiente:** [08 · Diagnóstico de servicios](/ApuntesRedes/06-servicios-red/08-diagnostico-servicios)
+📚 [Volver al índice de la unidad](/ApuntesRedes/06-servicios-red) · **Anterior:** [6 · NTP: la hora es sagrada](/ApuntesRedes/06-servicios-red/06-ntp) · **Siguiente:** [8 · Diagnóstico de servicios](/ApuntesRedes/06-servicios-red/08-diagnostico-servicios)

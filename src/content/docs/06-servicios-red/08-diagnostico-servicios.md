@@ -1,11 +1,11 @@
 ---
-title: 08 — Diagnóstico de servicios
+title: 8 — Diagnóstico de servicios
 description: "El usuario dice «no funciona»: tú sabes dónde mirar 🔍"
 ---
 
 <p><small>El usuario dice "no funciona": tú sabes dónde mirar 🔍</small></p>
 
-> 🗺️ **Estás en:** 🗄️ **Servicios de red: DHCP, DNS y NTP** → 08 · Diagnóstico de servicios
+> 🗺️ **Estás en:** 🗄️ **Servicios de red: DHCP, DNS y NTP** → 8 · Diagnóstico de servicios
 
 ---
 
@@ -114,7 +114,7 @@ La regla es inquebrantable: **no subas de escalón hasta que el actual esté ver
 <details>
 <summary>🔄 Respuestas</summary>
 
-1. **1) IP/Gateway** (`ipconfig /all`), **2) gateway** (`ping 192.168.1.1`), **3) Internet por IP** (`ping 8.8.8.8`), **4) DNS** (`nslookup`), **5) hora** (`show ntp status` en servidores / `w32tm` en Windows). No se sube de escalón hasta que el actual falla o está verde.
+1. **1) IP/Gateway** (`ipconfig /all`), **2) gateway** (`ping 192.168.1.1`), **3) Internet por IP** (`ping 8.8.8.8`), **4) DNS** (`nslookup`), **5) hora** (`w32tm /query /status` en Windows; `show ntp status` en los equipos de red). No se sube de escalón hasta que el actual esté verde.
 2. Es una dirección **APIPA** (169.254.0.0/16): el cliente no encontró servidor DHCP. Estás en el escalón 1; revisa pools, exclusiones, helper o conectividad con el servidor.
 3. `nslookup dominio.com` (mi resolver) contra `nslookup dominio.com 8.8.8.8` (resolver externo). Difieren → tu resolver/caché. Coinciden mal → zona remota.
 4. Porque borra el **estado** (concesiones, contadores, tablas, debugs) que es justamente la evidencia del problema: diagnostico primero, reiniciar después.
@@ -140,4 +140,4 @@ La regla es inquebrantable: **no subas de escalón hasta que el actual esté ver
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/06-servicios-red) · **Anterior:** [07 · NTP en Cisco: configuración y verificación](/ApuntesRedes/06-servicios-red/07-ntp-cisco) · **Siguiente:** [09 · Cierre](/ApuntesRedes/06-servicios-red/09-cierre)
+📚 [Volver al índice de la unidad](/ApuntesRedes/06-servicios-red) · **Anterior:** [7 · NTP en Cisco: configuración y verificación](/ApuntesRedes/06-servicios-red/07-ntp-cisco) · **Siguiente:** [9 · Cierre](/ApuntesRedes/06-servicios-red/09-cierre)
