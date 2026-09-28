@@ -91,15 +91,15 @@ Has terminado la teoría: sabes por qué solo hay tres canales limpios en 2,4 GH
 ## ⚡ Laboratorio de tortura: WLAN con dos SSIDs y un intruso
 
 > **Duración:** 1,5 horas
-> **Material:** Packet Tracer — 1 router 2911, 1 switch 2960, 2 APs domésticos, 3 laptops (WPC300N), 1 PC
+> **Material:** Packet Tracer — 1 router 2911, 1 switch 2960, 2 APs domésticos, 3 portátiles (WPC300N), 1 PC
 
-**Montaje:** Router → Switch; del switch salen PC-1 (VLAN 10), AP-1 (trunk 10,99) y AP-2 (trunk 10,99). Las laptops se reparten entre ambos APs.
+**Montaje:** Router → Switch; del switch salen PC-1 (VLAN 10), AP-1 (trunk 10,99) y AP-2 (trunk 10,99). Los portátiles se reparten entre ambos APs.
 
 **Configura al inicio:**
-1. Router: subinterfaces .10 y .99 (gateway 192.168.10.1 y 192.168.99.1) + pool DHCP para ambas VLANs.
+1. Router: subinterfaces .10 y .99 (gateway 192.168.10.1 y 192.168.99.1) + pool DHCP para ambas VLANs + ACL 110 (deny 99→10 y permit any) aplicada entrante en la subinterfaz .99 — es la que hará que los invitados no pingen a la VLAN 10 (recuerda de la unidad de ACL).
 2. AP-1: SSID `CORP` canal 1 / SSID `INVITADOS` canal 11 (si el AP es single-SSID, usa AP-1=CORP y AP-2=INVITADOS en canales 1 y 11).
 3. Switch: trunks con VLANs 10,99 permitidas hacia los APs.
-4. Verifica: laptops de `CORP` con IP 192.168.10.x, invitados con 192.168.99.x, y los invitados NO pingen a 192.168.10.x.
+4. Verifica: portátiles de `CORP` con IP 192.168.10.x, invitados con 192.168.99.x, y los invitados NO pingen a 192.168.10.x.
 
 **Ahora, SIN MIRAR, tu profesor introduce TRES fallos:**
 - Fallo A: cambia el canal de AP-1 al 11 (mismo que AP-2).

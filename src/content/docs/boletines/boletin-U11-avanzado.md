@@ -28,7 +28,7 @@ a) ¿Cómo puede haber señal excelente y mala calidad? ¿Qué mide cada cosa?
 b) Enumera 3 causas típicas de este síntoma.
 c) ¿Qué herramienta del portátil o del AP usarías para confirmarlo?
 
-**Pista:** RSSI alto no es sinonimo de SNR alto: mira la interferencia y la reutilización de canal.
+**Pista:** RSSI alto no es sinónimo de SNR alto: mira la interferencia y la reutilización de canal.
 
 ## 3. Plan de canales 5 GHz
 
@@ -80,7 +80,7 @@ c) El AP doméstico de Packet Tracer solo permite WPA2-PSK. ¿Cómo se llama esa
 
 ## 9. Caso WiFi: oficina con zonas muertas
 
-En una oficina de 25 puestos separados por tabiques de cartón-yeso, un único AP wifi en el pasillo central da "zonas muertas" y una velocidad general decepcionante. Los empleados se quejan cada tarde.
+En una oficina de 25 puestos separados por tabiques de cartón-yeso, un único AP WiFi en el pasillo central da "zonas muertas" y una velocidad general decepcionante. Los empleados se quejan cada tarde.
 
 a) ¿Qué causas físicas explicarían la lentitud (nombra al menos 3)?
 b) ¿Qué herramientas usarías para confirmarlas?
@@ -94,6 +94,6 @@ Una oficina tiene 20 PCs por cable (FastE/GigE) y 20 portátiles por WiFi detrá
 
 a) ¿Los dos grupos comparten la capa OSI de "entrega local"? ¿Cuál?
 b) Compara en tabla: nº de MACs en la cabecera, quién "monta" la trama en el aire y qué pasa con las colisiones/medio compartido.
-c) ¿Por qué el OS de arriba (IPv4) no distingue si el tramo local fue RJ45 o radio?
+c) ¿Por qué la capa de arriba (IPv4) no distingue si el tramo local fue RJ45 o radio?
 
 **Pista:** misma capa 2 lógica, distinto estándar; el estándar 802.x es un detalle de la capa 1–2.

@@ -1,11 +1,11 @@
 ---
-title: 02 — Medios y antenas
+title: 2 — Medios y antenas
 description: La señal que se estira, se enfoca y se pierde 📡
 ---
 
 <p><small>La señal que se estira, se enfoca y se pierde 📡</small></p>
 
-> 🗺️ **Estás en:** 📶 **Redes inalámbricas** → 02 · Medios y antenas
+> 🗺️ **Estás en:** 📶 **Redes inalámbricas** → 2 · Medios y antenas
 
 ---
 
@@ -97,4 +97,4 @@ Para enlaces exteriores, las bandas de 5 GHz dan más canales y menos interferen
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/11-redes-inalambricas) · **Anterior:** [01 · El medio inalámbrico](/ApuntesRedes/11-redes-inalambricas/01-medio-inalambrico) · **Siguiente:** [03 · Estándares 802.11](/ApuntesRedes/11-redes-inalambricas/03-estandares-80211)
+📚 [Volver al índice de la unidad](/ApuntesRedes/11-redes-inalambricas) · **Anterior:** [1 · El medio inalámbrico](/ApuntesRedes/11-redes-inalambricas/01-medio-inalambrico) · **Siguiente:** [3 · Estándares 802.11](/ApuntesRedes/11-redes-inalambricas/03-estandares-80211)

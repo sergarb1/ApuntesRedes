@@ -1,11 +1,11 @@
 ---
-title: 07 — APs y controladores
+title: 7 — APs y controladores
 description: Autónomos, ligeros y el cerebro que los dirige 🧠
 ---
 
 <p><small>Autónomos, ligeros y el cerebro que los dirige 🧠</small></p>
 
-> 🗺️ **Estás en:** 📶 **Redes inalámbricas** → 07 · APs y controladores
+> 🗺️ **Estás en:** 📶 **Redes inalámbricas** → 7 · APs y controladores
 
 ---
 
@@ -62,7 +62,7 @@ El túnel **CAPWAP** encapsula el tráfico de gestión (y, en modo central, el d
 | Coste inicial | Bajo | WLC (hardware o virtual) |
 | Escala recomendada | ≤ ~5-10 APs | Decenas a miles |
 
-> 💡 **El WLC ya no es siempre una caja:** además del WLC físico existe el **vWLC** (máquina virtual) y el modelo **cloud/ embedded** (el "controlador" vive en un AP o en la nube del fabricante, como UniFi o Meraki). El concepto manda: configuración central, APs ligeros.
+> 💡 **El WLC ya no es siempre una caja:** además del WLC físico existe el **vWLC** (máquina virtual) y el modelo **en la nube o embebido** (el "controlador" vive en un AP o en la nube del fabricante, como UniFi o Meraki). El concepto manda: configuración central, APs ligeros.
 
 ---
 
@@ -138,4 +138,4 @@ Flujo típico de fallo: AP lightweight "no aparece en el WLC" → revisa que el 
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/11-redes-inalambricas) · **Anterior:** [06 · Seguridad WLAN](/ApuntesRedes/11-redes-inalambricas/06-seguridad-wlan) · **Siguiente:** [08 · Configuración y verificación](/ApuntesRedes/11-redes-inalambricas/08-configuracion-wlan)
+📚 [Volver al índice de la unidad](/ApuntesRedes/11-redes-inalambricas) · **Anterior:** [6 · Seguridad WLAN](/ApuntesRedes/11-redes-inalambricas/06-seguridad-wlan) · **Siguiente:** [8 · Configuración y verificación](/ApuntesRedes/11-redes-inalambricas/08-configuracion-wlan)

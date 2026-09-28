@@ -1,11 +1,11 @@
 ---
-title: 01 — El medio inalámbrico
+title: 1 — El medio inalámbrico
 description: El aire como cable que nadie controla 🌬️
 ---
 
 <p><small>El aire como cable que nadie controla 🌬️</small></p>
 
-> 🗺️ **Estás en:** 📶 **Redes inalámbricas** → 01 · El medio inalámbrico
+> 🗺️ **Estás en:** 📶 **Redes inalámbricas** → 1 · El medio inalámbrico
 
 ---
 
@@ -86,7 +86,7 @@ Por eso el mismo AP que funciona perfecto en tu casa se desploma en una cafeter�
 <summary>🔄 Respuestas</summary>
 
 1. Porque cada canal ocupa ~20 MHz y solo están separados 5 MHz: los canales 1, 6 y 11 son los únicos tres que **no se solapan** entre sí; cualquier otro convive a medias con dos vecinos.
-2. El **ruido de fondo/SNR**. Con −55 dBm de señal y mucho ruido, la relación señal/ruido es mala y el rendimiento se hunde. Medir señal sin ruido es media diagnosis.
+2. El **ruido de fondo/SNR**. Con −55 dBm de señal y mucho ruido, la relación señal/ruido es mala y el rendimiento se hunde. Medir señal sin ruido es solo la mitad del diagnóstico.
 3. La que funcione tras **medir**, pero en metal los 2,4 GHz suelen sufrir reflexiones y 5 GHz peor penetración… la respuesta profesional es un site survey: no hay banda ganadora en abstracto, hay una banda que funciona con esos obstáculos y esa ubicación de APs.
 </details>
 
@@ -110,4 +110,4 @@ Por eso el mismo AP que funciona perfecto en tu casa se desploma en una cafeter�
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/11-redes-inalambricas) · **Anterior:** [Índice de la unidad](/ApuntesRedes/11-redes-inalambricas) · **Siguiente:** [02 · Medios y antenas](/ApuntesRedes/11-redes-inalambricas/02-medios-inalambricos)
+📚 [Volver al índice de la unidad](/ApuntesRedes/11-redes-inalambricas) · **Anterior:** [Índice de la unidad](/ApuntesRedes/11-redes-inalambricas) · **Siguiente:** [2 · Medios y antenas](/ApuntesRedes/11-redes-inalambricas/02-medios-inalambricos)

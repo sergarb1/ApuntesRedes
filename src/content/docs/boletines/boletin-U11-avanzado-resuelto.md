@@ -9,11 +9,11 @@ description: Soluciones de los ejercicios avanzados de redes inalámbricas (WiFi
 
 ## 1. Diseño de cobertura de un instituto
 
-a) **Mínimo 6-8 APs** (2 por planta como mínimo por superficie, más si hay paredes de hormigón): repartidos para solapar celdas ~15-20%. El hormigón armado atenuina mucho: más APs con menos potencia gana a pocos APs a tope.
+a) **Mínimo 6-8 APs** (2 por planta como mínimo por superficie, más si hay paredes de hormigón): repartidos para solapar celdas ~15-20%. El hormigón armado atenúa mucho: más APs con menos potencia gana a pocos APs a tope.
 
 b) **2,4 GHz:** dispositivos lentos/IoT y compatibilidad; poco ancho de banda útil (3 canales). **5 GHz:** profesores y alumnos con portátiles/móviles modernos: más canales, más velocidad. 6 GHz si el hardware lo permite (WiFi 6E/7).
 
-c) Porque **profesores** requiere autenticación por usuario (Enterprise/RADIUS), trazabilidad y acceso a recursos internos; **alumnos** solo necesita Internet con control de ancho y registro. VLANs distintas aíslan ambos mundos en capa 2 y permiten políticas distintas en capa 3.
+c) Porque el SSID `Profesores` requiere autenticación por usuario (Enterprise/RADIUS), trazabilidad y acceso a recursos internos; el SSID `Alumnos` solo necesita Internet con control de ancho y registro. VLANs distintas aíslan ambos mundos en capa 2 y permiten políticas distintas en capa 3.
 
 d) **Interferencia por reutilización de canal (co-channel interference)**: los APs se oyen entre sí, compiten por el medio (CSMA/CA) y el throughput de la zona se divide. Por eso el plan 1-6-11.
 
@@ -23,11 +23,11 @@ a) La **potencia de señal** (RSSI) mide cuánto llega; la **calidad** (SNR y re
 
 b) 1) Vecinos u otros APs en el mismo canal (co-channel); 2) microondas, videoporteros, Bluetooth u otros emisores de 2,4 GHz; 3) reflexiones multipath por paredes/metal que ensucian la señal (o hidden node).
 
-c) Analizador WiFi (inSSIDer, WiFi Analyzer, Acrylic): mira SNR, canal ocupado por otros BSSIDs y utilisation. En el controlador: estadísticas de retransmisiones y de errores CRC del AP.
+c) Analizador WiFi (inSSIDer, WiFi Analyzer, Acrylic): mira SNR, canal ocupado por otros BSSIDs y uso del canal. En el controlador: estadísticas de retransmisiones y de errores CRC del AP.
 
 ## 3. Plan de canales 5 GHz
 
-a) Ejemplo: AP1 → 36, AP2 → 44, AP3 → 52, AP4 → 60 (separación de 4 números × 20 MHz; solape nulo). Si son APs con 80 MHz: 36, 52, 100, 116 (bloques no solapados).
+a) Ejemplo: AP1 → 36, AP2 → 44, AP3 → 52, AP4 → 60 (separación de 8 canales = 40 MHz; solape nulo). Si son APs con 80 MHz: 36, 52, 100, 116 (bloques no solapados).
 
 b) Con 40/80 MHz **dobles/cuadruplicas el ancho** del canal → más throughput pico. Riesgo: consumes varios canales de 20, chocas con vecinos y en 2,4 GHz es directamente una mala idea (solo hay 3).
 
@@ -51,9 +51,9 @@ c) **Segmentación** de la unidad: aislar por VLAN los dispositivos no confiable
 
 ## 6. Diagnóstico de un despliegue roto
 
-a) 1) **Canales mal asignados:** 1-1-1-6-1-11 apila tres APs vecinos en el canal 1: co-channel interference brutal. 2) **Potencia al máximo en todos:** celdas enormes que se solapan demasiado; el cliente "se casa" con un AP lejano en vez de moverse al cercano.
+a) 1) **Canales mal asignados:** 1-1-1-6-1-11 apila cuatro APs vecinos en el canal 1: co-channel interference brutal. 2) **Potencia al máximo en todos:** celdas enormes que se solapan demasiado; el cliente "se casa" con un AP lejano en vez de moverse al cercano.
 
-b) Al caminar, el cliente pierde al AP viejo y busca uno nuevo; si las celdas están mal solapadas (o el cliente se empeña en el lejano), el roving tarda: escanea canales, reautentica (con Enterprise, además, 802.1X completo). 20 s es roaming roto, no una microscaída.
+b) Al caminar, el cliente pierde al AP viejo y busca uno nuevo; si las celdas están mal solapadas (o el cliente se empeña en el lejano), el roaming tarda: escanea canales, reautentica (con Enterprise, además, 802.1X completo). 20 s es roaming roto, no una microcaída.
 
 c) 1) **Bajar potencia** a un nivel que dé celdas del tamaño adecuado con solape controlado. 2) Replan de canales 1-6-11 alternados (y en 5 GHz, bloques no solapados). 3) Activar las ayudas del controlador: roaming asistido (802.11k/v/r) y balanceo de clientes. 4) En Enterprise, fast roaming (PMKID/FT) para no repetir el 802.1X completo.
 
@@ -63,7 +63,7 @@ a) El 1200 Mbps es **enlace físico teórico** (mejor caso, MCS alto, sin reinte
 
 b) **CSMA/CA**: el medio radio es único y compartido: solo uno transmite a la vez, y cada retransmisión por colisión o mala señal roba tiempo útil a todos.
 
-c) 1) **Más APs** (repartir la carga entre celdas) con canales distintos y potencias contenidas. 2) **Dirigir más carga a 5 GHz** (band steering): más canales, menos competencia. 3) Si el AP lo soporta, perfiles/limites por cliente para que nadie monopilice.
+c) 1) **Más APs** (repartir la carga entre celdas) con canales distintos y potencias contenidas. 2) **Dirigir más carga a 5 GHz** (band steering): más canales, menos competencia. 3) Si el AP lo soporta, perfiles/límites por cliente para que nadie monopolice.
 
 ## 8. Caso integrador con Packet Tracer
 
