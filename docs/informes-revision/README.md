@@ -16,7 +16,7 @@ Orden de revisión: **1 → 12** (introducción primero). Alcance por sesión: *
 | 06 | Servicios de red | ✅ revisada | [revision-U06-servicios-red.md](revision-U06-servicios-red.md) |
 | 07 | Enrutamiento estático | ✅ revisada | [revision-U06-enrutamiento-estatico.md](revision-U06-enrutamiento-estatico.md) |
 | 08 | OSPF | ✅ revisada | [revision-U07-ospf.md](revision-U07-ospf.md) |
-| 09 | NAT y PAT | ⏳ pendiente | — |
+| 09 | NAT y PAT | ✅ revisada | [revision-U09-nat-pat.md](revision-U09-nat-pat.md) |
 | 10 | ACL y seguridad | ✅ revisada | [revision-U10-acl-seguridad.md](revision-U10-acl-seguridad.md) |
 | 11 | Redes inalámbricas | ⏳ pendiente | — |
 | 12 | Alta disponibilidad | ⏳ pendiente | — |

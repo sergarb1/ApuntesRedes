@@ -52,13 +52,13 @@ Como es una traducción fija, la entrada no caduca: estará ahí mientras la reg
 
 ## 🎡 NAT dinámico (pool)
 
-En lugar de una pareja fija, defines un **pool** de IPs públicas dentro de un /29 (ej. 83.45.12.80-83.45.12.85, 6 IPs utilizables). Cuando un equipo interno quiere salir, el router le asigna una de esas IPs mientras dure su conexión; cuando termina, la devuelve al pool.
+En lugar de una pareja fija, defines un **pool** de IPs públicas dentro de un /29 (ej. 83.45.12.81-83.45.12.86: las 6 IPs utilizables de la red 83.45.12.80/29). Cuando un equipo interno quiere salir, el router le asigna una de esas IPs mientras dure su conexión; cuando termina, la devuelve al pool.
 
 ```
 Usuarios          Pool público disponible
-192.168.1.10  →   83.45.12.78
-192.168.1.20  →   83.45.12.79
-192.168.1.30  →   83.45.12.80   (el .81 queda libre hasta que haga falta)
+192.168.1.10  →   83.45.12.81
+192.168.1.20  →   83.45.12.82
+192.168.1.30  →   83.45.12.83   (el .84 queda libre hasta que haga falta)
 ```
 
 **Ventaja:** no necesitas una pública por equipo, solo tantas como conexiones simultáneas quieras permitir. **Limitación:** no sirve para servicios entrantes —como la traducción cambia al vuelo, nadie externo sabe qué IP pública corresponde a cada servidor.
@@ -66,7 +66,7 @@ Usuarios          Pool público disponible
 ### Configuración en Cisco
 
 ```bash
-R1(config)# ip nat pool PUBLICO 83.45.12.78 83.45.12.81 netmask 255.255.255.248
+R1(config)# ip nat pool PUBLICO 83.45.12.81 83.45.12.86 netmask 255.255.255.248
 R1(config)# access-list 1 permit 192.168.1.0 0.0.0.255
 R1(config)# ip nat inside source list 1 pool PUBLICO
 R1(config)# interface g0/0

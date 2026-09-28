@@ -15,7 +15,7 @@ description: La traducción que rescata a IPv4 y por qué existe 🌐
 
 Una IP privada (192.168.1.10) no puede viajar por Internet: las direcciones públicas son el único idioma que entiende la red global. NAT es el **intérprete** que se sienta en el borde de tu red y traduce ese idioma privado al público para que tu equipo pueda salir al mundo... y para que el mundo pueda responderle.
 
-Si esto te suena de pasada, es porque ya lo rozaste en las unidades de IPv4. Aquí lo llevamos al fondo: por qué existe, qué resuelve y qué rompe.
+Si esto te suena de pasada, es porque ya lo rozaste en la unidad de dirección IP. Aquí lo llevamos al fondo: por qué existe, qué resuelve y qué rompe.
 
 ---
 

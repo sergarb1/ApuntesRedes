@@ -32,10 +32,8 @@ Ya tienes las piezas: el concepto (punto 1), los tipos (2), estático y dinámic
 |---|---|---|
 | R1 g0/0 (LAN) | 192.168.1.1/24 | Interfaz `inside` |
 | R1 g0/1 (WAN) | 203.0.113.1/30 | Interfaz `outside`, IP pública |
-| PC1, PC2, PC3 | 192.168.1.10, .20, .30 | Equipos que salen por PAT |
+| PC1, PC2, PC3 | 192.168.1.11, .12, .13 | Equipos que salen por PAT |
 | Servidor web | 192.168.1.10:80 | Servicio a exponer al exterior |
-
-> ⚠️ **Detalle que confunde:** PC1 y el servidor web comparten IP en este guion (192.168.1.10). En un montaje real serían equipos distintos; aquí los separamos en los pasos para que veas las dos caras de NAT por separado. Si quieres ser estricto, usa 192.168.1.10 para el servidor y .11-.13 para los PCs.
 
 ---
 
