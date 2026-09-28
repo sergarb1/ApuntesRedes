@@ -111,7 +111,7 @@ Has terminado la teoría: sabes dónde se esconden los SPOFs, cómo STP y EtherC
 
 **Fallo intencionado extra:** el profesor añade un tercer router R3 al grupo HSRP con prioridad 255 y **sin** preempt, y luego con preempt. El reto: explicar la diferencia de comportamiento y decidir si el preempt de R3 es buena idea.
 
-> **Pista 1 (fallo A):** con HSRP por defecto espera 3 hellos (~10 s). Cuenta los pings perdidos y prueba `standby timers 1 3` en ambos.
+> **Pista 1 (fallo A):** con HSRP por defecto espera 3 hellos (~10 s). Cuenta los pings perdidos y prueba `standby 1 timers 1 3` en ambos.
 >
 > **Pista 2 (fallo B):** si R1 sigue saludando, R2 no toma el relevo: el gateway sigue siendo R1, que ya no tiene salida. ¿Qué falta? El track sobre el enlace WAN con `decrement`.
 >
@@ -155,13 +155,13 @@ Has terminado la teoría: sabes dónde se esconden los SPOFs, cómo STP y EtherC
 Horizontal:
 1. Punto único de fallo (sigla)
 3. Protocolo estándar de gateway redundante (RFC, no Cisco)
-5. Agrupación de enlaces físicos en uno lógico (dos palabras)
+5. Agrupación de enlaces físicos en uno lógico
 7. Sondeo activo de IOS que mide si un destino responde (2 palabras)
 
 Vertical:
 2. Rol del router que atiende la IP virtual en HSRP
 4. Ruta con distancia administrativa alta que espera dormida
-6. Varios switches convertidos en uno lógico (2 palabras)
+6. Varios switches convertidos en uno lógico
 ```
 
 <details>
@@ -215,10 +215,10 @@ El paquete del lunes llegó a 8.8.8.8 a la tercera: dos pings perdidos, cero usu
 
 | CE | Criterio | Cubierto |
 |---|---|---|
-| RA3 | Conmutadores con tolerancia a fallos | ✅ Puntos 2-4 y ⚡ Laboratorio |
-| RA5 | Segmentación con continuidad de servicio | ✅ Puntos 2-5 |
-| RA6 | Encaminamiento redundante | ✅ Puntos 5-7 + 🧠 Atrévete (punto 9) |
-| RA1 | Estructura y principios de redes tolerantes | ✅ Puntos 1 y 8 + 💬 Entrevista (punto 9) |
+| RA3 | Administración de conmutadores con tolerancia a fallos | ✅ Puntos 2, 3 y 4 + ⚡ Laboratorio (punto 9) |
+| RA5 | Segmentación segura y continua de la red | ✅ Puntos 2-5 |
+| RA6 | Encaminamiento con redundancia | ✅ Puntos 5, 6 y 7 + 🧠 Atrévete a pensar (punto 9) |
+| RA1 | Estructura de red tolerante a fallos | ✅ Puntos 1 y 8 + 💬 Entrevista (punto 9) |
 
 ---
 

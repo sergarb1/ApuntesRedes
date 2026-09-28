@@ -1,11 +1,11 @@
 ---
-title: 01 — Disponibilidad y SPOFs
+title: 1 — Disponibilidad y SPOFs
 description: Los nueves, el coste del parón y dónde se esconde el fracaso ⏱️
 ---
 
 <p><small>Los nueves, el coste del parón y dónde se esconde el fracaso ⏱️</small></p>
 
-> 🗺️ **Estás en:** 🔁 **Alta disponibilidad y redundancia** → 01 · Disponibilidad y SPOFs
+> 🗺️ **Estás en:** 🔁 **Alta disponibilidad y redundancia** → 1 · Disponibilidad y SPOFs
 
 ---
 
@@ -137,4 +137,4 @@ En las unidades siguientes desmontas cada pieza: [STP como aliado](/ApuntesRedes
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/12-alta-disponibilidad) · **Anterior:** [Índice de la unidad](/ApuntesRedes/12-alta-disponibilidad) · **Siguiente:** [02 · STP: redundancia sin bucles](/ApuntesRedes/12-alta-disponibilidad/02-stp-redundancia)
+📚 [Volver al índice de la unidad](/ApuntesRedes/12-alta-disponibilidad) · **Anterior:** [Índice de la unidad](/ApuntesRedes/12-alta-disponibilidad) · **Siguiente:** [2 · STP: redundancia sin bucles](/ApuntesRedes/12-alta-disponibilidad/02-stp-redundancia)

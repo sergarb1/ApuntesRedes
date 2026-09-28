@@ -19,7 +19,7 @@ Orden de revisión: **1 → 12** (introducción primero). Alcance por sesión: *
 | 09 | NAT y PAT | ✅ revisada | [revision-U09-nat-pat.md](revision-U09-nat-pat.md) |
 | 10 | ACL y seguridad | ✅ revisada | [revision-U10-acl-seguridad.md](revision-U10-acl-seguridad.md) |
 | 11 | Redes inalámbricas | ✅ revisada | [revision-U11-redes-inalambricas.md](revision-U11-redes-inalambricas.md) |
-| 12 | Alta disponibilidad | ⏳ pendiente | — |
+| 12 | Alta disponibilidad | ✅ revisada | [revision-U12-alta-disponibilidad.md](revision-U12-alta-disponibilidad.md) |
 | — | Cierre transversal | ⏳ pendiente | — |
 
 Los informes de la revisión vigente se nombran `revision-UXX-<nombre>.md` (los de la estructura antigua eran `informe-UXX.md`: **no confundir su numeración**).

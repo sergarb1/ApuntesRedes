@@ -1,11 +1,11 @@
 ---
-title: "05 — FHRP: el gateway redundante"
+title: "5 — FHRP: el gateway redundante"
 description: Una IP, dos routers, cero drama 🎭
 ---
 
 <p><small>Una IP, dos routers, cero drama 🎭</small></p>
 
-> 🗺️ **Estás en:** 🔁 **Alta disponibilidad y redundancia** → 05 · FHRP: el gateway redundante
+> 🗺️ **Estás en:** 🔁 **Alta disponibilidad y redundancia** → 5 · FHRP: el gateway redundante
 
 ---
 
@@ -132,4 +132,4 @@ Y en el respaldo, el mismo grupo con `State: Standby`. Si ambos dicen `Active`, 
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/12-alta-disponibilidad) · **Anterior:** [04 · Stacking y chassis virtuales](/ApuntesRedes/12-alta-disponibilidad/04-stacking) · **Siguiente:** [06 · HSRP en Cisco](/ApuntesRedes/12-alta-disponibilidad/06-hsrp-cisco)
+📚 [Volver al índice de la unidad](/ApuntesRedes/12-alta-disponibilidad) · **Anterior:** [4 · Stacking y chassis virtuales](/ApuntesRedes/12-alta-disponibilidad/04-stacking) · **Siguiente:** [6 · HSRP en Cisco](/ApuntesRedes/12-alta-disponibilidad/06-hsrp-cisco)

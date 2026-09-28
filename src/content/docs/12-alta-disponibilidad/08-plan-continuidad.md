@@ -1,11 +1,11 @@
 ---
-title: 08 — Plan de continuidad
+title: 8 — Plan de continuidad
 description: Cuando el diseño no basta, el procedimiento salva 📋
 ---
 
 <p><small>Cuando el diseño no basta, el procedimiento salva 📋</small></p>
 
-> 🗺️ **Estás en:** 🔁 **Alta disponibilidad y redundancia** → 08 · Plan de continuidad
+> 🗺️ **Estás en:** 🔁 **Alta disponibilidad y redundancia** → 8 · Plan de continuidad
 
 ---
 
@@ -139,4 +139,4 @@ Un simulacro anual por SPOF importante convierte el plan en confianza. Y cada in
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/12-alta-disponibilidad) · **Anterior:** [07 · Redundancia en capa 3](/ApuntesRedes/12-alta-disponibilidad/07-redundancia-l3) · **Siguiente:** [09 · Cierre](/ApuntesRedes/12-alta-disponibilidad/09-cierre)
+📚 [Volver al índice de la unidad](/ApuntesRedes/12-alta-disponibilidad) · **Anterior:** [7 · Redundancia en capa 3](/ApuntesRedes/12-alta-disponibilidad/07-redundancia-l3) · **Siguiente:** [9 · Cierre](/ApuntesRedes/12-alta-disponibilidad/09-cierre)

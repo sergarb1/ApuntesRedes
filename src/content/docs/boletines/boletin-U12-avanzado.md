@@ -17,7 +17,7 @@ a) ¿Dónde aplicas cada mecanismo: STP, EtherChannel, HSRP, routing?
 b) ¿Qué pasa si cae D1? Detalla capa 2 y capa 3.
 c) ¿Qué SPOFs quedan si el "pool" de servidores tiene una sola tarjeta de red por servidor?
 
-**Pica:** piensa por capas: capa 2 (STP/EtherChannel), capa 3 gateway (FHRP), capa 3 salida (routing/ISP).
+**Pista:** piensa por capas: capa 2 (STP/EtherChannel), capa 3 gateway (FHRP), capa 3 salida (routing/ISP).
 
 ## 2. HSRP con preempt y tracking
 

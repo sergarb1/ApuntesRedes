@@ -1,11 +1,11 @@
 ---
-title: 03 — EtherChannel
+title: 3 — EtherChannel
 description: Varios cables, un solo enlace gigante ⚡
 ---
 
 <p><small>Varios cables, un solo enlace gigante ⚡</small></p>
 
-> 🗺️ **Estás en:** 🔁 **Alta disponibilidad y redundancia** → 03 · EtherChannel
+> 🗺️ **Estás en:** 🔁 **Alta disponibilidad y redundancia** → 3 · EtherChannel
 
 ---
 
@@ -118,7 +118,7 @@ Group  Port-channel  Protocol    Ports
 1. Dos cables sueltos = dos caminos = **bucle**; STP bloquea uno. El EtherChannel es **un solo enlace lógico** para STP: no hay bucle y no bloquea.
 2. **LACP** es el estándar IEEE (802.3ad/802.1AX), **PAgP** es propietario de Cisco. En LACP: `active` inicia la negociación, `passive` solo responde; combinaciones válidas: active-active y active-passive.
 3. Máximo **1 Gbps**: un flujo individual va por un único cable físico (hash). El canal suma para el conjunto de flujos y da tolerancia a fallos, no "trocea" conversaciones.
-4. `Po1(SU)` con miembros `(P)`: canal **S**tanding/usable (en uso) con miembros activos en el canal. `I` = individual (fuera del canal), `D` = down.
+4. `Po1(SU)` con miembros `(P)`: canal en uso (**S** = capa 2, **U** = *in use*) con miembros activos en el canal. `I` = individual (fuera del canal), `D` = down.
 </details>
 
 ---
@@ -141,4 +141,4 @@ Group  Port-channel  Protocol    Ports
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/12-alta-disponibilidad) · **Anterior:** [02 · STP: redundancia sin bucles](/ApuntesRedes/12-alta-disponibilidad/02-stp-redundancia) · **Siguiente:** [04 · Stacking y chassis virtuales](/ApuntesRedes/12-alta-disponibilidad/04-stacking)
+📚 [Volver al índice de la unidad](/ApuntesRedes/12-alta-disponibilidad) · **Anterior:** [2 · STP: redundancia sin bucles](/ApuntesRedes/12-alta-disponibilidad/02-stp-redundancia) · **Siguiente:** [4 · Stacking y chassis virtuales](/ApuntesRedes/12-alta-disponibilidad/04-stacking)
