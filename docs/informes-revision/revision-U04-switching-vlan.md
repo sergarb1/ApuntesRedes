@@ -112,9 +112,9 @@
 
 ## 5. Pendientes fuera del alcance
 
-- Los otros 7 índices con "empezar siempre el resuelto" (U05–U12) → sus sesiones.
-- Tablas CE de la U05 (RA3/RA4/RA5 sin letras oficiales) → sesión 05.
-- Diagramas: baseline 55 fallos → pasada transversal.
+- ~~Los otros 7 índices con "empezar siempre el resuelto" (U05–U12) → sus sesiones.~~ → cerrados en sus sesiones (temario completo auditado).
+- ~~Tablas CE de la U05 (RA3/RA4/RA5 sin letras oficiales) → sesión 05.~~ → resuelto en la sesión 05 (letras oficiales verificadas).
+- ~~Diagramas: baseline 55 fallos → pasada transversal.~~ → hecho: `check:diagrams` = **0** (54 → 0, nuevo baseline).
 - Crucigrama: se corrigen longitudes, pero no hay rejilla visible en el Markdown (solo pistas).
 
 ---

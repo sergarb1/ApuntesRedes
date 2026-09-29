@@ -98,5 +98,5 @@ Etiquetas: 🟡 corregir ya · 🔵 ampliar · ⚪ dejar · 🔴 mover/quitar (r
 - [x] `check:unidad 09` sin FALLOs · `check-uds` en 0 · `check-links` OK · `check:diagrams` 54 (nuevo baseline; era 55) · build 183 páginas — re-verificado tras la pasada de decisiones (R1 + cross-units)
 - [x] DOCX regenerado (`npm run docx`, 68/68)
 - [x] Comprobación lingüística es-ES (textos nuevos: es-ES natural, sin LatAM ni anglicismos)
-- [ ] Commit `Revisión U09: …` (tras confirmación)
+- [x] Commit `Revisión U09: …` — hecho y pusheado (`ba4cc5d`); se marcaba pendiente en la sesión
 - [x] Matriz de solapamientos + README de estado actualizados

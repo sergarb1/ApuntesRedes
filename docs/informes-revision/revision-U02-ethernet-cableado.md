@@ -116,5 +116,5 @@ Sin candidatos a mover/quitar.
 - [x] `check:unidad 02` 0/0 · `check-uds` 0 · `check-links` 0 · build 183 · `check:diagrams` = 54 (nuevo baseline tras Q1 de U03; era 55) — re-verificado tras la pasada de decisiones
 - [x] Comprobación lingüística es-ES
 - [x] DOCX regenerado (`npm run docx`): 68 generados, 0 fallos
-- [ ] Commit `Revisión U02: …`
+- [x] Commit `Revisión U02: …` — hecho y pusheado (`b8afc85`); se marcaba pendiente en la sesión
 - [x] Matriz de solapamientos + README de estado actualizados

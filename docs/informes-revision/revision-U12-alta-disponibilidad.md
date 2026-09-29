@@ -88,5 +88,5 @@ Etiquetas: 🟡 corregir ya · 🔵 ampliar · ⚪ dejar · 🔴 mover/quitar (r
 - [x] `check:unidad 12` sin FALLOs · `check-uds` en 0 · `check-links` OK · `check:diagrams` 54 (nuevo baseline; era 55) · build 183 páginas — re-verificado tras la pasada de decisiones (R1)
 - [x] DOCX regenerado (`npm run docx`, 68/68)
 - [x] Comprobación lingüística es-ES (escaneo post-edición: solo quedan marcas exentas — relleno de índice/cierre y "(2 palabras)" de IP SLA)
-- [ ] Commit `Revisión U12: …` (tras confirmación)
+- [x] Commit `Revisión U12: …` — hecho y pusheado (`f9a4828`); se marcaba pendiente en la sesión
 - [x] Matriz de solapamientos + README de estado actualizados (las 12 unidades revisadas)
