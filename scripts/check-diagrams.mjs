@@ -4,12 +4,16 @@
 // Reglas:
 //  1. fontFamily === 3 (Cascadia) en todos los textos.
 //  2. fontSize >= 16 en todos los textos.
-//  3. Contención: se toma del SVG exportado la caja que realmente renderiza
-//     cada texto (translate + media anchura del grupo) y se comprueba que cabe
-//     en su contenedor (su rectángulo vinculado, o el más pequeño que lo
-//     contiene) con aire mínimo de 6 px a los lados y 4 px arriba/abajo; los
-//     textos sueltos no van pegados a los bordes y el último de cada
-//     contenedor deja >= 10 px de base.
+//  3. Contención: la caja horizontal sale del SVG exportado (translate + media
+//     anchura del grupo = ancho real renderizado y posición centrada por el
+//     cliente) y la vertical del `y` guardado en el .excalidraw — la coordenada
+//     Y del SVG no es un traslado global (varía entre texto suelto y etiqueta
+//     vinculada). Se comprueba que el texto cabe en su contenedor (su
+//     rectángulo vinculado, o el más pequeño que lo contiene) con aire mínimo
+//     de 6 px a los lados y 4 px arriba/abajo; los textos sueltos no van
+//     pegados a los bordes y el último de cada contenedor deja >= 10 px de base.
+//     La altura de caja usa el número de líneas realmente renderizado en el
+//     SVG, así que un texto que se envuelve de más se detecta igualmente.
 //  4. Sin solapes AABB entre las cajas renderizadas de los textos.
 //  5. El SVG existe y pesa más de 1 KB.
 //  6. El título libre se parece al nombre base del fichero.
@@ -72,19 +76,18 @@ const renderedTexts = (svgPath) => {
   return out;
 };
 
-// Traslación de coordenadas del SVG a coordenadas de escena: se obtiene de un
-// texto suelto alineado a la izquierda, cuya posición de diseño conocemos.
+// Traslación horizontal del SVG a coordenadas de escena: se obtiene de los
+// textos sueltos alineados a la izquierda (todos comparten el mismo desfase
+// en X; la Y se toma del .excalidraw, ver regla 3).
 const svgOffsets = (rendered, texts) => {
   const free = texts.filter((t) => !t.containerId && t.textAlign === 'left');
   const pairs = [];
   for (const t of free) {
     const r = rendered.find((x) => x.content === t.text);
-    if (r) pairs.push({ dx: r.left - t.x, dy: r.top - t.y });
+    if (r) pairs.push(r.left - t.x);
   }
   if (!pairs.length) return null;
-  const dx = pairs[Math.floor(pairs.length / 2)].dx;
-  const dy = pairs[Math.floor(pairs.length / 2)].dy;
-  return { dx, dy };
+  return { dx: pairs[Math.floor(pairs.length / 2)] };
 };
 
 let failures = 0;
@@ -120,7 +123,7 @@ for (const f of files) {
         if (idx < 0) continue;
         used.add(idx);
         const r = rendered[idx];
-        boxes.push({ t, left: r.left - off.dx, top: r.top - off.dy, w: r.w, h: 1.25 * t.fontSize * r.lines.length });
+        boxes.push({ t, left: r.left - off.dx, top: t.y, w: r.w, h: 1.25 * t.fontSize * r.lines.length });
       }
       if (boxes.length !== texts.length) {
         fail(name, `${texts.length - boxes.length} textos sin caja en el SVG`);

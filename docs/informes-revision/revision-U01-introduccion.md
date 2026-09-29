@@ -56,7 +56,7 @@ Etiquetas: 🟡 corregir ya · 🔵 ampliar · ⚪ dejar · 🔵/🔴 decisión.
 | B3 | `boletin-U01-avanzado-resuelto.md:51` | Aritmética: `"30 PC + 1 impresora = 31 puertos, sobran 17"` — olvidaba el router del enunciado | `32 puertos (…+1 router), sobran 16` |
 | B4 | `boletin-U01-avanzado-resuelto.md:76` | Solución 8b cita un `"Foro de la Unidad de la plataforma"` que no existe en el curso | Reescrito: documentar excepción + captura + pasos y pedir ayuda con todo eso delante |
 | B5 | `boletin-U01-inicial.md:47` (analogía MAC) | Revisada: la tabla "une con flechas" mezcla filas a propósito y el resuelto asigna `matrícula inmutable → MAC` correctamente | ⚪ sin acción |
-| B6 | Par inicial/avanzado | 🔵 Posible inversión de dificultad en algún ejercicio | Pendiente de la revisión comparada de boletines (cierre transversal) |
+| B6 | Par inicial/avanzado | 🔵 Inversión confirmada: el avanzado #6 "Mente binaria" (4×8 de memoria) era más fácil que el inicial #7 (diagnóstico DNS) | ✅ **reescrito el #6 del avanzado** (+ su resuelto): conversión con razonamiento, KB→bytes y detección del error de unidades; cierre transversal |
 
 ### 🔵 Ampliar / ⚪ dejar (sin tocar)
 

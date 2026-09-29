@@ -208,7 +208,7 @@
     {
       "id": "att",
       "type": "rectangle",
-      "x": 400,
+      "x": 560,
       "y": 140,
       "width": 180,
       "height": 100,
@@ -245,7 +245,7 @@
       "type": "rectangle",
       "x": 300,
       "y": 290,
-      "width": 400,
+      "width": 450,
       "height": 120,
       "angle": 0,
       "backgroundColor": "#fff7ed",
@@ -456,14 +456,14 @@
       "text": "100 m",
       "textAlign": "center",
       "updated": 1790219044467,
-      "version": 2,
+      "version": 1,
       "versionNonce": 890988038,
       "verticalAlign": "middle"
     },
     {
       "id": "att-label",
       "type": "text",
-      "x": 410,
+      "x": 570,
       "y": 165,
       "width": 160,
       "height": 50,
@@ -500,7 +500,7 @@
     {
       "id": "xt-label",
       "type": "text",
-      "x": 310,
+      "x": 335,
       "y": 320,
       "width": 380,
       "height": 60,

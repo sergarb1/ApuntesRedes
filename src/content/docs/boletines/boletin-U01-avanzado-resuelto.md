@@ -61,8 +61,8 @@ Sin ARP, la capa 2 (Ethernet) no puede funcionar porque no sabe a quién enviar 
 ## 6. Mente binaria
 
 a) 4 bytes × 8 bits/byte = **32 bits**.
-b) 320 bits ÷ 8 bits/byte = **40 bytes**.
-c) 4 letras = 4 bytes; 4 × 8 = **32 bits**.
+b) 320 KB × 1024 bytes/KB = **327.680 bytes**.
+c) **Se equivocó en la unidad.** Al multiplicar 320 × 8 el resultado son bits: 320 bytes × 8 bits/byte = **2.560 bits**, no KB (2.560 KB serían 2.621.440 bytes). Su número es correcto pero la etiqueta es falsa.
 
 ## 7. El mapa del curso
 

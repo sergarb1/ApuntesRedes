@@ -85,4 +85,4 @@ Líneas referidas al estado **pre-edición**.
 - [x] DOCX regenerado (`npm run docx` → 68/68)
 - [x] Comprobación lingüística es-ES ("voluntarios", "colección de relojes…", "solicitadas"; `syslog`/`w32tm`/`nslookup` como términos técnicos)
 - [x] Matriz de solapamientos + README de estado actualizados
-- [ ] Commit `Revisión U06: …` — **pendiente de aprobación**
+- [x] Commit `Revisión U06: …` — hecho y pusheado (`8dadbf5`); se marcaba pendiente en la sesión
