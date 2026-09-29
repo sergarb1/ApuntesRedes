@@ -104,10 +104,10 @@ La unidad se reordenó (VLANs → switching; aquí 7 teoría + cierre) y quedaro
 
 ## 5. Pendientes fuera del alcance
 
-- Los otros 7 índices con "empezar siempre el resuelto" (U06–U12) → sus sesiones.
-- Tablas CE de U06–U12 (baldosas planas o letras sin alinear) → sus sesiones.
-- Diagramas: baseline 55 fallos → pasada transversal.
-- Cierre transversal: recontar duplicados DHCP/trunking tras la sesión 10.
+- ~~Los otros 7 índices con "empezar siempre el resuelto" (U06–U12) → sus sesiones.~~ → cerrados en sus sesiones (temario completo auditado).
+- ~~Tablas CE de U06–U12 (baldosas planas o letras sin alinear) → sus sesiones.~~ → cerradas en sus sesiones + pasada de decisiones.
+- ~~Diagramas: baseline 55 fallos → pasada transversal.~~ → hecho: `check:diagrams` = **0** (54 → 0, nuevo baseline).
+- ~~Cierre transversal: recontar duplicados DHCP/trunking tras la sesión 10.~~ → hecho: recuento final sin duplicados (fila DHCP de la matriz).
 
 ---
 

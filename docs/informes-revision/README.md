@@ -20,7 +20,7 @@ Orden de revisión: **1 → 12** (introducción primero). Alcance por sesión: *
 | 10 | ACL y seguridad | ✅ revisada | [revision-U10-acl-seguridad.md](revision-U10-acl-seguridad.md) |
 | 11 | Redes inalámbricas | ✅ revisada | [revision-U11-redes-inalambricas.md](revision-U11-redes-inalambricas.md) |
 | 12 | Alta disponibilidad | ✅ revisada | [revision-U12-alta-disponibilidad.md](revision-U12-alta-disponibilidad.md) |
-| — | Cierre transversal | ⏳ pendiente | — |
+| — | Cierre transversal | ✅ cerrado | — |
 
 Los informes de la revisión vigente se nombran `revision-UXX-<nombre>.md` (los de la estructura antigua eran `informe-UXX.md`: **no confundir su numeración**).
 
@@ -36,7 +36,13 @@ Se aplicaron de golpe las decisiones 🔴 recomendadas de las sesiones de revisi
 - **Cross-units**: cierre de U08 (relleno `08 ·`, desc "Sé el Router OSPF", footer) y U07 ("Sé el Router" → "Sé el Paquete del cierre").
 - **Menores**: U02 filas `RA2·d)`/`RA2·e)` con "→ se verá en…"; enlace de `03-nat-estatico-y-dinamico` a la unidad de ACL; U03-Q1 (diagrama de fragmentación reetiquetado, `u03-frag-hdr` resuelto → `check:diagrams` 55 → **54**, nuevo baseline).
 - Verificación: `check:unidad` 0 FALLOs (10 unidades) · `check-uds` 0 · `check-links` 0 · build 183 · DOCX 68/68.
-- Queda solo el **cierre transversal** (diagramas y coherencia global); las 2 decisiones menores de **U10** (CE `b)` y Fallo B) se cerraron manteniendo lo aplicado.
+- ~~Queda solo el **cierre transversal** (diagramas y coherencia global)~~ → **cerrado el 29/09/2026**; las 2 decisiones menores de **U10** (CE `b)` y Fallo B) se cerraron manteniendo lo aplicado.
+
+## Cierre transversal (29/09/2026)
+
+- **Diagramas**: corregido el eje Y de `check-diagrams.mjs` (la coordenada Y del SVG no es un traslado global: 36 de las 54 reglas eran falsos positivos) y arreglados los 7 diagramas con fallo real — `u01-4-piezas`, `u01-escalera-ping`, `u01-mapa-curso`, `u02-atenuacion-crosstalk`, `u02-crimpado-pasos`, `u02-modelo-osi` y `u03-cabecera-ipv4` (títulos acortados, etiquetas envueltas a 2 líneas, zonas y capas ensanchadas, regrid de la cabecera IPv4, etiquetas de la escalera a 16 px y la caja de atenuación movida). **`check:diagrams` → 0 fallos (54 → 0, nuevo baseline)**.
+- **Coherencia global**: fila **DHCP** de la matriz con recuento final sin duplicados (las 4 unidades no-casa son usos operativos o puentes); fila **HSRP** cerrada (la única mención en inalámbricas es el "PRÓXIMAMENTE" del cierre); **B6** de U01 resuelto reescribiendo el #6 del boletín avanzado (inversión de dificultad confirmada y corregida); checkbox stale del commit de U06 marcado.
+- Verificación: `check:unidad all` 0 FALLOs / 0 avisos (12/12) · `check-uds` 0 · `check-links` 0 · `check:diagrams` 0 · build 183 · DOCX 68/68.
 
 ## Ciclo por sesión (una unidad)
 

@@ -41,11 +41,13 @@ Tienes que montar red en un aula de 30 PC con 1 impresora compartida y 1 router 
 
 ## 6. Mente binaria
 
-Calcula sin calculadora:
+Calcula sin calculadora y razona cada paso:
 
 a) ¿Cuántos bits hay en 4 bytes?
-b) ¿Cuántos bytes son 320 bits?
-c) La palabra "HOLA" tiene 4 letras y ocupa 4 bytes. ¿Cuántos bits son?
+b) Un archivo de trabajo ocupa 320 KB. Si cada KB son 1024 bytes, ¿cuántos bytes son esos 320 KB?
+c) Un compañero asegura: *"Como 1 byte son 8 bits, un archivo de 320 bytes ocupa 2.560 KB"*. Localiza su error y da el resultado correcto con sus unidades.
+
+**Pista:** no confundas la cantidad (bits/bytes) con la unidad con la que la etiquetas.
 
 ## 7. El mapa del curso
 
