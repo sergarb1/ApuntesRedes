@@ -121,5 +121,5 @@ Sin candidatos a mover/quitar (🔴 resueltos: tarea 4 reencuadrada y fallo 2 su
 - [x] `check:unidad 03` 0/0 · `check-uds` 0 · `check-links` 0 · build 183 · `check:diagrams` = **54 (nuevo baseline tras Q1; era 55)**
 - [x] Comprobación lingüística es-ES (sin LatAM ni "UD" en prosa; números con formato es-ES)
 - [x] DOCX regenerado (`npm run docx`): 68 generados, 0 fallos
-- [ ] Commit `Revisión U03: …`
+- [x] Commit `Revisión U03: …` — hecho y pusheado (`0e8fd7c`); se marcaba pendiente en la sesión
 - [x] Matriz de solapamientos + README de estado actualizados

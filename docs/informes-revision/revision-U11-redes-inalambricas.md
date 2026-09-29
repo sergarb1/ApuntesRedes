@@ -101,5 +101,5 @@ Etiquetas: 🟡 corregir ya · 🔵 ampliar · ⚪ dejar · 🔴 mover/quitar (r
 - [x] `check:unidad 11` sin FALLOs · `check-uds` en 0 · `check-links` OK · `check:diagrams` 54 (nuevo baseline; era 55) · build 183 páginas — re-verificado tras la pasada de decisiones (R1 + R2)
 - [x] DOCX regenerado (`npm run docx`, 68/68)
 - [x] Comprobación lingüística es-ES (23 textos corregidos revisados: no quedan "laptop" en prosa, anglicismos ni acentos sueltos)
-- [ ] Commit `Revisión U11: …` (tras confirmación)
+- [x] Commit `Revisión U11: …` — hecho y pusheado (`602494f`); se marcaba pendiente en la sesión
 - [x] Matriz de solapamientos + README de estado actualizados
