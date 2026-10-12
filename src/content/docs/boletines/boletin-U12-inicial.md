@@ -1,73 +1,77 @@
 ---
-title: Boletín de Alta disponibilidad — Inicial
-description: Ejercicios básicos de alta disponibilidad y redundancia
+title: Boletín de Redes inalámbricas — Inicial
+description: Ejercicios básicos de redes inalámbricas (WiFi)
 ---
 
-# 📝 Boletín de Alta disponibilidad — Inicial
+# 📝 Boletín de Redes inalámbricas — Inicial
 
-> Ejercicios básicos para afianzar los conceptos de redundancia: SPOFs, STP, EtherChannel y FHRP.
+> Ejercicios básicos para afianzar los conceptos de redes WLAN: estándares, seguridad y diseño.
 
 ---
 
-## 1. ¿Qué concepto soy?
+## 1. ¿Quién soy?
 
-a) Un único componente cuya caída tumba todo el servicio.
-b) Protocolo que evita bucles de capa 2 bloqueando puertos redundantes.
-c) Tecnología que agrupa varios enlaces físicos en uno lógico.
-d) Protocolo que da gateway redundante con IP virtual compartida.
-e) Tiempo de servicio pactado, en porcentaje anual (99,99%).
+a) Estándar IEEE que define las redes WLAN.
+b) El identificador de la red que ves al escanear.
+c) Dispositivo que convierte la señal cableada en radio.
+d) Modo en el que dos portátiles se conectan directamente sin punto de acceso.
+e) Organización que certifica la interoperabilidad de los equipos WiFi.
 
-## 2. Verdadero o falso
+## 2. Bandas y canales
 
-a) STP bloquea puertos para evitar bucles de capa 2.
-b) EtherChannel aumenta el ancho de banda y la redundancia a la vez.
-c) En HSRP los dos routers tienen la misma IP física configurada.
-d) Un stack de switches se administra como un único switch lógico.
-e) Más disponibilidad de nueves siempre sale gratis.
+a) ¿Qué dos bandas usa el WiFi doméstico habitual?
+b) ¿Cuántos canales no solapados hay en 2,4 GHz y cuáles son?
+c) ¿Qué banda tolera mejor la interferencia y cuál llega más lejos?
+d) ¿Qué canal usarías en un edificio con vecinos saturando el 1 y el 11?
 
-## 3. Cálculo de disponibilidad
+## 3. Verdadero o falso
 
-a) Un servicio con 99,9% de disponibilidad anual, ¿cuánto tiempo puede estar caído al año (aprox)?
-b) ¿Y con 99,99%?
-c) Si tu red tiene tres SPOFs en serie con 99,5% cada uno, ¿cuál es la disponibilidad aproximada del conjunto?
+a) WEP sigue siendo una opción válida para redes domésticas pequeñas.
+b) WPA2-Personal usa una clave compartida (PSK).
+c) WPA3 añade SAE, que resiste mejor los ataques de diccionario.
+d) En 5 GHz los canales no solapados son muchos más que en 2,4 GHz.
+e) Un AP con SSID oculto está protegido contra clientes no autorizados.
 
-**Pista:** multiplica disponibilidades en serie; 1 año ≈ 8.760 horas.
+## 4. Seguridad: escala del mal
 
-## 4. ¿Quién bloquea el puerto?
+Ordena de peor a mejor: WEP, WPA3, WPA, WPA2, red abierta.
 
-Dos switches (SW1 y SW2) conectados por dos enlaces. SW1 es la raíz STP.
+## 5. WiFi 4 → WiFi 7
 
-a) ¿Qué switch elegirá el puerto bloqueado?
-b) ¿Qué criterio usa STP si los costes son iguales?
-c) ¿Qué pasaría si no hubiera STP y ambos enlaces reenviaran?
+Relaciona cada nombre comercial con su estándar IEEE:
 
-## 5. Relaciona comandos HSRP
-
-| Comando | Función |
+| Marketing | IEEE |
 |---|---|
-| 1. `standby 1 ip 192.168.1.254` | a) Prioridad del router (mayor gana) |
-| 2. `standby 1 priority 110` | b) IP virtual del grupo |
-| 3. `standby 1 preempt` | c) Estado del grupo HSRP |
-| 4. `show standby brief` | d) Recuperar el rol activo al volver |
+| 1. WiFi 4 | a) 802.11ax |
+| 2. WiFi 5 | b) 802.11n |
+| 3. WiFi 6 | c) 802.11ac |
+| 4. WiFi 6E | d) 802.11be |
+| 5. WiFi 7 | e) 802.11ax en 6 GHz |
 
-## 6. Diseño básico redundante
+## 6. Cobertura
 
-Dibuja o describe una topología con 2 switches de acceso, 2 de distribución y 2 routers de salida, indicando:
+El despacho del fondo no tiene señal. El router está en el salón.
 
-a) Dónde pondrías EtherChannels.
-b) Dónde actúa STP y dónde HSRP.
-c) ¿Qué pasa si cae un switch de distribución?
+a) ¿Cuáles son los tres primeros ajustes que probarías?
+b) ¿Por qué colocar el AP en el suelo o dentro de un armario metálico es mala idea?
+c) ¿Qué es el "cliente travieso" (hidden node) y cómo se manifiesta?
 
-## 7. VRRP vs HSRP
+## 7. Configuración mínima de un AP
 
-a) ¿Cuál es propietario de Cisco y cuál es el estándar?
-b) ¿Qué IP virtual usa VRRP por defecto si no se configura otra?
-c) ¿En qué protocolo está el router "dueño" de la IP virtual y cómo se llama ahí?
+Escribe la configuración que pondrías en un AP doméstico para una red de un estudio de música: SSID `EstudioNet`, WPA2/WPA3 Personal, contraseña segura, 2,4 GHz canal 6, 20 MHz.
 
-## 8. Diagnóstico rápido
+## 8. Autenticación: Personal vs Enterprise
 
-Los usuarios de la VLAN 10 no llegan a Internet. El switch de acceso está bien, los PCs tienen IP correcta y el gateway responde al ping... pero desde el router de salida no hay ruta.
+a) ¿Qué diferencia esencial hay entre WPA2-PSK y WPA2-Enterprise?
+b) ¿Qué servidor aparece en Enterprise y qué protocolo habla con el AP?
+c) ¿Qué red del instituto sería candidata a Enterprise y por qué?
 
-a) ¿Por qué el ping al gateway funciona si el problema está "más allá"?
-b) ¿Qué comando del gateway (HSRP activo) usarías para ver la tabla de rutas?
-c) ¿Es este fallo un SPOF resuelto por HSRP? ¿Por qué?
+## 9. Medios y estándares WiFi: verdadero o falso
+
+Indica si cada afirmación es verdadera (V) o falsa (F) y corrige las falsas:
+
+a) El estándar 802.11ax se conoce comercialmente como WiFi 6.
+b) El WiFi transmite por ondas electromagnéticas en el aire, sin cable.
+c) La velocidad real del WiFi suele estar entre el 30% y el 50% de la teórica.
+d) El WiFi NO es capa 2 del modelo OSI porque no hay cable.
+e) En 2,4 GHz hay tres canales no solapados: 1, 6 y 11.

@@ -1,129 +1,201 @@
 ---
-title: Boletín de Servicios de red — Avanzado (Resuelto)
-description: Soluciones de los ejercicios avanzados de servicios de red (DHCP, DNS y NTP)
+title: Boletín de Trunking e inter-VLAN — Avanzado (Resuelto)
+description: Soluciones ejercicios avanzados de VLANs
 ---
 
-# ✅ Boletín de Servicios de red — Avanzado (Resuelto)
+# ✅ Boletín de Trunking e inter-VLAN — Avanzado (Resuelto)
 
 ---
 
-## 1. DHCP en el router Cisco
+## 1. Configuración completa de VLANs
 
-a)
+**Switch1:**
 ```bash
-ip dhcp excluded-address 192.168.1.1 192.168.1.20
-ip dhcp pool LAN1
- network 192.168.1.0 255.255.255.0
- default-router 192.168.1.1
- dns-server 8.8.8.8 1.1.1.1
- lease 3
+Switch1(config)# vlan 10
+Switch1(config-vlan)# name Ventas
+Switch1(config)# vlan 20
+Switch1(config-vlan)# name RRHH
+Switch1(config)# interface range fa0/1-5
+Switch1(config-if-range)# switchport mode access
+Switch1(config-if-range)# switchport access vlan 10
+Switch1(config)# interface range fa0/6-10
+Switch1(config-if-range)# switchport mode access
+Switch1(config-if-range)# switchport access vlan 20
+Switch1(config)# interface fa0/23
+Switch1(config-if)# switchport mode trunk
+Switch1(config-if)# switchport trunk allowed vlan 10,20
+Switch1(config)# interface fa0/24
+Switch1(config-if)# switchport mode trunk
+Switch1(config-if)# switchport trunk native vlan 99
+Switch1(config-if)# switchport trunk allowed vlan 10,20
 ```
 
-b) Secuencia de diagnóstico:
-1. `show running-config | section dhcp` → ¿existe el pool y las exclusiones?
-2. `show ip dhcp binding` → ¿ha entregado alguna dirección alguna vez? Si nadie tiene concesión, el problema es de alcance (VLAN/helper) o de pool.
-3. `show ip interface brief` → ¿la interfaz de la LAN está Up/Up con su IP? (si está down, el pool no sirve)
-4. En el PC: `ipconfig /renew` y mira si llega Offer; si no llega, comprueba que PC y servidor comparten red o que existe `ip helper-address` en la VLAN.
-5. Repasa exclusiones: si por error excluyes toda la subred, el pool no tiene nada que ofrecer.
+**Switch2:** (configuración similar: mismas VLANs, mismos puertos access 1-5 → 10 y 6-10 → 20, y el mismo trunk en Fa0/24 con native 99 y `allowed vlan 10,20`).
 
-## 2. DNS jerárquico
-
-a) Recorrido:
-1. El resolver del PC pregunta al DNS configurado (p. ej. el router o el DNS del centro).
-2. Si ese resolver no tiene la respuesta en caché, pregunta a un **servidor raíz**: "¿quién es la autoridad de `.es`?"
-3. El raíz responde con los servidores del **TLD** `.es`.
-4. El resolver pregunta al TLD, que le da los servidores **autoritativos** de `ejemplo.es`.
-5. El autoritativo responde el registro A de `www.ejemplo.es`.
-6. El resolver entrega la IP al PC y la guarda en su caché.
-
-b) La segunda vez la respuesta sale de la **caché** del resolver (y probablemente también de la del propio PC): ni raíz ni TLD ni autoritativo se consultan.
-
-c) El **TTL** define cuántos segundos puede reutilizarse una respuesta cacheada. TTL corto = cambios rápidos pero más consultas; TTL largo = menos tráfico pero cambios lentos en propagarse.
-
-## 3. Selección de registros para un mini-proyecto
-
-a)
-```
-instituto.edu.      A      198.51.100.10
-instituto.edu.      AAAA   2001:db8::10
-www                 A      198.51.100.10
-www                 AAAA   2001:db8::10
-aulas               CNAME  www.instituto.edu.
-instituto.edu.      MX 10  mail.proveedor.com.
-```
-(En los registros MX el nombre del servidor de correo debe tener su propio A/AAAA.)
-
-b) El **MX** del dominio apuntando a `mail.proveedor.com.` (con punto final), más el A/AAAA de ese host si no lo gestiona el proveedor.
-
-c) **No.** La RFC prohíbe CNAME en el apex del dominio (convive con SOA/NS). Para el raíz se usan registros A/AAAA directos, o ALIAS/ANAME donde el proveedor lo ofrezca.
-
-## 4. Diagnóstico con nslookup
-
-a) El **servidor DNS configurado no responde** (timeout). La consulta no se resuelve: problema de alcance o del propio servidor 192.168.1.1.
-
-b) Consulta correcta: `www` es un **CNAME** hacia `web.ejemplo.es`, que resuelve a 203.0.113.99. Todo normal: la cadena de alias termina en un A.
-
-c) El **DNS funciona pero el navegador no**: prueba caché del navegador corrupta (vaciarla), un proxy configurado, un archivo hosts con una entrada vieja, o un firewall local. El DNS es una capa; la navegación depende de más cosas.
-
-## 5. NTP con jerarquía
-
-a) **Diseño:**
-- R1 (borde) sincroniza con servidores públicos (p. ej. `pool.ntp.org` o el NTP del proveedor) → quedará en estrato 2 o 3.
-- S1 sincroniza con R1 → estrato 3 o 4.
-- Los switches de acceso y demás equipos sincronizan con S1 (o con R1 si la red es pequeña) → un estrato más abajo.
-Nunca todos los equipos contra Internet: peor control, más tráfico y menos consistencia interna.
-
-b)
+**Router:**
 ```bash
-! R1 (borde)
-ntp server pool.ntp.org
-! (opcional) ntp master 3  si no hay acceso público garantizado
-
-! S1
-ntp server <ip_de_R1>
+Router(config)# interface fa0/0
+Router(config-if)# no shutdown
+Router(config)# interface fa0/0.10
+Router(config-subif)# encapsulation dot1Q 10
+Router(config-subif)# ip address 192.168.10.1 255.255.255.0
+Router(config)# interface fa0/0.20
+Router(config-subif)# encapsulation dot1Q 20
+Router(config-subif)# ip address 192.168.20.1 255.255.255.0
 ```
 
-c)
+## 2. Diagnóstico de native VLAN
+
+a) **Problemas:** las tramas sin etiquetar (de la VLAN nativa, incluyendo tráfico de control CDP/VTP/DTP y datos de esa VLAN) se interpretan en la VLAN equivocada en el otro extremo.
+   - Tráfico de control (CDP, VTP) no funciona correctamente entre switches.
+   - Posibles problemas de conectividad en la native VLAN (va y viene a ratos).
+   - Mensajes de error en el log de ambos switches: *"Native VLAN mismatch discovered on Fa0/24"*.
+
+b) **Diagnóstico:** `show interfaces trunk` en ambos switches. Muestra la native VLAN de cada extremo y reporta directamente el mismatch.
+
+c) **Arreglo sin pérdida:** configurar la **misma native VLAN en ambos extremos** — elegir un número (ej. 99) y ponerlo en ambos:
+   ```bash
+   Switch2(config-if)# switchport trunk native vlan 99
+   ```
+   El cambio es **inmediato**: la native VLAN solo afecta a tramas sin etiquetar. Las VLANs etiquetadas (10, 20, 30) no sufren interrupción durante el cambio.
+
+## 3. Diseño de VLANs corporativas
+
+a) **Tabla de VLANs:**
+   | VLAN | Nombre | Puertos |
+   |------|--------|---------|
+   | 10 | Recepción | Planta baja 1-5 |
+   | 20 | Servidores | Planta baja 6-15 |
+   | 30 | Ventas | Planta 1, puertos 1-30 |
+   | 40 | Marketing | Planta 1, puertos 31-45 |
+   | 50 | IT | Planta 2, puertos 1-20 |
+   | 60 | Dirección | Planta 2, puertos 21-25 |
+
+b) **Router-on-a-stick:** en la planta baja, cerca de los servidores, conectado por un trunk a un puerto del core (puede enrutar todas las VLANs con subinterfaces). **Alternativa:** switch capa 3 como core en la sala de servidores, haciendo routing entre VLANs internamente con SVIs (se elimina el cuello de botella del router).
+
+c) **VLANs en trunks:** todas (10, 20, 30, 40, 50, 60) en los trunks del core, con **native VLAN cambiada** (ej. 999) y **`allowed vlan`** cubriendo todas. IT necesita acceso a todas las VLANs para administrar.
+
+d) **ACLs para limitar Dirección** (se aplican en la subinterfaz del router de la VLAN 60):
+   ```bash
+   access-list 101 permit ip 192.168.60.0 0.0.0.255 192.168.20.0 0.0.0.255
+   access-list 101 deny ip 192.168.60.0 0.0.0.255 any
+   ```
+   Aplicar con `ip access-group 101 in` en la subinterfaz `Fa0/0.60`. (Detalles finos de ACLs, más adelante.)
+
+## 4. VTP disaster recovery
+
+a) **Por qué:** VTP propaga la base de datos del switch con mayor **revision number**. El switch nuevo (rev 500) tiene número más alto que el server actual (rev 100). Al propagar su base de datos (posiblemente vacía), todas las VLANs se borran en la red. Basta un trunk para que el anuncio llegue a todos.
+
+b) **Recuperación:**
+   1. **Desconectar el switch problemático inmediatamente** (cable del trunk) para frenar la propagación.
+   2. Reconfigurar las VLANs manualmente en cada switch (o restaurar un backup de la config).
+   3. Cambiar los switches a **VTP transparent** (o VTPv3 mode off) para que ningún switch pueda volver a hacer esto.
+
+c) **Medidas preventivas:**
+   - Usar **VTP transparent** o **VTPv3 mode off** (no propaga ni procesa anuncios).
+   - Verificar el **revision number** (`show vtp status`) de todo switch antes de enchufarlo.
+   - **Resetear** la base de datos de cualquier equipo usado: `delete flash:vlan.dat` y reiniciar, antes de conectarlo.
+   - Documentar la base de datos de VLANs (la config es tu backup).
+
+## 5. Router-on-a-stick: cuello de botella
+
+a) **Cálculo:** 4 VLANs × 30 Mbps = **120 Mbps**. La interfaz FastEthernet (100 Mbps) NO puede soportar 120 Mbps. **Sí hay cuello de botella** (pérdidas y saturación).
+
+b) **Alternativas:**
+   - **Interfaz GigabitEthernet** (1000 Mbps) → 120 Mbps es apenas el 12 % de capacidad.
+   - **Switch capa 3 con SVIs** → routing en hardware interno, sin interfaz única de salida.
+   - Dividir las VLANs entre **dos interfaces físicas** del router (proporcional al tráfico).
+
+c) **Con GigabitEthernet:** 120 Mbps sobre 1000 Mbps = **12 % de uso**, sin cuello de botella. Si el tráfico se duplica (240 Mbps), seguimos al 24 %: holgado.
+
+## 6. Seguridad en VLANs
+
+| Riesgo | Mitigación |
+|---|---|
+| 1. **VLAN Hopping por DTP**: el atacante negocia un trunk (`dynamic desirable`) y recibe todas las VLANs | `switchport mode access` + `switchport nonegotiate`; puertos libres con `shutdown` |
+| 2. **Double tagging en la native VLAN**: el atacante manda una trama con doble etiqueta 802.1Q y la segunda etiqueta llega a otra VLAN | Native VLAN **≠ 1** y **sin datos en la native**; segmentar físicamente zonas sensibles |
+| 3. **VTP como arma**: un switch con revision number mayor anuncia su base de datos (vacía) y borra VLANs | VTP transparent / VTPv3 off, verificar `show vtp status` antes de conectar equipo |
+
+## 7. VLAN hopping y hardening
+
+a) **Los dos vectores de ataque:**
+   1. **Negociación de trunk por DTP:** un portátil conectado a un puerto en modo `dynamic desirable` (o `dynamic auto` si el portátil pide) tramita el protocolo DTP y consigue que el puerto se convierta en **trunk**. A partir de ahí, todas las VLANs que cruzan el trunk quedan a su alcance.
+   2. **Double tagging:** el atacante envía una trama con **dos etiquetas 802.1Q** (a menudo con la native VLAN). El primer switch elimina la primera etiqueta (la trata como native) y la reenvía por el trunk; el segundo switch ve la segunda etiqueta y la entrega en la **VLAN objetivo**. El atacante nunca llega a ser trunk ni a hablar directamente: salta a la VLAN objetivo de forma encubierta.
+
+b) **Tres mitigaciones concretas:**
+   1. **Apagar DTP en puertos de usuario:** `switchport mode access` + `switchport nonegotiate` (y `shutdown` en los puertos no usados) → el atacante no puede negociar un trunk.
+   2. **Cambiar la native VLAN y no usarla para datos:** `switchport trunk native vlan 99` (o 999) en TODOS los trunks, y usar VLANs de datos distintas de la native → el double tagging pierde su puerta de entrada.
+   3. **Limitar y segmentar:** `switchport trunk allowed vlan 10,20,30` para restringir qué VLANs cruzan cada trunk, y **VTP transparent / VTPv3 off** para que un switch rogue no arrase la base de datos.
+
+## 8. Inter-VLAN con SVI paso a paso
+
+**(Se asume que los puertos access de las VLANs 10/20/30 ya están asignados.)**
+
+a) **Creación de VLANs:**
 ```bash
-show ntp status
-show ntp associations
+Switch(config)# vlan 10
+Switch(config-vlan)# name Ventas
+Switch(config)# vlan 20
+Switch(config-vlan)# name RRHH
+Switch(config)# vlan 30
+Switch(config-vlan)# name IT
 ```
-En `show ntp status` buscas la línea de sincronización y el estrato; en `associations`, el peer elegido (marcado con `*`), su IP y su estrato.
 
-## 6. Los tres servicios en un solo caso
-
-a) **DHCP** caído o inalcanzable. El rango 169.254.0.0/16 es **APIPA** (Automatic Private IP Addressing): el PC se autoasigna una IP de ese rango cuando nadie le contesta al Discover.
-
-b) DHCP Discover es un **broadcast**, y los broadcasts no cruzan VLANs (ni routers). Si el PC está en otra VLAN distinta a la del servidor DHCP sin un `ip helper-address` en el router de esa VLAN, la petición nunca llega.
-
-c) Ahora falla **DNS**. Compruebas con `nslookup` (o `Resolve-DnsName` en PowerShell): si `nslookup www.google.com 8.8.8.8` funciona pero con el DNS asignado no, el problema es el servidor DNS asignado por DHCP (o su helper). Complementa con `ping 8.8.8.8` para confirmar que hay salida a Internet.
-
-d) El PC estaba bien porque los **PCs ya sincronizaban su reloj** (con NTP interno o con Windows por Internet cuando hubo red). El switch, sin embargo, lleva su reloj propio sin fuente NTP configurada: tras el corte eléctrico perdió la hora (los switches sin NTP arrancan con fecha por defecto). De ahí la importancia de configurar NTP en los equipos de red, no solo en los PCs.
-
-## 7. DHCPv6 y doble pila
-
-a) **SLAAC:** el PC construye su propia dirección a partir del prefijo que anuncia el router (RA) + su identificador de interfaz (EUI-64 o aleatorio), sin servidor que lleve registro. **Stateful DHCPv6:** un servidor DHCPv6 asigna y registra las direcciones, como DHCPv4 pero en IPv6.
-
-b) **SLAAC + stateless DHCPv6:** los RA anuncian el prefijo (flag O=1, M=0) y el DHCPv6 solo entrega "otra información": DNS, dominio, NTP.
-
-c)
+b) **Activar el routing global:**
 ```bash
-ipv6 unicast-routing
-interface g0/0
- ipv6 address fe80::1 link-local
- ipv6 address 2001:db8:ab::1/64
- ipv6 nd other-config-flag
-ipv6 dhcp pool CLIENTES
- dns-server 2001:4860:4860::8888
- domain-name instituto.edu
-interface g0/0
- ipv6 dhcp server CLIENTES
+Switch(config)# ip routing
 ```
 
-## 8. El "no tiene Internet" clásico
+c) **SVIs (uno por VLAN):**
+```bash
+Switch(config)# interface vlan 10
+Switch(config-if)# ip address 192.168.10.1 255.255.255.0
+Switch(config-if)# no shutdown
 
-a) **Sano:** DHCP (IP y gateway correctos), routing básico (llega a 1.1.1.1, si nslookup contra 1.1.1.1 funciona hay salida a Internet). **Roto:** el **DNS configurado** en el equipo (el asignado no responde; uno externo sí).
+Switch(config)# interface vlan 20
+Switch(config-if)# ip address 192.168.20.1 255.255.255.0
+Switch(config-if)# no shutdown
 
-b) 1) Arreglar/renombrar el servidor DNS configurado (por ejemplo poner 1.1.1.1 u 8.8.8.8 a mano) y 2) corregir de raíz el DNS que entrega el DHCP del router del centro (opción `dns-server` en el pool) o el propio servidor DNS caído.
+Switch(config)# interface vlan 30
+Switch(config-if)# ip address 192.168.30.1 255.255.255.0
+Switch(config-if)# no shutdown
+```
 
-c) **NTP** solo sincroniza relojes; **DHCP** está funcionando (hay IP y gateway); **routing** hay: las consultas a 1.1.1.1 van y vuelven. El único servicio que falla es la resolución de nombres con el servidor asignado.
+d) **Gateway de cada PC:**
+
+| VLAN | Subred | Gateway (IP del SVI) |
+|---|---|---|
+| 10 Ventas | 192.168.10.0/24 | 192.168.10.1 |
+| 20 RRHH | 192.168.20.0/24 | 192.168.20.1 |
+| 30 IT | 192.168.30.0/24 | 192.168.30.1 |
+
+**Verificación:** comprueba que el SVI esté Up/Up (`show ip interface brief`), revisa que las VLANs existan en `show vlan brief` y prueba la conectividad con `ping` entre SVIs (ej. desde el SVI 10 contra 192.168.20.1). Si los SVIs están Up/Up pero no enrutan, el culpable es el comando `ip routing` olvidado.
+
+## 9. DHCP por VLAN sin teclear IPs
+
+a) **Pools (en el switch capa 3):**
+```bash
+Switch(config)# ip dhcp excluded-address 192.168.10.1 192.168.10.10
+Switch(config)# ip dhcp excluded-address 192.168.20.1 192.168.20.10
+
+Switch(config)# ip dhcp pool VENTAS
+Switch(dhcp-config)# network 192.168.10.0 255.255.255.0
+Switch(dhcp-config)# default-router 192.168.10.1
+Switch(dhcp-config)# dns-server 8.8.8.8
+
+Switch(config)# ip dhcp pool RRHH
+Switch(dhcp-config)# network 192.168.20.0 255.255.255.0
+Switch(dhcp-config)# default-router 192.168.20.1
+Switch(dhcp-config)# dns-server 8.8.8.8
+```
+
+b) **Exclusión:** el rango `.1` a `.10` de cada subred (el `.1` es el SVI/gateway). Sin la exclusión, DHCP puede entregar `192.168.10.1` a un PC: dos equipos con la misma IP, el gateway "ocupado" y conflictos que son un dolor de localizar.
+
+c) **Relay:** `ip helper-address 192.168.30.10` en `interface vlan 10` y en `interface vlan 20`. Sin esa línea, el DISCOVER del PC es broadcast y **no cruza el router** (el broadcast se queda en su VLAN); el servidor de la VLAN 30 nunca lo ve y el PC acaba en APIPA.
+
+d) **Diagnóstico en orden:**
+   1. `show ip dhcp pool` → ¿existe el pool VENTAS y su `network` es 192.168.10.0/24? ¿Hay IPs libres?
+   2. `show ip interface brief` → ¿la SVI de la VLAN 10 está Up/Up?
+   3. `show ip helper-address` (o revisar la config de la SVI) → ¿está el `ip helper-address 192.168.30.10`? Y en el switch del PC: `show vlan brief` → ¿el puerto está en la VLAN 10?
+
+Si el DISCOVER ni siquiera aparece, el problema está aguas abajo (VLAN/puerto); si aparece pero no hay OFFER, es el pool o el relay.

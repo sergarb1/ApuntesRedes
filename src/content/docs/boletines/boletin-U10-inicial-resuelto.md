@@ -1,62 +1,72 @@
 ---
-title: Boletín de ACL y seguridad — Inicial (Resuelto)
-description: Soluciones de los ejercicios básicos de ACLs y seguridad de red
+title: Boletín de NAT y PAT — Inicial (Resuelto)
+description: Soluciones ejercicios básicos de NAT
 ---
 
-# ✅ Boletín de ACL y seguridad — Inicial (Resuelto)
+# ✅ Boletín de NAT y PAT — Inicial (Resuelto)
 
 ---
 
-## 1. Verdadero o falso
+## 1. ¿Qué es NAT?
 
-a) **Verdadero.** Solo IP origen (o rechaza todo lo demás). Para origen+destino+puerto, extendida.
-b) **Falso.** Al final hay un **deny any** implícito, no permit.
-c) **Verdadero.** Protocolo (IP, TCP, UDP, ICMP…), IP origen/destino y puerto de origen/destino.
-d) **Verdadero.** Con solo líneas deny, el deny any implícito del final rechaza todo: la ACL corta el 100% del tráfico que evalúa.
-e) **Verdadero.** Y con contadores de matches por línea, muy útil para diagnosticar.
+**NAT** (Network Address Translation) traduce direcciones IP privadas (no enrutables en Internet) a direcciones IP públicas (enrutables). Es necesario porque:
+- Las IPv4 públicas son limitadas.
+- Una LAN completa puede compartir una o pocas IPs públicas.
 
-## 2. Números de ACL
+## 2. Tipos de NAT
 
-| Tipo | Rango |
+| Tipo | Descripción |
 |---|---|
-| Estándar | **1-99, 1300-1999** |
-| Extendida | **100-199, 2000-2699** |
+| NAT estático | **B** — Una IP privada fija se traduce a una IP pública fija |
+| NAT dinámico | **C** — Se asigna una IP pública de un pool disponible |
+| PAT | **A** — Muchas IPs privadas comparten una IP pública variando puertos |
 
-## 3. ¿Qué comando?
+## 3. Configura PAT
 
-1 → b (`ip access-group` = aplicar ACL a interfaz)
-2 → d (`access-list` numerada estándar)
-3 → a (`ip access-list extended` = ACL nombrada extendida)
-4 → c (`show access-lists` = ACLs y contadores)
+```bash
+R1(config)# access-list 1 permit 192.168.1.0 0.0.0.255
+R1(config)# ip nat inside source list 1 interface g0/1 overload
+R1(config)# interface g0/0
+R1(config-if)# ip nat inside
+R1(config)# interface g0/1
+R1(config-if)# ip nat outside
+```
 
-## 4. Wildcard masks
+## 4. Tabla NAT
 
-La wildcard es el **inverso** de la máscara de subred (restando cada octeto a 255):
+a) **2 dispositivos** (192.168.1.10 y 192.168.1.20).
+b) **83.45.12.78**.
+c) **50001**.
 
-| Máscara de subred | Wildcard | ¿Qué representa? |
-|---|---|---|
-| 255.255.255.0 | `0.0.0.255` | Los 24 primeros bits fijos: una red /24 |
-| 255.255.255.255 | `0.0.0.0` | Todos los bits fijos: **solo esa IP** (host exacto) |
-| 255.255.0.0 | `0.0.255.255` | Los 16 primeros bits fijos: una red /16 |
+## 5. Verdadero o falso
 
-## 5. ACL básica
+a) **Falso.** NAT estático es 1 a 1. PAT permite compartir una IP.
+b) **Verdadero.** NAT necesita saber qué interfaz es inside y cuál outside.
+c) **Falso.** NAT estático hace eso. NAT dinámico asigna de un pool, no es fijo.
+d) **Verdadero.**
 
-a) `access-list 10 permit 192.168.1.0 0.0.0.255`
-b) `interface g0/1` → `ip access-group 10 out`
+## 6. NAT destino (port forwarding)
 
-## 6. Estándar o extendida
+```bash
+R1(config)# ip nat inside source static tcp 192.168.1.10 80 83.45.12.78 80
+R1(config)# interface g0/0
+R1(config-if)# ip nat inside
+R1(config)# interface g0/1
+R1(config-if)# ip nat outside
+```
 
-a) **Estándar.** Solo filtra por origen, y solo hay un origen que bloquear: el host escaneador. Además la estándar es más ligera.
-b) **Extendida.** Filtra protocolo (TCP) y puerto (80/443), cosa que la estándar no puede.
-c) **Estándar.** Es el escenario clásico de la estándar: menos CPU y solo interesa el origen.
+## 7. ¿Qué tipo de NAT es?
 
-## 7. ¿Dónde aplico la ACL?
+| Escenario | Tipo |
+|---|---|
+| a) Servidor web 192.168.1.10 ↔ 83.45.12.78 fijo | **NAT estático** (1:1) |
+| b) Pool de 4 IPs públicas asignadas al vuelo | **NAT dinámico** (pool) |
+| c) 300 alumnos saliendo por una IP pública | **PAT** (sobrecarga) |
+| d) Puerto público 8080 → 192.168.1.10:80 | **NAT destino** (port forwarding) |
 
-a) **Cerca del destino**: en R1, interfaz hacia LAN-B, sentido **out**. La estándar se coloca cerca del destino para no filtrar de más en el camino.
-b) **Cerca del origen**: en R1, interfaz hacia LAN-A, sentido **in**. La extendida filtra con precisión (protocolo+puerto), así que conviene cortar el tráfico lo antes posible y no consumir ancho de banda en vano.
+## 8. Lee la tabla NAT
 
-## 8. Comandos de verificación
-
-1 → b (`show access-lists` muestra contadores de matches por línea)
-2 → a (`show ip interface` indica la ACL aplicada y el sentido)
-3 → c (`show running-config` muestra las líneas tal como las escribiste)
+a) **3 conexiones activas:** dos consultas DNS (8.8.8.8:53) y una sesión HTTPS (142.250.184.4:443).
+b) **49152** — es el puerto efímero original del PC 192.168.1.30 (columna *Inside local*).
+c) Porque **NAT asigna un puerto global distinto** a cada conexión (60001, 60002, 60003): los puertos efímeros duplicados no chocan porque el *Inside global* los desambigua.
+d) Las dos primeras van a **8.8.8.8:53 (DNS)**; la tercera a **142.250.184.4:443 (HTTPS)**.

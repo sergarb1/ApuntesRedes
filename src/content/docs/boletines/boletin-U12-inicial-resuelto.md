@@ -1,65 +1,75 @@
 ---
-title: Boletín de Alta disponibilidad — Inicial (Resuelto)
-description: Soluciones de los ejercicios básicos de alta disponibilidad y redundancia
+title: Boletín de Redes inalámbricas — Inicial (Resuelto)
+description: Soluciones de los ejercicios básicos de redes inalámbricas (WiFi)
 ---
 
-# ✅ Boletín de Alta disponibilidad — Inicial (Resuelto)
+# ✅ Boletín de Redes inalámbricas — Inicial (Resuelto)
 
 ---
 
-## 1. ¿Qué concepto soy?
+## 1. ¿Quién soy?
 
-a) **SPOF** (Single Point of Failure).
-b) **STP** (Spanning Tree Protocol).
-c) **EtherChannel** (o LAG/port-channel).
-d) **FHRP** (HSRP, VRRP o GLBP).
-e) Los **cuatro nueves**: 99,99% ≈ 52 minutos al año.
+a) **IEEE 802.11** (familia: a/b/g/n/ac/ax/be…).
+b) El **SSID** (Service Set Identifier).
+c) El **punto de acceso (AP)**.
+d) Modo **ad hoc** (IBSS). Hoy en día, Wi-Fi Direct ha tomado el relevo.
+e) La **Wi-Fi Alliance**.
 
-## 2. Verdadero o falso
+## 2. Bandas y canales
 
-a) **Verdadero.** Bloquea puertos redundantes y los deja de reserva: si falla el camino activo, desbloquea.
-b) **Verdadero.** Suma ancho de banda y si un miembro cae, el canal sigue (con menos ancho).
-c) **Falso.** Cada router conserva su IP física; la IP virtual es **compartida** y la responde el activo.
-d) **Verdadero.** El stack se ve como un switch: una config, una MAC, una gestión.
-e) **Falso.** Cada "nueve" extra multiplica el coste (redundancia, monitorización, pruebas). El diseño busca el equilibrio coste/riesgo.
+a) **2,4 GHz y 5 GHz** (y 6 GHz con WiFi 6E/7).
+b) **Tres**: 1, 6 y 11.
+c) La de **5 GHz** tolera mejor interferencias (más canales y menos aparatos antiguos); la de **2,4 GHz** llega más lejos y atraviesa mejor las paredes.
+d) **Canal 6**, el único de los tres que no has mencionado; si tu vecino inunda el 1 y el 11, en el 6 estás razonablemente limpio.
 
-## 3. Cálculo de disponibilidad
+## 3. Verdadero o falso
 
-a) 99,9% → **8,76 horas** al año (0,001 × 8.760 h).
-b) 99,99% → **52,6 minutos** al año.
-c) 0,995 × 0,995 × 0,995 ≈ **98,5%** (≈ 131 horas al año de caída). En serie, la disponibilidad del conjunto siempre es **peor** que la del peor eslabón.
+a) **Falso.** WEP está roto desde hace décadas (se descifra en minutos). Solo aparece en museos y en el examen.
+b) **Verdadero.** PSK = Pre-Shared Key: todos comparten la misma contraseña.
+c) **Verdadero.** SAE (Simultaneous Authentication of Equals) sustituye al PSK y salva el four-way handshake clásico de los ataques offline.
+d) **Verdadero.** Decenas de canales de 20 MHz no solapados frente a los 3 de 2,4 GHz.
+e) **Falso.** El SSID oculto va en claro en las tramas de gestión; esconderlo no autentica a nadie. Seguridad real: WPA2/WPA3.
 
-## 4. ¿Quién bloquea el puerto?
+## 4. Seguridad: escala del mal
 
-a) **SW2** (el que no es raíz): elige un puerto raíz y bloquea el otro de los dos enlaces.
-b) El **ID de sistema del switch emisor** (prioridad + MAC): gana el BPDU con menor ID; a igualdad, la MAC más baja.
-c) **Tormenta de broadcast**: las tramas de broadcast giran eternamente, multiplicándose en cada vuelta, y la red se satura en segundos (y las tablas MAC se corruptan).
+**Red abierta → WEP → WPA → WPA2 → WPA3** (de peor a mejor).
 
-## 5. Relaciona comandos HSRP
+## 5. WiFi 4 → WiFi 7
 
-1 → b (`standby 1 ip` define la IP virtual)
-2 → a (`priority` más alta = más candidato a activo)
-3 → d (`preempt` permite recuperar el rol activo al volver)
-4 → c (`show standby brief` = estado de los grupos)
+1 → b (WiFi 4 = 802.11n)
+2 → c (WiFi 5 = 802.11ac)
+3 → a (WiFi 6 = 802.11ax)
+4 → e (WiFi 6E = 802.11ax en 6 GHz)
+5 → d (WiFi 7 = 802.11be)
 
-## 6. Diseño básico redundante
+## 6. Cobertura
 
-a) **EtherChannel** en los enlaces de acceso→distribución (2×1G por enlace, por ejemplo) y en la interconexión de los dos routers de salida. Duplica ancho y tolera la caída de un miembro.
+a) 1) Reposicionar el AP (centro, alto y despejado); 2) probar otra banda/canal (2,4 GHz llega más lejos; en 5 GHz prueba canales limpios); 3) añadir un segundo AP o un extensor/mesh bien colocado.
 
-b) **STP** actúa en toda la topología de capa 2 (acceso y distribución): bloquee los enlaces redundantes que crearían bucles. **HSRP** actúa en capa 3, entre los dos routers de salida, hacia la puerta de enlace de cada VLAN.
+b) El suelo absorbe y multiplica reflexiones; el metal actúa como jaula (atenuación enorme). La señal se irradia en forma aproximada de dona alrededor de las antenas: el AP alto y centrado cubre más.
 
-c) Si cae un switch de distribución: STP desbloquea los puertos de reserva, el HSRP activo puede pasar al otro router si era él quien cayó, y el servicio sigue (con quizá menos ancho). Es el objetivo de la redundancia: que el fallo sea un "evento", no una "incidencia".
+c) El **hidden node**: dos clientes que se oyen al AP pero no entre ellos transmiten a la vez y colisionan *en el AP*. Se manifiesta como rendimiento errático que empeora con más clientes y distancias largas. Mitigación: RTS/CTS, repartir mejor los APs.
 
-## 7. VRRP vs HSRP
+## 7. Configuración mínima de un AP
 
-a) **HSRP** es propietario de Cisco; **VRRP** es el estándar abierto (RFC 5798).
-b) Por defecto VRRP usa la **IP física del router maestro como IP virtual** (distinto de HSRP, que usa una IP virtual propia en la subred).
-c) En VRRP se llama **router maestro** (y los otros, backup); en HSRP, **activo** y en espera.
+- SSID: `EstudioNet`
+- Seguridad: **WPA2/WPA3 Personal** (transición) o WPA3 si todos los equipos lo soportan
+- Contraseña: larga (16+ caracteres), no un diccionario (ejemplo de criterio: `clave-larga-no-obvia-2026`)
+- Banda: 2,4 GHz (llega a la sala del fondo)
+- Canal: **6** (20 MHz) — evita el 1 y el 11 si hay vecinos, y no uses 40 MHz en 2,4 GHz: saturas el vecindario y pierdes estabilidad.
 
-## 8. Diagnóstico rápido
+## 8. Autenticación: Personal vs Enterprise
 
-a) Porque el gateway (routers con HSRP) está vivo en **capa 2**: el ping solo prueba que el router activo responde, no que sepa encaminar hacia Internet.
+a) **PSK:** una contraseña compartida por todos (si se filtra, cambia para todo el mundo). **Enterprise:** cada usuario se autentica con sus credenciales individuales (usuario/contraseña o certificado).
 
-b) `show ip route` en el router HSRP activo (y `show standby brief` para saber cuál es).
+b) Un servidor **RADIUS**; el AP habla con él mediante **802.1X/EAP**.
 
-c) **No.** HSRP protege la **caída del gateway** (capa 3 local). Aquí el fallo está en el **routing de salida** del propio activo: si cae todo el router, HSRP ayuda; pero un fallo de ruta en el activo con el router vivo no dispara el failover (salvo con tracking/ip SLA configurado).
+c) El WiFi de **profesores/administración** o el corporativo: cientos de usuarios identificables, posibilidad de revocar a uno concreto sin tocar al resto y trazabilidad por usuario. El WiFi de invitados, en cambio, es PSK de toda la vida.
+
+## 9. Medios y estándares WiFi: verdadero o falso
+
+a) **Verdadero.** 802.11ax = WiFi 6 (2019, bandas de 2,4 y 5 GHz).
+b) **Verdadero.** El WiFi envía ondas electromagnéticas por el aire, sin medio conductor.
+c) **Verdadero.** La velocidad real WiFi suele ser el 30-50% de la teórica por overhead, obstrucciones e interferencias.
+d) **Falso.** El WiFi **sí es capa 2** (enlace): entrega local por MAC con tramas 802.11; el aire es solo el medio (capa 1).
+e) **Verdadero.** En 2,4 GHz los tres canales no solapados son 1, 6 y 11.

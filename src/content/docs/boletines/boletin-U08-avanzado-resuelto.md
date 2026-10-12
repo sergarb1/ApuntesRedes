@@ -1,135 +1,132 @@
 ---
-title: Boletín de OSPF — Avanzado (Resuelto)
-description: Soluciones de los ejercicios avanzados de Routing Dinámico
+title: Boletín de Enrutamiento estático — Avanzado (Resuelto)
+description: Soluciones de los ejercicios avanzados de enrutamiento estático
 ---
 
-# ✅ Boletín de OSPF — Avanzado (Resuelto)
+# ✅ Boletín de Enrutamiento estático — Avanzado (Resuelto)
 
 ---
 
-## 1. Configuración OSPF multiárea
+## 1. Configuración multi-router
 
 **R1:**
 ```bash
-interface loopback 0
- ip address 1.1.1.1 255.255.255.255
 interface g0/0
  ip address 192.168.1.1 255.255.255.0
+ no shutdown
 interface g0/1
- ip address 192.168.2.1 255.255.255.0
-interface g0/2
  ip address 10.0.0.1 255.255.255.252
-router ospf 1
- router-id 1.1.1.1
- network 192.168.1.0 0.0.0.255 area 0
- network 192.168.2.0 0.0.0.255 area 0
- network 10.0.0.0 0.0.0.3 area 0
+ no shutdown
+ip route 192.168.2.0 255.255.255.0 10.0.0.2
+ip route 192.168.3.0 255.255.255.0 10.0.0.2
+ip route 0.0.0.0 0.0.0.0 10.0.0.2
 ```
 
-**R2 (ABR):**
+**R2:**
 ```bash
-interface loopback 0
- ip address 2.2.2.2 255.255.255.255
 interface g0/0
  ip address 10.0.0.2 255.255.255.252
+ no shutdown
 interface g0/1
  ip address 10.0.0.5 255.255.255.252
-router ospf 1
- router-id 2.2.2.2
- network 10.0.0.0 0.0.0.3 area 0
- network 10.0.0.4 0.0.0.3 area 1
+ no shutdown
+interface g0/2
+ ip address 192.168.2.1 255.255.255.0
+ no shutdown
+ip route 192.168.1.0 255.255.255.0 10.0.0.1
+ip route 192.168.3.0 255.255.255.0 10.0.0.6
 ```
 
 **R3:**
 ```bash
-interface loopback 0
- ip address 3.3.3.3 255.255.255.255
 interface g0/0
- ip address 192.168.3.1 255.255.255.0
-interface g0/1
  ip address 10.0.0.6 255.255.255.252
-router ospf 1
- router-id 3.3.3.3
- network 192.168.3.0 0.0.0.255 area 1
- network 10.0.0.4 0.0.0.3 area 1
+ no shutdown
+interface g0/1
+ ip address 192.168.3.1 255.255.255.0
+ no shutdown
+ip route 192.168.1.0 255.255.255.0 10.0.0.5
+ip route 192.168.2.0 255.255.255.0 10.0.0.5
+ip route 0.0.0.0 0.0.0.0 10.0.0.5
 ```
 
-## 2. Diagnóstico OSPF
+## 2. Rutas flotantes
 
-a) **FULL/DR:** El vecino 3.3.3.3 es el DR y la adyacencia está completa (FULL). Es normal en Ethernet.
+a) **Comandos:**
+```bash
+ip route 0.0.0.0 0.0.0.0 10.0.0.2        # AD=1 (por defecto)
+ip route 0.0.0.0 0.0.0.0 10.0.1.2 5      # AD=5 (respaldo)
+ip route 192.168.100.0 255.255.255.0 10.0.0.2
+```
 
-b) **2WAY/DROTHER:** El vecino 4.4.4.4 no es DR ni BDR (DROTHER). La adyacencia está en 2WAY, que es el estado normal entre DROTHERS (no intercambian LSAs directamente, solo con el DR).
+b) **Cuándo se activa:** Cuando la ruta primaria (10.0.0.2) desaparece de la tabla (el siguiente salto deja de ser accesible). Entonces la ruta con AD=5 aparece en la tabla.
 
-c) **Porque no es necesario.** En redes multiacceso, los DROTHERS solo forman adyacencia FULL con el DR y BDR. Entre DROTHERS se quedan en 2WAY.
+c) **Verificación:** `show ip route 0.0.0.0` muestra qué ruta por defecto está activa. Si aparece la de 10.0.1.2, la primaria ha fallado.
 
-d) **No aparece en esa salida** (los `Neighbor ID` son los de los vecinos): no es 3.3.3.3 ni 4.4.4.4, y a juzgar por los estados este router es **DROTHER** — si fuera BDR, el vecino 4.4.4.4 estaría en FULL con él, no en 2WAY. El tuyo lo ves con `show ip ospf`.
+## 3. Resolución de problemas de rutas
 
-## 3. Redistribución OSPF
+a) **No funciona.** La interfaz G0/1 está `shutdown` (administratively down). La ruta por defecto apunta a 10.0.0.2, que está en G0/1. Si la interfaz está caída, la ruta no se instala en la tabla.
 
-a) `redistribute static subnets` inyecta las rutas estáticas configuradas en el router al proceso OSPF, para que otros routers OSPF aprendan esas rutas.
+b) `show ip route` — 0.0.0.0/0 no aparecerá. `show ip interface brief` — G0/1 aparece como "administratively down".
 
-b) **Dos rutas:** la ruta por defecto (0.0.0.0/0) y la ruta estática 10.100.0.0/16.
+c) **Cambiar:**
+```bash
+interface g0/1
+ no shutdown
+```
+Y verificar que el enlace esté físicamente conectado.
 
-c) **Sí.** `redistribute static subnets` inyecta en OSPF las dos estáticas de la tabla (tanto la 10.100.0.0/16 como la 0.0.0.0/0) y `default-information originate` se asegura de anunciar además la ruta por defecto como externa E2: entre los dos comandos, todos los routers OSPF terminan aprendiendo las dos rutas.
+## 4. Longest prefix match
 
-## 4. Cambio de coste OSPF
+a) **192.168.1.30 → via 10.0.0.10** (la /28 cubre de .16 a .31: es la coincidencia más larga).
 
-a) **Camino A** (R1→R2→R3, 2 enlaces Gigabit) tiene coste **1 + 1 = 2**. El **Camino B** (R1→R4→R5→R3, 3 enlaces FastEthernet) tiene coste **1 + 1 + 1 = 3**. OSPF elige el de menor coste total: **el Camino A**.
+b) **192.168.1.200 → via 10.0.0.6** (cae en la /24; la /28 no la cubre y pesa más que la /16).
 
-b) Para forzar el Camino B, aumentar el coste en los enlaces de A:
-   ```bash
-   R1(config-if)# ip ospf cost 10
-   ```
+c) **192.168.3.44 → via 10.0.0.2** (solo la /16 la abarca: ni la /24 ni la /28 llegan a .3.x).
 
-c) `show ip ospf interface` o `show ip route` muestra el coste de cada ruta.
+d) **192.168.1.15 → via 10.0.0.6** (está en la /24 pero fuera de la /28, que empieza en .16).
 
-## 5. DR/BDR election
+**Regla:** a mayor máscara (28 > 24 > 16), coincidencia más específica y elegida primero.
 
-a) **DR: R3** (prioridad 10, la más alta). **BDR: R4** (prioridad 5, segunda más alta).
+## 5. V/F con matices
 
-b) Cambiar la **prioridad** de R1 a un valor más alto que 10:
-   ```bash
-   R1(config-if)# ip ospf priority 20
-   ```
-   (Nota: la elección se hace al iniciar OSPF, al reiniciar el proceso o si falla el DR: el BDR asciende y se elige otro)
+a) **Falso.** La sintaxis es válida y el IOS la acepta en la config; lo que pasa es que no se *instala* en la tabla porque el next-hop es inalcanzable. Comprueba `show ip route` e interfaces.
+b) **Verdadero.** En multiacceso (Ethernet con varios vecinos) una ruta con interfaz de salida hace que el router pregunte por ARP a cualquiera: solo es segura en punto a punto.
+c) **Verdadero.** Es exactamente una ruta flotante: gana la de menor AD, la otra espera en la configuración.
+d) **Verdadero.** Es la ruta de último recurso: solo se consulta cuando el longest prefix match no encuentra nada más específico.
+e) **Falso.** El router necesita una ruta conectada (o aprendida) a la subred del next-hop; si no, la estática no se instala.
 
-## 6. Troubleshooting OSPF
+## 6. Diseño de rutas para una sede
 
-**Paso 1:** Verificar conectividad capa 3 → `ping` entre routers vecinos. Si no hay ping, el problema está en capa 1 o 2.
+a) **Tres:** dos rutas estáticas (LAN de R2 y LAN de R3) + la ruta por defecto a Internet. Las redes de enlace (10.0.0.0/30 y 10.0.0.4/30) no necesitan rutas en R1 porque son conectadas.
 
-**Paso 2:** Verificar que las interfaces están activas → `show ip interface brief`. Buscar "up/up".
+b) **En R1:**
+```bash
+ip route 192.168.2.0 255.255.255.0 10.0.0.2
+ip route 192.168.3.0 255.255.255.0 10.0.0.6
+ip route 0.0.0.0 0.0.0.0 <ip_del_proveedor>
+```
 
-**Paso 3:** Verificar que OSPF está configurado → `show ip protocols`. Debe mostrar OSPF con Router ID y redes declaradas.
+c) **Una ruta por defecto al router central:**
+```bash
+ip route 0.0.0.0 0.0.0.0 10.0.0.1
+```
+Todo lo que no sea su propia LAN se lo entrega a R1, que ya sabe encaminarlo (sucursales) o lo manda a Internet.
 
-**Paso 4:** Verificar vecinos → `show ip ospf neighbor`. Si no hay vecinos, comprobar:
-- `network` declarada correctamente (wildcard, área)
-- Hello/Dead timers coinciden (por defecto 10/40 en broadcast)
-- No hay ACL bloqueando protocolo 89 (OSPF)
+## 7. Interferencia con rutas conectadas
 
-**Paso 5:** Verificar LSDB → `show ip ospf database`. Debe haber LSAs de todos los routers.
+**No pasa nada dramático:** la ruta estática se configura pero **no llega a instalarse**. En `show ip route` verías solo la `C` (conectada, AD 0): con el mismo prefijo, la conectada gana a la estática (AD 1), así que el encaminamiento local sigue funcionando sin interferencias. Eso sí: es una config descuidada — sobra y conviene quitarla con `no ip route ...`.
 
-**Paso 6:** Verificar tabla de rutas → `show ip route ospf`. Las rutas deben aparecer con prefijo O (OSPF).
+## 8. Escenario completo de diagnóstico
 
-## 7. Elección DR/BDR en otro segmento
+a) **A R2 le faltan las rutas de vuelta** hacia 192.168.1.0/24 (y hacia 10.0.0.0/30 no hace falta: es conectada). Sin ruta de retorno, el paquete de ping llega pero la respuesta se pierde:
+```bash
+ip route 192.168.1.0 255.255.255.0 10.0.0.1
+```
 
-a) **DR: R-B** (prioridad 200, la más alta). **BDR: R-C** (prioridad 150, segunda más alta).
+b) **A R1 le falta la ruta hacia 192.168.2.0/24:**
+```bash
+ip route 192.168.2.0 255.255.255.0 10.0.0.2
+```
 
-b) **R-D** tiene prioridad **0**: no participa en la elección. Solo actuará como **DROTHER**, sincronizándose con el DR y el BDR sin poder ser elegido.
-
-c) **R-B** — con prioridades empatadas (1 = 1), el desempate lo hace el **Router ID más alto** (10.0.0.2 > 10.0.0.1). La prioridad manda primero; el Router ID solo decide empates.
-
-d) **No cambia.** La elección de DR/BDR se hace al arrancar OSPF, al reiniciar el proceso o si falla el DR (el BDR asciende); subir la prioridad de R-C a 255 no destrona al DR ya elegido (R-B). Para que cambie tendrías que **reiniciar el proceso OSPF** (o el router) en los routers del segmento, y entonces R-C (prioridad 255) ganaría.
-
-## 8. La adyacencia que no levanta
-
-a) Al funcionar el ping, queda **descartado el plano físico/enlace y la capa 3** del enlace: las IPs se alcanzan. El problema está en el **plano OSPF** (configuración lógica del protocolo), no en la conectividad.
-
-b) **Orden de diagnóstico:**
-1. `show ip protocols` → comprobar que OSPF arranca en ambos, que el **Router ID** no está duplicado y que las redes declaradas incluyen el enlace Serial.
-2. `show ip ospf interface` → confirmar en ambos routers que la interfaz **participa** en OSPF, y comparar **área**, **wildcard** y **timers** (Hello/Dead). Si no aparece, la red no está declarada o la wildcard está mal.
-3. Verificar que el **área** coincide en los dos lados del enlace (revisar el `network ... area X`).
-4. Comparar los **timers Hello/Dead** en ambos lados con `show ip ospf interface`: deben coincidir (por defecto 10/40 en broadcast y punto a punto Serial; solo en redes NBMA son 30/120). Si uno quedó con valores distintos, no forman vecindad.
-5. `show access-lists` (y contadores en la interfaz) → descartar una **ACL** que bloquee el **protocolo 89 (OSPF)** en el sentido de entrada/salida.
-6. Solo si todo lo anterior está bien, subir un nivel: `debug ip ospf events` (con cuidado) para ver por qué se rechaza el Hello.
-
-c) `show ip ospf interface <interfaz>`: si la interfaz aparece listada con su área y sus timers, está **participando en OSPF sin ambigüedad**. Si no sale, OSPF no la tiene declarada (falta `network` o wildcard incorrecta).
+c) Porque el **traceroute usa respuestas ICMP time-exceeded** (o UDP con puerto inalcanzable) que algún router intermedio no genera o filtra. El forwarding puede estar perfecto y aun así el traceroute no pintar el último salto: no siempre es un problema de rutas.

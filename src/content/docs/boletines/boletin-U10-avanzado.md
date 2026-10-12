@@ -1,138 +1,103 @@
 ---
-title: Boletín de ACL y seguridad — Avanzado
-description: Ejercicios avanzados de ACLs y seguridad de red
+title: Boletín de NAT y PAT — Avanzado
+description: Ejercicios avanzados de NAT
 ---
 
-# 📝 Boletín de ACL y seguridad — Avanzado
+# 📝 Boletín de NAT y PAT — Avanzado
 
-> Ejercicios que requieren aplicar ACLs con criterio. En los difíciles tienes pista.
+> Ejercicios que requieren comprender NAT en profundidad.
 
 ---
 
-## 1. ACL extendida: YouTube blocker
+## 1. Traducción manual
 
-El jefe quiere bloquear YouTube (173.194.0.0/16) en horario laboral (9:00-18:00). El resto del tráfico debe permitirse.
+Dado el siguiente escenario:
 
-a) Escribe la ACL extendida (con time-range)
-b) ¿Dónde la aplicas (inbound/outbound, qué interfaz)?
-c) ¿Qué pasa si el router no soporta time-range? ¿Alternativa?
+- PC1: 192.168.1.10, accede a 8.8.8.8:80 (HTTP)
+- PC2: 192.168.1.20, accede a 8.8.8.8:53 (DNS)
+- Router NAT IP pública: 83.45.12.78
 
-**Pista:** `time-range` y `absolute` o `periodic` para horarios.
+El PC1 usa puerto origen 50000 y PC2 puerto 50000 también. Completa la tabla NAT:
 
-## 2. Diagnóstico de ACL
+| Pro | Inside global | Inside local | Outside local | Outside global |
+|---|---|---|---|---|
+| tcp | 83.45.12.78:___ | 192.168.1.10:50000 | 8.8.8.8:80 | 8.8.8.8:80 |
+| udp | ___ | 192.168.1.20:50000 | 8.8.8.8:53 | 8.8.8.8:53 |
 
-Un administrador aplica esta ACL en G0/0 de un router (LAN 192.168.1.0/24), sentido **in** (hacia el router):
+## 2. Problema con FTP activo
 
-```
-access-list 10 deny 192.168.1.10
-access-list 10 permit 192.168.1.0 0.0.0.255
-```
+Un usuario interno (192.168.1.10) intenta usar FTP activo para enviar un archivo a un servidor externo (200.100.50.1). El protocolo FTP activo funciona así:
 
-a) El PC 192.168.1.10 no puede acceder a Internet. ¿Es normal?
-b) ¿Y el PC 192.168.1.20? ¿Puede acceder a Internet?
-c) ¿Qué comando usarías para ver si la ACL está funcionando?
-d) Si la ACL se aplica outbound en G0/1 (hacia Internet), ¿cómo afecta al tráfico entre PCs de la misma LAN?
+- El cliente abre puerto 1025 para datos.
+- El cliente envía el comando PORT 192,168,1,10,4,1 (puerto 4×256+1=1025).
+- El servidor intenta conectar a 192.168.1.10:1025.
 
-## 3. ACL de firewall básico
+¿Por qué falla? ¿Cómo lo solucionas?
 
-Diseña una ACL para un router de borde que protege una red interna (192.168.1.0/24):
+## 3. Configuración multi-NAT
 
-**Reglas:**
-1. Permitir HTTP/HTTPS saliente (cualquier destino)
-2. Permitir DNS saliente (UDP 53)
-3. Bloquear SSH saliente (TCP 22)
-4. Permitir el retorno de las conexiones TCP establecidas (tráfico de retorno)
-5. Permitir también las respuestas DNS entrantes (UDP con puerto de origen 53)
-6. Denegar el resto
+Una empresa tiene dos servidores internos:
+- Servidor web en 192.168.1.10:80 y 192.168.1.10:443
+- Servidor SSH en 192.168.1.20:22
+- IP pública: 83.45.12.78
 
-**Pista:** Usa `established` para el retorno TCP; las respuestas DNS no son TCP y necesitan su propia línea UDP.
+Quieren:
+- Web accesible desde fuera como 83.45.12.78:8080 → 192.168.1.10:80
+- HTTPS accesible como 83.45.12.78:8443 → 192.168.1.10:443
+- SSH accesible como 83.45.12.78:2222 → 192.168.1.20:22
 
-## 4. ACL nombrada para horario
+Configura el NAT destino necesario.
 
-Escribe una ACL nombrada `BLOQUEAR_STREAMING` que bloquee el puerto **443** (HTTPS) **cualquier día de 9:00 a 18:00** para la red interna 192.168.1.0/24, permitiendo el resto del tráfico. Incluye el `time-range`, la ACL y su aplicación en la interfaz hacia Internet (G0/1).
+## 4. NAT + VPN
 
-**Pista:** usa `time-range` con `periodic daily`, referencia la regla con `time-range`, acaba con `permit ip any any` (recuerda el deny any implícito) y aplica la ACL outbound en G0/1.
+Un empleado necesita conectar por VPN (IPsec) a la oficina. El router de la oficina hace NAT.
 
-## 5. El orden de las líneas importa
+Pero IPsec no funciona a través de NAT. ¿Por qué? ¿Qué solución existe?
 
-Estas dos ACLs tienen las mismas líneas en distinto orden. ¿Qué tráfico pasa en cada caso?
+## 5. Análisis de timeouts
 
-**ACL A:**
-```
-access-list 20 deny 192.168.1.0 0.0.0.255
-access-list 20 permit any
-```
+Un usuario se queja de que su conexión SSH se corta después de 5 minutos de inactividad. La tabla NAT tiene un timeout de 5 minutos para UDP y configurable para TCP.
 
-**ACL B:**
-```
-access-list 20 permit any
-access-list 20 deny 192.168.1.0 0.0.0.255
-```
+¿Por qué se corta la conexión aunque el timeout NAT no haya expirado? ¿Dónde está el verdadero problema?
 
-a) ¿Qué hace cada una?
-b) ¿Qué principio rompe la ACL B?
+## 6. NAT y servidores duales
 
-**Pista:** el router evalúa las líneas **en orden** y para en la primera coincidencia.
+Una empresa tiene:
+- 2 IPs públicas: 83.45.12.78 y 83.45.12.79
+- Servidor web interno: 192.168.10.10
+- Servidor de correo interno: 192.168.10.20
 
-## 6. ACL con error clásico
+Quieren que el web sea accesible por 83.45.12.78 y el correo por 83.45.12.79. Los PCs internos deben salir por PAT con la IP 83.45.12.78.
 
-Quieres permitir solo SSH a un servidor (10.0.0.50) desde la red de administración (192.168.100.0/24), sin cortar el ping de diagnóstico. Un compañero escribe:
+Configura todo.
 
-```
-access-list 110 permit tcp 192.168.100.0 0.0.0.255 host 10.0.0.50 eq 22
-access-list 110 deny ip any any
-access-list 110 permit icmp any any
-```
+## 7. Multi-NAT: servidores duales + PAT simultáneo
 
-a) ¿Funciona el ping hacia el servidor? ¿Por qué?
-b) ¿Cómo reordenas las líneas para conseguirlo? (pista: en una ACL numerada no puedes reordenar; ¿cómo se hace entonces?)
-c) ¿Es necesaria la línea `deny ip any any`?
+Una empresa tiene:
+- Red interna 192.168.50.0/24, servidor web DMZ en 192.168.50.10 (puertos 80 y 443).
+- Dos IPs públicas: 83.45.12.78 y 83.45.12.79.
+- Los usuarios internos deben salir a Internet por **PAT** con la IP 83.45.12.78.
+- El servidor web debe ser accesible desde fuera como **83.45.12.78:8080 → 192.168.50.10:80** y **83.45.12.78:8443 → 192.168.50.10:443**.
+- Además, la IP pública 83.45.12.79 se reserva para un servidor de correo (192.168.50.20) con **NAT estático 1:1** para los puertos 25, 587 y 993.
 
-## 7. Port Security
+Configura todo el NAT en el router (interfaces: g0/0 LAN inside, g0/1 WAN outside).
 
-Un switch tiene la interfaz G0/1 conectada al PC de recepción. Configura Port Security para que:
+**Pista:** puedes combinar PAT overload y `ip nat inside source static tcp` en el mismo router. Revisa que el tráfico saliente de los usuarios no colisione con las traducciones estáticas reservadas.
 
-a) Solo aprenda una MAC y la guarde en la running-config (sticky).
-b) Si llega otra MAC, descarte los paquetes infractores pero no apague el puerto y genere mensajes de log.
-c) Escribe la configuración completa y el comando para ver el estado.
+## 8. Diagnóstico: "no salimos a Internet"
 
-**Pista:** `switchport port-security violation restrict` + `logging` integrado.
+En el instituto no sale Internet. Configuración actual de R1:
 
-## 8. Diagnóstico de port security
+- g0/0: 192.168.1.1/24 (inside LAN)
+- g0/1: 203.0.113.2/30 (outside, hacia el ISP con ruta por defecto)
+- `ip nat inside source list 1 interface g0/1 overload`
+- `access-list 1 permit 192.168.1.0 0.0.0.255`
 
-Un administrador configuró port security en el puerto Fa0/1:
+Síntoma: los PCs hacen ping al gateway (192.168.1.1) y a 203.0.113.2, pero **no** a 8.8.8.8.
 
-```
-Switch(config-if)# switchport port-security maximum 1
-Switch(config-if)# switchport port-security violation shutdown
-```
+a) Ordena las comprobaciones de diagnóstico que harías, de la más básica a la más específica.
+b) ¿Qué comando confirma que NAT está traduciendo? ¿Qué esperas ver?
+c) Tras revisar, ves que `show ip nat translations` está vacío aunque hay tráfico. ¿Qué comprobarías a continuación? Da al menos 3 causas probables.
+d) Encuentra el fallo real: las interfaces g0/0 y g0/1 **no tienen** `ip nat inside` / `ip nat outside`. Explica por qué sin esas marcas no hay traducción, aunque el resto de comandos sean correctos.
 
-Un usuario se conecta con su portátil y funciona. Luego conecta otro portátil (el suyo y el de un compañero) usando un switch no administrado. El puerto se deshabilita.
-
-a) ¿Por qué ocurrió?
-b) ¿Qué dos cambios harías en la configuración para permitir esta situación sin perder seguridad?
-c) ¿Cómo recuperas el puerto?
-
-## 9. Laboratorio: Port Security en la sala de profesores
-
-Configura el puerto Fa0/24 del switch (donde se enchufa el PC de la sala de profesores) para que:
-
-a) Solo permita 1 MAC aprendida automáticamente y permanente (sticky).
-b) Si aparece una segunda MAC, el puerto se deshabilite (violación shutdown).
-c) Escribe los comandos completos y verifica con el comando de comprobación adecuado.
-
-Después, un profe desenchufa su PC y conecta su portátil personal. El puerto entra en errdisable.
-
-d) ¿Por qué ha ocurrido la violación si solo hay UN dispositivo conectado?
-e) ¿Qué dos comandos ejecutarías para recuperar el puerto?
-f) ¿Cómo evitarías el problema sin perder seguridad (piensa en el envejecimiento de la MAC sticky)?
-
-**Pista:** la MAC sticky NO caduca aunque el PC se desenchufe; si cambias de equipo, hay dos MACs distintas "conocidas" en el puerto y se supera el máximo. Para recuperar errdisable: `shutdown` + `no shutdown`. Para expirar la sticky cuando el dispositivo se desenchufa, configura el envejecimiento de la port security (`switchport port-security aging`).
-
-## 10. Mini-caso final
-
-Un instituto pide: "la sala de profesores (192.168.10.0/24) no puede usar el WiFi de alumnos (192.168.20.0/24), pero ambos deben salir a Internet (G0/2 del router) y los profesores acceden al servidor de notas (10.0.0.5) por HTTPS".
-
-a) Diseña las ACLs mínimas (nómbralas) y di en qué interfaz/sentido las aplicas.
-b) ¿Qué pasa con el retorno del tráfico de profesores hacia el servidor con tu diseño?
-c) ¿Qué le dirías al director si pide "bloquear YouTube por completo"? (reflexiona: ACLs vs herramientas adecuadas)
+**Pista:** NAT se diagnostica en progresión: primero conectividad, luego traducción, luego ruta. Sin `ip nat inside/outside`, el router no sabe qué tráfico traducir: los paquetes salen sin traducir (o se descartan) y la tabla NAT queda vacía.

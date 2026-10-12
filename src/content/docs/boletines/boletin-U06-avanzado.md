@@ -1,102 +1,117 @@
 ---
-title: Boletín de Servicios de red — Avanzado
-description: Ejercicios avanzados de servicios de red (DHCP, DNS y NTP)
+title: Boletín de Trunking e inter-VLAN — Avanzado
+description: Ejercicios avanzados de VLANs
 ---
 
-# 📝 Boletín de Servicios de red — Avanzado
+# 📝 Boletín de Trunking e inter-VLAN — Avanzado
 
-> Ejercicios que requieren aplicar DHCP, DNS y NTP de forma combinada. En los difíciles tienes pista.
+> Ejercicios que requieren aplicar los conceptos de VLANs, trunks y routing de forma más profunda. En los difíciles tienes pista.
 
 ---
 
-## 1. DHCP en el router Cisco
+## 1. Configuración completa de VLANs
 
-Configura el router R1 como servidor DHCP para la LAN 192.168.1.0/24:
+Configura este escenario en Packet Tracer (o describe los comandos):
 
-- Rango excluido: .1 a .20 (infraestructura)
-- Gateway: 192.168.1.1
-- DNS: 8.8.8.8 y 1.1.1.1
-- Concesión de 3 días
+- **Switch1:** VLAN 10 (Ventas) puertos 1-5, VLAN 20 (RRHH) puertos 6-10
+- **Switch2:** VLAN 10 puertos 1-5, VLAN 20 puertos 6-10
+- **Trunk:** Switch1 Fa0/24 ↔ Switch2 Fa0/24
+- **Router:** Fa0/0 conectado a Switch1 Fa0/23, subinterfaces para VLAN 10 y 20
 
-a) Escribe la configuración completa.
-b) Un PC no recibe IP. Enumera tu secuencia de diagnóstico (comandos y qué buscas en cada uno).
+Escribe la configuración completa del router y ambos switches.
 
-**Pista:** `ip dhcp excluded-address` + `ip dhcp pool`.
+## 2. Diagnóstico de native VLAN
 
-## 2. DNS jerárquico
+Un administrador configura un trunk entre dos switches:
 
-Explica el recorrido completo de una consulta DNS para `www.ejemplo.es` la primera vez que la hace un equipo (cachés vacías):
-
-a) ¿Quién pregunta a quién? Enumera los pasos (resolver local → raíz → TLD → autoritativo).
-b) ¿Qué pasa la segunda vez, cinco minutos después?
-c) ¿Qué papel juega el TTL de los registros?
-
-## 3. Selección de registros para un mini-proyecto
-
-Tu centro va a publicar: web (`www.instituto.edu`), correo propio, y un alias corto `aulas` que apunta al mismo servidor que `www`. El servidor tiene IP 198.51.100.10 (IPv4) y 2001:db8::10 (IPv6). El correo lo gestiona un proveedor externo.
-
-a) Escribe los registros mínimos con sus tipos.
-b) ¿Qué registro necesitarías añadir para que `mail.proveedor.com` reciba el correo en nombre del instituto?
-c) Un compañero propone un registro CNAME para el dominio raíz `instituto.edu`. ¿Es buena idea?
-
-## 4. Diagnóstico con nslookup
-
-Interpreta estas salidas y di qué está pasando en cada caso:
-
-a)
 ```
-Servidor: UnKnown
-Address: 192.168.1.1
-
-*** No se puede encontrar el nombre del servidor: DNS request timed out.
-Nombre: www.ejemplo.es
+Switch1: native VLAN 99, allowed VLANs 10,20,30
+Switch2: native VLAN 1,  allowed VLANs 10,20,30
 ```
 
-b)
-```
-Nombre: www.ejemplo.es
-Address: 203.0.113.99
-Aliases: www.ejemplo.es
-          web.ejemplo.es
-```
+a) ¿Qué problemas puede causar esta discrepancia?
+b) ¿Qué comando usarías para diagnosticarlo?
+c) ¿Cómo arreglarlo sin perder conectividad?
 
-c) `nslookup www.ejemplo.es 8.8.8.8` responde correctamente, pero el navegador no abre la web.
+**Pista:** `show interfaces trunk` muestra la native VLAN de cada extremo.
 
-## 5. NTP con jerarquía
+## 3. Diseño de VLANs corporativas
 
-Tu red tiene un router de borde (R1), un switch de distribución (S1) y decenas de switches de acceso.
+Diseña la segmentación VLAN para una empresa con:
 
-a) Diseña la jerarquía NTP: ¿de dónde toma la hora cada nivel? ¿Qué estrato quedaría aproximadamente en cada uno?
-b) Escribe la configuración de R1 y S1.
-c) ¿Qué comando usas en S1 para comprobar con quién está sincronizado y en qué estrato está?
+- **3 plantas:**
+  - Planta baja: Recepción (5 PCs) + Sala servidores (10 servidores)
+  - Planta 1: Ventas (30 PCs) + Marketing (15 PCs)
+  - Planta 2: IT (20 PCs) + Dirección (5 PCs)
 
-## 6. Los tres servicios en un solo caso
+- **Requisitos:**
+  - Cada departamento debe estar en VLAN separada
+  - Los servidores están en VLAN propia
+  - IT debe poder acceder a todas las VLANs (administración)
+  - Dirección solo accede a su VLAN y a servidores
 
-Escenario: tras una caída eléctrica, el aula de informática no navega. Un alumno apunta estos datos de su PC:
+a) Propón una tabla de VLANs (ID, nombre, puertos)
+b) ¿Dónde pones el router-on-a-stick? ¿Y si usas switch capa 3?
+c) ¿Qué VLANs permites en cada trunk?
+d) ¿Con qué ACLs limitas el acceso de Dirección?
 
-- IP: 169.254.18.42, máscara 255.255.0.0
-- DNS en blanco
-- La hora del equipo está bien
+## 4. VTP disaster recovery
 
-a) ¿Qué servicio está fallando? ¿Cómo se llama ese rango 169.254.x.x?
-b) El profesor comprueba el switch del aula y no está en la VLAN correcta. ¿Por qué eso explica el fallo de DHCP?
-c) Arreglada la VLAN, el PC navega por IP pero `www.google.com` sigue fallando. ¿Qué compruebas ahora y con qué comando?
-d) Al final del caso, ¿por qué el reloj del PC estaba bien? ¿Qué le pasó al switch, entonces?
+Un administrador conecta un switch con VTP server y revision number 500 a una red donde el server actual tiene revision 100. En 2 segundos, todas las VLANs de la red desaparecen.
 
-**Pista:** APIPA y su rango 169.254.0.0/16; y piensa quién da la hora a quién en cada dispositivo.
+a) ¿Por qué ocurrió?
+b) ¿Cómo recuperas la red?
+c) ¿Qué medidas preventivas tomarías para evitar que vuelva a ocurrir?
 
-## 7. DHCPv6 y doble pila
+**Pista:** VTP propaga la base de datos del switch con mayor revision number.
 
-El centro quiere IPv6 en el aula: prefijo 2001:db8:ab::/64, gateway fe80::1, DNS 2001:4860:4860::8888.
+## 5. Router-on-a-stick: cuello de botella
 
-a) ¿Dos formas de dar dirección IPv6 a los clientes? Describe brevemente SLAAC y stateful DHCPv6.
-b) ¿Qué opción usarías si solo quieres repartir DNS y dominio (las direcciones las autoconfiguran los PCs)?
-c) Escribe la config de un router Cisco para la opción b).
+Un router-on-a-stick con interfaz FastEthernet (100 Mbps) atiende 4 VLANs. Cada VLAN genera 30 Mbps de tráfico.
 
-## 8. El "no tiene Internet" clásico
+a) ¿Hay cuello de botella? Calcula el tráfico total.
+b) ¿Qué alternativa propones si el tráfico crece al doble?
+c) ¿Cómo cambia el escenario con una interfaz GigabitEthernet?
 
-Una usuaria llama: "no tengo Internet". Su PC muestra: IP correcta 192.168.1.50 (DHCP OK), gateway correcto, pero `nslookup www.elmundo.es` falla; `nslookup www.elmundo.es 1.1.1.1` funciona.
+## 6. Seguridad en VLANs
 
-a) ¿Qué capa/servicio está sano y cuál roto?
-b) ¿Qué dos arreglos inmediatos propones?
-c) ¿Por qué NO es un problema de NTP, de DHCP ni de routing?
+Enumera 3 riesgos de seguridad específicos de VLANs y cómo mitigarlos:
+
+| Riesgo | Mitigación |
+|---|---|
+| 1. | |
+| 2. | |
+| 3. | |
+
+**Pista:** Piensa en DTP, native VLAN, VTP, VLAN hopping, etc.
+
+## 7. VLAN hopping y hardening
+
+a) Describe los **2 vectores de ataque** principales que permiten a un atacante salirse de su VLAN (VLAN hopping), explicando cómo funciona cada uno.
+b) Propón **3 mitigaciones concretas** de hardening con sus comandos.
+
+**Pista:** piensa en la negociación de trunks por DTP y en el double tagging sobre la native VLAN. Las mitigaciones están en el punto 6 de seguridad: `switchport nonegotiate`, native VLAN ≠ 1, `allowed vlan`, VTP.
+
+## 8. Inter-VLAN con SVI paso a paso
+
+Escribe la configuración completa que necesita un **switch capa 3** (por ejemplo un 3560) para enrutar entre 3 VLANs (10 Ventas → 192.168.10.0/24, 20 RRHH → 192.168.20.0/24, 30 IT → 192.168.30.0/24), asumiendo que los puertos access ya están asignados.
+
+Incluye:
+
+a) La creación de las VLANs con nombre.
+b) El comando que activa el routing global.
+c) Los tres SVIs con su IP y `no shutdown`.
+d) El gateway que debe tener cada PC de cada VLAN.
+
+**Pista:** el orden de los comandos importa: primero `ip routing`, después cada `interface vlan X`. Sin `ip routing`, los SVIs existen pero no enrutan. El gateway de cada VLAN es la IP del SVI de esa VLAN.
+
+## 9. DHCP por VLAN sin teclear IPs
+
+Siguiendo con el escenario del ejercicio 8 (SVIs 192.168.10.1, 192.168.20.1 y 192.168.30.1), la empresa tiene 60 PCs y no quiere configurarles la IP a mano:
+
+a) Escribe los pools DHCP para las VLANs 10 (Ventas) y 20 (RRHH): `network`, `default-router` y `dns-server 8.8.8.8`.
+b) ¿Qué rango debes excluir y qué problema evitas con ello?
+c) El servidor DHCP real está en la VLAN 30 (`192.168.30.10`). ¿Qué línea añades en las SVIs de las VLANs 10 y 20 y por qué no funciona sin ella?
+d) Un PC de la VLAN 10 se queda en `169.254.10.50`. Escribe en orden las 3 comprobaciones que harías para encontrar el culpable.
+
+**Pista:** `ip dhcp pool`, `ip dhcp excluded-address` y `ip helper-address`. Recuerda que el DISCOVER es broadcast y que el broadcast no cruza VLANs.

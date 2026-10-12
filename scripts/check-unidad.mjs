@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Auditoría estructural por unidad — revisión tema a tema.
 // Uso: node scripts/check-unidad.mjs [unidad|all]
-//   unidad: "02", "2", "02-ethernet-cableado" o sustringo ("ethernet")
+//   unidad: "02", "2", "02-medios-y-cableado" o sustringo ("ethernet")
 // Sin argumentos = todas las unidades.
 // FALLO (sale con 1) = incumple convención obligatoria.
 // AVISO (no falla) = inconsistencia a decidir/confirmar en la sesión de revisión.

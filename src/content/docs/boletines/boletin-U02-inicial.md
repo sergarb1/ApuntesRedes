@@ -1,11 +1,11 @@
 ---
-title: Boletín de Ethernet y cableado — Inicial
-description: Ejercicios básicos de Infraestructura Física de Red (medios, cableado, OSI y trama)
+title: Boletín de Medios y cableado — Inicial
+description: Ejercicios básicos de Infraestructura Física de Red (medios y cableado)
 ---
 
-# 📝 Boletín de Ethernet y cableado — Inicial
+# 📝 Boletín de Medios y cableado — Inicial
 
-> Ejercicios básicos para afianzar los conceptos de medios físicos, cableado, crimpado, modelo OSI y trama Ethernet.
+> Ejercicios básicos para afianzar los conceptos de medios físicos, cableado, crimpado y estándares.
 
 ---
 
@@ -84,35 +84,3 @@ c) El estándar 1000BASE-T trabaja sobre par trenzado de cobre.
 d) La fibra multimodo llega a distancias de más de 40 km.
 e) La fibra monomodo se usa para enlaces largos (cientos de metros o kilómetros).
 
-## 9. Modelo OSI: capas y PDUs
-
-Relaciona cada capa OSI con la PDU que "viaja" en ella:
-
-| Capa | PDU |
-|---|---|
-| 1 · Física | a) Paquete |
-| 2 · Enlace | b) Bits |
-| 3 · Red | c) Trama |
-| 4 · Transporte | d) Segmento |
-
-Indica además si cada frase es verdadera (V) o falsa (F) y corrige las falsas:
-
-a) OSI es el modelo de 7 capas que corre de verdad en Internet.
-b) TCP/IP es la pila real; OSI se usa como mapa para hablar y diagnosticar.
-c) Esta unidad vive sobre todo en las capas 1 y 2.
-d) "Capa 3" y "capa Red" son sinónimos en el lenguaje de clase.
-
-## 10. La trama Ethernet
-
-Contesta sobre una trama Ethernet II (la de cobre y fibra):
-
-a) ¿Qué tres campos de dirección/tipo lleva siempre al principio (cabecera de 14 bytes)?
-b) Si Wireshark muestra EtherType `0x0800`, ¿qué protocolo hay dentro?
-c) ¿Qué tamaño mínimo y máximo tiene el payload de la trama Ethernet?
-d) ¿Qué significa FCS y qué pasa si no cuadra?
-e) ¿Quién calcula y quién comprueba el FCS en un cableado con switch?
-
-V/F:
-
-f) El payload mínimo de una trama Ethernet es de 46 bytes (64 bytes de trama en total con cabecera y FCS).
-g) El WiFi (802.11) NO es capa 2 porque no hay cable.

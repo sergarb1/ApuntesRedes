@@ -1,11 +1,11 @@
 ---
-title: Boletín de Ethernet y cableado — Avanzado
-description: Ejercicios avanzados de Infraestructura Física, diagnóstico por capas y trama
+title: Boletín de Medios y cableado — Avanzado
+description: Ejercicios avanzados de Infraestructura Física de Red (medios y cableado)
 ---
 
-# 📝 Boletín de Ethernet y cableado — Avanzado
+# 📝 Boletín de Medios y cableado — Avanzado
 
-> Ejercicios que requieren aplicar los conceptos de cableado, medios físicos, OSI y trama de forma combinada. En los difíciles tienes pista.
+> Ejercicios que requieren aplicar los conceptos de cableado y medios físicos de forma combinada. En los difíciles tienes pista.
 
 ---
 
@@ -91,18 +91,3 @@ En cada caso indica: medio (cobre/fibra), categoría/estándar aproximado y, si 
 
 **Pista:** decide primero por distancia y presupuesto. 100 m es el límite del cobre, la multimodo cubre hasta ~550 m y la monomodo el resto.
 
-## 8. Diagnóstico por capas (OSI en acción)
-
-Síntomas en una oficina:
-
-- **Síntoma A:** el LED del switch está verde, el tester de cables pasa al 100%, pero Wireshark muestra tramas con FCS erróneo y el ping a la IP del gateway falla a veces.
-- **Síntoma B:** el LED del puerto del switch está apagado en el PC del usuario, aunque el cable está enchufado a ambos lados.
-- **Síntoma C:** el cable está pelado y un par partido: no hay LED de enlace.
-
-Para cada síntoma:
-
-a) ¿En qué capa OSI (1, 2 o 3) sitúas el fallo? Justifica con la PDU afectada (bits, trama, paquete).
-b) ¿Qué comando o herramienta usarías primero?
-c) En el Síntoma A, el tester ha pasado al 100%. ¿Puedes descartar ya la capa 1? Justifica.
-
-**Pista:** escalera 1→2→3 de la unidad inicial; si hay LED y tester OK, la capa 1 local funciona y el problema sube a la trama o más arriba.

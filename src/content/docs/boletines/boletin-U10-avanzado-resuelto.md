@@ -1,191 +1,114 @@
 ---
-title: Boletín de ACL y seguridad — Avanzado (Resuelto)
-description: Soluciones de los ejercicios avanzados de ACLs y seguridad de red
+title: Boletín de NAT y PAT — Avanzado (Resuelto)
+description: Soluciones ejercicios avanzados de NAT
 ---
 
-# ✅ Boletín de ACL y seguridad — Avanzado (Resuelto)
+# ✅ Boletín de NAT y PAT — Avanzado (Resuelto)
 
 ---
 
-## 1. ACL extendida: YouTube blocker
+## 1. Traducción manual
 
-a) **ACL con time-range:**
-```bash
-time-range LABORAL
- periodic weekdays 9:00 to 18:00
+| Pro | Inside global | Inside local | Outside local | Outside global |
+|---|---|---|---|---|
+| tcp | 83.45.12.78:**60001** | 192.168.1.10:50000 | 8.8.8.8:80 | 8.8.8.8:80 |
+| udp | **83.45.12.78:60002** | 192.168.1.20:50000 | 8.8.8.8:53 | 8.8.8.8:53 |
 
-ip access-list extended BLOQUEAR_YT
- deny tcp any 173.194.0.0 0.0.255.255 eq 80 time-range LABORAL
- deny tcp any 173.194.0.0 0.0.255.255 eq 443 time-range LABORAL
- permit ip any any
-```
+NAT asigna puertos únicos (60001, 60002) aunque los puertos origen sean iguales (50000).
 
-b) **Aplicar:** Outbound en G0/1 (hacia Internet), para filtrar tráfico saliente.
+## 2. Problema con FTP activo
 
-c) **Alternativa sin time-range:** no se puede definir "9 a 18" con la ACL pura; habría que cambiar manualmente la ACL cada mañana y cada tarde (desastrosamente manual) o gestionarlo con un script/programación externa que alterne las versiones de política. Por eso `time-range` existe.
+**Falla porque el servidor FTP externo intenta conectar directamente a 192.168.1.10:1025, pero esa IP es privada y no es accesible desde fuera.** Además, NAT no traduce IPs dentro del payload del protocolo FTP (comando PORT).
 
-## 2. Diagnóstico de ACL
+**Soluciones:**
+- Usar **FTP pasivo**: el cliente inicia ambas conexiones.
+- Activar **ALG FTP** en el router para que inspeccione y traduzca las IPs en el comando PORT.
+- Usar FTP sobre TLS/SSH.
 
-a) **Sí, es normal.** La línea 1 deniega explícitamente 192.168.1.10. La línea 2 permite al resto de la red. El deny any implícito está al final.
-
-b) **Sí, 192.168.1.20 puede** porque coincide con la línea 2 (permit 192.168.1.0/24).
-
-c) `show access-lists 10` — Muestra los contadores de hits de cada línea.
-
-d) **No afecta.** La ACL está en G0/1 (outbound). El tráfico entre PCs de la misma LAN no pasa por el router, solo por el switch. Las ACLs en interfaces del router solo afectan al tráfico que pasa por el router.
-
-## 3. ACL de firewall básico
+## 3. Configuración multi-NAT
 
 ```bash
-ip access-list extended FIREWALL_INTERNO
- permit tcp 192.168.1.0 0.0.0.255 any eq 80
- permit tcp 192.168.1.0 0.0.0.255 any eq 443
- permit udp 192.168.1.0 0.0.0.255 any eq 53
- deny tcp 192.168.1.0 0.0.0.255 any eq 22
- deny ip any any
-
-interface g0/1
- ip access-group FIREWALL_INTERNO out
-
-ip access-list extended FIREWALL_RETORNO
- permit tcp any 192.168.1.0 0.0.0.255 established
- permit udp any eq 53 192.168.1.0 0.0.0.255 any
- deny ip any any
-
-interface g0/1
- ip access-group FIREWALL_RETORNO in
+R1(config)# ip nat inside source static tcp 192.168.1.10 80 83.45.12.78 8080
+R1(config)# ip nat inside source static tcp 192.168.1.10 443 83.45.12.78 8443
+R1(config)# ip nat inside source static tcp 192.168.1.20 22 83.45.12.78 2222
 ```
 
-(Las respuestas DNS no son TCP: si solo dejas el `established`, la consulta sale pero la respuesta muere en el `deny ip any any`. Por eso la línea UDP con puerto de origen 53.)
+## 4. NAT + VPN
 
-## 4. ACL nombrada para horario
+**IPsec no pasa NAT porque NAT modifica la cabecera IP, y los protocolos AH y ESP usan hashes que verifican la integridad de la cabecera IP.** Al cambiar la IP, el hash no coincide y el paquete se rechaza.
+
+**Solución:** **NAT-T (NAT Traversal)** — encapsula paquetes IPsec dentro de UDP (puerto 4500). NAT puede traducir UDP sin problemas, y IPsec viaja encapsulado.
+
+## 5. Análisis de timeouts
+
+**El problema no es NAT, es el firewall o el propio router que tiene un timeout de sesión TCP menor que el de NAT.** Muchos firewalls cierran conexiones TCP inactivas después de unos minutos. También puede ser el **keepalive TCP** del cliente o servidor SSH.
+
+**Solución:** Configurar keepalive SSH en el cliente (`ServerAliveInterval 60`), o ajustar el timeout de sesión TCP en el router.
+
+## 6. NAT y servidores duales
 
 ```bash
-time-range LABORAL_DIARIO
- periodic daily 9:00 to 18:00
+! PAT para todos los internos
+R1(config)# access-list 1 permit 192.168.10.0 0.0.0.255
+R1(config)# ip nat inside source list 1 interface g0/1 overload
 
-ip access-list extended BLOQUEAR_STREAMING
- deny tcp 192.168.1.0 0.0.0.255 any eq 443 time-range LABORAL_DIARIO
- permit ip any any
+! NAT destino para servidor web (IP pública 83.45.12.78)
+R1(config)# ip nat inside source static tcp 192.168.10.10 80 83.45.12.78 80
+R1(config)# ip nat inside source static tcp 192.168.10.10 443 83.45.12.78 443
 
-interface g0/1
- ip access-group BLOQUEAR_STREAMING out
+! NAT destino para servidor correo (IP pública 83.45.12.79)
+R1(config)# ip nat inside source static tcp 192.168.10.20 25 83.45.12.79 25
+R1(config)# ip nat inside source static tcp 192.168.10.20 587 83.45.12.79 587
+R1(config)# ip nat inside source static tcp 192.168.10.20 993 83.45.12.79 993
+
+! Interfaces
+R1(config)# interface g0/0
+R1(config-if)# ip nat inside
+R1(config)# interface g0/1
+R1(config-if)# ip nat outside
 ```
 
-**Lectura:** de 9 a 18 todos los días, el tráfico HTTPS originado en la red interna se deniega; el resto de horario (y el resto de tráfico, como el puerto 80) pasa. El `permit ip any any` + el deny implícito se encargan del resto.
-
-## 5. El orden de las líneas importa
-
-a) **ACL A:** deniega todo el tráfico de 192.168.1.0/24 y deja pasar el resto.
-**ACL B:** la primera línea `permit any` coincide con TODO (incluida 192.168.1.0/24), así que la segunda línea jamás se evalúa: la ACL permite absolutamente todo y la denegación es letra muerta.
-
-b) **Rompe el principio de "primera coincidencia gana"** (y el de ordenar primero lo más específico). Las ACLs no son un listado de intenciones: son una cadena de evaluación secuencial.
-
-## 6. ACL con error clásico
-
-a) **No.** La línea `deny ip any any` está en medio: al evaluarla, todo lo que no sea SSH de administración (incluido ICMP) muere ahí. El `permit icmp` de abajo nunca se consulta: la ACL se detiene en la primera coincidencia.
-
-b) **En una ACL numerada no se puede reordenar ni insertar en medio**: la solución canónica es borrarla y reescribirla en el orden correcto:
+## 7. Multi-NAT: servidores duales + PAT simultáneo
 
 ```bash
-no access-list 110
-access-list 110 permit icmp any any
-access-list 110 permit tcp 192.168.100.0 0.0.0.255 host 10.0.0.50 eq 22
-access-list 110 deny ip any any
+! PAT para los usuarios internos (83.45.12.78)
+R1(config)# access-list 1 permit 192.168.50.0 0.0.0.255
+R1(config)# ip nat inside source list 1 interface g0/1 overload
+
+! NAT destino para el servidor web (puertos públicos en 83.45.12.78)
+R1(config)# ip nat inside source static tcp 192.168.50.10 80 83.45.12.78 8080
+R1(config)# ip nat inside source static tcp 192.168.50.10 443 83.45.12.78 8443
+
+! NAT estático 1:1 para el servidor de correo (83.45.12.79)
+R1(config)# ip nat inside source static tcp 192.168.50.20 25 83.45.12.79 25
+R1(config)# ip nat inside source static tcp 192.168.50.20 587 83.45.12.79 587
+R1(config)# ip nat inside source static tcp 192.168.50.20 993 83.45.12.79 993
+
+! Interfaces
+R1(config)# interface g0/0
+R1(config-if)# ip nat inside
+R1(config)# interface g0/1
+R1(config-if)# ip nat outside
 ```
 
-(Si la política va a crecer, en la próxima escríbela como ACL **nombrada**: `ip access-list extended SOLO_SSH`… allí sí puedes insertar, borrar y reordenar líneas con sus números de secuencia.)
+**Nota:** las traducciones estáticas y el PAT conviven sin problema. El tráfico de los usuarios usa el overload con puertos efímeros; las reglas estáticas tienen prioridad sobre sus puertos concretos (8080, 8443, 25, 587, 993).
 
-c) **No es necesaria.** El `deny ip any any` implícito del final ya hace ese trabajo. Escribirla solo aporta legibilidad explícita (y contadores visibles).
+## 8. Diagnóstico: "no salimos a Internet"
 
-## 7. Port Security
+a) **Orden de comprobaciones (de básico a específico):**
+   1. `ping 192.168.1.1` desde un PC → ¿la LAN está viva?
+   2. `ping 203.0.113.2` desde un PC → ¿el paquete llega hasta la WAN del router?
+   3. `ping 8.8.8.8` desde el propio R1 → ¿tiene el router salida real?
+   4. `show ip nat translations` → ¿hay traducciones activas?
+   5. Revisar la access-list (¿permite la red correcta?) y el `overload` (¿está puesto?).
+   6. Verificar las marcas `ip nat inside/outside` en las interfaces.
 
-a) y b) y c) **Configuración completa:**
-```bash
-interface g0/1
- switchport mode access
- switchport port-security
- switchport port-security maximum 1
- switchport port-security mac-address sticky
- switchport port-security violation restrict
-```
+b) **`show ip nat translations`.** Esperas ver entradas del tipo `tcp 203.0.113.2:puerto ... 192.168.1.X:puerto ...` en cuanto los PCs generen tráfico hacia fuera.
 
-- **sticky:** la MAC aprendida se escribe en la running-config (guárdala con `copy run start` para hacerla permanente).
-- **restrict:** descarta los paquetes del infractor, genera mensajes de log y contadores, pero el puerto sigue activo para la MAC legítima (a diferencia de `shutdown`, que tumba el puerto entero).
+c) Si la tabla está **vacía** con tráfico circulando:
+   - La access-list no coincide con la red interna (red mal escrita o wildcard incorrecto).
+   - Falta la palabra `overload` en el comando PAT.
+   - Faltan `ip nat inside`/`ip nat outside` en las interfaces.
+   - El tráfico que se prueba no atraviesa las interfaces inside/outside (p. ej. se prueba desde el propio router).
 
-**Verificación:**
-```bash
-show port-security interface g0/1
-show port-security address
-```
-
-## 8. Diagnóstico de port security
-
-a) **Ocurrió porque** el usuario conectó un switch no administrado. Los PCs de ambos usuarios tienen MACs diferentes, y el switch de red ve más de 1 MAC en el puerto, superando el límite (maximum 1).
-
-b) **Dos cambios:**
-   1. Aumentar `maximum` a un valor razonable (ej. 5-10) si es un puerto compartido
-   2. Cambiar `violation` a `restrict` (descarta tráfico extra pero no deshabilita el puerto) o `protect` (descarta silenciosamente)
-
-c) **Recuperar el puerto:**
-   ```bash
-   Switch(config)# interface fa0/1
-   Switch(config-if)# shutdown
-   Switch(config-if)# no shutdown
-   ```
-   O configurar `errdisable recovery cause psecure-violation` para recuperación automática.
-
-## 9. Laboratorio: Port Security en la sala de profesores
-
-a) y b) Configuración completa:
-
-```bash
-Switch(config)# interface fa0/24
-Switch(config-if)# switchport mode access
-Switch(config-if)# switchport port-security
-Switch(config-if)# switchport port-security maximum 1
-Switch(config-if)# switchport port-security mac-address sticky
-Switch(config-if)# switchport port-security violation shutdown
-```
-
-c) Verificación: `Switch# show port-security interface fa0/24` (muestra el máximo, las MACs seguras y el estado del puerto).
-
-d) La violación ocurre porque la **MAC sticky del PC original NO caduca**: aunque el PC se desenchufe, su MAC permanece aprendida como permanente. Al conectar el portátil, su MAC nueva hace un total de 2 MACs en el puerto y se supera el máximo (1) → violación shutdown → errdisable.
-
-e) Recuperar el puerto:
-
-```bash
-Switch(config)# interface fa0/24
-Switch(config-if)# shutdown
-Switch(config-if)# no shutdown
-```
-
-(O configurar `errdisable recovery cause psecure-violation`.)
-
-f) Sin perder seguridad, puedes:
-   - Aumentar `maximum` a 2 si es un puerto compartido.
-   - Configurar el **envejecimiento de la port security** para que la MAC sticky expire si el dispositivo se desenchufa (las sticky necesitan `aging static` para poder caducar):
-     ```bash
-     Switch(config-if)# switchport port-security aging time 5
-     Switch(config-if)# switchport port-security aging type inactivity
-     Switch(config-if)# switchport port-security aging static
-     ```
-   - O usar `violation restrict` (descarta el tráfico extra sin deshabilitar el puerto), aunque es menos estricto.
-
-## 10. Mini-caso final
-
-a) **Diseño mínimo (extendidas, cerca del origen):**
-
-```bash
-ip access-list extended PROFES
- deny ip 192.168.10.0 0.0.0.255 192.168.20.0 0.0.0.255
- permit tcp 192.168.10.0 0.0.0.255 host 10.0.0.5 eq 443
- permit ip 192.168.10.0 0.0.0.255 any
-```
-Aplicada **in** en la interfaz VLAN/interfaz de la red de profesores (donde entra su tráfico al router).
-
-**Nota:** no hace falta ACL para "el WiFi de alumnos no accede a profesores": con la primera línea de PROFES ya se corta el ida; para el corte completo bidireccional se añadiría una ACL espejo en la red de alumnos (`deny ip 192.168.20.0 0.0.0.255 192.168.10.0 0.0.0.255` + `permit ip any any`).
-
-b) **El retorno del servidor (10.0.0.5 → 192.168.10.x) no cruza la ACL de PROFES** (esa solo filtra el tráfico *originado* en profesores, aplicada in en su interfaz). El retorno llega por G0/0/servidores y lo encamina el router normalmente. Si hubiéramos puesto una ACL en la interfaz del servidor, sí tendríamos que prever el retorno.
-
-c) **Reflexión:** una ACL por IP es una herramienta burda para bloquear YouTube: CDN compartidas con otros servicios, apps que cambian de IPs, HTTPS que impide ver dominios... Para eso hay proxies/filtros DNS (o firewalls de siguiente generación). Las ACLs sirven para políticas simples por red/puerto; para "bloquear YouTube" honestamente mejor un filtro DNS o un proxy. Es una conversación de expectativas, no de comandos.
+d) **Fallo real:** sin `ip nat inside` en g0/0 ni `ip nat outside` en g0/1, NAT no tiene "puertas" de traducción. La regla `ip nat inside source list 1 interface g0/1 overload` dice QUÉ traducir y A DÓNDE, pero NAT necesita saber qué tráfico es interno y cuál externo. Sin esas marcas de interfaz, los paquetes de la LAN se reenvían tal cual (o se descartan) y la tabla NAT permanece vacía: exactamente el síntoma observado.

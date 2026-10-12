@@ -1,9 +1,9 @@
 ---
-title: Boletín de Ethernet y cableado — Packet Tracer
+title: Boletín de Medios y cableado — Packet Tracer
 description: Prácticas guiadas de capas 1 y 2 en Packet Tracer (y un toque de Wireshark) 🖥️
 ---
 
-# 🖥️ Boletín de Ethernet y cableado — Packet Tracer
+# 🖥️ Boletín de Medios y cableado — Packet Tracer
 
 > **Variante práctica de nivel único** (no es el par inicial/avanzado). Ocho micro-prácticas de baja dificultad en **Packet Tracer** para afianzar medios, cableado, capas 1–2 y la trama Ethernet. Una o dos abres Wireshark (o el *Simulation mode* de PT) para mirar EtherTypes y MACs. El resuelto está justo al lado: úsalo solo cuando te atasques.
 
@@ -74,4 +74,4 @@ Monta dos mini-topologías en paralelo: (A) 3 PCs + **hub**; (B) 3 PCs + **switc
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/02-ethernet-cableado) · **También:** [Resuelto](/ApuntesRedes/boletines/boletin-u02-packettracer-resuelto)
+📚 [Volver al índice de la unidad](/ApuntesRedes/02-medios-y-cableado) · **También:** [Resuelto](/ApuntesRedes/boletines/boletin-u02-packettracer-resuelto)

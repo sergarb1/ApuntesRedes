@@ -1,9 +1,9 @@
 ---
-title: Boletín de Ethernet y cableado — Packet Tracer resuelto
+title: Boletín de Medios y cableado — Packet Tracer resuelto
 description: Soluciones paso a paso de las prácticas de capas 1 y 2 en Packet Tracer ✅
 ---
 
-# ✅ Boletín de Ethernet y cableado — Packet Tracer resuelto
+# ✅ Boletín de Medios y cableado — Packet Tracer resuelto
 
 > Misma numeración y enunciados que el [por-resolver](/ApuntesRedes/boletines/boletin-u02-packettracer). Aquí tienes el camino completo: qué clicar, qué comando pegar y qué deberías ver.
 
@@ -174,4 +174,4 @@ Who has 192.168.1.11? Tell 192.168.1.10   (request, EtherType 0x0806)
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/02-ethernet-cableado) · **También:** [Por resolver](/ApuntesRedes/boletines/boletin-u02-packettracer)
+📚 [Volver al índice de la unidad](/ApuntesRedes/02-medios-y-cableado) · **También:** [Por resolver](/ApuntesRedes/boletines/boletin-u02-packettracer)

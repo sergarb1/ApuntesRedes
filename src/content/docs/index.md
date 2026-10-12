@@ -1,6 +1,6 @@
 ---
 title: Inicio
-description: Apuntes de Planificación y Administración de Redes (PAR) — 12 unidades didácticas. CC BY-SA 4.0 — Sergi Garcia Barea
+description: Apuntes de Planificación y Administración de Redes (PAR) — 13 unidades didácticas. CC BY-SA 4.0 — Sergi Garcia Barea
 ---
 
 <div align="center">
@@ -50,12 +50,22 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Ethernet</span>
+    <span class="num">Medios</span>
     <span class="ra">RA1 · RA2</span>
   </div>
-  <a href="/ApuntesRedes/02-ethernet-cableado" class="title-link">Ethernet, medios y cableado</a>
-  <p class="desc">El cable traicionero 🔌 — Medios guiados y no guiados, UTP, fibra,<code> crimpado</code> y la trama Ethernet.</p>
-  <a href="/ApuntesRedes/02-ethernet-cableado" class="unit-link">👉 Ver unidad 👈</a>
+  <a href="/ApuntesRedes/02-medios-y-cableado" class="title-link">Medios y cableado</a>
+  <p class="desc">El cable traicionero 🔌 — Medios guiados y no guiados, UTP, fibra y <code>crimpado</code>.</p>
+  <a href="/ApuntesRedes/02-medios-y-cableado" class="unit-link">👉 Ver unidad 👈</a>
+</div>
+
+<div class="unit-card">
+  <div class="unit-card-header">
+    <span class="num">Capa de enlace</span>
+    <span class="ra">RA1</span>
+  </div>
+  <a href="/ApuntesRedes/03-capa-de-enlace" class="title-link">Capa de enlace y trama Ethernet</a>
+  <p class="desc">Los bits tienen nombre 🏷️ — Modelo OSI,<code> direcciones MAC</code>, trama y encapsulación.</p>
+  <a href="/ApuntesRedes/03-capa-de-enlace" class="unit-link">👉 Ver unidad 👈</a>
 </div>
 
 <div class="unit-card">
@@ -63,9 +73,9 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
     <span class="num">Dirección IP</span>
     <span class="ra">RA1 · RA2 · RA4 · RA6</span>
   </div>
-  <a href="/ApuntesRedes/03-direccionamiento-ip" class="title-link">Direccionamiento IP y subnetting</a>
+  <a href="/ApuntesRedes/04-direccionamiento-ip" class="title-link">Direccionamiento IP y subnetting</a>
   <p class="desc">La calculadora maldita 🧮 — IPv4,<code> VLSM</code>, CIDR e IPv6 con SLAAC y transición.</p>
-  <a href="/ApuntesRedes/03-direccionamiento-ip" class="unit-link">👉 Ver unidad 👈</a>
+  <a href="/ApuntesRedes/04-direccionamiento-ip" class="unit-link">👉 Ver unidad 👈</a>
 </div>
 
 <div class="unit-card">
@@ -73,9 +83,9 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
     <span class="num">Switching</span>
     <span class="ra">RA3 · RA5</span>
   </div>
-  <a href="/ApuntesRedes/04-switching" class="title-link">Switching y redes VLAN</a>
+  <a href="/ApuntesRedes/05-switching" class="title-link">Switching y redes VLAN</a>
   <p class="desc">El switch enfadado 😡 — Conmutación,<code> STP</code> y segmentación con VLANs.</p>
-  <a href="/ApuntesRedes/04-switching" class="unit-link">👉 Ver unidad 👈</a>
+  <a href="/ApuntesRedes/05-switching" class="unit-link">👉 Ver unidad 👈</a>
 </div>
 
 <div class="unit-card">
@@ -83,9 +93,9 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
     <span class="num">Trunking</span>
     <span class="ra">RA3 · RA4 · RA5</span>
   </div>
-  <a href="/ApuntesRedes/05-trunking-inter-vlan" class="title-link">Trunking y enrutamiento inter-VLAN</a>
+  <a href="/ApuntesRedes/06-trunking-inter-vlan" class="title-link">Trunking y enrutamiento inter-VLAN</a>
   <p class="desc">La oficina dividida 🏢 — Trunks 802.1Q,<code> router-on-a-stick</code> y switch capa 3.</p>
-  <a href="/ApuntesRedes/05-trunking-inter-vlan" class="unit-link">👉 Ver unidad 👈</a>
+  <a href="/ApuntesRedes/06-trunking-inter-vlan" class="unit-link">👉 Ver unidad 👈</a>
 </div>
 
 <div class="unit-card">
@@ -93,9 +103,9 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
     <span class="num">Servicios</span>
     <span class="ra">RA2</span>
   </div>
-  <a href="/ApuntesRedes/06-servicios-red" class="title-link">Servicios de red: DHCP, DNS y NTP</a>
+  <a href="/ApuntesRedes/07-servicios-red" class="title-link">Servicios de red: DHCP, DNS y NTP</a>
   <p class="desc">La red como plataforma 🗄️ — DHCP,<code> DNS</code> y NTP desplegados y administrados.</p>
-  <a href="/ApuntesRedes/06-servicios-red" class="unit-link">👉 Ver unidad 👈</a>
+  <a href="/ApuntesRedes/07-servicios-red" class="unit-link">👉 Ver unidad 👈</a>
 </div>
 
 <div class="unit-card">
@@ -103,9 +113,9 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
     <span class="num">Enrutamiento</span>
     <span class="ra">RA4</span>
   </div>
-  <a href="/ApuntesRedes/07-enrutamiento-estatico" class="title-link">Enrutamiento estático</a>
+  <a href="/ApuntesRedes/08-enrutamiento-estatico" class="title-link">Enrutamiento estático</a>
   <p class="desc">El GPS del router 🧭 — Componentes del router,<code> rutas estáticas</code> y ruta por defecto.</p>
-  <a href="/ApuntesRedes/07-enrutamiento-estatico" class="unit-link">👉 Ver unidad 👈</a>
+  <a href="/ApuntesRedes/08-enrutamiento-estatico" class="unit-link">👉 Ver unidad 👈</a>
 </div>
 
 <div class="unit-card">
@@ -113,9 +123,9 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
     <span class="num">OSPF</span>
     <span class="ra">RA6</span>
   </div>
-  <a href="/ApuntesRedes/08-ospf" class="title-link">Enrutamiento dinámico con OSPF</a>
+  <a href="/ApuntesRedes/09-ospf" class="title-link">Enrutamiento dinámico con OSPF</a>
   <p class="desc">El router que habla solo 🗣️ — Vecinos, áreas,<code> coste</code> y configuración de OSPF.</p>
-  <a href="/ApuntesRedes/08-ospf" class="unit-link">👉 Ver unidad 👈</a>
+  <a href="/ApuntesRedes/09-ospf" class="unit-link">👉 Ver unidad 👈</a>
 </div>
 
 <div class="unit-card">
@@ -123,9 +133,9 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
     <span class="num">NAT</span>
     <span class="ra">RA7</span>
   </div>
-  <a href="/ApuntesRedes/09-nat-pat" class="title-link">NAT y PAT</a>
+  <a href="/ApuntesRedes/10-nat-pat" class="title-link">NAT y PAT</a>
   <p class="desc">Internet no funciona otra vez 🌐 — NAT estático y dinámico,<code> PAT</code> y port forwarding.</p>
-  <a href="/ApuntesRedes/09-nat-pat" class="unit-link">👉 Ver unidad 👈</a>
+  <a href="/ApuntesRedes/10-nat-pat" class="unit-link">👉 Ver unidad 👈</a>
 </div>
 
 <div class="unit-card">
@@ -133,9 +143,9 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
     <span class="num">ACL</span>
     <span class="ra">RA4</span>
   </div>
-  <a href="/ApuntesRedes/10-acl-seguridad" class="title-link">ACL y seguridad básica de red</a>
+  <a href="/ApuntesRedes/11-acl-seguridad" class="title-link">ACL y seguridad básica de red</a>
   <p class="desc">El portero de la red 🛡️ — ACLs estándar y extendidas,<code> time-range</code> y Port Security.</p>
-  <a href="/ApuntesRedes/10-acl-seguridad" class="unit-link">👉 Ver unidad 👈</a>
+  <a href="/ApuntesRedes/11-acl-seguridad" class="unit-link">👉 Ver unidad 👈</a>
 </div>
 
 <div class="unit-card">
@@ -143,9 +153,9 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
     <span class="num">Inalámbricas</span>
     <span class="ra">RA1 · RA2 · RA3 · RA7</span>
   </div>
-  <a href="/ApuntesRedes/11-redes-inalambricas" class="title-link">Redes inalámbricas</a>
+  <a href="/ApuntesRedes/12-redes-inalambricas" class="title-link">Redes inalámbricas</a>
   <p class="desc">El aire que promete 📶 — 802.11, canales,<code> cobertura</code> y seguridad WLAN.</p>
-  <a href="/ApuntesRedes/11-redes-inalambricas" class="unit-link">👉 Ver unidad 👈</a>
+  <a href="/ApuntesRedes/12-redes-inalambricas" class="unit-link">👉 Ver unidad 👈</a>
 </div>
 
 <div class="unit-card">
@@ -153,9 +163,9 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
     <span class="num">Alta disponibilidad</span>
     <span class="ra">RA1 · RA3 · RA5 · RA6</span>
   </div>
-  <a href="/ApuntesRedes/12-alta-disponibilidad" class="title-link">Alta disponibilidad y redundancia</a>
+  <a href="/ApuntesRedes/13-alta-disponibilidad" class="title-link">Alta disponibilidad y redundancia</a>
   <p class="desc">La red que nunca duerme 🔁 — STP, EtherChannel,<code> stacking</code> y HSRP.</p>
-  <a href="/ApuntesRedes/12-alta-disponibilidad" class="unit-link">👉 Ver unidad 👈</a>
+  <a href="/ApuntesRedes/13-alta-disponibilidad" class="unit-link">👉 Ver unidad 👈</a>
 </div>
 
 </div>
@@ -178,7 +188,7 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Ethernet</span>
+    <span class="num">Medios y cableado</span>
   </div>
   <div class="ejercicio-links">
     <a href="/ApuntesRedes/boletines/boletin-u02-inicial" class="elink">🟢 Inicial por resolver</a>
@@ -190,35 +200,35 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Dirección IP</span>
+    <span class="num">Capa de enlace y trama</span>
   </div>
   <div class="ejercicio-links">
     <a href="/ApuntesRedes/boletines/boletin-u03-inicial" class="elink">🟢 Inicial por resolver</a>
     <a href="/ApuntesRedes/boletines/boletin-u03-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
     <a href="/ApuntesRedes/boletines/boletin-u03-avanzado" class="elink">⭐ Avanzado por resolver</a>
     <a href="/ApuntesRedes/boletines/boletin-u03-avanzado-resuelto" class="elink">💪 Avanzado resuelto</a>
-    <a href="/ApuntesRedes/boletines/boletin-u03-ipv6-inicial" class="elink">🟢 IPv6 inicial por resolver</a>
-    <a href="/ApuntesRedes/boletines/boletin-u03-ipv6-inicial-resuelto" class="elink">✅ IPv6 inicial resuelto</a>
-    <a href="/ApuntesRedes/boletines/boletin-u03-ipv6-avanzado" class="elink">⭐ IPv6 avanzado por resolver</a>
-    <a href="/ApuntesRedes/boletines/boletin-u03-ipv6-avanzado-resuelto" class="elink">💪 IPv6 avanzado resuelto</a>
   </div>
 </div>
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Switching</span>
+    <span class="num">Dirección IP</span>
   </div>
   <div class="ejercicio-links">
     <a href="/ApuntesRedes/boletines/boletin-u04-inicial" class="elink">🟢 Inicial por resolver</a>
     <a href="/ApuntesRedes/boletines/boletin-u04-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
     <a href="/ApuntesRedes/boletines/boletin-u04-avanzado" class="elink">⭐ Avanzado por resolver</a>
     <a href="/ApuntesRedes/boletines/boletin-u04-avanzado-resuelto" class="elink">💪 Avanzado resuelto</a>
+    <a href="/ApuntesRedes/boletines/boletin-u04-ipv6-inicial" class="elink">🟢 IPv6 inicial por resolver</a>
+    <a href="/ApuntesRedes/boletines/boletin-u04-ipv6-inicial-resuelto" class="elink">✅ IPv6 inicial resuelto</a>
+    <a href="/ApuntesRedes/boletines/boletin-u04-ipv6-avanzado" class="elink">⭐ IPv6 avanzado por resolver</a>
+    <a href="/ApuntesRedes/boletines/boletin-u04-ipv6-avanzado-resuelto" class="elink">💪 IPv6 avanzado resuelto</a>
   </div>
 </div>
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Trunking</span>
+    <span class="num">Switching</span>
   </div>
   <div class="ejercicio-links">
     <a href="/ApuntesRedes/boletines/boletin-u05-inicial" class="elink">🟢 Inicial por resolver</a>
@@ -230,7 +240,7 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Servicios</span>
+    <span class="num">Trunking</span>
   </div>
   <div class="ejercicio-links">
     <a href="/ApuntesRedes/boletines/boletin-u06-inicial" class="elink">🟢 Inicial por resolver</a>
@@ -242,7 +252,7 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Enrutamiento</span>
+    <span class="num">Servicios</span>
   </div>
   <div class="ejercicio-links">
     <a href="/ApuntesRedes/boletines/boletin-u07-inicial" class="elink">🟢 Inicial por resolver</a>
@@ -254,7 +264,7 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">OSPF</span>
+    <span class="num">Enrutamiento</span>
   </div>
   <div class="ejercicio-links">
     <a href="/ApuntesRedes/boletines/boletin-u08-inicial" class="elink">🟢 Inicial por resolver</a>
@@ -266,7 +276,7 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">NAT</span>
+    <span class="num">OSPF</span>
   </div>
   <div class="ejercicio-links">
     <a href="/ApuntesRedes/boletines/boletin-u09-inicial" class="elink">🟢 Inicial por resolver</a>
@@ -278,7 +288,7 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">ACL</span>
+    <span class="num">NAT</span>
   </div>
   <div class="ejercicio-links">
     <a href="/ApuntesRedes/boletines/boletin-u10-inicial" class="elink">🟢 Inicial por resolver</a>
@@ -290,7 +300,7 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Inalámbricas</span>
+    <span class="num">ACL</span>
   </div>
   <div class="ejercicio-links">
     <a href="/ApuntesRedes/boletines/boletin-u11-inicial" class="elink">🟢 Inicial por resolver</a>
@@ -302,13 +312,25 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 12 u
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Alta disponibilidad</span>
+    <span class="num">Inalámbricas</span>
   </div>
   <div class="ejercicio-links">
     <a href="/ApuntesRedes/boletines/boletin-u12-inicial" class="elink">🟢 Inicial por resolver</a>
     <a href="/ApuntesRedes/boletines/boletin-u12-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
     <a href="/ApuntesRedes/boletines/boletin-u12-avanzado" class="elink">⭐ Avanzado por resolver</a>
     <a href="/ApuntesRedes/boletines/boletin-u12-avanzado-resuelto" class="elink">💪 Avanzado resuelto</a>
+  </div>
+</div>
+
+<div class="unit-card">
+  <div class="unit-card-header">
+    <span class="num">Alta disponibilidad</span>
+  </div>
+  <div class="ejercicio-links">
+    <a href="/ApuntesRedes/boletines/boletin-u13-inicial" class="elink">🟢 Inicial por resolver</a>
+    <a href="/ApuntesRedes/boletines/boletin-u13-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
+    <a href="/ApuntesRedes/boletines/boletin-u13-avanzado" class="elink">⭐ Avanzado por resolver</a>
+    <a href="/ApuntesRedes/boletines/boletin-u13-avanzado-resuelto" class="elink">💪 Avanzado resuelto</a>
   </div>
 </div>
 
