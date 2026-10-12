@@ -1,151 +1,186 @@
 ---
-title: Boletín de Switching y VLAN — Avanzado (Resuelto)
-description: Soluciones de los ejercicios avanzados de Switching, STP y VLAN
+title: Boletín de Direccionamiento IP — Avanzado (Resuelto)
+description: Soluciones de ejercicios avanzados de subnetting, VLSM, cabecera IPv4, ARP y fragmentación
 ---
 
-# ✅ Boletín de Switching y VLAN — Avanzado (Resuelto)
+# ✅ Boletín de Direccionamiento IP — Avanzado (Resuelto)
 
 ---
 
-## 1. Configuración básica de switch
+## 1. Diseño VLSM
 
-```bash
-Switch> enable
-Switch# configure terminal
-Switch(config)# hostname SW-OFICINA-01
+Red base: 172.16.0.0/24 (256 direcciones totales)
 
-SW-OFICINA-01(config)# vlan 10
-SW-OFICINA-01(config-vlan)# name Ventas
-SW-OFICINA-01(config-vlan)# exit
-SW-OFICINA-01(config)# vlan 20
-SW-OFICINA-01(config-vlan)# name RRHH
-SW-OFICINA-01(config-vlan)# exit
-SW-OFICINA-01(config)# vlan 999
-SW-OFICINA-01(config-vlan)# name Gestion
-SW-OFICINA-01(config-vlan)# exit
+**Ordenando de mayor a menor:** Producción (60) → Desarrollo (30) → Testing (10) → 3 enlaces WAN (2 c/u)
 
-SW-OFICINA-01(config)# interface range fa0/1-10
-SW-OFICINA-01(config-if-range)# switchport mode access
-SW-OFICINA-01(config-if-range)# switchport access vlan 10
-SW-OFICINA-01(config-if-range)# exit
-SW-OFICINA-01(config)# interface range fa0/11-12
-SW-OFICINA-01(config-if-range)# switchport mode access
-SW-OFICINA-01(config-if-range)# switchport access vlan 20
-SW-OFICINA-01(config-if-range)# exit
+| Subred | Hosts | CIDR | Red | Rango | Broadcast |
+|---|---|---|---|---|---|
+| Producción | 60 (62) | /26 | 172.16.0.0 | .1 - .62 | .63 |
+| Desarrollo | 30 (30) | /27 | 172.16.0.64 | .65 - .94 | .95 |
+| Testing | 10 (14) | /28 | 172.16.0.96 | .97 - .110 | .111 |
+| WAN 1 | 2 (2) | /30 | 172.16.0.112 | .113 - .114 | .115 |
+| WAN 2 | 2 (2) | /30 | 172.16.0.116 | .117 - .118 | .119 |
+| WAN 3 | 2 (2) | /30 | 172.16.0.120 | .121 - .122 | .123 |
 
-SW-OFICINA-01(config)# interface vlan 999
-SW-OFICINA-01(config-if)# ip address 192.168.99.10 255.255.255.0
-SW-OFICINA-01(config-if)# no shutdown
-SW-OFICINA-01(config-if)# exit
-SW-OFICINA-01(config)# ip default-gateway 192.168.99.1
+**Sobran:** 172.16.0.124 - 172.16.0.255 = **132 direcciones**. Ojo: ese hueco no es una subred alineada; la mayor subred alineada que cabe entera dentro es **172.16.0.128/25** (126 hosts útiles) y las direcciones .124-.127 se quedarían sin aprovechar por no estar alineadas.
+
+## 2. Diagnóstico DHCP
+
+a) Es una **dirección APIPA** (Automatic Private IP Addressing), rango 169.254.0.0/16.
+
+b) Windows asigna automáticamente una IP APIPA cuando el **servidor DHCP no responde** o no está disponible.
+
+c) **Soluciones:**
+   1. Verificar que el servidor DHCP esté encendido y funcionando
+   2. Comprobar la conectividad con el servidor DHCP (¿está en la misma red? ¿hay switches funcionando?)
+   3. Hacer `ipconfig /release` y `ipconfig /renew` para forzar una nueva solicitud DHCP
+   4. Asignar una IP estática si el DHCP no es recuperable
+
+## 3. Subnetting binario
+
+a) **IP en binario:** 200.100.50.30 = 11001000.01100100.00110010.00011110
+   **Máscara en binario:** 255.255.255.224 = 11111111.11111111.11111111.11100000
+
+b) **AND → Dirección de red:** 11001000.01100100.00110010.00000000 = **200.100.50.0/27**
+
+c) **Broadcast:** 200.100.50.31 (todos los bits de host a 1: 00011111)
+
+d) **Hosts útiles:** 2⁵ - 2 = 32 - 2 = **30 hosts**
+
+e) **200.100.50.62 → binario:** 11001000.01100100.00110010.00111110
+   Red de .62 con /27: 200.100.50.32/27 (bits de red fijos, 00100000)
+   **NO está en la misma subred.** .30 está en 200.100.50.0/27, .62 está en 200.100.50.32/27.
+
+## 4. Resumen de subredes
+
+a) **Bits a pedir:** 2ⁿ = 8 → n = 3 bits
+
+b) Máscara original: /16. Nuevos bits: 16 + 3 = **/19** (255.255.224.0)
+
+c) **Hosts por subred:** 32 - 19 = 13 bits de host → 2¹³ - 2 = **8190 hosts**
+
+d) **Subredes:**
+   - 10.0.0.0/19
+   - 10.0.32.0/19
+   - 10.0.64.0/19
+   - 10.0.96.0/19
+   - 10.0.128.0/19
+   - 10.0.160.0/19
+   - 10.0.192.0/19
+   - 10.0.224.0/19
+
+(El incremento entre subredes es 32 en el tercer octeto: 2¹⁹⁻¹⁶ = 2³ = 32)
+
+## 5. Sumarización de rutas
+
+a) **Ruta resumida:** 192.168.0.0/22
+
+**Razonamiento:**
+- 192.168.0.0/24: bits 22-23 = 00
+- 192.168.1.0/24: bits 22-23 = 01
+- 192.168.2.0/24: bits 22-23 = 10
+- 192.168.3.0/24: bits 22-23 = 11
+
+Los primeros 22 bits son idénticos. La ruta /22 engloba las 4 subredes.
+
+b) **Máscara:** /22 (255.255.252.0)
+
+c) **IPs totales:** 2^(32-22) - 2 = 2¹⁰ - 2 = **1022 hosts** (1024 direcciones totales)
+
+## 6. Plan de direccionamiento para una empresa
+
+Red base: 10.0.0.0/22 (1024 direcciones, 1022 hosts útiles)
+
+**Ordenando de mayor a menor:**
+- Administración: 200 → /24 (254 hosts)
+- Producción: 100 → /25 (126 hosts)
+- IT: 50 → /26 (62 hosts)
+- Ventas: 50 → /26 (62 hosts)
+- Almacén: 20 → /27 (30 hosts)
+- Dirección: 10 → /28 (14 hosts)
+- Enlace /30
+
+**Plan VLSM:**
+
+| Subred | CIDR | Red | Rango | Broadcast |
+|---|---|---|---|---|
+| Administración | /24 | 10.0.0.0 | .1 - .254 | .255 |
+| Producción | /25 | 10.0.1.0 | .1 - .126 | .127 |
+| IT | /26 | 10.0.1.128 | .129 - .190 | .191 |
+| Ventas | /26 | 10.0.1.192 | .193 - .254 | .255 |
+| Almacén | /27 | 10.0.2.0 | .1 - .30 | .31 |
+| Dirección | /28 | 10.0.2.32 | .33 - .46 | .47 |
+| Enlace | /30 | 10.0.2.48 | .49 - .50 | .51 |
+
+**Sobran:** 10.0.2.52 - 10.0.3.255 → **~460 IPs**
+
+**Problemas si crece al doble:** Si cada departamento duplica sus hosts, Administración necesitaría /23 (510 hosts), lo que rompe el plan VLSM actual. Habría que rediseñar usando una red base más grande (ej. /20) desde el principio.
+
+## 7. VLSM con requisitos mínimos
+
+Red base: 192.168.1.0/24 (256 direcciones, 254 hosts útiles)
+
+**Ordenando de mayor a menor:** Producción (50) → Comercial (25) → Soporte (10) → Enlace WAN (2)
+
+| Subred | Resolviendo | CIDR | Red | Rango | Broadcast |
+|---|---|---|---|---|---|
+| Producción | 2ʰ−2 ≥ 50 → h=6 (62) | /26 | 192.168.1.0 | .1 - .62 | .63 |
+| Comercial | 2ʰ−2 ≥ 25 → h=5 (30) | /27 | 192.168.1.64 | .65 - .94 | .95 |
+| Soporte | 2ʰ−2 ≥ 10 → h=4 (14) | /28 | 192.168.1.96 | .97 - .110 | .111 |
+| Enlace WAN | 2ʰ−2 ≥ 2 → h=2 (2) | /30 | 192.168.1.112 | .113 - .114 | .115 |
+
+b) **Queda libre** desde 192.168.1.116 hasta 192.168.1.255 = **140 direcciones**. Ojo otra vez con la alineación: dentro de ese hueco la mayor subred alineada es **192.168.1.128/25** (126 hosts útiles) y las direcciones .116-.127 no se pueden aprovechar sin romper la alineación.
+
+**Comprobación del encadenado:** Producción acaba en .63 → Comercial arranca en .64. Comercial acaba en .95 → Soporte arranca en .96. Soporte acaba en .111 → el enlace WAN arranca en .112.
+
+## 8. Conflicto de IP
+
+a) **Qué ocurre:** cuando el PC pide IP por DHCP recibe 192.168.1.20, pero la impresora ya la tiene en uso. Hay **duplicado de dirección**: uno de los dos (o ambos, según el momento) pierde conectividad, aparecen errores de "duplicate address", y el tráfico hacia esa IP puede ir a uno o a otro. El servidor DHCP puede detectarlo *antes* de conceder la IP haciendo un ping o un ARP probe a la dirección; si hay respuesta, la descarta y la registra en la tabla de conflictos.
+
+b) **Cómo lo detecta:** en el router, el comando:
+
+```
+show ip dhcp conflict
 ```
 
-d) `show vlan brief` — lista las VLANs 10, 20 y 999 y qué puertos tiene asignados cada una.
+Muestra las direcciones que el servidor DHCP encontró en conflicto (con el método de detección y la fecha). Si la impresora estática sigue dentro del rango sin excluir, verás la entrada y podrás actuar.
 
-## 2. Análisis de topología STP
+c) **Cómo prevenirlo:** desde el diseño, **excluir las IPs estáticas** del pool DHCP antes de que reparta nada:
 
-a) **Root Bridge: Switch C.** Prioridad 4096 (la más baja). Aunque Switch A y B tienen MACs más bajas, la prioridad de Switch C (4096) es mucho menor que 32768.
-
-b) **Root Ports:** Cada switch no-root tiene 1 Root Port. Como hay 3 switches y Switch C es Root, Switches A y B tienen 1 Root Port cada uno = **2 Root Ports** total.
-
-c) **Designated Ports:** 1 por segmento. Hay 3 segmentos (A-B, B-C, C-A) → **3 Designated Ports** (todos los puertos del Root Bridge y el puerto del segmento con mejor coste hacia el Root).
-
-d) Si **Switch C falla**:
-   - Switches A y B pierden su Root Bridge
-   - Se inicia una nueva elección. Con la misma prioridad (32768), gana Switch A (MAC más baja)
-   - Los puertos necesarios pasan por listening y learning antes de reenviar (los que estaban bloqueados esperan además a que se resuelva la topología)
-   - Convergencia: ~30-50 segundos con STP, ~1-3 segundos con RSTP
-
-## 3. Diagnóstico de VLAN
-
-a) `show vlan brief` — lista todas las VLANs del switch y los puertos de cada una. (También sirve `show interfaces fa0/9 switchport` si quieres mirar solo ese puerto.)
-
-b) El puerto Fa0/9 **no se asignó a la VLAN 10** (se quedó en la VLAN 1 de fábrica). Se confirma con `show vlan brief`: Fa0/9 aparece listado en la VLAN 1, mientras Fa0/10 aparece en la VLAN 10.
-
-c)
-
-```bash
-Switch(config)# interface fa0/9
-Switch(config-if)# switchport access vlan 10
+```
+ip dhcp excluded-address 192.168.1.1 192.168.1.30
 ```
 
-El DHCP fallaba porque el DISCOVER de Ana es un broadcast y se queda en la VLAN 1: no llega al dominio de broadcast de la VLAN 10, donde están el resto de Ventas y su servidor DHCP.
+Así el router nunca concede las direcciones fijas (impresoras, servidores, el propio gateway). Alternativa: usar **reservas DHCP** por MAC para los equipos que quieras fijos sin configurarlos a mano.
 
-d) Etiquetar físicamente los puertos y los cables (VLAN 10 / VLAN 20) y mantener el mismo reparto de rangos en todos los switches: lo que no está etiquetado se olvida.
+## 9. Fragmentación real (túnel y MTU)
 
-## 4. Diseño de red redundante
+a) **Frag 1 (salto Gigabit, MTU 1500):** payload por fragmento = 1500 − 20 = 1480 (ya múltiplo de 8) → 5000 B → **4 fragmentos**: 1480 + 1480 + 1480 + 560.
 
-a) **Topología:** anillo con diagonal. Enlaces SW1–SW2, SW2–SW3, SW3–SW4, SW4–SW1 y SW1–SW3 (5 enlaces en total). STP deja activos solo los enlaces de un árbol que conecte los 4 switches y bloquea el resto.
+b) **Refragmentación en el WAN (MTU 1000):** payload útil = 1000 − 20 = 980… pero 980 **no** es múltiplo de 8; el mayor múltiplo de 8 ≤ 980 es **976**. Los fragmentos 1-3 (1480 B) no caben: cada uno se trocea en 976 + 504. El fragmento 4 (560 B) ya cabe entero. Total: **7 fragmentos**.
 
-b) **2 puertos bloqueados.** Para conectar 4 switches sin bucles hacen falta 3 enlaces activos (n − 1 = 3); hay 5, así que STP bloquea 2 (uno por cada enlace sobrante). Cuáles exactos dependen del Root Bridge y de los costes, pero el número es siempre 2.
+| Frag | Datos | MF | Offset (×8) |
+|---|---|---|---|
+| 1a | 976 | 1 | 0 |
+| 1b | 504 | 1 | 122 (976/8) |
+| 2a | 976 | 1 | 185 |
+| 2b | 504 | 1 | 307 (2456/8) |
+| 3a | 976 | 1 | 370 |
+| 3b | 504 | 1 | 492 (3936/8) |
+| 4 | 560 | **0** | 555 |
 
-c) `spanning-tree vlan 1 priority 4096` (la prioridad debe ser múltiplo de 4096; con 4096 le gana a los 32768 por defecto).
+(Comprobación: 3 × (976 + 504) + 560 = 3 × 1480 + 560 = **5000 B** ✓. El offset de cada pieza = byte absoluto que empieza a contar ÷ 8, así que el trozo 1b arranca en el byte 976 → 122.)
 
-d) **Sí, la red sigue conectada:** al caer SW1 desaparecen sus tres enlaces (SW1–SW2, SW4–SW1 y SW1–SW3), pero quedan SW2–SW3 y SW3–SW4, que encadenan a los tres switches supervivientes (SW2 → SW3 → SW4).
-   - **Con STP:** ~30-50 segundos de convergencia
-   - **Con RSTP:** ~1-3 segundos
+c) Síntoma clásico: **el ping pequeño va y el grande se corta o da "Packet needs to be fragmented but DF set"**; con `tracert` los saltos intermedios pueden no responder si el problema es de encapsulado/túnel. En Windows: `ping -f -l 1472` (prueba de Path MTU) fallando en el salto problemático.
 
-## 5. Análisis de la tabla CAM
+d) **No.** En IPv6 solo el **origen** fragmenta; los routers intermedios no fragmentan (Path MTU Discovery / Packet Too Big de ICMPv6).
 
-a) **Dos dispositivos** en Fa0/4: 00D0.BC96.1A01 y 00D0.BC96.1A02. La tabla muestra ambas MACs en el mismo puerto.
+## 10. ARP, Wireshark y capas
 
-b) **4 puertos** con dispositivos: Fa0/1, Fa0/2, Fa0/3 y Fa0/4.
+a) Porque la capa 2 no puede montar la trama sin la **MAC destino**. ICMP ya tiene las IPs, pero el "sobre" Ethernet necesita la dirección de enlace del gateway (o del host): ARP la obtiene antes de enviar el primer paquete IP.
 
-c) **No aparece.** La dirección de broadcast no se aprende en la tabla (no es la MAC de ningún equipo): el switch inunda el broadcast por todos los puertos del VLAN por definición.
+b) Sin reply, el host **no tiene MAC destino** → no construye la trama → el ICMP "se queda" en la pila. Falla en la frontera **capa 2/3 de la LAN** (sin ARP no hay trama). El ping no sale "por la puerta" (gateway).
 
-d) **Si llega una trama con destino 00D0.BC96.1A03:** Es una MAC desconocida (no está en la tabla). El switch **inunda** la trama por todos los puertos excepto el de origen.
+c) **No culpes de ARP:** si `arp -a` trae la MAC del gateway y el ping al gateway va, la resolución local funciona. El fallo a `8.8.8.8` es **ruta por defecto, NAT, firewall o DNS** (capa 3+ / servicio).
 
-## 6. STP: cálculo de costes
-
-a) **Root Port de Switch C:** Depende del coste acumulado hacia el Root Bridge.
-
-   **Camino C → A directo (Fa0/3):** coste = 19
-   **Camino C → B → A (Fa0/2 → Fa0/1):** coste = 19 + 19 = 38
-
-   Fa0/3 tiene **menor coste total** (19 < 38), así que **Fa0/3 es el Root Port**.
-
-b) **Costes:** C→A directo = 19. C→B→A = 38.
-
-c) **Alternate Port:** Fa0/2 (el puerto del camino más caro que queda en discarding como respaldo).
-
-d) **Si el coste de Fa0/3 se cambia a 4:** El coste total por Fa0/3 baja a 4, reforzando aún más que Fa0/3 sea el Root Port. Si en cambio el coste de Fa0/3 subiera a 100, entonces el Root Port pasaría a ser el del camino C→B→A (coste 38 < 100).
-
-## 7. Topología STP/RSTP bajo análisis
-
-a) **Root Bridge: SW1.** Prioridad 4096, muy por debajo de los 32768 de los demás. No hace falta desempate por MAC.
-
-b) **Puerto en estado Discarding:** el enlace redundante **SW2-SW3**. Concretamente, el puerto de SW3 hacia SW2 (el extremo con mayor coste acumulado hacia el Root, que queda como **Alternate Port**). Los enlaces directos SW1-SW2, SW1-SW3 y SW1-SW4 son Designated (todos los puertos del Root).
-
-c) **3 Root Ports**: SW2, SW3 y SW4 son switches no-root, cada uno con su Root Port hacia SW1 (por su enlace directo de coste 19).
-
-d) **Con RSTP:** la red converge en **1-3 segundos** (handshake propuesta/acuerdo). **Con STP clásico:** **30-50 segundos** (esperando temporizadores).
-
-e) Los puertos del Root Bridge son todos **Designated**: son el "punto de referencia" del árbol y nunca se bloquean.
-
-## 8. Laboratorio: segmentación en un switch
-
-a)
-
-```bash
-Switch(config)# vlan 10
-Switch(config-vlan)# name Ventas
-Switch(config-vlan)# exit
-Switch(config)# vlan 20
-Switch(config-vlan)# name RRHH
-Switch(config-vlan)# exit
-Switch(config)# interface range fa0/1-8
-Switch(config-if-range)# switchport mode access
-Switch(config-if-range)# switchport access vlan 10
-Switch(config-if-range)# exit
-Switch(config)# interface range fa0/9-16
-Switch(config-if-range)# switchport mode access
-Switch(config-if-range)# switchport access vlan 20
-```
-
-b) `show vlan brief` → Fa0/1 y Fa0/2 en la VLAN 10, Fa0/9 en la VLAN 20. En `show mac address-table` la MAC de PC1 aparece en la columna Vlan con el valor 10.
-
-c) PC1 → PC2 **funciona** (misma VLAN y misma subred). PC1 → PC3 **no funciona**, y no es un fallo: aunque compartan subred IP, el switch no reenvía tramas entre VLAN distintas.
-
-d) Tras `switchport access vlan 10` en Fa0/9, el ping PC1 → PC3 **funciona**: los tres quedan en el mismo dominio de broadcast. Una VLAN decide quién se habla en capa 2; la IP no salva la conversación si la VLAN los separa.
-
-e) No: la subred IP no cruza el aislamiento de capa 2. Para que VLANs distintas se comuniquen hace falta un router (o un switch de capa 3) entre ellas — el siguiente paso del curso, en trunking e inter-VLAN.
+d) Dentro va un **paquete IPv4** (EtherType `0x0800`). Las IPs van en la **cabecera IPv4**: campo **IP origen** = 192.168.1.50, campo **IP destino** = 192.168.1.1 (además del protocolo = 1 para ICMP).

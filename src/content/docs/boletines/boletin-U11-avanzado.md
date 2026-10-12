@@ -1,99 +1,138 @@
 ---
-title: Boletín de Redes inalámbricas — Avanzado
-description: Ejercicios avanzados de redes inalámbricas (WiFi)
+title: Boletín de ACL y seguridad — Avanzado
+description: Ejercicios avanzados de ACLs y seguridad de red
 ---
 
-# 📝 Boletín de Redes inalámbricas — Avanzado
+# 📝 Boletín de ACL y seguridad — Avanzado
 
-> Ejercicios que requieren diseñar y diagnosticar WLANs. En los difíciles tienes pista.
+> Ejercicios que requieren aplicar ACLs con criterio. En los difíciles tienes pista.
 
 ---
 
-## 1. Diseño de cobertura de un instituto
+## 1. ACL extendida: YouTube blocker
 
-Edificio de dos plantas, 40×20 m, hormigón armado. Usuarios: 30 profesores con portátiles, 300 alumnos con móviles, ~50 IPs extra (cámaras, impresoras).
+El jefe quiere bloquear YouTube (173.194.0.0/16) en horario laboral (9:00-18:00). El resto del tráfico debe permitirse.
 
-a) ¿Cuántos APs pondrías como mínimo y dónde (a grandes rasgos)?
-b) ¿Qué bandas asignas a qué uso?
-c) Dos SSIDs: `Profesores` (Enterprise) y `Alumnos` (PSK con portal cautivo). ¿Por qué esta separación?
-d) ¿Qué pasa con el canal si dos APs vecinos emiten en el mismo canal 2,4 GHz?
+a) Escribe la ACL extendida (con time-range)
+b) ¿Dónde la aplicas (inbound/outbound, qué interfaz)?
+c) ¿Qué pasa si el router no soporta time-range? ¿Alternativa?
 
-**Pista:** en 2,4 GHz solo hay 3 canales no solapados (1/6/11); el patrón clásico de celdas alterna 1-6-11-1-6-11.
+**Pista:** `time-range` y `absolute` o `periodic` para horarios.
 
-## 2. El misterio del aula 12
+## 2. Diagnóstico de ACL
 
-El aula 12 tiene WiFi pésimo: se desconecta cada pocos minutos, aunque la señal que muestra el portátil es "excelente".
+Un administrador aplica esta ACL en G0/0 de un router (LAN 192.168.1.0/24), sentido **in** (hacia el router):
 
-a) ¿Cómo puede haber señal excelente y mala calidad? ¿Qué mide cada cosa?
-b) Enumera 3 causas típicas de este síntoma.
-c) ¿Qué herramienta del portátil o del AP usarías para confirmarlo?
+```
+access-list 10 deny 192.168.1.10
+access-list 10 permit 192.168.1.0 0.0.0.255
+```
 
-**Pista:** RSSI alto no es sinónimo de SNR alto: mira la interferencia y la reutilización de canal.
+a) El PC 192.168.1.10 no puede acceder a Internet. ¿Es normal?
+b) ¿Y el PC 192.168.1.20? ¿Puede acceder a Internet?
+c) ¿Qué comando usarías para ver si la ACL está funcionando?
+d) Si la ACL se aplica outbound en G0/1 (hacia Internet), ¿cómo afecta al tráfico entre PCs de la misma LAN?
 
-## 3. Plan de canales 5 GHz
+## 3. ACL de firewall básico
 
-Tienes 4 APs en la misma planta. En 5 GHz dispones de canales de 20 MHz (36, 40, 44, 48, 52, 56, 60, 64, 100+…).
+Diseña una ACL para un router de borde que protege una red interna (192.168.1.0/24):
 
-a) Asigna canales a los 4 APs para minimizar solape.
-b) ¿Qué ventaja tiene usar 40 u 80 MHz en 5 GHz en lugar de 20 MHz? ¿Y su riesgo?
-c) ¿Qué son los canales DFS y qué riesgo tienen?
+**Reglas:**
+1. Permitir HTTP/HTTPS saliente (cualquier destino)
+2. Permitir DNS saliente (UDP 53)
+3. Bloquear SSH saliente (TCP 22)
+4. Permitir el retorno de las conexiones TCP establecidas (tráfico de retorno)
+5. Permitir también las respuestas DNS entrantes (UDP con puerto de origen 53)
+6. Denegar el resto
 
-## 4. WPA3 y el handshake
+**Pista:** Usa `established` para el retorno TCP; las respuestas DNS no son TCP y necesitan su propia línea UDP.
 
-a) ¿Qué problema clásico de WPA2-PSK corrige WPA3 con SAE?
-b) ¿Qué es el "modo transición" WPA2/WPA3 y cuándo tiene sentido?
-c) Un compañero propone "SSID oculto + filtrado MAC" como seguridad. Desmonta la idea con dos argumentos.
+## 4. ACL nombrada para horario
 
-## 5. Portal cautivo y VLANs
+Escribe una ACL nombrada `BLOQUEAR_STREAMING` que bloquee el puerto **443** (HTTPS) **cualquier día de 9:00 a 18:00** para la red interna 192.168.1.0/24, permitiendo el resto del tráfico. Incluye el `time-range`, la ACL y su aplicación en la interfaz hacia Internet (G0/1).
 
-El WiFi de invitados debe: tener portal de aceptación de condiciones, no ver la red interna y salir solo a Internet.
+**Pista:** usa `time-range` con `periodic daily`, referencia la regla con `time-range`, acaba con `permit ip any any` (recuerda el deny any implícito) y aplica la ACL outbound en G0/1.
 
-a) ¿En qué VLAN lo metes y por qué?
-b) ¿Qué es un portal cautivo y qué limitaciones tiene?
-c) ¿Qué norma de seguridad de la unidad aplicas al aislar invitados?
+## 5. El orden de las líneas importa
 
-## 6. Diagnóstico de un despliegue roto
+Estas dos ACLs tienen las mismas líneas en distinto orden. ¿Qué tráfico pasa en cada caso?
 
-Tras instalar 6 APs nuevos, los usuarios se quejan: en pasillos funciona bien, pero al caminar entre zonas el WiFi se corta 20 segundos. `show` del controlador: cada AP emite al máximo de potencia, todos con el mismo SSID y canales 1-1-1-6-1-11 en 2,4 GHz.
+**ACL A:**
+```
+access-list 20 deny 192.168.1.0 0.0.0.255
+access-list 20 permit any
+```
 
-a) ¿Qué dos errores de diseño detectas?
-b) ¿Por qué se corta 20 segundos al caminar (roaming)?
-c) ¿Qué ajustarías (potencias, canales, roaming)?
+**ACL B:**
+```
+access-list 20 permit any
+access-list 20 deny 192.168.1.0 0.0.0.255
+```
 
-**Pista:** para que el roaming funcione bien, las celdas deben solaparse un poco (≈15-20%) pero con canales distintos.
+a) ¿Qué hace cada una?
+b) ¿Qué principio rompe la ACL B?
 
-## 7. Cálculo rápido de throughput
+**Pista:** el router evalúa las líneas **en orden** y para en la primera coincidencia.
 
-Un AP WiFi 6 teórico en 80 MHz, 2×2: hasta 1200 Mbps de enlace. Un aula tiene 25 alumnos compartiendo ese AP.
+## 6. ACL con error clásico
 
-a) ¿Por qué el throughput real por alumno es mucho menor que 1200/25?
-b) ¿Qué papel juega el medio compartido (CSMA/CA) en esto?
-c) ¿Qué dos medidas de diseño mejoran la experiencia si el aula crece a 50 alumnos?
+Quieres permitir solo SSH a un servidor (10.0.0.50) desde la red de administración (192.168.100.0/24), sin cortar el ping de diagnóstico. Un compañero escribe:
 
-## 8. Caso integrador con Packet Tracer
+```
+access-list 110 permit tcp 192.168.100.0 0.0.0.255 host 10.0.0.50 eq 22
+access-list 110 deny ip any any
+access-list 110 permit icmp any any
+```
 
-Monta en Packet Tracer: un router 2911 con servidor DHCP, un switch 2960 con dos VLANs (10 docentes, 20 alumnos), un AP doméstico en la VLAN 20 y dos portátiles inalámbricos.
+a) ¿Funciona el ping hacia el servidor? ¿Por qué?
+b) ¿Cómo reordenas las líneas para conseguirlo? (pista: en una ACL numerada no puedes reordenar; ¿cómo se hace entonces?)
+c) ¿Es necesaria la línea `deny ip any any`?
 
-a) ¿Qué tipo de puerto de switch conecta el AP y por qué?
-b) El portátil de alumnos obtiene IP de la VLAN 20 pero no navega. El gateway de la VLAN 20 está bien. ¿Qué dos cosas compruebas primero?
-c) El AP doméstico de Packet Tracer solo permite WPA2-PSK. ¿Cómo se llama esa misma seguridad en la nomenclatura de la unidad?
+## 7. Port Security
 
-## 9. Caso WiFi: oficina con zonas muertas
+Un switch tiene la interfaz G0/1 conectada al PC de recepción. Configura Port Security para que:
 
-En una oficina de 25 puestos separados por tabiques de cartón-yeso, un único AP WiFi en el pasillo central da "zonas muertas" y una velocidad general decepcionante. Los empleados se quejan cada tarde.
+a) Solo aprenda una MAC y la guarde en la running-config (sticky).
+b) Si llega otra MAC, descarte los paquetes infractores pero no apague el puerto y genere mensajes de log.
+c) Escribe la configuración completa y el comando para ver el estado.
 
-a) ¿Qué causas físicas explicarían la lentitud (nombra al menos 3)?
-b) ¿Qué herramientas usarías para confirmarlas?
-c) Propón 3 soluciones realistas ordenadas de más barata a más cara.
+**Pista:** `switchport port-security violation restrict` + `logging` integrado.
 
-**Pista:** piensa en canales (1, 6, 11), interferencia de vecinos, obstáculos y el número de clientes compartiendo el mismo AP. Recuerda que la velocidad real WiFi es del 30-50%.
+## 8. Diagnóstico de port security
 
-## 10. 802.3 vs 802.11 en la misma oficina
+Un administrador configuró port security en el puerto Fa0/1:
 
-Una oficina tiene 20 PCs por cable (FastE/GigE) y 20 portátiles por WiFi detrás del mismo switch.
+```
+Switch(config-if)# switchport port-security maximum 1
+Switch(config-if)# switchport port-security violation shutdown
+```
 
-a) ¿Los dos grupos comparten la capa OSI de "entrega local"? ¿Cuál?
-b) Compara en tabla: nº de MACs en la cabecera, quién "monta" la trama en el aire y qué pasa con las colisiones/medio compartido.
-c) ¿Por qué la capa de arriba (IPv4) no distingue si el tramo local fue RJ45 o radio?
+Un usuario se conecta con su portátil y funciona. Luego conecta otro portátil (el suyo y el de un compañero) usando un switch no administrado. El puerto se deshabilita.
 
-**Pista:** misma capa 2 lógica, distinto estándar; el estándar 802.x es un detalle de la capa 1–2.
+a) ¿Por qué ocurrió?
+b) ¿Qué dos cambios harías en la configuración para permitir esta situación sin perder seguridad?
+c) ¿Cómo recuperas el puerto?
+
+## 9. Laboratorio: Port Security en la sala de profesores
+
+Configura el puerto Fa0/24 del switch (donde se enchufa el PC de la sala de profesores) para que:
+
+a) Solo permita 1 MAC aprendida automáticamente y permanente (sticky).
+b) Si aparece una segunda MAC, el puerto se deshabilite (violación shutdown).
+c) Escribe los comandos completos y verifica con el comando de comprobación adecuado.
+
+Después, un profe desenchufa su PC y conecta su portátil personal. El puerto entra en errdisable.
+
+d) ¿Por qué ha ocurrido la violación si solo hay UN dispositivo conectado?
+e) ¿Qué dos comandos ejecutarías para recuperar el puerto?
+f) ¿Cómo evitarías el problema sin perder seguridad (piensa en el envejecimiento de la MAC sticky)?
+
+**Pista:** la MAC sticky NO caduca aunque el PC se desenchufe; si cambias de equipo, hay dos MACs distintas "conocidas" en el puerto y se supera el máximo. Para recuperar errdisable: `shutdown` + `no shutdown`. Para expirar la sticky cuando el dispositivo se desenchufa, configura el envejecimiento de la port security (`switchport port-security aging`).
+
+## 10. Mini-caso final
+
+Un instituto pide: "la sala de profesores (192.168.10.0/24) no puede usar el WiFi de alumnos (192.168.20.0/24), pero ambos deben salir a Internet (G0/2 del router) y los profesores acceden al servidor de notas (10.0.0.5) por HTTPS".
+
+a) Diseña las ACLs mínimas (nómbralas) y di en qué interfaz/sentido las aplicas.
+b) ¿Qué pasa con el retorno del tráfico de profesores hacia el servidor con tu diseño?
+c) ¿Qué le dirías al director si pide "bloquear YouTube por completo"? (reflexiona: ACLs vs herramientas adecuadas)

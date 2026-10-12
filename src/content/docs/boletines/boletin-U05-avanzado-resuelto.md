@@ -1,201 +1,151 @@
 ---
-title: Boletín de Trunking e inter-VLAN — Avanzado (Resuelto)
-description: Soluciones ejercicios avanzados de VLANs
+title: Boletín de Switching y VLAN — Avanzado (Resuelto)
+description: Soluciones de los ejercicios avanzados de Switching, STP y VLAN
 ---
 
-# ✅ Boletín de Trunking e inter-VLAN — Avanzado (Resuelto)
+# ✅ Boletín de Switching y VLAN — Avanzado (Resuelto)
 
 ---
 
-## 1. Configuración completa de VLANs
+## 1. Configuración básica de switch
 
-**Switch1:**
 ```bash
-Switch1(config)# vlan 10
-Switch1(config-vlan)# name Ventas
-Switch1(config)# vlan 20
-Switch1(config-vlan)# name RRHH
-Switch1(config)# interface range fa0/1-5
-Switch1(config-if-range)# switchport mode access
-Switch1(config-if-range)# switchport access vlan 10
-Switch1(config)# interface range fa0/6-10
-Switch1(config-if-range)# switchport mode access
-Switch1(config-if-range)# switchport access vlan 20
-Switch1(config)# interface fa0/23
-Switch1(config-if)# switchport mode trunk
-Switch1(config-if)# switchport trunk allowed vlan 10,20
-Switch1(config)# interface fa0/24
-Switch1(config-if)# switchport mode trunk
-Switch1(config-if)# switchport trunk native vlan 99
-Switch1(config-if)# switchport trunk allowed vlan 10,20
+Switch> enable
+Switch# configure terminal
+Switch(config)# hostname SW-OFICINA-01
+
+SW-OFICINA-01(config)# vlan 10
+SW-OFICINA-01(config-vlan)# name Ventas
+SW-OFICINA-01(config-vlan)# exit
+SW-OFICINA-01(config)# vlan 20
+SW-OFICINA-01(config-vlan)# name RRHH
+SW-OFICINA-01(config-vlan)# exit
+SW-OFICINA-01(config)# vlan 999
+SW-OFICINA-01(config-vlan)# name Gestion
+SW-OFICINA-01(config-vlan)# exit
+
+SW-OFICINA-01(config)# interface range fa0/1-10
+SW-OFICINA-01(config-if-range)# switchport mode access
+SW-OFICINA-01(config-if-range)# switchport access vlan 10
+SW-OFICINA-01(config-if-range)# exit
+SW-OFICINA-01(config)# interface range fa0/11-12
+SW-OFICINA-01(config-if-range)# switchport mode access
+SW-OFICINA-01(config-if-range)# switchport access vlan 20
+SW-OFICINA-01(config-if-range)# exit
+
+SW-OFICINA-01(config)# interface vlan 999
+SW-OFICINA-01(config-if)# ip address 192.168.99.10 255.255.255.0
+SW-OFICINA-01(config-if)# no shutdown
+SW-OFICINA-01(config-if)# exit
+SW-OFICINA-01(config)# ip default-gateway 192.168.99.1
 ```
 
-**Switch2:** (configuración similar: mismas VLANs, mismos puertos access 1-5 → 10 y 6-10 → 20, y el mismo trunk en Fa0/24 con native 99 y `allowed vlan 10,20`).
+d) `show vlan brief` — lista las VLANs 10, 20 y 999 y qué puertos tiene asignados cada una.
 
-**Router:**
+## 2. Análisis de topología STP
+
+a) **Root Bridge: Switch C.** Prioridad 4096 (la más baja). Aunque Switch A y B tienen MACs más bajas, la prioridad de Switch C (4096) es mucho menor que 32768.
+
+b) **Root Ports:** Cada switch no-root tiene 1 Root Port. Como hay 3 switches y Switch C es Root, Switches A y B tienen 1 Root Port cada uno = **2 Root Ports** total.
+
+c) **Designated Ports:** 1 por segmento. Hay 3 segmentos (A-B, B-C, C-A) → **3 Designated Ports** (todos los puertos del Root Bridge y el puerto del segmento con mejor coste hacia el Root).
+
+d) Si **Switch C falla**:
+   - Switches A y B pierden su Root Bridge
+   - Se inicia una nueva elección. Con la misma prioridad (32768), gana Switch A (MAC más baja)
+   - Los puertos necesarios pasan por listening y learning antes de reenviar (los que estaban bloqueados esperan además a que se resuelva la topología)
+   - Convergencia: ~30-50 segundos con STP, ~1-3 segundos con RSTP
+
+## 3. Diagnóstico de VLAN
+
+a) `show vlan brief` — lista todas las VLANs del switch y los puertos de cada una. (También sirve `show interfaces fa0/9 switchport` si quieres mirar solo ese puerto.)
+
+b) El puerto Fa0/9 **no se asignó a la VLAN 10** (se quedó en la VLAN 1 de fábrica). Se confirma con `show vlan brief`: Fa0/9 aparece listado en la VLAN 1, mientras Fa0/10 aparece en la VLAN 10.
+
+c)
+
 ```bash
-Router(config)# interface fa0/0
-Router(config-if)# no shutdown
-Router(config)# interface fa0/0.10
-Router(config-subif)# encapsulation dot1Q 10
-Router(config-subif)# ip address 192.168.10.1 255.255.255.0
-Router(config)# interface fa0/0.20
-Router(config-subif)# encapsulation dot1Q 20
-Router(config-subif)# ip address 192.168.20.1 255.255.255.0
+Switch(config)# interface fa0/9
+Switch(config-if)# switchport access vlan 10
 ```
 
-## 2. Diagnóstico de native VLAN
+El DHCP fallaba porque el DISCOVER de Ana es un broadcast y se queda en la VLAN 1: no llega al dominio de broadcast de la VLAN 10, donde están el resto de Ventas y su servidor DHCP.
 
-a) **Problemas:** las tramas sin etiquetar (de la VLAN nativa, incluyendo tráfico de control CDP/VTP/DTP y datos de esa VLAN) se interpretan en la VLAN equivocada en el otro extremo.
-   - Tráfico de control (CDP, VTP) no funciona correctamente entre switches.
-   - Posibles problemas de conectividad en la native VLAN (va y viene a ratos).
-   - Mensajes de error en el log de ambos switches: *"Native VLAN mismatch discovered on Fa0/24"*.
+d) Etiquetar físicamente los puertos y los cables (VLAN 10 / VLAN 20) y mantener el mismo reparto de rangos en todos los switches: lo que no está etiquetado se olvida.
 
-b) **Diagnóstico:** `show interfaces trunk` en ambos switches. Muestra la native VLAN de cada extremo y reporta directamente el mismatch.
+## 4. Diseño de red redundante
 
-c) **Arreglo sin pérdida:** configurar la **misma native VLAN en ambos extremos** — elegir un número (ej. 99) y ponerlo en ambos:
-   ```bash
-   Switch2(config-if)# switchport trunk native vlan 99
-   ```
-   El cambio es **inmediato**: la native VLAN solo afecta a tramas sin etiquetar. Las VLANs etiquetadas (10, 20, 30) no sufren interrupción durante el cambio.
+a) **Topología:** anillo con diagonal. Enlaces SW1–SW2, SW2–SW3, SW3–SW4, SW4–SW1 y SW1–SW3 (5 enlaces en total). STP deja activos solo los enlaces de un árbol que conecte los 4 switches y bloquea el resto.
 
-## 3. Diseño de VLANs corporativas
+b) **2 puertos bloqueados.** Para conectar 4 switches sin bucles hacen falta 3 enlaces activos (n − 1 = 3); hay 5, así que STP bloquea 2 (uno por cada enlace sobrante). Cuáles exactos dependen del Root Bridge y de los costes, pero el número es siempre 2.
 
-a) **Tabla de VLANs:**
-   | VLAN | Nombre | Puertos |
-   |------|--------|---------|
-   | 10 | Recepción | Planta baja 1-5 |
-   | 20 | Servidores | Planta baja 6-15 |
-   | 30 | Ventas | Planta 1, puertos 1-30 |
-   | 40 | Marketing | Planta 1, puertos 31-45 |
-   | 50 | IT | Planta 2, puertos 1-20 |
-   | 60 | Dirección | Planta 2, puertos 21-25 |
+c) `spanning-tree vlan 1 priority 4096` (la prioridad debe ser múltiplo de 4096; con 4096 le gana a los 32768 por defecto).
 
-b) **Router-on-a-stick:** en la planta baja, cerca de los servidores, conectado por un trunk a un puerto del core (puede enrutar todas las VLANs con subinterfaces). **Alternativa:** switch capa 3 como core en la sala de servidores, haciendo routing entre VLANs internamente con SVIs (se elimina el cuello de botella del router).
+d) **Sí, la red sigue conectada:** al caer SW1 desaparecen sus tres enlaces (SW1–SW2, SW4–SW1 y SW1–SW3), pero quedan SW2–SW3 y SW3–SW4, que encadenan a los tres switches supervivientes (SW2 → SW3 → SW4).
+   - **Con STP:** ~30-50 segundos de convergencia
+   - **Con RSTP:** ~1-3 segundos
 
-c) **VLANs en trunks:** todas (10, 20, 30, 40, 50, 60) en los trunks del core, con **native VLAN cambiada** (ej. 999) y **`allowed vlan`** cubriendo todas. IT necesita acceso a todas las VLANs para administrar.
+## 5. Análisis de la tabla CAM
 
-d) **ACLs para limitar Dirección** (se aplican en la subinterfaz del router de la VLAN 60):
-   ```bash
-   access-list 101 permit ip 192.168.60.0 0.0.0.255 192.168.20.0 0.0.0.255
-   access-list 101 deny ip 192.168.60.0 0.0.0.255 any
-   ```
-   Aplicar con `ip access-group 101 in` en la subinterfaz `Fa0/0.60`. (Detalles finos de ACLs, más adelante.)
+a) **Dos dispositivos** en Fa0/4: 00D0.BC96.1A01 y 00D0.BC96.1A02. La tabla muestra ambas MACs en el mismo puerto.
 
-## 4. VTP disaster recovery
+b) **4 puertos** con dispositivos: Fa0/1, Fa0/2, Fa0/3 y Fa0/4.
 
-a) **Por qué:** VTP propaga la base de datos del switch con mayor **revision number**. El switch nuevo (rev 500) tiene número más alto que el server actual (rev 100). Al propagar su base de datos (posiblemente vacía), todas las VLANs se borran en la red. Basta un trunk para que el anuncio llegue a todos.
+c) **No aparece.** La dirección de broadcast no se aprende en la tabla (no es la MAC de ningún equipo): el switch inunda el broadcast por todos los puertos del VLAN por definición.
 
-b) **Recuperación:**
-   1. **Desconectar el switch problemático inmediatamente** (cable del trunk) para frenar la propagación.
-   2. Reconfigurar las VLANs manualmente en cada switch (o restaurar un backup de la config).
-   3. Cambiar los switches a **VTP transparent** (o VTPv3 mode off) para que ningún switch pueda volver a hacer esto.
+d) **Si llega una trama con destino 00D0.BC96.1A03:** Es una MAC desconocida (no está en la tabla). El switch **inunda** la trama por todos los puertos excepto el de origen.
 
-c) **Medidas preventivas:**
-   - Usar **VTP transparent** o **VTPv3 mode off** (no propaga ni procesa anuncios).
-   - Verificar el **revision number** (`show vtp status`) de todo switch antes de enchufarlo.
-   - **Resetear** la base de datos de cualquier equipo usado: `delete flash:vlan.dat` y reiniciar, antes de conectarlo.
-   - Documentar la base de datos de VLANs (la config es tu backup).
+## 6. STP: cálculo de costes
 
-## 5. Router-on-a-stick: cuello de botella
+a) **Root Port de Switch C:** Depende del coste acumulado hacia el Root Bridge.
 
-a) **Cálculo:** 4 VLANs × 30 Mbps = **120 Mbps**. La interfaz FastEthernet (100 Mbps) NO puede soportar 120 Mbps. **Sí hay cuello de botella** (pérdidas y saturación).
+   **Camino C → A directo (Fa0/3):** coste = 19
+   **Camino C → B → A (Fa0/2 → Fa0/1):** coste = 19 + 19 = 38
 
-b) **Alternativas:**
-   - **Interfaz GigabitEthernet** (1000 Mbps) → 120 Mbps es apenas el 12 % de capacidad.
-   - **Switch capa 3 con SVIs** → routing en hardware interno, sin interfaz única de salida.
-   - Dividir las VLANs entre **dos interfaces físicas** del router (proporcional al tráfico).
+   Fa0/3 tiene **menor coste total** (19 < 38), así que **Fa0/3 es el Root Port**.
 
-c) **Con GigabitEthernet:** 120 Mbps sobre 1000 Mbps = **12 % de uso**, sin cuello de botella. Si el tráfico se duplica (240 Mbps), seguimos al 24 %: holgado.
+b) **Costes:** C→A directo = 19. C→B→A = 38.
 
-## 6. Seguridad en VLANs
+c) **Alternate Port:** Fa0/2 (el puerto del camino más caro que queda en discarding como respaldo).
 
-| Riesgo | Mitigación |
-|---|---|
-| 1. **VLAN Hopping por DTP**: el atacante negocia un trunk (`dynamic desirable`) y recibe todas las VLANs | `switchport mode access` + `switchport nonegotiate`; puertos libres con `shutdown` |
-| 2. **Double tagging en la native VLAN**: el atacante manda una trama con doble etiqueta 802.1Q y la segunda etiqueta llega a otra VLAN | Native VLAN **≠ 1** y **sin datos en la native**; segmentar físicamente zonas sensibles |
-| 3. **VTP como arma**: un switch con revision number mayor anuncia su base de datos (vacía) y borra VLANs | VTP transparent / VTPv3 off, verificar `show vtp status` antes de conectar equipo |
+d) **Si el coste de Fa0/3 se cambia a 4:** El coste total por Fa0/3 baja a 4, reforzando aún más que Fa0/3 sea el Root Port. Si en cambio el coste de Fa0/3 subiera a 100, entonces el Root Port pasaría a ser el del camino C→B→A (coste 38 < 100).
 
-## 7. VLAN hopping y hardening
+## 7. Topología STP/RSTP bajo análisis
 
-a) **Los dos vectores de ataque:**
-   1. **Negociación de trunk por DTP:** un portátil conectado a un puerto en modo `dynamic desirable` (o `dynamic auto` si el portátil pide) tramita el protocolo DTP y consigue que el puerto se convierta en **trunk**. A partir de ahí, todas las VLANs que cruzan el trunk quedan a su alcance.
-   2. **Double tagging:** el atacante envía una trama con **dos etiquetas 802.1Q** (a menudo con la native VLAN). El primer switch elimina la primera etiqueta (la trata como native) y la reenvía por el trunk; el segundo switch ve la segunda etiqueta y la entrega en la **VLAN objetivo**. El atacante nunca llega a ser trunk ni a hablar directamente: salta a la VLAN objetivo de forma encubierta.
+a) **Root Bridge: SW1.** Prioridad 4096, muy por debajo de los 32768 de los demás. No hace falta desempate por MAC.
 
-b) **Tres mitigaciones concretas:**
-   1. **Apagar DTP en puertos de usuario:** `switchport mode access` + `switchport nonegotiate` (y `shutdown` en los puertos no usados) → el atacante no puede negociar un trunk.
-   2. **Cambiar la native VLAN y no usarla para datos:** `switchport trunk native vlan 99` (o 999) en TODOS los trunks, y usar VLANs de datos distintas de la native → el double tagging pierde su puerta de entrada.
-   3. **Limitar y segmentar:** `switchport trunk allowed vlan 10,20,30` para restringir qué VLANs cruzan cada trunk, y **VTP transparent / VTPv3 off** para que un switch rogue no arrase la base de datos.
+b) **Puerto en estado Discarding:** el enlace redundante **SW2-SW3**. Concretamente, el puerto de SW3 hacia SW2 (el extremo con mayor coste acumulado hacia el Root, que queda como **Alternate Port**). Los enlaces directos SW1-SW2, SW1-SW3 y SW1-SW4 son Designated (todos los puertos del Root).
 
-## 8. Inter-VLAN con SVI paso a paso
+c) **3 Root Ports**: SW2, SW3 y SW4 son switches no-root, cada uno con su Root Port hacia SW1 (por su enlace directo de coste 19).
 
-**(Se asume que los puertos access de las VLANs 10/20/30 ya están asignados.)**
+d) **Con RSTP:** la red converge en **1-3 segundos** (handshake propuesta/acuerdo). **Con STP clásico:** **30-50 segundos** (esperando temporizadores).
 
-a) **Creación de VLANs:**
+e) Los puertos del Root Bridge son todos **Designated**: son el "punto de referencia" del árbol y nunca se bloquean.
+
+## 8. Laboratorio: segmentación en un switch
+
+a)
+
 ```bash
 Switch(config)# vlan 10
 Switch(config-vlan)# name Ventas
+Switch(config-vlan)# exit
 Switch(config)# vlan 20
 Switch(config-vlan)# name RRHH
-Switch(config)# vlan 30
-Switch(config-vlan)# name IT
+Switch(config-vlan)# exit
+Switch(config)# interface range fa0/1-8
+Switch(config-if-range)# switchport mode access
+Switch(config-if-range)# switchport access vlan 10
+Switch(config-if-range)# exit
+Switch(config)# interface range fa0/9-16
+Switch(config-if-range)# switchport mode access
+Switch(config-if-range)# switchport access vlan 20
 ```
 
-b) **Activar el routing global:**
-```bash
-Switch(config)# ip routing
-```
+b) `show vlan brief` → Fa0/1 y Fa0/2 en la VLAN 10, Fa0/9 en la VLAN 20. En `show mac address-table` la MAC de PC1 aparece en la columna Vlan con el valor 10.
 
-c) **SVIs (uno por VLAN):**
-```bash
-Switch(config)# interface vlan 10
-Switch(config-if)# ip address 192.168.10.1 255.255.255.0
-Switch(config-if)# no shutdown
+c) PC1 → PC2 **funciona** (misma VLAN y misma subred). PC1 → PC3 **no funciona**, y no es un fallo: aunque compartan subred IP, el switch no reenvía tramas entre VLAN distintas.
 
-Switch(config)# interface vlan 20
-Switch(config-if)# ip address 192.168.20.1 255.255.255.0
-Switch(config-if)# no shutdown
+d) Tras `switchport access vlan 10` en Fa0/9, el ping PC1 → PC3 **funciona**: los tres quedan en el mismo dominio de broadcast. Una VLAN decide quién se habla en capa 2; la IP no salva la conversación si la VLAN los separa.
 
-Switch(config)# interface vlan 30
-Switch(config-if)# ip address 192.168.30.1 255.255.255.0
-Switch(config-if)# no shutdown
-```
-
-d) **Gateway de cada PC:**
-
-| VLAN | Subred | Gateway (IP del SVI) |
-|---|---|---|
-| 10 Ventas | 192.168.10.0/24 | 192.168.10.1 |
-| 20 RRHH | 192.168.20.0/24 | 192.168.20.1 |
-| 30 IT | 192.168.30.0/24 | 192.168.30.1 |
-
-**Verificación:** comprueba que el SVI esté Up/Up (`show ip interface brief`), revisa que las VLANs existan en `show vlan brief` y prueba la conectividad con `ping` entre SVIs (ej. desde el SVI 10 contra 192.168.20.1). Si los SVIs están Up/Up pero no enrutan, el culpable es el comando `ip routing` olvidado.
-
-## 9. DHCP por VLAN sin teclear IPs
-
-a) **Pools (en el switch capa 3):**
-```bash
-Switch(config)# ip dhcp excluded-address 192.168.10.1 192.168.10.10
-Switch(config)# ip dhcp excluded-address 192.168.20.1 192.168.20.10
-
-Switch(config)# ip dhcp pool VENTAS
-Switch(dhcp-config)# network 192.168.10.0 255.255.255.0
-Switch(dhcp-config)# default-router 192.168.10.1
-Switch(dhcp-config)# dns-server 8.8.8.8
-
-Switch(config)# ip dhcp pool RRHH
-Switch(dhcp-config)# network 192.168.20.0 255.255.255.0
-Switch(dhcp-config)# default-router 192.168.20.1
-Switch(dhcp-config)# dns-server 8.8.8.8
-```
-
-b) **Exclusión:** el rango `.1` a `.10` de cada subred (el `.1` es el SVI/gateway). Sin la exclusión, DHCP puede entregar `192.168.10.1` a un PC: dos equipos con la misma IP, el gateway "ocupado" y conflictos que son un dolor de localizar.
-
-c) **Relay:** `ip helper-address 192.168.30.10` en `interface vlan 10` y en `interface vlan 20`. Sin esa línea, el DISCOVER del PC es broadcast y **no cruza el router** (el broadcast se queda en su VLAN); el servidor de la VLAN 30 nunca lo ve y el PC acaba en APIPA.
-
-d) **Diagnóstico en orden:**
-   1. `show ip dhcp pool` → ¿existe el pool VENTAS y su `network` es 192.168.10.0/24? ¿Hay IPs libres?
-   2. `show ip interface brief` → ¿la SVI de la VLAN 10 está Up/Up?
-   3. `show ip helper-address` (o revisar la config de la SVI) → ¿está el `ip helper-address 192.168.30.10`? Y en el switch del PC: `show vlan brief` → ¿el puerto está en la VLAN 10?
-
-Si el DISCOVER ni siquiera aparece, el problema está aguas abajo (VLAN/puerto); si aparece pero no hay OFFER, es el pool o el relay.
+e) No: la subred IP no cruza el aislamiento de capa 2. Para que VLANs distintas se comuniquen hace falta un router (o un switch de capa 3) entre ellas — el siguiente paso del curso, en trunking e inter-VLAN.

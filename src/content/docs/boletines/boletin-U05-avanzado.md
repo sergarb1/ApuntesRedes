@@ -1,117 +1,130 @@
 ---
-title: Boletín de Trunking e inter-VLAN — Avanzado
-description: Ejercicios avanzados de VLANs
+title: Boletín de Switching y VLAN — Avanzado
+description: Ejercicios avanzados de Switching, STP y VLAN
 ---
 
-# 📝 Boletín de Trunking e inter-VLAN — Avanzado
+# 📝 Boletín de Switching y VLAN — Avanzado
 
-> Ejercicios que requieren aplicar los conceptos de VLANs, trunks y routing de forma más profunda. En los difíciles tienes pista.
+> Ejercicios que requieren aplicar los conceptos de switching, STP y VLAN de forma más profunda.
 
 ---
 
-## 1. Configuración completa de VLANs
+## 1. Configuración básica de switch
 
-Configura este escenario en Packet Tracer (o describe los comandos):
+Configura un switch Cisco desde cero con:
 
-- **Switch1:** VLAN 10 (Ventas) puertos 1-5, VLAN 20 (RRHH) puertos 6-10
-- **Switch2:** VLAN 10 puertos 1-5, VLAN 20 puertos 6-10
-- **Trunk:** Switch1 Fa0/24 ↔ Switch2 Fa0/24
-- **Router:** Fa0/0 conectado a Switch1 Fa0/23, subinterfaces para VLAN 10 y 20
+a) Hostname: SW-OFICINA-01
+b) VLAN de gestión 999 con SVI y dirección 192.168.99.10/24, gateway 192.168.99.1
+c) VLAN 10 (Ventas) y VLAN 20 (RRHH); puertos Fa0/1-10 en la VLAN 10 y Fa0/11-12 en la VLAN 20
+d) Verificación: ¿qué comando confirma que las VLANs existen y que los puertos están asignados?
 
-Escribe la configuración completa del router y ambos switches.
+Escribe los comandos necesarios.
 
-## 2. Diagnóstico de native VLAN
+## 2. Análisis de topología STP
 
-Un administrador configura un trunk entre dos switches:
+Tienes 3 switches con estas configuraciones:
+
+| Switch | Prioridad | MAC |
+|---|---|---|
+| Switch A | 32768 | 0011.2233.4400 |
+| Switch B | 32768 | 0011.2233.4401 |
+| Switch C | 4096 | 0011.2233.4402 |
+
+Los switches están conectados en triángulo (A-B, B-C, C-A).
+
+a) ¿Quién es el Root Bridge? ¿Por qué?
+b) ¿Cuántos Root Ports hay en total?
+c) ¿Cuántos Designated Ports hay?
+d) Si Switch C falla, ¿qué cambios ocurren en la topología?
+
+## 3. Diagnóstico de VLAN
+
+En una oficina montan VLANs por primera vez en un switch de 24 puertos: VLAN 10 para Ventas (Fa0/1-12) y VLAN 20 para RRHH (Fa0/13-24). Al terminar, los equipos de RRHH funcionan, pero el PC de Ana, enchufado en Fa0/9 (debería ser Ventas), no obtiene IP por DHCP ni ve al resto de Ventas; su compañero, en Fa0/10, sí funciona.
+
+a) ¿Qué comando miras primero para comprobar en qué VLAN está el puerto de Ana?
+b) ¿Cuál es la causa más probable? ¿Cómo la confirmas?
+c) ¿Cómo lo arreglas? ¿Y por qué falla también el DHCP?
+d) Si cada semana se reorganizan las mesas, ¿qué buena práctica te ahorra repetir el diagnóstico?
+
+**Pista:** la VLAN decide el dominio de broadcast; si el puerto no está en la suya, el equipo queda fuera de casa.
+
+## 4. Diseño de red redundante
+
+Diseña la red de una oficina con 4 switches (SW1, SW2, SW3, SW4) y 50 PCs, con esta topología y STP activo:
+
+- Anillo: SW1–SW2–SW3–SW4–SW1
+- Enlace extra directo entre SW1 y SW3
+- Requisito: si falla un enlace o un switch individual, la red sigue funcionando
+
+a) Dibuja la topología conceptual y marca qué puertos bloqueará STP
+b) ¿Cuántos puertos quedarán bloqueados? Razona la respuesta
+c) ¿Qué prioridad asignarías para forzar a SW1 como Root Bridge?
+d) ¿Qué pasa si SW1 falla? ¿Cuánto tarda la red en recuperarse con STP? ¿Y con RSTP?
+
+## 5. Análisis de la tabla CAM
+
+Observa esta tabla MAC:
 
 ```
-Switch1: native VLAN 99, allowed VLANs 10,20,30
-Switch2: native VLAN 1,  allowed VLANs 10,20,30
+Vlan    Mac Address       Type        Ports
+----    -----------       --------    -----
+   1    0050.7966.6800    DYNAMIC     Fa0/1
+   1    0050.7966.6801    DYNAMIC     Fa0/2
+   1    0050.7966.6802    DYNAMIC     Fa0/3
+   1    00D0.BC96.1A01    DYNAMIC     Fa0/4
+   1    00D0.BC96.1A02    DYNAMIC     Fa0/4
 ```
 
-a) ¿Qué problemas puede causar esta discrepancia?
-b) ¿Qué comando usarías para diagnosticarlo?
-c) ¿Cómo arreglarlo sin perder conectividad?
+a) ¿Cuántos dispositivos hay conectados al puerto Fa0/4? ¿Cómo lo sabes?
+b) ¿Cuántos puertos del switch tienen dispositivos conectados?
+c) ¿Aparece la dirección de broadcast `FFFF.FFFF.FFFF` en la tabla? Si no aparece, ¿qué hace el switch con un broadcast?
+d) Si llega una trama con destino 00D0.BC96.1A03, ¿qué hace el switch?
 
-**Pista:** `show interfaces trunk` muestra la native VLAN de cada extremo.
+## 6. STP: cálculo de costes
 
-## 3. Diseño de VLANs corporativas
+Tienes esta topología STP:
 
-Diseña la segmentación VLAN para una empresa con:
+- Switch A (Root Bridge)
+- Switch B conectado a A por Fa0/1 (coste 19)
+- Switch C conectado a B por Fa0/2 (coste 19)
+- Switch C también conectado a A por Fa0/3 (coste 19)
 
-- **3 plantas:**
-  - Planta baja: Recepción (5 PCs) + Sala servidores (10 servidores)
-  - Planta 1: Ventas (30 PCs) + Marketing (15 PCs)
-  - Planta 2: IT (20 PCs) + Dirección (5 PCs)
+a) ¿Cuál es el Root Port de Switch C?
+b) ¿Qué coste tiene cada camino hacia el Root?
+c) ¿Cuál es el Alternate Port de Switch C?
+d) Si el coste de Fa0/3 se cambia a 4, ¿qué cambia?
 
-- **Requisitos:**
-  - Cada departamento debe estar en VLAN separada
-  - Los servidores están en VLAN propia
-  - IT debe poder acceder a todas las VLANs (administración)
-  - Dirección solo accede a su VLAN y a servidores
+## 7. Topología STP/RSTP bajo análisis
 
-a) Propón una tabla de VLANs (ID, nombre, puertos)
-b) ¿Dónde pones el router-on-a-stick? ¿Y si usas switch capa 3?
-c) ¿Qué VLANs permites en cada trunk?
-d) ¿Con qué ACLs limitas el acceso de Dirección?
+Tienes 4 switches con estas configuraciones:
 
-## 4. VTP disaster recovery
+| Switch | Prioridad | MAC |
+|---|---|---|
+| SW1 | 4096 | 0011.2233.4400 |
+| SW2 | 32768 | 0011.2233.4401 |
+| SW3 | 32768 | 0011.2233.4402 |
+| SW4 | 32768 | 0011.2233.4403 |
 
-Un administrador conecta un switch con VTP server y revision number 500 a una red donde el server actual tiene revision 100. En 2 segundos, todas las VLANs de la red desaparecen.
+Conexiones (todas de coste 19):
+- SW1-SW2, SW1-SW3 y SW1-SW4 (enlace directo al Root)
+- SW2-SW3 (enlace redundante que cierra el bucle)
 
-a) ¿Por qué ocurrió?
-b) ¿Cómo recuperas la red?
-c) ¿Qué medidas preventivas tomarías para evitar que vuelva a ocurrir?
+a) ¿Quién es el Root Bridge y por qué?
+b) ¿Qué puertos quedan en estado Blocking/Discarding?
+c) ¿Cuántos Root Ports hay en total?
+d) Con RSTP, ¿cuánto tardaría la red en converger si SW1 se cae? ¿Y con STP clásico?
+e) ¿Qué papel juegan los puertos del Root Bridge?
 
-**Pista:** VTP propaga la base de datos del switch con mayor revision number.
+**Pista:** el Root Bridge es el de menor Bridge ID; todos sus puertos son Designated. Los switches no-root tienen 1 Root Port cada uno, y el enlace redundante SW2-SW3 crea un Alternate Port en el extremo con mayor coste acumulado hacia el Root.
 
-## 5. Router-on-a-stick: cuello de botella
+## 8. Laboratorio: segmentación en un switch
 
-Un router-on-a-stick con interfaz FastEthernet (100 Mbps) atiende 4 VLANs. Cada VLAN genera 30 Mbps de tráfico.
+Monta esto en un switch (o en Packet Tracer): tres PCs con IPs de la misma subred (192.168.10.0/24): PC1 en Fa0/1, PC2 en Fa0/2 y PC3 en Fa0/9.
 
-a) ¿Hay cuello de botella? Calcula el tráfico total.
-b) ¿Qué alternativa propones si el tráfico crece al doble?
-c) ¿Cómo cambia el escenario con una interfaz GigabitEthernet?
+a) Crea la VLAN 10 (Ventas) y la VLAN 20 (RRHH); asigna Fa0/1-8 a la VLAN 10 y Fa0/9-16 a la VLAN 20.
+b) Verifica con `show vlan brief`: ¿en qué VLAN aparecen los tres puertos? ¿Y la MAC de PC1 en `show mac address-table`?
+c) Prueba ping de PC1 → PC2 y de PC1 → PC3. ¿Cuál funciona? ¿Es un fallo el que no funcione? ¿Por qué?
+d) Sin tocar las IPs, mueve Fa0/9 a la VLAN 10 y repite el ping PC1 → PC3. ¿Ahora va? ¿Qué conclusión sacas sobre lo que hace una VLAN?
+e) Un compañero insiste: "si están en la misma red IP, se verán aunque estén en VLANs distintas". ¿Le crees? ¿Qué le respondes?
 
-## 6. Seguridad en VLANs
-
-Enumera 3 riesgos de seguridad específicos de VLANs y cómo mitigarlos:
-
-| Riesgo | Mitigación |
-|---|---|
-| 1. | |
-| 2. | |
-| 3. | |
-
-**Pista:** Piensa en DTP, native VLAN, VTP, VLAN hopping, etc.
-
-## 7. VLAN hopping y hardening
-
-a) Describe los **2 vectores de ataque** principales que permiten a un atacante salirse de su VLAN (VLAN hopping), explicando cómo funciona cada uno.
-b) Propón **3 mitigaciones concretas** de hardening con sus comandos.
-
-**Pista:** piensa en la negociación de trunks por DTP y en el double tagging sobre la native VLAN. Las mitigaciones están en el punto 6 de seguridad: `switchport nonegotiate`, native VLAN ≠ 1, `allowed vlan`, VTP.
-
-## 8. Inter-VLAN con SVI paso a paso
-
-Escribe la configuración completa que necesita un **switch capa 3** (por ejemplo un 3560) para enrutar entre 3 VLANs (10 Ventas → 192.168.10.0/24, 20 RRHH → 192.168.20.0/24, 30 IT → 192.168.30.0/24), asumiendo que los puertos access ya están asignados.
-
-Incluye:
-
-a) La creación de las VLANs con nombre.
-b) El comando que activa el routing global.
-c) Los tres SVIs con su IP y `no shutdown`.
-d) El gateway que debe tener cada PC de cada VLAN.
-
-**Pista:** el orden de los comandos importa: primero `ip routing`, después cada `interface vlan X`. Sin `ip routing`, los SVIs existen pero no enrutan. El gateway de cada VLAN es la IP del SVI de esa VLAN.
-
-## 9. DHCP por VLAN sin teclear IPs
-
-Siguiendo con el escenario del ejercicio 8 (SVIs 192.168.10.1, 192.168.20.1 y 192.168.30.1), la empresa tiene 60 PCs y no quiere configurarles la IP a mano:
-
-a) Escribe los pools DHCP para las VLANs 10 (Ventas) y 20 (RRHH): `network`, `default-router` y `dns-server 8.8.8.8`.
-b) ¿Qué rango debes excluir y qué problema evitas con ello?
-c) El servidor DHCP real está en la VLAN 30 (`192.168.30.10`). ¿Qué línea añades en las SVIs de las VLANs 10 y 20 y por qué no funciona sin ella?
-d) Un PC de la VLAN 10 se queda en `169.254.10.50`. Escribe en orden las 3 comprobaciones que harías para encontrar el culpable.
-
-**Pista:** `ip dhcp pool`, `ip dhcp excluded-address` y `ip helper-address`. Recuerda que el DISCOVER es broadcast y que el broadcast no cruza VLANs.
+**Pista:** la VLAN manda antes que la IP: en capa 2 el switch decide qué puertos hablan entre sí.

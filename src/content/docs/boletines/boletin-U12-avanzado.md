@@ -1,89 +1,99 @@
 ---
-title: Boletín de Alta disponibilidad — Avanzado
-description: Ejercicios avanzados de alta disponibilidad y redundancia
+title: Boletín de Redes inalámbricas — Avanzado
+description: Ejercicios avanzados de redes inalámbricas (WiFi)
 ---
 
-# 📝 Boletín de Alta disponibilidad — Avanzado
+# 📝 Boletín de Redes inalámbricas — Avanzado
 
-> Ejercicios que requieren diseñar y diagnosticar arquitecturas redundantes. En los difíciles tienes pista.
+> Ejercicios que requieren diseñar y diagnosticar WLANs. En los difíciles tienes pista.
 
 ---
 
-## 1. Diseño jerárquico completo
+## 1. Diseño de cobertura de un instituto
 
-Empresa con: 2 routers de borde (R1, R2), 2 switches de distribución (D1, D2), 4 switches de acceso (A1-A4). Cada switch de acceso se conecta a ambos de distribución. VLANs 10 (usuarios) y 20 (servidores).
+Edificio de dos plantas, 40×20 m, hormigón armado. Usuarios: 30 profesores con portátiles, 300 alumnos con móviles, ~50 IPs extra (cámaras, impresoras).
 
-a) ¿Dónde aplicas cada mecanismo: STP, EtherChannel, HSRP, routing?
-b) ¿Qué pasa si cae D1? Detalla capa 2 y capa 3.
-c) ¿Qué SPOFs quedan si el "pool" de servidores tiene una sola tarjeta de red por servidor?
+a) ¿Cuántos APs pondrías como mínimo y dónde (a grandes rasgos)?
+b) ¿Qué bandas asignas a qué uso?
+c) Dos SSIDs: `Profesores` (Enterprise) y `Alumnos` (PSK con portal cautivo). ¿Por qué esta separación?
+d) ¿Qué pasa con el canal si dos APs vecinos emiten en el mismo canal 2,4 GHz?
 
-**Pista:** piensa por capas: capa 2 (STP/EtherChannel), capa 3 gateway (FHRP), capa 3 salida (routing/ISP).
+**Pista:** en 2,4 GHz solo hay 3 canales no solapados (1/6/11); el patrón clásico de celdas alterna 1-6-11-1-6-11.
 
-## 2. HSRP con preempt y tracking
+## 2. El misterio del aula 12
 
-Configura R1 y R2 para la VLAN 10 (192.168.10.0/24):
+El aula 12 tiene WiFi pésimo: se desconecta cada pocos minutos, aunque la señal que muestra el portátil es "excelente".
 
-- IP virtual: 192.168.10.1
-- R1 activo (priority 110), R2 en espera (priority 100)
-- Preempt en R1
-- R1 debe ceder el rol si su interfaz WAN cae (tracking con decremento 20)
+a) ¿Cómo puede haber señal excelente y mala calidad? ¿Qué mide cada cosa?
+b) Enumera 3 causas típicas de este síntoma.
+c) ¿Qué herramienta del portátil o del AP usarías para confirmarlo?
 
-a) Escribe la configuración de ambos.
-b) ¿Qué pasa si cae la WAN de R1? ¿Y si se recupera?
-c) ¿Por qué sin `preempt`, tras recuperarse R1, seguiría R2 de activo?
+**Pista:** RSSI alto no es sinónimo de SNR alto: mira la interferencia y la reutilización de canal.
 
-## 3. Diagnóstico de un EtherChannel roto
+## 3. Plan de canales 5 GHz
 
-Un port-channel entre SW1 y SW2 no sube. Config de SW1: `channel-group 1 mode on` en Fa0/1-2. Config de SW2: `channel-group 1 mode desirable` en Fa0/1-2.
+Tienes 4 APs en la misma planta. En 5 GHz dispones de canales de 20 MHz (36, 40, 44, 48, 52, 56, 60, 64, 100+…).
 
-a) ¿Por qué falla la negociación?
-b) ¿Qué combinaciones `on/desirable/auto/active/passive` funcionan entre sí?
-c) ¿Qué comando usarías para ver el estado y por qué?
+a) Asigna canales a los 4 APs para minimizar solape.
+b) ¿Qué ventaja tiene usar 40 u 80 MHz en 5 GHz en lugar de 20 MHz? ¿Y su riesgo?
+c) ¿Qué son los canales DFS y qué riesgo tienen?
 
-**Pista:** `mode on` no negocia nada; LACP es `active/passive`, PAgP es `desirable/auto`.
+## 4. WPA3 y el handshake
 
-## 4. Bucle de capa 2 en producción
+a) ¿Qué problema clásico de WPA2-PSK corrige WPA3 con SAE?
+b) ¿Qué es el "modo transición" WPA2/WPA3 y cuándo tiene sentido?
+c) Un compañero propone "SSID oculto + filtrado MAC" como seguridad. Desmonta la idea con dos argumentos.
 
-Lunes 8:15: la red del centro se satura. Un becario conectó un cable entre dos switches de acceso "para probar". STP: RSTP en todos los switches.
+## 5. Portal cautivo y VLANs
 
-a) ¿Por qué RSTP no bloqueó el bucle al instante?
-b) ¿Qué otros mecanismos complementan a STP contra esto? (pista: funciones de puerto de acceso)
-c) ¿Qué configuración prevents en los puertos de acceso para la próxima vez?
+El WiFi de invitados debe: tener portal de aceptación de condiciones, no ver la red interna y salir solo a Internet.
 
-## 5. Cálculo de costes y failover
+a) ¿En qué VLAN lo metes y por qué?
+b) ¿Qué es un portal cautivo y qué limitaciones tiene?
+c) ¿Qué norma de seguridad de la unidad aplicas al aislar invitados?
 
-Topología: SW1(raíz) — SW2 y SW3, y un enlace SW2-SW3. Costes RSTP: 1 Gbps = 4, 100 Mbps = 19.
+## 6. Diagnóstico de un despliegue roto
 
-a) SW2 y SW3 conectados a SW1 por 1 Gbps, y entre ellos por 100 Mbps. ¿Qué puerto bloquea STP y en qué switch?
-b) Cae el enlace SW1-SW3. ¿Qué pasa con el puerto bloqueado?
-c) ¿Cuánto tarda RSTP en converger aproximadamente, frente a STP clásico?
+Tras instalar 6 APs nuevos, los usuarios se quejan: en pasillos funciona bien, pero al caminar entre zonas el WiFi se corta 20 segundos. `show` del controlador: cada AP emite al máximo de potencia, todos con el mismo SSID y canales 1-1-1-6-1-11 en 2,4 GHz.
 
-## 6. Doble nodo con keepalives
+a) ¿Qué dos errores de diseño detectas?
+b) ¿Por qué se corta 20 segundos al caminar (roaming)?
+c) ¿Qué ajustarías (potencias, canales, roaming)?
 
-Dos firewalls en HA activo/pasivo con su interfaz de heartbeat. El enlace heartbeat se rompe pero ambos firewalls siguen vivos.
+**Pista:** para que el roaming funcione bien, las celdas deben solaparse un poco (≈15-20%) pero con canales distintos.
 
-a) ¿Qué problema aparece (y cómo se llama)?
-b) ¿Qué efectos verían los usuarios?
-c) ¿Qué mitiga este problema?
+## 7. Cálculo rápido de throughput
 
-**Pista:** split-brain: dos nodos creyéndose dueños de la IP virtual.
+Un AP WiFi 6 teórico en 80 MHz, 2×2: hasta 1200 Mbps de enlace. Un aula tiene 25 alumnos compartiendo ese AP.
 
-## 7. Stack vs no stack
+a) ¿Por qué el throughput real por alumno es mucho menor que 1200/25?
+b) ¿Qué papel juega el medio compartido (CSMA/CA) en esto?
+c) ¿Qué dos medidas de diseño mejoran la experiencia si el aula crece a 50 alumnos?
 
-Un centro duda entre 2 switches apilados (stack) o 2 switches independientes con STP y HSRP en los routers.
+## 8. Caso integrador con Packet Tracer
 
-a) ¿Qué ventaja tiene el stack para el gateway (con SVIs) frente a 2 switches independientes?
-b) ¿Qué pasa con el stack si falla el cable de stacking o el switch master?
-c) ¿Qué riesgo compartido (shared risk) introduce el stack que dos cajas separadas no tienen?
+Monta en Packet Tracer: un router 2911 con servidor DHCP, un switch 2960 con dos VLANs (10 docentes, 20 alumnos), un AP doméstico en la VLAN 20 y dos portátiles inalámbricos.
 
-## 8. Plan de continuidad
+a) ¿Qué tipo de puerto de switch conecta el AP y por qué?
+b) El portátil de alumnos obtiene IP de la VLAN 20 pero no navega. El gateway de la VLAN 20 está bien. ¿Qué dos cosas compruebas primero?
+c) El AP doméstico de Packet Tracer solo permite WPA2-PSK. ¿Cómo se llama esa misma seguridad en la nomenclatura de la unidad?
 
-Un instituto define su plan de continuidad para la red:
+## 9. Caso WiFi: oficina con zonas muertas
 
-- RTO objetivo: 5 minutos
-- RPO: no aplica (no es un servicio de datos, es conectividad)
-- Componentes: 2 routers (HSRP), 2 switches de distribución (stack), UPS en cada armario, 2 enlaces ISP (uno de respaldo con rutas flotantes)
+En una oficina de 25 puestos separados por tabiques de cartón-yeso, un único AP WiFi en el pasillo central da "zonas muertas" y una velocidad general decepcionante. Los empleados se quejan cada tarde.
 
-a) ¿Qué es RTO y por qué 5 minutos es un objetivo exigente pero razonable con esta arquitectura?
-b) ¿Qué escenarios cubre bien el plan y cuáles no? (piensa: caída de un router, de un ISP, de un armario eléctrico, de la fibra del campus)
-c) ¿Qué prueba harías cada semestre para validar el plan?
+a) ¿Qué causas físicas explicarían la lentitud (nombra al menos 3)?
+b) ¿Qué herramientas usarías para confirmarlas?
+c) Propón 3 soluciones realistas ordenadas de más barata a más cara.
+
+**Pista:** piensa en canales (1, 6, 11), interferencia de vecinos, obstáculos y el número de clientes compartiendo el mismo AP. Recuerda que la velocidad real WiFi es del 30-50%.
+
+## 10. 802.3 vs 802.11 en la misma oficina
+
+Una oficina tiene 20 PCs por cable (FastE/GigE) y 20 portátiles por WiFi detrás del mismo switch.
+
+a) ¿Los dos grupos comparten la capa OSI de "entrega local"? ¿Cuál?
+b) Compara en tabla: nº de MACs en la cabecera, quién "monta" la trama en el aire y qué pasa con las colisiones/medio compartido.
+c) ¿Por qué la capa de arriba (IPv4) no distingue si el tramo local fue RJ45 o radio?
+
+**Pista:** misma capa 2 lógica, distinto estándar; el estándar 802.x es un detalle de la capa 1–2.

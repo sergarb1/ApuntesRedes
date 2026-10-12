@@ -1,111 +1,102 @@
 ---
-title: Boletín de Enrutamiento estático — Avanzado
-description: Ejercicios avanzados de enrutamiento estático
+title: Boletín de Servicios de red — Avanzado
+description: Ejercicios avanzados de servicios de red (DHCP, DNS y NTP)
 ---
 
-# 📝 Boletín de Enrutamiento estático — Avanzado
+# 📝 Boletín de Servicios de red — Avanzado
 
-> Ejercicios que requieren aplicar rutas estáticas con criterio. En los difíciles tienes pista.
+> Ejercicios que requieren aplicar DHCP, DNS y NTP de forma combinada. En los difíciles tienes pista.
 
 ---
 
-## 1. Configuración multi-router
+## 1. DHCP en el router Cisco
 
-Diseña la configuración para 3 routers en línea:
+Configura el router R1 como servidor DHCP para la LAN 192.168.1.0/24:
 
+- Rango excluido: .1 a .20 (infraestructura)
+- Gateway: 192.168.1.1
+- DNS: 8.8.8.8 y 1.1.1.1
+- Concesión de 3 días
+
+a) Escribe la configuración completa.
+b) Un PC no recibe IP. Enumera tu secuencia de diagnóstico (comandos y qué buscas en cada uno).
+
+**Pista:** `ip dhcp excluded-address` + `ip dhcp pool`.
+
+## 2. DNS jerárquico
+
+Explica el recorrido completo de una consulta DNS para `www.ejemplo.es` la primera vez que la hace un equipo (cachés vacías):
+
+a) ¿Quién pregunta a quién? Enumera los pasos (resolver local → raíz → TLD → autoritativo).
+b) ¿Qué pasa la segunda vez, cinco minutos después?
+c) ¿Qué papel juega el TTL de los registros?
+
+## 3. Selección de registros para un mini-proyecto
+
+Tu centro va a publicar: web (`www.instituto.edu`), correo propio, y un alias corto `aulas` que apunta al mismo servidor que `www`. El servidor tiene IP 198.51.100.10 (IPv4) y 2001:db8::10 (IPv6). El correo lo gestiona un proveedor externo.
+
+a) Escribe los registros mínimos con sus tipos.
+b) ¿Qué registro necesitarías añadir para que `mail.proveedor.com` reciba el correo en nombre del instituto?
+c) Un compañero propone un registro CNAME para el dominio raíz `instituto.edu`. ¿Es buena idea?
+
+## 4. Diagnóstico con nslookup
+
+Interpreta estas salidas y di qué está pasando en cada caso:
+
+a)
 ```
-R1 (192.168.1.0/24) ──── R2 ──── R3 (192.168.3.0/24)
-                          │
-                     (192.168.2.0/24)
-```
+Servidor: UnKnown
+Address: 192.168.1.1
 
-**Enlaces:**
-- R1-R2: 10.0.0.0/30
-- R2-R3: 10.0.0.4/30
-
-Escribe la **configuración completa** de R1, R2 y R3 (interfaces, rutas estáticas, rutas por defecto). Nota: R2 es el router central sin salida externa, así que **no lleva ruta por defecto** (solo rutas específicas hacia R1 y R3).
-
-## 2. Rutas flotantes
-
-Configura un router con:
-- Ruta por defecto primaria hacia 10.0.0.2 (AD=1)
-- Ruta por defecto de respaldo hacia 10.0.1.2 (AD=5)
-- Ruta estática hacia 192.168.100.0/24 vía 10.0.0.2
-
-a) Escribe los comandos
-b) ¿Cuándo se activa la ruta de respaldo?
-c) ¿Cómo verificarías que la ruta de respaldo está activa?
-
-**Pista:** la AD se escribe al final del `ip route`.
-
-## 3. Resolución de problemas de rutas
-
-Un router tiene esta configuración:
-
-```
-interface g0/0
- ip address 192.168.1.1 255.255.255.0
- no shutdown
-interface g0/1
- ip address 10.0.0.1 255.255.255.252
- shutdown
-ip route 0.0.0.0 0.0.0.0 10.0.0.2
-```
-
-a) ¿Funciona la ruta por defecto? ¿Por qué?
-b) ¿Qué comando muestra el problema?
-c) ¿Qué cambiarías para que funcione?
-
-## 4. Longest prefix match
-
-Un router tiene estas rutas en su tabla:
-
-```
-192.168.0.0/16  via 10.0.0.2
-192.168.1.0/24  via 10.0.0.6
-192.168.1.16/28 via 10.0.0.10
+*** No se puede encontrar el nombre del servidor: DNS request timed out.
+Nombre: www.ejemplo.es
 ```
 
-Decide por cuál de los tres next-hops enviará el router cada paquete destinado a:
-
-a) 192.168.1.30
-b) 192.168.1.200
-c) 192.168.3.44
-d) 192.168.1.15
-
-**Pista:** el *longest prefix match* manda: gana la ruta con la máscara más larga que coincida con la IP destino. La /28 solo cubre de 192.168.1.16 a 192.168.1.31.
-
-## 5. V/F con matices
-
-a) Si configuras una ruta estática y no aparece en `show ip route`, el IOS la descartó por un error de sintaxis.
-b) Una ruta estática con interfaz de salida en lugar de next-hop solo funciona bien en enlaces punto a punto.
-c) Dos rutas a la misma red con distinta AD: se instala la de menor AD y la otra queda como respaldo (flotante).
-d) La ruta por defecto se usa solo si no existe ninguna otra ruta más específica para el destino.
-e) Un `ip route` hacia un next-hop que está en una subred que el router no tiene configurada se instala sin problemas.
-
-## 6. Diseño de rutas para una sede
-
-Tu empresa tiene un router central (R1) y dos sucursales (R2 y R3). R1-R2 usa 10.0.0.0/30, R1-R3 usa 10.0.0.4/30. Las LANs: R2 tiene 192.168.2.0/24 y R3 tiene 192.168.3.0/24. R1 tiene 192.168.1.0/24 y sale a Internet por G0/2.
-
-a) ¿Cuántas rutas estáticas necesita R1 para llegar a todas las LANs y a Internet?
-b) Escribe las de R1.
-c) ¿Qué única ruta necesitan R2 y R3 para "verlo todo" (sucursales + Internet)? Escribe una para R2.
-
-## 7. Interferencia con rutas conectadas
-
-Escribe en R1: `ip route 192.168.1.0 255.255.255.0 10.0.0.2`, siendo 192.168.1.0/24 la propia LAN de R1 conectada en G0/0. ¿Qué pasa? ¿Qué tipo de entrada verías en `show ip route` y por qué no rompe el encaminamiento local?
-
-**Pista:** el IOS prioriza por AD: la conectada (0) manda sobre la estática (1).
-
-## 8. Escenario completo de diagnóstico
-
-Escenario: R1 y R2 conectados por 10.0.0.0/30. LAN R1: 192.168.1.0/24, LAN R2: 192.168.2.0/24. El PC de R1 hace ping a la LAN de R2 y falla. `show ip route` en R2 muestra:
-
+b)
 ```
-C  10.0.0.0/30 is directly connected, G0/1
-C  192.168.2.0/24 is directly connected, G0/0
+Nombre: www.ejemplo.es
+Address: 203.0.113.99
+Aliases: www.ejemplo.es
+          web.ejemplo.es
 ```
 
-a) ¿Qué le falta a R2?
-b) ¿Qué le falta a R1 (supón que R2 ya está arreglado)?
-c) El ping del PC ya llega a la LAN de R2 pero el traceroute se queda a medias. ¿Por qué puede pasar aunque el routing esté bien?
+c) `nslookup www.ejemplo.es 8.8.8.8` responde correctamente, pero el navegador no abre la web.
+
+## 5. NTP con jerarquía
+
+Tu red tiene un router de borde (R1), un switch de distribución (S1) y decenas de switches de acceso.
+
+a) Diseña la jerarquía NTP: ¿de dónde toma la hora cada nivel? ¿Qué estrato quedaría aproximadamente en cada uno?
+b) Escribe la configuración de R1 y S1.
+c) ¿Qué comando usas en S1 para comprobar con quién está sincronizado y en qué estrato está?
+
+## 6. Los tres servicios en un solo caso
+
+Escenario: tras una caída eléctrica, el aula de informática no navega. Un alumno apunta estos datos de su PC:
+
+- IP: 169.254.18.42, máscara 255.255.0.0
+- DNS en blanco
+- La hora del equipo está bien
+
+a) ¿Qué servicio está fallando? ¿Cómo se llama ese rango 169.254.x.x?
+b) El profesor comprueba el switch del aula y no está en la VLAN correcta. ¿Por qué eso explica el fallo de DHCP?
+c) Arreglada la VLAN, el PC navega por IP pero `www.google.com` sigue fallando. ¿Qué compruebas ahora y con qué comando?
+d) Al final del caso, ¿por qué el reloj del PC estaba bien? ¿Qué le pasó al switch, entonces?
+
+**Pista:** APIPA y su rango 169.254.0.0/16; y piensa quién da la hora a quién en cada dispositivo.
+
+## 7. DHCPv6 y doble pila
+
+El centro quiere IPv6 en el aula: prefijo 2001:db8:ab::/64, gateway fe80::1, DNS 2001:4860:4860::8888.
+
+a) ¿Dos formas de dar dirección IPv6 a los clientes? Describe brevemente SLAAC y stateful DHCPv6.
+b) ¿Qué opción usarías si solo quieres repartir DNS y dominio (las direcciones las autoconfiguran los PCs)?
+c) Escribe la config de un router Cisco para la opción b).
+
+## 8. El "no tiene Internet" clásico
+
+Una usuaria llama: "no tengo Internet". Su PC muestra: IP correcta 192.168.1.50 (DHCP OK), gateway correcto, pero `nslookup www.elmundo.es` falla; `nslookup www.elmundo.es 1.1.1.1` funciona.
+
+a) ¿Qué capa/servicio está sano y cuál roto?
+b) ¿Qué dos arreglos inmediatos propones?
+c) ¿Por qué NO es un problema de NTP, de DHCP ni de routing?

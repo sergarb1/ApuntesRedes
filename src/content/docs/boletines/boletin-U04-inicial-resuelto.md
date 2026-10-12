@@ -1,76 +1,131 @@
 ---
-title: Boletín de Switching y VLAN — Inicial (Resuelto)
-description: Soluciones de los ejercicios básicos de Switching, STP y VLAN
+title: Boletín de Direccionamiento IP — Inicial (Resuelto)
+description: Soluciones de ejercicios básicos de IPv4, cabecera, ARP, fragmentación y subnetting
 ---
 
-# ✅ Boletín de Switching y VLAN — Inicial (Resuelto)
+# ✅ Boletín de Direccionamiento IP — Inicial (Resuelto)
 
 ---
 
-## 1. ¿Qué hace el switch?
+## 1. Conversión binario
 
-1 → b (MAC destino conocida → reenvío selectivo)
-2 → a (MAC destino desconocida → inunda)
-3 → c (Broadcast → inunda)
+a) 192 → **11000000**
+b) 10 → **00001010**
+c) 255 → **11111111**
+d) 0 → **00000000**
 
-## 2. Verdadero o falso
+## 2. Conversión a decimal
 
-a) **Verdadero.** Cada puerto es un dominio de colisión independiente.
-b) **Falso.** Los switches no segmentan dominios de broadcast. Eso lo hacen los routers.
-c) **Verdadero.** STP bloquea puertos redundantes para romper bucles.
-d) **Verdadero.** RSTP (IEEE 802.1w) converge en 1-3 segundos frente a los 30-50 de STP.
-e) **Falso.** La tabla MAC se llama tabla MAC o CAM table. La tabla ARP está en los hosts, no en los switches.
-f) **Verdadero.** Cada VLAN es un dominio de broadcast propio: el broadcast de una no pasa a la otra.
+a) 11000000 → **192**
+b) 10101000 → **168**
+c) 00001010 → **10**
+d) 11111111 → **255**
 
-## 3. Estados STP
+## 3. ¿Qué máscara es?
 
-1. c) **Blocking** (20s escuchando BPDUs)
-2. d) **Listening** (15s, escucha pero no aprende MACs)
-3. a) **Learning** (15s, aprende MACs pero no reenvía)
-4. b) **Forwarding** (reenvía tráfico normalmente)
+/24 → b) 255.255.255.0  
+/16 → c) 255.255.0.0  
+/30 → a) 255.255.255.252  
+/8 → d) 255.0.0.0
 
-Tiempo total: ~50 segundos.
+## 4. Verdadero o falso
 
-## 4. Identifica el rol
+a) **Falso.** IPv4 tiene 32 bits (4 octetos).
+b) **Falso.** Cada octeto va de 0 a 255. 256 no existe en un octeto de 8 bits.
+c) **Verdadero.** La última dirección del rango es el broadcast.
+d) **Verdadero.** Dynamic Host Configuration Protocol.
+e) **Falso.** Las IPs privadas (RFC 1918) no son enrutables en Internet. Necesitan NAT.
 
-a) **Designated Port** — El Root Bridge tiene todos sus puertos como Designated.
-b) **Root Port** — Cada switch no-root tiene un Root Port hacia el Root Bridge.
-c) **Alternate Port** — Puerto bloqueado como respaldo.
+## 5. Calcula hosts
 
-## 5. ¿Qué comando?
+a) /24 → 256 - 2 = **254 hosts**
+b) /27 → 32 - 2 = **30 hosts**
+c) /30 → 4 - 2 = **2 hosts**
+d) /29 → 8 - 2 = **6 hosts**
 
-1 → c (`show mac address-table`)
-2 → a (`show spanning-tree`)
-3 → b (`spanning-tree portfast`)
-4 → d (`switchport access vlan 10`)
+## 6. Identifica el tipo
 
-## 6. Tormenta de broadcast
+a) 10.0.0.15 → **Privada** (clase A, RFC 1918)
+b) 8.8.8.8 → **Pública** (DNS de Google)
+c) 192.168.1.1 → **Privada** (clase C, RFC 1918)
+d) 127.0.0.1 → **Especial** (loopback/localhost)
+e) 172.16.0.100 → **Privada** (clase B, RFC 1918)
+f) 169.254.1.1 → **Especial** (APIPA, cuando DHCP no responde)
 
-**b) Un bucle en la red.** Si hay caminos redundantes sin STP, los broadcasts rebotan infinitamente entre switches, saturando la red.
+## 7. Calcula la dirección de red
 
-## 7. Reenvío de tramas y la tabla CAM
+a) `192.168.1.37` & `255.255.255.0` → la máscara deja pasar los 3 primeros octetos y borra el último → **192.168.1.0/24**
 
-a) MAC origen `0050.7966.6801` → **aprende/refresca Fa0/2**. MAC destino `00D0.BC96.1A01` conocida → **reenvía solo por Fa0/3**.
+```
+IP:      192.168.1.37  → 11000000.10101000.00000001.00100101
+Máscara: 255.255.255.0 → 11111111.11111111.11111111.00000000
+AND:                   → 11000000.10101000.00000001.00000000
+Red:     192.168.1.0
+```
 
-b) MAC origen `0050.7966.6800` → aprende/refresca Fa0/1 (ya estaba). MAC destino `0050.7966.6802` **desconocida** → **inunda por todos los puertos excepto Fa0/1**.
+b) `10.0.0.150` & `255.0.0.0` → **10.0.0.0/8**
 
-c) Destino broadcast `FFFF.FFFF.FFFF` → **inunda por todos los puertos** excepto el de origen (Fa0/3).
+```
+IP:      10.0.0.150  → 00001010.00000000.00000000.10010110
+Máscara: 255.0.0.0   → 11111111.00000000.00000000.00000000
+AND:                 → 00001010.00000000.00000000.00000000
+Red:     10.0.0.0
+```
 
-d) La MAC `0050.7966.6801` aparece por Fa0/4 cuando estaba aprendida en Fa0/2: el switch **actualiza la tabla CAM** y asocia la MAC a Fa0/4 (la entrada dinámica se mueve al puerto más reciente).
+c) `172.16.0.200` & `255.255.255.128` → el octeto mágico es el último: `200 = 11001000`, `128 = 10000000` → AND = `10000000` = 128 → **172.16.0.128/25**
 
-## 8. Estados STP
+```
+IP:      172.16.0.200  → 10101100.00010000.00000000.11001000
+Máscara: 255.255.255.128 → 11111111.11111111.11111111.10000000
+AND:                    → 10101100.00010000.00000000.10000000
+Red:     172.16.0.128
+```
 
-Tabla completada:
+d) `192.168.1.66` & `255.255.255.192` → octeto mágico el último: `66 = 01000010`, `192 = 11000000` → AND = `01000000` = 64 → **192.168.1.64/26**
 
-| Estado | ¿Reenvía tráfico? | ¿Aprende MACs? | Tiempo |
-|---|---|---|---|
-| Blocking | No | No | 20 s (Max Age) |
-| Listening | No | No | 15 s |
-| Learning | No | Sí | 15 s |
-| Forwarding | Sí | Sí | Indefinido |
+```
+IP:      192.168.1.66  → 11000000.10101000.00000001.01000010
+Máscara: 255.255.255.192 → 11111111.11111111.11111111.11000000
+AND:                    → 11000000.10101000.00000001.01000000
+Red:     192.168.1.64
+```
 
-a) **Blocking → Listening → Learning → Forwarding** (Disabled es un estado administrativo, no forma parte de la secuencia normal).
+## 8. Subredes iguales
 
-b) **30 segundos sin fallos** (15 s Listening + 15 s Learning); hasta **50 s** si hay un fallo y entra el Max Age (20 s + 15 s + 15 s).
+a) **2 bits:** `2ⁿ ≥ 4` → n = 2 (2² = 4).
+b) Nueva máscara: **/26 = 255.255.255.192** (`11111111.11111111.11111111.11000000`).
+c) Hosts=(32 − 26 = 6 bits) → 2⁶ − 2 = **62 hosts útiles** por subred.
+d) Incremento = 2⁶ = 64:
 
-c) **Forwarding**: es el único estado que reenvía tráfico (y además aprende MACs).
+| Subred | Red | Primer host | Último host | Broadcast |
+|---|---|---|---|---|
+| 1 | 192.168.5.0/26 | 192.168.5.1 | 192.168.5.62 | 192.168.5.63 |
+| 2 | 192.168.5.64/26 | 192.168.5.65 | 192.168.5.126 | 192.168.5.127 |
+| 3 | 192.168.5.128/26 | 192.168.5.129 | 192.168.5.190 | 192.168.5.191 |
+| 4 | 192.168.5.192/26 | 192.168.5.193 | 192.168.5.254 | 192.168.5.255 |
+
+## 9. Cabecera IPv4
+
+**Matching:** 1 → c (TTL) · 2 → a (Protocolo) · 3 → b (IPs) · 4 → d (fragmentación)
+
+**V/F:**
+
+e) **Verdadero.** 5 words de 32 bits = **20 bytes** (sin opciones).
+f) **Falso.** El checksum de la cabecera solo valida **la cabecera** en cada salto. Los datos los protegen TCP/UDP; el enlace, el FCS de la trama.
+g) **Verdadero.** Cada router resta 1 al TTL; a 0 se descarta y se suele notificar ICMP "Time Exceeded" (base del `traceroute`).
+
+## 10. ARP en la red local
+
+a) **ARP Request** en broadcast: MAC destino `FF:FF:FF:FF:FF:FF`. Pregunta: *"¿quién tiene 192.168.1.20?"*.
+b) El host dueño de `192.168.1.20` responde con un **ARP Reply en unicast** incluyendo su MAC.
+c) Guarda el par **IP → MAC** en la **tabla ARP**. En Windows: `arp -a` (en Linux, `ip neigh`).
+d) **IP → MAC** (dirección lógica a dirección de enlace). La inversa no hace falta: la MAC solo se usa en el medio local.
+
+## 11. MTU y fragmentación
+
+a) Payload útil por fragmento = 1500 − 20 = **1480 bytes** (1480 es múltiplo de 8, como exige el offset).
+b) Datos totales = 4000.  
+   - Frag 1: 1480 · Frag 2: 1480 · Frag 3: **1040** (4000 − 2960).  
+   → **3 fragmentos.** El último mide 1040 + 20 = **1060 bytes** en total.
+c) **Flag MF** (*More Fragments*) = **1** en los que no son el último; el último lleva **MF = 0**.
+d) **El host destino.** Los routers solo fragmentan si hace falta; no reensamblan.

@@ -1,9 +1,9 @@
 ---
-title: Boletín de Ethernet y cableado — Avanzado (Resuelto)
+title: Boletín de Medios y cableado — Avanzado (Resuelto)
 description: Soluciones de los ejercicios avanzados de Infraestructura Física, OSI y trama
 ---
 
-# ✅ Boletín de Ethernet y cableado — Avanzado (Resuelto)
+# ✅ Boletín de Medios y cableado — Avanzado (Resuelto)
 
 ---
 
@@ -105,12 +105,3 @@ c) **Campus de 3 edificios:**
 
 > 💡 **Regla resumen:** distancia decide el medio (cobre ≤ 100 m, multimodo ≤ ~550 m, monomodo el resto); presupuesto decide las categorías.
 
-## 8. Diagnóstico por capas (OSI en acción)
-
-**Síntoma A → alerta en la capa 1 que la capa 2 delata.** El FCS es la capa 2 quien lo detecta, pero casi siempre la causa es física: señal marginal (atenuación, diafonía, EMI o un crimpado flojo) que el tester de continuidad no mide, y por eso el ping falla de forma intermitente. Herramientas: probar un cable conocido bueno, revisar el cableado y, si persiste, un certificador de categoría; Wireshark para contar los errores.
-
-**Síntoma B → Capa 1 (física).** LED apagado = no hay enlace: sin negociación no hay bits. Revisa el cable, el conector, el puerto del switch y la NIC del PC.
-
-**Síntoma C → Capa 1 (física).** Par partido = no hay enlace: sin LED no hay negociación, no hay bits. Repelar/crimpar o sustituir el tramo.
-
-> 💡 **Clave de examen:** si no hay LED, ni mires Wireshark: el problema es de capa 1. Y si hay LED, el tester pasa pero aparecen FCS erróneos, no descartes la capa 1: el tester solo mide continuidad, no calidad de señal.

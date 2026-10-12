@@ -1,77 +1,80 @@
 ---
-title: Boletín de Redes inalámbricas — Inicial
-description: Ejercicios básicos de redes inalámbricas (WiFi)
+title: Boletín de ACL y seguridad — Inicial
+description: Ejercicios básicos de ACLs y seguridad de red
 ---
 
-# 📝 Boletín de Redes inalámbricas — Inicial
+# 📝 Boletín de ACL y seguridad — Inicial
 
-> Ejercicios básicos para afianzar los conceptos de redes WLAN: estándares, seguridad y diseño.
+> Ejercicios básicos para afianzar los conceptos de ACLs y seguridad de red.
 
 ---
 
-## 1. ¿Quién soy?
+## 1. Verdadero o falso
 
-a) Estándar IEEE que define las redes WLAN.
-b) El identificador de la red que ves al escanear.
-c) Dispositivo que convierte la señal cableada en radio.
-d) Modo en el que dos portátiles se conectan directamente sin punto de acceso.
-e) Organización que certifica la interoperabilidad de los equipos WiFi.
+a) Las ACLs estándar filtran solo por IP origen.
+b) Al final de toda ACL hay un permit any implícito.
+c) Una ACL extendida puede filtrar por protocolo y puerto.
+d) Una ACL sin ninguna línea `permit` bloquea todo el tráfico que le llega.
+e) `show access-lists` muestra las ACLs configuradas y sus contadores.
 
-## 2. Bandas y canales
+## 2. Números de ACL
 
-a) ¿Qué dos bandas usa el WiFi doméstico habitual?
-b) ¿Cuántos canales no solapados hay en 2,4 GHz y cuáles son?
-c) ¿Qué banda tolera mejor la interferencia y cuál llega más lejos?
-d) ¿Qué canal usarías en un edificio con vecinos saturando el 1 y el 11?
+¿Qué rango de números usan las ACLs estándar y extendidas?
 
-## 3. Verdadero o falso
-
-a) WEP sigue siendo una opción válida para redes domésticas pequeñas.
-b) WPA2-Personal usa una clave compartida (PSK).
-c) WPA3 añade SAE, que resiste mejor los ataques de diccionario.
-d) En 5 GHz los canales no solapados son muchos más que en 2,4 GHz.
-e) Un AP con SSID oculto está protegido contra clientes no autorizados.
-
-## 4. Seguridad: escala del mal
-
-Ordena de peor a mejor: WEP, WPA3, WPA, WPA2, red abierta.
-
-## 5. WiFi 4 → WiFi 7
-
-Relaciona cada nombre comercial con su estándar IEEE:
-
-| Marketing | IEEE |
+| Tipo | Rango |
 |---|---|
-| 1. WiFi 4 | a) 802.11ax |
-| 2. WiFi 5 | b) 802.11n |
-| 3. WiFi 6 | c) 802.11ac |
-| 4. WiFi 6E | d) 802.11be |
-| 5. WiFi 7 | e) 802.11ax en 6 GHz |
+| Estándar | |
+| Extendida | |
 
-## 6. Cobertura
+## 3. ¿Qué comando?
 
-El despacho del fondo no tiene señal. El router está en el salón.
+Relaciona el comando con su función:
 
-a) ¿Cuáles son los tres primeros ajustes que probarías?
-b) ¿Por qué colocar el AP en el suelo o dentro de un armario metálico es mala idea?
-c) ¿Qué es el "cliente travieso" (hidden node) y cómo se manifiesta?
+| Comando | Función |
+|---|---|
+| 1. `ip access-group 10 out` | a) Crear ACL nombrada extendida |
+| 2. `access-list 10 permit ...` | b) Aplicar ACL a interfaz |
+| 3. `ip access-list extended MI_ACL` | c) Ver las ACLs y sus contadores |
+| 4. `show access-lists` | d) Crear ACL numerada estándar |
 
-## 7. Configuración mínima de un AP
+## 4. Wildcard masks
 
-Escribe la configuración que pondrías en un AP doméstico para una red de un estudio de música: SSID `EstudioNet`, WPA2/WPA3 Personal, contraseña segura, 2,4 GHz canal 6, 20 MHz.
+Las ACLs usan *wildcard masks*, el inverso de la máscara de subred. Para cada máscara de subred, escribe su wildcard y qué representa (qué bits quedan libres para cualquier valor):
 
-## 8. Autenticación: Personal vs Enterprise
+| Máscara de subred | Wildcard | ¿Qué representa? |
+|---|---|---|
+| 255.255.255.0 | | |
+| 255.255.255.255 | | |
+| 255.255.0.0 | | |
 
-a) ¿Qué diferencia esencial hay entre WPA2-PSK y WPA2-Enterprise?
-b) ¿Qué servidor aparece en Enterprise y qué protocolo habla con el AP?
-c) ¿Qué red del instituto sería candidata a Enterprise y por qué?
+## 5. ACL básica
 
-## 9. Medios y estándares WiFi: verdadero o falso
+Escribe los comandos para:
 
-Indica si cada afirmación es verdadera (V) o falsa (F) y corrige las falsas:
+a) Crear una ACL estándar que permita la red 192.168.1.0/24
+b) Aplicarla a la interfaz G0/1 en sentido outbound
 
-a) El estándar 802.11ax se conoce comercialmente como WiFi 6.
-b) El WiFi transmite por ondas electromagnéticas en el aire, sin cable.
-c) La velocidad real del WiFi suele estar entre el 30% y el 50% de la teórica.
-d) El WiFi NO es capa 2 del modelo OSI porque no hay cable.
-e) En 2,4 GHz hay tres canales no solapados: 1, 6 y 11.
+## 6. Estándar o extendida
+
+¿Qué tipo de ACL usarías en cada caso y por qué?
+
+a) Bloquear a un host concreto de la LAN que hace escaneos.
+b) Permitir solo HTTP/HTTPS de la VLAN 30 hacia el servidor web interno.
+c) Filtrar por IP origen en un router antiguo con muy poca CPU.
+
+## 7. ¿Dónde aplico la ACL?
+
+Regla práctica: la estándar se coloca **cerca del destino** y la extendida **cerca del origen**. En este escenario (PC1 en LAN-A, servidor en LAN-B, R1 en medio), ¿dónde aplicarías cada ACL y en qué sentido?
+
+a) ACL estándar que bloquea a PC1 llegar al servidor.
+b) ACL extendida que permite solo HTTP de LAN-A al servidor.
+
+## 8. Comandos de verificación
+
+Relaciona cada comando de verificación con su utilidad:
+
+| Comando | Utilidad |
+|---|---|
+| 1. `show access-lists` | a) Ver qué ACL está aplicada a cada interfaz y sentido |
+| 2. `show ip interface` | b) Ver contadores de matches por línea de la ACL |
+| 3. `show running-config` | c) Ver las líneas exactas de la ACL tal como se configuraron |

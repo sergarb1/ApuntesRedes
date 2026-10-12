@@ -1,64 +1,61 @@
 ---
-title: Boletín de Servicios de red — Inicial (Resuelto)
-description: Soluciones de los ejercicios básicos de servicios de red (DHCP, DNS y NTP)
+title: Boletín de Trunking e inter-VLAN — Inicial (Resuelto)
+description: Soluciones ejercicios básicos de VLANs
 ---
 
-# ✅ Boletín de Servicios de red — Inicial (Resuelto)
+# ✅ Boletín de Trunking e inter-VLAN — Inicial (Resuelto)
 
 ---
 
-## 1. ¿Qué servicio soy?
+## 1. ¿Qué VLAN soy?
 
-a) **DHCP** — Dynamic Host Configuration Protocol.
-b) **DNS** — Domain Name System.
-c) **NTP** — Network Time Protocol.
-d) **DNS** — el navegador pregunta primero por el nombre antes de conectar.
+1 → c (VLAN de datos: tráfico normal de usuario)
+2 → a (VLAN de voz: teléfonos IP, QoS 802.1p)
+3 → d (VLAN nativa: sin etiquetar en el trunk)
+4 → b (VLAN de gestión: administración del switch, SSH/SNMP)
 
-## 2. Las cuatro fases de DHCP
+## 2. Verdadero o falso
 
-1. c) Discover → 2. b) Offer → 3. a) Request → 4. d) Acknowledge
+a) **Verdadero.** Cada VLAN es un dominio de broadcast independiente: un broadcast de VLAN 10 no llega a la VLAN 20.
+b) **Verdadero.** IEEE 802.1Q es el estándar de etiquetado VLAN (TPID 0x8100, 4 bytes).
+c) **Falso.** Las VLANs aíslan en capa 2. Necesitan un router (o un switch capa 3) para hacer inter-VLAN routing.
+d) **Verdadero.** Un trunk transporta todas las VLANs permitidas, etiquetadas con 802.1Q (salvo la native).
+e) **Verdadero.** VLAN 1 es la native y la VLAN por defecto del switch. Por seguridad conviene cambiarla.
 
-El cliente grita "¿hay algún servidor?" (Discover), el servidor ofrece una IP (Offer), el cliente la reclama (Request) y el servidor la confirma (Ack).
+## 3. Identifica
 
-## 3. Verdadero o falso
+a) **Puerto access** — Solo una VLAN, tráfico sin etiquetar.
+b) **Puerto trunk** — Múltiples VLANs etiquetadas con 802.1Q (y la native sin etiquetar).
 
-a) **Verdadero.** La concesión se renueva a mitad de plazo si el cliente sigue activo.
-b) **Falso.** Un registro A relaciona nombre con IPv4; para IPv6 es el registro **AAAA**.
-c) **Verdadero.** NTP escucha y habla por UDP/123.
-d) **Falso.** Una configuración manual completa necesita IP, máscara, gateway y DNS: sin DNS ni gateway no llegarías ni a Internet.
-e) **Verdadero.** La oferta DHCP incluye opciones: máscara, gateway por defecto, DNS, dominio, TFTP…
+## 4. Números
 
-## 4. ¿Qué registro DNS?
+a) **12 bits** para el VLAN ID.
+b) **4094 VLANs** (12 bits = 4096, reservadas 0 y 4095).
+c) **4 bytes** insertados entre la MAC de origen y el EtherType: TPID (2 bytes) + TCI (2 bytes) = PRI (3 bits) + CFI (1 bit) + VLAN ID (12 bits).
 
-1 → c (A: nombre → IPv4)
-2 → a (CNAME: alias de otro nombre)
-3 → d (AAAA: nombre → IPv6)
-4 → b (MX: servidor de correo del dominio)
-5 → f (SOA/NS: autoridad y servidores del dominio)
-6 → e (PTR: resolución inversa IP → nombre)
+## 5. Relaciona
 
-## 5. ¿Qué comando?
+1 → b (`switchport mode trunk` configura el puerto como trunk)
+2 → a (`vlan 10` crea la VLAN 10)
+3 → c (`show vlan brief` muestra las VLANs y sus puertos)
+4 → d (`encapsulation dot1Q 10` etiqueta la subinterfaz con la VLAN 10)
 
-1 → b (`/renew` fuerza nueva negociación DHCP)
-2 → c (nslookup consulta un servidor DNS)
-3 → a (`/displaydns` muestra la caché)
-4 → d (`/flushdns` la vacía)
+## 6. ¿Qué necesito?
 
-## 6. El reloj y los logs
+**b) Un router o switch capa 3.** Las VLANs aíslan en capa 2. Para comunicarse entre VLANs se necesita routing (inter-VLAN routing): router-on-a-stick con subinterfaces o un switch multicapa con SVIs.
 
-Falta **NTP**. Si el reloj del dispositivo no está sincronizado, las marcas de tiempo de los logs no sirven para reconstruir una incidencia: no puedes comparar "el switch avisó a las 08:59" con "el servidor registró el error a las 09:00" si cada uno lleva su hora. Con NTP todos los equipos apuntan a la misma fuente y los logs cuadran.
+## 7. Comandos de resolución
 
-## 7. DHCP helper
+1 → c (`show vlan brief` → VLANs y puertos access)
+2 → a (`show interfaces trunk` → native VLAN, allowed y mismatches)
+3 → b (`show running-config` → configuración completa actual)
 
-Falta el **ip helper-address** en el router (o switch capa 3) de la VLAN 20. DHCP Discover es un broadcast y los broadcasts no cruzan VLANs: el agente de reenvío del router convierte ese broadcast en un unicast hacia 192.168.10.5:
+d) **`show ip interface brief`** — en el router-on-a-stick, te muestra las subinterfaces (Fa0/0.10, Fa0/0.20…) con su estado **Up/Up** y sus IPs. Si una subinterfaz está *down/down*, el problema suele ser la interfaz física sin `no shutdown`, o que la VLAN no exista en el switch.
 
-```bash
-interface vlan 20
- ip helper-address 192.168.10.5
-```
+## 8. V/F inter-VLAN
 
-## 8. Verifica tu red
-
-a) Si aparece "DHCP habilitado: Sí" y una línea "Concesión obtenida / Concesión expira", es DHCP. Si no hay concesión y la IP la escribiste tú, es estática.
-b) En la línea "Concesión expira" (típico: 24 horas en redes domésticas).
-c) En "Servidores DNS": normalmente la IP del router de casa o las DNS del operador (y en muchas redes, un DNS interno de la empresa o del centro).
+a) **Verdadero.** Cada VLAN necesita su subinterfaz (`interface fa0/0.10`) con `encapsulation dot1Q 10` y su IP de gateway.
+b) **Verdadero.** Un switch capa 3 enruta entre VLANs con SVIs (`interface vlan X`) + `ip routing`, sin router externo.
+c) **Verdadero.** El router-on-a-stick enruta todo por la única interfaz física: es el cuello de botella del diseño.
+d) **Verdadero.** Sin `ip routing`, los SVIs están Up/Up pero NO enrutan entre VLANs. Es el fallo nº1 al probar.
+e) **Verdadero.** Todo el tráfico inter-VLAN atraviesa la misma interfaz: si las VLANs generan más de su ancho de banda, se satura (por eso se usa Gigabit o un switch capa 3).

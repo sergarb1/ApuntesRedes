@@ -1,7 +1,7 @@
 # Apuntes PAR — Planificación y Administración de Redes
 
 > **Aprende redes como si la red se fuera a caer mañana.**  
-> 12 unidades didácticas (introducción + 11 de temario) · 80% práctico · Estilo conversacional
+> 13 unidades didácticas (introducción + 12 de temario) · 80% práctico · Estilo conversacional
 
 **CC BY-SA 4.0** — [Sergi Garcia Barea](https://github.com/sergarb1)
 
@@ -18,9 +18,10 @@
 Un paquete IP viaja desde que nace en un navegador hasta la nube. Cada unidad avanza con él.
 
 ```
-🚪 Bienvenida  → 📡 Cable y trama  → 🧮 IP y subnetting → 🔀 Switching
-🌉 Trunking    → 🧭 Rutas estáticas → 🗣️ OSPF           → 🛡️ ACLs
-🌐 NAT/PAT     → 🗄️ DHCP/DNS/NTP    → 📶 Inalámbrico    → 🔁 Alta disponibilidad
+🚪 Bienvenida  → 📡 Medios        → 🔗 Trama y capa 2 → 🧮 IP y subnetting
+🔀 Switching   → 🌉 Trunking      → 🗄️ DHCP/DNS/NTP   → 🧭 Rutas estáticas
+🗣️ OSPF        → 🌐 NAT/PAT       → 🛡️ ACLs           → 📶 Inalámbrico
+🔁 Alta disponibilidad
 ```
 
 ---
@@ -30,15 +31,16 @@ Un paquete IP viaja desde que nace en un navegador hasta la nube. Cada unidad av
 | Título | Nombre didáctico | Emoji |
 |---|---|---|
 | Introducción | Bienvenida al mundo de las redes | 🚪 |
-| Ethernet, medios de transmisión y cableado | Donde todo viaje empieza por un cable | 📡 |
+| Medios de transmisión y cableado | Donde todo viaje empieza por un cable | 📡 |
+| Capa de enlace y trama Ethernet | El sobre que envuelve cada viaje por el cable | 🔗 |
 | Direccionamiento IP y subnetting | La calculadora maldita, ahora con IPv6 | 🧮 |
 | Switching y VLAN | El cerebro de la red local | 🔀 |
 | Trunking y enrutamiento inter-VLAN | Un enlace, muchas VLANs | 🌉 |
+| Servicios de red: DHCP, DNS y NTP | Los que trabajan en silencio | 🗄️ |
 | Enrutamiento estático | El GPS de bolsillo | 🧭 |
 | Enrutamiento dinámico con OSPF | El router que habla solo | 🗣️ |
-| ACLs y seguridad de red | Filtrar sin romper la red | 🛡️ |
 | NAT y PAT | Salir a Internet sin quemar IPs | 🌐 |
-| Servicios de red: DHCP, DNS y NTP | Los que trabajan en silencio | 🗄️ |
+| ACLs y seguridad de red | Filtrar sin romper la red | 🛡️ |
 | Redes inalámbricas | Libertad sin cables, con vecinos incluidos | 📶 |
 | Alta disponibilidad y redundancia | Que no se caiga nunca | 🔁 |
 
@@ -72,7 +74,7 @@ Un paquete IP viaja desde que nace en un navegador hasta la nube. Cada unidad av
 | **Idioma** | Castellano (raíz `/`) |
 | **Buscador** | Pagefind integrado (Starlight) |
 | **Diagramas** | Excalidraw (MCP `mcp-excalidraw-server`) → SVG en `public/diagrams/` + fuentes `.excalidraw`, con control de calidad (`npm run check:diagrams`); D2 (Terrastruct) como alternativa vía `npm run diagrams` |
-| **Fotos** | Stock Pexels/Unsplash en `public/photos/` (solo objetos físicos; hoy solo en la unidad de Ethernet) |
+| **Fotos** | Stock Pexels/Unsplash en `public/photos/` (solo objetos físicos; hoy solo en la unidad de medios) |
 | **Exportación** | PDF (starlight-to-pdf) · EPUB + DOCX (Pandoc 3.11) |
 | **Despliegue** | GitHub Actions → GitHub Pages (`main` branch) |
 
@@ -111,13 +113,14 @@ npm run check:diagrams  # Control de calidad de los diagramas Excalidraw
 ```
 src/
 ├── content/
-│   ├── docs/                     → 12 unidades en Markdown
+│   ├── docs/                     → 13 unidades en Markdown
 │   │   ├── index.md              → Portada con hero + cards
 │   │   ├── 01-introduccion.md …  → Índice de cada unidad
 │   │   ├── 01-introduccion/      → Puntos (01-…, 10-mapa, 08-glosario, 09-preguntas)
-│   │   ├── 02-ethernet-cableado/ → Ethernet (01-…07 teoría, 08 OSI, 09 trama, 10 cierre)
-│   │   ├── 03-direccionamiento-ip/ … 12-alta-disponibilidad/
-│   │   └── boletines/            → Ejercicios: inicial/avanzado + resueltos (texto puro, sin imágenes); variante packettracer en Ethernet y dirección IP
+│   │   ├── 02-medios-y-cableado/ → Medios (01-…07 teoría capa 1, 08 cierre)
+│   │   ├── 03-capa-de-enlace/    → OSI, MAC, trama, encapsulación (01-…05)
+│   │   ├── 04-direccionamiento-ip/ … 13-alta-disponibilidad/
+│   │   └── boletines/            → Ejercicios: inicial/avanzado + resueltos (texto puro, sin imágenes); variante packettracer en medios y dirección IP
 │   └── config.ts                 → Colecciones de contenido
 ├── styles/
 │   └── custom.css                → Tema azul + glassmorphism + print
@@ -129,8 +132,8 @@ docs/
 ├── network-topology-icons.excalidrawlib → Librería local de iconos
 └── excalidraw-setup.md           → Guía reutilizable del MCP Excalidraw
 public/
-├── diagrams/                     → SVG + fuentes .excalidraw (introducción, Ethernet y dirección IP)
-├── photos/                       → Fotos stock (solo en Ethernet: UTP, RJ45, fibra, patch panel)
+├── diagrams/                     → SVG + fuentes .excalidraw (introducción, medios, capa de enlace y dirección IP)
+├── photos/                       → Fotos stock (solo en medios: UTP, RJ45, fibra, patch panel)
 ├── portada.svg                   → Portada web / PDF / EPUB
 ├── pdf/                          → ApuntesPAR.pdf
 └── epub/                         → ApuntesPAR.epub

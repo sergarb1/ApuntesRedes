@@ -1,186 +1,56 @@
 ---
-title: Boletín de Direccionamiento IP — Avanzado (Resuelto)
-description: Soluciones de ejercicios avanzados de subnetting, VLSM, cabecera IPv4, ARP y fragmentación
+title: Boletín de Capa de enlace y trama Ethernet — Avanzado (Resuelto)
+description: Soluciones de los ejercicios avanzados de MAC, trama, encapsulación y diagnóstico
 ---
 
-# ✅ Boletín de Direccionamiento IP — Avanzado (Resuelto)
+# 💪 Boletín de Capa de enlace y trama Ethernet — Avanzado (Resuelto)
 
 ---
 
-## 1. Diseño VLSM
+## 1. Lectura de bits: ¿qué MAC es esta?
 
-Red base: 172.16.0.0/24 (256 direcciones totales)
+a) `02` = `00000010`: el primer bit (más significativo, bit I/G) es **0** → **unicast**.
+b) El segundo bit (U/L) es **1** → **administrada localmente** (alguien la ha cambiado).
+c) Binario: `0000 0010` → I/G = 0 (individual, una sola tarjeta) · U/L = 1 (local). Una MAC `02:…` es lo típico de una interfaz con spoofing activo.
 
-**Ordenando de mayor a menor:** Producción (60) → Desarrollo (30) → Testing (10) → 3 enlaces WAN (2 c/u)
+## 2. La trama en hex
 
-| Subred | Hosts | CIDR | Red | Rango | Broadcast |
-|---|---|---|---|---|---|
-| Producción | 60 (62) | /26 | 172.16.0.0 | .1 - .62 | .63 |
-| Desarrollo | 30 (30) | /27 | 172.16.0.64 | .65 - .94 | .95 |
-| Testing | 10 (14) | /28 | 172.16.0.96 | .97 - .110 | .111 |
-| WAN 1 | 2 (2) | /30 | 172.16.0.112 | .113 - .114 | .115 |
-| WAN 2 | 2 (2) | /30 | 172.16.0.116 | .117 - .118 | .119 |
-| WAN 3 | 2 (2) | /30 | 172.16.0.120 | .121 - .122 | .123 |
+a) Destino `ff:ff:ff:ff:ff:ff` → **broadcast**: la reciben todas las tarjetas de la LAN.
+b) Origen `00:1a:2b:…` → el OUI `00:1A:2B` corresponde al fabricante de esa tarjeta (según IEEE).
+c) EtherType **`08 06` = ARP** (0x0806). Quien pregunta es el emisor (necesita una MAC); **responderá** quien tenga la IP consultada, en **unicast** hacia el emisor.
 
-**Sobran:** 172.16.0.124 - 172.16.0.255 = **132 direcciones**. Ojo: ese hueco no es una subred alineada; la mayor subred alineada que cabe entera dentro es **172.16.0.128/25** (126 hosts útiles) y las direcciones .124-.127 se quedarían sin aprovechar por no estar alineadas.
+## 3. Diagnóstico por capas (OSI en acción)
 
-## 2. Diagnóstico DHCP
+- **Síntoma A — Capa 2 (trama), con posible raíz en capa 1.** El FCS erróneo lo detecta la capa 2, pero casi siempre la causa es física: señal marginal (atenuación, diafonía, EMI, crimpado flojo) que el tester de continuidad no mide. Herramientas: cable de prueba conocido, revisión del tramo, certificador de categoría; Wireshark para contar errores. **El tester al 100% NO descarta la capa 1:** solo mide continuidad, no calidad de señal.
+- **Síntoma B — Capa 1 (física).** LED apagado = no hay enlace: sin negociación no hay bits. Revisa cable, conector, puerto y NIC.
+- **Síntoma C — Capa 2 (dirección).** Dos equipos con la misma MAC: el switch no distingue a quién mandar (la tabla salta entre puertos). Herramienta: tabla MAC del switch (`show mac address-table`) + `ipconfig /all` / `ip link` en cada PC. Solución: quitar el clonado.
 
-a) Es una **dirección APIPA** (Automatic Private IP Addressing), rango 169.254.0.0/16.
+> 💡 **Clave de examen:** si no hay LED, ni mires Wireshark: capa 1. Y si hay LED, el tester pasa pero aparecen FCS erróneos o MACs duplicadas, el problema es de la trama (capa 2).
 
-b) Windows asigna automáticamente una IP APIPA cuando el **servidor DHCP no responde** o no está disponible.
+## 4. El viaje con sus MACs
 
-c) **Soluciones:**
-   1. Verificar que el servidor DHCP esté encendido y funcionando
-   2. Comprobar la conectividad con el servidor DHCP (¿está en la misma red? ¿hay switches funcionando?)
-   3. Hacer `ipconfig /release` y `ipconfig /renew` para forzar una nueva solicitud DHCP
-   4. Asignar una IP estática si el DHCP no es recuperable
+| Tramo | MAC origen → destino | IP origen → destino |
+|---|---|---|
+| PC → router | `AAAA…01` → `BBBB…01` | `10.0.0.5` → `93.184.216.34` |
+| Router → ISP | `BBBB…02` → MAC del siguiente salto | `10.0.0.5` → `93.184.216.34` |
 
-## 3. Subnetting binario
+a) **Nunca.** La trama solo existe dentro de tu LAN: en cuanto sale del router, se rehace con otras MACs. El servidor solo ve la IP de origen, no tu MAC.
+b) **ARP** (request broadcast: «¿quién tiene 192.168.1.1?» → reply unicast con su MAC).
 
-a) **IP en binario:** 200.100.50.30 = 11001000.01100100.00110010.00011110
-   **Máscara en binario:** 255.255.255.224 = 11111111.11111111.11111111.11100000
+## 5. Matemáticas de la trama
 
-b) **AND → Dirección de red:** 11001000.01100100.00110010.00000000 = **200.100.50.0/27**
+a) 14 (cabecera) + 100 (payload) + 4 (FCS) = **118 bytes**.
+b) **Dos tramas** (1500 + 100). El **payload máximo de la trama es 1500 bytes** (MTU); lo que pasa de eso no cabe en una trama.
+c) La **fragmentación de IP** (capa 3): si el paquete supera la MTU del enlace, el router lo parte en fragmentos. (Los routers de hoy evitan el clásico Path MTU Discovery bloqueado… y las redes IPv6 ya no fragmentan: avísalo con ICMPv6.)
 
-c) **Broadcast:** 200.100.50.31 (todos los bits de host a 1: 00011111)
+## 6. Caso de laboratorio: el gateway que no responde
 
-d) **Hosts útiles:** 2⁵ - 2 = 32 - 2 = **30 hosts**
+a) Quedan descartados: tu PC, el cable, el switch y la PC `192.168.1.60` (la LAN funciona). Siguen en pie: el router (`192.168.1.1`), su enlace hacia el ISP y lo que hay más allá.
+b) **`arp -a`** (Windows/Linux): muestra la tabla IP ↔ MAC; para `192.168.1.1` debes ver la MAC del router.
+c) Esperas **la MAC real del router** en la interfaz LAN. Si la tabla muestra `00:00:00:00:00:00` (o no hay entrada), **no se pudo completar el ARP**: sin MAC del gateway no hay trama hacia fuera, y por eso no sale nada aunque tu IP esté bien. Suele ser: gateway mal escrito en la IP, interfaz mal, o el router apagado.
 
-e) **200.100.50.62 → binario:** 11001000.01100100.00110010.00111110
-   Red de .62 con /27: 200.100.50.32/27 (bits de red fijos, 00100000)
-   **NO está en la misma subred.** .30 está en 200.100.50.0/27, .62 está en 200.100.50.32/27.
+## 7. 802.3 vs 802.11 en la práctica
 
-## 4. Resumen de subredes
-
-a) **Bits a pedir:** 2ⁿ = 8 → n = 3 bits
-
-b) Máscara original: /16. Nuevos bits: 16 + 3 = **/19** (255.255.224.0)
-
-c) **Hosts por subred:** 32 - 19 = 13 bits de host → 2¹³ - 2 = **8190 hosts**
-
-d) **Subredes:**
-   - 10.0.0.0/19
-   - 10.0.32.0/19
-   - 10.0.64.0/19
-   - 10.0.96.0/19
-   - 10.0.128.0/19
-   - 10.0.160.0/19
-   - 10.0.192.0/19
-   - 10.0.224.0/19
-
-(El incremento entre subredes es 32 en el tercer octeto: 2¹⁹⁻¹⁶ = 2³ = 32)
-
-## 5. Sumarización de rutas
-
-a) **Ruta resumida:** 192.168.0.0/22
-
-**Razonamiento:**
-- 192.168.0.0/24: bits 22-23 = 00
-- 192.168.1.0/24: bits 22-23 = 01
-- 192.168.2.0/24: bits 22-23 = 10
-- 192.168.3.0/24: bits 22-23 = 11
-
-Los primeros 22 bits son idénticos. La ruta /22 engloba las 4 subredes.
-
-b) **Máscara:** /22 (255.255.252.0)
-
-c) **IPs totales:** 2^(32-22) - 2 = 2¹⁰ - 2 = **1022 hosts** (1024 direcciones totales)
-
-## 6. Plan de direccionamiento para una empresa
-
-Red base: 10.0.0.0/22 (1024 direcciones, 1022 hosts útiles)
-
-**Ordenando de mayor a menor:**
-- Administración: 200 → /24 (254 hosts)
-- Producción: 100 → /25 (126 hosts)
-- IT: 50 → /26 (62 hosts)
-- Ventas: 50 → /26 (62 hosts)
-- Almacén: 20 → /27 (30 hosts)
-- Dirección: 10 → /28 (14 hosts)
-- Enlace /30
-
-**Plan VLSM:**
-
-| Subred | CIDR | Red | Rango | Broadcast |
-|---|---|---|---|---|
-| Administración | /24 | 10.0.0.0 | .1 - .254 | .255 |
-| Producción | /25 | 10.0.1.0 | .1 - .126 | .127 |
-| IT | /26 | 10.0.1.128 | .129 - .190 | .191 |
-| Ventas | /26 | 10.0.1.192 | .193 - .254 | .255 |
-| Almacén | /27 | 10.0.2.0 | .1 - .30 | .31 |
-| Dirección | /28 | 10.0.2.32 | .33 - .46 | .47 |
-| Enlace | /30 | 10.0.2.48 | .49 - .50 | .51 |
-
-**Sobran:** 10.0.2.52 - 10.0.3.255 → **~460 IPs**
-
-**Problemas si crece al doble:** Si cada departamento duplica sus hosts, Administración necesitaría /23 (510 hosts), lo que rompe el plan VLSM actual. Habría que rediseñar usando una red base más grande (ej. /20) desde el principio.
-
-## 7. VLSM con requisitos mínimos
-
-Red base: 192.168.1.0/24 (256 direcciones, 254 hosts útiles)
-
-**Ordenando de mayor a menor:** Producción (50) → Comercial (25) → Soporte (10) → Enlace WAN (2)
-
-| Subred | Resolviendo | CIDR | Red | Rango | Broadcast |
-|---|---|---|---|---|---|
-| Producción | 2ʰ−2 ≥ 50 → h=6 (62) | /26 | 192.168.1.0 | .1 - .62 | .63 |
-| Comercial | 2ʰ−2 ≥ 25 → h=5 (30) | /27 | 192.168.1.64 | .65 - .94 | .95 |
-| Soporte | 2ʰ−2 ≥ 10 → h=4 (14) | /28 | 192.168.1.96 | .97 - .110 | .111 |
-| Enlace WAN | 2ʰ−2 ≥ 2 → h=2 (2) | /30 | 192.168.1.112 | .113 - .114 | .115 |
-
-b) **Queda libre** desde 192.168.1.116 hasta 192.168.1.255 = **140 direcciones**. Ojo otra vez con la alineación: dentro de ese hueco la mayor subred alineada es **192.168.1.128/25** (126 hosts útiles) y las direcciones .116-.127 no se pueden aprovechar sin romper la alineación.
-
-**Comprobación del encadenado:** Producción acaba en .63 → Comercial arranca en .64. Comercial acaba en .95 → Soporte arranca en .96. Soporte acaba en .111 → el enlace WAN arranca en .112.
-
-## 8. Conflicto de IP
-
-a) **Qué ocurre:** cuando el PC pide IP por DHCP recibe 192.168.1.20, pero la impresora ya la tiene en uso. Hay **duplicado de dirección**: uno de los dos (o ambos, según el momento) pierde conectividad, aparecen errores de "duplicate address", y el tráfico hacia esa IP puede ir a uno o a otro. El servidor DHCP puede detectarlo *antes* de conceder la IP haciendo un ping o un ARP probe a la dirección; si hay respuesta, la descarta y la registra en la tabla de conflictos.
-
-b) **Cómo lo detecta:** en el router, el comando:
-
-```
-show ip dhcp conflict
-```
-
-Muestra las direcciones que el servidor DHCP encontró en conflicto (con el método de detección y la fecha). Si la impresora estática sigue dentro del rango sin excluir, verás la entrada y podrás actuar.
-
-c) **Cómo prevenirlo:** desde el diseño, **excluir las IPs estáticas** del pool DHCP antes de que reparta nada:
-
-```
-ip dhcp excluded-address 192.168.1.1 192.168.1.30
-```
-
-Así el router nunca concede las direcciones fijas (impresoras, servidores, el propio gateway). Alternativa: usar **reservas DHCP** por MAC para los equipos que quieras fijos sin configurarlos a mano.
-
-## 9. Fragmentación real (túnel y MTU)
-
-a) **Frag 1 (salto Gigabit, MTU 1500):** payload por fragmento = 1500 − 20 = 1480 (ya múltiplo de 8) → 5000 B → **4 fragmentos**: 1480 + 1480 + 1480 + 560.
-
-b) **Refragmentación en el WAN (MTU 1000):** payload útil = 1000 − 20 = 980… pero 980 **no** es múltiplo de 8; el mayor múltiplo de 8 ≤ 980 es **976**. Los fragmentos 1-3 (1480 B) no caben: cada uno se trocea en 976 + 504. El fragmento 4 (560 B) ya cabe entero. Total: **7 fragmentos**.
-
-| Frag | Datos | MF | Offset (×8) |
-|---|---|---|---|
-| 1a | 976 | 1 | 0 |
-| 1b | 504 | 1 | 122 (976/8) |
-| 2a | 976 | 1 | 185 |
-| 2b | 504 | 1 | 307 (2456/8) |
-| 3a | 976 | 1 | 370 |
-| 3b | 504 | 1 | 492 (3936/8) |
-| 4 | 560 | **0** | 555 |
-
-(Comprobación: 3 × (976 + 504) + 560 = 3 × 1480 + 560 = **5000 B** ✓. El offset de cada pieza = byte absoluto que empieza a contar ÷ 8, así que el trozo 1b arranca en el byte 976 → 122.)
-
-c) Síntoma clásico: **el ping pequeño va y el grande se corta o da "Packet needs to be fragmented but DF set"**; con `tracert` los saltos intermedios pueden no responder si el problema es de encapsulado/túnel. En Windows: `ping -f -l 1472` (prueba de Path MTU) fallando en el salto problemático.
-
-d) **No.** En IPv6 solo el **origen** fragmenta; los routers intermedios no fragmentan (Path MTU Discovery / Packet Too Big de ICMPv6).
-
-## 10. ARP, Wireshark y capas
-
-a) Porque la capa 2 no puede montar la trama sin la **MAC destino**. ICMP ya tiene las IPs, pero el "sobre" Ethernet necesita la dirección de enlace del gateway (o del host): ARP la obtiene antes de enviar el primer paquete IP.
-
-b) Sin reply, el host **no tiene MAC destino** → no construye la trama → el ICMP "se queda" en la pila. Falla en la frontera **capa 2/3 de la LAN** (sin ARP no hay trama). El ping no sale "por la puerta" (gateway).
-
-c) **No culpes de ARP:** si `arp -a` trae la MAC del gateway y el ping al gateway va, la resolución local funciona. El fallo a `8.8.8.8` es **ruta por defecto, NAT, firewall o DNS** (capa 3+ / servicio).
-
-d) Dentro va un **paquete IPv4** (EtherType `0x0800`). Las IPs van en la **cabecera IPv4**: campo **IP origen** = 192.168.1.50, campo **IP destino** = 192.168.1.1 (además del protocolo = 1 para ICMP).
+a) **802.11** — la trama WiFi es la única de capa 2 que puede llevar hasta 4 direcciones (receptor, transmisor, receptor final, transmisor final).
+b) **En el AP**, en la frontera con la LAN cableada: descifra la trama 802.11 y la reenvía como trama Ethernet (o la vuelve a cifrar si el destino también está en WiFi).
+c) Porque el EtherType va **dentro de la trama**, y los dos estándares son **capa 2** con entregas locales equivalentes: arriba, la capa 3 recibe siempre "un paquete IPv4" sin importar si viajó por cobre, fibra o aire.

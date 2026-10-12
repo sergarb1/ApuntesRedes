@@ -1,104 +1,129 @@
 ---
-title: Boletín de Switching y VLAN — Inicial
-description: Ejercicios básicos de Switching, STP y VLAN
+title: Boletín de Direccionamiento IP — Inicial
+description: Ejercicios básicos de IPv4, cabecera, ARP, fragmentación y subnetting
 ---
 
-# 📝 Boletín de Switching y VLAN — Inicial
+# 📝 Boletín de Direccionamiento IP — Inicial
 
-> Ejercicios básicos para afianzar los conceptos de switching, STP y VLAN.
+> Ejercicios básicos para afianzar los conceptos de direccionamiento IPv4, máscaras, cabecera, ARP y fragmentación.
 
 ---
 
-## 1. ¿Qué hace el switch?
+## 1. Conversión binario
 
-Relaciona la situación con la acción del switch:
+Convierte a binario (8 bits):
 
-| Situación | Acción |
+a) 192
+b) 10
+c) 255
+d) 0
+
+## 2. Conversión a decimal
+
+Convierte a decimal:
+
+a) 11000000
+b) 10101000
+c) 00001010
+d) 11111111
+
+## 3. ¿Qué máscara es?
+
+Relaciona la notación CIDR con la máscara decimal (escribe la letra):
+
+| CIDR | Letra |
 |---|---|
-| 1. Llega una trama con MAC destino conocida | a) Inunda por todos los puertos menos el origen |
-| 2. Llega una trama con MAC destino desconocida | b) Reenvía solo por el puerto correspondiente |
-| 3. Llega una trama broadcast | c) Inunda por todos los puertos |
+| /24 | ___ |
+| /16 | ___ |
+| /30 | ___ |
+| /8 | ___ |
 
-## 2. Verdadero o falso
-
-a) Un switch segmenta los dominios de colisión.
-b) Un switch segmenta los dominios de broadcast.
-c) STP evita bucles en redes conmutadas.
-d) RSTP converge más rápido que STP.
-e) La tabla MAC de un switch se llama tabla ARP.
-f) Cada VLAN creada en el switch es un dominio de broadcast independiente.
-
-## 3. Estados STP
-
-Ordena los estados STP por los que pasa un puerto desde que se activa hasta que reenvía tráfico:
-
-a) Learning
-b) Forwarding
-c) Blocking
-d) Listening
-
-## 4. Identifica el rol
-
-Indica qué rol STP tiene cada puerto:
-
-a) Puerto del Root Bridge hacia un switch no-root
-b) Puerto que mira hacia el Root Bridge (en un switch no-root)
-c) Puerto bloqueado que proporciona un camino alternativo
-
-## 5. ¿Qué comando?
-
-Relaciona el comando con su función:
-
-| Comando | Función |
+| Opciones de máscara | |
 |---|---|
-| 1. `show mac address-table` | a) Ver estado STP |
-| 2. `show spanning-tree` | b) Configurar PortFast |
-| 3. `spanning-tree portfast` | c) Ver tabla MAC del switch |
-| 4. `switchport access vlan 10` | d) Asignar el puerto a la VLAN 10 |
+| a) | 255.255.255.252 |
+| b) | 255.255.255.0 |
+| c) | 255.255.0.0 |
+| d) | 255.0.0.0 |
 
-## 6. Tormenta de broadcast
+## 4. Verdadero o falso
 
-¿Qué es necesario para que ocurra una tormenta de broadcast?
+a) Una dirección IPv4 tiene 48 bits.
+b) 192.168.1.256 es una IP válida.
+c) La dirección de broadcast de 192.168.1.0/24 es 192.168.1.255.
+d) DHCP asigna IPs automáticamente.
+e) Las IPs privadas pueden viajar por Internet.
 
-a) Un solo switch con muchos PCs
-b) Un bucle en la red (switches conectados formando un círculo)
-c) Un cable defectuoso
-d) Un router mal configurado
+## 5. Calcula hosts
 
-## 7. Reenvío de tramas y la tabla CAM
+¿Cuántos hosts útiles tiene cada subred?
 
-Observa la tabla CAM de un switch:
+a) /24
+b) /27
+c) /30
+d) /29
 
-```
-Vlan    Mac Address       Type        Ports
-----    -----------       --------    -----
-   1    0050.7966.6800    DYNAMIC     Fa0/1
-   1    0050.7966.6801    DYNAMIC     Fa0/2
-   1    00D0.BC96.1A01    DYNAMIC     Fa0/3
-```
+## 6. Identifica el tipo
 
-Indica qué hace el switch en cada caso:
+Indica si cada IP es pública, privada o especial:
 
-a) Llega una trama por Fa0/2 con MAC origen `0050.7966.6801` y destino `00D0.BC96.1A01`.
-b) Llega una trama por Fa0/1 con MAC origen `0050.7966.6800` y destino `0050.7966.6802` (desconocida).
-c) Llega una trama por Fa0/3 con destino `FFFF.FFFF.FFFF` (broadcast).
-d) Llega una trama por Fa0/4 con MAC origen `0050.7966.6801`, una MAC que ya estaba aprendida en Fa0/2. ¿Qué hace el switch con la tabla CAM?
+a) 10.0.0.15
+b) 8.8.8.8
+c) 192.168.1.1
+d) 127.0.0.1
+e) 172.16.0.100
+f) 169.254.1.1
 
-**Pista:** si la MAC destino está en la tabla, reenvío selectivo; si no está, inundo. Y si la misma MAC origen aparece por un puerto distinto, la tabla se actualiza con el puerto más reciente.
+## 7. Calcula la dirección de red
 
-## 8. Estados STP
+Para cada par de IP y máscara, haz el **AND** bit a bit y di cuál es la **dirección de red**:
 
-Completa la tabla de estados STP:
+a) IP: 192.168.1.37 · Máscara: 255.255.255.0
+b) IP: 10.0.0.150 · Máscara: 255.0.0.0
+c) IP: 172.16.0.200 · Máscara: 255.255.255.128
+d) IP: 192.168.1.66 · Máscara: 255.255.255.192
 
-| Estado | ¿Reenvía tráfico? | ¿Aprende MACs? | Tiempo |
-|---|---|---|---|
-| Blocking | No | ... | ... |
-| Listening | ... | No | 15 s |
-| Learning | No | ... | ... |
-| Forwarding | ... | Sí | Indefinido |
+**Pista:** pasa el octeto "mágico" (el último de la máscara que no es 255) a binario y haz el AND con el octeto correspondiente de la IP. El resto de octetos se copian tal cual (si la máscara es 255) o se ponen a 0 (si la máscara es 0).
 
-a) ¿Cuál es el orden exacto de los estados desde que se activa el puerto?
-b) ¿Cuánto tarda un puerto STP en pasar de blocking a forwarding si no hay fallos?
-c) ¿En qué estado está un puerto que ya reenvía tráfico y aprende MACs?
+## 8. Subredes iguales
 
-**Pista:** solo Learning aprende sin reenviar, y solo Forwarding reenvía. Suma los tiempos de los estados intermedios.
+Divide la red **192.168.5.0/24** en **4 subredes del mismo tamaño**.
+
+a) ¿Cuántos bits debes prestar a la máscara?
+b) ¿Cuál es la nueva máscara (CIDR y decimal)?
+c) ¿Cuántos hosts útiles tiene cada subred?
+d) Enumera las 4 direcciones de red con su rango de hosts.
+
+## 9. Cabecera IPv4
+
+Relaciona cada campo de la cabecera con su función:
+
+| Campo | Función |
+|---|---|
+| 1. TTL | a) Dice qué hay dentro: TCP (6), UDP (17), ICMP (1) |
+| 2. Protocolo | b) IP origen y destino del paquete |
+| 3. IP origen / destino | c) Contador de saltos; a 0 el paquete se descarta |
+| 4. Offset + flags MF | d) Coordinan la fragmentación y el reensamblado |
+
+V/F:
+
+e) La cabecera IPv4 mínima mide 20 bytes.
+f) El checksum de la cabecera IP protege el payload de los datos.
+g) TTL evita bucles de rutas indefinidas.
+
+## 10. ARP en la red local
+
+Una PC `192.168.1.10` quiere hacer ping a `192.168.1.20` y su tabla ARP está vacía.
+
+a) ¿Qué mensaje ARP se envía primero y con qué dirección MAC de destino (capa 2)?
+b) ¿Quién contesta y con qué tipo de mensaje?
+c) ¿Qué guarda la PC en su tabla al terminar? ¿Con qué comando lo compruebas en Windows?
+d) ¿ARP resuelve IP→MAC o MAC→IP?
+
+## 11. MTU y fragmentación
+
+Un host envía un datagrama IPv4 de **4000 bytes de datos** + 20 de cabecera por un enlace con **MTU 1500**.
+
+a) ¿Cuántos bytes de payload caben en cada fragmento (recuerda el múltiplo de 8 y la cabecera)?
+b) ¿Cuántos fragmentos salen en total? ¿Cuánto mide el último?
+c) ¿Qué flag indica al destino que aún faltan fragmentos?
+d) ¿Quién reensambla: el router intermedio o el host destino?

@@ -18,17 +18,18 @@ const outRoot = path.join(root, 'docx');
 
 const unitSlugs = [
   '01-introduccion',
-  '02-ethernet-cableado',
-  '03-direccionamiento-ip',
-  '04-switching',
-  '05-trunking-inter-vlan',
-  '06-servicios-red',
-  '07-enrutamiento-estatico',
-  '08-ospf',
-  '09-nat-pat',
-  '10-acl-seguridad',
-  '11-redes-inalambricas',
-  '12-alta-disponibilidad',
+  '02-medios-y-cableado',
+  '03-capa-de-enlace',
+  '04-direccionamiento-ip',
+  '05-switching',
+  '06-trunking-inter-vlan',
+  '07-servicios-red',
+  '08-enrutamiento-estatico',
+  '09-ospf',
+  '10-nat-pat',
+  '11-acl-seguridad',
+  '12-redes-inalambricas',
+  '13-alta-disponibilidad',
 ];
 
 function stripFrontmatter(content) {

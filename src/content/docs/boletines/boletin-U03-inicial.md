@@ -1,129 +1,83 @@
 ---
-title: Boletín de Direccionamiento IP — Inicial
-description: Ejercicios básicos de IPv4, cabecera, ARP, fragmentación y subnetting
+title: Boletín de Capa de enlace y trama Ethernet — Inicial
+description: Ejercicios básicos de modelo OSI, direcciones MAC, trama Ethernet y encapsulación
 ---
 
-# 📝 Boletín de Direccionamiento IP — Inicial
+# 📝 Boletín de Capa de enlace y trama Ethernet — Inicial
 
-> Ejercicios básicos para afianzar los conceptos de direccionamiento IPv4, máscaras, cabecera, ARP y fragmentación.
+> Ejercicios básicos para afianzar el mapa OSI, las direcciones MAC, la trama Ethernet y la encapsulación.
 
 ---
 
-## 1. Conversión binario
+## 1. Relaciona capa y PDU
 
-Convierte a binario (8 bits):
+Relaciona cada capa OSI con la PDU que "viaja" en ella:
 
-a) 192
-b) 10
-c) 255
-d) 0
-
-## 2. Conversión a decimal
-
-Convierte a decimal:
-
-a) 11000000
-b) 10101000
-c) 00001010
-d) 11111111
-
-## 3. ¿Qué máscara es?
-
-Relaciona la notación CIDR con la máscara decimal (escribe la letra):
-
-| CIDR | Letra |
+| Capa | PDU |
 |---|---|
-| /24 | ___ |
-| /16 | ___ |
-| /30 | ___ |
-| /8 | ___ |
+| 1 · Física | a) Paquete |
+| 2 · Enlace | b) Bits |
+| 3 · Red | c) Trama |
+| 4 · Transporte | d) Segmento |
 
-| Opciones de máscara | |
+## 2. Anatomía de una MAC
+
+Contesta sobre la dirección `00:1A:2B:3C:4D:5E`:
+
+a) ¿Cuántos bytes tiene?
+b) ¿Cuáles forman el OUI y quién lo asigna?
+c) ¿Qué identifica la parte restante?
+
+## 3. Unicast, multicast o broadcast
+
+Indica de qué tipo es cada dirección MAC:
+
+a) `FF:FF:FF:FF:FF:FF`
+b) `00:1A:2B:3C:4D:5E`
+c) `01:00:5E:11:22:33`
+
+## 4. Verdadero o falso (MAC e IP)
+
+a) La MAC cambia cada vez que el equipo se conecta a otra red.
+b) La IP de destino se conserva de principio a fin del viaje por Internet.
+c) Las MACs de la trama se rehacen en cada salto con router.
+d) El switch usa las IP para reenviar las tramas.
+
+## 5. Los campos de la trama Ethernet II
+
+Contesta sobre la trama Ethernet (cobre y fibra):
+
+a) ¿Qué tres campos de dirección/tipo lleva al principio de la trama?
+b) Si el EtherType es `0x0800`, ¿qué protocolo hay dentro?
+c) ¿Qué tamaño mínimo y máximo tiene el payload?
+d) ¿Qué significa FCS y qué pasa si no cuadra?
+
+## 6. Ordena la encapsulación
+
+Ordena estos pasos de envío (del 1 al 5):
+
+a) La trama se convierte en bits y salen por el medio
+b) El segmento TCP recibe una cabecera IP y se convierte en paquete
+c) Los datos de la aplicación se envuelven en una cabecera TCP (segmento)
+d) El paquete recibe cabecera Ethernet y FCS (trama)
+e) El navegador prepara los datos HTTP
+
+## 7. MAC o IP: ¿cuál?
+
+Relaciona cada frase con MAC o IP:
+
+| Frase | ¿MAC o IP? |
 |---|---|
-| a) | 255.255.255.252 |
-| b) | 255.255.255.0 |
-| c) | 255.255.0.0 |
-| d) | 255.0.0.0 |
+| 1. La escribe el fabricante | a) IP |
+| 2. Identifica el destino final en Internet | b) MAC |
+| 3. Se cambia en cada salto con router | b) MAC |
+| 4. La configuras tú o te la da el DHCP | a) IP |
 
-## 4. Verdadero o falso
+## 8. El sobre de la capa 2 (802.11 vs 802.3)
 
-a) Una dirección IPv4 tiene 48 bits.
-b) 192.168.1.256 es una IP válida.
-c) La dirección de broadcast de 192.168.1.0/24 es 192.168.1.255.
-d) DHCP asigna IPs automáticamente.
-e) Las IPs privadas pueden viajar por Internet.
+Indica V (verdadero) o F (falso) y corrige las falsas:
 
-## 5. Calcula hosts
-
-¿Cuántos hosts útiles tiene cada subred?
-
-a) /24
-b) /27
-c) /30
-d) /29
-
-## 6. Identifica el tipo
-
-Indica si cada IP es pública, privada o especial:
-
-a) 10.0.0.15
-b) 8.8.8.8
-c) 192.168.1.1
-d) 127.0.0.1
-e) 172.16.0.100
-f) 169.254.1.1
-
-## 7. Calcula la dirección de red
-
-Para cada par de IP y máscara, haz el **AND** bit a bit y di cuál es la **dirección de red**:
-
-a) IP: 192.168.1.37 · Máscara: 255.255.255.0
-b) IP: 10.0.0.150 · Máscara: 255.0.0.0
-c) IP: 172.16.0.200 · Máscara: 255.255.255.128
-d) IP: 192.168.1.66 · Máscara: 255.255.255.192
-
-**Pista:** pasa el octeto "mágico" (el último de la máscara que no es 255) a binario y haz el AND con el octeto correspondiente de la IP. El resto de octetos se copian tal cual (si la máscara es 255) o se ponen a 0 (si la máscara es 0).
-
-## 8. Subredes iguales
-
-Divide la red **192.168.5.0/24** en **4 subredes del mismo tamaño**.
-
-a) ¿Cuántos bits debes prestar a la máscara?
-b) ¿Cuál es la nueva máscara (CIDR y decimal)?
-c) ¿Cuántos hosts útiles tiene cada subred?
-d) Enumera las 4 direcciones de red con su rango de hosts.
-
-## 9. Cabecera IPv4
-
-Relaciona cada campo de la cabecera con su función:
-
-| Campo | Función |
-|---|---|
-| 1. TTL | a) Dice qué hay dentro: TCP (6), UDP (17), ICMP (1) |
-| 2. Protocolo | b) IP origen y destino del paquete |
-| 3. IP origen / destino | c) Contador de saltos; a 0 el paquete se descarta |
-| 4. Offset + flags MF | d) Coordinan la fragmentación y el reensamblado |
-
-V/F:
-
-e) La cabecera IPv4 mínima mide 20 bytes.
-f) El checksum de la cabecera IP protege el payload de los datos.
-g) TTL evita bucles de rutas indefinidas.
-
-## 10. ARP en la red local
-
-Una PC `192.168.1.10` quiere hacer ping a `192.168.1.20` y su tabla ARP está vacía.
-
-a) ¿Qué mensaje ARP se envía primero y con qué dirección MAC de destino (capa 2)?
-b) ¿Quién contesta y con qué tipo de mensaje?
-c) ¿Qué guarda la PC en su tabla al terminar? ¿Con qué comando lo compruebas en Windows?
-d) ¿ARP resuelve IP→MAC o MAC→IP?
-
-## 11. MTU y fragmentación
-
-Un host envía un datagrama IPv4 de **4000 bytes de datos** + 20 de cabecera por un enlace con **MTU 1500**.
-
-a) ¿Cuántos bytes de payload caben en cada fragmento (recuerda el múltiplo de 8 y la cabecera)?
-b) ¿Cuántos fragmentos salen en total? ¿Cuánto mide el último?
-c) ¿Qué flag indica al destino que aún faltan fragmentos?
-d) ¿Quién reensambla: el router intermedio o el host destino?
+a) El WiFi no es capa 2 porque no hay cable.
+b) La trama WiFi puede llevar hasta 4 direcciones MAC.
+c) La cabecera de la trama Ethernet lleva un FCS de 4 bytes.
+d) El switch examina el campo EtherType para decidir a qué puerto reenviar.

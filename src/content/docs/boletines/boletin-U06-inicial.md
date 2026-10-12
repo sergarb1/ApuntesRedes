@@ -1,76 +1,86 @@
 ---
-title: Boletín de Servicios de red — Inicial
-description: Ejercicios básicos de servicios de red (DHCP, DNS y NTP)
+title: Boletín de Trunking e inter-VLAN — Inicial
+description: Ejercicios básicos de VLANs
 ---
 
-# 📝 Boletín de Servicios de red — Inicial
+# 📝 Boletín de Trunking e inter-VLAN — Inicial
 
-> Ejercicios básicos para afianzar los conceptos de DHCP, DNS y NTP.
+> Ejercicios básicos para afianzar los conceptos de VLANs: tipos, 802.1Q, trunks e inter-VLAN routing.
 
 ---
 
-## 1. ¿Qué servicio soy?
+## 1. ¿Qué VLAN soy?
 
-Adivina el servicio por su descripción:
+Relaciona el tipo de VLAN con su descripción:
 
-a) Reparto direcciones IP a los equipos que se conectan a la red.
-b) Traduzco nombres de dominio en direcciones IP.
-c) Mantengo sincronizado el reloj de todos los dispositivos de la red.
-d) Me mencionas cada vez que escribes `www.google.com` en el navegador.
-
-## 2. Las cuatro fases de DHCP
-
-Ordena las fases de la negociación DORA:
-
-a) Request
-b) Offer
-c) Discover
-d) Acknowledge
-
-## 3. Verdadero o falso
-
-a) DHCP entrega una IP durante un tiempo limitado llamado concesión (lease).
-b) Un registro A de DNS relaciona un nombre con una dirección IPv6.
-c) NTP usa el puerto UDP 123.
-d) Si falla DHCP, puedes configurar la IP a mano pero no la puerta de enlace.
-e) El servidor DHCP puede entregar también máscara, gateway y servidores DNS.
-
-## 4. ¿Qué registro DNS?
-
-Relaciona cada situación con el registro adecuado:
-
-| Situación | Registro |
+| Tipo | Descripción |
 |---|---|
-| 1. dominio.com → 203.0.113.10 | a) CNAME |
-| 2. www → dominio.com (alias) | b) MX |
-| 3. dominio.com → 2001:db8::10 | c) A |
-| 4. El servidor de correo del dominio | d) AAAA |
-| 5. Saber quién es dueño de un dominio | e) PTR |
-| 6. 203.0.113.10 → dominio.com (inverso) | f) SOA/NS |
+| 1. VLAN de datos | a) Para teléfonos IP, con prioridad QoS |
+| 2. VLAN de voz | b) Para administrar el switch |
+| 3. VLAN nativa | c) Tráfico normal de usuario |
+| 4. VLAN de gestión | d) Sin etiquetar en el trunk |
 
-## 5. ¿Qué comando?
+## 2. Verdadero o falso
 
-Relaciona el comando con su función:
+a) Una VLAN segmenta el dominio de broadcast.
+b) El estándar de etiquetado VLAN es 802.1Q.
+c) Dos PCs en diferentes VLANs pueden comunicarse directamente sin router.
+d) Un trunk transporta tráfico de múltiples VLANs.
+e) La native VLAN por defecto es VLAN 1.
+
+## 3. Identifica
+
+¿Qué tipo de puerto es cada uno?
+
+a) Puerto que conecta un PC (solo una VLAN)
+b) Puerto que conecta dos switches (múltiples VLANs)
+
+## 4. Números
+
+Completa:
+
+a) ¿Cuántos bits tiene el VLAN ID en 802.1Q? ___
+b) ¿Cuántas VLANs permite el estándar? ___
+c) ¿Cuántos bytes añade 802.1Q a la trama? ___
+
+## 5. Relaciona
 
 | Comando | Función |
 |---|---|
-| 1. `ipconfig /renew` | a) Ver la caché DNS del equipo |
-| 2. `nslookup www.ejemplo.es` | b) Forzar nueva petición DHCP |
-| 3. `ipconfig /displaydns` | c) Consultar un servidor DNS concreto |
-| 4. `ipconfig /flushdns` | d) Vaciar la caché DNS |
+| 1. `switchport mode trunk` | a) Crear una VLAN |
+| 2. `vlan 10` | b) Configurar puerto como trunk |
+| 3. `show vlan brief` | c) Ver todas las VLANs |
+| 4. `encapsulation dot1Q 10` | d) Configurar subinterfaz para VLAN 10 |
 
-## 6. El reloj y los logs
+## 6. ¿Qué necesito?
 
-El switch del centro guarda sus logs, pero al revisarlos a las 9:00 aparece todo con fecha del día anterior y una hora sin sentido. ¿Qué servicio falta y por qué importa para diagnosticar incidencias?
+Para que PCs de VLAN 10 y VLAN 20 se comuniquen, necesito:
 
-## 7. DHCP helper
+a) Un trunk entre switches
+b) Un router o switch capa 3
+c) Un cable cruzado
+d) STP activado
 
-Un servidor DHCP está en la VLAN 10 (192.168.10.5). Los equipos de la VLAN 20 no reciben IP. ¿Qué falta configurar y en qué dispositivo?
+## 7. Comandos de resolución
 
-## 8. Verifica tu red
+Relaciona cada comando de verificación con su utilidad:
 
-En tu portátil, ejecuta `ipconfig /all` (o `ip addr` en Linux) e identifica:
+| Comando | Utilidad |
+|---|---|
+| 1. `show vlan brief` | a) Ver la native VLAN, VLANs permitidas y mismatches del trunk |
+| 2. `show interfaces trunk` | b) Ver la configuración completa actual del dispositivo |
+| 3. `show running-config` | c) Ver qué VLANs existen y qué puertos access tiene cada una |
 
-a) ¿Tu IP es DHCP o estática? ¿Cómo lo sabes?
-b) ¿Cuándo expira tu concesión?
-c) ¿Qué servidores DNS te han asignado?
+Además, responde:
+
+d) ¿Qué comando usarías para comprobar si las subinterfaces del router están Up/Up?
+
+## 8. V/F inter-VLAN
+
+Verdadero o falso sobre router-on-a-stick y SVIs:
+
+a) En router-on-a-stick, cada VLAN necesita su propia subinterfaz con `encapsulation dot1Q`.
+b) Un switch capa 3 enruta entre VLANs sin necesidad de router externo.
+c) El cuello de botella del router-on-a-stick es la única interfaz física que comparten todas las VLANs.
+d) Sin el comando `ip routing`, los SVIs de un switch capa 3 no enrutan entre VLANs.
+e) En router-on-a-stick, el tráfico de todas las VLANs pasa por la misma interfaz y por tanto se puede saturar con mucho tráfico.

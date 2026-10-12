@@ -1,75 +1,62 @@
 ---
-title: Boletín de Redes inalámbricas — Inicial (Resuelto)
-description: Soluciones de los ejercicios básicos de redes inalámbricas (WiFi)
+title: Boletín de ACL y seguridad — Inicial (Resuelto)
+description: Soluciones de los ejercicios básicos de ACLs y seguridad de red
 ---
 
-# ✅ Boletín de Redes inalámbricas — Inicial (Resuelto)
+# ✅ Boletín de ACL y seguridad — Inicial (Resuelto)
 
 ---
 
-## 1. ¿Quién soy?
+## 1. Verdadero o falso
 
-a) **IEEE 802.11** (familia: a/b/g/n/ac/ax/be…).
-b) El **SSID** (Service Set Identifier).
-c) El **punto de acceso (AP)**.
-d) Modo **ad hoc** (IBSS). Hoy en día, Wi-Fi Direct ha tomado el relevo.
-e) La **Wi-Fi Alliance**.
+a) **Verdadero.** Solo IP origen (o rechaza todo lo demás). Para origen+destino+puerto, extendida.
+b) **Falso.** Al final hay un **deny any** implícito, no permit.
+c) **Verdadero.** Protocolo (IP, TCP, UDP, ICMP…), IP origen/destino y puerto de origen/destino.
+d) **Verdadero.** Con solo líneas deny, el deny any implícito del final rechaza todo: la ACL corta el 100% del tráfico que evalúa.
+e) **Verdadero.** Y con contadores de matches por línea, muy útil para diagnosticar.
 
-## 2. Bandas y canales
+## 2. Números de ACL
 
-a) **2,4 GHz y 5 GHz** (y 6 GHz con WiFi 6E/7).
-b) **Tres**: 1, 6 y 11.
-c) La de **5 GHz** tolera mejor interferencias (más canales y menos aparatos antiguos); la de **2,4 GHz** llega más lejos y atraviesa mejor las paredes.
-d) **Canal 6**, el único de los tres que no has mencionado; si tu vecino inunda el 1 y el 11, en el 6 estás razonablemente limpio.
+| Tipo | Rango |
+|---|---|
+| Estándar | **1-99, 1300-1999** |
+| Extendida | **100-199, 2000-2699** |
 
-## 3. Verdadero o falso
+## 3. ¿Qué comando?
 
-a) **Falso.** WEP está roto desde hace décadas (se descifra en minutos). Solo aparece en museos y en el examen.
-b) **Verdadero.** PSK = Pre-Shared Key: todos comparten la misma contraseña.
-c) **Verdadero.** SAE (Simultaneous Authentication of Equals) sustituye al PSK y salva el four-way handshake clásico de los ataques offline.
-d) **Verdadero.** Decenas de canales de 20 MHz no solapados frente a los 3 de 2,4 GHz.
-e) **Falso.** El SSID oculto va en claro en las tramas de gestión; esconderlo no autentica a nadie. Seguridad real: WPA2/WPA3.
+1 → b (`ip access-group` = aplicar ACL a interfaz)
+2 → d (`access-list` numerada estándar)
+3 → a (`ip access-list extended` = ACL nombrada extendida)
+4 → c (`show access-lists` = ACLs y contadores)
 
-## 4. Seguridad: escala del mal
+## 4. Wildcard masks
 
-**Red abierta → WEP → WPA → WPA2 → WPA3** (de peor a mejor).
+La wildcard es el **inverso** de la máscara de subred (restando cada octeto a 255):
 
-## 5. WiFi 4 → WiFi 7
+| Máscara de subred | Wildcard | ¿Qué representa? |
+|---|---|---|
+| 255.255.255.0 | `0.0.0.255` | Los 24 primeros bits fijos: una red /24 |
+| 255.255.255.255 | `0.0.0.0` | Todos los bits fijos: **solo esa IP** (host exacto) |
+| 255.255.0.0 | `0.0.255.255` | Los 16 primeros bits fijos: una red /16 |
 
-1 → b (WiFi 4 = 802.11n)
-2 → c (WiFi 5 = 802.11ac)
-3 → a (WiFi 6 = 802.11ax)
-4 → e (WiFi 6E = 802.11ax en 6 GHz)
-5 → d (WiFi 7 = 802.11be)
+## 5. ACL básica
 
-## 6. Cobertura
+a) `access-list 10 permit 192.168.1.0 0.0.0.255`
+b) `interface g0/1` → `ip access-group 10 out`
 
-a) 1) Reposicionar el AP (centro, alto y despejado); 2) probar otra banda/canal (2,4 GHz llega más lejos; en 5 GHz prueba canales limpios); 3) añadir un segundo AP o un extensor/mesh bien colocado.
+## 6. Estándar o extendida
 
-b) El suelo absorbe y multiplica reflexiones; el metal actúa como jaula (atenuación enorme). La señal se irradia en forma aproximada de dona alrededor de las antenas: el AP alto y centrado cubre más.
+a) **Estándar.** Solo filtra por origen, y solo hay un origen que bloquear: el host escaneador. Además la estándar es más ligera.
+b) **Extendida.** Filtra protocolo (TCP) y puerto (80/443), cosa que la estándar no puede.
+c) **Estándar.** Es el escenario clásico de la estándar: menos CPU y solo interesa el origen.
 
-c) El **hidden node**: dos clientes que se oyen al AP pero no entre ellos transmiten a la vez y colisionan *en el AP*. Se manifiesta como rendimiento errático que empeora con más clientes y distancias largas. Mitigación: RTS/CTS, repartir mejor los APs.
+## 7. ¿Dónde aplico la ACL?
 
-## 7. Configuración mínima de un AP
+a) **Cerca del destino**: en R1, interfaz hacia LAN-B, sentido **out**. La estándar se coloca cerca del destino para no filtrar de más en el camino.
+b) **Cerca del origen**: en R1, interfaz hacia LAN-A, sentido **in**. La extendida filtra con precisión (protocolo+puerto), así que conviene cortar el tráfico lo antes posible y no consumir ancho de banda en vano.
 
-- SSID: `EstudioNet`
-- Seguridad: **WPA2/WPA3 Personal** (transición) o WPA3 si todos los equipos lo soportan
-- Contraseña: larga (16+ caracteres), no un diccionario (ejemplo de criterio: `clave-larga-no-obvia-2026`)
-- Banda: 2,4 GHz (llega a la sala del fondo)
-- Canal: **6** (20 MHz) — evita el 1 y el 11 si hay vecinos, y no uses 40 MHz en 2,4 GHz: saturas el vecindario y pierdes estabilidad.
+## 8. Comandos de verificación
 
-## 8. Autenticación: Personal vs Enterprise
-
-a) **PSK:** una contraseña compartida por todos (si se filtra, cambia para todo el mundo). **Enterprise:** cada usuario se autentica con sus credenciales individuales (usuario/contraseña o certificado).
-
-b) Un servidor **RADIUS**; el AP habla con él mediante **802.1X/EAP**.
-
-c) El WiFi de **profesores/administración** o el corporativo: cientos de usuarios identificables, posibilidad de revocar a uno concreto sin tocar al resto y trazabilidad por usuario. El WiFi de invitados, en cambio, es PSK de toda la vida.
-
-## 9. Medios y estándares WiFi: verdadero o falso
-
-a) **Verdadero.** 802.11ax = WiFi 6 (2019, bandas de 2,4 y 5 GHz).
-b) **Verdadero.** El WiFi envía ondas electromagnéticas por el aire, sin medio conductor.
-c) **Verdadero.** La velocidad real WiFi suele ser el 30-50% de la teórica por overhead, obstrucciones e interferencias.
-d) **Falso.** El WiFi **sí es capa 2** (enlace): entrega local por MAC con tramas 802.11; el aire es solo el medio (capa 1).
-e) **Verdadero.** En 2,4 GHz los tres canales no solapados son 1, 6 y 11.
+1 → b (`show access-lists` muestra contadores de matches por línea)
+2 → a (`show ip interface` indica la ACL aplicada y el sentido)
+3 → c (`show running-config` muestra las líneas tal como las escribiste)

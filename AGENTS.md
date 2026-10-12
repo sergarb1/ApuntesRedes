@@ -6,7 +6,7 @@ Este archivo ayuda a cualquier agente LLM (como opencode, Claude, ChatGPT, etc.)
 
 ## 📋 Descripción del proyecto
 
-Apuntes del módulo **PAR** (Planificación y Administración de Redes) para CFGS de Administración de Sistemas Informáticos en Red. 12 unidades didácticas (introducción + 11 unidades de temario) con enfoque 80% práctico y un estilo conversacional con humor. Publicado como web estática con Astro + Starlight + GitHub Pages.
+Apuntes del módulo **PAR** (Planificación y Administración de Redes) para CFGS de Administración de Sistemas Informáticos en Red. 13 unidades didácticas (introducción + 12 unidades de temario) con enfoque 80% práctico y un estilo conversacional con humor. Publicado como web estática con Astro + Starlight + GitHub Pages.
 
 ---
 
@@ -27,18 +27,19 @@ Apuntes del módulo **PAR** (Planificación y Administración de Redes) para CFG
 ```
 src/content/docs/            → Secciones en Markdown (raíz, índices de unidad)
 src/content/docs/01-introduccion/… → 10 puntos (01-…, 10-mapa, 08-glosario, 09-preguntas-tontas)
-src/content/docs/02-ethernet-cableado/…      → UD2 · Ethernet, medios y cableado (10 puntos: 01–07 teoría, 08 modelo OSI, 09 trama, 10 cierre)
-src/content/docs/03-direccionamiento-ip/…    → UD3 · Direccionamiento IP y subnetting (IPv4 + IPv6)
-src/content/docs/04-switching/…              → UD4 · Switching y VLAN
-src/content/docs/05-trunking-inter-vlan/…    → UD5 · Trunking e inter-VLAN
-src/content/docs/06-servicios-red/…          → UD6 · Servicios: DHCP, DNS y NTP
-src/content/docs/07-enrutamiento-estatico/…  → UD7 · Enrutamiento estático
-src/content/docs/08-ospf/…                   → UD8 · OSPF
-src/content/docs/09-nat-pat/…                → UD9 · NAT y PAT
-src/content/docs/10-acl-seguridad/…          → UD10 · ACL y seguridad básica
-src/content/docs/11-redes-inalambricas/…     → UD11 · Redes inalámbricas
-src/content/docs/12-alta-disponibilidad/…    → UD12 · Alta disponibilidad
-src/content/docs/boletines/  → Ejercicios (inicial, avanzado + resueltos, por unidad; variante `packettracer` en Ethernet y dirección IP)
+src/content/docs/02-medios-y-cableado/…      → UD2 · Medios y cableado (8 puntos: 01–07 teoría capa 1, 08 cierre)
+src/content/docs/03-capa-de-enlace/…          → UD3 · Capa de enlace (5 puntos: modelo OSI, direcciones MAC, trama Ethernet, encapsulación, cierre)
+src/content/docs/04-direccionamiento-ip/…    → UD4 · Direccionamiento IP y subnetting (IPv4 + IPv6, 13 puntos)
+src/content/docs/05-switching/…              → UD5 · Switching y VLAN
+src/content/docs/06-trunking-inter-vlan/…    → UD6 · Trunking e inter-VLAN
+src/content/docs/07-servicios-red/…          → UD7 · Servicios: DHCP, DNS y NTP
+src/content/docs/08-enrutamiento-estatico/…  → UD8 · Enrutamiento estático
+src/content/docs/09-ospf/…                   → UD9 · OSPF
+src/content/docs/10-nat-pat/…                → UD10 · NAT y PAT
+src/content/docs/11-acl-seguridad/…          → UD11 · ACL y seguridad básica
+src/content/docs/12-redes-inalambricas/…     → UD12 · Redes inalámbricas
+src/content/docs/13-alta-disponibilidad/…    → UD13 · Alta disponibilidad
+src/content/docs/boletines/  → Ejercicios (inicial, avanzado + resueltos, por unidad; variante `packettracer` en medios y dirección IP)
 src/styles/custom.css        → CSS del tema (azul #2563eb + teal #4ecdc4, Geist Sans, glassmorphism)
 src/assets/logo.svg          → Logo
 scripts/                     → Scripts de exportación (PDF, EPUB, DOCX) y diagramas (D2)
@@ -77,7 +78,7 @@ El contenido de las unidades **no lleva números de unidad** (`UD3`, `U05`, `Uni
 - Títulos de boletín → *"Boletín de Trunking e inter-VLAN — Avanzado"* (nombre de la unidad, no número).
 - Pie de navegación → `**Siguiente:** [Enrutamiento estático](…)` (sin `UD6 ·`).
 
-**Exentos** (navegación/identidad, sí llevan números): las etiquetas del sidebar en `astro.config.mjs` (autonumeradas) y los **nombres de fichero/URLs/rutas** (`boletin-U05-…`, `u03-…svg`).
+**Exentos** (navegación/identidad, sí llevan números): las etiquetas del sidebar en `astro.config.mjs` (autonumeradas) y los **nombres de fichero/URLs/rutas** (`boletin-U06-…`, `u04-…svg`).
 
 Verificación: `node scripts/check-uds.mjs` (scanner de referencias en el Markdown de `src/content/docs/` — landing y mapa incluidos — y en el texto de los SVG de `public/diagrams/`) tras cualquier edición masiva.
 
@@ -89,7 +90,7 @@ Las secciones viven repartidas entre el **índice** (`src/content/docs/NN-unidad
 
 1. `## 🎯 Objetivo de la unidad`
 2. `## 🗺️ Mapa de la unidad` — la lista de contenidos (tabla que enlaza cada punto)
-3. `## 📝 Boletines de la unidad` — enlaces `<a href>` con el slug en minúsculas (`boletin-u05-inicial`)
+3. `## 📝 Boletines de la unidad` — enlaces `<a href>` con el slug en minúsculas (`boletin-u06-inicial`)
 4. `## ✅ Criterios de evaluación cubiertos (RAx)` — tabla de CEs (los RA del índice y los del cierre deben coincidir)
 5. `## 🚪 ¿Por dónde empiezo?`
 
@@ -126,13 +127,13 @@ Las secciones viven repartidas entre el **índice** (`src/content/docs/NN-unidad
 - **🏆 Logros** — gamificación (meter al inicio o final)
 - **🐍 Spoiler / Soluciones** — usar siempre `<details><summary>...</summary>...</details>`
 
-### Límites de contenido por unidad (Ethernet y puentes)
+### Límites de contenido por unidad (medios, capa de enlace y puentes)
 
-- **La unidad de Ethernet vive solo en las capas 1 y 2** (medios, cable UTP/fibra, crimpado, cableado estructurado, modelo OSI como mapa teórico y trama Ethernet). No meter en profundidad: WiFi/802.11 (→ redes inalámbricas), ARP, cabecera IPv4 ni fragmentación/MTU (→ dirección IP, ampliada en `01-estructura-ipv4.md`).
-- Se puede **nombrar** ARP o capa 3 como puente hacia la unidad de dirección IP, sin desarrollarlos (el enlace natural es de `09-trama-ethernet.md` a dirección IP).
-- **OSI en la unidad de Ethernet es "solo culturilla"**: 7 capas + OSI vs TCP/IP + "aquí estamos en 1–2"; el modelo real y lo de capa 3+ se tocan en unidades posteriores.
-- El punto de trama Ethernet cubre **medios guiados (802.3) y no guiados (802.11)** a alto nivel (mismas capas 1–2); el detalle WiFi va en redes inalámbricas.
-- **Boletines:** si un ejercicio de Ethernet toca WiFi → moverlo al boletín de redes inalámbricas; si toca ARP/MTU/cabecera → al de dirección IP (añadir ahí si no existe; no duplicar en Ethernet).
+- **La unidad de medios vive solo en la capa 1** (cobre, fibra, aire, crimpado, cableado estructurado). No meter en profundidad: modelo OSI, MAC, trama Ethernet (→ capa de enlace), WiFi/802.11 (→ redes inalámbricas), ARP, cabecera IPv4 ni fragmentación/MTU (→ dirección IP, ampliada en `01-estructura-ipv4.md`).
+- Se puede **nombrar** ARP o capa 3 como puente hacia la unidad de dirección IP, sin desarrollarlos (el enlace natural es de la trama Ethernet a dirección IP).
+- **OSI en la unidad de medios no aparece**: el modelo OSI vive en la unidad de capa de enlace (5 puntos: OSI, MAC, trama, encapsulación, cierre). La capa 1 se toca en medios; la capa 2 completa en capa de enlace.
+- El punto de trama Ethernet (capa de enlace) cubre **medios guiados (802.3) y no guiados (802.11)** a alto nivel (mismas capas 1–2); el detalle WiFi va en redes inalámbricas.
+- **Boletines:** si un ejercicio de medios toca WiFi → moverlo al boletín de redes inalámbricas; si toca ARP/MTU/cabecera → al de dirección IP (añadir ahí si no existe; no duplicar en medios).
 
 ### Estilo de escritura
 
@@ -314,7 +315,7 @@ Protocolo aplicado a la unidad de dirección IP; repetible para cualquier unidad
 | `u01-escalera-ping` | `07-metodo-diagnostico.md` · Escalera del Ping | 5 peldaños 0–4 de abajo arriba + caja roja de avería |
 | `u01-mapa-curso` | `10-mapa-del-curso.md` · 12 etapas | 2 bandas de cuatrimestre, las etapas del curso con flechas |
 
-### Diagramas de la unidad de Ethernet existentes
+### Diagramas de la unidad de medios y cableado existentes
 
 | Fichero | Sección `.md` | Contenido |
 |---|---|---|
@@ -325,36 +326,41 @@ Protocolo aplicado a la unidad de dirección IP; repetible para cualquier unidad
 | `u02-fibra-smf-mmf` | `05-fibra-optica.md` · SMF vs MMF | Núcleo, fuente, distancia y coste |
 | `u02-atenuacion-crosstalk` | `06-conceptos-fisicos.md` · Atenuación y diafonía | Señal que se debilita + NEXT/FEXT |
 | `u02-recorrido-senal` | `07-cableado-estructurado.md` · Recorrido de la señal | PC → latiguillo → keystone → horizontal → patch panel → switch |
-| `u02-modelo-osi` | `08-modelo-osi.md` · Modelo OSI | 7 capas apiladas, marca "AQUÍ ESTAMOS" en 1–2, nota TCP/IP |
-| `u02-trama-ethernet` | `09-trama-ethernet.md` · Trama Ethernet II | MACs, EtherType, payload, FCS |
+
+### Diagramas de la unidad de capa de enlace existentes
+
+| Fichero | Sección `.md` | Contenido |
+|---|---|---|
+| `u03-modelo-osi` | `01-modelo-osi.md` · Modelo OSI | 7 capas apiladas, marca "AQUÍ ESTAMOS" en 1–2, nota TCP/IP |
+| `u03-trama-ethernet` | `03-trama-ethernet.md` · Trama Ethernet II | MACs, EtherType, payload, FCS |
 | — | `10-cierre.md` | Cierre práctico: sin diagrama (actividades, no conceptos) |
 
 ### Diagramas de la unidad de dirección IP existentes
 
 | Fichero | Sección `.md` | Contenido |
 |---|---|---|
-| `u03-cabecera-ipv4` | `01-estructura-ipv4.md` · Cabecera | Campos clave de la cabecera IPv4 (ver, IHL, TTL, protocolo, direcciones) |
-| `u03-fragmentacion` | `01-estructura-ipv4.md` · Fragmentación y MTU | Paquete 4000 B → 3 fragmentos (1480+1480+1040) con MF/offset |
-| `u03-arp` | `01-estructura-ipv4.md` · Flujo ARP | Descubrimiento de MAC en la capa 2 antes del envío IP (PC → broadcast → unicast respuesta) |
-| `u03-mascara-bits` | `05-mascaras-y-cidr.md` · Máscara a nivel de bits | Ejemplo /26: 26 bits de red, 6 de host, rango útil y broadcast |
-| `u03-subnetting-bloque` | `06-subnetting-paso-a-paso.md` · Bloque de subredes | Cómo se reparte un bloque mayor en subredes (paso 4) |
-| `u03-dora` | `08-dhcp.md` · DORA | Secuencia Discover → Offer → Request → ACK (PC ↔ servidor) |
-| `u03-ndp-ns-na` | `14-icmpv6-y-ndp.md` · NS/NA | Neighbor Solicitation (multicast solicited-node) → Neighbor Advertisement unicast con MAC |
-| `u03-ndp-rs-ra` | `14-icmpv6-y-ndp.md` · RS/RA | Router Solicitation al encender → Router Advertisement con prefijo, flags M/O y RDNSS |
-| `u03-transicion` | `15-mecanismos-de-transicion.md` · Visión general | Los 4 mecanismos de transición IPv4↔IPv6 en un mapa (los ASCII de detalle de cada mecanismo se quedan en el texto) |
+| `u04-cabecera-ipv4` | `01-estructura-ipv4.md` · Cabecera | Campos clave de la cabecera IPv4 (ver, IHL, TTL, protocolo, direcciones) |
+| `u04-fragmentacion` | `01-estructura-ipv4.md` · Fragmentación y MTU | Paquete 4000 B → 3 fragmentos (1480+1480+1040) con MF/offset |
+| `u04-arp` | `01-estructura-ipv4.md` · Flujo ARP | Descubrimiento de MAC en la capa 2 antes del envío IP (PC → broadcast → unicast respuesta) |
+| `u04-mascara-bits` | `05-mascaras-y-cidr.md` · Máscara a nivel de bits | Ejemplo /26: 26 bits de red, 6 de host, rango útil y broadcast |
+| `u04-subnetting-bloque` | `06-subnetting-paso-a-paso.md` · Bloque de subredes | Cómo se reparte un bloque mayor en subredes (paso 4) |
+| `u04-dora` | `07-dhcp.md` · DORA | Secuencia Discover → Offer → Request → ACK (PC ↔ servidor) |
+| `u04-ndp-ns-na` | `11-icmpv6-y-ndp.md` · NS/NA | Neighbor Solicitation (multicast solicited-node) → Neighbor Advertisement unicast con MAC |
+| `u04-ndp-rs-ra` | `11-icmpv6-y-ndp.md` · RS/RA | Router Solicitation al encender → Router Advertisement con prefijo, flags M/O y RDNSS |
+| `u04-transicion` | `12-mecanismos-de-transicion.md` · Visión general | Los 4 mecanismos de transición IPv4↔IPv6 en un mapa (los ASCII de detalle de cada mecanismo se quedan en el texto) |
 
 ### Diagramas de la unidad de switching existentes
 
 | Fichero | Sección `.md` | Contenido |
 |---|---|---|
-| `u04-hub-vs-switch` | `01-que-es-un-switch.md` · Switch vs hub | Inundación del hub frente a reenvío selectivo del switch |
-| `u04-aprendizaje-mac` | `02-aprendizaje-mac.md` · Aprendizaje | Las 2 primeras tramas: inunda por desconocida, reenvía unicast al conocerla |
-| `u04-dominios-colision` | `03-dominios-colision-broadcast.md` · Dominios de colisión | Hub (1 dominio compartido) frente a switch (1 por puerto) |
-| `u04-tormenta-broadcast` | `04-tormenta-de-broadcast.md` · Bucle y tormenta | Bucle de dos caminos con la circulación numerada (1·3·5 / 2·4·6) |
-| `u04-stp-fisica-logica` | `04-tormenta-de-broadcast.md` · La solución: STP **y** `05-stp-fundamentos.md` · Qué hace STP | Red física (2 caminos) vs red lógica con puerto bloqueado — **mismo SVG referenciado en dos páginas** |
-| `u04-roles-stp` | `06-puertos-y-estados-stp.md` · Roles | Root bridge con todos DP, no-root con RP y AP bloqueado |
-| `u04-estados-puerto` | `06-puertos-y-estados-stp.md` · Estados | Timeline Blocking → Listening → Learning → Forwarding (20/15/15 s) |
-| `u04-vlan-dominios` | `08-que-es-una-vlan.md` · Dominio de broadcast | Switch plano (1 dominio) frente a 3 VLANs en el mismo switch físico |
+| `u05-hub-vs-switch` | `01-que-es-un-switch.md` · Switch vs hub | Inundación del hub frente a reenvío selectivo del switch |
+| `u05-aprendizaje-mac` | `02-aprendizaje-mac.md` · Aprendizaje | Las 2 primeras tramas: inunda por desconocida, reenvía unicast al conocerla |
+| `u05-dominios-colision` | `03-dominios-colision-broadcast.md` · Dominios de colisión | Hub (1 dominio compartido) frente a switch (1 por puerto) |
+| `u05-tormenta-broadcast` | `04-tormenta-de-broadcast.md` · Bucle y tormenta | Bucle de dos caminos con la circulación numerada (1·3·5 / 2·4·6) |
+| `u05-stp-fisica-logica` | `04-tormenta-de-broadcast.md` · La solución: STP **y** `05-stp-fundamentos.md` · Qué hace STP | Red física (2 caminos) vs red lógica con puerto bloqueado — **mismo SVG referenciado en dos páginas** |
+| `u05-roles-stp` | `06-puertos-y-estados-stp.md` · Roles | Root bridge con todos DP, no-root con RP y AP bloqueado |
+| `u05-estados-puerto` | `06-puertos-y-estados-stp.md` · Estados | Timeline Blocking → Listening → Learning → Forwarding (20/15/15 s) |
+| `u05-vlan-dominios` | `08-que-es-una-vlan.md` · Dominio de broadcast | Switch plano (1 dominio) frente a 3 VLANs en el mismo switch físico |
 
 ### Fotos stock (criterio por unidad)
 
@@ -363,7 +369,7 @@ Las fotos **solo proceden cuando ilustran un objeto físico real** que el alumno
 - Fuentes: **Pexels** o **Unsplash** (uso libre; no exigen atribución, pero se cita origen en esta tabla).
 - Destino: `public/photos/uXX-nombre.jpg` (jpg, ~1260 px de ancho).
 - Inserción: `![alt es-ES](/ApuntesRedes/photos/uXX-nombre.jpg)` junto a la sección conceptual; alt en español de España.
-- **De momento solo la unidad de Ethernet tiene fotos** (4, en los puntos 02, 04, 05 y 07). **La unidad de dirección IP no lleva fotos stock** (todo es abstracto: subnetting, DORA, cabecenas…). Al ampliar otra unidad, evaluar caso a caso con la regla de arriba y no saturar: 1–2 fotos por página como máximo. **Los boletines nunca llevan fotos ni diagramas** (ver ⚠️ Notas, punto 6).
+- **De momento solo la unidad de medios y cableado tiene fotos** (4, en los puntos 02, 04, 05 y 07). **La unidad de dirección IP no lleva fotos stock** (todo es abstracto: subnetting, DORA, cabecenas…). Al ampliar otra unidad, evaluar caso a caso con la regla de arriba y no saturar: 1–2 fotos por página como máximo. **Los boletines nunca llevan fotos ni diagramas** (ver ⚠️ Notas, punto 6).
 
 | Fichero | `.md` | Muestra | Origen |
 |---|---|---|---|
@@ -422,7 +428,7 @@ npx astro build   # Solo Astro (si D2 NO está instalado; npm run build ejecuta 
 3. **Siempre mantener las secciones obligatorias** — cada unidad debe tener todas las secciones enumeradas arriba.
 4. **Los ejercicios SIEMPRE con solución** en `<details>`.
 5. **Laboratorios SIEMPRE con fallo intencionado** — el 80% práctico es obligatorio.
-6. **Los boletines siguen el patrón:** `inicial` (fácil) y `avanzado` (difícil), cada uno con su `-resuelto`, en `src/content/docs/boletines/` con nombre `boletin-UXX-inicial(-resuelto).md` / `boletin-UXX-avanzado(-resuelto).md`. **Son texto puro por diseño: NO llevan diagramas ni fotos** (mismo criterio en las 60 hojas del curso; pegar el diagrama de la unidad bajo un ejercicio de recall regalaría la respuesta). La unidad de dirección IP tiene además la variante `boletin-U03-ipv6-*`. Ethernet y dirección IP tienen además la variante **`boletin-U02-packettracer-*` / `boletin-U03-packettracer-*`**: práctica guiada de nivel único (no es el par inicial/avanzado), 8 micro-prácticas + resuelto 1:1; se enlaza en el sidebar como grupo "· Packet Tracer" y en los índices de cada unidad.
+6. **Los boletines siguen el patrón:** `inicial` (fácil) y `avanzado` (difícil), cada uno con su `-resuelto`, en `src/content/docs/boletines/` con nombre `boletin-UXX-inicial(-resuelto).md` / `boletin-UXX-avanzado(-resuelto).md`. **Son texto puro por diseño: NO llevan diagramas ni fotos** (mismo criterio en las 60 hojas del curso; pegar el diagrama de la unidad bajo un ejercicio de recall regalaría la respuesta). La unidad de dirección IP tiene además la variante `boletin-U04-ipv6-*`. Medios y dirección IP tienen además la variante **`boletin-U02-packettracer-*` / `boletin-U04-packettracer-*`**: práctica guiada de nivel único (no es el par inicial/avanzado), 8 micro-prácticas + resuelto 1:1; se enlaza en el sidebar como grupo "· Packet Tracer" y en los índices de cada unidad.
 7. **El CSS no debe romperse** — probar con `npm run build` después de cambios.
 8. **CI/CD en rama `main`**.
 9. **Puppeteer** instalado para PDFs, pero con `PUPPETEER_SKIP_DOWNLOAD=true` en CI. En local, si la versión cacheada de Chrome falla, se usa el Chrome del sistema con `PUPPETEER_EXECUTABLE_PATH="C:\Program Files\Google\Chrome\Application\chrome.exe"`.
@@ -430,7 +436,7 @@ npx astro build   # Solo Astro (si D2 NO está instalado; npm run build ejecuta 
 11. **El build ejecuta `npm run build` que genera diagramas automáticamente** (prependido en el script).
 12. **PDF** se genera con `starlight-to-pdf` — un único PDF con todas las unidades y portada. Ver `scripts/pdf-*.html`.
 13. **EPUB** se genera con Pandoc — `scripts/generate-epub.ps1` + `scripts/epub.css`. El script reescribe las rutas `/ApuntesRedes/diagrams/` → `public/diagrams/` para que Pandoc encuentre los SVGs.
-14. **DOCX por unidad** — `scripts/generate-docx.mjs` (`npm run docx`, requiere Pandoc CLI en PATH). Crea `docx/<unidad>/` con un `.docx` de la unidad completa y un `.docx` suelto por cada boletín (incl. `-resuelto` y variantes `U03-ipv6-*` y `U02/U03-packettracer-*`). **Sí va al repo** (no está en `.gitignore`). Tras editar contenido de unidades o boletines, regenerar con `npm run docx` y commitear los DOCX juntos. Mismas reescrituras de rutas que el EPUB (`/ApuntesRedes/…` → `public/…` para diagrams/photos).
+14. **DOCX por unidad** — `scripts/generate-docx.mjs` (`npm run docx`, requiere Pandoc CLI en PATH). Crea `docx/<unidad>/` con un `.docx` de la unidad completa y un `.docx` suelto por cada boletín (incl. `-resuelto` y variantes `U04-ipv6-*` y `U02/U04-packettracer-*`). **Sí va al repo** (no está en `.gitignore`). Tras editar contenido de unidades o boletines, regenerar con `npm run docx` y commitear los DOCX juntos. Mismas reescrituras de rutas que el EPUB (`/ApuntesRedes/…` → `public/…` para diagrams/photos).
 14b. **Pandoc 3.11** instalado en local con winget (`winget upgrade JohnMacFarlane.Pandoc`). Tras actualizar, refrescar el PATH de la shell (`$env:Path = [System.Environment]::GetEnvironmentVariable('Path','Machine') + ';' + [System.Environment]::GetEnvironmentVariable('Path','User')`) o abrir una terminal nueva.
 15. **Lenguaje es-ES obligatorio** — todo texto nuevo o editado cumple la sección 🗣️ Requisito lingüístico; hacer la comprobación lingüística antes de cerrar.
 15. **Excalidraw** — MCP + skill instalados; **recomendado reinstalar/actualizar la skill** si se cambia de entorno (`install-skill --dir …`); seguir workflow y reglas de la sección 📊; verificar con screenshot antes de exportar; NO subir sin comprobar solapes.
