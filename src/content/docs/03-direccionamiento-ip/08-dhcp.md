@@ -21,15 +21,6 @@ Imagina repartir configuraciones a miles de equipos a mano. DHCP es el conserje 
 
 En cuanto arranca un dispositivo sin configuración estática, lanza el baile de cuatro mensajes. El nombre lo dice todo: **D**iscover, **O**ffer, **R**equest, A**CK**.
 
-```
-PC                         Servidor DHCP
- │                              │
- ├──── DHCP DISCOVER ─────────►│  Búsqueda de servidor DHCP
- │◄──── DHCP OFFER ────────────┤  Oferta: "Toma 192.168.1.20"
- ├──── DHCP REQUEST ──────────►│  Aceptación: "Quiero esa IP"
- │◄──── DHCP ACK ──────────────┤  Confirmación: "Es tuya"
-```
-
 1. **DISCOVER:** el PC grita a la red buscando servidores DHCP (va a broadcast).
 2. **OFFER:** el servidor contesta con una IP "reservada en la caja" y sus extras (máscara, gateway, DNS).
 3. **REQUEST:** el PC acepta formalmente esa IP y se la reserva.

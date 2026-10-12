@@ -19,19 +19,7 @@ description: Quién puede hablar a la vez y quién lo oye todo 🌐
 
 Cuando dos equipos envían a la vez por el mismo medio, sus señales chocan: eso es una **colisión**. Todos los equipos que comparten ese medio forman un **dominio de colisión**.
 
-```
-HUB (1 dominio de colisión):
-  [PC1]──┐
-         ├─[HUB]──[PC2]
-  [PC3]──┘
-  PC1 y PC2 NO pueden hablar a la vez → colisión
-
-SWITCH (1 dominio por puerto):
-  [PC1]──┐
-         ├─[SWITCH]──[PC2]
-  [PC3]──┘
-  PC1 y PC2 SÍ pueden hablar a la vez (sin colisión)
-```
+![Dominios de colisión: el hub comparte un único dominio mientras cada puerto del switch es un dominio independiente](/ApuntesRedes/diagrams/u04-dominios-colision.svg)
 
 Cada puerto de un switch es un dominio de colisión independiente: dos PCs conectados a puertos distintos pueden transmitir **simultáneamente** sin pisarse. Esto multiplica la capacidad efectiva de la red: es una de las grandes ventajas del switch frente al hub.
 

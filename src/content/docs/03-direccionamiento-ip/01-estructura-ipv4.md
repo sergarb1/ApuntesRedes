@@ -68,21 +68,6 @@ Juntos forman `192.168.1.10`. Simple. Ese es todo el truco de la notación: **tr
 
 La dirección no viaja sola: se monta en la **cabecera IPv4**, el "sobre" que la capa 3 añade delante de los datos. Los routers **no abren el contenido**: leen la cabecera, deciden por dónde ir y la reenvían.
 
-```
-┌──────────────────────────────────────────────────────────────┐
-│ Vers(4)│IHL│ TOS │ Long.total │ ID │Flags│Offset│ TTL │Proto│
-├──────────────────────────────────────────────────────────────┤
-│         Checksum cabecera (16 bits)                          │
-├──────────────────────────────────────────────────────────────┤
-│         IP ORIGEN (32 bits)     │      IP DESTINO (32 bits)  │
-├──────────────────────────────────────────────────────────────┤
-│         Opciones (0 o más, si IHL > 5)                       │
-├──────────────────────────────────────────────────────────────┤
-│         Datos (payload)                                      │
-└──────────────────────────────────────────────────────────────┘
-Cabecera mínima: 20 bytes (5 words de 32 bits)
-```
-
 Campos que de verdad importan en examen y en el día a día:
 
 | Campo | Tamaño | Qué hace |
@@ -105,18 +90,6 @@ Campos que de verdad importan en examen y en el día a día:
 ## ✂️ Fragmentación y MTU
 
 Cada medio tiene un **techo de tamaño**. En Ethernet ese techo es el **MTU de 1500 bytes** de payload (lo viste en unidades anteriores). Si un paquete IP es más grande que el MTU del siguiente enlace, **alguien lo parte**: eso es **fragmentación**.
-
-```
-Paquete con 4000 B de payload  →  MTU del enlace = 1500 B
-        │
-        ▼
-┌─────────────┐ ┌─────────────┐ ┌─────────────┐
-│ frag 1      │ │ frag 2      │ │ frag 3      │
-│ 1480 B datos│ │ 1480 B datos│ │ 1040 B datos│
-│ MF=1, off=0 │ │ MF=1, off=… │ │ MF=0        │
-└─────────────┘ └─────────────┘ └─────────────┘
-        (20 B cabecera cada fragmento; 1480 = múltiplo de 8)
-```
 
 - **Quién fragmenta (IPv4):** el **emisor** o **cualquier router** intermedio cuyo enlace de salida tenga un MTU menor.
 - **Flag MF** (*More Fragments*): `1` = "vienen más"; `0` = "soy el último".
@@ -161,19 +134,7 @@ En la [unidad de Ethernet y cableado](/ApuntesRedes/02-ethernet-cableado/09-tram
 4. El dueño responde con un **ARP Reply** en **unicast**: *"Soy yo, mi MAC es aa:bb:cc:dd:ee:ff"*.
 5. Tu PC guarda la pareja IP→MAC en su **tabla ARP** y ya puede construir la trama Ethernet con la MAC destino.
 
-```
-PC .10                                PC .20
-  │  ARP Request (broadcast)            │
-  │  "¿quién tiene .20?"                │
-  │ ───────────────────────────────────►│  (todos reciben)
-  │                                     │
-  │  ARP Reply (unicast)                │
-  │  "soy .20, MAC aa:bb:…"             │
-  │◄─────────────────────────────────── │
-  │  tabla ARP: .20 → aa:bb:…           │
-  ▼                                     ▼
-  trama Ethernet con MAC destino = aa:bb:…
-```
+![Proceso ARP en la red local: PC-A envía un ARP Request en broadcast buscando la MAC de la IP destino y el dueño responde con un ARP Reply en unicast](/ApuntesRedes/diagrams/u03-arp.svg)
 
 - **ARP es capa 3 pedir ayuda a la capa 2:** resuelve un problema de *dirección lógica* usando el medio *físico/enlace*.
 - **Tabla ARP:** caché de pares IP→MAC. Se consulta con `arp -a` (Windows) o `ip neigh` (Linux). Si la entrada caduca o se borra, el proceso se repite.

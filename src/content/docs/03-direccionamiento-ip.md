@@ -13,6 +13,8 @@ description: La calculadora maldita, ahora con IPv6 🧮
 
 Bienvenido a la unidad que convierte binario en oficio. Primero dominas IPv4: estructura de la dirección y de la cabecera, ARP, fragmentación, clases, máscaras, CIDR, VLSM y el subnetting clásico con papel y boli. Después saltas al futuro: IPv6, su notación, sus tipos de dirección, SLAAC, DHCPv6 y los mecanismos que permiten que ambos mundos convivan. DHCP aparece aquí en versión introductoria; en la [unidad de servicios de red](/ApuntesRedes/06-servicios-red) lo despliega a fondo. ARP, la cabecera y la fragmentación cierran el puente con la trama de la [unidad de Ethernet y cableado](/ApuntesRedes/02-ethernet-cableado/09-trama-ethernet).
 
+¿Y dónde encaja esto en el modelo OSI? En la **capa 3 — la capa de red**. En Ethernet te quedaste en las capas 1 y 2 (medio físico y trama MAC); aquí subes un peldaño: la capa 3 es la del **direccionamiento lógico** (las IP), la que decide **por dónde viaja** cada paquete de punta a punta cruzando redes distintas, y la que se apoya en los routers. Dentro de tu red local manda la trama Ethernet (capa 2) y su MAC; en cuanto el paquete quiere salir de casa, manda la IP. Toda la unidad vive ahí arriba.
+
 Esta unidad se lee como un **libro de 18 capítulos**: los 17 primeros son teoría en progresión (el último es actualidad pura: IPv8) y el 18º es el aterrizaje práctico.
 
 ---

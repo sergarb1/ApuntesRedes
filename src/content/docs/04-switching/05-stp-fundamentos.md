@@ -25,14 +25,7 @@ STP trabaja **sobre la marcha**: los switches se intercambian información const
 - **Bloquea** los puertos que crearían el bucle (los deja "en espera").
 - **Reacciona** si un enlace activo falla: desbloquea el de respaldo automáticamente.
 
-```
-Red física:                   Red lógica (tras STP):
-┌────┐      ┌────┐            ┌────┐      ┌────┐
-│ A  │──┬───│ B  │            │ A  │──┬───│ B  │
-└────┘  │   └────┘            └────┘  ╳   └────┘
-        │                                 ╳ = puerto bloqueado
-        └──────┐                          (sin tráfico de datos)
-```
+![Red física con dos caminos frente a red lógica tras STP: el protocolo bloquea un puerto para romper el bucle](/ApuntesRedes/diagrams/u04-stp-fisica-logica.svg)
 
 > 💡 **Analogía del metro:** STP es como un mapa de metro que solo deja activa UNA línea entre dos estaciones, y mantiene las demás cerradas por si la principal se corta. La red siempre tiene camino... pero nunca dos a la vez.
 

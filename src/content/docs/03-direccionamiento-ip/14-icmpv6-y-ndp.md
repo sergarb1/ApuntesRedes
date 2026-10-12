@@ -34,17 +34,7 @@ Es el punto de la *higiene de red*: IPv6 no solo amplía direcciones, también l
 
 Cuando un PC quiere hablar con un vecino de su misma red, necesita su MAC. Dentro del enlace:
 
-```
-PC-A (2001:DB8::10)                     PC-B (2001:DB8::20)
-        │ ① NS: "¿Quién tiene 2001:DB8::20?"      │
-        │      (multicast solicited-node)         │
-        │───────────────────────────────────────→  │
-        │                                         │
-        │ ② NA: "Yo, mi MAC es AA:BB:CC:DD:EE:FF" │
-        │      (unicast dirigido a PC-A)           │
-        │←───────────────────────────────────────  │
-        │   ¡Listo! Aprende la MAC y envía la IP   │
-```
+![Flujo NDP NS/NA: PC-A envía un Neighbor Solicitation a la multicast de nodo solicitado y PC-B responde con un Neighbor Advertisement en unicast con su MAC](/ApuntesRedes/diagrams/u03-ndp-ns-na.svg)
 
 - **Neighbor Solicitation (NS):** "¿Quién tiene la dirección X?" Va a la **solicited-node multicast** (`FF02::1:FFxx:xxxx`), un grupo mucho más pequeño que el broadcast.
 - **Neighbor Advertisement (NA):** "Yo la tengo, y mi MAC es…". Se envía **unicast** al solicitante.
@@ -60,13 +50,7 @@ NDP también reemplaza al "gateway + máscara a mano" con dos mensajes:
 - **RS (Router Solicitation):** el dispositivo pregunta al encender "¿Hay routers aquí?" → multicast `FF02::2` (todos los routers).
 - **RA (Router Advertisement):** el router responde con el **prefijo**, los **flags M/O**, y otra info como RDNSS (DNS). Periódicos (cada unos minutos) y además responden a cada RS.
 
-```
-PC al encenderse:
-  ① RS → "¿Hay algún router?"            (a FF02::2)
-  ② RA ← "Sí, prefijo 2001:DB8:1:2::/64,
-          M=0, O=1, RDNSS=2001:4860:4860::8888"
-  ③ PC configura GUA por SLAAC y gateway = FE80 del router
-```
+![Secuencia RS/RA: el PC recién encendido manda un Router Solicitation a FF02::2, el router responde con un Router Advertisement que lleva el prefijo y los flags, y el PC configura su GUA por SLAAC](/ApuntesRedes/diagrams/u03-ndp-rs-ra.svg)
 
 Este RA es el que vimos en [SLAAC (punto 12)](/ApuntesRedes/03-direccionamiento-ip/12-eui64-y-slaac) y el que leen los flags M/O del [punto 13](/ApuntesRedes/03-direccionamiento-ip/13-dhcpv6).
 

@@ -36,16 +36,7 @@ Recuerda el reparto de poderes: si la decisión se toma con **IP**, el dispositi
 
 El hub (repetidor multipuerto) es el abuelo de las redes: recibe una señal por un puerto y la **retransmite por todos los demás**, sin preguntarse nada. El switch lo supera porque **aprende** y **segmenta**.
 
-```
-HUB:                        SWITCH:
-[PC1]──┐                    [PC1]──┐
-        ├─[HUB]──[PC2]             ├─[SWITCH]──[PC2]
-[PC3]──┘                    [PC3]──┘
-
-PC1 envía a PC2:            PC1 envía a PC2:
-  PC3 también lo recibe       PC3 NO lo recibe
-  → desperdicio de ancho      → tráfico privado y ordenado
-```
+![Comparación entre hub y switch: el hub reenvía la trama a todos los puertos y el switch la reenvía solo al destino](/ApuntesRedes/diagrams/u04-hub-vs-switch.svg)
 
 | Característica | Hub | Switch |
 |---|---|---|
