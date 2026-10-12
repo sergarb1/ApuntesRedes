@@ -19,12 +19,7 @@ description: Cuando los broadcasts rebotan sin fin y la red se ahoga 🌪️
 
 Los bucles nacen de la **redundancia bienintencionada**: para que la red no se caiga si un cable falla, conectamos los switches por dos caminos. El problema es que, sin un mecanismo que lo gestione, dos caminos entre los mismos switches forman un **circuito cerrado**.
 
-```
-Switch A ──────── Switch B
-    │                │
-    └───────────────┘
-       (segundo cable)
-```
+![Bucle entre dos switches y tormenta de broadcast: cada vuelta de la trama por los dos caminos duplica las copias](/ApuntesRedes/diagrams/u04-tormenta-broadcast.svg)
 
 Parece inofensivo, pero es una bomba de relojería. Un único broadcast lo demuestra.
 
@@ -36,13 +31,6 @@ Parece inofensivo, pero es una bomba de relojería. Un único broadcast lo demue
 2. **Switch A** lo recibe por el puerto 1 y lo **inunda** por todos los demás, incluyendo el segundo cable hacia Switch B.
 3. **Switch B** lo recibe por ese cable y lo inunda por todos sus puertos... **incluyendo el otro cable hacia Switch A**.
 4. **Switch A** lo vuelve a recibir por el segundo cable. ¿Qué hace? ¡Inundarlo otra vez! Y así eternamente.
-
-```
-PC1 ─▶ [Switch A] ──(1)──▶ [Switch B]
-           ▲                    │
-           └────(3)─────(2)────┘
-   Cada vuelta duplica las copias → la red se satura
-```
 
 Cada copia que recibe un switch genera **otras tantas** hacia el resto de puertos. Es una multiplicación exponencial: en pocos segundos los LEDs del switch parpadean como una discoteca y el ancho de banda se agota.
 
@@ -69,14 +57,7 @@ Cada copia que recibe un switch genera **otras tantas** hacia el resto de puerto
 
 La respuesta al bucle es el **Spanning Tree Protocol (STP, IEEE 802.1D)**: un protocolo que detecta los caminos redundantes y **bloquea puertos** para que solo exista un camino activo entre cualquier par de switches.
 
-```
-Sin STP:                    Con STP (802.1D):
-┌────┐      ┌────┐          ┌────┐      ┌────┐
-│ A  │──┬───│ B  │          │ A  │──┬───│ B  │
-└────┘  │   └────┘          └────┘  ╳   └────┘
-        │                            ╳ = puerto BLOQUEADO
-        └──────────┘                  (rompe el bucle)
-```
+![Solución de STP al bucle: en la red lógica se bloquea un camino y solo queda un enlace activo](/ApuntesRedes/diagrams/u04-stp-fisica-logica.svg)
 
 Si un cable activo falla, STP **desbloquea** el de respaldo automáticamente y la red sigue viva. Esa es la redundancia bien hecha: dos caminos físicos, uno solo activo a la vez. Lo estudiamos al detalle en el [punto 5](/ApuntesRedes/04-switching/05-stp-fundamentos).
 

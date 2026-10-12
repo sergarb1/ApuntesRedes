@@ -26,17 +26,7 @@ En el punto 5 vimos quién es el rey (el Root Bridge). Ahora toca ver qué papel
 | **Alternate Port (AP)** | Puerto **bloqueado** que proporciona un camino alternativo al Root (respaldo). |
 | **Backup Port (BP)** | Puerto bloqueado **redundante dentro del mismo segmento** (raro en redes típicas). |
 
-```
-         [Root Bridge]
-            │  DP        ← todos los puertos del root son DP
-       ┌────┴────┐
-       │         │
-     [S2]      [S3]
-   RP │         │ RP      ← cada switch no-root: 1 RP
-   AP │(bloq.)  │
-       └────────┘
-        segmento con su DP
-```
+![Roles STP: el root bridge con todos sus puertos designated y los switches no-root con su root port y un alternate port bloqueado](/ApuntesRedes/diagrams/u04-roles-stp.svg)
 
 > 💡 **Truco de examen:** el Root Bridge tiene **todos** sus puertos en rol Designated. Los switches no-root tienen **un Root Port** (su mejor salida hacia la raíz) y, si hay redundancia, **Alternate Ports** bloqueados.
 
@@ -54,13 +44,7 @@ Un puerto que arranca no reenvía tráfico de golpe: necesita tiempo para **aseg
 | **Forwarding** | Sí | Sí | Indefinido |
 | **Disabled** | No | No | Administrativo |
 
-```
-Blocking ──▶ Listening ──▶ Learning ──▶ Forwarding
-  20 s          15 s          15 s          ¡ya!
-   (escucha     (escucha      (aprende      (reenvía
-    BPDUs)      BPDUs, no     MACs, no      datos)
-                reenvía)      reenvía)
-```
+![Estados de puerto de STP: blocking, listening, learning y forwarding con sus tiempos de 20, 15 y 15 segundos](/ApuntesRedes/diagrams/u04-estados-puerto.svg)
 
 **Tiempo total de convergencia STP: 30-50 segundos.** ¡Una eternidad en redes modernas! Si un PC se conecta a un puerto sin protección, tardará hasta 50 segundos en poder hablar. Por eso existen PortFast y RSTP, que verás en el [punto 7](/ApuntesRedes/04-switching/07-rstp-y-portfast).
 

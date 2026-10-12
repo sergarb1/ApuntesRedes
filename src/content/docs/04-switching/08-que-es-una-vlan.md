@@ -48,25 +48,7 @@ Un **dominio de broadcast** es el conjunto de dispositivos que reciben un broadc
 
 Al crear VLANs, decides **dónde terminan los dominios**:
 
-```
-Sin VLANs (un solo dominio de broadcast):
-┌────────────────────────────────────┐
-│       SWITCH (1 dominio bcast)     │
-│  Fa0/1  Fa0/2  Fa0/3  ...  Fa0/48 │
-│  PC-A    PC-B    PC-C      PC-D    │
-└────────────────────────────────────┘
-   Un ARP de PC-A lo ven TODOS.
-
-Con VLANs (3 dominios de broadcast):
-┌────────────────────────────────────────────┐
-│             SWITCH FÍSICO                  │
-│  ┌─VLAN 10─┐  ┌─VLAN 20─┐  ┌─VLAN 30─┐    │
-│  │Fa0/1-16 │  │Fa0/17-32│  │Fa0/33-48│    │
-│  │ Ventas  │  │ RRHH    │  │ IT      │    │
-│  └─────────┘  └─────────┘  └─────────┘    │
-│   3 dominios de broadcast separados         │
-└────────────────────────────────────────────┘
-```
+![Sin VLANs un único dominio de broadcast frente a tres VLANs separadas dentro del mismo switch físico](/ApuntesRedes/diagrams/u04-vlan-dominios.svg)
 
 Este es el punto clave de la capa 2 que luego usarás con los routers: **dos VLANs que comparten switch no se ven**. Y "no verse" es exactamente lo que quieres entre departamentos.
 

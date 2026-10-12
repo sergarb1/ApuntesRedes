@@ -19,12 +19,9 @@ Si la IP es tu número de casa, la máscara es la frontera del vecindario. Sin m
 
 ## 🪟 ¿Qué es la máscara de subred?
 
-Una máscara es también un número de 32 bits, pero con una regla fija: **primero van los 1s y después los 0s**. Los 1s marcan la porción de **red**; los 0s la porción de **host**.
+Una máscara es también un número de 32 bits, pero con una regla fija: **primero van los 1s y después los 0s**. Los 1s marcan la porción de **red**; los 0s la porción de **host**. En la imagen, el ejemplo de una `/26`: los bits de red (azul) están fijos y los de host (verde) son los libres.
 
-```
-255.255.255.0  →  11111111.11111111.11111111.00000000
-                  │────── red (24 bits) ──────││ host │
-```
+![Máscara /26 (255.255.255.192): los bits de red en azul y los de host en verde sobre la dirección en binario; 26 bits de red dejan 62 hosts útiles](/ApuntesRedes/diagrams/u03-mascara-bits.svg)
 
 La forma decimal de la máscara sale de convertir cada octeto: `11111111` = 255, `00000000` = 0. Por eso la clásica `255.255.255.0`.
 

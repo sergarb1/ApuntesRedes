@@ -267,6 +267,28 @@ Tres scripts en `scripts/` (idempotentes; se pueden repetir):
 
 *Pendiente:* la coordenada Y del SVG no es un traslado global (varía entre texto suelto y etiqueta vinculada), así que la contención vertical se calcula con el `y` guardado en el `.excalidraw` y la horizontal con el SVG.
 
+### Revisión de diagramas de una unidad (checklist reutilizable)
+
+Protocolo aplicado a la unidad de dirección IP; repetible para cualquier unidad `UXX` antes de darla por cerrada:
+
+1. **Inventario punto a punto** — listar los diagramas de la unidad (`public/diagrams/uXX-*`, pares `.excalidraw` + `.svg`) y las referencias en su Markdown (`grep diagrams/uXX- src/content/docs/…`). De ahí salen dos listas:
+   - **Huérfanos** → diagramas con 0 referencias. Decidir dónde insertarlos (tras la sección conceptual que ilustran), renderizarlos/screenshot para comprobar calidad y luego insertar.
+   - **Duplicados ASCII+imagen** → bloques de código que ilustran lo mismo que un diagrama. Regla de revisión: **quitar el ASCII, dejar la imagen**. Solo se quitan los ASCII que el diagrama sustituye literalmente: los ejemplos de configuración, salidas de consola y los ASCII de detalle de subtemas (p. ej. uno por mecanismo) **se quedan**.
+2. **Cobertura de la intro** — si la unidad encaja con un concepto transversal (p. ej. la capa OSI que ocupa IP en el índice de dirección IP), comprobar que el índice lo menciona; añadirlo si falta.
+3. **Insertar huérfanos** — `![alt es-ES](/ApuntesRedes/diagrams/uXX-nombre.svg)` tras el párrafo/tabla correspondiente, alt explicativo en es-ES. Si el texto usa un ejemplo distinto al del diagrama (p. ej. /24 vs /26), el alt debe enlazar ambos para que no parezca una contradicción.
+4. **Crear diagramas nuevos solo donde haga falta** — conceptos clave que hoy solo viven en ASCII (p. ej. NDP NS/NA y RS/RA en dirección IP). Workflow obligatorio (JSON → `add` → `screenshot` → corregir → `export` + SVG → `clear --yes`), clonando el estilo de un diagrama aprobado de la misma unidad: texto suelto encima de las cajas (no bound labels), `fontFamily: 3`, `textAlign: "left"`, título ≈ nombre base del fichero (regla 6 del checker).
+5. **Verificación en este orden:**
+   - `node scripts/fix-fonts.mjs` y `node scripts/fix-text-align.mjs` (solo si el checker acusa; idempotentes)
+   - `npm run check:diagrams` → 0 fallos
+   - `npm run check:unidad XX` → 0 fallos
+   - `node scripts/check-uds.mjs` → restos 0
+   - `node scripts/check-links.mjs` → OK
+   - `npx astro build` → 183 páginas
+   - `npm run docx` → 68 generados, 0 fallos
+   - Contar `word/media/*.svg` en el DOCX de la unidad (descomprimiendo el zip): debe haber **un SVG por cada diagrama referenciado** en su Markdown.
+6. **Actualizar la tabla de diagramas de esa unidad en AGENTS.md** (sección "Diagramas de la unidad … existentes"): añadir los insertados/creados y su sección `.md`.
+7. **No commitear sin confirmación explícita.**
+
 ### Iconos de red
 
 - Diccionario del proyecto: **`docs/excalidraw-icons.md`** — **los 10 iconos íntegros** de dwelle *network-topology-icons*: Computer (3 variantes), Server, Switch, Hub, Router, Client, Firewall y VPN. En JSON Excalidraw listo para copiar. Copiar el objeto, desplazar `x`/`y` del grupo, regenerar `id` si se reutiliza.
@@ -313,7 +335,26 @@ Tres scripts en `scripts/` (idempotentes; se pueden repetir):
 |---|---|---|
 | `u03-cabecera-ipv4` | `01-estructura-ipv4.md` · Cabecera | Campos clave de la cabecera IPv4 (ver, IHL, TTL, protocolo, direcciones) |
 | `u03-fragmentacion` | `01-estructura-ipv4.md` · Fragmentación y MTU | Paquete 4000 B → 3 fragmentos (1480+1480+1040) con MF/offset |
+| `u03-arp` | `01-estructura-ipv4.md` · Flujo ARP | Descubrimiento de MAC en la capa 2 antes del envío IP (PC → broadcast → unicast respuesta) |
+| `u03-mascara-bits` | `05-mascaras-y-cidr.md` · Máscara a nivel de bits | Ejemplo /26: 26 bits de red, 6 de host, rango útil y broadcast |
+| `u03-subnetting-bloque` | `06-subnetting-paso-a-paso.md` · Bloque de subredes | Cómo se reparte un bloque mayor en subredes (paso 4) |
 | `u03-dora` | `08-dhcp.md` · DORA | Secuencia Discover → Offer → Request → ACK (PC ↔ servidor) |
+| `u03-ndp-ns-na` | `14-icmpv6-y-ndp.md` · NS/NA | Neighbor Solicitation (multicast solicited-node) → Neighbor Advertisement unicast con MAC |
+| `u03-ndp-rs-ra` | `14-icmpv6-y-ndp.md` · RS/RA | Router Solicitation al encender → Router Advertisement con prefijo, flags M/O y RDNSS |
+| `u03-transicion` | `15-mecanismos-de-transicion.md` · Visión general | Los 4 mecanismos de transición IPv4↔IPv6 en un mapa (los ASCII de detalle de cada mecanismo se quedan en el texto) |
+
+### Diagramas de la unidad de switching existentes
+
+| Fichero | Sección `.md` | Contenido |
+|---|---|---|
+| `u04-hub-vs-switch` | `01-que-es-un-switch.md` · Switch vs hub | Inundación del hub frente a reenvío selectivo del switch |
+| `u04-aprendizaje-mac` | `02-aprendizaje-mac.md` · Aprendizaje | Las 2 primeras tramas: inunda por desconocida, reenvía unicast al conocerla |
+| `u04-dominios-colision` | `03-dominios-colision-broadcast.md` · Dominios de colisión | Hub (1 dominio compartido) frente a switch (1 por puerto) |
+| `u04-tormenta-broadcast` | `04-tormenta-de-broadcast.md` · Bucle y tormenta | Bucle de dos caminos con la circulación numerada (1·3·5 / 2·4·6) |
+| `u04-stp-fisica-logica` | `04-tormenta-de-broadcast.md` · La solución: STP **y** `05-stp-fundamentos.md` · Qué hace STP | Red física (2 caminos) vs red lógica con puerto bloqueado — **mismo SVG referenciado en dos páginas** |
+| `u04-roles-stp` | `06-puertos-y-estados-stp.md` · Roles | Root bridge con todos DP, no-root con RP y AP bloqueado |
+| `u04-estados-puerto` | `06-puertos-y-estados-stp.md` · Estados | Timeline Blocking → Listening → Learning → Forwarding (20/15/15 s) |
+| `u04-vlan-dominios` | `08-que-es-una-vlan.md` · Dominio de broadcast | Switch plano (1 dominio) frente a 3 VLANs en el mismo switch físico |
 
 ### Fotos stock (criterio por unidad)
 

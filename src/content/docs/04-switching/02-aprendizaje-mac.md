@@ -24,17 +24,7 @@ Cuando una trama entra por un puerto, el switch registra dos cosas:
 1. **MAC origen** → la asocia al **puerto de entrada** (si aún no la conoce).
 2. Cuando luego llegue una trama dirigida a esa MAC, ya sabrá **por qué puerto reenviarla**.
 
-```
-Paso 1: PC-A envía a PC-B (MAC B desconocida)
-  PC-A ──trama(SRC=A, DST=B)──▶ [SWITCH]
-    → Aprende: A está en Fa0/1
-    → DST B desconocida → inunda por todos los puertos
-
-Paso 2: PC-B responde a PC-A (MAC A YA conocida)
-  PC-B ──trama(SRC=B, DST=A)──▶ [SWITCH]
-    → Aprende: B está en Fa0/2
-    → DST A conocida → reenvía SOLO por Fa0/1
-```
+![Aprendizaje de MAC en dos tramas: la primera se inunda por desconocida y la segunda se reenvía solo por el puerto correcto](/ApuntesRedes/diagrams/u04-aprendizaje-mac.svg)
 
 Resultado: con solo dos tramas, el switch ya sabe **A→Fa0/1** y **B→Fa0/2**. A partir de ahí, la conversación fluye sin inundaciones.
 

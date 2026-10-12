@@ -15,6 +15,8 @@ description: Dual Stack, túneles y NAT64/DNS64 para convivir durante la migraci
 
 No hay un interruptor que apague IPv4. Los tres mecanismos conviven mientras la Internet entera migra poco a poco.
 
+![Los tres mecanismos de transición IPv4 a IPv6: Dual Stack (las dos pilas a la vez), túnel (IPv6 dentro de IPv4) y NAT64/DNS64 (traducción entre familias)](/ApuntesRedes/diagrams/u03-transicion.svg)
+
 ---
 
 ## 🗃️ Dual Stack: el "por si acaso" de los dos a la vez
