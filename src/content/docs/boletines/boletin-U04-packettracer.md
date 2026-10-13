@@ -5,7 +5,7 @@ description: Prácticas guiadas de direccionamiento IP y DHCP en Packet Tracer (
 
 # 🖥️ Boletín de Direccionamiento IP — Packet Tracer
 
-> **Variante práctica de nivel único** (no es el par inicial/avanzado). Ocho micro-prácticas de baja dificultad en **Packet Tracer** para que el direccionamiento deje de ser magia: IPs estáticas, DHCP en router, APIPA, un poco de Wireshark (DORA y ARP) y un cierre con IPv6. Ideal tras leer los puntos 1–8 y 16 de la unidad.
+> **Variante práctica de nivel único** (no es el par inicial/avanzado). Ocho micro-prácticas de baja dificultad en **Packet Tracer** para que el direccionamiento deje de ser magia: IPs estáticas, DHCP en router, APIPA, un poco de Wireshark (DORA y ARP) y un cierre con IPv6. Ideal tras leer los puntos 1–7 y 12 de la unidad.
 
 > 🧰 **Requisitos:** Cisco Packet Tracer. Wireshark opcional (si no, usa *Simulation mode* y los PDU details de PT).
 
@@ -66,11 +66,11 @@ En *Desktop → IPv6 Configuration* de las PCs, prueba **ambos** caminos: (a) di
 | Ejercicio | Concepto | Punto |
 |---|---|---|
 | 1 | IP estática y misma subred | 1–2 |
-| 2–3 | AND, máscaras, límites de subred | 2, 5–6 |
-| 4–5 | DHCP pool, excluded, APIPA | 8 |
-| 6 | DORA paso a paso | 8 |
+| 2–3 | AND, máscaras, límites de subred | 2, 4–5 |
+| 4–5 | DHCP pool, excluded, APIPA | 7 |
+| 6 | DORA paso a paso | 7 |
 | 7 | ARP (puente con la trama) | 1 |
-| 8 | IPv6 estático / SLAAC | 12, 16 |
+| 8 | IPv6 estático / SLAAC | 10, 12 |
 
 ---
 

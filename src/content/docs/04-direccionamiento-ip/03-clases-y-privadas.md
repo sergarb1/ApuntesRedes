@@ -39,16 +39,24 @@ Al vuelo: primer octeto **0-127** → A (`8.8.8.8`), **128-191** → B (`172.16.
 
 En 1993 llegó **CIDR** (*Classless Inter-Domain Routing*):
 
-- **Sin clases:** ya no se mira *de qué clase es* la IP; manda la **máscara /n**.
-- **Sin máscaras fijas:** cualquier máscara, con cualquier red, del tamaño que haga falta.
-- **Rutas agregadas:** se pueden agrupar varias redes en una sola ruta (sumarización, en los boletines).
-
-```
-10.0.0.0/8        → Red: 8 bits,  Host: 24 bits   (la vieja "clase A")
-192.168.1.128/25  → Red: 25 bits, Host: 7 bits    (imposible con clases)
-```
+- **Sin clases:** ya no se mira *de qué clase es* la IP; manda la **máscara /n** (la mecánica, en el [punto 4](/ApuntesRedes/04-direccionamiento-ip/04-mascaras-y-cidr)).
+- **Sin máscaras fijas:** cualquier máscara, con cualquier red, del tamaño que haga falta: `192.168.1.128/25` era impensable con clases.
+- **Rutas agregadas:** se pueden agrupar varias redes en una sola ruta (sumarización, justo abajo).
 
 La misma dirección puede significar cosas distintas según su `/n`: con CIDR puedes dar a `192.168.1.0` un /26 o un /30 y nadie discute. Con clases habría sido un pecado.
+
+### 🧩 Sumarización: varias rutas en una
+
+Gracias a que las redes ya no tienen tamaño fijo, un router puede anunciar **una sola ruta resumen** en lugar de un puñado de rutas casi idénticas:
+
+```
+192.168.0.0/24  ┐
+192.168.1.0/24  ├──→  192.168.0.0/22   (una sola ruta en la tabla)
+192.168.2.0/24  │      cubre 192.168.0.0 – 192.168.3.255
+192.168.3.0/24  ┘
+```
+
+**El truco:** buscar los bits en común por la izquierda. Las cuatro redes comparten los **22 primeros bits**, así que el resumen es `/22`. Menos rutas en las tablas = enrutamiento más rápido y anuncios más estables. Este ejercicio es el favorito de los boletines avanzados.
 
 ---
 

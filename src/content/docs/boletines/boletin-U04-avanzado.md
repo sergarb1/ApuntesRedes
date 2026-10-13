@@ -119,7 +119,7 @@ a) Explica qué ocurre cuando un PC pide IP por DHCP y recibe `192.168.1.20`, qu
 b) ¿Cómo detectaría el administrador el conflicto? ¿Qué comando usaría en el router?
 c) ¿Cómo se **previene** este problema desde el diseño?
 
-**Pista:** Antes de conceder una IP, el servidor DHCP suele comprobar (el RFC lo llama "ping") si la dirección ya está en uso. En Cisco el resultado se registra en una tabla concreta que se consulta con `show`. Y la solución de fondo ya la viste en el punto 8 de la unidad: `ip dhcp excluded-address`.
+**Pista:** Antes de conceder una IP, el servidor DHCP suele comprobar (el RFC lo llama "ping") si la dirección ya está en uso. En Cisco el resultado se registra en una tabla concreta que se consulta con `show`. Y la solución de fondo ya la viste en el punto 7 de la unidad: `ip dhcp excluded-address`.
 
 ## 9. Fragmentación real (túnel y MTU)
 

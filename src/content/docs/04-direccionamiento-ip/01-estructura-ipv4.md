@@ -49,18 +49,9 @@ Dicho así parece mucho. Lo es... en 1981. Hoy hay más dispositivos conectados 
 
 ## 🌐 Notación decimal punteada
 
-Cada octeto se convierte de binario a decimal y se separa con puntos:
+Cada octeto se convierte de binario a decimal y se separa con puntos: `11000000` → 192, `10101000` → 168… Juntos forman `192.168.1.10`. Ese es todo el truco de la notación: **traducir cada octeto binario a decimal** y unirlo con puntos. En el [punto 2](/ApuntesRedes/04-direccionamiento-ip/02-binario-y-and) aprenderás a hacer esa conversión como un rayo.
 
-| Binario (8 bits) | Decimal | 
-|---|---|
-| `11000000` | 192 |
-| `10101000` | 168 |
-| `00000001` | 1 |
-| `00001010` | 10 |
-
-Juntos forman `192.168.1.10`. Simple. Ese es todo el truco de la notación: **traducir cada octeto binario a decimal** y unirlo con puntos. En el [punto 2](/ApuntesRedes/04-direccionamiento-ip/02-binario-y-and) aprenderás a hacer esa conversión como un rayo.
-
-> 💡 **Tip:** una IP por sí sola no dice nada: necesita saber qué parte es *red* y qué parte es *host*. Eso lo decide la **máscara**, que verás en el [punto 5](/ApuntesRedes/04-direccionamiento-ip/04-mascaras-y-cidr). Por ahora, memoriza que la IP es solo el número de casa; la máscara decide el vecindario.
+> 💡 **Tip:** una IP por sí sola no dice nada: necesita saber qué parte es *red* y qué parte es *host*. Eso lo decide la **máscara**, que verás en el [punto 4](/ApuntesRedes/04-direccionamiento-ip/04-mascaras-y-cidr). Por ahora, memoriza que la IP es solo el número de casa; la máscara decide el vecindario.
 
 ---
 
@@ -118,7 +109,7 @@ No todas las direcciones del espacio IPv4 se pueden usar para asignar a un equip
 
 > ⚠️ **Trampa de examen:** el **loopback** (127.x.x.x) no es una IP "de la casa", es una dirección que dice "habla con este mismo equipo". Hacer `ping 127.0.0.1` no sale a ningún sitio: comprueba que tu pila TCP/IP funciona.
 
-Una de las más odiadas es **169.254.x.x**: cuando un PC no consigue IP por DHCP, se asigna él mismo una APIPA. El día que veas esa IP en un `ipconfig /all`, sabrás que el DHCP no respondió. Lo verás a fondo en el [punto 8](/ApuntesRedes/04-direccionamiento-ip/07-dhcp).
+Una de las más odiadas es **169.254.x.x**: cuando un PC no consigue IP por DHCP, se asigna él mismo una APIPA. El día que veas esa IP en un `ipconfig /all`, sabrás que el DHCP no respondió. Lo verás a fondo en el [punto 7](/ApuntesRedes/04-direccionamiento-ip/07-dhcp).
 
 ---
 
@@ -139,7 +130,7 @@ En la [unidad de capa de enlace y trama Ethernet](/ApuntesRedes/03-capa-de-enlac
 - **ARP es capa 3 pedir ayuda a la capa 2:** resuelve un problema de *dirección lógica* usando el medio *físico/enlace*.
 - **Tabla ARP:** caché de pares IP→MAC. Se consulta con `arp -a` (Windows) o `ip neigh` (Linux). Si la entrada caduca o se borra, el proceso se repite.
 - **Proxy ARP:** un router que responde ARP *en nombre de* hosts de otra red (a veces sorprende en laboratorios).
-- **En IPv6 no existe ARP:** lo sustituye **NDP** con multicast (punto 14). La idea es la misma: resolver vecinos, sin el broadcast masivo.
+- **En IPv6 no existe ARP:** lo sustituye **NDP** con multicast (punto 11). La idea es la misma: resolver vecinos, sin el broadcast masivo.
 
 > 🔗 **Cuándo miras ARP en el diagnóstico:** el ping a la IP de tu red local falla *antes* de salir del router → a menudo es "no resuelvo MAC" (ARP vacío, VLAN mal, duplicate IP). Si ARP va bien y el ping a Internet falla, el problema es más arriba (ruta, DNS, NAT…).
 
