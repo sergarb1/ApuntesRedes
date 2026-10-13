@@ -19,17 +19,9 @@ Hasta aquí, todos los tipos traducían a los que **salían**. Pero hay un probl
 
 ## 🚪 El problema que resuelve
 
-Sin NAT destino, el tráfico entrante no tiene a dónde ir:
+Sin NAT destino, el tráfico entrante no tiene a dónde ir: el router recibe la petición en su IP pública, pero no sabe qué equipo interno la busca. NAT destino responde a esa pregunta con una regla que reenvía el paquete al servidor interno:
 
-```
-Internet → 83.45.12.78:80  →  ¿y ahora qué?  →  NADIE
-```
-
-El router recibe la petición en su IP pública, pero no sabe qué equipo interno la busca. NAT destino responde a esa pregunta con una regla:
-
-```
-Internet → 83.45.12.78:80  →  regla NAT destino  →  192.168.1.10:80
-```
+![NAT destino: el cliente llama al puerto 8080 de la IP pública y el router reenvía al servidor interno :80](/ApuntesRedes/diagrams/u10-nat-destino.svg)
 
 Cualquier paquete que llegue a la IP pública en el puerto 80 se reenvía, con el destino reescrito, al servidor web interno. Es el "buzón de paquetería" del edificio de oficinas del punto 2: el exterior solo conoce la dirección pública, y la recepción reparte.
 

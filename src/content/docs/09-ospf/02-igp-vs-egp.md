@@ -21,18 +21,7 @@ Antes de hablar de OSPF hay que saber dónde vive. Este punto te da el mapa: qu�
 
 Un **AS** (Autonomous System) es un conjunto de redes bajo **una única administración**: la red de tu instituto, la de una empresa, la de un operador. Cada AS tiene un número público (ASN) para identificarse en Internet.
 
-```
-            AS 65001 (tu empresa)
-   ┌──────────────────────────────┐
-   │   R1 ── R2 ── R3             │  ← aquí dentro → IGP (OSPF/RIP/EIGRP)
-   │   │         │                │
-   │   └─── LAN1 └──── LAN2       │
-   └──────────┬───────────────────┘
-              │ ← aquí entre AS → EGP (BGP)
-   ┌──────────┴───────────────────┐
-   │         AS del operador      │
-   └──────────────────────────────┘
-```
+![Dos sistemas autónomos: IGP dentro de cada AS y EGP (BGP) entre AS](/ApuntesRedes/diagrams/u09-igp-egp.svg)
 
 - **Dentro** de un AS usas un **IGP**: decide la mejor ruta hacia cada red interna.
 - **Entre** AS distintos usas un **EGP**: decide cómo llegar a la red de "los otros". El único EGP relevante es **BGP**, el protocolo que sostiene Internet.

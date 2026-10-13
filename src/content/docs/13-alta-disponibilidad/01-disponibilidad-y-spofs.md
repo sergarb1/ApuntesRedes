@@ -70,15 +70,7 @@ Reducir el MTTR a la mitad suele ser más barato que duplicar el MTBF. Primero p
 
 El patrón universal de HA en redes es **duplicar por capas, sin crear bucles ni cerebros divididos**:
 
-```
-              [Router R1]───[Router R2]      ← HSRP (gateway virtual)
-                   │              │
-              [Switch SW1]───[Switch SW2]     ← stack o dos equipos
-                ║ (EtherChannel) ║
-              [Switch SW3]───[Switch SW4]     ← acceso, doble uplink
-                 │              │
-               PCs            PCs             ← cada PC, dos caminos
-```
+![Redundancia por capas: R1-R2 (HSRP), SW1-SW2 (stack), SW3-SW4 con doble uplink a PCs](/ApuntesRedes/diagrams/u13-redundancia-capas.svg)
 
 - **Capa 2:** EtherChannel y STP gestionan la redundancia de enlaces sin bucles.
 - **Capa 3:** HSRP da un gateway virtual; las rutas dinámicas o flotantes cubren caminos.

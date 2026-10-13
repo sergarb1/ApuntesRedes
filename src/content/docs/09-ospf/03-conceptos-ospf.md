@@ -46,13 +46,7 @@ A diferencia de RIP, que solo mira "hacia dónde y a cuántos saltos", OSPF quie
 
 Dijkstra calcula el **camino de menor coste** desde un origen hacia todos los demás nodos. En OSPF se ejecuta sobre la LSDB cada vez que hay un cambio, y el resultado alimenta la tabla de rutas. Un ejemplo mínimo:
 
-```
-        A ───── B
-        │ 5     │ 2
-        │       │
-        C ───── D
-           1        (costes: A-C=5, A-B=5, B-D=2, C-D=1)
-```
+![Topología A-B-C-D con costes, camino ganador A→C→D en verde](/ApuntesRedes/diagrams/u09-coste-ruta.svg)
 
 Desde A, ¿cuál es la mejor ruta a D? **A → C → D** (5 + 1 = 6) frente a A → B → D (5 + 2 = 7). OSPF elige la de coste menor, no la de menos routers. El coste de cada enlace lo aprenderás en el [punto 6](/ApuntesRedes/09-ospf/06-coste-ospf).
 

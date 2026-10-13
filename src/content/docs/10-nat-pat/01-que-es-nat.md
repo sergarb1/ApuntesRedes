@@ -37,17 +37,9 @@ El protocolo IPv4 solo ofrece ~4.300 millones de direcciones. Con un móvil por 
 
 ### ¿Dónde vive NAT?
 
-NAT vive en el **borde de tu red**: el router que conecta tu LAN con el ISP. Mira el viaje de un paquete con y sin NAT:
+NAT vive en el **borde de tu red**: el router que conecta tu LAN con el ISP. Sin NAT, un PC privado saldría con su IP tal cual (imposible a escala mundial). Con NAT, el router se queda con la IP pública y **traduce** la privada de cada paquete que cruza su interfaz *outside*. Todo el "truco" de NAT ocurre en ese router:
 
-```
-SIN NAT (ideal)                          CON NAT (realidad)
-┌──────┐        ┌────────┐        ┌──────┐        ┌────────┐
-│ PC   │────────│ Router │───────►│ PC   │────────│ Router │
-│ 8.8.8.1│  IP pública directa       │192.168.1.10│  NAT: traduce │
-└──────┘  sale tal cual              └──────┘  a 83.45.12.78
-```
-
-En el primer caso el PC sale con su IP tal cual (imposible a escala mundial). En el segundo, el router se queda con la IP pública y **traduce** la privada de cada paquete que cruza su interfaz *outside*. Todo el "truco" de NAT ocurre en ese recuadro de la derecha.
+![Viaje de un paquete: la PC sale con IP privada y el router la traduce a la IP pública](/ApuntesRedes/diagrams/u10-que-es-nat.svg)
 
 ---
 

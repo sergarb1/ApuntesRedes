@@ -30,14 +30,7 @@ Estos términos son el idioma de las redes inalámbricas; caen en examen y en en
 
 La diferencia SSID/BSSID aclara el gran misterio del "roaming invisible": en un ESS, tu portátil ve **un solo SSID** aunque haya 8 APs; cada AP se distingue por su BSSID (MAC), y el cliente cambia de AP sin que cambie de red. A eso se le llama **roaming**.
 
-```
-ESS "Empresa" (un solo SSID, 3 BSS):
-                    ┌── switch/cable (DS) ──┐
-                    │        │              │
-                 [AP-1]   [AP-2]        [AP-3]
-                BSS-1     BSS-2         BSS-3
-              clientes   clientes      clientes
-```
+![ESS: tres APs con el mismo SSID unidos por el DS; el cliente roama entre BSS](/ApuntesRedes/diagrams/u12-ess-roaming.svg)
 
 ---
 

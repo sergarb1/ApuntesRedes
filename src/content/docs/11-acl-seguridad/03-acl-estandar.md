@@ -72,10 +72,7 @@ La respuesta es el ancla de todo este punto:
 - La estándar **solo filtra por origen**. Si la pones cerca del origen (digamos en tu router de borde), bloquea a toda esa subred *para todo* — ya no distingues si iba a la web, al servidor de nóminas o a una impresora.
 - Colocada **cerca del destino**, decides *exactamente quién llega hasta ahí*. Un intruso mal contenido en el camino no llega a la víctima.
 
-```
-                    (colocación A: cerca de origen)        (colocación B: cerca de destino)
-origen ─── routerA ──── routerB ──── routerC ──── destino
-```
+![Colocación A (cerca del origen, incorrecta) frente a B (cerca del destino, correcta)](/ApuntesRedes/diagrams/u11-colocacion-acl.svg)
 
 - En **A** bloqueas un origen para todo el mundo.
 - En **B** (correcto para estándar) decides quién alcanza el destino concreto. El tráfico permitido gasta ancho de banda de por medio, pero es la única manera de saber "a quién dejo llegar aquí".

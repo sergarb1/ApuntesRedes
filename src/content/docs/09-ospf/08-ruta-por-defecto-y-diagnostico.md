@@ -37,13 +37,7 @@ R3(config-router)# default-information originate     # la anuncia a OSPF
 
 El orden importa: **de lo físico a lo lógico**. Cada paso descarta un nivel y te acerca al fallo.
 
-```
-Paso 1  ping / show ip interface brief   → ¿hay conectividad capa 3?
-Paso 2  show ip protocols                → ¿OSPF arranca y declara las redes?
-Paso 3  show ip ospf neighbor            → ¿hay vecinos? ¿están en FULL?
-Paso 4  show ip ospf database            → ¿la LSDB tiene los LSAs de todos?
-Paso 5  show ip route ospf               → ¿aparecen las rutas (prefijo O)?
-```
+![Escalera de diagnóstico OSPF: de lo físico (abajo) a lo lógico (arriba)](/ApuntesRedes/diagrams/u09-escalera-ospf.svg)
 
 **Causas típicas de "no forma vecindad"** (la lista que cualquier admin repite de memoria):
 

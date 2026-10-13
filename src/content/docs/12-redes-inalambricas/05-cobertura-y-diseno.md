@@ -47,17 +47,7 @@ Y dos consejos que parecen obvios pero se olvidan:
 
 Para una planta rectangular con tres APs (supón pasillo central y aulas a ambos lados):
 
-```
-  ┌──────────────────────────────────────────┐
-  │  Aula 1        Aula 2         Aula 3     │
-  │  [AP-1]        [AP-2]        [AP-3]      │
-  │  canal 1       canal 6       canal 11    │
-  ├────────── pasillo ───────────────────────┤
-  │  Aula 4        Aula 5         Aula 6     │
-  │  (recibe       (recibe        (recibe    │
-  │   de AP-1)      de AP-2)       de AP-3)  │
-  └──────────────────────────────────────────┘
-```
+![Plano con AP-1 ch 1, AP-2 ch 6 y AP-3 ch 11; celdas solapadas en el pasillo](/ApuntesRedes/diagrams/u12-cobertura-canales.svg)
 
 Cada AP en un canal no solapado, potencias moderadas, solapamiento en el pasillo para el roaming. En 5 GHz el patrón se repite con canales de 20/40 MHz alternos. Los controladores y los APs modernos tienen **RRM** (Radio Resource Management) para automatizar canales y potencias; aun así, un administrador revisa que la automatización no haya metido los tres APs en el mismo canal "porque hoy toca".
 

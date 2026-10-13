@@ -23,19 +23,7 @@ Si todos los routers de una red gigante compartieran la misma LSDB, cada cambio 
 - **Aislamiento de fallos:** un problema en la Área 2 no obliga a recalcular a toda la red.
 - **Menos recursos:** menos LSAs, menos SPF, menos memoria.
 
-```
-            ┌─────────────────┐
-            │     ÁREA 0      │
-            │   (backbone)    │
-            │ R0a ─────── R0b │
-            └───┬─────────┬───┘
-                │         │
-        ┌───────┴───┐   ┌─┴────────┐
-        │ ÁREA 1    │   │ ÁREA 2   │
-        │ R1a ─ R1b │   │ R2a      │
-        └───────────┘   └──────────┘
-        (R0a y R0b son ABR: conectan áreas al backbone)
-```
+![Área 0 (backbone) unida a las áreas 1 y 2 a través de sus ABR](/ApuntesRedes/diagrams/u09-areas-ospf.svg)
 
 ---
 

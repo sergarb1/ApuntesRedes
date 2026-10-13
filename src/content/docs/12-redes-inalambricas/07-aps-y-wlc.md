@@ -33,19 +33,7 @@ Configurar 10 autónomos = repetir 10 veces el mismo trabajo y rezar para no equ
 
 En el modelo lightweight, el AP se "vacía": mantiene la parte física (radio, beacons, cifrado de tramas) y delega la gestión en un **WLC** (*Wireless LAN Controller*):
 
-```
-        CLIENTES WiFi
-             │
-   ┌─────────┴─────────┐
-   │  AP lightweight   │  ← solo radio: beacons, asociaciones, cifrado
-   └─────────┬─────────┘
-             │ túnel CAPWAP (encapsulado, puede cruzar la red)
-   ┌─────────┴─────────┐
-   │        WLC        │  ← cerebro: SSIDs, VLANs, seguridad, RRM, roaming
-   └─────────┬─────────┘
-             │
-        Red cableada
-```
+![AP lightweight unido al WLC por túnel CAPWAP; el WLC es el cerebro de la flota](/ApuntesRedes/diagrams/u12-capwap-wlc.svg)
 
 El túnel **CAPWAP** encapsula el tráfico de gestión (y, en modo central, el de datos) entre AP y WLC. Beneficios del modelo:
 

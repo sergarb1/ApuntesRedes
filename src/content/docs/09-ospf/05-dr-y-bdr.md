@@ -28,17 +28,7 @@ Con DR (contando solo las adyacencias con el DR): N-1 adyacencias. Si contamos t
 
 Con 5 routers:
 
-```
-Sin DR → 5*4/2 = 10 adyacencias       Con DR y BDR → 2*5-3 = 7 adyacencias
-   R1─R2                                 R1   R2   R3   R4
-   R1─R3                                 │    │    │    │
-   R1─R4                                 └────┴─┐──┴────┘
-   R1─R5                                        │
-   R2─R3 ...                                ┌───┴───┐
-                                            │  DR   │
-                                            │  BDR  │
-                                            └───────┘
-```
+![Cuatro routers en un switch: R3 es DR, R4 es BDR y R1/R2 son DROTHER](/ApuntesRedes/diagrams/u09-dr-bdr.svg)
 
 Cada router forma adyacencia **FULL** solo con el DR y el BDR. Los routers "de a pie" (DROTHER) se quedan en estado **2WAY** entre sí: se ven, se saludan, pero no intercambian LSDB directamente.
 

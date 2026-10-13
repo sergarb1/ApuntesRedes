@@ -25,15 +25,7 @@ Con dos switches independientes en paralelo (doble uplink desde cada acceso, uno
 
 El stacking elimina esos tres: los miembros actúan como **un solo switch** con más puertos. Si un miembro muere, el stack sigue siendo "un switch" que perdió puertos, no una topología que reconverge.
 
-```
-        STACK (un solo switch lógico)
-   ┌──────────────────────────────────┐
-   │  [SW-1] ⇄ [SW-2] ⇄ [SW-3]        │  ← enlaces de stack (anillo)
-   │  master ─ member ─ member        │
-   └──────────────────────────────────┘
-      │           │          │
-    acceso      acceso     acceso        ← cada puerto es "del stack"
-```
+![Anillo de stack: SW-1 master con SW-2 y SW-3 members unidos por enlaces de stack](/ApuntesRedes/diagrams/u13-stacking.svg)
 
 ---
 
