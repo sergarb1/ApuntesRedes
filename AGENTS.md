@@ -339,8 +339,10 @@ Protocolo aplicado a la unidad de dirección IP; repetible para cualquier unidad
 |---|---|---|
 | `u03-modelo-osi` | `01-modelo-osi.md` · Modelo OSI | 7 capas apiladas, marca "AQUÍ ESTAMOS" en 1–2, nota TCP/IP |
 | `u03-estructura-mac` | `02-direcciones-mac.md` · Cómo se escribe una MAC | OUI + NIC en 48 bits y bits I/G y U/L |
+| `u03-unicast-multicast-broadcast` | `02-direcciones-mac.md` · Unicast, multicast y broadcast | Una tarjeta / el grupo / todas, según el bit I/G |
 | `u03-trama-ethernet` | `03-trama-ethernet.md` · Trama Ethernet II | MACs, EtherType, payload, FCS |
 | `u03-flujo-encapsulacion` | `04-encapsulacion.md` · Las muñecas rusas | Datos → segmento → paquete → trama → bits |
+| `u03-viaje-macs` | `04-encapsulacion.md` · Un viaje de verdad | PC → router → servidor: MACs por salto, IP intacta |
 | — | `05-cierre.md` | Cierre práctico: sin diagrama (actividades, no conceptos) |
 
 ### Diagramas de la unidad de dirección IP existentes

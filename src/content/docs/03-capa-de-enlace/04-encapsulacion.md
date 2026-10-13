@@ -36,6 +36,8 @@ Ya sabes de la [unidad anterior](/ApuntesRedes/03-capa-de-enlace/01-modelo-osi) 
 
 Tu PC pide una página. Mira quién escribe qué cabecera y **qué cambia en cada salto**:
 
+![Viaje de un paquete de la PC al servidor: la trama usa MACs de PC a router y luego de router a servidor, mientras la IP de destino se conserva en todo el recorrido](/ApuntesRedes/diagrams/u03-viaje-macs.svg)
+
 | Tramo | MAC origen → destino (trama) | IP origen → destino (paquete) | ¿Qué cambia? |
 |---|---|---|---|
 | PC → router (tu LAN) | PC → **router** (puerta de enlace) | PC → servidor web | La trama la encabeza tu PC y la recoge el router |
