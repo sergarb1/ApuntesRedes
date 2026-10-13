@@ -26,15 +26,7 @@ Imagina que eres el router. Te llega un paquete cuyo destino es `8.8.8.8`. Tu pr
 3. **¿Tengo la ruta por defecto (0.0.0.0/0)?** Sí → es tu último recurso, sal por ahí.
 4. **Nada coincide** → descarta el paquete y envía al origen un **ICMP Destination Net Unreachable**.
 
-```
-Paquete llega → ¿destino local? ──sí──▶ entrégalo a la interfaz
-     │
-     └no── ¿ruta en la tabla? ──sí──▶ reenvía por el next-hop
-                 │
-                 └no── ¿ruta por defecto? ──sí──▶ sale por la default
-                             │
-                             └no── ▶ descarta + ICMP "Destination Net Unreachable"
-```
+![Cascada de decisiones del router: red conectada, ruta en la tabla, ruta por defecto y descarte con ICMP unreachable](/ApuntesRedes/diagrams/u08-decision-router.svg)
 
 > 💡 **La lección del laboratorio:** sin rutas, un router no es más que un switch caro — el ⭐ Sé el Paquete del cierre lo pone en escena.
 

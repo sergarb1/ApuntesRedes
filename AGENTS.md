@@ -388,6 +388,14 @@ Protocolo aplicado a la unidad de dirección IP; repetible para cualquier unidad
 | `u07-ntp-strata` | `06-ntp.md` · Strata | Cadena Stratum 0 (GPS) → 1 → 2 (pool) → 3 (router) → clientes |
 | `u07-escalera-servicio` | `08-diagnostico-servicios.md` · La escalera del servicio | 5 peldaños: DHCP → gateway → Internet por IP → DNS → NTP (patrón de la escalera del ping) |
 
+### Diagramas de la unidad de enrutamiento estático existentes
+
+| Fichero | Sección `.md` | Contenido |
+|---|---|---|
+| `u08-secuencia-arranque` | `01-componentes-del-router.md` · Secuencia de arranque | POST → Boot ROM/ROMMON → carga IOS (Flash/TFTP) → carga startup-config (NVRAM/setup mode) |
+| `u08-topologia-r1-r2` | `03-rutas-estaticas.md` · La topología de cabecera | R1 con LAN 192.168.1.0/24, enlace WAN 10.0.0.0/30 y R2 con LAN 192.168.2.0/24 y salida a Internet |
+| `u08-decision-router` | `05-como-decide-el-router.md` · El viaje de un paquete | Cascada de decisiones: red conectada → ruta en tabla → ruta por defecto → descarte con ICMP unreachable |
+
 ### Fotos stock (criterio por unidad)
 
 Las fotos **solo proceden cuando ilustran un objeto físico real** que el alumno debe reconocer (cable, conector, herramienta, panel, rack, AP…). **No** se usan para conceptos abstractos (subnetting, STP, OSPF, NAT, ACL, VLAN lógica…): ahí manda el diagrama Excalidraw o el esquema en código.
