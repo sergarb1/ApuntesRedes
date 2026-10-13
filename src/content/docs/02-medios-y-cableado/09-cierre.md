@@ -1,15 +1,15 @@
 ---
-title: "8 — Cierre: consolida lo aprendido"
+title: "9 — Cierre: consolida lo aprendido"
 description: El cierre práctico, con cables, luz y caos controlado 🔌
 ---
 
 <p><small>El cierre práctico, con cables, luz y caos controlado 🔌</small></p>
 
-> 🗺️ **Estás en:** 📡 **Medios y cableado** → 8 · Cierre: consolida lo aprendido
+> 🗺️ **Estás en:** 📡 **Medios y cableado** → 9 · Cierre: consolida lo aprendido
 
 ---
 
-Has terminado la teoría: sabes por qué se trenza el cobre, cómo se crimpa un RJ45, cuándo la fibra manda, por qué el WiFi miente y cómo se cablea un edificio en serio. Este cierre es el aterrizaje: recorres lo aprendido con juegos, un laboratorio real de crimpado y las preguntas que te harán en una entrevista. Léelo justo después del [punto 7](/ApuntesRedes/02-medios-y-cableado/07-cableado-estructurado) y antes de abrir los boletines. En la unidad siguiente, el modelo OSI y la trama Ethernet pondrán este cable a trabajar de verdad.
+Has terminado la teoría: sabes por qué se trenza el cobre, cómo se crimpa un RJ45, cuándo la fibra manda, por qué el WiFi miente, cómo se cablea un edificio en serio y cómo se dibuja una red antes de tenderla. Este cierre es el aterrizaje: recorres lo aprendido con juegos, un laboratorio real de crimpado y las preguntas que te harán en una entrevista. Léelo justo después del [punto 8](/ApuntesRedes/02-medios-y-cableado/08-topologias-de-red) y antes de abrir los boletines. En la unidad siguiente, el modelo OSI y la trama Ethernet pondrán este cable a trabajar de verdad.
 
 ---
 
@@ -251,13 +251,13 @@ Un cable Cat6 transporta 1 Gbps sin problemas hasta que una silla pasa por encim
 |---|---|---|
 | RA1·b) | Medios de transmisión | ✅ Puntos 1, 2 y 5 |
 | RA2·a) | Estándares para redes cableadas | ✅ Puntos 2-3 y 7 |
-| RA2·b) | Montaje de cables | ✅ Punto 4 + ⚡ Laboratorio (punto 8) |
+| RA2·b) | Montaje de cables | ✅ Punto 4 + ⚡ Laboratorio (punto 9) |
 | RA2·c) | Comprobadores de conectividad | ✅ Puntos 4 y 6 |
 | RA1·d) | Trama y encapsulación Ethernet | → Se verá en la unidad de capa de enlace y trama |
 | RA2·d) | Direccionamiento lógico IP | → Se verá en la unidad de dirección IP |
 | RA2·e) | Adaptadores de red | → Se verá en dirección IP y en redes inalámbricas |
-| RA2·f) | Integración de dispositivos | ✅ Cableado estructurado (punto 7) + ⚡ Laboratorio (punto 8) |
+| RA2·f) | Integración de dispositivos | ✅ Cableado estructurado (punto 7) + ⚡ Laboratorio (punto 9) |
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/02-medios-y-cableado) · **Anterior:** [7 · Cableado estructurado](/ApuntesRedes/02-medios-y-cableado/07-cableado-estructurado) · **Siguiente:** [Capa de enlace y trama Ethernet](/ApuntesRedes/03-capa-de-enlace)
+📚 [Volver al índice de la unidad](/ApuntesRedes/02-medios-y-cableado) · **Anterior:** [8 · Topologías de red](/ApuntesRedes/02-medios-y-cableado/08-topologias-de-red) · **Siguiente:** [Capa de enlace y trama Ethernet](/ApuntesRedes/03-capa-de-enlace)

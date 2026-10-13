@@ -105,3 +105,19 @@ c) **Campus de 3 edificios:**
 
 > 💡 **Regla resumen:** distancia decide el medio (cobre ≤ 100 m, multimodo ≤ ~550 m, monomodo el resto); presupuesto decide las categorías.
 
+
+## 8. Cálculo de enlaces y redundancia
+
+a) **8 nodos:** `8·7/2 = 28` enlaces. **20 nodos:** `20·19/2 = 190` enlaces. Se dispara rápido: por eso la malla completa solo se usa en redes muy pequeñas.
+
+b) **Mínimo 8 enlaces:** un **anillo** de 8 nodos cierra el circuito con exactamente `n = 8` enlaces y, mientras no se rompan dos tramos seguidos, todo el mundo sigue comunicado. Es la forma barata de conseguir camino alternativo; en la práctica se combina con alguna cruz adicional (malla parcial) para aguantar dos cortes.
+
+c) **Estrella (con switch) en el acceso:** cada puesto con su propio cable, fallos aislados, fácil etiquetado y diagnóstico, y es exactamente lo que ya hiciste en el cableado estructurado.
+
+## 9. Topología y puntos únicos de fallo
+
+a) **Solo se caen las 30 PCs de la planta 2.** El resto de plantas y el core siguen: la estrella aísla el fallo a la planta afectada (los enlaces de las otras plantas al core no se ven tocados).
+
+b) **Híbrida / árbol (jerárquica):** estrellas de acceso por planta + una estrella superior con el core. Es la topología real de las redes de empresa.
+
+c) **El switch core es punto único de fallo:** si se cae él, se cae todo el edificio. La mitigación sin rehacer el cableado es **duplicar el core** (dos switches con enlaces desde cada planta) y dejar que la redundancia la gestione el protocolo de capa 2 (STP/RSTP, de la unidad de switching), en lugar de crear enlaces paralelos a ciegas que provoquen bucles.

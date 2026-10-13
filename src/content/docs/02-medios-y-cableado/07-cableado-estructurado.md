@@ -134,4 +134,4 @@ La inversión extra del cableado estructurado se paga en la **primera mudanza de
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/02-medios-y-cableado) · **Anterior:** [6 · Conceptos físicos clave](/ApuntesRedes/02-medios-y-cableado/06-conceptos-fisicos) · **Siguiente:** [8 · Cierre: consolida lo aprendido](/ApuntesRedes/02-medios-y-cableado/08-cierre)
+📚 [Volver al índice de la unidad](/ApuntesRedes/02-medios-y-cableado) · **Anterior:** [6 · Conceptos físicos clave](/ApuntesRedes/02-medios-y-cableado/06-conceptos-fisicos) · **Siguiente:** [8 · Topologías de red](/ApuntesRedes/02-medios-y-cableado/08-topologias-de-red)

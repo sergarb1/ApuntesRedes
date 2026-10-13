@@ -56,7 +56,8 @@ const unidadesExpandidas = {
     { slug: '02-medios-y-cableado/05-fibra-optica', label: '5 · Fibra óptica' },
     { slug: '02-medios-y-cableado/06-conceptos-fisicos', label: '6 · Conceptos físicos clave' },
     { slug: '02-medios-y-cableado/07-cableado-estructurado', label: '7 · Cableado estructurado' },
-    { slug: '02-medios-y-cableado/08-cierre', label: '8 · Cierre' },
+    { slug: '02-medios-y-cableado/08-topologias-de-red', label: '8 · Topologías de red' },
+    { slug: '02-medios-y-cableado/09-cierre', label: '9 · Cierre' },
   ],
   '03-capa-de-enlace': [
     { slug: '03-capa-de-enlace/01-modelo-osi', label: '1 · El modelo OSI' },
@@ -217,7 +218,7 @@ const boletinesGroups = boletinCodes.flatMap((code, i) => {
       items: boletinItems(code),
     },
   ];
-  if (code === '02' || code === '04') {
+  if (code === '03' || code === '04') {
     groups.push(packetTracerGroup(code, i, emojis));
   }
   // La unidad 04 tiene además boletines específicos de IPv6

@@ -34,6 +34,8 @@ Los **3 primeros bytes** son el **OUI** (*Organizationally Unique Identifier*): 
 
 > 🔍 **Truco para mirar OUIs:** en `ipconfig /all` o en `ip link` verás la MAC de tu interfaz. Los primeros 6 caracteres dicen quién fabricó esa placa (salvo que alguien la haya "disfrazado", que esto llega abajo).
 
+![Estructura de una dirección MAC: OUI de 24 bits asignado por el IEEE, NIC de 24 bits del fabricante y los bits I/G y U/L del primer byte](/ApuntesRedes/diagrams/u03-estructura-mac.svg)
+
 ---
 
 ## 🎭 Unicast, multicast y broadcast

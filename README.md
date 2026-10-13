@@ -120,7 +120,7 @@ src/
 │   │   ├── 02-medios-y-cableado/ → Medios (01-…07 teoría capa 1, 08 cierre)
 │   │   ├── 03-capa-de-enlace/    → OSI, MAC, trama, encapsulación (01-…05)
 │   │   ├── 04-direccionamiento-ip/ … 13-alta-disponibilidad/
-│   │   └── boletines/            → Ejercicios: inicial/avanzado + resueltos (texto puro, sin imágenes); variante packettracer en medios y dirección IP
+│   │   └── boletines/            → Ejercicios: inicial/avanzado + resueltos (texto puro, sin imágenes); variante packettracer en capa de enlace y dirección IP
 │   └── config.ts                 → Colecciones de contenido
 ├── styles/
 │   └── custom.css                → Tema azul + glassmorphism + print

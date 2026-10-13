@@ -27,7 +27,7 @@ Apuntes del módulo **PAR** (Planificación y Administración de Redes) para CFG
 ```
 src/content/docs/            → Secciones en Markdown (raíz, índices de unidad)
 src/content/docs/01-introduccion/… → 10 puntos (01-…, 10-mapa, 08-glosario, 09-preguntas-tontas)
-src/content/docs/02-medios-y-cableado/…      → UD2 · Medios y cableado (8 puntos: 01–07 teoría capa 1, 08 cierre)
+src/content/docs/02-medios-y-cableado/…      → UD2 · Medios y cableado (9 puntos: 01–08 teoría capa 1, 09 cierre)
 src/content/docs/03-capa-de-enlace/…          → UD3 · Capa de enlace (5 puntos: modelo OSI, direcciones MAC, trama Ethernet, encapsulación, cierre)
 src/content/docs/04-direccionamiento-ip/…    → UD4 · Direccionamiento IP y subnetting (IPv4 + IPv6, 13 puntos)
 src/content/docs/05-switching/…              → UD5 · Switching y VLAN
@@ -39,7 +39,7 @@ src/content/docs/10-nat-pat/…                → UD10 · NAT y PAT
 src/content/docs/11-acl-seguridad/…          → UD11 · ACL y seguridad básica
 src/content/docs/12-redes-inalambricas/…     → UD12 · Redes inalámbricas
 src/content/docs/13-alta-disponibilidad/…    → UD13 · Alta disponibilidad
-src/content/docs/boletines/  → Ejercicios (inicial, avanzado + resueltos, por unidad; variante `packettracer` en medios y dirección IP)
+src/content/docs/boletines/  → Ejercicios (inicial, avanzado + resueltos, por unidad; variante `packettracer` en capa de enlace y dirección IP)
 src/styles/custom.css        → CSS del tema (azul #2563eb + teal #4ecdc4, Geist Sans, glassmorphism)
 src/assets/logo.svg          → Logo
 scripts/                     → Scripts de exportación (PDF, EPUB, DOCX) y diagramas (D2)
@@ -326,14 +326,22 @@ Protocolo aplicado a la unidad de dirección IP; repetible para cualquier unidad
 | `u02-fibra-smf-mmf` | `05-fibra-optica.md` · SMF vs MMF | Núcleo, fuente, distancia y coste |
 | `u02-atenuacion-crosstalk` | `06-conceptos-fisicos.md` · Atenuación y diafonía | Señal que se debilita + NEXT/FEXT |
 | `u02-recorrido-senal` | `07-cableado-estructurado.md` · Recorrido de la señal | PC → latiguillo → keystone → horizontal → patch panel → switch |
+| `u02-topologia-punto-a-punto` | `08-topologias-de-red.md` · Punto a punto | Dos dispositivos con un único enlace |
+| `u02-topologia-bus` | `08-topologias-de-red.md` · Bus | Cable central con todos los dispositivos enganchados |
+| `u02-topologia-anillo` | `08-topologias-de-red.md` · Anillo | Circuitos cerrado sin extremos |
+| `u02-topologia-estrella` | `08-topologias-de-red.md` · Estrella | Cada equipo con su cable al switch central |
+| `u02-topologia-malla` | `08-topologias-de-red.md` · Malla | Enlaces directos y caminos alternativos |
+| `u02-topologia-hibrida` | `08-topologias-de-red.md` · Híbrida | Estrellas de acceso bajo un core jerárquico |
 
 ### Diagramas de la unidad de capa de enlace existentes
 
 | Fichero | Sección `.md` | Contenido |
 |---|---|---|
 | `u03-modelo-osi` | `01-modelo-osi.md` · Modelo OSI | 7 capas apiladas, marca "AQUÍ ESTAMOS" en 1–2, nota TCP/IP |
+| `u03-estructura-mac` | `02-direcciones-mac.md` · Cómo se escribe una MAC | OUI + NIC en 48 bits y bits I/G y U/L |
 | `u03-trama-ethernet` | `03-trama-ethernet.md` · Trama Ethernet II | MACs, EtherType, payload, FCS |
-| — | `10-cierre.md` | Cierre práctico: sin diagrama (actividades, no conceptos) |
+| `u03-flujo-encapsulacion` | `04-encapsulacion.md` · Las muñecas rusas | Datos → segmento → paquete → trama → bits |
+| — | `05-cierre.md` | Cierre práctico: sin diagrama (actividades, no conceptos) |
 
 ### Diagramas de la unidad de dirección IP existentes
 
@@ -428,7 +436,7 @@ npx astro build   # Solo Astro (si D2 NO está instalado; npm run build ejecuta 
 3. **Siempre mantener las secciones obligatorias** — cada unidad debe tener todas las secciones enumeradas arriba.
 4. **Los ejercicios SIEMPRE con solución** en `<details>`.
 5. **Laboratorios SIEMPRE con fallo intencionado** — el 80% práctico es obligatorio.
-6. **Los boletines siguen el patrón:** `inicial` (fácil) y `avanzado` (difícil), cada uno con su `-resuelto`, en `src/content/docs/boletines/` con nombre `boletin-UXX-inicial(-resuelto).md` / `boletin-UXX-avanzado(-resuelto).md`. **Son texto puro por diseño: NO llevan diagramas ni fotos** (mismo criterio en las 60 hojas del curso; pegar el diagrama de la unidad bajo un ejercicio de recall regalaría la respuesta). La unidad de dirección IP tiene además la variante `boletin-U04-ipv6-*`. Medios y dirección IP tienen además la variante **`boletin-U02-packettracer-*` / `boletin-U04-packettracer-*`**: práctica guiada de nivel único (no es el par inicial/avanzado), 8 micro-prácticas + resuelto 1:1; se enlaza en el sidebar como grupo "· Packet Tracer" y en los índices de cada unidad.
+6. **Los boletines siguen el patrón:** `inicial` (fácil) y `avanzado` (difícil), cada uno con su `-resuelto`, en `src/content/docs/boletines/` con nombre `boletin-UXX-inicial(-resuelto).md` / `boletin-UXX-avanzado(-resuelto).md`. **Son texto puro por diseño: NO llevan diagramas ni fotos** (mismo criterio en las 60 hojas del curso; pegar el diagrama de la unidad bajo un ejercicio de recall regalaría la respuesta). La unidad de dirección IP tiene además la variante `boletin-U04-ipv6-*`. Capa de enlace y dirección IP tienen además la variante **`boletin-U03-packettracer-*` / `boletin-U04-packettracer-*`**: práctica guiada de nivel único (no es el par inicial/avanzado), 8 micro-prácticas + resuelto 1:1; se enlaza en el sidebar como grupo "· Packet Tracer" y en los índices de cada unidad.
 7. **El CSS no debe romperse** — probar con `npm run build` después de cambios.
 8. **CI/CD en rama `main`**.
 9. **Puppeteer** instalado para PDFs, pero con `PUPPETEER_SKIP_DOWNLOAD=true` en CI. En local, si la versión cacheada de Chrome falla, se usa el Chrome del sistema con `PUPPETEER_EXECUTABLE_PATH="C:\Program Files\Google\Chrome\Application\chrome.exe"`.
@@ -436,7 +444,7 @@ npx astro build   # Solo Astro (si D2 NO está instalado; npm run build ejecuta 
 11. **El build ejecuta `npm run build` que genera diagramas automáticamente** (prependido en el script).
 12. **PDF** se genera con `starlight-to-pdf` — un único PDF con todas las unidades y portada. Ver `scripts/pdf-*.html`.
 13. **EPUB** se genera con Pandoc — `scripts/generate-epub.ps1` + `scripts/epub.css`. El script reescribe las rutas `/ApuntesRedes/diagrams/` → `public/diagrams/` para que Pandoc encuentre los SVGs.
-14. **DOCX por unidad** — `scripts/generate-docx.mjs` (`npm run docx`, requiere Pandoc CLI en PATH). Crea `docx/<unidad>/` con un `.docx` de la unidad completa y un `.docx` suelto por cada boletín (incl. `-resuelto` y variantes `U04-ipv6-*` y `U02/U04-packettracer-*`). **Sí va al repo** (no está en `.gitignore`). Tras editar contenido de unidades o boletines, regenerar con `npm run docx` y commitear los DOCX juntos. Mismas reescrituras de rutas que el EPUB (`/ApuntesRedes/…` → `public/…` para diagrams/photos).
+14. **DOCX por unidad** — `scripts/generate-docx.mjs` (`npm run docx`, requiere Pandoc CLI en PATH). Crea `docx/<unidad>/` con un `.docx` de la unidad completa y un `.docx` suelto por cada boletín (incl. `-resuelto` y variantes `U04-ipv6-*` y `U03/U04-packettracer-*`). **Sí va al repo** (no está en `.gitignore`). Tras editar contenido de unidades o boletines, regenerar con `npm run docx` y commitear los DOCX juntos. Mismas reescrituras de rutas que el EPUB (`/ApuntesRedes/…` → `public/…` para diagrams/photos).
 14b. **Pandoc 3.11** instalado en local con winget (`winget upgrade JohnMacFarlane.Pandoc`). Tras actualizar, refrescar el PATH de la shell (`$env:Path = [System.Environment]::GetEnvironmentVariable('Path','Machine') + ';' + [System.Environment]::GetEnvironmentVariable('Path','User')`) o abrir una terminal nueva.
 15. **Lenguaje es-ES obligatorio** — todo texto nuevo o editado cumple la sección 🗣️ Requisito lingüístico; hacer la comprobación lingüística antes de cerrar.
 15. **Excalidraw** — MCP + skill instalados; **recomendado reinstalar/actualizar la skill** si se cambia de entorno (`install-skill --dir …`); seguir workflow y reglas de la sección 📊; verificar con screenshot antes de exportar; NO subir sin comprobar solapes.
