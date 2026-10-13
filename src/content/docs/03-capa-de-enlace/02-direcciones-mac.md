@@ -45,6 +45,8 @@ El primer byte de la MAC lleva dos bits con nombre raro que deciden **para quié
 - **Bit I/G (Individual/Group):** 0 = **unicast** (una tarjeta concreta), 1 = **multicast** (un grupo).
 - **Bit U/L (Local/Universal):** 0 = MAC de fábrica (**global**), 1 = MAC **administrada localmente** (la cambias tú).
 
+![Unicast, multicast y broadcast: una tarjeta concreta, solo las del grupo o todas a la vez, según el bit I/G del primer byte](/ApuntesRedes/diagrams/u03-unicast-multicast-broadcast.svg)
+
 | Tipo | Ejemplo | Quién la recoge |
 |---|---|---|
 | **Unicast** | `00:1A:2B:3C:4D:5E` | Solo esa tarjeta |
