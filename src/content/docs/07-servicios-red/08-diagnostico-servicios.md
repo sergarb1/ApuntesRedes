@@ -19,13 +19,7 @@ description: "El usuario dice «no funciona»: tú sabes dónde mirar 🔍"
 
 El método es el mismo que aprendiste en unidades anteriores (la escalera del ping), pero aplicado a los servicios:
 
-```
-1. ¿Tiene IP, máscara y gateway?          → DHCP      (ipconfig / ip addr)
-2. ¿Pinge su gateway?                     → L2/L3 local
-3. ¿Pinge 8.8.8.8?                        → routing hasta Internet
-4. ¿Resuelve nombres?                     → DNS       (nslookup/dig)
-5. ¿Está la hora en orden?                → NTP       (solo servers/audit)
-```
+![Escalera del servicio: cinco peldaños de diagnóstico en orden — DHCP, gateway, Internet por IP, DNS y NTP — sin subir si el anterior no está en verde](/ApuntesRedes/diagrams/u07-escalera-servicio.svg)
 
 La regla es inquebrantable: **no subas de escalón hasta que el actual esté verde**. Si el paso 1 falla, el problema es DHCP aunque el usuario jure que "se ha caído Internet".
 

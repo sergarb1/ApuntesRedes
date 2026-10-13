@@ -82,11 +82,15 @@ const renderedTexts = (svgPath) => {
 const svgOffsets = (rendered, texts) => {
   const free = texts.filter((t) => !t.containerId && t.textAlign === 'left');
   const pairs = [];
+  const usedR = new Set();
   for (const t of free) {
-    const r = rendered.find((x) => x.content === t.text);
-    if (r) pairs.push(r.left - t.x);
+    const idx = rendered.findIndex((r, i) => !usedR.has(i) && r.content === t.text);
+    if (idx < 0) continue;
+    usedR.add(idx);
+    pairs.push(rendered[idx].left - t.x);
   }
   if (!pairs.length) return null;
+  pairs.sort((a, b) => a - b);
   return { dx: pairs[Math.floor(pairs.length / 2)] };
 };
 
