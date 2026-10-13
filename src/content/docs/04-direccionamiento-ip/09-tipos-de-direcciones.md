@@ -55,7 +55,7 @@ Link-local IPv6..: fe80::21a:2bff:fe3c:4d5e%12           ← LLA automática
 Default Gateway..: fe80::1%12                            ← router (LLA)
 ```
 
-Cada prefijo te dice el tipo: la GUA empieza por `2001:`, la Link-Local por `fe80::`, y el gateway es la LLA del router. Y el *Temporary IPv6* es la dirección temporal de Privacy Extensions (RFC 4941), de la que hablaremos en el [punto 12](/ApuntesRedes/04-direccionamiento-ip/10-eui64-y-slaac). Tener varias direcciones a la vez es normal en IPv6.
+Cada prefijo te dice el tipo: la GUA empieza por `2001:`, la Link-Local por `fe80::`, y el gateway es la LLA del router. Y el *Temporary IPv6* es la dirección temporal de Privacy Extensions (RFC 4941), de la que hablaremos en el [punto 10](/ApuntesRedes/04-direccionamiento-ip/10-eui64-y-slaac). Tener varias direcciones a la vez es normal en IPv6.
 
 ---
 
@@ -70,7 +70,7 @@ Una dirección **multicast** identifica a un **grupo** de interfaces. El paquete
 | `FF02::1` | **Todos los nodos** IPv6 del enlace (≈ el broadcast de IPv4) |
 | `FF02::2` | **Todos los routers** del enlace |
 | `FF02::5` | Todos los routers OSPF |
-| `FF02::1:FFxx:xxxx` | **Solicited-node multicast**: grupo derivado de la propia IP, usado por NDP ([punto 14](/ApuntesRedes/04-direccionamiento-ip/11-icmpv6-y-ndp)) |
+| `FF02::1:FFxx:xxxx` | **Solicited-node multicast**: grupo derivado de la propia IP, usado por NDP ([punto 11](/ApuntesRedes/04-direccionamiento-ip/11-icmpv6-y-ndp)) |
 
 > ⚠️ **Ojo con el segundo bloque:** el `02` en `FF02::` indica el **ámbito** (scope): `02` = enlace local, `05` = sitio, `0E` = global. `FF02::1` solo afecta al cable local; no viaja.
 

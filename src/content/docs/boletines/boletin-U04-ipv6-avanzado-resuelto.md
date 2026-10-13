@@ -16,7 +16,7 @@ b) **Primeras 3 subredes /64:**
    - `2001:DB8:CAFE:1::/64`
    - `2001:DB8:CAFE:2::/64`
 
-c) **Por qué /64:** es el estándar de la IETF porque deja los 64 bits inferiores para el identificador de interfaz (SLAAC/EUI-64, punto 12). Con /128 no habría espacio para hosts ni para autoconfiguración: solo cabría una dirección exacta.
+c) **Por qué /64:** es el estándar de la IETF porque deja los 64 bits inferiores para el identificador de interfaz (SLAAC/EUI-64, punto 10). Con /128 no habría espacio para hosts ni para autoconfiguración: solo cabría una dirección exacta.
 
 ## 2. EUI-64
 

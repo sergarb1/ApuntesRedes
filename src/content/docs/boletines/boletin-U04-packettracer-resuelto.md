@@ -147,7 +147,7 @@ ping 192.168.10.11
 2. **ARP Reply**: *192.168.10.11 is at 00:…* → se llena la caché ARP.
 3. **ICMP Echo / Reply** → EtherType `0x0800`.
 
-**Conclusión:** sin la MAC del vecino no hay trama Ethernet completa; el ARP es el puente obligatorio capa 3 → capa 2 en IPv4 (en IPv6 ese papel lo hace NDP, punto 14).
+**Conclusión:** sin la MAC del vecino no hay trama Ethernet completa; el ARP es el puente obligatorio capa 3 → capa 2 en IPv4 (en IPv6 ese papel lo hace NDP, punto 11).
 
 ---
 

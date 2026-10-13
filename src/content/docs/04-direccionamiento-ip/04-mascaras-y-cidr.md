@@ -84,7 +84,7 @@ Esta es la tabla que debes tener *grabada a fuego* (o al menos a mano). Desde la
 | /16 | 255.255.0.0 | 65.536 | **65.534** | Empresa mediana |
 | /8 | 255.0.0.0 | 16.777.216 | **16.777.214** | Gran empresa |
 
-> ⚠️ **Por qué "hosts útiles" ≠ "IPs totales":** de cada red, la primera dirección es la de **red** y la última el **broadcast**. Ninguna se asigna a un equipo. Por eso se restan 2 (en detalle en el [punto 6](/ApuntesRedes/04-direccionamiento-ip/05-subnetting-paso-a-paso)).
+> ⚠️ **Por qué "hosts útiles" ≠ "IPs totales":** de cada red, la primera dirección es la de **red** y la última el **broadcast**. Ninguna se asigna a un equipo. Por eso se restan 2 (en detalle en el [punto 5](/ApuntesRedes/04-direccionamiento-ip/05-subnetting-paso-a-paso)).
 
 ### Cómo leer la tabla
 

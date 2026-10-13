@@ -52,7 +52,7 @@ NDP también reemplaza al "gateway + máscara a mano" con dos mensajes:
 
 ![Secuencia RS/RA: el PC recién encendido manda un Router Solicitation a FF02::2, el router responde con un Router Advertisement que lleva el prefijo y los flags, y el PC configura su GUA por SLAAC](/ApuntesRedes/diagrams/u04-ndp-rs-ra.svg)
 
-Este RA es el que vimos en [SLAAC (punto 10)](/ApuntesRedes/04-direccionamiento-ip/10-eui64-y-slaac) y el que leen los flags M/O del [punto 13](/ApuntesRedes/04-direccionamiento-ip/07-dhcp).
+Este RA es el que vimos en [SLAAC (punto 10)](/ApuntesRedes/04-direccionamiento-ip/10-eui64-y-slaac) y el que leen los flags M/O del [punto 7](/ApuntesRedes/04-direccionamiento-ip/07-dhcp).
 
 ---
 

@@ -24,7 +24,7 @@ Hay dos reglas que nunca se rompen:
 1. **Ordenar de mayor a menor necesidad.** Primero el que pide más hosts, al final el que menos.
 2. **Empezar donde acaba el anterior.** Cada subred arranca justo en la dirección que quedó libre tras la anterior; no puedes saltarte bloques ni reordenar luego.
 
-Recuerda la fórmula de hosts de cada máscara (la tienes en el [punto 5](/ApuntesRedes/04-direccionamiento-ip/04-mascaras-y-cidr)): `/25`=126, `/26`=62, `/27`=30, `/28`=14, `/29`=6, `/30`=2. Siempre se elige la máscara en la que **2ʰ − 2 ≥ hosts pedidos** con el menor desperdicio.
+Recuerda la fórmula de hosts de cada máscara (la tienes en el [punto 4](/ApuntesRedes/04-direccionamiento-ip/04-mascaras-y-cidr)): `/25`=126, `/26`=62, `/27`=30, `/28`=14, `/29`=6, `/30`=2. Siempre se elige la máscara en la que **2ʰ − 2 ≥ hosts pedidos** con el menor desperdicio.
 
 ---
 

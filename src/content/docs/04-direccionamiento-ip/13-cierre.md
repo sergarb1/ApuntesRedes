@@ -9,7 +9,7 @@ description: El cierre práctico de la unidad, con subnetting, VLSM, DHCP y diag
 
 ---
 
-Has terminado la teoría. Este cierre es el aterrizaje: recorre lo aprendido con juegos, un laboratorio de direccionamiento de verdad y las preguntas que te harán en una entrevista. Léelo justo después del [punto 17](/ApuntesRedes/04-direccionamiento-ip/13-cierre) y antes de abrir los boletines. Eso sí: deja la calculadora a mano... pero aprende a no necesitarla.
+Has terminado la teoría. Este cierre es el aterrizaje: recorre lo aprendido con juegos, un laboratorio de direccionamiento de verdad y las preguntas que te harán en una entrevista. Léelo justo después del [punto 12](/ApuntesRedes/04-direccionamiento-ip/12-mecanismos-de-transicion) y antes de abrir los boletines. Eso sí: deja la calculadora a mano... pero aprende a no necesitarla.
 
 ---
 
@@ -235,7 +235,7 @@ La primera dirección de cada subred es la **dirección de red** (todos los bits
 
 > ❓ **¿Se pueden agotar las IPs IPv4?**
 
-Ya se agotaron. La IANA asignó el último bloque de direcciones IPv4 en 2011. Desde entonces, las nuevas redes usan IPv6 o dependen de NAT para compartir una IP pública entre muchos dispositivos. Por eso IPv6 dejó de ser el futuro: ya lo has visto en los puntos 9 a 16.
+Ya se agotaron. La IANA asignó el último bloque de direcciones IPv4 en 2011. Desde entonces, las nuevas redes usan IPv6 o dependen de NAT para compartir una IP pública entre muchos dispositivos. Por eso IPv6 dejó de ser el futuro: ya lo has visto en los puntos 8 a 12.
 
 ---
 
@@ -253,11 +253,11 @@ Un host recibe la IP 10.0.1.10 mediante DHCP en una red privada. El tráfico via
 
 | CE | Criterio | Cubierto |
 |---|---|---|
-| RA2·d) | Direccionamiento lógico IPv4/IPv6 | ✅ Puntos 1-5 y 9-12 + ⚡ Laboratorio (punto 18) |
-| RA1·c) | Subredes y diseño lógico | ✅ Puntos 5-7 (CIDR/VLSM) |
-| RA4·h) | Router como servidor de direcciones IP dinámicas | ✅ Puntos 8 y 13 + ⚡ Laboratorio (punto 18) |
-| RA4·d) | Comandos de configuración | ✅ Punto 16 (interfaces IPv6) + ⚡ Laboratorio (punto 18) |
-| RA6 | Fundamentos para el encaminamiento | ✅ Puntos 1-2 y 5 (cabecera, ARP, máscaras/redes) |
+| RA2·d) | Direccionamiento lógico IPv4/IPv6 | ✅ Puntos 1-5 y 8-10 + ⚡ Laboratorio (punto 13) |
+| RA1·c) | Subredes y diseño lógico | ✅ Puntos 4-6 (CIDR/VLSM) |
+| RA4·h) | Router como servidor de direcciones IP dinámicas | ✅ Punto 7 (DHCP/DHCPv6) + ⚡ Laboratorio (punto 13) |
+| RA4·d) | Comandos de configuración | ✅ Punto 12 (dual stack en la práctica) + ⚡ Laboratorio (punto 13) |
+| RA6 | Fundamentos para el encaminamiento | ✅ Puntos 1-2 y 4 (cabecera, ARP, máscaras/redes) |
 
 ---
 
