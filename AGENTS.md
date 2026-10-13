@@ -372,6 +372,22 @@ Protocolo aplicado a la unidad de dirección IP; repetible para cualquier unidad
 | `u05-estados-puerto` | `06-puertos-y-estados-stp.md` · Estados | Timeline Blocking → Listening → Learning → Forwarding (20/15/15 s) |
 | `u05-vlan-dominios` | `08-que-es-una-vlan.md` · Dominio de broadcast | Switch plano (1 dominio) frente a 3 VLANs en el mismo switch físico |
 
+### Diagramas de la unidad de trunking e inter-VLAN existentes
+
+| Fichero | Sección `.md` | Contenido |
+|---|---|---|
+| `u06-trunk-8021q` | `01-trunks-y-8021q.md` · ¿Qué es un trunk? | Dos switches con trunk bidireccional 802.1Q llevando las VLANs 10/20/30 etiquetadas; la native cruza sin etiqueta |
+| `u06-router-on-a-stick` | `03-inter-vlan-routing.md` · Por qué las VLANs "no se ven" | Router con subinterfaz por VLAN (`.10`/`.20`/`.30`) conectado al switch por trunk, con PCs de Ventas y RRHH |
+
+### Diagramas de la unidad de servicios de red existentes
+
+| Fichero | Sección `.md` | Contenido |
+|---|---|---|
+| `u04-dora` | `02-dhcp.md` · DORA | Secuencia Discover → Offer → Request → ACK (PC ↔ servidor) — **reutilizado de dirección IP** |
+| `u07-dns-jerarquia` | `04-dns.md` · La jerarquía | Árbol raíz → `.es` → `ejemplo.es` → `www.ejemplo.es` con delegación en cadena |
+| `u07-ntp-strata` | `06-ntp.md` · Strata | Cadena Stratum 0 (GPS) → 1 → 2 (pool) → 3 (router) → clientes |
+| `u07-escalera-servicio` | `08-diagnostico-servicios.md` · La escalera del servicio | 5 peldaños: DHCP → gateway → Internet por IP → DNS → NTP (patrón de la escalera del ping) |
+
 ### Fotos stock (criterio por unidad)
 
 Las fotos **solo proceden cuando ilustran un objeto físico real** que el alumno debe reconocer (cable, conector, herramienta, panel, rack, AP…). **No** se usan para conceptos abstractos (subnetting, STP, OSPF, NAT, ACL, VLAN lógica…): ahí manda el diagrama Excalidraw o el esquema en código.

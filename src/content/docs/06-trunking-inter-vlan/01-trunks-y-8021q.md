@@ -51,13 +51,7 @@ El FCS se recalcula siempre que cambia la trama: introducir la etiqueta modifica
 
 Un **trunk** es un puerto configurado para transportar varias VLANs. Por el puerto **access** solo pasa la VLAN de su departamento; por el **trunk** pasa todo el catálogo de VLANs permitidas, todas etiquetadas salvo la native:
 
-```
-Switch A (puerto Fa0/24, trunk) ──── Switch B (puerto Fa0/24, trunk)
-        │                                    │
-   VLAN 10 (Ventas)                    VLAN 10 (Ventas)
-   VLAN 20 (RRHH)                      VLAN 20 (RRHH)
-   VLAN 30 (IT)                        VLAN 30 (IT)
-```
+![Dos switches unidos por un trunk 802.1Q que transporta las VLANs 10, 20 y 30 etiquetadas; solo la native VLAN cruza sin etiqueta](/ApuntesRedes/diagrams/u06-trunk-8021q.svg)
 
 Sin el trunk, las VLANs de Ventas a un lado del edificio no llegarían a las del otro. Con él, un cable sostiene todas las VLANs del edificio. El mismo concepto se usa entre switch y router ([punto 3](/ApuntesRedes/06-trunking-inter-vlan/03-inter-vlan-routing)) o entre switch y switch para los enlaces de core.
 

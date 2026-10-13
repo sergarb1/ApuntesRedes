@@ -21,19 +21,7 @@ En unidades anteriores viste DNS como "el servicio que hace la web usable". Ahor
 
 DNS no es una base de datos gigante: es un **árbol** repartido por el mundo. De derecha a izquierda en un nombre:
 
-```
-                    .  (raíz)
-                    |
-      ┌─────────┬───┴────┬──────────┐
-     .es       .com      .org      .eu   (TLD)
-      |
-  ┌───┴────┐
- .gob     .edu            (segundo nivel)
-  |
- ejemplo.es                (dominio del propietario)
-  |
- www.ejemplo.es            (host / subdominio)
-```
+![Jerarquía DNS de un nombre: raíz, TLD .es, dominio ejemplo.es y host www.ejemplo.es, con delegación en cadena](/ApuntesRedes/diagrams/u07-dns-jerarquia.svg)
 
 Cada nivel delega en el de abajo: la raíz no sabe dónde está `www.ejemplo.es`, pero sabe quién gestiona el `.es`; los servidores del `.es` saben quién gestiona `ejemplo.es`; y los servidores de `ejemplo.es` conocen por fin la IP de `www`. Esa delegación en cadena es la clave del sistema.
 

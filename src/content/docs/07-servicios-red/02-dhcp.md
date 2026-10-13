@@ -28,16 +28,7 @@ Cuando un equipo se conecta y está configurado para "obtener una dirección aut
 | 3 | **R**equest | Cliente → servidor elegido | "Vale, me quedo esa dirección" | Broadcast (avisa a otros servers) |
 | 4 | **A**ck | Servidor → cliente | "Confirmado: es tuya hasta las X, y por cierto, tu gateway es…" | Broadcast o unicast |
 
-```
-CLIENTE                        SERVIDOR DHCP
-   |                                 |
-   |──── DISCOVER (broadcast) ──────►|  "¿Alguien ahí?"
-   |◄──── OFFER ─────────────────────|  "Te ofrezco 192.168.1.50"
-   |──── REQUEST (broadcast) ───────►|  "Me la quedo"
-   |◄──── ACK ───────────────────────|  "Tuya por 24 horas"
-   |                                 |
-   |  El cliente ya tiene IP ✔       |
-```
+![Secuencia DORA del DHCP en cuatro mensajes: Discover, Offer, Request y ACK entre el PC cliente y el servidor](/ApuntesRedes/diagrams/u04-dora.svg)
 
 > 💡 **Por qué Request es broadcast:** puede haber más de un servidor DHCP escuchando. El cliente solo acepta una oferta, y avisando en broadcast les dice a los demás "tu oferta no ha sido la elegida", para que liberen la dirección reservada.
 

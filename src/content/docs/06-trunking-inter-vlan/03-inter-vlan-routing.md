@@ -23,17 +23,7 @@ La regla de oro que repetimos en esta unidad: **el switch no reenvía tramas ent
 
 La solución es que haya un **dispositivo de capa 3** en medio:
 
-```
-                    ┌─────────────┐
-                    │   ROUTER    │
-                    │ 10.1  20.1  │
-                    └──────┬──────┘
-                           │   [trunk 802.1Q]
-                    ┌──────┴──────┐
-                    │   SWITCH    │
-              VLAN 10└──┐     ┌──┘VLAN 20
-                  Ventas │     │ RRHH
-```
+![Router-on-a-stick: el router con subinterfaz por VLAN conectado al switch por un trunk 802.1Q, con PCs de Ventas y RRHH detrás](/ApuntesRedes/diagrams/u06-router-on-a-stick.svg)
 
 Cuando el PC de Ventas quiere hablar con RRHH:
 1. El tráfico hacia otra VLAN es **tráfico "hacia fuera"** → el PC lo manda a su **gateway** (la IP del router en esa VLAN).
@@ -47,16 +37,6 @@ Cuando el PC de Ventas quiere hablar con RRHH:
 ## 🍡 Router-on-a-stick: un router, muchos sombreros
 
 La técnica clásica: **una sola interfaz física** del router atiende **todas** las VLANs. Sobre la interfaz física `Fa0/0` montas una **subinterfaz lógica por VLAN** (`.10`, `.20`, `.30`…), cada una con su etiqueta 802.1Q y su IP de gateway.
-
-```
-Router Fa0/0.10 → VLAN 10 (192.168.10.1/24)
-Router Fa0/0.20 → VLAN 20 (192.168.20.1/24)
-Router Fa0/0.30 → VLAN 30 (192.168.30.1/24)
-         │
-      [Trunk 802.1Q]
-         │
-      [Switch]
-```
 
 Ventajas: mínimo hardware (un puerto), fácil de entender y perfecto para redes pequeñas. Desventaja: **una sola interfaz es un cuello de botella** (todos los inter-VLAN atraviesan el mismo cable), algo que ataca el switch de capa 3 del [punto 4](/ApuntesRedes/06-trunking-inter-vlan/04-switch-capa3).
 

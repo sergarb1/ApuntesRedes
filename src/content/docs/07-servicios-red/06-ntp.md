@@ -34,17 +34,7 @@ El **orden judicial** de una intrusión, el **debugeo** de una caída y la **val
 
 NTP organiza las fuentes de tiempo en niveles llamados **stratum**:
 
-```
-Stratum 0  →  Relojes atómicos, GPS (la fuente "física")
-     │
-Stratum 1  →  Servidores directamente conectados a stratum 0
-     │
-Stratum 2  →  Servidores que se sincronizan con stratum 1
-     │
-Stratum 3  →  Tu router Cisco de la oficina
-     │
-   Clientes →  PCs, switches, cámaras…
-```
+![Cadena de strata NTP: del reloj atómico (stratum 0) a los servidores de referencia, el pool, el router de la oficina y los clientes](/ApuntesRedes/diagrams/u07-ntp-strata.svg)
 
 - **Stratum 0** no se ofrece por red: son las fuentes físicas (reloj atómico, GPS).
 - **Stratum 1** son los servidores de referencia públicos (por ejemplo los del proyecto NTP Pool).
