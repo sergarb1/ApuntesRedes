@@ -1,9 +1,9 @@
 # planaseguir.txt — Revisión de diagramas (imágenes) unidad por unidad
 
-Estado: EN CURSO. Revisión de imágenes UD05–UD08 HECHA y commiteada.
-HEAD: 5a3be4e en main (UD08: añade 3 diagramas Excalidraw y sustituye los ASCII).
+Estado: COMPLETADO. Revisión de imágenes UD05–UD13 HECHA y commiteada.
+HEAD: c345761 en main (UD09-13: añade 18 diagramas Excalidraw y sustituye los ASCII).
 
-## Qué estamos haciendo
+## Qué estábamos haciendo
 
 Revisar las **imágenes (diagramas Excalidraw)** de cada unidad siguiendo el protocolo
 de `AGENTS.md` § "Revisión de diagramas de una unidad (checklist reutilizable)":
@@ -18,16 +18,15 @@ verificar todo → tabla AGENTS.md → commit SOLO con confirmación explícita.
   6 ASCII sustituidos; fix checker (svgOffsets duplicados).
 - **UD08**: 5a3be4e — 3 diagramas nuevos (u08-secuencia-arranque, u08-topologia-r1-r2,
   u08-decision-router); ASCII sustituidos en 01, 03 y 05; tabla AGENTS.md.
+- **UD09–UD13**: c345761 — 18 diagramas nuevos (u09×5, u10×3, u11×2, u12×4, u13×4);
+  ASCII sustituidos en 20 Markdown; tablas AGENTS.md; 77 DOCX regenerados.
 
 ## Pendiente (siguiente sesión / otro PC)
 
-- **UD09 (OSPF)**, **UD10 (NAT/PAT)**, **UD11 (ACL)**, **UD12 (inalámbricas)**,
-  **UD13 (alta disponibilidad)**: mismo protocolo.
-- Para cada una: 1) inventario `public/diagrams/uXX-*` y refs en el Markdown;
-  2) huérfanos → insertar; 3) ASCII duplicados que el diagrama sustituye literalmente
-  → quitar; 4) crear diagramas nuevos solo si aportan (NO si el contenido es
-  config/tablas/prosa sin esquema visual); 5) workflow Excalidraw obligatorio;
-  6) verificación; 7) tabla en AGENTS.md (tras la unidad anterior, antes de "### Fotos stock").
+- **Revisión de diagramas: NO queda nada — UD01–UD13 completadas.**
+- Si se retoma el proyecto: no hace falta tocar este protocolo de nuevo.
+- Posibles tareas siguientes (sin empezar): ampliar fotos stock en unidades que no
+  tengan (criterio de AGENTS.md § Fotos stock), o revisar contenido de otras unidades.
 
 ## Protocolo workflow Excalidraw (Windows, puerto 3001)
 
@@ -71,3 +70,22 @@ verificar todo → tabla AGENTS.md → commit SOLO con confirmación explícita.
 - Lenguaje es-ES obligatorio; alt texts descriptivos.
 - Locks LibreOffice `docx/**/.~lock.*#` NO commitear.
 - Prohibido editar `docs/informes-revision/**`, `openspec/**`.
+
+## Lecciones nuevas de UD09–13 (no romper)
+
+- **NUNCA reescribir `.excalidraw` con PowerShell `ConvertTo-Json`** — convierte
+  `·`/`…` en mojibake (`Â·`, `â€¦`) y los textos dejan de matchear el SVG
+  ("textos sin caja"). Usar Node (`JSON.parse`/`writeFileSync`) para editar.
+- **`import-scene --path f.excalidraw` degrada el SVG** a la plantilla vacía de
+  256 KB (0 `<g>`, 0 `<text>`). Workflow fiable: JSON array de elementos en temp
+  → `add temp.json` → `export --out f.excalidraw` + `screenshot --format svg`.
+- **Bound labels del cliente salen con fontFamily 1 y fontSize 14** (excluidos de
+  fix-fonts). Preferible en el JSON origen: texto libre centrado sobre la caja
+  (fontFamily "cascadia" → se normaliza a 3) en vez de `label` bound.
+- **Textos multi-línea con líneas en blanco rompen el SVG** (el `<text>` se cierra
+  mal y el checker no matchea). Quitar líneas vacías del `text` en el JSON.
+- **Tras `fix-fonts.mjs`/`fix-text-align.mjs`**, si tocan `.excalidraw`, el SVG
+  queda desincronizado → rehacer con `add` desde temp (no `import-scene`).
+- El checker exige `fontFamily === 3` (número), no el string "cascadia".
+- Anchos: el texto renderizado puede medir más que el `width` guardado (p. ej.
+  "LAN 192.168.1.0/24" ≈ 169 px) → ensanchar caja y texto con margen.
