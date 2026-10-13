@@ -1,113 +1,73 @@
-# planaseguir.txt — Mover PT a U03, punto de Topologías en U02, diagramas U03 y cierre
+# planaseguir.txt — Revisión de diagramas (imágenes) unidad por unidad
 
-Estado: PLAN NUEVO (sustituye al antiguo F1–F5: F2 fix-fonts, F3 check:diagrams y F5
-refs AGENTS ya están hechos y commiteados; F4 (topologías PT) se CANCELA, ver abajo).
-HEAD: f9e7bd4 en main (reestructuración a 13 unidades commiteada y pusheada).
+Estado: EN CURSO. Revisión de imágenes UD05–UD08 HECHA y commiteada.
+HEAD: 5a3be4e en main (UD08: añade 3 diagramas Excalidraw y sustituye los ASCII).
 
-Servidor Excalidraw propio en puerto 3001: todos los comandos CLI llevan
-`$env:EXPRESS_SERVER_URL = 'http://127.0.0.1:3001'` (el 3000 lo usa otra instancia; no tocar).
-Si la pestaña del navegador se cierra: `Start-Process "http://127.0.0.1:3001/"` y reintentar
-(exit 4 = pestaña requerida).
+## Qué estamos haciendo
 
-## Decisiones ya tomadas (13/10/2026)
+Revisar las **imágenes (diagramas Excalidraw)** de cada unidad siguiendo el protocolo
+de `AGENTS.md` § "Revisión de diagramas de una unidad (checklist reutilizable)":
+inventario → huérfanos → duplicados ASCII → crear diagramas solo donde aporten →
+verificar todo → tabla AGENTS.md → commit SOLO con confirmación explícita.
 
-- **PT U02→U03: re-tocar ejercicios** (no solo enlaces): reenfocar intro y ejercicios
-  1/2/4/8 a capa 2; los de cables pasan a "repaso de la unidad anterior" con cross-link.
-- **Boletines de U02**: +1-2 ejercicios de topologías por boletín (inicial y avanzado,
-  con su resuelto).
-- **Topologías**: 6 diagramas Excalidraw (uno por topología: punto a punto, bus, anillo,
-  estrella, malla, híbrida/árbol).
-- **Exportación final**: DOCX + EPUB (PDF queda pendiente, como hasta ahora).
-- **F4 CANCELADO** (topologías PT `u02/u03-pt-topologia`): los boletines son texto puro
-  por diseño y `check:unidad` marca FALLO si llevan imágenes (AGENTS.md + revisión U02).
+## Hecho (commits)
 
-## Fase 1 — Mover boletines Packet Tracer de U02 a U03
+- **UD01–UD04**: hechas antes (e0ff677, etc.).
+- **UD05/06/07**: fa9d5b6 — 5 diagramas nuevos (u06-trunk-8021q, u06-router-on-a-stick,
+  u07-dns-jerarquia, u07-ntp-strata, u07-escalera-servicio) + reutilización u04-dora;
+  6 ASCII sustituidos; fix checker (svgOffsets duplicados).
+- **UD08**: 5a3be4e — 3 diagramas nuevos (u08-secuencia-arranque, u08-topologia-r1-r2,
+  u08-decision-router); ASCII sustituidos en 01, 03 y 05; tabla AGENTS.md.
 
-1. `git mv src/content/docs/boletines/boletin-U02-packettracer.md → boletin-U03-packettracer.md`
-   (igual con `-resuelto`).
-2. Retoque de contenido (ambos):
-   - title/H1: «Boletín de Medios y cableado» → «Boletín de Capa de enlace y trama Ethernet».
-   - Intro: «medios, cableado, capas 1–2» → capa 2 / trama / MAC / EtherType / ARP.
-   - Ejercicios 1, 2, 4, 8 re-tocados: si dependen de cables/capa 1 → marcados como repaso
-     con cross-link a `02-medios-y-cableado/03-directo-cruzado-consola` (nada de «esta unidad»
-     para contenido de U02).
-   - Tabla «Criterios de esta práctica»: filas 1-2 y 8 como repaso/puente.
-   - Pies: `/ApuntesRedes/02-medios-y-cableado` → `/ApuntesRedes/03-capa-de-enlace`;
-     enlaces cruzados `boletin-u02-packettracer*` → `boletin-u03-packettracer*`.
-   - En el resuelto: revisar refs «de esta unidad» (la de trama Ethernet ya es U03 ✓;
-     la de hub/switch → cross-ref a switching).
-3. `astro.config.mjs:220`: `code === '02' || code === '04'` → `code === '03' || code === '04'`.
-4. `02-medios-y-cableado.md`: quitar los 2 `<a>` de PT (líneas 60-61).
-5. `03-capa-de-enlace.md`: añadir los 2 `<a>` de PT en el bloque 📝 Boletines (+ nota
-   tipo «esta unidad tiene además una variante Packet Tracer»).
-6. Docs: `AGENTS.md` líneas ~42 y ~431 y `README.md:123` → «variante packettracer en
-   capa de enlace y dirección IP».
-7. DOCX: borrar `docx/02-medios-y-cableado/boletin-U02-packettracer{,-resuelto}.docx`
-   (huérfanos); `npm run docx` los regenera en `docx/03-capa-de-enlace/` (total = 73).
+## Pendiente (siguiente sesión / otro PC)
 
-## Fase 2 — Punto 08 «Topologías de red» en U02
+- **UD09 (OSPF)**, **UD10 (NAT/PAT)**, **UD11 (ACL)**, **UD12 (inalámbricas)**,
+  **UD13 (alta disponibilidad)**: mismo protocolo.
+- Para cada una: 1) inventario `public/diagrams/uXX-*` y refs en el Markdown;
+  2) huérfanos → insertar; 3) ASCII duplicados que el diagrama sustituye literalmente
+  → quitar; 4) crear diagramas nuevos solo si aportan (NO si el contenido es
+  config/tablas/prosa sin esquema visual); 5) workflow Excalidraw obligatorio;
+  6) verificación; 7) tabla en AGENTS.md (tras la unidad anterior, antes de "### Fotos stock").
 
-1. Crear `02-medios-y-cableado/08-topologias-de-red.md` con el contenido draft del usuario
-   (punto a punto, bus, anillo, estrella, malla, híbrida/árbol; mini-chequeo 3 preguntas,
-   resumen 3 frases, vocabulario; plantilla estándar: frontmatter, breadcrumb, pie con
-   Anterior = 07 Cableado estructurado, Siguiente = 09 Cierre).
-2. `git mv 08-cierre.md → 09-cierre.md`; actualizar pie (**Anterior:** 8 · Topologías).
-3. `07-cableado-estructurado.md`: pie **Siguiente:** 08-cierre → 08-topologias-de-red.
-4. `02-medios-y-cableado.md` índice: «8 puntos: 7 de teoría… y el 8º» → «9 puntos: 8 de
-   teoría y el 9º, aterrizaje»; mapa (fila 08 Topologías + cierre 09); objetivo (bullet
-   nuevo de topologías); tabla CEs (Laboratorio «punto 8» → «punto 9»).
-5. `09-cierre.md`: misma corrección «punto 8» → «punto 9» en su tabla de CEs.
-6. `astro.config.mjs` `unidadesExpandidas['02-medios-y-cableado']`: añadir
-   `{ slug: '02-medios-y-cableado/08-topologias-de-red', label: '8 · Topologías de red' }`
-   y cierre → `label: '9 · Cierre'`.
-7. Boletines U02 inicial/avanzado (+ resueltos): +1-2 ejercicios de topologías.
-8. Revisar cierre U02 completo (partes de confirmación final) con la nueva numeración.
+## Protocolo workflow Excalidraw (Windows, puerto 3001)
 
-## Fase 3 — 8 diagramas Excalidraw (workflow obligatorio)
+- `$env:EXPRESS_SERVER_URL = 'http://127.0.0.1:3001'` (el 3000 lo usa otra instancia).
+- Pestaña abierta: `Start-Process "http://127.0.0.1:3001/"` si falla con exit 4.
+- JSON en `/tmp` o carpeta temporal → `add fichero.json` → esperar ~3 s → `screenshot --out x.png`
+  → REVISAR PNG (leer la imagen) → corregir si hace falta → `export --out f.excalidraw` +
+  `screenshot --format svg --out f.svg` → `clear --yes` → siguiente.
+- NUNCA paralelizar clear/import/export.
+- Tras crear/editar: `node scripts/fix-fonts.mjs && node scripts/fix-text-align.mjs` →
+  si tocan `.excalidraw`, **re-exportar el SVG** (`import f.excalidraw --replace` +
+  `screenshot --format svg`) → `npm run check:diagrams` → 0 fallos.
+- Reglas diseño: fontFamily 3, texto ≥16 (títulos 20–28), fillStyle solid,
+  paleta azul #2563eb / teal #4ecdc4 / rojo #e03131 (fondos #eff6ff/#f0fdf4/#ffe3e3),
+  shapes ≥120×60, gaps 40–80, rejilla 20px, texto suelto textAlign left,
+  bound labels center; flechas SIEMPRE con startElementId/endElementId.
+- Checker: título = texto libre con mayor fontSize y token del nombre base
+  (quitar `uXX-`, sin acentos); bound labels pad ≥6 horiz / ≥4 vert; SVG ≥1KB.
+- Iconos: `docs/excalidraw-icons.md`. Borrar `.tmp-*` de `public/diagrams/` antes de commitear.
 
-- **6 de topologías** → `u02-topologia-{punto-a-punto,bus,anillo,estrella,malla,hibrida}.svg`
-  (+ `.excalidraw`), insertados en `08-topologias-de-red.md` bajo cada sección.
-- **2 de U03**: `u03-estructura-mac` (OUI 24 + NIC 24, bits I/G y U/L) en
-  `02-direcciones-mac.md` § «Cómo se escribe una MAC»;
-  `u03-flujo-encapsulacion` (datos→segmento→paquete→trama→bits) en `04-encapsulacion.md`
-  § «Las muñecas rusas».
-- Workflow: JSON → `add` → esperar ~3 s → `screenshot` → corregir → `export` SVG+fuente →
-  `clear --yes` → siguiente. NUNCA paralelizar. Tras todos: `node scripts/fix-fonts.mjs`,
-  `node scripts/fix-text-align.mjs`, `npm run check:diagrams` → 0 fallos.
-- Texto ≥16 px (títulos 20–28), fontFamily 3, `textAlign: left` en texto suelto, paleta
-  azul #2563eb / teal #4ecdc4, shapeStyle solid, shapes ≥120×60, gaps 40–80, rejilla 20px.
-- Iconos de red: `docs/excalidraw-icons.md` (dwelle). Borrar `.tmp-*` antes de commitear.
-
-## Fase 4 — Revisión de adecuación (boletines + cierres U02/U03)
-
-- Boletines U02/U03 ya leídos: encajan con su teoría; solo ajustes de Fase 1-2.
-- Cierres: releer `09-cierre` (U02) y `05-cierre` (U03) completos; verificar CEs RA1/RA2,
-  numeración y referencias a puntos tras los cambios.
-- Comprobación lingüística es-ES final (formato 16.777.216, ordenación, sin LatAm).
-
-## Fase 5 — Verificación y exportes (orden)
+## Verificación por unidad (orden)
 
 1. `npm run check:diagrams` → 0 fallos
-2. `npm run check:unidad 02` y `npm run check:unidad 03` → 0 FALLO
+2. `npm run check:unidad XX` → 0 FALLOs
 3. `node scripts/check-uds.mjs` → restos 0
 4. `node scripts/check-links.mjs` → OK
-5. `npx astro build` → 187 páginas (186 + la del nuevo punto) — reintentar si EPERM de OneDrive
-6. `npm run docx` → 73 generados, 0 fallos (los PT en su carpeta nueva)
-7. `npm run epub` → OK
-8. Grep final: sin `.tmp-*`, sin refs `boletin-u02-packettracer`, sin «8 puntos» en U02
-9. **Commit + push** — SOLO con confirmación explícita del usuario (mensaje en español,
-   estilo del repo; commitear también los DOCX/EPUB regenerados).
+5. `./node_modules/.bin/astro build` → 191 páginas (en Linux; en Windows `npx astro build`)
+6. `export PATH="$HOME/.local/bin:$PATH" && npm run docx` (pandoc en ~/.local/bin en Linux;
+   en Windows pandoc ya en PATH) → 77 generados, 0 fallos
+7. Contar SVGs en `word/media/` del DOCX de la unidad (unzip -l) → uno por diagrama referenciado
+8. Commit (estilo repo, español) + push — SOLO con confirmación explícita.
 
 ## Reglas aprendidas (no romper)
 
-- NUNCA paralelizar clear/import/export (ficheros cruzados y SVGs de 256 B vacíos).
-- Esperar ~3 s tras `add` antes del screenshot (fuentes aún cargando).
-- En `add`, los campos dentro de `label:{...}` se stripean → propiedades a nivel de rect.
-- Flechas: requieren `x`,`y` (y `points`) aunque tengan `startElementId/endElementId`.
-- PowerShell PS5.1: sin `&&` (usar `;`); NO `Set-Content -Encoding UTF8` (añade BOM y rompe
-  check-unidad) → `[System.IO.File]::WriteAllText($p,$t,(New-Object System.Text.UTF8Encoding($false)))`.
-- Titles YAML con `:` entrecomillados. `rtk` es prefijo de comandos bash de este entorno.
+- Solo se quitan ASCII que el diagrama sustituye LITERALMENTE (configs, salidas de
+  consola y ASCII de detalle se quedan).
+- Flechas: requieren x, y (y points) aunque tengan startElementId/endElementId;
+  el cliente ancla al punto medio del borde.
+- Bound label de flecha puede bajar a fontSize 14 → fix-fonts + re-exportar SVG.
 - Boletines: texto puro, sin imágenes ni números de unidad en títulos.
-- Lenguaje es-ES obligatorio; astro.config.mjs solo si hace falta (aquí sí: sidebar).
-- Prohibido editar `docs/informes-revision/**`, `openspec/**` (y este fichero se sobrescribe
-  con este plan nuevo).
+- Lenguaje es-ES obligatorio; alt texts descriptivos.
+- Locks LibreOffice `docx/**/.~lock.*#` NO commitear.
+- Prohibido editar `docs/informes-revision/**`, `openspec/**`.
