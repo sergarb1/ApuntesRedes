@@ -40,11 +40,7 @@ ip route {red_destino} {máscara} {siguiente_salto | interfaz_salida}
 
 Todo este punto gira alrededor de dos routers unidos por un enlace WAN:
 
-```
-R1 ──── 10.0.0.0/30 ──── R2 ──── Internet
- │                           │
-192.168.1.0/24           192.168.2.0/24
-```
+![Topología de la unidad: R1 con LAN 192.168.1.0/24, enlace WAN 10.0.0.0/30 y R2 con LAN 192.168.2.0/24 y salida a Internet](/ApuntesRedes/diagrams/u08-topologia-r1-r2.svg)
 
 - **R1** tiene la LAN1 (192.168.1.0/24) y el enlace (10.0.0.0/30) con IP `10.0.0.1`.
 - **R2** tiene la LAN2 (192.168.2.0/24) y el enlace con IP `10.0.0.2`, además de su salida a Internet.

@@ -60,13 +60,7 @@ Cuando le das corriente a un router, ocurre esto en un abrir y cerrar de ojos:
 
 ¿Por qué te cuento esto? Porque el día que un router "se queda colgado" en un banner flash rojo sin arrancar el IOS, necesitarás saber que tu Flash está dañado o el registro de boot está mal, y que ROMMON es tu única salida. Y en las entrevistas, esta secuencia sale más de lo que crees.
 
-```
-Secuencia de arranque
-1. POST            → verifica hardware
-2. Boot ROM        → carga ROMMON (modo emergencia)
-3. IOS             → se carga desde Flash (o TFTP)
-4. startup-config  → se carga desde NVRAM (o setup mode)
-```
+![Secuencia de arranque de un router: POST, Boot ROM/ROMMON, carga del IOS y carga de la configuración](/ApuntesRedes/diagrams/u08-secuencia-arranque.svg)
 
 ---
 
