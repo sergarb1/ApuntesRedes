@@ -60,24 +60,13 @@ def subset_font(ttf_bytes: bytes, charset: str) -> bytes:
 
 
 def process_svg(path: Path) -> bool:
-    """Subset the embedded font in one SVG file. Returns True if modified."""
+    """Subset every embedded font in one SVG file. Returns True if modified."""
     content = path.read_text(encoding="utf-8")
 
-    m = FONT_RE.search(content)
-    if not m:
+    matches = list(FONT_RE.finditer(content))
+    if not matches:
         print(f"  SKIP {path.name}: no embedded font found")
         return False
-
-    mime, b64_payload, fmt = m.group(1), m.group(2), m.group(3)
-
-    # Decode current font
-    try:
-        ttf_bytes = base64.b64decode(b64_payload)
-    except Exception as e:
-        print(f"  SKIP {path.name}: base64 decode error: {e}")
-        return False
-
-    original_size = len(ttf_bytes)
 
     # Extract characters used in this SVG
     charset = extract_chars(content)
@@ -85,27 +74,28 @@ def process_svg(path: Path) -> bool:
         print(f"  SKIP {path.name}: no <text> elements found")
         return False
 
-    # Subset
-    try:
-        woff2_bytes = subset_font(ttf_bytes, charset)
-    except Exception as e:
-        print(f"  SKIP {path.name}: subset error: {e}")
-        return False
-
-    new_b64 = base64.b64encode(woff2_bytes).decode("ascii")
-
-    # Replace the font payload and update mime/format
-    new_m = FONT_RE.search(content)
-    old_block = new_m.group(0)
-    new_block = f"url(data:font/woff2;base64,{new_b64}) format(\"woff2\")"
-    content = content.replace(old_block, new_block, 1)
+    # Rebuild content replacing each font payload (right to left to keep offsets)
+    sizes = []
+    for m in reversed(matches):
+        b64_payload = m.group(2)
+        try:
+            ttf_bytes = base64.b64decode(b64_payload)
+            woff2_bytes = subset_font(ttf_bytes, charset)
+        except Exception as e:
+            print(f"  SKIP {path.name}: subset error on a font: {e}")
+            return False
+        sizes.append((len(ttf_bytes), len(woff2_bytes)))
+        new_b64 = base64.b64encode(woff2_bytes).decode("ascii")
+        new_block = f"url(data:font/woff2;base64,{new_b64}) format(\"woff2\")"
+        content = content[: m.start()] + new_block + content[m.end() :]
 
     path.write_text(content, encoding="utf-8")
 
-    new_size = path.stat().st_size
+    old_total = sum(o for o, _ in sizes)
+    new_total = sum(n for _, n in sizes)
     print(
         f"  OK   {path.name}: "
-        f"font {original_size:,} B -> {len(woff2_bytes):,} B | "
+        f"{len(sizes)} font(s) {old_total:,} B -> {new_total:,} B | "
         f"SVG {path.stat().st_size:,} B ({len(charset)} glyphs)"
     )
     return True
