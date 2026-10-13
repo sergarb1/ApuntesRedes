@@ -19,21 +19,7 @@ description: Las muñecas rusas de la red, capa a capa 🪆
 
 Ya sabes de la [unidad anterior](/ApuntesRedes/03-capa-de-enlace/01-modelo-osi) que cada capa tiene su PDU. Ahora mira **cómo se consigue**: los datos no viajan solos, viajan *envueltos*.
 
-```
-[        datos de tu aplicación (HTTP…)        ]
-                │  + cabecera TCP (puertos)
-                ▼
-[  segmento TCP: cabecera + datos  ]
-                │  + cabecera IP (IPs origen/destino)
-                ▼
-[  paquete IP: cabecera + segmento  ]
-                │  + cabecera Ethernet (MACs) + FCS
-                ▼
-[  trama Ethernet: MACs + IP + TCP + datos + FCS  ]
-                │  capa 1: a la línea
-                ▼
-   101100…  (bits por cobre / fibra / aire)
-```
+![Flujo de encapsulación: los datos se envuelven capa a capa (datos, segmento TCP, paquete IP, trama Ethernet y bits) y al llegar cada capa se quita su cabecera](/ApuntesRedes/diagrams/u03-flujo-encapsulacion.svg)
 
 | Capa | PDU | Cabecera que añade | Ejemplo de campo clave |
 |---|---|---|---|

@@ -91,3 +91,21 @@ En cada caso indica: medio (cobre/fibra), categoría/estándar aproximado y, si 
 
 **Pista:** decide primero por distancia y presupuesto. 100 m es el límite del cobre, la multimodo cubre hasta ~550 m y la monomodo el resto.
 
+
+## 8. Cálculo de enlaces y redundancia
+
+a) ¿Cuántos enlaces tiene una **malla completa** de 8 nodos? ¿Y de 20? (fórmula: `n·(n−1)/2`)
+b) Con los mismos 8 nodos, propón una **malla parcial** que use mucho menos cable pero siga aguantando la caída de un enlace sin aislar a nadie. ¿Cuántos enlaces te gastas como mínimo y con qué forma?
+c) En esa red, ¿qué topología usarías en el **acceso** (los puestos de trabajo) y por qué?
+
+**Pista:** una topología que garantiza camino alternativo con el mínimo de enlaces es el anillo; piensa en cuántos enlaces tiene un anillo de 8 nodos.
+
+## 9. Topología y puntos únicos de fallo
+
+Un edificio tiene esta diseño: en cada planta, 30 PCs conectadas en **estrella** al switch de planta; los switches de planta se conectan en **estrella** a un único switch core en el sótano. Un viernes se avería el switch de la planta 2.
+
+a) ¿Qué PCs se quedan sin red y cuáles no? ¿Se cae el edificio entero?
+b) ¿Qué topología es la combinación de las plantas con el core?
+c) ¿Qué punto único de fallo queda en el diseño? ¿Cómo lo mitigarías sin rehacer todo el cableado?
+
+**Pista:** recuerda la jerarquía acceso → distribución → core y qué es un punto único de fallo.

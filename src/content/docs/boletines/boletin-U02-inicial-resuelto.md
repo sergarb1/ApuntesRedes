@@ -66,3 +66,18 @@ c) **Verdadero.** 1000BASE-T (Gigabit Ethernet) trabaja sobre par trenzado de co
 d) **Falso.** Es la fibra **monomodo** la que llega a 40+ km. La **multimodo** se queda en unos 550 m a 10 Gbps.
 e) **Verdadero.** La monomodo está pensada para enlaces largos (cientos de metros y kilómetros); la multimodo, para distancias cortas/medias.
 
+
+## 9. Topologías: identifícalas
+
+a) **Punto a punto** — dos equipos y un solo enlace; simple, pero sin alternativa si se cae.
+b) **Bus** — un cable central compartido; barato, pero el cable es un punto único de fallo para toda la red.
+c) **Estrella** — cada puesto con su cable al switch: el fallo se queda en un PC.
+d) **Anillo** — circuito cerrado con un vecino a cada lado.
+e) **Malla** — enlaces directos entre nodos con caminos alternativos.
+
+## 10. Topologías: elige y justifica
+
+a) **Estrella:** al cada PC tener su propio cable al switch, el que se desconecta se queda solo sin tocar al resto.
+b) **Estrella (la solución):** en bus, el corte del cable central paraba toda la red; con estrella el fallo se aísla por puesto. (El enunciado describe el problema clásico de la bus.)
+c) **Punto a punto:** son dos extremos y un solo enlace; no hace falta nada más.
+d) **Malla (parcial):** los caminos alternativos permiten esquivar la caída de un enlace; por eso los núcleos de operadores y los datacenters se diseñan en malla.

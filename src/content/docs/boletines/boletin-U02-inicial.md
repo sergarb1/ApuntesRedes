@@ -84,3 +84,22 @@ c) El estándar 1000BASE-T trabaja sobre par trenzado de cobre.
 d) La fibra multimodo llega a distancias de más de 40 km.
 e) La fibra monomodo se usa para enlaces largos (cientos de metros o kilómetros).
 
+
+## 9. Topologías: identifícalas
+
+Relaciona cada descripción con su topología (**punto a punto**, **bus**, **anillo**, **estrella**, **malla**):
+
+a) Dos equipos con un único cable entre ellos, sin nada más.
+b) Todos los equipos enganchados a un mismo cable central, con terminadores en los extremos.
+c) Cada PC con su propio cable hasta un switch central.
+d) Un circuito cerrado: cada equipo habla con sus dos vecinos.
+e) Casi todos conectados directamente con casi todos, con caminos alternativos.
+
+## 10. Topologías: elige y justifica
+
+Elige la topología más adecuada para cada caso y explica en una frase por qué:
+
+a) Oficina de 25 PCs donde cada cierto tiempo alguien desconecta su cable "por accidente".
+b) Red antigua con coaxial en la que un corte de cable dejó sin servicio a toda la planta.
+c) Enlace de fibra entre dos edificios de un mismo campus.
+d) Núcleo de una red de operador que tiene que aguantar la caída de dos enlaces sin perder comunicaciones.
