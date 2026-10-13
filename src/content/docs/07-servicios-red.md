@@ -51,13 +51,15 @@ Al terminar, serás capaz de:
 
 ## 📝 Boletines de la unidad
 
-> Practica con los pares del curso: empezar siempre el resuelto para ver el estilo y luego intentar el por-resolver.
+> Practica con los pares del curso: empezar siempre el resuelto para ver el estilo y luego intentar el por-resolver. Esta unidad tiene además una **variante Packet Tracer**: 8 micro-prácticas guiadas de nivel único (tres con fallo intencionado).
 
 <div class="ejercicio-links">
   <a href="/ApuntesRedes/boletines/boletin-u07-inicial" class="elink">🟢 Inicial por resolver</a>
   <a href="/ApuntesRedes/boletines/boletin-u07-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
   <a href="/ApuntesRedes/boletines/boletin-u07-avanzado" class="elink">⭐ Avanzado por resolver</a>
   <a href="/ApuntesRedes/boletines/boletin-u07-avanzado-resuelto" class="elink">💪 Avanzado resuelto</a>
+  <a href="/ApuntesRedes/boletines/boletin-u07-packettracer" class="elink">🖥️ Packet Tracer por resolver</a>
+  <a href="/ApuntesRedes/boletines/boletin-u07-packettracer-resuelto" class="elink">✅ Packet Tracer resuelto</a>
 </div>
 
 ---

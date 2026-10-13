@@ -175,11 +175,11 @@ ping 192.168.10.11
 | Ejercicio | Concepto | Punto |
 |---|---|---|
 | 1 | IP estática y misma subred | 1–2 |
-| 2–3 | AND, máscaras, límites de subred | 2, 5–6 |
-| 4–5 | DHCP pool, excluded, APIPA | 8 |
-| 6 | DORA paso a paso | 8 |
+| 2–3 | AND, máscaras, límites de subred | 2, 4–5 |
+| 4–5 | DHCP pool, excluded, APIPA | 7 |
+| 6 | DORA paso a paso | 7 |
 | 7 | ARP (puente con la trama) | 1 |
-| 8 | IPv6 estático / SLAAC | 12, 16 |
+| 8 | IPv6 estático / SLAAC | 10, 12 |
 
 ---
 
