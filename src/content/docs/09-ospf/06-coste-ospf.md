@@ -37,13 +37,7 @@ El valor de referencia **10^8 = 100 Mbps** es el "coste 1" por defecto. A partir
 
 **Coste de una ruta completa:** se suman los costes de todos los enlaces del camino. Ejemplo, con el mapa del [punto 3](/ApuntesRedes/09-ospf/03-conceptos-ospf):
 
-```
-        A ───── B
-        │ 5     │ 2
-        │       │
-        C ───── D
-           1        (costes: A-C=5, A-B=5, B-D=2, C-D=1)
-```
+![Topología A-B-C-D: OSPF elige A→C→D (coste 6) frente a A→B→D (coste 7)](/ApuntesRedes/diagrams/u09-coste-ruta.svg)
 
 - A → B → D = 5 + 2 = **7**
 - A → C → D = 5 + 1 = **6** ← OSPF elige este camino (menor coste total)

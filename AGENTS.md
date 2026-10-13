@@ -396,6 +396,49 @@ Protocolo aplicado a la unidad de dirección IP; repetible para cualquier unidad
 | `u08-topologia-r1-r2` | `03-rutas-estaticas.md` · La topología de cabecera | R1 con LAN 192.168.1.0/24, enlace WAN 10.0.0.0/30 y R2 con LAN 192.168.2.0/24 y salida a Internet |
 | `u08-decision-router` | `05-como-decide-el-router.md` · El viaje de un paquete | Cascada de decisiones: red conectada → ruta en tabla → ruta por defecto → descarte con ICMP unreachable |
 
+### Diagramas de la unidad de OSPF existentes
+
+| Fichero | Sección `.md` | Contenido |
+|---|---|---|
+| `u09-igp-egp` | `01-intro-y-protocolos.md` · IGP frente a EGP | Autónomos internos (RIP, OSPF, EIS-IS) frente a BGP entre AS |
+| `u09-areas-ospf` | `02-areas-y-tipos-de-routers.md` · Áreas OSPF | Backbone área 0 con ABR/ASBR y áreas 1/2/3 con routers internos |
+| `u09-dr-bdr` | `03-drdbs-y-vecinos.md` · DR y BDR | Elección de DR/BDR en una red multiacceso y relación con los demás routers |
+| `u09-coste-ruta` | `04-metrica-y-convergencia.md` · Coste y convergencia | Coste de ancho de banda y recálculo de LSAs al caer un enlace |
+| `u09-escalera-ospf` | `08-diagnostico-ospf.md` · La escalera del diagnóstico | 5 peldaños de comprobación: neighbor → adjacency → LSDB → SPF → forwarding |
+
+### Diagramas de la unidad de NAT y PAT existentes
+
+| Fichero | Sección `.md` | Contenido |
+|---|---|---|
+| `u10-que-es-nat` | `01-que-es-nat.md` · Qué es NAT | PC con IP privada 192.168.1.10, router NAT con IP pública 83.45.12.78 y destino 8.8.8.8 |
+| `u10-pat-flujo` | `04-pat-y-puertos.md` · Flujos PAT y traducción de puertos | Dos PCs (54321) con el mismo puerto origen traducidos a 60001 y 60002 hacia el mismo servidor |
+| `u10-nat-destino` | `05-nat-estatico-y-destino.md` · NAT de destino | Servidor con IP pública 83.45.12.80 accesible desde Internet vía NAT de destino al 192.168.1.20 |
+
+### Diagramas de la unidad de ACL existentes
+
+| Fichero | Sección `.md` | Contenido |
+|---|---|---|
+| `u11-flujo-acl` | `02-flujo-evaluacion-acl.md` · Evaluación de una ACL | Evaluación línea a línea de arriba abajo con deny implícito al final |
+| `u11-colocacion-acl` | `03-colocacion-y-numeracion.md` · Dónde colocar la ACL | Marcas A (cerca del origen) y B (cerca del destino) sobre la ruta de un paquete |
+
+### Diagramas de la unidad de redes inalámbricas existentes
+
+| Fichero | Sección `.md` | Contenido |
+|---|---|---|
+| `u12-ess-roaming` | `01-que-es-una-wlan.md` · Topología ESS y roaming | Un solo SSID "Empresa" con 3 APs (BSSID ...:01/02/03, canales 1/6/11) y clientes con roaming entre celdas |
+| `u12-cobertura-canales` | `03-planificacion-canales.md` · Cobertura y canales | 3 aulas con AP-1 ch1, AP-2 ch6 y AP-3 ch11, celdas solapadas ~15-20 % en el pasillo |
+| `u12-ssid-vlan` | `05-seguridad-wlan.md` · SSID y VLAN | AP solo puente → switch 802.1Q → VLAN 10 CORP (802.1X + RADIUS) y VLAN 99 INVITADOS |
+| `u12-capwap-wlc` | `07-aps-y-wlc.md` · AP lightweight y WLC | AP ligero (solo radio) + túnel CAPWAP al WLC (cerebro: SSIDs, VLANs, RRM, roaming, 802.1X) |
+
+### Diagramas de la unidad de alta disponibilidad existentes
+
+| Fichero | Sección `.md` | Contenido |
+|---|---|---|
+| `u13-redundancia-capas` | `01-disponibilidad-y-spofs.md` · Redundancia por capas | Redundancia de enlace, de equipo (apilado) y de ruta (FHRP) frente al punto único de fallo |
+| `u13-etherchannel` | `03-etherchannel.md` · Etherchannel | Agregación de 2 enlaces físicos en 1 lógico (Po1) con LACP activo/activo |
+| `u13-stacking` | `04-stacking.md` · Stacking | Dos switches apilados en un solo sistema lógico con stack port y MDC |
+| `u13-fhrp` | `05-fhrp.md` · FHRP y VRRP | R1 activo (192.168.1.2) + R2 respaldo (192.168.1.3) con IP virtual 192.168.1.1 y MAC 0000.0c07.ac01 |
+
 ### Fotos stock (criterio por unidad)
 
 Las fotos **solo proceden cuando ilustran un objeto físico real** que el alumno debe reconocer (cable, conector, herramienta, panel, rack, AP…). **No** se usan para conceptos abstractos (subnetting, STP, OSPF, NAT, ACL, VLAN lógica…): ahí manda el diagrama Excalidraw o el esquema en código.

@@ -21,13 +21,7 @@ Acabaste el mundo del routing: el router ya sabe *por dónde* ir. Ahora toca dec
 
 Una ACL no es un "concepto": es una **lista numerada de condiciones en orden**. El router evalúa el tráfico **línea por línea, de arriba a abajo**, y en cuanto hay coincidencia, aplica la acción de esa línea (permitir o denegar) y **deja de mirar**.
 
-```
-Trafico → ¿coincide línea 1? ──sí──▶ permit/deny (FIN)
-    │
-    └no── ¿coincide línea 2? ──sí──▶ permit/deny (FIN)
-              │
-              └no── ... hasta llegar al final
-```
+![Evaluación de ACL: cada línea se comprueba en orden y la primera coincidencia manda](/ApuntesRedes/diagrams/u11-flujo-acl.svg)
 
 > ⚠️ **La regla más importante de toda la unidad — DENY ANY IMPLÍCITO:**
 > Al final de toda ACL hay un **deny any implícito**. Si el tráfico no coincide con NINGUNA línea, se **descarta**. Por eso, una ACL sin un `permit any` final se convierte en el "no entra nada" definitivo.

@@ -26,12 +26,9 @@ PC1  192.168.1.10:54321  →  8.8.8.8:80
 PC2  192.168.1.20:54321  →  8.8.8.8:53
 ```
 
-Si el router tradujera solo la IP, ambos saldrían como `83.45.12.78:54321`... y cuando llegara la respuesta, ¿a quién se la entrega? **Colisión garantizada.** La solución de PAT es asignar un puerto global distinto a cada conexión:
+Si el router tradujera solo la IP, ambos saldrían como `83.45.12.78:54321`... y cuando llegara la respuesta, ¿a quién se la entrega? **Colisión garantizada.** La solución de PAT es asignar un puerto global distinto a cada conversación:
 
-```
-PC1  83.45.12.78:60001  ←──→  192.168.1.10:54321
-PC2  83.45.12.78:60002  ←──→  192.168.1.20:54321
-```
+![PAT: PC1 y PC2 comparten la IP pública; el router asigna :60001 y :60002](/ApuntesRedes/diagrams/u10-pat-flujo.svg)
 
 Ahora la tabla NAT desambigua perfectamente: la respuesta dirigida a `:60001` es de PC1 y la de `:60002` de PC2. **El puerto efímero global actúa como matrícula de cada conversación.**
 

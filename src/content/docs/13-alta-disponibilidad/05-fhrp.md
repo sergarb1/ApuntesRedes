@@ -28,16 +28,7 @@ Soluciones torpes: cambiar el gateway a mano en cada equipo (MTTR: horas), o DHC
 
 ## 🎭 El truco: IP virtual + MAC virtual
 
-```
-                 clientes (gateway = 192.168.1.1)
-                          │
-        ┌─────────────────┴─────────────────┐
-        │         IP virtual: 192.168.1.1   │
-        │         MAC virtual: 0000.0c07.ac01│
-        ├─────────────────┬─────────────────┤
-   [R1 ACTIVO]        [R2 RESPALDO]
-   IP real .2         IP real .3
-```
+![Clientes con gateway 192.168.1.1 → IP virtual compartida por R1 activo (.2) y R2 respaldo (.3)](/ApuntesRedes/diagrams/u13-fhrp.svg)
 
 1. Los routers negocian quién es **activo** (atiende la IP virtual) y quién **respaldo** (vigila).
 2. El activo responde al ARP de la IP virtual con una **MAC virtual especial**.

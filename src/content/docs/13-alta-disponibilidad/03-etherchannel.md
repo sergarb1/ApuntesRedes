@@ -23,12 +23,7 @@ Poner dos cables sin más entre dos switches crea un **bucle**: STP bloquearía 
 - El tráfico se **reparte** entre los cables activos (hash por MAC/IP/puerto).
 - Si un cable muere, el tráfico de ese cable se redistribuye entre los vivos **en milisegundos** (sin reconvergencia STP).
 
-```
-Sin EtherChannel:                Con EtherChannel (Po1):
-  SW1 ══════ SW2  (activo)        SW1 ══════ SW2  ┐
-  SW1 ────── SW2  (bloqueado)     SW1 ══════ SW2  ├─ 2 Gbps lógicos
-                                  SW1 ══════ SW2  ┘  y a prueba de cables
-```
+![Sin EtherChannel: un enlace activo y otro bloqueado por STP. Con Po1: un solo enlace lógico](/ApuntesRedes/diagrams/u13-etherchannel.svg)
 
 ---
 

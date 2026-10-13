@@ -50,18 +50,7 @@ Reglas prácticas:
 
 ## 🏗️ Anatomía de una WLAN empresarial segura
 
-```
-                        ┌──────────────┐
-   Portátiles ──(WiFi)──│      AP      │── trunk ──┌──────────────┐
-                        │ (solo puente)│           │    Switch    │
-   Móviles    ──(WiFi)──│              │           └──────┬───────┘
-                        └──────────────┘                  │
-                       SSID "CORP" → VLAN 10 ─────────────┤→ firewall/router
-                       SSID "INVITADOS" → VLAN 99 ────────┘
-                                  │
-                        (VLAN 99: solo salida a Internet,
-                         clientes aislados entre sí)
-```
+![SSID CORP → VLAN 10 e INVITADOS → VLAN 99: el AP puentea y el switch etiqueta por trunk](/ApuntesRedes/diagrams/u12-ssid-vlan.svg)
 
 Las piezas clave:
 
