@@ -132,7 +132,7 @@ docs/
 ├── network-topology-icons.excalidrawlib → Librería local de iconos
 └── excalidraw-setup.md           → Guía reutilizable del MCP Excalidraw
 public/
-├── diagrams/                     → SVG + fuentes .excalidraw (introducción, medios, capa de enlace y dirección IP)
+├── diagrams/                     → SVG + fuentes .excalidraw (las 13 unidades; calidad con check:diagrams)
 ├── photos/                       → Fotos stock (solo en medios: UTP, RJ45, fibra, patch panel)
 ├── portada.svg                   → Portada web / PDF / EPUB
 ├── pdf/                          → ApuntesPAR.pdf

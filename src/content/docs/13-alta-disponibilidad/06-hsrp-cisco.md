@@ -19,15 +19,7 @@ description: Manos a la IP virtual ⚙️
 
 Dos routers como gateway de la LAN 192.168.1.0/24:
 
-```
-        [R1] .2   ← activo (prioridad 110, preempt)
-           │
-   ── switch ──  clientes (gateway: 192.168.1.1 = IP virtual)
-           │
-        [R2] .3   ← standby (prioridad por defecto 100)
-           │
-        salida a Internet (WANs propias en cada router)
-```
+![Escenario HSRP: R1 activo (.2) y R2 respaldo (.3) comparten la IP virtual 192.168.1.1; los clientes la usan de gateway sin cambiar nada](/ApuntesRedes/diagrams/u13-fhrp.svg)
 
 ### Configuración de R1 (activo deseado)
 

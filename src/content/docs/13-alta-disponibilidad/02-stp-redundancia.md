@@ -39,12 +39,7 @@ Por qué importa: los puertos bloqueados y los caminos activos se calculan **des
 
 ## 📈 La redundancia en acción: el puerto bloqueado que salva la red
 
-```
-        SW-Dist-1 ══════════ SW-Dist-2
-             │   \           /  │
-             │     \         /  │
-        [SW-Acceso-A]════════[SW-Acceso-B]   ← enlace redundante
-```
+![Redundancia con STP: cuatro switches con todos los enlaces físicos; el enlace SW-Dist-2 ↔ SW-Acceso-B queda bloqueado y el resto son caminos activos](/ApuntesRedes/diagrams/u13-stp-failover.svg)
 
 Con dos caminos entre distribución y acceso, STP bloquea uno (por ejemplo, el enlace SW-Acceso-B ↔ SW-Dist-2). Cuando el cable SW-Acceso-A ↔ SW-Dist-1 muere:
 

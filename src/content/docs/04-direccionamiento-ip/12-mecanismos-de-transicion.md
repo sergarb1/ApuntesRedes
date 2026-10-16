@@ -1,9 +1,9 @@
 ---
 title: 12 — Mecanismos de transición
-description: Dual Stack, túneles y NAT64/DNS64 para convivir durante la migración 🔀
+description: Dual Stack, túneles, NAT64/DNS64 y los parches de coexistencia (CG-NAT) para convivir durante la migración 🔀
 ---
 
-<p><small>Dual Stack, túneles y NAT64/DNS64 para convivir durante la migración 🔀</small></p>
+<p><small>Dual Stack, túneles, NAT64/DNS64 y los parches de coexistencia (CG-NAT) para convivir durante la migración 🔀</small></p>
 
 > 🗺️ **Estás en:** 🧮 **Direccionamiento IP y subnetting** → 12 · Mecanismos de transición
 
@@ -13,7 +13,7 @@ description: Dual Stack, túneles y NAT64/DNS64 para convivir durante la migraci
 
 > IPv4 no desaparecerá de golpe: la transición se apoya en **Dual Stack** (los dos protocolos a la vez), **túneles** (IPv6 dentro de IPv4 cuando el camino no lo soporta) y **NAT64 + DNS64** (traducción para que una red solo-IPv6 hable con los servidores solo-IPv4 de toda la vida).
 
-No hay un interruptor que apague IPv4. Los tres mecanismos conviven mientras la Internet entera migra poco a poco.
+No hay un interruptor que apague IPv4. Los tres mecanismos conviven mientras la Internet entera migra poco a poco… y mientras tanto los operadores se apañan con **CG-NAT** para exprimir lo que queda de IPv4.
 
 ![Los tres mecanismos de transición IPv4 a IPv6: Dual Stack (las dos pilas a la vez), túnel (IPv6 dentro de IPv4) y NAT64/DNS64 (traducción entre familias)](/ApuntesRedes/diagrams/u04-transicion.svg)
 
@@ -107,29 +107,61 @@ interface GigabitEthernet0/0
 
 ---
 
+## 🏴‍☠️ Traducción de direcciones y parches de coexistencia
+
+Cuando no es posible usar doble pila directamente por falta de direccionamiento IPv4 público, se recurre a la traducción: **CG-NAT** (*Carrier-Grade NAT* / NAT444).
+
+Aunque técnicamente es una extensión de IPv4, es el mecanismo clave que los operadores utilizan para estirar la vida útil de IPv4 mientras despliegan IPv6.
+
+**¿Por qué existe?** Los ISP no tienen suficientes direcciones IPv4 públicas para asignar una a cada cliente residencial o móvil.
+
+**¿Cómo funciona?**
+
+1. El router del usuario recibe en su interfaz WAN una dirección IP privada de operador, del rango dedicado **`100.64.0.0/10`** (RFC 6598).
+2. En la central del operador, un equipo CG-NAT traduce el tráfico de miles de usuarios hacia un *pool* muy reducido de IPs públicas globales mediante **PAT**.
+3. Resultado: un esquema de **triple NAT (NAT444)** — LAN del cliente (privada) → WAN del cliente (CG-NAT) → Internet (IP pública compartida).
+
+**Consecuencias e impacto práctico:**
+
+- **Afecta a:** la redirección de puertos (*port forwarding*), los servidores web/VPN autoalojados en casa, las consolas de videojuegos (NAT estricta / NAT Tipo 3) y las cámaras IP sin nube.
+- **Identificación rápida:** si la IP WAN de tu router va del `100.64.x.x` al `100.127.x.x`, estás detrás de un CG-NAT. ¿Por qué esos números en concreto te delatan? Porque no es un rango privado de casa, sino un bloque especial reservado para operadores en 2012:
+
+| | **IPs privadas de casa** | **IPs privadas de operador** |
+|---|---|---|
+| **Rango** | `10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16` | `100.64.0.0/10` (`100.64.0.0` – `100.127.255.255`) |
+| **Estándar** | RFC 1918 | RFC 6598 (IETF, 2012) |
+| **Para quién** | Redes locales de usuarios: ninguna funciona directamente en Internet | Solo la red interna del ISP |
+
+Ese rango **nunca es enrutable en Internet pública**: se usa únicamente en la red interna del operador para conectar la interfaz WAN de tu router doméstico con los equipos de traducción del propio ISP. Por eso `100.64.x.x` en la WAN de tu router es la firma inequívoca del CG-NAT.
+
+---
+
 ## 🧠 Mini-chequeo
 
 1. ¿Qué registro DNS elige IPv6 en un PC dual stack? ¿Y si no existe?
-2. Diferencia en una frase: túnel vs NAT64.
-3. Un cliente solo-IPv6 quiere visitar un web solo-IPv4. ¿Qué dos piezas participan y qué hace cada una?
-4. ¿Qué dos líneas son imprescindibles en un router Cisco para que arranque a hablar IPv6?
+2. Diferencia en una frase: túnel vs NAT64 vs CG-NAT.
+3. Un cliente solo-IPv6 quiere visitar una web solo-IPv4. ¿Qué dos piezas participan y qué hace cada una?
+4. Si un ISP no tiene suficientes IPs públicas IPv4, ¿qué tecnología implementa y en qué rango asigna las IPs a sus clientes?
+5. ¿Qué dos líneas son imprescindibles en un router Cisco para que arranque a hablar IPv6?
 
 <details>
 <summary>🔄 Respuestas</summary>
 
-1. El DNS primero consulta el registro **AAAA** (IPv6). Si el dominio no tiene, cae a **A** (IPv4). Por eso un dominio dual stack entrega ambos registros.
-2. Un **túnel encapsula** IPv6 dentro de IPv4 (el paquete interior sigue siendo IPv6); **NAT64 traduce** directamente IPv6↔IPv4 (cambia la dirección en las cabeceras).
-3. **DNS64** genera una IPv6 sintética a partir del registro A del servidor; **NAT64** traduce el tráfico real IPv6→IPv4 (y vuelta) hacia el servidor. Sin DNS64 el cliente ni siquiera podría resolver el nombre como IPv6.
-4. `ipv6 unicast-routing` (modo global) y `ipv6 address …/64` + `no shutdown` en la interfaz.
+1. El DNS primero consulta el registro **AAAA** (IPv6). Si el dominio no lo tiene, recurre a **A** (IPv4). Por eso un servicio en dual stack publica ambos registros.
+2. Un **túnel encapsula** IPv6 dentro de IPv4 (el paquete interior sigue siendo IPv6); **NAT64 traduce** la cabecera entre IPv6 e IPv4; y **CG-NAT** hace un NAT IPv4-a-IPv4 masivo a nivel de operador para compartir una misma IP pública entre muchos abonados.
+3. **DNS64** genera una IPv6 sintética a partir del registro A (IPv4) del servidor; **NAT64** hace la traducción real del tráfico IPv6↔IPv4 sobre el terreno. Sin DNS64, el cliente solo-IPv6 ni siquiera sabría a qué dirección enviar el paquete.
+4. Aplica **CG-NAT** (*Carrier-Grade NAT* / NAT444) y asigna a los routers de los usuarios direcciones IP privadas de operador dentro del bloque **`100.64.0.0/10`** (RFC 6598).
+5. `ipv6 unicast-routing` (en modo de configuración global) y `ipv6 address …/64` + `no shutdown` en la interfaz correspondiente.
 </details>
 
 ---
 
-## ✅ Resumen en 3 frases
+## ✅ Resumen en 4 frases
 
-- **Dual Stack** mantiene IPv4 e IPv6 simultáneamente y deja que el DNS elija (registro AAAA vs A).
-- Los **túneles** (6to4, Teredo, GRE, ISATAP) encapsulan IPv6 dentro de IPv4 cuando el camino es solo-IPv4.
-- **NAT64 + DNS64** permiten que una red solo-IPv6 acceda a servicios solo-IPv4 traduciendo el tráfico.
+- **Dual Stack** mantiene IPv4 e IPv6 simultáneamente en la interfaz y deja que la resolución DNS elija el camino óptimo (registro AAAA vs A).
+- **CG-NAT** (*Carrier-Grade NAT*) es el parche de los operadores para exprimir las últimas direcciones IPv4, compartiendo una IP pública entre cientos de clientes mediante una red intermedia `100.64.0.0/10`.
+- Los **túneles** (6to4, Teredo, GRE, ISATAP) encapsulan paquetes IPv6 dentro de IPv4 cuando el transporte aún no soporta IPv6 nativo.
+- **NAT64 + DNS64** forman la pareja indispensable para que una red solo-IPv6 se conecte de forma transparente con servidores antiguos que solo disponen de IPv4.
 
 ## 🐛 Vocabulario rápido
 
@@ -141,6 +173,7 @@ interface GigabitEthernet0/0
 | 6to4 / Teredo / GRE / ISATAP | Tipos de túnel: automático, UDP/NAT, manual, LAN |
 | NAT64 | Traducción IPv6→IPv4 (protocolos distintos) |
 | DNS64 | Genera IPv6 sintética a partir de registros A |
+| CG-NAT | NAT444 del operador: IP pública compartida vía `100.64.0.0/10` (RFC 6598) |
 
 ---
 
