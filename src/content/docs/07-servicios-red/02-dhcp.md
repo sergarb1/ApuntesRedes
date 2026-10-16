@@ -60,11 +60,7 @@ DHCP no regala direcciones: las **presta**. El ciclo de vida de un lease:
 3. **T2 (87,5 %):** si el servidor original no responde, el cliente pide en broadcast a cualquier servidor.
 4. **Expiración:** si nadie responde, el cliente suelta la dirección y vuelve a empezar por Discover.
 
-```
-0%────────────50%────────────87.5%──────────100%
-│  USO NORMAL  │  T1: renovar   │  T2: rebroadcast  │  │
-│              │  con el server │  con cualquiera   │EXPIRA
-```
+![Ciclo de vida del lease DHCP: uso normal hasta T1 al 50 % para renovar, T2 al 87,5 % para rebroadcast y expiración al 100 %](/ApuntesRedes/diagrams/u07-lease-timeline.svg)
 
 Este diseño hace que un servidor DHCP caído no tumbe la red de golpe: los clientes ya tienen su lease y van renovando. Por eso en redes grandes se dejan leases de horas o días, nunca de minutos.
 

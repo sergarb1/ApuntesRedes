@@ -1,7 +1,8 @@
 # planaseguir.txt — Revisión de diagramas (imágenes) unidad por unidad
 
-Estado: COMPLETADO. Revisión de imágenes UD05–UD13 HECHA y commiteada.
-HEAD: c345761 en main (UD09-13: añade 18 diagramas Excalidraw y sustituye los ASCII).
+Estado: REVISIÓN UD01–UD13 COMPLETADA. Pendiente una tanda final de 8 candidatos
+más la adaptación de la nueva sección CG-NAT (ya aplicada en la sesión).
+HEAD: e51d181 (pendiente commit de tanda UD07–13 + CG-NAT + docs).
 
 ## Qué estábamos haciendo
 
@@ -20,13 +21,61 @@ verificar todo → tabla AGENTS.md → commit SOLO con confirmación explícita.
   u08-decision-router); ASCII sustituidos en 01, 03 y 05; tabla AGENTS.md.
 - **UD09–UD13**: c345761 — 18 diagramas nuevos (u09×5, u10×3, u11×2, u12×4, u13×4);
   ASCII sustituidos en 20 Markdown; tablas AGENTS.md; 77 DOCX regenerados.
+- **Tanda UD07–13 (pendiente de commit)**: 5 diagramas nuevos + sustituciones:
+  - `u07-dependencias` → `07-servicios-red/01-por-que-servicios.md`
+  - `u07-lease-timeline` → `07-servicios-red/02-dhcp.md`
+  - `u07-dhcp-relay` → `07-servicios-red/03-dhcp-cisco.md`
+  - `u12-antenas-patron` → `12-redes-inalambricas/02-medios-inalambricos.md`
+  - `u13-stp-failover` → `13-alta-disponibilidad/02-stp-redundancia.md`
+  - `06-hsrp-cisco.md` → reutiliza `u13-fhrp` (mismo SVG en dos páginas)
+  - ASCII que se quedaron (decisión): ejemplos de coste OSPF, cabeceras de lab
+    UD09/10/12, mapeo de una línea de NAT estático, escenarios de cierre.
 
-## Pendiente (siguiente sesión / otro PC)
+## Pendiente — tanda final aprobada (8 operaciones)
 
-- **Revisión de diagramas: NO queda nada — UD01–UD13 completadas.**
-- Si se retoma el proyecto: no hace falta tocar este protocolo de nuevo.
-- Posibles tareas siguientes (sin empezar): ampliar fotos stock en unidades que no
-  tengan (criterio de AGENTS.md § Fotos stock), o revisar contenido de otras unidades.
+Ejecutar con el workflow Excalidraw de este archivo. Alcance aprobado por el usuario
+("todos los candidatos") + corrección de coherencia:
+
+1. **UD03** `03-capa-de-enlace/03-trama-ethernet.md:43` — quitar ASCII (réplica literal
+   de `u03-trama-ethernet`, que está 18 líneas debajo). Solo se elimina el bloque.
+2. **Nuevo** `u04-anatomia-ip` → `04-direccionamiento-ip/01-estructura-ipv4.md` ·
+   Anatomía de una IPv4 (32 bits = 4 octetos; `u04-cabecera` es la cabecera, distinto).
+3. **Nuevo** `u04-anycast` → `04-direccionamiento-ip/09-tipos-de-direcciones.md` · anycast
+   (Usuario → 1.1.1.1 → réplicas Madrid/Miami; el enrutamiento elige la más cercana).
+4. **Nuevo** `u06-trama-8021q` → `06-trunking-inter-vlan/01-trunks-y-8021q.md` ·
+   La trama 802.1Q (tag 4 B insertada: TPID 0x8100, PRI 3 b, VLAN ID 12 b).
+5. **Nuevo** `u06-native-mismatch` → `06-trunking-inter-vlan/01-trunks-y-8021q.md` ·
+   native VLAN distinta (A native 99 / B native 1 → trama sin etiqueta malinterpretada).
+6. **Nuevo** `u06-pvlan` → `06-trunking-inter-vlan/06-seguridad-en-vlans.md` ·
+   PVLAN (gateway promiscuous + clientes isolated; A no ve a B ni a C).
+7. **Nuevo** `u05-router-broadcast` → `05-switching/03-dominios-colision-broadcast.md` ·
+   Dominio de broadcast (el router corta el broadcast entre VLANs).
+8. **Nuevo** `u05-bpduguard` → `05-switching/07-rstp-y-portfast.md` · BPDUGuard
+   (PC autorizado → forwarding; switch pirata → errdisable).
+9. **Coherencia** `07-servicios-red/01-por-que-servicios.md:65` — reformular
+   "primero verifica el abajo, después el de encima" → "primero el primer eslabón de
+   la cadena (DHCP), después los que se apoyan en él" (la cadena del diagrama es
+   horizontal).
+
+Se descartaron (se quedan ASCII): 04/02 pesos de bit, 04/03 sumarización, 05/03
+conteos de examen, 06/02 cabecera de lab, 06/07 relay (IPs 192.168.30.10 chocarían
+con `u07-dhcp-relay`), 09/04+06+07+cierre, 10/03+08, 12/08. UD01/02/08/11: sin candidatos.
+
+Tras la tanda: fix-fonts/fix-text-align → `check:diagrams` → `check:unidad all` →
+`check-uds` → `check-links` → build 191 → docx 77 → tablas AGENTS.md (UD04 ×2,
+UD05 ×2, UD06 ×3) → commit + push con confirmación.
+
+## Hecho en esta sesión (contenido)
+
+- **UD4/12 Mecanismos de transición adaptado**: añadida la sección
+  `🏴‍☠️ Traducción de direcciones y parches de coexistencia` (CG-NAT/NAT444,
+  100.64.0.0/10 RFC 6598 vs RFC 1918, consecuencias e identificación), mini-chequeo a
+  5 preguntas, `✅ Resumen en 4 frases` (nuevo: ahora son 4), fila CG-NAT en el
+  vocabulario, description del frontmatter y mapa de la unidad actualizados.
+  El diagrama `u04-transicion` sigue siendo válido (tres mecanismos de migración;
+  el CG-NAT queda como parche en texto). AGENTS.md: corregida la fila de
+  `u04-transicion` ("los 4 mecanismos" → "los tres mecanismos"). README.md: los
+  diagramas ahora cubren las 13 unidades (antes decía 4).
 
 ## Protocolo workflow Excalidraw (Windows, puerto 3001)
 

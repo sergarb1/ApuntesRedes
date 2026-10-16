@@ -357,7 +357,7 @@ Protocolo aplicado a la unidad de dirección IP; repetible para cualquier unidad
 | `u04-dora` | `07-dhcp.md` · DORA | Secuencia Discover → Offer → Request → ACK (PC ↔ servidor) |
 | `u04-ndp-ns-na` | `11-icmpv6-y-ndp.md` · NS/NA | Neighbor Solicitation (multicast solicited-node) → Neighbor Advertisement unicast con MAC |
 | `u04-ndp-rs-ra` | `11-icmpv6-y-ndp.md` · RS/RA | Router Solicitation al encender → Router Advertisement con prefijo, flags M/O y RDNSS |
-| `u04-transicion` | `12-mecanismos-de-transicion.md` · Visión general | Los 4 mecanismos de transición IPv4↔IPv6 en un mapa (los ASCII de detalle de cada mecanismo se quedan en el texto) |
+| `u04-transicion` | `12-mecanismos-de-transicion.md` · Visión general | Los tres mecanismos de transición IPv4↔IPv6 en un mapa (Dual Stack, túnel y NAT64/DNS64); los ASCII de detalle y el parche CG-NAT se quedan en el texto |
 
 ### Diagramas de la unidad de switching existentes
 
@@ -384,6 +384,9 @@ Protocolo aplicado a la unidad de dirección IP; repetible para cualquier unidad
 | Fichero | Sección `.md` | Contenido |
 |---|---|---|
 | `u04-dora` | `02-dhcp.md` · DORA | Secuencia Discover → Offer → Request → ACK (PC ↔ servidor) — **reutilizado de dirección IP** |
+| `u07-dependencias` | `01-por-que-servicios.md` · La dependencia entre servicios | Cadena DHCP → DNS → NTP: cada servicio necesita al siguiente (da la IP, mide la hora, se descubre por nombre) |
+| `u07-lease-timeline` | `02-dhcp.md` · Ciclo de vida del lease | Barra 0–100 %: uso normal, T1 (50 %) renueva, T2 (87,5 %) rebroadcast y expiración |
+| `u07-dhcp-relay` | `03-dhcp-cisco.md` · Agente de reenvío | CLIENTE → ROUTER SUCURSAL (broadcast → unicast con helper) → SERVIDOR 10.0.0.5, DISCOVER/OFFER hasta el ACK |
 | `u07-dns-jerarquia` | `04-dns.md` · La jerarquía | Árbol raíz → `.es` → `ejemplo.es` → `www.ejemplo.es` con delegación en cadena |
 | `u07-ntp-strata` | `06-ntp.md` · Strata | Cadena Stratum 0 (GPS) → 1 → 2 (pool) → 3 (router) → clientes |
 | `u07-escalera-servicio` | `08-diagnostico-servicios.md` · La escalera del servicio | 5 peldaños: DHCP → gateway → Internet por IP → DNS → NTP (patrón de la escalera del ping) |
@@ -426,6 +429,7 @@ Protocolo aplicado a la unidad de dirección IP; repetible para cualquier unidad
 | Fichero | Sección `.md` | Contenido |
 |---|---|---|
 | `u12-ess-roaming` | `01-que-es-una-wlan.md` · Topología ESS y roaming | Un solo SSID "Empresa" con 3 APs (BSSID ...:01/02/03, canales 1/6/11) y clientes con roaming entre celdas |
+| `u12-antenas-patron` | `02-medios-inalambricos.md` · Tipos de antena | Donut omnidireccional 360° alrededor del AP frente al haz direccional concentrado en el objetivo |
 | `u12-cobertura-canales` | `03-planificacion-canales.md` · Cobertura y canales | 3 aulas con AP-1 ch1, AP-2 ch6 y AP-3 ch11, celdas solapadas ~15-20 % en el pasillo |
 | `u12-ssid-vlan` | `05-seguridad-wlan.md` · SSID y VLAN | AP solo puente → switch 802.1Q → VLAN 10 CORP (802.1X + RADIUS) y VLAN 99 INVITADOS |
 | `u12-capwap-wlc` | `07-aps-y-wlc.md` · AP lightweight y WLC | AP ligero (solo radio) + túnel CAPWAP al WLC (cerebro: SSIDs, VLANs, RRM, roaming, 802.1X) |
@@ -435,9 +439,10 @@ Protocolo aplicado a la unidad de dirección IP; repetible para cualquier unidad
 | Fichero | Sección `.md` | Contenido |
 |---|---|---|
 | `u13-redundancia-capas` | `01-disponibilidad-y-spofs.md` · Redundancia por capas | Redundancia de enlace, de equipo (apilado) y de ruta (FHRP) frente al punto único de fallo |
+| `u13-stp-failover` | `02-stp-redundancia.md` · La redundancia en acción | Diamante Dist-1/2 + Acceso-A/B con el enlace Dist-2 ↔ Acceso-B bloqueado (dashed rojo) y el resto de caminos activos |
 | `u13-etherchannel` | `03-etherchannel.md` · Etherchannel | Agregación de 2 enlaces físicos en 1 lógico (Po1) con LACP activo/activo |
 | `u13-stacking` | `04-stacking.md` · Stacking | Dos switches apilados en un solo sistema lógico con stack port y MDC |
-| `u13-fhrp` | `05-fhrp.md` · FHRP y VRRP | R1 activo (192.168.1.2) + R2 respaldo (192.168.1.3) con IP virtual 192.168.1.1 y MAC 0000.0c07.ac01 |
+| `u13-fhrp` | `05-fhrp.md` · FHRP y VRRP **y** `06-hsrp-cisco.md` · Escenario base | R1 activo (192.168.1.2) + R2 respaldo (192.168.1.3) con IP virtual 192.168.1.1 y MAC 0000.0c07.ac01 — **mismo SVG referenciado en dos páginas** |
 
 ### Fotos stock (criterio por unidad)
 

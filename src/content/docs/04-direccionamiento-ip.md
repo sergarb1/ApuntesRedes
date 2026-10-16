@@ -47,7 +47,7 @@ Al terminar, serás capaz de:
 | [09 · Tipos de direcciones](/ApuntesRedes/04-direccionamiento-ip/09-tipos-de-direcciones) | Global, link-local, multicast, anycast | Todos |
 | [10 · EUI-64 y SLAAC](/ApuntesRedes/04-direccionamiento-ip/10-eui64-y-slaac) | Autoconfiguración de IPv6 | Clave |
 | [11 · ICMPv6 y NDP](/ApuntesRedes/04-direccionamiento-ip/11-icmpv6-y-ndp) | El ARP del mundo IPv6 | Clave |
-| [12 · Mecanismos de transición](/ApuntesRedes/04-direccionamiento-ip/12-mecanismos-de-transicion) | Dual stack, túneles, NAT64 y práctica | Todos |
+| [12 · Mecanismos de transición](/ApuntesRedes/04-direccionamiento-ip/12-mecanismos-de-transicion) | Dual stack, túneles, NAT64 y CG-NAT | Todos |
 | [13 · Cierre](/ApuntesRedes/04-direccionamiento-ip/13-cierre) | Sé el Paquete, Fireside, Laboratorio, Crucigrama… | Todos |
 
 > 📖 **Flujo de lectura:** los 12 primeros puntos son teoría en progresión. El 13º es el aterrizaje práctico: léelo justo después del 12º y antes de abrir los boletines.

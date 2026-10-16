@@ -60,11 +60,7 @@ En esta unidad aprenderás a montarlos en **Cisco IOS** (que es lo que vas a con
 
 Lo que hace difícil diagnosticar estos servicios es que **se necesitan entre sí**, en cadena:
 
-```
-DHCP ── entrega la IP del servidor DNS ──► DNS
-DNS ── necesita la hora para firmar/caducar ──► NTP
-NTP ── a veces se descubre por nombre ──► DNS
-```
+![Dependencias entre los tres servicios: DHCP entrega su IP al DNS, DNS consulta la hora al NTP y a veces el NTP se descubre por el DNS](/ApuntesRedes/diagrams/u07-dependencias.svg)
 
 Si un portátil "no navega", puede ser DNS caído… o DHCP que no entregó el DNS correcto… o NTP desajustado que invalida las credenciales del dominio. El diagnóstico de servicios es un ejercicio de orden: primero verifica el abajo, después el de encima. Lo practicarás en el [punto 8](/ApuntesRedes/07-servicios-red/08-diagnostico-servicios).
 

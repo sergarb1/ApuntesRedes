@@ -28,14 +28,7 @@ En la [unidad de Medios y cableado](/ApuntesRedes/02-medios-y-cableado) viste el
 
 La **ganancia** (en dBi) no amplifica: reordena. Una antena de 8 dBi omnidireccional aplana su "donut" de cobertura: gana distancia en horizontal pero la pierde en vertical. En una planta, perfecto. Para cubrir dos plantas desde el techo de la inferior, fatal.
 
-```
-Omnidireccional (donut):        Direccional (foco):
-      ╭───────╮                      ▲
-     /         \                     │
-    |     AP    |                    │ → la energía va al objetivo
-     \         /                      │
-      ╰───────╯
-```
+![Patrones de antena: el omnidireccional reparte la energía en un donut de 360° alrededor del AP y el direccional la concentra en un haz estrecho hacia el objetivo](/ApuntesRedes/diagrams/u12-antenas-patron.svg)
 
 ---
 

@@ -73,16 +73,7 @@ Router-Sucursal(config-if)# ip helper-address 10.0.0.5
 
 Con esa línea, cuando el router recibe un broadcast DHCP en Gi0/0, lo **encapsula en un unicast** hacia 10.0.0.5 (el servidor central), indicando en qué subred se originó. El servidor responde también en unicast, y el router entrega la respuesta al cliente.
 
-```
-CLIENTE                    ROUTER SUCURSAL                SERVIDOR 10.0.0.5
-   |                             |                              |
-   |─ DISCOVER (broadcast) ─────►|                              |
-   |                             |─ unicast DISCOVER ──────────►|
-   |                             |  (con subred de origen)      |
-   |                             |◄─ unicast OFFER ─────────────|
-   |◄─ OFFER ────────────────────|                              |
-   |─ REQUEST (broadcast) ──────►|   … y así hasta el ACK       |
-```
+![DHCP con relay: el cliente manda DISCOVER en broadcast, el router lo encapsula en unicast hacia el servidor 10.0.0.5 y devuelve el OFFER hasta el ACK](/ApuntesRedes/diagrams/u07-dhcp-relay.svg)
 
 > 💡 **`ip helper-address` no es solo DHCP:** reenvía por defecto otros broadcasts útiles (TFTP, DNS, NetBIOS, syslog…). Si quieres afinar, existe `ip forward-protocol` para elegir qué dejar pasar.
 
