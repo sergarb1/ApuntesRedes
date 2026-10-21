@@ -129,7 +129,7 @@ src/
 └── env.d.ts
 docs/
 ├── excalidraw-icons.md           → Diccionario de iconos de red (JSON para Excalidraw)
-├── network-topology-icons.excalidrawlib → Librería local de iconos
+├── libraries/                    → Catálogo .excalidrawlib (redes, flujo, UML…) + lib-add.mjs
 └── excalidraw-setup.md           → Guía reutilizable del MCP Excalidraw
 public/
 ├── diagrams/                     → SVG + fuentes .excalidraw (las 13 unidades; calidad con check:diagrams)

@@ -97,12 +97,7 @@ Si el Switch A tiene native VLAN 99 y el Switch B native VLAN 1, ocurre lo sigui
 2. B la recibe sin etiqueta… y como para B la native es la 1, la "interpreta" como VLAN 1.
 3. El tráfico de la sensata VLAN 1 de A y el de la 99 de B se mezclan: conectividad rara, mensajes de error en ambos logs y —con mala leche— una vía para ataques de doble etiquetado.
 
-```
-Switch A                          Switch B
-─────────────────────────────────────────────
-native VLAN: 99                   native VLAN: 1
-trama sin etiqueta →  "VLAN 99"   trama sin etiqueta → "VLAN 1" ❌ MISMATCH
-```
+![Dos switches con trunk: Switch A manda una trama sin etiqueta creyendo que es de su native VLAN 99, pero Switch B la recibe y la entrega en la VLAN 1, su propia native](/ApuntesRedes/diagrams/u06-native-mismatch.svg)
 
 > ⚠️ **Síntoma del mismatch:** el switch ladra por el log *"Native VLAN mismatch discovered on Fa0/24"* y el tráfico de DHCP/ARP entre VLANs "va y viene a ratos". La solución es una línea: que ambos extremos declaren la **misma** native VLAN. Lo compruebas con `show interfaces trunk`.
 

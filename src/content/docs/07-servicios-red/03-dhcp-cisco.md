@@ -81,7 +81,7 @@ Con esa línea, cuando el router recibe un broadcast DHCP en Gi0/0, lo **encapsu
 
 ## 🏗️ Dos pools, dos subredes: el mismo router, el mismo proceso
 
-Un router puede servir varias subredes a la vez. La regla: el cliente recibe dirección del pool **cuya red coincide con la interfaz por la que llegó su Discover**. Con helper, coincide con la subred indicada por el agente.
+Un router puede servir varias subredes a la vez. La regla: el cliente recibe dirección del pool **cuya red coincide con la interfaz por la que llegó su Discover** (con helper, la subred que declara el agente):
 
 ```
 ip dhcp pool VLAN10-VENTAS
@@ -92,7 +92,7 @@ ip dhcp pool VLAN20-RRHH
  default-router 192.168.20.1
 ```
 
-Con los SVIs de la [unidad de trunking e inter-VLAN](/ApuntesRedes/06-trunking-inter-vlan) configurados (192.168.10.1 y 192.168.20.1 en el switch capa 3), cada VLAN recibirá direcciones de su pool automáticamente. Recuerda que si el DHCP server está fuera, cada SVI necesita su `ip helper-address`.
+Con los SVIs de la [unidad de trunking e inter-VLAN](/ApuntesRedes/06-trunking-inter-vlan) configurados (192.168.10.1 y 192.168.20.1), cada VLAN recibirá direcciones de su pool. Recuerda que si el servidor DHCP está fuera, cada SVI necesita su `ip helper-address`.
 
 ---
 

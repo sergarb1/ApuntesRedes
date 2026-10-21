@@ -19,7 +19,7 @@ Hasta aquí separaste y conectaste VLANs. Ahora toca el lado oscuro: qué pasa c
 
 ## 🧱 VACL: el filtro dentro de la VLAN
 
-Una **VACL** (*VLAN Access Control List*) filtra el tráfico **dentro de una VLAN**, cosa que una ACL de router no hace (esa funciona en capa 3, en el router). Con VACL decides qué tráfico se permite o se bloquea entre hosts de la *misma* VLAN o hacia otras VLANs en el propio switch.
+Una **VACL** (*VLAN Access Control List*) filtra el tráfico **dentro de una VLAN**, cosa que una ACL de router no hace (esa funciona en capa 3, en el router): decides qué se permite entre hosts de la *misma* VLAN o hacia otras VLANs en el propio switch.
 
 ```bash
 Switch(config)# access-list 101 permit ip any any
@@ -56,17 +56,7 @@ Las **PVLAN** (*Private VLAN*) dividen una VLAN en subgrupos de puertos para que
 | **Isolated** | Solo habla con el promiscuous (nada con otros isolated) |
 | **Community** | Habla con su comunidad y el promiscuous |
 
-```
-                 ┌──────────────────────────────┐
-                 │  GATEWAY (promiscuous)       │
-                 └──────────────┬───────────────┘
-             ┌──────────────────┼──────────────────┐
-     ┌───────┴───────┐   ┌─────┴──────┐   ┌─────┴──────┐
-     │ Cliente A     │   │ Cliente B  │   │ Cliente C  │
-     │  (isolated)   │   │ (isolated) │   │ (isolated) │
-     └───────────────┘   └────────────┘   └────────────┘
-     A NO ve a B ni a C; solo habla con el gateway.
-```
+![PVLAN: un gateway promiscuous que habla con todos y tres clientes isolated que solo ven al gateway, nunca entre sí](/ApuntesRedes/diagrams/u06-pvlan.svg)
 
 En universo de correos: los "isolated" son celdas de biblioteca que solo hablan con el bibliotecario. Los "community" son aulas: se hablan entre ellos y con el bibliotecario, pero no con otras aulas.
 
@@ -83,14 +73,9 @@ Es la familia de ataques para salir de tu VLAN. Los dos vectores principales:
 
 Secuencia del **double tagging** (el sofisticado):
 
-```
-1. Atacante (VLAN nativa) envía trama etiquetada "VLAN 20" DENTRO de otra etiqueta "native".
-2. El primer switch quita la primera etiqueta (trata la trama como native).
-3. Reenvía la trama por el trunk... con la etiqueta VLAN 20 aún puesta.
-4. El segundo switch la ve como tráfico legítimo de VLAN 20 y la entrega al objetivo.
-```
+![Double tagging: el atacante envía una trama con dos etiquetas, Switch 1 quita la exterior creyendo que es native y Switch 2 entrega la trama a la VLAN 20, su objetivo](/ApuntesRedes/diagrams/u06-double-tagging.svg)
 
-No hagas túneles mentales: lo importante es que **si la native VLAN transporta datos y todos usan la 1, el doble etiquetado es gratis**. Por eso cambiar la native (el paso 3 de la checklist de abajo) no es un capricho.
+Lo importante es que **si la native VLAN transporta datos y todos usan la 1, el doble etiquetado es gratis**. Por eso cambiar la native (el paso 3 de la checklist de abajo) no es un capricho.
 
 ---
 
