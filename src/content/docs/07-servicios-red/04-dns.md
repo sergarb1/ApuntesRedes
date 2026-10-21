@@ -31,13 +31,7 @@ Cada nivel delega en el de abajo: la raíz no sabe dónde está `www.ejemplo.es`
 
 Cuando escribes `www.ejemplo.es` en el navegador, la conversación real es esta:
 
-| Paso | Conversación | Tipo |
-|---|---|---|
-| 1 | PC → servidor DNS configurado (el *resolver*): "dame la IP de www.ejemplo.es" | **Recursiva** (el resolver responde SIEMPRE con la respuesta final o un error) |
-| 2 | Resolver → servidor raíz: "¿quién gestiona .es?" | **Iterativa** (el raíz contesta: "pregunta a estos") |
-| 3 | Resolver → servidor .es: "¿quién gestiona ejemplo.es?" | Iterativa |
-| 4 | Resolver → servidor de ejemplo.es: "¿IP de www?" | Iterativa |
-| 5 | El servidor autoritativo contesta la IP → el resolver la entrega al PC | — |
+![Resolución DNS: el PC hace una sola consulta recursiva a su resolver y este recorre la jerarquía de forma iterativa (raíz, TLD .es y autoritativo) hasta devolver la IP](/ApuntesRedes/diagrams/u07-resolucion-dns.svg)
 
 La diferencia conceptual:
 

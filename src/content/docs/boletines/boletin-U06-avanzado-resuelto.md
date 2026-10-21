@@ -7,44 +7,7 @@ description: Soluciones ejercicios avanzados de VLANs
 
 ---
 
-## 1. Configuración completa de VLANs
-
-**Switch1:**
-```bash
-Switch1(config)# vlan 10
-Switch1(config-vlan)# name Ventas
-Switch1(config)# vlan 20
-Switch1(config-vlan)# name RRHH
-Switch1(config)# interface range fa0/1-5
-Switch1(config-if-range)# switchport mode access
-Switch1(config-if-range)# switchport access vlan 10
-Switch1(config)# interface range fa0/6-10
-Switch1(config-if-range)# switchport mode access
-Switch1(config-if-range)# switchport access vlan 20
-Switch1(config)# interface fa0/23
-Switch1(config-if)# switchport mode trunk
-Switch1(config-if)# switchport trunk allowed vlan 10,20
-Switch1(config)# interface fa0/24
-Switch1(config-if)# switchport mode trunk
-Switch1(config-if)# switchport trunk native vlan 99
-Switch1(config-if)# switchport trunk allowed vlan 10,20
-```
-
-**Switch2:** (configuración similar: mismas VLANs, mismos puertos access 1-5 → 10 y 6-10 → 20, y el mismo trunk en Fa0/24 con native 99 y `allowed vlan 10,20`).
-
-**Router:**
-```bash
-Router(config)# interface fa0/0
-Router(config-if)# no shutdown
-Router(config)# interface fa0/0.10
-Router(config-subif)# encapsulation dot1Q 10
-Router(config-subif)# ip address 192.168.10.1 255.255.255.0
-Router(config)# interface fa0/0.20
-Router(config-subif)# encapsulation dot1Q 20
-Router(config-subif)# ip address 192.168.20.1 255.255.255.0
-```
-
-## 2. Diagnóstico de native VLAN
+## 1. Diagnóstico de native VLAN
 
 a) **Problemas:** las tramas sin etiquetar (de la VLAN nativa, incluyendo tráfico de control CDP/VTP/DTP y datos de esa VLAN) se interpretan en la VLAN equivocada en el otro extremo.
    - Tráfico de control (CDP, VTP) no funciona correctamente entre switches.
@@ -59,7 +22,7 @@ c) **Arreglo sin pérdida:** configurar la **misma native VLAN en ambos extremos
    ```
    El cambio es **inmediato**: la native VLAN solo afecta a tramas sin etiquetar. Las VLANs etiquetadas (10, 20, 30) no sufren interrupción durante el cambio.
 
-## 3. Diseño de VLANs corporativas
+## 2. Diseño de VLANs corporativas
 
 a) **Tabla de VLANs:**
    | VLAN | Nombre | Puertos |
@@ -82,7 +45,7 @@ d) **ACLs para limitar Dirección** (se aplican en la subinterfaz del router de 
    ```
    Aplicar con `ip access-group 101 in` en la subinterfaz `Fa0/0.60`. (Detalles finos de ACLs, más adelante.)
 
-## 4. VTP disaster recovery
+## 3. VTP disaster recovery
 
 a) **Por qué:** VTP propaga la base de datos del switch con mayor **revision number**. El switch nuevo (rev 500) tiene número más alto que el server actual (rev 100). Al propagar su base de datos (posiblemente vacía), todas las VLANs se borran en la red. Basta un trunk para que el anuncio llegue a todos.
 
@@ -97,7 +60,7 @@ c) **Medidas preventivas:**
    - **Resetear** la base de datos de cualquier equipo usado: `delete flash:vlan.dat` y reiniciar, antes de conectarlo.
    - Documentar la base de datos de VLANs (la config es tu backup).
 
-## 5. Router-on-a-stick: cuello de botella
+## 4. Router-on-a-stick: cuello de botella
 
 a) **Cálculo:** 4 VLANs × 30 Mbps = **120 Mbps**. La interfaz FastEthernet (100 Mbps) NO puede soportar 120 Mbps. **Sí hay cuello de botella** (pérdidas y saturación).
 
@@ -108,7 +71,7 @@ b) **Alternativas:**
 
 c) **Con GigabitEthernet:** 120 Mbps sobre 1000 Mbps = **12 % de uso**, sin cuello de botella. Si el tráfico se duplica (240 Mbps), seguimos al 24 %: holgado.
 
-## 6. Seguridad en VLANs
+## 5. Seguridad en VLANs
 
 | Riesgo | Mitigación |
 |---|---|
@@ -116,7 +79,7 @@ c) **Con GigabitEthernet:** 120 Mbps sobre 1000 Mbps = **12 % de uso**, sin cuel
 | 2. **Double tagging en la native VLAN**: el atacante manda una trama con doble etiqueta 802.1Q y la segunda etiqueta llega a otra VLAN | Native VLAN **≠ 1** y **sin datos en la native**; segmentar físicamente zonas sensibles |
 | 3. **VTP como arma**: un switch con revision number mayor anuncia su base de datos (vacía) y borra VLANs | VTP transparent / VTPv3 off, verificar `show vtp status` antes de conectar equipo |
 
-## 7. VLAN hopping y hardening
+## 6. VLAN hopping y hardening
 
 a) **Los dos vectores de ataque:**
    1. **Negociación de trunk por DTP:** un portátil conectado a un puerto en modo `dynamic desirable` (o `dynamic auto` si el portátil pide) tramita el protocolo DTP y consigue que el puerto se convierta en **trunk**. A partir de ahí, todas las VLANs que cruzan el trunk quedan a su alcance.
@@ -127,7 +90,7 @@ b) **Tres mitigaciones concretas:**
    2. **Cambiar la native VLAN y no usarla para datos:** `switchport trunk native vlan 99` (o 999) en TODOS los trunks, y usar VLANs de datos distintas de la native → el double tagging pierde su puerta de entrada.
    3. **Limitar y segmentar:** `switchport trunk allowed vlan 10,20,30` para restringir qué VLANs cruzan cada trunk, y **VTP transparent / VTPv3 off** para que un switch rogue no arrase la base de datos.
 
-## 8. Inter-VLAN con SVI paso a paso
+## 7. Inter-VLAN con SVI paso a paso
 
 **(Se asume que los puertos access de las VLANs 10/20/30 ya están asignados.)**
 
@@ -171,7 +134,7 @@ d) **Gateway de cada PC:**
 
 **Verificación:** comprueba que el SVI esté Up/Up (`show ip interface brief`), revisa que las VLANs existan en `show vlan brief` y prueba la conectividad con `ping` entre SVIs (ej. desde el SVI 10 contra 192.168.20.1). Si los SVIs están Up/Up pero no enrutan, el culpable es el comando `ip routing` olvidado.
 
-## 9. DHCP por VLAN sin teclear IPs
+## 8. DHCP por VLAN sin teclear IPs
 
 a) **Pools (en el switch capa 3):**
 ```bash

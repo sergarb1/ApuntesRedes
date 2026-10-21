@@ -41,13 +41,7 @@ Qué acabas de hacer:
 
 ### La hora manual: solo para arrancar
 
-Si el router no tiene NTP aún ni pila de reloj (los equipos antiguos pierden la hora al reiniciar), pónlela a mano **una vez**:
-
-```
-Router# clock set 12:30:00 18 Sep 2026
-```
-
-Ojo: `clock set` se ejecuta en modo **privilegiado** (no en `configure terminal`) y solo es un parche: la solución real es NTP.
+Si el router no tiene NTP aún ni pila de reloj (los equipos antiguos pierden la hora al reiniciar), pónlela a mano **una vez** —`Router# clock set 12:30:00 18 Sep 2026`, en modo **privilegiado** (no en `configure terminal`)— y solo como parche: la solución real es NTP.
 
 ---
 
@@ -55,29 +49,9 @@ Ojo: `clock set` se ejecuta en modo **privilegiado** (no en `configure terminal`
 
 En redes de empresa o laboratorios sin salida a Internet, el diseño canónico es:
 
-```
-      [Router CORE]  ← ntp master (stratum local)
-       │      │      │
-   [SW-1]  [SW-2]  [R-Sucursal]  ← todos: ntp server <IP-core>
-       │
-     [PCs]               ← reciben NTP vía DHCP (opción 42) o manual
-```
+![Diseño NTP interno: el router core con ntp master 3 alimenta a los switches y al router de sucursal con ntp server, y los PCs reciben la hora vía DHCP](/ApuntesRedes/diagrams/u07-diseno-ntp.svg)
 
-En el core:
-
-```
-Router-Core(config)# ntp master 3
-```
-
-Eso lo convierte en fuente autoritativa de stratum 3 (elige tú el número) aunque pierda sus fuentes externas. En producción se usa con tiento: mejor tener fuentes externas y dejar `ntp master` como último recurso.
-
-En cada switch/route cliente:
-
-```
-Switch(config)# ntp server 10.0.0.1
-```
-
-Y para que el core también se sincronice de verdad contra fuera: `ntp server es.pool.ntp.org` + `ntp master 3` como respaldo.
+En el core, `Router-Core(config)# ntp master 3` lo convierte en fuente autoritativa de stratum 3 (elige tú el número) aunque pierda sus fuentes externas; cada cliente apunta a él con `ntp server 10.0.0.1`. En producción se usa con tiento: mejor tener fuentes externas reales (`ntp server es.pool.ntp.org`) y dejar `ntp master` como último recurso.
 
 ---
 
@@ -121,8 +95,6 @@ Salida esperada de un cliente bien sincronizado:
 ```
 Router# show ntp status
 Clock is synchronized, stratum 4, reference is 10.0.0.1
-nominal freq is 250.0000 Hz, actual freq is 249.9995 Hz, precision is 2**10
-...
 
 Router# show ntp associations
   address         ref clock       st   when   poll reach  delay  offset   disp

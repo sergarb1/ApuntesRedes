@@ -44,7 +44,8 @@ src/styles/custom.css        → CSS del tema (azul #2563eb + teal #4ecdc4, Geis
 src/assets/logo.svg          → Logo
 scripts/                     → Scripts de exportación (PDF, EPUB, DOCX) y diagramas (D2)
 docs/excalidraw-icons.md     → Diccionario de iconos de red para Excalidraw (los 10 de dwelle, JSON listo para copiar)
-docs/network-topology-icons.excalidrawlib → Fuente local de la librería de iconos
+docs/libraries/              → Catálogo .excalidrawlib (redes, flujo, UML, arquitectura…); ver § Librerías Excalidraw
+scripts/lib-add.mjs          → Inserta items de un .excalidrawlib en el canvas del MCP (ver § CLI útil)
 docs/excalidraw-setup.md     → Prompt/guía reutilizable para montar Excalidraw MCP en otros proyectos Astro
 public/diagrams/             → SVGs + fuentes `.excalidraw` (D2 y Excalidraw)
 public/portada.svg           → Portada para web, PDF y EPUB
@@ -293,9 +294,41 @@ Protocolo aplicado a la unidad de dirección IP; repetible para cualquier unidad
 ### Iconos de red
 
 - Diccionario del proyecto: **`docs/excalidraw-icons.md`** — **los 10 iconos íntegros** de dwelle *network-topology-icons*: Computer (3 variantes), Server, Switch, Hub, Router, Client, Firewall y VPN. En JSON Excalidraw listo para copiar. Copiar el objeto, desplazar `x`/`y` del grupo, regenerar `id` si se reutiliza.
-- Fuente local: **`docs/network-topology-icons.excalidrawlib`** (descarga de https://libraries.excalidraw.com/libraries/dwelle/network-topology-icons.excalidrawlib). Sirve para regenerar el diccionario o reimportar en Excalidraw.com.
+- Fuente local: **`docs/libraries/network-topology-icons.excalidrawlib`** (descarga de https://libraries.excalidraw.com/libraries/dwelle/network-topology-icons.excalidrawlib). Sirve para regenerar el diccionario o reimportar en Excalidraw.com.
 - Otras librerías re-descargables: dwelle *network-elements* (5); `network-flat` corrupto (no usar).
 - Regenerar el diccionario desde la `.excalidrawlib` si hace falta (script Node que vuelva cada `libraryItems` como sección `###`).
+
+### Librerías Excalidraw (`docs/libraries/` + `scripts/lib-add.mjs`)
+
+Catálogo local de `.excalidrawlib` del catálogo oficial (https://libraries.excalidraw.com), para dar por tierra a los diagramas sin teclear cajas a mano:
+
+| Fichero | Items | Formato | Uso principal |
+|---|---:|---|---|
+| `network-topology-icons.excalidrawlib` | 10 | v2 | **Redes**: router, switch, hub, firewall, VPN, servidor, cliente, ordenadores 3D |
+| `algorithms-data-structures-arrays-matrices-trees.excalidrawlib` | 22 | v2 | Algoritmos / EDA: arrays, listas, tablas hash, árboles |
+| `decision-flow-control.excalidrawlib` | 8 | v1 | Flujos: rombos de condición sí/no |
+| `software-architecture.excalidrawlib` | 7 | v1 | Arquitectura: caché, BD, cliente/servidor, pipeline |
+| `uml-er.excalidrawlib` | 21 | v1 | UML y ER: clases, relaciones, cardinalidad |
+| `programming-icons.excalidrawlib` | 65 | v2 | Iconos de lenguajes y tipos de fichero |
+| `it-logos.excalidrawlib` | 31 | v2 | Logos IT: Docker, Kubernetes, GitLab, Python… |
+| `graphs.excalidrawlib` | 12 | v1 | Grafos clásicos (Petersen, bipartitos…) |
+| `stick-figures.excalidrawlib` | 9 | v2 | Personajes para actores y escenas |
+
+**El canvas del MCP no carga `.excalidrawlib` directamente;** usar el helper `scripts/lib-add.mjs`, que extrae los items (v2 `libraryItems` y v1 `library`), los normaliza (escala a `--width` px, regenera ids/grupos/bindings) y los emite como batch JSON para `add -`:
+
+```bash
+# Catálogo de una librería (índice, tamaño, nº de elementos, etiqueta)
+node scripts/lib-add.mjs --list docs/libraries/network-topology-icons.excalidrawlib
+
+# Insertar items concretos (ej.: router=8, firewall=4, cliente=9) en el lienzo
+node scripts/lib-add.mjs docs/libraries/network-topology-icons.excalidrawlib 8 4 9 \
+  | npx -y mcp-excalidraw-server add -
+```
+
+- Tras insertar, recolocar con `update`/`arrange` y aplicar la **paleta del proyecto** (los items vienen con los colores de su autor).
+- Los items insertados se fusionan en la escena: regenerar ids si se reutilizan en varios diagramas.
+- Para reimportar en el navegador (excalidraw.com o el canvas local): menú de librería → «Open», o arrastrar el `.excalidrawlib`.
+- Fuente y licencia de cada pack: `https://libraries.excalidraw.com/libraries/<autor>/<nombre>.excalidrawlib` (guidelines de `excalidraw/excalidraw-libraries`; respeta la atribución del autor en material público).
 
 ### Inserción en Markdown
 
@@ -377,7 +410,12 @@ Protocolo aplicado a la unidad de dirección IP; repetible para cualquier unidad
 | Fichero | Sección `.md` | Contenido |
 |---|---|---|
 | `u06-trunk-8021q` | `01-trunks-y-8021q.md` · ¿Qué es un trunk? | Dos switches con trunk bidireccional 802.1Q llevando las VLANs 10/20/30 etiquetadas; la native cruza sin etiqueta |
+| `u06-native-mismatch` | `01-trunks-y-8021q.md` · El problema clásico | Switch A (native 99) manda una trama sin etiqueta y Switch B (native 1) la entrega en la VLAN equivocada |
+| `u06-escenario-departamental` | `02-configuracion-y-verificacion.md` · El escenario departamental | Router con subinterfaces 10/20 + trunk a Switch1, trunk a Switch2 y 4 PCs (VLANs 10/20) |
 | `u06-router-on-a-stick` | `03-inter-vlan-routing.md` · Por qué las VLANs "no se ven" | Router con subinterfaz por VLAN (`.10`/`.20`/`.30`) conectado al switch por trunk, con PCs de Ventas y RRHH |
+| `u06-pvlan` | `06-seguridad-en-vlans.md` · PVLAN | Gateway promiscuous arriba y tres clientes isolated que solo ven al gateway, nunca entre sí |
+| `u06-double-tagging` | `06-seguridad-en-vlans.md` · VLAN hopping | Atacante → Switch 1 (quita la etiqueta exterior) → Switch 2 → objetivo en la VLAN 20 |
+| `u06-dhcp-relay` | `07-dhcp-por-vlan.md` · DHCP relay | PC VLAN 10 → router (ip helper-address, unicast) → servidor VLAN 30, con DORA completo |
 
 ### Diagramas de la unidad de servicios de red existentes
 
@@ -388,7 +426,10 @@ Protocolo aplicado a la unidad de dirección IP; repetible para cualquier unidad
 | `u07-lease-timeline` | `02-dhcp.md` · Ciclo de vida del lease | Barra 0–100 %: uso normal, T1 (50 %) renueva, T2 (87,5 %) rebroadcast y expiración |
 | `u07-dhcp-relay` | `03-dhcp-cisco.md` · Agente de reenvío | CLIENTE → ROUTER SUCURSAL (broadcast → unicast con helper) → SERVIDOR 10.0.0.5, DISCOVER/OFFER hasta el ACK |
 | `u07-dns-jerarquia` | `04-dns.md` · La jerarquía | Árbol raíz → `.es` → `ejemplo.es` → `www.ejemplo.es` con delegación en cadena |
+| `u07-resolucion-dns` | `04-dns.md` · Resolución recursiva vs iterativa | El PC hace una sola consulta recursiva al resolver y este recorre la jerarquía (raíz → TLD → autoritativo) de forma iterativa |
+| `u07-zona-dns` | `05-registros-dns.md` · Anatomía de una zona | Zona `empresa.local` con cabecera SOA/NS y los registros de servicio (A, CNAME, MX) debajo |
 | `u07-ntp-strata` | `06-ntp.md` · Strata | Cadena Stratum 0 (GPS) → 1 → 2 (pool) → 3 (router) → clientes |
+| `u07-diseno-ntp` | `07-ntp-cisco.md` · Diseño interno | Router CORE con `ntp master 3` → switches y router de sucursal con `ntp server`, PCs vía DHCP (opción 42) |
 | `u07-escalera-servicio` | `08-diagnostico-servicios.md` · La escalera del servicio | 5 peldaños: DHCP → gateway → Internet por IP → DNS → NTP (patrón de la escalera del ping) |
 
 ### Diagramas de la unidad de enrutamiento estático existentes

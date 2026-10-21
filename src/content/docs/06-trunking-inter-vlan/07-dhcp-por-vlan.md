@@ -65,14 +65,7 @@ Router(config-subif)# ip helper-address 192.168.30.10
 
 Con eso, cualquier DISCOVER que entre por la subinterfaz `.10` se redirige al servidor `192.168.30.10`. Se pone **una línea por interfaz/subinterfaz/SVI** desde la que quieras alcanzar el servidor.
 
-```text
-PC VLAN 10                          Servidor VLAN 30
-   │  DISCOVER (broadcast)              │
-   ├──────────────────────────────────►│  (relay unicast)
-   │                                   ├─ OFFER ─► PC
-   │◄─ REQUEST ────────────────────────┤
-   │◄─ ACK ────────────────────────────┤
-```
+![DHCP relay: un PC de la VLAN 10 manda el DISCOVER, el router lo reenvía en unicast con ip helper-address al servidor DHCP de la VLAN 30 y las respuestas vuelven al PC](/ApuntesRedes/diagrams/u06-dhcp-relay.svg)
 
 > 💡 **Analogía del conserje:** el PC solo grita dentro de su pasillo (su VLAN). El relay es el administrador que oye el grito, cruza el edificio y se lo transmite al conserje (el servidor) por el pasillo de atrás, sin que nadie tenga que gritar en todos los pasillos.
 

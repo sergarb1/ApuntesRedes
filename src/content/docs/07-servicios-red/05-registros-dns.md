@@ -19,17 +19,9 @@ description: El directorio de tu dominio, fila a fila 📝
 
 Una zona DNS es el bloque de autoridad que administras: para `empresa.local`, todos los nombres que cuelgan de ese dominio. En su interior conviven:
 
-```
-empresa.local  → SOA + NS (los metadatos y los servidores que mandan)
-  ├─ www       → A     192.168.1.10
-  ├─ web       → CNAME www
-  ├─ mail      → A     192.168.1.20
-  ├─ @         → MX 10 mail.empresa.local
-  ├─ ftp       → A     192.168.1.30
-  └─ impresoras→ A     192.168.1.40
-```
+![Anatomía de una zona DNS: la cabecera con los registros SOA y NS y, debajo, los registros de servicio (A, CNAME y MX) del dominio empresa.local](/ApuntesRedes/diagrams/u07-zona-dns.svg)
 
-La `@` significa "el propio dominio, sin host delante". El **SOA** (Start of Authority) es la primera fila obligatoria: declara el administrador, el número de serie de la zona y los temporizadores de replicación y caché. Cada vez que editas la zona, **sube el serial** (o lo hace el software solo): si no, los secundarios no se enteran de que hay cambios.
+El **SOA** (Start of Authority) es la primera fila obligatoria: declara el administrador, el número de serie de la zona y los temporizadores de replicación y caché. Cada vez que editas la zona, **sube el serial** (o lo hace el software solo): si no, los secundarios no se enteran de que hay cambios.
 
 ---
 
