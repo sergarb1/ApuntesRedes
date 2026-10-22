@@ -20,22 +20,12 @@ description: Manos al reloj del router ⚙️
 Escenario típico: tu router se sincroniza con fuentes públicas (o con el servidor NTP de la empresa) y, a su vez, hace de servidor para el resto de la red, que apuntará a su IP.
 
 ```
-Router> enable
-Router# configure terminal
-Router(config)# clock timezone CET 1 0
-Router(config)# clock summer-time CEST recurring last Sun Mar 2:00 last Sun Oct 3:00
-Router(config)# ntp server es.pool.ntp.org
+Router(config)# clock timezone CET 1 0    ← zona horaria UTC+1 (hora peninsular de invierno)
+Router(config)# clock summer-time CEST recurring last Sun Mar 2:00 last Sun Oct 3:00   ← cambio de hora automático (marzo/octubre)
+Router(config)# ntp server es.pool.ntp.org  ← fuente de sincronización; repite el comando por cada fuente
 Router(config)# ntp server hora.roa.es
 Router(config)# end
 ```
-
-Qué acabas de hacer:
-
-| Comando | Efecto |
-|---|---|
-| `clock timezone CET 1 0` | Zona horaria UTC+1 (hora peninsular de invierno) |
-| `clock summer-time CEST recurring…` | Cambio de hora automático (marzo/octubre) |
-| `ntp server IP-o-nombre` | Declara una fuente de sincronización (repite por cada fuente) |
 
 > ⚠️ **Ojo con Packet Tracer:** ahí `ntp server` funciona con **IP, no con nombres** (no hay resolución DNS en ese comando). Usa `ntp server 216.239.35.0` o, mejor, la IP de un router interno que haga de stratum superior.
 
@@ -77,7 +67,7 @@ Switch(config)# ntp server 10.0.0.1 key 1
 
 Así el cliente solo acepta sincronización firmada con la clave 1. En Packet Tracer la sintaxis `md5` funciona entre routers y switches igual.
 
-> 💡 **NTP vs SNTP:** SNTP es la versión simplificada del protocolo (mismo formato de paquete, menos disciplina de reloj) que usan cámaras, impresoras y dispositivos embebidos. Tu router habla NTP completo; la cámara de vigilancia, probablemente SNTP. No es "peor": para un dispositivo que solo quiere estar en hora, sobra.
+> 💡 **NTP vs SNTP:** SNTP es la versión ligera del protocolo (mismo paquete, menos disciplina de reloj) que usan cámaras e impresoras: para un dispositivo que solo quiere estar en hora, sobra.
 
 ---
 

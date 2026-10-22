@@ -74,10 +74,7 @@ Un servidor DNS no guarda "nombres e IPs" a secas: guarda **registros tipados**.
 
 ## 🪞 Zona directa y zona inversa
 
-- **Zona directa:** nombres → IPs (registros A/AAAA). Es la que todos conocen.
-- **Zona inversa:** IPs → nombres (registros PTR dentro de dominios especiales `in-addr.arpa`). La usan los servidores de correo para verificar que quien les habla es quien dice ser, y muchas herramientas de log para mostrar nombres en vez de números.
-
-Si un día un correo tuyo sale rechazado por "no reverse DNS", ya sabes: a tu IP pública le falta su PTR.
+La **zona directa** mapea nombres → IPs (registros A/AAAA), la que todos conocen; la **zona inversa** hace lo contrario: IPs → nombres (registros PTR en dominios especiales `in-addr.arpa`), y la usan los servidores de correo para verificar que quien les habla es quien dice ser. Si un día un correo tuyo sale rechazado por "no reverse DNS", ya sabes: a tu IP pública le falta su PTR.
 
 ---
 

@@ -26,7 +26,7 @@ a) **Verdadero.** La concesión se renueva a mitad de plazo si el cliente sigue 
 b) **Falso.** Un registro A relaciona nombre con IPv4; para IPv6 es el registro **AAAA**.
 c) **Verdadero.** NTP escucha y habla por UDP/123.
 d) **Falso.** Una configuración manual completa necesita IP, máscara, gateway y DNS: sin DNS ni gateway no llegarías ni a Internet.
-e) **Verdadero.** La oferta DHCP incluye opciones: máscara, gateway por defecto, DNS, dominio, TFTP…
+e) **Verdadero.** La oferta DHCP incluye opciones: máscara, gateway por defecto, DNS, dominio…
 
 ## 4. ¿Qué registro DNS?
 

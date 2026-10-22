@@ -45,20 +45,12 @@ Una concesión no es solo la IP. El servidor entrega un paquete de configuració
 | 6 (DNS) | Servidores DNS | 192.168.1.10 y 8.8.8.8 |
 | 15 (Domain) | Sufijo DNS del dominio | empresa.local |
 | 51 (Lease Time) | Duración de la concesión | 86400 s (24 h) |
-| 66/150 (TFTP) | Servidor de configuración (teléfonos IP) | 192.168.1.20 |
-
-Las opciones 66/150 explican por qué un teléfono IP "sabe" dónde está la centralita sin configurar nada a mano: se lo dice DHCP.
 
 ---
 
 ## ⏳ La concesión: no es para siempre
 
-DHCP no regala direcciones: las **presta**. El ciclo de vida de un lease:
-
-1. **Asignación:** DORA completo; el cliente recibe la IP con un tiempo de concesión.
-2. **T1 (50 % del lease):** el cliente intenta **renovar** con el servidor original (Request unicast → Ack).
-3. **T2 (87,5 %):** si el servidor original no responde, el cliente pide en broadcast a cualquier servidor.
-4. **Expiración:** si nadie responde, el cliente suelta la dirección y vuelve a empezar por Discover.
+DHCP no regala direcciones: las **presta**. Tras el DORA de asignación, el lease avanza por fases: a los **T1 (50 %)** el cliente **renueva** con su servidor original (Request unicast → Ack); si no le contesta, a los **T2 (87,5 %)** pide en broadcast a cualquier servidor; y si nadie responde, el lease **expira**: el cliente suelta la dirección y vuelve a empezar por Discover.
 
 ![Ciclo de vida del lease DHCP: uso normal hasta T1 al 50 % para renovar, T2 al 87,5 % para rebroadcast y expiración al 100 %](/ApuntesRedes/diagrams/u07-lease-timeline.svg)
 

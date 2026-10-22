@@ -40,22 +40,13 @@ NTP organiza las fuentes de tiempo en niveles llamados **stratum**:
 - **Stratum 1** son los servidores de referencia públicos (por ejemplo los del proyecto NTP Pool).
 - Cada nivel que baja suma 1 al stratum. Un router sincronizado contra un stratum 2 será stratum 3.
 
-El protocolo además **calcula el retardo de red** (offset y delay) en el intercambio de paquetes y corrige el reloj de forma gradual, sin saltos bruscos que romperían los logs.
-
-> 💡 **Detalle de diseño elegante:** NTP no manda "la hora" a lo bruto: mide cuatro marcas de tiempo (salida, llegada, respuesta y recepción) y calcula offset y delay del camino. Así corrige incluso la latencia de la red que le separa de la fuente.
+> 💡 **Detalle de diseño elegante:** NTP no manda "la hora" a lo bruto: mide cuatro marcas de tiempo (salida, llegada, respuesta y recepción), calcula el offset y el retardo del camino y corrige el reloj de forma gradual, sin saltos bruscos que romperían los logs.
 
 ---
 
 ## 🇪🇸 ¿De dónde cuelga tu red? Fuentes horarias en España
 
-En producción no sincronizas contra "el reloj de Windows de alguien": apuntas a fuentes fiables:
-
-| Fuente | Ejemplo | Comentario |
-|---|---|---|
-| **NTP Pool español** | `es.pool.ntp.org` | Round-robin de servidores voluntarios en España |
-| **Observatorio Naval** | `hora.roa.es` | Fuente institucional oficial |
-| **Reloj del sistema del ISP** | La IP que entrega tu operador | Suele ser stratum 2-3 razonable |
-| **GPS/DCF77 local** | Antena en el rack | Cuando no quieres depender de Internet |
+En producción no sincronizas contra "el reloj de Windows de alguien": apuntas a fuentes fiables, como el **NTP Pool español** (`es.pool.ntp.org`, round-robin de voluntarios), el **Observatorio Naval** (`hora.roa.es`, fuente institucional), el reloj que entrega tu ISP o, si no quieres depender de Internet, una antena **GPS/DCF77** en el rack.
 
 Buena práctica: configuras **varias fuentes** (al menos 3) para que NTP las compare y elija la más consistente; con una sola fuente nunca sabes si ella misma está loca.
 
