@@ -45,14 +45,7 @@ Un administrador que asigna IPs a mano en una red de 200 equipos pierde la vida 
 
 ## 🧩 Servicios centralizados vs servicios en el router
 
-¿Dónde vive cada servicio? Tienes dos grandes opciones y ambas son válidas:
-
-| Opción | Ejemplo típico | Cuándo se usa |
-|---|---|---|
-| **En el router/firewall** | DHCP y DNS en el router Cisco de la sucursal | Redes pequeñas, sucursales, laboratorios |
-| **En servidores dedicados** | Windows Server, BIND, Samba | Redes medianas y grandes, integración con dominio |
-
-En esta unidad aprenderás a montarlos en **Cisco IOS** (que es lo que vas a configurar en Packet Tracer y lo que pide el currículo), pero los conceptos —lease, zona, stratum— son idénticos en cualquier plataforma: un servidor Windows DHCP usa los mismos mensajes DORA que un router Cisco.
+¿Dónde vive cada servicio? En **el router/firewall** (redes pequeñas, sucursales y laboratorios) o en **servidores dedicados** como Windows Server, BIND o Samba (redes medianas y grandes, con integración en el dominio). En esta unidad aprenderás a montarlos en **Cisco IOS** (que es lo que vas a configurar en Packet Tracer y lo que pide el currículo), pero los conceptos —lease, zona, stratum— son idénticos en cualquier plataforma: un servidor Windows DHCP usa los mismos mensajes DORA que un router Cisco.
 
 ---
 

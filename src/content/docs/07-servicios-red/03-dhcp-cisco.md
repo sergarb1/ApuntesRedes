@@ -20,30 +20,16 @@ description: Un pool, unas exclusiones y un helper 🧰
 Escenario: el router es el gateway de la red 192.168.1.0/24 y reparte direcciones del rango .100 al .200, dejando los números bajos para equipos con IP fija.
 
 ```
-Router> enable
-Router# configure terminal
-Router(config)# ip dhcp excluded-address 192.168.1.1 192.168.1.99
-Router(config)# ip dhcp excluded-address 192.168.1.201 192.168.1.254
-Router(config)# ip dhcp pool LAN-1
-Router(dhcp-config)# network 192.168.1.0 255.255.255.0
-Router(dhcp-config)# default-router 192.168.1.1
-Router(dhcp-config)# dns-server 192.168.1.10
-Router(dhcp-config)# domain-name empresa.local
-Router(dhcp-config)# lease 1 12        ← 1 día y 12 horas
+Router(config)# ip dhcp excluded-address 192.168.1.1 192.168.1.99    ← rango reservado: nunca se ofrecerá
+Router(config)# ip dhcp excluded-address 192.168.1.201 192.168.1.254  ← lo mismo con el tramo alto
+Router(config)# ip dhcp pool LAN-1        ← crea el pool (el "bolso" de direcciones)
+Router(dhcp-config)# network 192.168.1.0 255.255.255.0   ← subred de la que se sacan las IPs
+Router(dhcp-config)# default-router 192.168.1.1   ← opción 3: el gateway de los clientes
+Router(dhcp-config)# dns-server 192.168.1.10      ← opción 6: los servidores DNS
+Router(dhcp-config)# domain-name empresa.local    ← opción 15: el sufijo DNS
+Router(dhcp-config)# lease 1 12        ← duración de la concesión: días [horas [minutos]]
 Router(dhcp-config)# end
 ```
-
-Qué es cada pieza:
-
-| Comando | Para qué |
-|---|---|
-| `ip dhcp excluded-address a b` | Reserva un rango: el servidor nunca ofrecerá esas IPs |
-| `ip dhcp pool NOMBRE` | Crea el pool (el "bolso" de direcciones) y entra en su configuración |
-| `network` | La subred y máscara desde la que se sacan las direcciones |
-| `default-router` | Opción 3: el gateway que entregará a los clientes |
-| `dns-server` | Opción 6: los servidores DNS |
-| `domain-name` | Opción 15: el sufijo DNS |
-| `lease` | Duración de la concesión (días [horas [minutos]]) |
 
 > ⚠️ **Orden importa poco, coherencia importa mucho:** si el `default-router` no es una IP del propio router, los clientes tendrán dirección pero no saldrán a otras redes. Es el fallo clásico de laboratorio.
 
