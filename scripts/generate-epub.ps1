@@ -29,6 +29,10 @@ $boletinSections = @(
   "inicial",
   "avanzado-resuelto",
   "avanzado",
+  "ipv6-inicial-resuelto",
+  "ipv6-inicial",
+  "ipv6-avanzado-resuelto",
+  "ipv6-avanzado",
   "packettracer-resuelto",
   "packettracer"
 )
@@ -68,7 +72,7 @@ function Add-MdFile {
   $content = Get-Content $Path -Raw -Encoding UTF8
   $title = Get-FrontTitle -Content $content -Fallback ([System.IO.Path]::GetFileNameWithoutExtension($Path))
 
-  $content = $content -replace '(?ms)^---.*?^---\s*', ''
+  $content = $content -replace '(?ms)\A---.*?^---\s*', ''
   $content = $content.Trim()
   $content = $content -replace '/ApuntesRedes/cc-by-sa\.png', 'public/cc-by-sa.png'
   $content = $content -replace '/ApuntesRedes/diagrams/', 'public/diagrams/'
@@ -111,7 +115,7 @@ foreach ($u in $unitSlugs) {
         $eContent = Get-Content $bfFile -Raw -Encoding UTF8
         $eTitle = Get-FrontTitle -Content $eContent -Fallback $bfName
 
-        $eContent = $eContent -replace '(?ms)^---.*?^---\s*', ''
+        $eContent = $eContent -replace '(?ms)\A---.*?^---\s*', ''
         $eContent = $eContent.Trim()
         $eContent = $eContent -replace '/ApuntesRedes/cc-by-sa\.png', 'public/cc-by-sa.png'
         $eContent = $eContent -replace '/ApuntesRedes/diagrams/', 'public/diagrams/'
