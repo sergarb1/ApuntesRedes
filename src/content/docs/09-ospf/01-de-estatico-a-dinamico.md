@@ -1,5 +1,5 @@
 ---
-title: 1 — De estático a dinámico
+title: "1 · De estático a dinámico"
 description: Por qué el routing estático no escala y qué ganas con lo dinámico 🧭
 ---
 

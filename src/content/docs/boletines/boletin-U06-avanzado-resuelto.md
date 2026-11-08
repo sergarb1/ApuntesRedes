@@ -3,8 +3,6 @@ title: Boletín de Trunking e inter-VLAN — Avanzado (Resuelto)
 description: Soluciones ejercicios avanzados de VLANs
 ---
 
-# ✅ Boletín de Trunking e inter-VLAN — Avanzado (Resuelto)
-
 ---
 
 ## 1. Diagnóstico de native VLAN

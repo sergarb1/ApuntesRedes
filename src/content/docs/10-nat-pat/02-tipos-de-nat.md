@@ -1,5 +1,5 @@
 ---
-title: 2 — Tipos de NAT
+title: "2 · Tipos de NAT"
 description: Cuatro formas de traducir y cuándo usar cada una 🗂️
 ---
 

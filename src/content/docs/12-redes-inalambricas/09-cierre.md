@@ -1,11 +1,11 @@
 ---
-title: "09 — Cierre: consolida lo aprendido"
+title: "9 · Cierre"
 description: El cierre práctico, con canales, SSIDs y vecinos ruidosos 📶
 ---
 
 <p><small>El cierre práctico, con canales, SSIDs y vecinos ruidosos 📶</small></p>
 
-> 🗺️ **Estás en:** 📶 **Redes inalámbricas** → 09 · Cierre
+> 🗺️ **Estás en:** 📶 **Redes inalámbricas** → 9 · Cierre
 
 ---
 

@@ -3,8 +3,6 @@ title: Boletín de Direccionamiento IP — Inicial (Resuelto)
 description: Soluciones de ejercicios básicos de IPv4, cabecera, ARP, fragmentación y subnetting
 ---
 
-# ✅ Boletín de Direccionamiento IP — Inicial (Resuelto)
-
 ---
 
 ## 1. Conversión binario

@@ -1,5 +1,5 @@
 ---
-title: 6 — VLSM
+title: "6 · VLSM"
 description: Subredes a la medida de cada departamento, sin desperdiciar ni una IP 🎯
 ---
 

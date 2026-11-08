@@ -1,11 +1,11 @@
 ---
-title: 07 — Método de diagnóstico
+title: "7 · Método de diagnóstico"
 description: La escalera del diagnóstico y la lógica para cazar cualquier avería 🩺
 ---
 
 <p><small>La escalera del diagnóstico y la lógica para cazar cualquier avería 🩺</small></p>
 
-> 🗺️ **Estás en:** 🚪 **Introducción** → 07 · Método de diagnóstico
+> 🗺️ **Estás en:** 🚪 **Introducción** → 7 · Método de diagnóstico
 
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: 8 — Diagnóstico de servicios
+title: "8 · Diagnóstico de servicios"
 description: "El usuario dice «no funciona»: tú sabes dónde mirar 🔍"
 ---
 

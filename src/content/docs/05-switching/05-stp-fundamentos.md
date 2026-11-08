@@ -1,5 +1,5 @@
 ---
-title: "5 — STP: fundamentos"
+title: "5 · STP: fundamentos"
 description: BPDUs, Root Bridge y el árbol sin bucles 🌳
 ---
 

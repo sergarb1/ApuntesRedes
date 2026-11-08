@@ -1,5 +1,5 @@
 ---
-title: 1 — Medios de transmisión
+title: "1 · Medios de transmisión"
 description: Cobre, fibra o aire, elige tu herramienta 🗼
 ---
 

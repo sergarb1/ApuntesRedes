@@ -3,8 +3,6 @@ title: Boletín de OSPF — Inicial
 description: Ejercicios básicos de Routing Dinámico
 ---
 
-# 📝 Boletín de OSPF — Inicial
-
 > Ejercicios básicos para afianzar los conceptos de OSPF y routing dinámico.
 
 ---

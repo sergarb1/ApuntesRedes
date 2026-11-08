@@ -1,11 +1,11 @@
 ---
-title: 2 — Configuración y verificación de trunks
+title: "2 · Configuración de trunks"
 description: El escenario departamental paso a paso y cómo diagnosticarlo 🔧
 ---
 
 <p><small>El escenario departamental paso a paso y cómo diagnosticarlo 🔧</small></p>
 
-> 🗺️ **Estás en:** 🌉 **Trunking y enrutamiento inter-VLAN** → 2 · Configuración y verificación de trunks
+> 🗺️ **Estás en:** 🌉 **Trunking y enrutamiento inter-VLAN** → 2 · Configuración de trunks
 
 ---
 

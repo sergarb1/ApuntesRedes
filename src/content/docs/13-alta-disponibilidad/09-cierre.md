@@ -1,11 +1,11 @@
 ---
-title: "09 — Cierre: consolida lo aprendido"
+title: "9 · Cierre"
 description: El cierre práctico, donde la red aprende a caer de pie 🔁
 ---
 
 <p><small>El cierre práctico, donde la red aprende a caer de pie 🔁</small></p>
 
-> 🗺️ **Estás en:** 🔁 **Alta disponibilidad y redundancia** → 09 · Cierre
+> 🗺️ **Estás en:** 🔁 **Alta disponibilidad y redundancia** → 9 · Cierre
 
 ---
 

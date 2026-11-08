@@ -3,8 +3,6 @@ title: Boletín de Alta disponibilidad — Avanzado (Resuelto)
 description: Soluciones de los ejercicios avanzados de alta disponibilidad y redundancia
 ---
 
-# ✅ Boletín de Alta disponibilidad — Avanzado (Resuelto)
-
 ---
 
 ## 1. Diseño jerárquico completo

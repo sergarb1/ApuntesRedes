@@ -1,5 +1,5 @@
 ---
-title: 9 — Tipos de VLAN
+title: "9 · Tipos de VLAN"
 description: Datos, nativa, voz y gestión; estática frente a dinámica 🗂️
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: 2 — Aprendizaje de MACs
+title: "2 · Aprendizaje de MACs"
 description: La tabla CAM, cómo el switch memoriza quién vive en cada puerto 🧠
 ---
 

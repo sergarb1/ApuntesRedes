@@ -1,5 +1,5 @@
 ---
-title: 10 — El mapa del curso
+title: "10 · Mapa del curso"
 description: Las 13 etapas para pasar de cero a administrador de redes 🗺️
 ---
 

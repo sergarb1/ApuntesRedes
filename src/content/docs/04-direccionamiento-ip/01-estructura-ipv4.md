@@ -1,11 +1,11 @@
 ---
-title: 1 — Estructura de IPv4
+title: "1 · Estructura de IPv4 y cabecera"
 description: 32 bits, 4 octetos, el sobre del paquete y el puente con la MAC 🎭
 ---
 
 <p><small>32 bits, 4 octetos, el sobre del paquete y el puente con la MAC 🎭</small></p>
 
-> 🗺️ **Estás en:** 🧮 **Direccionamiento IP y subnetting** → 1 · Estructura de IPv4
+> 🗺️ **Estás en:** 🧮 **Direccionamiento IP y subnetting** → 1 · Estructura de IPv4 y cabecera
 
 ---
 

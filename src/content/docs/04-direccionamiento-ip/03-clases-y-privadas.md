@@ -1,5 +1,5 @@
 ---
-title: "3 — Clases, IPs privadas y públicas"
+title: "3 · Clases, IPs privadas y públicas"
 description: Las clases A-E de toda la vida, CIDR y el mapa privado vs público 🏠
 ---
 

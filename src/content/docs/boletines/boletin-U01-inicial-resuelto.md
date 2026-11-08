@@ -3,8 +3,6 @@ title: "Boletín de Introducción — Inicial (Resuelto)"
 description: Soluciones de los ejercicios básicos
 ---
 
-# ✅ Boletín de Introducción — Inicial (Resuelto)
-
 ---
 
 ## 1. Las 4 piezas del puzzle

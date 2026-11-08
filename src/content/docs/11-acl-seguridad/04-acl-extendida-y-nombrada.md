@@ -1,5 +1,5 @@
 ---
-title: 4 — ACL extendida y nombrada
+title: "4 · ACL extendida y nombrada"
 description: Filtrar por protocolo y puerto, horarios laborales y tráfico de retorno con ACLs de lujo 🚀
 ---
 

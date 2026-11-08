@@ -1,5 +1,5 @@
 ---
-title: 7 — Problemas y soluciones
+title: "7 · Problemas y soluciones"
 description: Cuando NAT rompe aplicaciones, ALGs y compañía ⚠️
 ---
 

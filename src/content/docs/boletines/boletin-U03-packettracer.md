@@ -3,8 +3,6 @@ title: Boletín de Capa de enlace y trama Ethernet — Packet Tracer
 description: Prácticas guiadas de capa 2 en Packet Tracer (y un toque de Wireshark) 🖥️
 ---
 
-# 🖥️ Boletín de Capa de enlace y trama Ethernet — Packet Tracer
-
 > **Variante práctica de nivel único** (no es el par inicial/avanzado). Ocho micro-prácticas de baja dificultad en **Packet Tracer** para afianzar la capa 2: direcciones MAC, tabla de direcciones del switch, trama Ethernet, EtherType y ARP. Una o dos abres Wireshark (o el *Simulation mode* de PT) para mirar esos campos en caliente. El resuelto está justo al lado: úsalo solo cuando te atasques.
 
 > 🧰 **Requisitos:** Cisco Packet Tracer (cualquier versión reciente). Wireshark opcional si tu profesor lo permite; si no, usa el *Simulation mode* de PT. Los ejercicios 1, 2 y 4 arrancan con cableado: es **repaso de la unidad anterior** ([directo, cruzado y consola](/ApuntesRedes/02-medios-y-cableado/03-directo-cruzado-consola)), lo que se evalúa es lo que pasa en la capa 2.

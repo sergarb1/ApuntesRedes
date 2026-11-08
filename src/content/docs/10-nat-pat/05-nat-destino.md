@@ -1,5 +1,5 @@
 ---
-title: 5 — NAT destino (port forwarding)
+title: "5 · NAT destino (port forwarding)"
 description: Exponer un servicio interno al mundo 🚪
 ---
 

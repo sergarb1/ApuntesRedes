@@ -3,8 +3,6 @@ title: Boletín de Redes inalámbricas — Avanzado (Resuelto)
 description: Soluciones de los ejercicios avanzados de redes inalámbricas (WiFi)
 ---
 
-# ✅ Boletín de Redes inalámbricas — Avanzado (Resuelto)
-
 ---
 
 ## 1. Diseño de cobertura de un instituto

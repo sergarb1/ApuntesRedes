@@ -3,8 +3,6 @@ title: Boletín de Switching y VLAN — Avanzado (Resuelto)
 description: Soluciones de los ejercicios avanzados de Switching, STP y VLAN
 ---
 
-# ✅ Boletín de Switching y VLAN — Avanzado (Resuelto)
-
 ---
 
 ## 1. Configuración básica de switch

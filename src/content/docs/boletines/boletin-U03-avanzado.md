@@ -3,8 +3,6 @@ title: Boletín de Capa de enlace y trama Ethernet — Avanzado
 description: Ejercicios avanzados de MAC, trama, encapsulación y diagnóstico por capas
 ---
 
-# ⭐ Boletín de Capa de enlace y trama Ethernet — Avanzado
-
 > Ejercicios que requieren aplicar OSI, MACs, tramas y encapsulación de forma combinada. En los difíciles tienes pista.
 
 ---

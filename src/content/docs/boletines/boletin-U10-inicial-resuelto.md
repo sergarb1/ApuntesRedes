@@ -3,8 +3,6 @@ title: Boletín de NAT y PAT — Inicial (Resuelto)
 description: Soluciones ejercicios básicos de NAT
 ---
 
-# ✅ Boletín de NAT y PAT — Inicial (Resuelto)
-
 ---
 
 ## 1. ¿Qué es NAT?

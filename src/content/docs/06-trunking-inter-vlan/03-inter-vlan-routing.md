@@ -1,11 +1,11 @@
 ---
-title: 3 — Inter-VLAN routing
+title: "3 · Enrutamiento inter-VLAN"
 description: Cómo hacer que VLANs aisladas se hablen gracias a un router 🧭
 ---
 
 <p><small>Cómo hacer que VLANs aisladas se hablen gracias a un router 🧭</small></p>
 
-> 🗺️ **Estás en:** 🌉 **Trunking y enrutamiento inter-VLAN** → 3 · Inter-VLAN routing
+> 🗺️ **Estás en:** 🌉 **Trunking y enrutamiento inter-VLAN** → 3 · Enrutamiento inter-VLAN
 
 ---
 

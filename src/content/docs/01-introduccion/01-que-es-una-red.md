@@ -1,11 +1,11 @@
 ---
-title: 01 — ¿Qué es una red?
+title: "1 · ¿Qué es una red?"
 description: La explicación que tu abuela entendería 💡
 ---
 
 <p><small>La explicación que tu abuela entendería 💡</small></p>
 
-> 🗺️ **Estás en:** 🚪 **Introducción** → 01 · ¿Qué es una red?
+> 🗺️ **Estás en:** 🚪 **Introducción** → 1 · ¿Qué es una red?
 
 ---
 

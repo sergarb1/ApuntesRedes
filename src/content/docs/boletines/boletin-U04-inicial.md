@@ -3,8 +3,6 @@ title: Boletín de Direccionamiento IP — Inicial
 description: Ejercicios básicos de IPv4, cabecera, ARP, fragmentación y subnetting
 ---
 
-# 📝 Boletín de Direccionamiento IP — Inicial
-
 > Ejercicios básicos para afianzar los conceptos de direccionamiento IPv4, máscaras, cabecera, ARP y fragmentación.
 
 ---

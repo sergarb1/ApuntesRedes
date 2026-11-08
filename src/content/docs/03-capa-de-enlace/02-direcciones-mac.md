@@ -1,5 +1,5 @@
 ---
-title: 2 — Direcciones MAC
+title: "2 · Direcciones MAC"
 description: La identidad de la tarjeta de red, en 48 bits 🪪
 ---
 

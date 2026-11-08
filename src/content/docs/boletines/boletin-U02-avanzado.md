@@ -3,8 +3,6 @@ title: Boletín de Medios y cableado — Avanzado
 description: Ejercicios avanzados de Infraestructura Física de Red (medios y cableado)
 ---
 
-# 📝 Boletín de Medios y cableado — Avanzado
-
 > Ejercicios que requieren aplicar los conceptos de cableado y medios físicos de forma combinada. En los difíciles tienes pista.
 
 ---

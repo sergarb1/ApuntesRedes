@@ -1,5 +1,5 @@
 ---
-title: 6 — Seguridad WLAN
+title: "6 · Seguridad WLAN"
 description: Del candado roto de WEP al WPA3 de verdad 🔐
 ---
 

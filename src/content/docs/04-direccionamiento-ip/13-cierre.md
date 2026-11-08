@@ -1,11 +1,11 @@
 ---
-title: "13 — Cierre: consolida lo aprendido"
+title: "13 · Cierre"
 description: El cierre práctico de la unidad, con subnetting, VLSM, DHCP y diagnóstico real 🧮
 ---
 
 <p><small>El cierre práctico de la unidad, con subnetting, VLSM, DHCP y diagnóstico real 🧮</small></p>
 
-> 🗺️ **Estás en:** 🧮 **Direccionamiento IP y subnetting** → 13 · Cierre: consolida lo aprendido
+> 🗺️ **Estás en:** 🧮 **Direccionamiento IP y subnetting** → 13 · Cierre
 
 ---
 

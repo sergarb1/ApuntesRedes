@@ -1,11 +1,11 @@
 ---
-title: "7 — NTP en Cisco: configuración y verificación"
+title: "7 · NTP en Cisco"
 description: Manos al reloj del router ⚙️
 ---
 
 <p><small>Manos al reloj del router ⚙️</small></p>
 
-> 🗺️ **Estás en:** 🗄️ **Servicios de red: DHCP, DNS y NTP** → 7 · NTP en Cisco: configuración y verificación
+> 🗺️ **Estás en:** 🗄️ **Servicios de red: DHCP, DNS y NTP** → 7 · NTP en Cisco
 
 ---
 

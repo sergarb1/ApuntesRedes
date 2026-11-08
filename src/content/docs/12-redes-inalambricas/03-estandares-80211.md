@@ -1,5 +1,5 @@
 ---
-title: 3 — Estándares 802.11
+title: "3 · Estándares 802.11"
 description: De los 11 Mbps aburridos a los 46 Gbps prometidos 🚀
 ---
 

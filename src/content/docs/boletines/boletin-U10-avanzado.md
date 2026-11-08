@@ -3,8 +3,6 @@ title: Boletín de NAT y PAT — Avanzado
 description: Ejercicios avanzados de NAT
 ---
 
-# 📝 Boletín de NAT y PAT — Avanzado
-
 > Ejercicios que requieren comprender NAT en profundidad.
 
 ---

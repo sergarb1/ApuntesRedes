@@ -1,5 +1,5 @@
 ---
-title: 3 — Directo, cruzado y consola
+title: "3 · Directo, cruzado y consola"
 description: T568A vs T568B y cuándo cada cable manda 🤝
 ---
 

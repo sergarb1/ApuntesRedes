@@ -1,11 +1,11 @@
 ---
-title: "09 — Cierre: consolida lo aprendido"
+title: "9 · Cierre"
 description: "El cierre práctico de NAT: sé el router, laboratorio y entrevista 🧠"
 ---
 
 <p><small>El cierre práctico de NAT: sé el router, laboratorio y entrevista 🧠</small></p>
 
-> 🗺️ **Estás en:** 🌐 **NAT y PAT** → 09 · Cierre: consolida lo aprendido
+> 🗺️ **Estás en:** 🌐 **NAT y PAT** → 9 · Cierre
 
 ---
 

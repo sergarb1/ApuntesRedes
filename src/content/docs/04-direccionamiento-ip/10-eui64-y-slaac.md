@@ -1,5 +1,5 @@
 ---
-title: 10 — EUI-64 y SLAAC
+title: "10 · EUI-64 y SLAAC"
 description: De la MAC al identificador de interfaz y la autoconfiguración plug-and-play 🌱
 ---
 

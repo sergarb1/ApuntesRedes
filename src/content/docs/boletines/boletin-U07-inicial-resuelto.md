@@ -3,8 +3,6 @@ title: Boletín de Servicios de red — Inicial (Resuelto)
 description: Soluciones de los ejercicios básicos de servicios de red (DHCP, DNS y NTP)
 ---
 
-# ✅ Boletín de Servicios de red — Inicial (Resuelto)
-
 ---
 
 ## 1. ¿Qué servicio soy?

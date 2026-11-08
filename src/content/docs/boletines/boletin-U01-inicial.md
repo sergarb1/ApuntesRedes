@@ -3,8 +3,6 @@ title: "Boletín de Introducción — Inicial"
 description: "Ejercicios básicos: componentes, hardware, direcciones, protocolos y diagnóstico"
 ---
 
-# 📝 Boletín de Introducción — Inicial
-
 > Ejercicios sencillos para calmar motores. Si respondes esto sin mirar los apuntes, ya tienes la base del curso.
 
 ---

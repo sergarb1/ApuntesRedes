@@ -1,11 +1,11 @@
 ---
-title: 06 — DNS y DHCP
+title: "6 · DNS y DHCP"
 description: La agenda telefónica y el recepcionista que nadie ve 📖
 ---
 
 <p><small>La agenda telefónica y el recepcionista que nadie ve 📖</small></p>
 
-> 🗺️ **Estás en:** 🚪 **Introducción** → 06 · DNS y DHCP
+> 🗺️ **Estás en:** 🚪 **Introducción** → 6 · DNS y DHCP
 
 ---
 

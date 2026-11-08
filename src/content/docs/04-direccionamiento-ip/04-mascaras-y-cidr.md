@@ -1,5 +1,5 @@
 ---
-title: 4 — Máscaras y notación CIDR
+title: "4 · Máscaras y notación CIDR"
 description: La frontera que separa red de host, del /30 al /8 🪟
 ---
 

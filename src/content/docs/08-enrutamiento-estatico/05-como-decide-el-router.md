@@ -1,5 +1,5 @@
 ---
-title: 5 — Cómo decide un router
+title: "5 · Cómo decide un router"
 description: "El cerebro detrás de cada reenvío: tabla, AD y longest prefix match 🧠"
 ---
 

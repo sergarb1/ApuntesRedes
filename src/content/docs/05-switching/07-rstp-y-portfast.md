@@ -1,5 +1,5 @@
 ---
-title: 7 — RSTP y PortFast
+title: "7 · RSTP y PortFast"
 description: La red que converge en segundos, no en minutos ⚡
 ---
 

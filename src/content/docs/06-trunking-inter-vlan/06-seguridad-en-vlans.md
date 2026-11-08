@@ -1,5 +1,5 @@
 ---
-title: 6 — Seguridad en VLANs
+title: "6 · Seguridad en VLANs"
 description: VACL, PVLAN y defensa contra el VLAN hopping 🛡️
 ---
 

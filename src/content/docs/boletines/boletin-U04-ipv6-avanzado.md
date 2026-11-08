@@ -3,8 +3,6 @@ title: Boletín de Direccionamiento IP · IPv6 — Avanzado
 description: Ejercicios avanzados de IPv6 y Transición
 ---
 
-# 📝 Boletín de Direccionamiento IP · IPv6 — Avanzado
-
 > Ejercicios que requieren aplicar los conceptos de IPv6, SLAAC y transición de forma más profunda.
 
 ---

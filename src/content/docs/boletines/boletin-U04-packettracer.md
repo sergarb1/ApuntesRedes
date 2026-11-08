@@ -3,8 +3,6 @@ title: Boletín de Direccionamiento IP — Packet Tracer
 description: Prácticas guiadas de direccionamiento IP y DHCP en Packet Tracer (y Wireshark) 🖥️
 ---
 
-# 🖥️ Boletín de Direccionamiento IP — Packet Tracer
-
 > **Variante práctica de nivel único** (no es el par inicial/avanzado). Ocho micro-prácticas de baja dificultad en **Packet Tracer** para que el direccionamiento deje de ser magia: IPs estáticas, DHCP en router, APIPA, un poco de Wireshark (DORA y ARP) y un cierre con IPv6. Ideal tras leer los puntos 1–7 y 12 de la unidad.
 
 > 🧰 **Requisitos:** Cisco Packet Tracer. Wireshark opcional (si no, usa *Simulation mode* y los PDU details de PT).

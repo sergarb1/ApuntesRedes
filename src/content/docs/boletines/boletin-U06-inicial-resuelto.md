@@ -3,8 +3,6 @@ title: Boletín de Trunking e inter-VLAN — Inicial (Resuelto)
 description: Soluciones ejercicios básicos de VLANs
 ---
 
-# ✅ Boletín de Trunking e inter-VLAN — Inicial (Resuelto)
-
 ---
 
 ## 1. ¿Qué VLAN soy?

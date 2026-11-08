@@ -1,5 +1,5 @@
 ---
-title: 3 — NAT estático y dinámico
+title: "3 · NAT estático y dinámico"
 description: El 1:1 fijo y el pool de IPs públicas 🎯
 ---
 

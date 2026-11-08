@@ -1,11 +1,11 @@
 ---
-title: 08 — Glosario
+title: "8 · Glosario"
 description: Tu chuleta rápida de términos de red 📖
 ---
 
 <p><small>Tu chuleta rápida de términos de red 📖</small></p>
 
-> 🗺️ **Estás en:** 🚪 **Introducción** → 08 · Glosario
+> 🗺️ **Estás en:** 🚪 **Introducción** → 8 · Glosario
 
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: 7 — APs y controladores
+title: "7 · APs y controladores"
 description: Autónomos, ligeros y el cerebro que los dirige 🧠
 ---
 

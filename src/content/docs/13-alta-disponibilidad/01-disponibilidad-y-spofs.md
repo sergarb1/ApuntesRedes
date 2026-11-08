@@ -1,5 +1,5 @@
 ---
-title: 1 — Disponibilidad y SPOFs
+title: "1 · Disponibilidad y SPOFs"
 description: Los nueves, el coste del parón y dónde se esconde el fracaso ⏱️
 ---
 

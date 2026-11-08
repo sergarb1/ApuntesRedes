@@ -1,11 +1,11 @@
 ---
-title: "4 — DNS: la guía telefónica de Internet"
+title: "4 · DNS: la guía telefónica"
 description: Nombres para humanos, IPs para máquinas 📖
 ---
 
 <p><small>Nombres para humanos, IPs para máquinas 📖</small></p>
 
-> 🗺️ **Estás en:** 🗄️ **Servicios de red: DHCP, DNS y NTP** → 4 · DNS: la guía telefónica de Internet
+> 🗺️ **Estás en:** 🗄️ **Servicios de red: DHCP, DNS y NTP** → 4 · DNS: la guía telefónica
 
 ---
 

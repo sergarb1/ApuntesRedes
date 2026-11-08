@@ -3,8 +3,6 @@ title: Boletín de Direccionamiento IP — Avanzado (Resuelto)
 description: Soluciones de ejercicios avanzados de subnetting, VLSM, cabecera IPv4, ARP y fragmentación
 ---
 
-# ✅ Boletín de Direccionamiento IP — Avanzado (Resuelto)
-
 ---
 
 ## 1. Diseño VLSM

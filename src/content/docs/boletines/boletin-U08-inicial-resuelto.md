@@ -3,8 +3,6 @@ title: Boletín de Enrutamiento estático — Inicial (Resuelto)
 description: Soluciones de los ejercicios básicos de enrutamiento estático
 ---
 
-# ✅ Boletín de Enrutamiento estático — Inicial (Resuelto)
-
 ---
 
 ## 1. Componentes del router

@@ -1,5 +1,5 @@
 ---
-title: "4 — Encapsulación: de la trama al paquete"
+title: "4 · Encapsulación: de la trama al paquete"
 description: Las muñecas rusas de la red, capa a capa 🪆
 ---
 

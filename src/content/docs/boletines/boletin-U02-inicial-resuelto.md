@@ -3,8 +3,6 @@ title: Boletín de Medios y cableado — Inicial (Resuelto)
 description: Soluciones de los ejercicios básicos de Infraestructura Física de Red
 ---
 
-# ✅ Boletín de Medios y cableado — Inicial (Resuelto)
-
 ---
 
 ## 1. Identifica el cable

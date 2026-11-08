@@ -1,5 +1,5 @@
 ---
-title: 7 — Cableado estructurado
+title: "7 · Cableado estructurado"
 description: El edificio cableado como Dios manda, con patch panels y keystones 🏗️
 ---
 

@@ -3,8 +3,6 @@ title: Boletín de Switching y VLAN — Avanzado
 description: Ejercicios avanzados de Switching, STP y VLAN
 ---
 
-# 📝 Boletín de Switching y VLAN — Avanzado
-
 > Ejercicios que requieren aplicar los conceptos de switching, STP y VLAN de forma más profunda.
 
 ---

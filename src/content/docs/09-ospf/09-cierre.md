@@ -1,11 +1,11 @@
 ---
-title: "09 — Cierre: consolida lo aprendido"
+title: "9 · Cierre"
 description: El cierre práctico de OSPF, con laboratorio y diagnóstico real 🧠
 ---
 
 <p><small>El cierre práctico de OSPF, con laboratorio y diagnóstico real 🧠</small></p>
 
-> 🗺️ **Estás en:** 🗣️ **Enrutamiento dinámico con OSPF** → 09 · Cierre: consolida lo aprendido
+> 🗺️ **Estás en:** 🗣️ **Enrutamiento dinámico con OSPF** → 9 · Cierre
 
 ---
 

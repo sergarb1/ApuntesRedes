@@ -1,5 +1,5 @@
 ---
-title: "2 — ACLs: concepto y tipos"
+title: "2 · ACLs: concepto y tipos"
 description: "Las listas de la compra del router: permitir, negar y dónde colgarlas 🛡️"
 ---
 

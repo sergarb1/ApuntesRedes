@@ -1,5 +1,5 @@
 ---
-title: 3 — Rutas estáticas
+title: "3 · Rutas estáticas"
 description: Enseñar al router el camino con ip route y una topología R1-R2 🗺️
 ---
 

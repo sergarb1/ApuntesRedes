@@ -3,8 +3,6 @@ title: Boletín de Enrutamiento estático — Inicial
 description: Ejercicios básicos de enrutamiento estático
 ---
 
-# 📝 Boletín de Enrutamiento estático — Inicial
-
 > Ejercicios básicos para afianzar los conceptos del router y las rutas estáticas.
 
 ---

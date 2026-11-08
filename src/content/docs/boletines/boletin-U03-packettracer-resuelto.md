@@ -3,8 +3,6 @@ title: Boletín de Capa de enlace y trama Ethernet — Packet Tracer resuelto
 description: Soluciones paso a paso de las prácticas de capa 2 en Packet Tracer ✅
 ---
 
-# ✅ Boletín de Capa de enlace y trama Ethernet — Packet Tracer resuelto
-
 > Misma numeración y enunciados que el [por-resolver](/ApuntesRedes/boletines/boletin-u03-packettracer). Aquí tienes el camino completo: qué clicar, qué comando pegar y qué deberías ver.
 
 ---

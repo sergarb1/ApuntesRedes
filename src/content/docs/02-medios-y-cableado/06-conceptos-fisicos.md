@@ -1,5 +1,5 @@
 ---
-title: 6 — Conceptos físicos clave
+title: "6 · Conceptos físicos clave"
 description: Ancho de banda, throughput, latencia, atenuación y diafonía 📐
 ---
 

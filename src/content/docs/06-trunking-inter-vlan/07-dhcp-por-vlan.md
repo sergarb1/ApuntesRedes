@@ -1,5 +1,5 @@
 ---
-title: 7 — DHCP por VLAN
+title: "7 · DHCP por VLAN"
 description: Reparte IPs automáticamente en cada VLAN y olvídate de configurar nada a mano 🤖
 ---
 

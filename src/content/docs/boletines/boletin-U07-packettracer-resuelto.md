@@ -3,8 +3,6 @@ title: Boletín de Servicios de red — Packet Tracer resuelto
 description: Soluciones paso a paso de las prácticas de DHCP, DNS y NTP en Packet Tracer ✅
 ---
 
-# ✅ Boletín de Servicios de red — Packet Tracer resuelto
-
 > Misma numeración y enunciados que el [por-resolver](/ApuntesRedes/boletines/boletin-u07-packettracer). Comandos, valores exactos y qué deberías ver en cada paso.
 
 ---

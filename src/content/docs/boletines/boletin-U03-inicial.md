@@ -3,8 +3,6 @@ title: Boletín de Capa de enlace y trama Ethernet — Inicial
 description: Ejercicios básicos de modelo OSI, direcciones MAC, trama Ethernet y encapsulación
 ---
 
-# 📝 Boletín de Capa de enlace y trama Ethernet — Inicial
-
 > Ejercicios básicos para afianzar el mapa OSI, las direcciones MAC, la trama Ethernet y la encapsulación.
 
 ---

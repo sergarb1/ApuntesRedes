@@ -3,8 +3,6 @@ title: Boletín de Servicios de red — Avanzado (Resuelto)
 description: Soluciones de los ejercicios avanzados de servicios de red (DHCP, DNS y NTP)
 ---
 
-# ✅ Boletín de Servicios de red — Avanzado (Resuelto)
-
 ---
 
 ## 1. DHCP en el router Cisco

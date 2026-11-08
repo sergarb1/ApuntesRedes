@@ -1,5 +1,5 @@
 ---
-title: 1 — Componentes del router
+title: "1 · Componentes del router"
 description: Qué hay dentro de un router y cómo enciende por la mañana 💾
 ---
 

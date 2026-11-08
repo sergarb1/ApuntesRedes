@@ -1,5 +1,5 @@
 ---
-title: "6 — NTP: la hora es sagrada"
+title: "6 · NTP: la hora es sagrada"
 description: Sin relojes sincronizados, no hay confianza ⏰
 ---
 

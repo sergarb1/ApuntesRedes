@@ -1,5 +1,5 @@
 ---
-title: 2 — El cable UTP
+title: "2 · El cable UTP"
 description: 8 hilos, 4 pares y una buena razón para trenzarlos 🌊
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: 5 — Fibra óptica
+title: "5 · Fibra óptica"
 description: La luz que se ríe de los 100 metros y de la interferencia ✨
 ---
 

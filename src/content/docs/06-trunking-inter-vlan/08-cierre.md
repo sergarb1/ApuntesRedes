@@ -1,11 +1,11 @@
 ---
-title: "08 — Cierre: consolida lo aprendido"
+title: "8 · Cierre"
 description: El cierre práctico, con trunks, VLANs y routers de por medio 🌉
 ---
 
 <p><small>El cierre práctico, con trunks, VLANs y routers de por medio 🌉</small></p>
 
-> 🗺️ **Estás en:** 🌉 **Trunking y enrutamiento inter-VLAN** → 08 · Cierre
+> 🗺️ **Estás en:** 🌉 **Trunking y enrutamiento inter-VLAN** → 8 · Cierre
 
 ---
 

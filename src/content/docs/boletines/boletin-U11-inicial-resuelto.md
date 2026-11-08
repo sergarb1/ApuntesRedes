@@ -3,8 +3,6 @@ title: Boletín de ACL y seguridad — Inicial (Resuelto)
 description: Soluciones de los ejercicios básicos de ACLs y seguridad de red
 ---
 
-# ✅ Boletín de ACL y seguridad — Inicial (Resuelto)
-
 ---
 
 ## 1. Verdadero o falso

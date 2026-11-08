@@ -3,8 +3,6 @@ title: Boletín de Redes inalámbricas — Inicial (Resuelto)
 description: Soluciones de los ejercicios básicos de redes inalámbricas (WiFi)
 ---
 
-# ✅ Boletín de Redes inalámbricas — Inicial (Resuelto)
-
 ---
 
 ## 1. ¿Quién soy?

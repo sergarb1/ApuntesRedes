@@ -1,5 +1,5 @@
 ---
-title: 5 — VTP y DTP
+title: "5 · VTP y DTP"
 description: Los protocolos que propagan VLANs... y los riesgos que traen 🎭
 ---
 

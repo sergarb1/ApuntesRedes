@@ -1,11 +1,11 @@
 ---
-title: 7 — DHCP
+title: "7 · DHCP y DHCPv6"
 description: El conserje que reparte IPs automáticamente con el proceso DORA 🤖
 ---
 
 <p><small>El conserje que reparte IPs automáticamente con el proceso DORA 🤖</small></p>
 
-> 🗺️ **Estás en:** 🧮 **Direccionamiento IP y subnetting** → 7 · DHCP
+> 🗺️ **Estás en:** 🧮 **Direccionamiento IP y subnetting** → 7 · DHCP y DHCPv6
 
 ---
 

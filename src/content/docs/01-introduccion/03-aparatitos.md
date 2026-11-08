@@ -1,11 +1,11 @@
 ---
-title: 03 — Los aparatitos
+title: "3 · Los aparatitos"
 description: Desmitificando el hardware que hay en tu salón 🔧
 ---
 
 <p><small>Desmitificando el hardware que hay en tu salón 🔧</small></p>
 
-> 🗺️ **Estás en:** 🚪 **Introducción** → 03 · Los aparatitos
+> 🗺️ **Estás en:** 🚪 **Introducción** → 3 · Los aparatitos
 
 ---
 

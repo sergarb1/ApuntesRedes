@@ -1,5 +1,5 @@
 ---
-title: 4 — Switch capa 3 y SVIs
+title: "4 · Switch capa 3 y SVIs"
 description: Routing a velocidad de hardware dentro del propio switch ⚡
 ---
 

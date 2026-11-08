@@ -1,11 +1,11 @@
 ---
-title: "9 — Cierre: consolida lo aprendido"
+title: "9 · Cierre"
 description: El cierre práctico, con cables, luz y caos controlado 🔌
 ---
 
 <p><small>El cierre práctico, con cables, luz y caos controlado 🔌</small></p>
 
-> 🗺️ **Estás en:** 📡 **Medios y cableado** → 9 · Cierre: consolida lo aprendido
+> 🗺️ **Estás en:** 📡 **Medios y cableado** → 9 · Cierre
 
 ---
 

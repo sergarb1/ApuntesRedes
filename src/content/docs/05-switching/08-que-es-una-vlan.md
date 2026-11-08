@@ -1,5 +1,5 @@
 ---
-title: 8 — ¿Qué es una VLAN?
+title: "8 · ¿Qué es una VLAN?"
 description: Una red lógica dentro de un switch físico 🏢
 ---
 

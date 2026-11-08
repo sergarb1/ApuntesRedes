@@ -1,11 +1,11 @@
 ---
-title: 05 — Paquetes y protocolos
+title: "5 · Paquetes y protocolos"
 description: Cómo viajan los datos por la red y qué reglas siguen ✉️
 ---
 
 <p><small>Cómo viajan los datos por la red y qué reglas siguen ✉️</small></p>
 
-> 🗺️ **Estás en:** 🚪 **Introducción** → 05 · Paquetes y protocolos
+> 🗺️ **Estás en:** 🚪 **Introducción** → 5 · Paquetes y protocolos
 
 ---
 

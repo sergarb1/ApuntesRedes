@@ -1,5 +1,5 @@
 ---
-title: 3 — Conceptos OSPF
+title: "3 · Conceptos OSPF"
 description: "LSA, LSDB, SPF, Router ID y Hello: la maquinaria interna de OSPF 🧠"
 ---
 

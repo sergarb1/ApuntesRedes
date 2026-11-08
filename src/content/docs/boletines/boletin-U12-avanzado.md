@@ -3,8 +3,6 @@ title: Boletín de Redes inalámbricas — Avanzado
 description: Ejercicios avanzados de redes inalámbricas (WiFi)
 ---
 
-# 📝 Boletín de Redes inalámbricas — Avanzado
-
 > Ejercicios que requieren diseñar y diagnosticar WLANs. En los difíciles tienes pista.
 
 ---

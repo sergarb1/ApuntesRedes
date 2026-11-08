@@ -1,5 +1,5 @@
 ---
-title: 12 — Mecanismos de transición
+title: "12 · Mecanismos de transición"
 description: Dual Stack, túneles, NAT64/DNS64 y los parches de coexistencia (CG-NAT) para convivir durante la migración 🔀
 ---
 

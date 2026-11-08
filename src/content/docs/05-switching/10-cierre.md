@@ -1,11 +1,11 @@
 ---
-title: "10 — Cierre: consolida lo aprendido"
+title: "10 · Cierre"
 description: El cierre práctico de la unidad, con chicha y diagnóstico real 🧠
 ---
 
 <p><small>El cierre práctico de la unidad, con chicha y diagnóstico real 🧠</small></p>
 
-> 🗺️ **Estás en:** 🔀 **Switching y VLAN** → 10 · Cierre: consolida lo aprendido
+> 🗺️ **Estás en:** 🔀 **Switching y VLAN** → 10 · Cierre
 
 ---
 

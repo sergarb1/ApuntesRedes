@@ -1,5 +1,5 @@
 ---
-title: 1 — El modelo OSI
+title: "1 · El modelo OSI"
 description: Siete capas de teoría para ubicar dónde juega Ethernet 🧅
 ---
 

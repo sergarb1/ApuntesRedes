@@ -3,8 +3,6 @@ title: Boletín de Enrutamiento estático — Avanzado (Resuelto)
 description: Soluciones de los ejercicios avanzados de enrutamiento estático
 ---
 
-# ✅ Boletín de Enrutamiento estático — Avanzado (Resuelto)
-
 ---
 
 ## 1. Configuración multi-router

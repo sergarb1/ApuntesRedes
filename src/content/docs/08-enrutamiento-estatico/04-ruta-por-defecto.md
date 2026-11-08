@@ -1,5 +1,5 @@
 ---
-title: 4 — Ruta por defecto
+title: "4 · Ruta por defecto"
 description: La salida de emergencia 0.0.0.0/0 y las rutas flotantes de respaldo 🚪
 ---
 

@@ -3,8 +3,6 @@ title: Boletín de NAT y PAT — Inicial
 description: Ejercicios básicos de NAT
 ---
 
-# 📝 Boletín de NAT y PAT — Inicial
-
 > Ejercicios para practicar los fundamentos de NAT.
 
 ---

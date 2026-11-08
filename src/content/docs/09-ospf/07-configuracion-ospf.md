@@ -1,5 +1,5 @@
 ---
-title: 7 — Configuración OSPF
+title: "7 · Configuración OSPF"
 description: Configuración básica y multiárea paso a paso 🛠️
 ---
 

@@ -3,8 +3,6 @@ title: Boletín de OSPF — Avanzado
 description: Ejercicios avanzados de Routing Dinámico
 ---
 
-# 📝 Boletín de OSPF — Avanzado
-
 > Ejercicios que requieren aplicar conceptos de OSPF de forma más profunda.
 
 ---

@@ -1,5 +1,5 @@
 ---
-title: 4 — Stacking y chassis virtuales
+title: "4 · Stacking y chassis virtuales"
 description: Varios switches, un solo equipo 🧱
 ---
 

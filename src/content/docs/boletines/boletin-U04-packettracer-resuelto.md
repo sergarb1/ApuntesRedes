@@ -3,8 +3,6 @@ title: Boletín de Direccionamiento IP — Packet Tracer resuelto
 description: Soluciones paso a paso de las prácticas de IP, DHCP y IPv6 en Packet Tracer ✅
 ---
 
-# ✅ Boletín de Direccionamiento IP — Packet Tracer resuelto
-
 > Misma numeración y enunciados que el [por-resolver](/ApuntesRedes/boletines/boletin-u04-packettracer). Comandos, valores exactos y qué deberías ver en cada paso.
 
 ---

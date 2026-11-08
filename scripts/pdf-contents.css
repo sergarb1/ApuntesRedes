@@ -1,0 +1,12 @@
+/* Contents del PDF compacto: solo los títulos de página (unidades, puntos y
+   boletines), sin las secciones internas (h2) que ensanchaban el índice a
+   decenas de páginas. El anidamiento oculto es el de los hijos de cada <li>
+   (las secciones h2 de cada página). */
+.s2pdf-contents ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+.s2pdf-contents ul ul {
+  display: none;
+}

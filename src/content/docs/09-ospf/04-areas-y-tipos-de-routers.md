@@ -1,5 +1,5 @@
 ---
-title: 4 — Áreas y tipos de routers
+title: "4 · Áreas y tipos de routers"
 description: El Área 0 como corazón y quién es quién en OSPF 🏙️
 ---
 

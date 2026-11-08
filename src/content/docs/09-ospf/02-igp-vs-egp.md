@@ -1,5 +1,5 @@
 ---
-title: 2 — IGP vs EGP y RIP vs OSPF
+title: "2 · IGP vs EGP y RIP vs OSPF"
 description: Protocolos de dentro y de fuera, y por qué OSPF le gana a RIP 🌍
 ---
 

@@ -1,11 +1,11 @@
 ---
-title: 09 — Preguntas tontas
+title: "9 · Preguntas tontas"
 description: Las dudas que nadie se atreve a hacer en voz alta 😅
 ---
 
 <p><small>Las dudas que nadie se atreve a hacer en voz alta 😅</small></p>
 
-> 🗺️ **Estás en:** 🚪 **Introducción** → 09 · Preguntas tontas
+> 🗺️ **Estás en:** 🚪 **Introducción** → 9 · Preguntas tontas
 
 ---
 

@@ -3,8 +3,6 @@ title: Boletín de Medios y cableado — Avanzado (Resuelto)
 description: Soluciones de los ejercicios avanzados de Infraestructura Física, OSI y trama
 ---
 
-# ✅ Boletín de Medios y cableado — Avanzado (Resuelto)
-
 ---
 
 ## 1. Diagnóstico de cableado

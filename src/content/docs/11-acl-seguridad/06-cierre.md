@@ -1,11 +1,11 @@
 ---
-title: "06 — Cierre: consolida lo aprendido"
+title: "6 · Cierre"
 description: El cierre práctico, con listas, wildcards y muñecos rusos 🛡️
 ---
 
 <p><small>El cierre práctico, con listas, wildcards y muñecos rusos 🛡️</small></p>
 
-> 🗺️ **Estás en:** 🛡️ **ACLs y seguridad de red** → 06 · Cierre
+> 🗺️ **Estás en:** 🛡️ **ACLs y seguridad de red** → 6 · Cierre
 
 ---
 

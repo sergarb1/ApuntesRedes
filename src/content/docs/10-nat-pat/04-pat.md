@@ -1,5 +1,5 @@
 ---
-title: 4 — PAT (sobrecarga)
+title: "4 · PAT (sobrecarga)"
 description: Una IP pública para todos, puertos al rescate 🔁
 ---
 

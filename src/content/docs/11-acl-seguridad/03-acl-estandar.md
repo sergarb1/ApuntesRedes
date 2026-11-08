@@ -1,5 +1,5 @@
 ---
-title: 3 — ACL estándar
+title: "3 · ACL estándar"
 description: Filtrar por IP origen con acceso-list y wildcards, colocándola cerca del destino 🎯
 ---
 

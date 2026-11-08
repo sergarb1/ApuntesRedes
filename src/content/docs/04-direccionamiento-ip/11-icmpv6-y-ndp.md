@@ -1,5 +1,5 @@
 ---
-title: 11 — ICMPv6 y NDP
+title: "11 · ICMPv6 y NDP"
 description: ARP, IGMP y broadcast pasan a mejor vida; llega NDP 🟢
 ---
 

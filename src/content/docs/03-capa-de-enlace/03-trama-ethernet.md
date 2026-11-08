@@ -1,5 +1,5 @@
 ---
-title: 3 — La trama Ethernet
+title: "3 · La trama Ethernet"
 description: El sobre de la capa 2, en cobre, fibra y en el aire 📦
 ---
 

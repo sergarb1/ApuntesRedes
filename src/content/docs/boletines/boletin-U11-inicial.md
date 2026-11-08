@@ -3,8 +3,6 @@ title: Boletín de ACL y seguridad — Inicial
 description: Ejercicios básicos de ACLs y seguridad de red
 ---
 
-# 📝 Boletín de ACL y seguridad — Inicial
-
 > Ejercicios básicos para afianzar los conceptos de ACLs y seguridad de red.
 
 ---

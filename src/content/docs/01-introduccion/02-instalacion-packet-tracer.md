@@ -1,11 +1,11 @@
 ---
-title: 02 — Instalación de Packet Tracer
+title: "2 · Instalación de Packet Tracer"
 description: Prepara tu laboratorio virtual antes de tocar cables reales 🛠️
 ---
 
 <p><small>Prepara tu laboratorio virtual antes de tocar cables reales 🛠️</small></p>
 
-> 🗺️ **Estás en:** 🚪 **Introducción** → 02 · Instalación de Packet Tracer
+> 🗺️ **Estás en:** 🚪 **Introducción** → 2 · Instalación de Packet Tracer
 
 ---
 

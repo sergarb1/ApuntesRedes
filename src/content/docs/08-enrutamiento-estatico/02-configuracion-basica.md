@@ -1,5 +1,5 @@
 ---
-title: 2 — Configuración básica
+title: "2 · Configuración básica"
 description: Modos CLI, primeros comandos y la configuración mínima de un router 🛠️
 ---
 

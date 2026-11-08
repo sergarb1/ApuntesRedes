@@ -1,5 +1,5 @@
 ---
-title: 2 — Binario y la operación AND
+title: "2 · Binario y la operación AND"
 description: El idioma materno de las redes, con pesos, conversión y AND 🔢
 ---
 

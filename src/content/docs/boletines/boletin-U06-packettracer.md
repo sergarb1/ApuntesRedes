@@ -3,8 +3,6 @@ title: Boletín de Trunking e inter-VLAN — Packet Tracer
 description: Prácticas guiadas de trunks, VLANs e inter-VLAN en Packet Tracer 🖥️
 ---
 
-# 🖥️ Boletín de Trunking e inter-VLAN — Packet Tracer
-
 > **Variante práctica de nivel único** (no es el par inicial/avanzado). Ocho micro-prácticas de baja dificultad en **Packet Tracer** para montar de cero una red con VLANs: crear VLANs, pasar tráfico por trunks, enrutar entre VLANs con router-on-a-stick y con switch capa 3, repartir IPs por VLAN y endurecer los trunks. Tres de ellas llevan un **fallo intencionado** que tienes que diagnosticar. Ideal tras leer los puntos 1–7 de la unidad.
 
 > 🧰 **Requisitos:** Cisco Packet Tracer. Necesitas 2 switches (`2960`), 1 router (`2911`), 3 PCs y, para el ejercicio 6, un switch de capa 3 (`3560`). El resuelto está justo al lado: úsalo solo cuando te atasques.

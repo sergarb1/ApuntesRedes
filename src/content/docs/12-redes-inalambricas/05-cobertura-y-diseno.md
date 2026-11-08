@@ -1,5 +1,5 @@
 ---
-title: 5 — Cobertura y diseño
+title: "5 · Cobertura y diseño"
 description: Dónde poner cada AP y en qué canal 📐
 ---
 

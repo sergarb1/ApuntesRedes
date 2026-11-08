@@ -1,5 +1,5 @@
 ---
-title: 5 — DR y BDR
+title: "5 · DR y BDR"
 description: El portavoz que evita el caos en redes multiacceso 🗣️
 ---
 

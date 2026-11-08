@@ -3,8 +3,6 @@ title: Boletín de ACL y seguridad — Avanzado (Resuelto)
 description: Soluciones de los ejercicios avanzados de ACLs y seguridad de red
 ---
 
-# ✅ Boletín de ACL y seguridad — Avanzado (Resuelto)
-
 ---
 
 ## 1. ACL extendida: YouTube blocker

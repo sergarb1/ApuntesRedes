@@ -1,5 +1,5 @@
 ---
-title: 3 — EtherChannel
+title: "3 · EtherChannel"
 description: Varios cables, un solo enlace gigante ⚡
 ---
 

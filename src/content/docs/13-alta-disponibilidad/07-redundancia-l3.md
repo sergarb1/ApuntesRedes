@@ -1,5 +1,5 @@
 ---
-title: 7 — Redundancia en capa 3
+title: "7 · Redundancia en capa 3"
 description: Dos caminos a Internet y una decisión automática 🛣️
 ---
 

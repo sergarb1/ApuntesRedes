@@ -1,11 +1,11 @@
 ---
-title: "06 — Cierre: consolida lo aprendido"
+title: "6 · Cierre"
 description: El cierre práctico, con rutas, next-hops y tablas 🧭
 ---
 
 <p><small>El cierre práctico, con rutas, next-hops y tablas 🧭</small></p>
 
-> 🗺️ **Estás en:** 🧭 **Enrutamiento estático** → 06 · Cierre
+> 🗺️ **Estás en:** 🧭 **Enrutamiento estático** → 6 · Cierre
 
 ---
 

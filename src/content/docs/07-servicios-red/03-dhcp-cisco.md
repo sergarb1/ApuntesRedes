@@ -1,11 +1,11 @@
 ---
-title: 3 — DHCP en Cisco y el agente de reenvío
+title: "3 · DHCP en Cisco y helper"
 description: Un pool, unas exclusiones y un helper 🧰
 ---
 
 <p><small>Un pool, unas exclusiones y un helper 🧰</small></p>
 
-> 🗺️ **Estás en:** 🗄️ **Servicios de red: DHCP, DNS y NTP** → 3 · DHCP en Cisco y el agente de reenvío
+> 🗺️ **Estás en:** 🗄️ **Servicios de red: DHCP, DNS y NTP** → 3 · DHCP en Cisco y helper
 
 ---
 

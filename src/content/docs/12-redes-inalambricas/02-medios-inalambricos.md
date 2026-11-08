@@ -1,5 +1,5 @@
 ---
-title: 2 — Medios y antenas
+title: "2 · Medios y antenas"
 description: La señal que se estira, se enfoca y se pierde 📡
 ---
 

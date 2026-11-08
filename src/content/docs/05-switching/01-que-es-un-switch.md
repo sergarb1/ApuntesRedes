@@ -1,5 +1,5 @@
 ---
-title: 1 — ¿Qué es un switch?
+title: "1 · ¿Qué es un switch?"
 description: El cerebro de la red local, reenviando tramas sin repetirlas 🔀
 ---
 

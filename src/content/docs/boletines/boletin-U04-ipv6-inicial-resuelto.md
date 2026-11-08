@@ -3,8 +3,6 @@ title: Boletín de Direccionamiento IP · IPv6 — Inicial (Resuelto)
 description: Soluciones ejercicios básicos de IPv6 y Transición
 ---
 
-# ✅ Boletín de Direccionamiento IP · IPv6 — Inicial (Resuelto)
-
 ---
 
 ## 1. Compresión de direcciones

@@ -1,5 +1,5 @@
 ---
-title: 4 — Crimpado y comprobación
+title: "4 · Crimpado y comprobación"
 description: De cable suelto a latiguillo perfecto, con tester de por medio 🛠️
 ---
 

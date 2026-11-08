@@ -1,5 +1,5 @@
 ---
-title: 6 — El coste OSPF
+title: "6 · El coste OSPF"
 description: Cómo OSPF convierte ancho de banda en coste ⚖️
 ---
 

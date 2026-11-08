@@ -3,8 +3,6 @@ title: Boletín de Switching y VLAN — Inicial (Resuelto)
 description: Soluciones de los ejercicios básicos de Switching, STP y VLAN
 ---
 
-# ✅ Boletín de Switching y VLAN — Inicial (Resuelto)
-
 ---
 
 ## 1. ¿Qué hace el switch?

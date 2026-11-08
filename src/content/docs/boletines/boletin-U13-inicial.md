@@ -3,8 +3,6 @@ title: Boletín de Alta disponibilidad — Inicial
 description: Ejercicios básicos de alta disponibilidad y redundancia
 ---
 
-# 📝 Boletín de Alta disponibilidad — Inicial
-
 > Ejercicios básicos para afianzar los conceptos de redundancia: SPOFs, STP, EtherChannel y FHRP.
 
 ---

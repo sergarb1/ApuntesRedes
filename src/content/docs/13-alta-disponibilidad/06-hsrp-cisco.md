@@ -1,5 +1,5 @@
 ---
-title: 6 — HSRP en Cisco
+title: "6 · HSRP en Cisco"
 description: Manos a la IP virtual ⚙️
 ---
 

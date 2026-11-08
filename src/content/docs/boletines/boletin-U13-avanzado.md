@@ -3,8 +3,6 @@ title: Boletín de Alta disponibilidad — Avanzado
 description: Ejercicios avanzados de alta disponibilidad y redundancia
 ---
 
-# 📝 Boletín de Alta disponibilidad — Avanzado
-
 > Ejercicios que requieren diseñar y diagnosticar arquitecturas redundantes. En los difíciles tienes pista.
 
 ---

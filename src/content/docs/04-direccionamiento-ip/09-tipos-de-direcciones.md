@@ -1,11 +1,11 @@
 ---
-title: 9 — Tipos de direcciones
+title: "9 · Tipos de direcciones IPv6"
 description: Unicast, multicast y anycast; GUA, LLA, ULA y loopback 🎯
 ---
 
 <p><small>Unicast, multicast y anycast; GUA, LLA, ULA y loopback 🎯</small></p>
 
-> 🗺️ **Estás en:** 🧮 **Direccionamiento IP y subnetting** → 9 · Tipos de direcciones
+> 🗺️ **Estás en:** 🧮 **Direccionamiento IP y subnetting** → 9 · Tipos de direcciones IPv6
 
 ---
 

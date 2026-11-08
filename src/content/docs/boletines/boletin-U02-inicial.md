@@ -3,8 +3,6 @@ title: Boletín de Medios y cableado — Inicial
 description: Ejercicios básicos de Infraestructura Física de Red (medios y cableado)
 ---
 
-# 📝 Boletín de Medios y cableado — Inicial
-
 > Ejercicios básicos para afianzar los conceptos de medios físicos, cableado, crimpado y estándares.
 
 ---

@@ -1,11 +1,11 @@
 ---
-title: "5 — Cierre: consolida lo aprendido"
+title: "5 · Cierre"
 description: OSI, MACs y tramas a examen, con caos controlado 🧅
 ---
 
 <p><small>OSI, MACs y tramas a examen, con caos controlado 🧅</small></p>
 
-> 🗺️ **Estás en:** 🔗 **Capa de enlace y trama Ethernet** → 5 · Cierre: consolida lo aprendido
+> 🗺️ **Estás en:** 🔗 **Capa de enlace y trama Ethernet** → 5 · Cierre
 
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: 8 — Topologías de red
+title: "8 · Topologías de red"
 description: "Cómo se dibujan los cables antes de tenderlos: punto a punto, bus, anillo, estrella, malla y híbrida 🕸️"
 ---
 

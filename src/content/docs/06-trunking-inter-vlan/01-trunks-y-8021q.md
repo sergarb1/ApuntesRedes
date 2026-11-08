@@ -1,5 +1,5 @@
 ---
-title: 1 — Trunks y 802.1Q
+title: "1 · Trunks y 802.1Q"
 description: El etiquetado que lleva varias VLANs por un mismo cable 🏷️
 ---
 

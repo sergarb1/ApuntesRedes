@@ -1,11 +1,11 @@
 ---
-title: "5 — FHRP: el gateway redundante"
+title: "5 · FHRP: gateway redundante"
 description: Una IP, dos routers, cero drama 🎭
 ---
 
 <p><small>Una IP, dos routers, cero drama 🎭</small></p>
 
-> 🗺️ **Estás en:** 🔁 **Alta disponibilidad y redundancia** → 5 · FHRP: el gateway redundante
+> 🗺️ **Estás en:** 🔁 **Alta disponibilidad y redundancia** → 5 · FHRP: gateway redundante
 
 ---
 

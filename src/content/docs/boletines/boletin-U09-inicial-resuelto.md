@@ -3,8 +3,6 @@ title: Boletín de OSPF — Inicial (Resuelto)
 description: Soluciones de los ejercicios básicos de Routing Dinámico
 ---
 
-# ✅ Boletín de OSPF — Inicial (Resuelto)
-
 ---
 
 ## 1. IGP vs EGP

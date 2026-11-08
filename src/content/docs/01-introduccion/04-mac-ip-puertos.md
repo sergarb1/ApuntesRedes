@@ -1,11 +1,11 @@
 ---
-title: 04 — MAC, IP y Puertos
+title: "4 · MAC, IP y Puertos"
 description: El DNI, el domicilio y el despacho de tus dispositivos 📮
 ---
 
 <p><small>El DNI, el domicilio y el despacho de tus dispositivos 📮</small></p>
 
-> 🗺️ **Estás en:** 🚪 **Introducción** → 04 · MAC, IP y Puertos
+> 🗺️ **Estás en:** 🚪 **Introducción** → 4 · MAC, IP y Puertos
 
 ---
 

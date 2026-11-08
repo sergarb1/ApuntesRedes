@@ -3,8 +3,6 @@ title: "Boletín de Introducción — Avanzado (Resuelto)"
 description: Soluciones de los ejercicios avanzados
 ---
 
-# 💪 Boletín de Introducción — Avanzado (Resuelto)
-
 ---
 
 ## 1. Diagnóstico completo: "No tengo Internet"

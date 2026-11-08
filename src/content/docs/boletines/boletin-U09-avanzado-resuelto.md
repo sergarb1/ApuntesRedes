@@ -3,8 +3,6 @@ title: Boletín de OSPF — Avanzado (Resuelto)
 description: Soluciones de los ejercicios avanzados de Routing Dinámico
 ---
 
-# ✅ Boletín de OSPF — Avanzado (Resuelto)
-
 ---
 
 ## 1. Configuración OSPF multiárea

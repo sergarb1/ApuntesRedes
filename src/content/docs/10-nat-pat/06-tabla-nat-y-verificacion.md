@@ -1,5 +1,5 @@
 ---
-title: 6 — Tabla NAT y verificación
+title: "6 · Tabla NAT y verificación"
 description: Leer la tabla NAT y saber si NAT trabaja 🔍
 ---
 

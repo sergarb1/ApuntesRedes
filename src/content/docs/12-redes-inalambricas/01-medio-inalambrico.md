@@ -1,5 +1,5 @@
 ---
-title: 1 — El medio inalámbrico
+title: "1 · El medio inalámbrico"
 description: El aire como cable que nadie controla 🌬️
 ---
 

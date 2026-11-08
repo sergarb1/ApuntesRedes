@@ -37,7 +37,7 @@ $boletinSections = @(
   "packettracer"
 )
 
-$metaTitle = "Apuntes PAR - Planificacion y Administracion de Redes"
+$metaTitle = "Apuntes PAR - Planificación y Administración de Redes"
 $metaLang = "es"
 $outFile = "ApuntesPAR.epub"
 
@@ -66,17 +66,40 @@ function Get-FrontTitle {
   return $Fallback
 }
 
+function Shift-Headings {
+  # Añade un '#' a cada encabezado ATX (## -> ###, # -> ##) fuera de bloques
+  # de código con cercas, para bajar un nivel el contenido embebido.
+  # La cerca puede ir sola, con sangría o tras un marcador de lista ("2. ```").
+  param([string]$Text)
+  $lines = $Text -split "`n"
+  $inFence = $false
+  $fenceRe = '^\s*(?:(?:\d+[.)]|[-*+])\s+)?(?:`{3,}[^`]*$|~{3,})'
+  for ($i = 0; $i -lt $lines.Count; $i++) {
+    if ($lines[$i] -match $fenceRe) { $inFence = -not $inFence; continue }
+    if (-not $inFence -and $lines[$i] -match '^#{1,6} ') { $lines[$i] = '#' + $lines[$i] }
+  }
+  return ($lines -join "`n")
+}
+
+function Get-Body {
+  # Quita el frontmatter y reescribe las rutas /ApuntesRedes -> public/
+  param($Content)
+  $c = $Content -replace '(?ms)\A---.*?^---\s*', ''
+  $c = $c.Trim()
+  $c = $c -replace '/ApuntesRedes/cc-by-sa\.png', 'public/cc-by-sa.png'
+  $c = $c -replace '/ApuntesRedes/diagrams/', 'public/diagrams/'
+  $c = $c -replace '/ApuntesRedes/photos/', 'public/photos/'
+  return $c
+}
+
 function Add-MdFile {
   param($Path, [int]$HeadingLevel)
 
   $content = Get-Content $Path -Raw -Encoding UTF8
   $title = Get-FrontTitle -Content $content -Fallback ([System.IO.Path]::GetFileNameWithoutExtension($Path))
 
-  $content = $content -replace '(?ms)\A---.*?^---\s*', ''
-  $content = $content.Trim()
-  $content = $content -replace '/ApuntesRedes/cc-by-sa\.png', 'public/cc-by-sa.png'
-  $content = $content -replace '/ApuntesRedes/diagrams/', 'public/diagrams/'
-  $content = $content -replace '/ApuntesRedes/photos/', 'public/photos/'
+  $content = Get-Body $content
+  $content = Shift-Headings $content
 
   $level = '#' * $HeadingLevel
   $null = $sb.AppendLine("$level $title")
@@ -88,19 +111,21 @@ function Add-MdFile {
 }
 
 foreach ($u in $unitSlugs) {
-  # --- Unit index (root file, e.g. 02-fundamentos-redes.md / 01-introduccion.md) ---
+  # --- Índice de la unidad (fichero raíz, p. ej. 02-medios-y-cableado.md) ---
   $indexFile = "$srcDir/$u.md"
   if (-not (Test-Path $indexFile)) { $indexFile = "$srcDir/$u.mdx" }
   if (Test-Path $indexFile) {
+    # Nivel 1: cada unidad abre su propio capítulo del EPUB
     Add-MdFile -Path $indexFile -HeadingLevel 1
   }
 
-  # --- Unit puntos (subcarpeta, e.g. 01-introduccion/01-*.md) ---
+  # --- Puntos de la unidad (subcarpeta, p. ej. 01-introduccion/01-*.md) ---
   $unitDir = "$srcDir/$u"
   if (Test-Path $unitDir) {
     $puntos = Get-ChildItem -Path $unitDir -Filter "*.md" -File | Sort-Object Name
     foreach ($p in $puntos) {
-      Add-MdFile -Path $p.FullName -HeadingLevel 1
+      # Nivel 2: los puntos cuelgan del índice de su unidad en el nav
+      Add-MdFile -Path $p.FullName -HeadingLevel 2
     }
   }
 
@@ -115,13 +140,13 @@ foreach ($u in $unitSlugs) {
         $eContent = Get-Content $bfFile -Raw -Encoding UTF8
         $eTitle = Get-FrontTitle -Content $eContent -Fallback $bfName
 
-        $eContent = $eContent -replace '(?ms)\A---.*?^---\s*', ''
-        $eContent = $eContent.Trim()
-        $eContent = $eContent -replace '/ApuntesRedes/cc-by-sa\.png', 'public/cc-by-sa.png'
-        $eContent = $eContent -replace '/ApuntesRedes/diagrams/', 'public/diagrams/'
-        $eContent = $eContent -replace '/ApuntesRedes/photos/', 'public/photos/'
-        $eContent = $eContent -replace '(?m)^(#+)', '##$1'
+        $eContent = Get-Body $eContent
+        # El boletine ya lleva su título en el frontmatter: se quita el H1
+        # interno duplicado (en la web se ve el título repetido).
+        $eContent = $eContent -replace '(?m)^#+\s+\S*\s*Boletín[^\r\n]*\r?\n\s*\r?\n?', ''
+        $eContent = Shift-Headings $eContent
 
+        # Nivel 2: los boletines cuelgan de su unidad en el nav
         $null = $sb.AppendLine("## $eTitle")
         $null = $sb.AppendLine("")
         if ($eContent) {
@@ -140,7 +165,8 @@ $cssPath = Join-Path $PSScriptRoot "epub.css"
 $pandoc = Get-ChildItem -Recurse -Filter "pandoc.exe" -Path "$env:LOCALAPPDATA\Microsoft\WinGet\Packages" -ErrorAction SilentlyContinue | Select-Object -First 1 -ExpandProperty FullName
 if (-not $pandoc) { $pandoc = "pandoc" }
 try {
-  & $pandoc $tempMd --from markdown --to epub3 --toc --toc-depth=3 --epub-cover-image="$coverPath" --highlight-style=pygments --css $cssPath -o $outPath
+  # --toc-depth=2: nav de dos niveles -> unidad (h1) -> puntos y boletines (h2)
+  & $pandoc $tempMd --from markdown --to epub3 --toc --toc-depth=2 --epub-cover-image="$coverPath" --highlight-style=pygments --css $cssPath -o $outPath
   if ($LASTEXITCODE -eq 0) { Write-Host "OK: $outPath" } else { Write-Host "FAIL" }
 } finally {
   Remove-Item $tempMd -Force -ErrorAction SilentlyContinue

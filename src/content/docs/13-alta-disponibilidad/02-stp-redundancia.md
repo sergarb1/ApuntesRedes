@@ -1,11 +1,11 @@
 ---
-title: "1 — STP: redundancia sin bucles"
+title: "2 · STP: redundancia sin bucles"
 description: El guardián que bloquea para que la red viva 🌉
 ---
 
 <p><small>El guardián que bloquea para que la red viva 🌉</small></p>
 
-> 🗺️ **Estás en:** 🔁 **Alta disponibilidad y redundancia** → 1 · STP: redundancia sin bucles
+> 🗺️ **Estás en:** 🔁 **Alta disponibilidad y redundancia** → 2 · STP: redundancia sin bucles
 
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: 8 — Plan de continuidad
+title: "8 · Plan de continuidad"
 description: Cuando el diseño no basta, el procedimiento salva 📋
 ---
 

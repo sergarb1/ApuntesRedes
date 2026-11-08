@@ -1,11 +1,11 @@
 ---
-title: "09 — Cierre: consolida lo aprendido"
+title: "9 · Cierre"
 description: El cierre práctico, con DORA, dominios y relojes en hora 🗄️
 ---
 
 <p><small>El cierre práctico, con DORA, dominios y relojes en hora 🗄️</small></p>
 
-> 🗺️ **Estás en:** 🗄️ **Servicios de red: DHCP, DNS y NTP** → 09 · Cierre
+> 🗺️ **Estás en:** 🗄️ **Servicios de red: DHCP, DNS y NTP** → 9 · Cierre
 
 ---
 

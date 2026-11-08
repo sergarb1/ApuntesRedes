@@ -1,5 +1,5 @@
 ---
-title: 3 — Dominios de colisión y broadcast
+title: "3 · Dominios de colisión y broadcast"
 description: Quién puede hablar a la vez y quién lo oye todo 🌐
 ---
 

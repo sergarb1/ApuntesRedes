@@ -3,8 +3,6 @@ title: Boletín de Direccionamiento IP · IPv6 — Avanzado (Resuelto)
 description: Soluciones ejercicios avanzados de IPv6 y Transición
 ---
 
-# ✅ Boletín de Direccionamiento IP · IPv6 — Avanzado (Resuelto)
-
 ---
 
 ## 1. Subnetting IPv6

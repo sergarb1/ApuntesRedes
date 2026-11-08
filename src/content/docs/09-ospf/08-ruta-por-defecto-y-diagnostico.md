@@ -1,5 +1,5 @@
 ---
-title: 8 — Ruta por defecto y diagnóstico
+title: "8 · Ruta por defecto y diagnóstico"
 description: Cómo anunciar el camino a Internet y cazar fallos de adyacencia 🔍
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: 6 — Puertos y estados STP
+title: "6 · Puertos y estados STP"
 description: Roles de puerto y los 4 estados hasta reenviar 🚦
 ---
 

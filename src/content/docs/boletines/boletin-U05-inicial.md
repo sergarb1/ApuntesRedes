@@ -3,8 +3,6 @@ title: Boletín de Switching y VLAN — Inicial
 description: Ejercicios básicos de Switching, STP y VLAN
 ---
 
-# 📝 Boletín de Switching y VLAN — Inicial
-
 > Ejercicios básicos para afianzar los conceptos de switching, STP y VLAN.
 
 ---

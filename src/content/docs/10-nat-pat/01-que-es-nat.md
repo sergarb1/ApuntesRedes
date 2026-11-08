@@ -1,5 +1,5 @@
 ---
-title: 1 — ¿Qué es NAT?
+title: "1 · ¿Qué es NAT?"
 description: La traducción que rescata a IPv4 y por qué existe 🌐
 ---
 

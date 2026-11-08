@@ -3,8 +3,6 @@ title: Boletín de Alta disponibilidad — Inicial (Resuelto)
 description: Soluciones de los ejercicios básicos de alta disponibilidad y redundancia
 ---
 
-# ✅ Boletín de Alta disponibilidad — Inicial (Resuelto)
-
 ---
 
 ## 1. ¿Qué concepto soy?

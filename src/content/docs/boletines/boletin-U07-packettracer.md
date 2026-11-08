@@ -3,8 +3,6 @@ title: Boletín de Servicios de red — Packet Tracer
 description: Prácticas guiadas de DHCP, DNS y NTP en Packet Tracer 🖥️
 ---
 
-# 🖥️ Boletín de Servicios de red — Packet Tracer
-
 > **Variante práctica de nivel único** (no es el par inicial/avanzado). Ocho micro-prácticas de baja dificultad en **Packet Tracer** para que los tres servicios dejen de ser magia: repartir IPs con DHCP en el router, montar registros DNS en el servidor de PT, poner en hora los equipos con NTP y, de camino, diagnosticar tres fallos intencionados con la escalera de diagnóstico. Ideal tras leer los puntos 1–8 de la unidad.
 
 > 🧰 **Requisitos:** Cisco Packet Tracer. Para el DNS usas un **Server** de PT (*Services → DNS*); los ejercicios 6 y 7 necesitan **dos routers** (o un router y un switch capa 3). El resuelto está justo al lado: úsalo solo cuando te atasques.

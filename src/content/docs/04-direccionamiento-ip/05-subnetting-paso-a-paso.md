@@ -1,5 +1,5 @@
 ---
-title: 5 — Subnetting paso a paso
+title: "5 · Subnetting paso a paso"
 description: Prestar bits de host para crear subredes, con las fórmulas y un ejemplo completo ✂️
 ---
 

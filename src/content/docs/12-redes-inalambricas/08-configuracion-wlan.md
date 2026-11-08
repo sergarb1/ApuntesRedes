@@ -1,11 +1,11 @@
 ---
-title: 8 — Configuración y verificación
+title: "8 · Configuración WLAN"
 description: Manos al aire, con cable de red debajo 🛠️
 ---
 
 <p><small>Manos al aire, con cable de red debajo 🛠️</small></p>
 
-> 🗺️ **Estás en:** 📶 **Redes inalámbricas** → 8 · Configuración y verificación
+> 🗺️ **Estás en:** 📶 **Redes inalámbricas** → 8 · Configuración WLAN
 
 ---
 

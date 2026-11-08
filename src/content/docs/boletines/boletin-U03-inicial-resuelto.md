@@ -3,8 +3,6 @@ title: Boletín de Capa de enlace y trama Ethernet — Inicial (Resuelto)
 description: Soluciones de los ejercicios básicos de OSI, MAC, trama y encapsulación
 ---
 
-# ✅ Boletín de Capa de enlace y trama Ethernet — Inicial (Resuelto)
-
 ---
 
 ## 1. Relaciona capa y PDU

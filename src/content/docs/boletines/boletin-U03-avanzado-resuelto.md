@@ -3,8 +3,6 @@ title: Boletín de Capa de enlace y trama Ethernet — Avanzado (Resuelto)
 description: Soluciones de los ejercicios avanzados de MAC, trama, encapsulación y diagnóstico
 ---
 
-# 💪 Boletín de Capa de enlace y trama Ethernet — Avanzado (Resuelto)
-
 ---
 
 ## 1. Lectura de bits: ¿qué MAC es esta?

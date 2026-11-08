@@ -3,8 +3,6 @@ title: Boletín de NAT y PAT — Avanzado (Resuelto)
 description: Soluciones ejercicios avanzados de NAT
 ---
 
-# ✅ Boletín de NAT y PAT — Avanzado (Resuelto)
-
 ---
 
 ## 1. Traducción manual

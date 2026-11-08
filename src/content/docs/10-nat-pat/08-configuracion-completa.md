@@ -1,5 +1,5 @@
 ---
-title: 8 — Configuración completa
+title: "8 · Configuración completa"
 description: El laboratorio NAT completo de principio a fin 🛠️
 ---
 

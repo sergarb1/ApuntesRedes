@@ -1,5 +1,5 @@
 ---
-title: 5 — Registros y zonas DNS
+title: "5 · Registros y zonas DNS"
 description: El directorio de tu dominio, fila a fila 📝
 ---
 

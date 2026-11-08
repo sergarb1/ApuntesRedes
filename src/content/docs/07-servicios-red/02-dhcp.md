@@ -1,5 +1,5 @@
 ---
-title: "2 — DHCP: el repartidor de IPs"
+title: "2 · DHCP: el repartidor de IPs"
 description: Cuatro mensajes y una dirección servida 📦
 ---
 

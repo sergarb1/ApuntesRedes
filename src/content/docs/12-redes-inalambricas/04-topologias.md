@@ -1,11 +1,11 @@
 ---
-title: 4 — Topologías y modos de trabajo
+title: "4 · Topologías y modos"
 description: BSS, ESS, ad-hoc, repetidores y mallas 🕸️
 ---
 
 <p><small>BSS, ESS, ad-hoc, repetidores y mallas 🕸️</small></p>
 
-> 🗺️ **Estás en:** 📶 **Redes inalámbricas** → 4 · Topologías y modos de trabajo
+> 🗺️ **Estás en:** 📶 **Redes inalámbricas** → 4 · Topologías y modos
 
 ---
 

@@ -3,8 +3,6 @@ title: "Boletín de Introducción — Avanzado"
 description: "Ejercicios de nivel avanzado: razonar, diagnosticar y diseñar"
 ---
 
-# 📝 Boletín de Introducción — Avanzado
-
 > Ejercicios que piden razonar, diagnosticar y defender ideas. No buscan memorizar: buscan que pienses como un administrador de redes.
 
 ---
