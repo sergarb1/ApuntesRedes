@@ -6,4 +6,5 @@ dist/
 # Tooling local del agente (no va al repo)
 .opencode/
 .serena/
+.freebuff/
 
