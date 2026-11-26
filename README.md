@@ -182,8 +182,6 @@ Bajo los siguientes términos:
 - **Atribución** — Debes dar crédito adecuado, proporcionar un enlace a la licencia
 - **CompartirIgual** — Si remezclas, transformas o creas, debes distribuir bajo la misma licencia
 
-Basado libremente en [oscarmaestre.github.io/apuntes_redes](https://oscarmaestre.github.io/apuntes_redes/) como inspiración pedagógica.
-
 ---
 
 > _"La red está viva. Y mientras haya un bit que transmitir, habrá un paquete que viaje."_  

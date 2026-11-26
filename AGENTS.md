@@ -10,6 +10,14 @@ Apuntes del módulo **PAR** (Planificación y Administración de Redes) para CFG
 
 ---
 
+## ✍️ Autoría (regla fija)
+
+- El único autor del proyecto es **Sergi Garcia Barea** (`sergarb1`). **No** añadir otros contribuidores, agradecimientos ni menciones a herramientas en README, documentación, contenido ni en el historial de git.
+- **Nada de atribución a Codebuff, Freebuff ni a ningún agente/LLM** en los commits: sin línea `Generated with…` y sin `Co-Authored-By`. El mensaje de commit termina en su propia última línea.
+- Prohibido añadir secciones de «contribuidores», badges de herramientas o cualquier crédito que no sea el autor del proyecto.
+
+---
+
 ## 🏗️ Stack
 
 - **Framework:** Astro 7 + Starlight 0.41
@@ -512,6 +520,12 @@ npx -y mcp-excalidraw-server export --out public/diagrams/x.excalidraw
 npx -y mcp-excalidraw-server clear --yes
 npx -y mcp-excalidraw-server install-skill --dir <skills-root>
 ```
+
+---
+
+## 🤝 Traspaso entre sesiones
+
+El estado de los trabajos en curso (revisión de diagramas, pendientes, workflow) vive en **`HANDSOFF.md`**, en la raíz del proyecto. Sustituye al antiguo `planaseguir.txt`: al retomar el proyecto, leer `HANDSOFF.md` antes de tocar nada y actualizarlo al cerrar la sesión. No crear otro fichero de seguimiento.
 
 ---
 
