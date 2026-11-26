@@ -293,8 +293,8 @@ Protocolo aplicado a la unidad de dirección IP; repetible para cualquier unidad
    - `npm run check:unidad XX` → 0 fallos
    - `node scripts/check-uds.mjs` → restos 0
    - `node scripts/check-links.mjs` → OK
-   - `npx astro build` → 183 páginas
-   - `npm run docx` → 68 generados, 0 fallos
+   - `npx astro build` → 197 páginas
+   - `npm run docx` → 83 generados, 0 fallos
    - Contar `word/media/*.svg` en el DOCX de la unidad (descomprimiendo el zip): debe haber **un SVG por cada diagrama referenciado** en su Markdown.
 6. **Actualizar la tabla de diagramas de esa unidad en AGENTS.md** (sección "Diagramas de la unidad … existentes"): añadir los insertados/creados y su sección `.md`.
 7. **No commitear sin confirmación explícita.**
@@ -565,7 +565,7 @@ npx astro build   # Solo Astro (si D2 NO está instalado; npm run build ejecuta 
 3. **Siempre mantener las secciones obligatorias** — cada unidad debe tener todas las secciones enumeradas arriba.
 4. **Los ejercicios SIEMPRE con solución** en `<details>`.
 5. **Laboratorios SIEMPRE con fallo intencionado** — el 80% práctico es obligatorio.
-6. **Los boletines siguen el patrón:** `inicial` (fácil) y `avanzado` (difícil), cada uno con su `-resuelto`, en `src/content/docs/boletines/` con nombre `boletin-UXX-inicial(-resuelto).md` / `boletin-UXX-avanzado(-resuelto).md`. **Son texto puro por diseño: NO llevan diagramas ni fotos** (mismo criterio en las 60 hojas del curso; pegar el diagrama de la unidad bajo un ejercicio de recall regalaría la respuesta). La unidad de dirección IP tiene además la variante `boletin-U04-ipv6-*`. Capa de enlace, dirección IP, trunking/inter-VLAN, servicios de red, enrutamiento estático, OSPF (una sola área) y ACL tienen además la variante **`boletin-U03-packettracer-*` / `boletin-U04-packettracer-*` / `boletin-U06-packettracer-*` / `boletin-U07-packettracer-*` / `boletin-U08-packettracer-*` / `boletin-U09-packettracer-*` / `boletin-U11-packettracer-*`**: práctica guiada de nivel único (no es el par inicial/avanzado), 8 micro-prácticas + resuelto 1:1; se enlaza en el sidebar como grupo "· Packet Tracer" y en los índices de cada unidad.
+6. **Los boletines siguen el patrón:** `inicial` (fácil) y `avanzado` (difícil), cada uno con su `-resuelto`, en `src/content/docs/boletines/` con nombre `boletin-UXX-inicial(-resuelto).md` / `boletin-UXX-avanzado(-resuelto).md`. **Son texto puro por diseño: NO llevan diagramas ni fotos** (mismo criterio en las 70 hojas del curso; pegar el diagrama de la unidad bajo un ejercicio de recall regalaría la respuesta). La unidad de dirección IP tiene además la variante `boletin-U04-ipv6-*`. Capa de enlace, dirección IP, trunking/inter-VLAN, servicios de red, enrutamiento estático, OSPF (una sola área) y ACL tienen además la variante **`boletin-U03-packettracer-*` / `boletin-U04-packettracer-*` / `boletin-U06-packettracer-*` / `boletin-U07-packettracer-*` / `boletin-U08-packettracer-*` / `boletin-U09-packettracer-*` / `boletin-U11-packettracer-*`**: práctica guiada de nivel único (no es el par inicial/avanzado), 8 micro-prácticas + resuelto 1:1; se enlaza en el sidebar como grupo "· Packet Tracer" y en los índices de cada unidad.
 7. **El CSS no debe romperse** — probar con `npm run build` después de cambios.
 8. **CI/CD en rama `main`**.
 9. **Puppeteer** instalado para PDFs, pero con `PUPPETEER_SKIP_DOWNLOAD=true` en CI. En local, si la versión cacheada de Chrome falla, se usa el Chrome del sistema con `PUPPETEER_EXECUTABLE_PATH="C:\Program Files\Google\Chrome\Application\chrome.exe"`.

@@ -7,7 +7,9 @@ estilo, idioma es-ES, reglas de diagramas) viven en `AGENTS.md`; aquí solo va
 el estado del trabajo.
 
 - **Último estado:** revisión de diagramas UD01–UD13 completada; repaso
-  estético de los diagramas de las unidades 8 a 13.
+  estético de los diagramas de las unidades 8 a 13; tres boletines Packet
+  Tracer nuevos (enrutamiento estático, OSPF de una sola área y ACL) y ajustes
+  en la unidad de traducción de direcciones (título y CG-NAT).
 - **Autoría:** solo Sergi Garcia Barea. Sin otros contribuidores y sin
   atribución a Codebuff/Freebuff en commits ni documentación (ver `AGENTS.md`).
 
@@ -44,6 +46,24 @@ solo con confirmación explícita.
   `u07-dhcp-relay`, `u12-antenas-patron`, `u13-stp-failover`; `06-hsrp-cisco`
   reutiliza `u13-fhrp`.
 
+### Boletines y contenido (sesión posterior)
+
+- **Boletines Packet Tracer de enrutamiento estático, OSPF y ACL:** creados
+  `boletin-U08-packettracer(-resuelto)`, `boletin-U09-packettracer(-resuelto)` y
+  `boletin-U11-packettracer(-resuelto)`. Ocho micro-prácticas y tres fallos
+  intencionados por boletín, en el mismo formato que los PT anteriores:
+  rutas estáticas y flotantes con ISP; OSPF de una sola área con el ISP
+  simulado por `Loopback0` en `8.8.8.8/32`; ACL estándar, extendida y nombrada,
+  VTY con `access-class` y port security. Enlazados en el bloque de boletines
+  de cada índice y en el grupo «· Packet Tracer» del sidebar. Los comandos son
+  IOS estándar, **sin ejecutar en Packet Tracer real**.
+- **Unidad de traducción de direcciones:** título cambiado de «NAT y PAT» a
+  «Traducción de direcciones: NAT y PAT» en frontmatter, sidebar, breadcrumbs
+  de los 9 puntos, mapa del curso, portada, README y `AGENTS.md`.
+- **CG-NAT:** sección nueva «📡 CG-NAT: el PAT del operador» en el punto 2
+  (`100.64.0.0/10` de RFC 6598, NAT444 y la pérdida del *port forwarding*) y
+  fila propia en la tabla de problemas del punto 7.
+
 ## Pendiente (candidatos ya identificados)
 
 No son urgentes: decidir caso a caso antes de crear nada.
@@ -60,6 +80,9 @@ No son urgentes: decidir caso a caso antes de crear nada.
 7. Coherencia en `07-servicios-red/01-por-que-servicios.md`: la cadena del
    diagrama es horizontal, así que el texto debe hablar del «primer eslabón
    (DHCP)» y no de «abajo/encima».
+8. Regenerar PDF y EPUB (`npm run pdf` / `npm run epub`): siguen con el título
+   antiguo de la unidad de traducción y no incluyen la sección de CG-NAT.
+9. Probar los tres boletines PT en Packet Tracer real y corregir lo que falle.
 
 Se descartó convertir a diagrama: pesos de bit (04/02), sumarización (04/03),
 conteos de examen (05/03), cabeceras de laboratorio (06/02, 09/04), relay de
@@ -100,8 +123,8 @@ con `textAlign: left` y etiquetas vinculadas centradas, flechas con
 2. `npm run check:unidad XX` → 0 FALLOs (o `all`).
 3. `node scripts/check-uds.mjs` → 0 restos.
 4. `node scripts/check-links.mjs` → OK.
-5. `npx astro build` → 191 páginas.
-6. `npm run docx` (Pandoc 3.11) → todos los DOCX, 0 fallos.
+5. `npx astro build` → 197 páginas.
+6. `npm run docx` (Pandoc 3.11) → 83 DOCX, 0 fallos.
 7. Contar los `word/media/*.svg` del DOCX de la unidad: uno por diagrama
    referenciado.
 8. Borrar `.tmp-*` de `public/diagrams/` y los `docx/**/.~lock.*#`.
