@@ -7,7 +7,7 @@ estilo, idioma es-ES, reglas de diagramas) viven en `AGENTS.md`; aquí solo va
 el estado del trabajo.
 
 - **Último estado:** revisión de diagramas UD01–UD13 completada; repaso
-  estético de los tres diagramas de la unidad de enrutamiento estático.
+  estético de los diagramas de las unidades 8 a 13.
 - **Autoría:** solo Sergi Garcia Barea. Sin otros contribuidores y sin
   atribución a Codebuff/Freebuff en commits ni documentación (ver `AGENTS.md`).
 
@@ -32,8 +32,14 @@ solo con confirmación explícita.
   enlace WAN en una pastilla separada de la flecha, etiquetas `sí`/`no` fuera
   de las flechas, texto teal oscurecido a `#0f766e` para que se lea y flechas
   con punta limpia.
-- **UD09–UD13:** 18 diagramas nuevos (`u09` ×5, `u10` ×3, `u11` ×2, `u12` ×4,
-  `u13` ×4) y sus sustituciones de ASCII.
+- **UD09–UD13:** 20 diagramas (`u09` ×5, `u10` ×3, `u11` ×2, `u12` ×5,
+  `u13` ×5) y sus sustituciones de ASCII. **Repaso estético posterior:** texto
+  por encima de las cajas (había etiquetas tapadas por el orden de capas, p. ej.
+  NAT y FHRP), etiquetas `sí`/`no`, costes OSPF, `FULL`, `HSRP`, `Po1` y
+  `roaming` fuera de las flechas, notas largas ajustadas al ancho del lienzo y
+  `viewBox` ampliado para que nada se corte. Se añadió el rótulo que faltaba en
+  la caja de clientes de FHRP y se separaron las dos flechas de PAT y de
+  EtherChannel que se dibujaban superpuestas.
 - **UD07–13, tanda extra:** `u07-dependencias`, `u07-lease-timeline`,
   `u07-dhcp-relay`, `u12-antenas-patron`, `u13-stp-failover`; `06-hsrp-cisco`
   reutiliza `u13-fhrp`.
