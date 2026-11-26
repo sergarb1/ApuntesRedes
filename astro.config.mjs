@@ -29,7 +29,7 @@ const unitLabels = [
   'Servicios de red: DHCP, DNS y NTP',
   'Enrutamiento estático',
   'Enrutamiento dinámico (OSPF)',
-  'NAT y PAT',
+  'Traducción de direcciones: NAT y PAT',
   'ACLs y seguridad de red',
   'Redes inalámbricas',
   'Alta disponibilidad y redundancia',

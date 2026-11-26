@@ -229,4 +229,4 @@ Sí, mientras no se reinicie el proceso ni caiga el DR. La elección de DR/BDR s
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesRedes/09-ospf) · **Anterior:** [08 · Ruta por defecto y diagnóstico](/ApuntesRedes/09-ospf/08-ruta-por-defecto-y-diagnostico) · **Siguiente:** [NAT y PAT](/ApuntesRedes/10-nat-pat)
+📚 [Volver al índice de la unidad](/ApuntesRedes/09-ospf) · **Anterior:** [08 · Ruta por defecto y diagnóstico](/ApuntesRedes/09-ospf/08-ruta-por-defecto-y-diagnostico) · **Siguiente:** [Traducción de direcciones: NAT y PAT](/ApuntesRedes/10-nat-pat)

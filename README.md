@@ -39,7 +39,7 @@ Un paquete IP viaja desde que nace en un navegador hasta la nube. Cada unidad av
 | Servicios de red: DHCP, DNS y NTP | Los que trabajan en silencio | 🗄️ |
 | Enrutamiento estático | El GPS de bolsillo | 🧭 |
 | Enrutamiento dinámico con OSPF | El router que habla solo | 🗣️ |
-| NAT y PAT | Salir a Internet sin quemar IPs | 🌐 |
+| Traducción de direcciones: NAT y PAT | Salir a Internet sin quemar IPs | 🌐 |
 | ACLs y seguridad de red | Filtrar sin romper la red | 🛡️ |
 | Redes inalámbricas | Libertad sin cables, con vecinos incluidos | 📶 |
 | Alta disponibilidad y redundancia | Que no se caiga nunca | 🔁 |

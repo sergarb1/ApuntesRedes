@@ -5,7 +5,7 @@ description: "El cierre práctico de NAT: sé el router, laboratorio y entrevist
 
 <p><small>El cierre práctico de NAT: sé el router, laboratorio y entrevista 🧠</small></p>
 
-> 🗺️ **Estás en:** 🌐 **NAT y PAT** → 9 · Cierre
+> 🗺️ **Estás en:** 🌐 **Traducción de direcciones: NAT y PAT** → 9 · Cierre
 
 ---
 

@@ -5,7 +5,7 @@ description: Cuatro formas de traducir y cuándo usar cada una 🗂️
 
 <p><small>Cuatro formas de traducir y cuándo usar cada una 🗂️</small></p>
 
-> 🗺️ **Estás en:** 🌐 **NAT y PAT** → 2 · Tipos de NAT
+> 🗺️ **Estás en:** 🌐 **Traducción de direcciones: NAT y PAT** → 2 · Tipos de NAT
 
 ---
 

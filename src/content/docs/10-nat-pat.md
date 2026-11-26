@@ -1,5 +1,5 @@
 ---
-title: NAT y PAT
+title: "Traducción de direcciones: NAT y PAT"
 description: Disfraces para salir a Internet 🌐
 ---
 

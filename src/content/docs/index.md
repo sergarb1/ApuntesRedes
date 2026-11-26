@@ -133,7 +133,7 @@ description: Apuntes de Planificación y Administración de Redes (PAR) — 13 u
     <span class="num">NAT</span>
     <span class="ra">RA7</span>
   </div>
-  <a href="/ApuntesRedes/10-nat-pat" class="title-link">NAT y PAT</a>
+  <a href="/ApuntesRedes/10-nat-pat" class="title-link">Traducción de direcciones: NAT y PAT</a>
   <p class="desc">Internet no funciona otra vez 🌐 — NAT estático y dinámico,<code> PAT</code> y port forwarding.</p>
   <a href="/ApuntesRedes/10-nat-pat" class="unit-link">👉 Ver unidad 👈</a>
 </div>

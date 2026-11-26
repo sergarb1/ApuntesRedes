@@ -43,7 +43,7 @@ src/content/docs/06-trunking-inter-vlan/…    → UD6 · Trunking e inter-VLAN
 src/content/docs/07-servicios-red/…          → UD7 · Servicios: DHCP, DNS y NTP
 src/content/docs/08-enrutamiento-estatico/…  → UD8 · Enrutamiento estático
 src/content/docs/09-ospf/…                   → UD9 · OSPF
-src/content/docs/10-nat-pat/…                → UD10 · NAT y PAT
+src/content/docs/10-nat-pat/…                → UD10 · Traducción de direcciones: NAT y PAT
 src/content/docs/11-acl-seguridad/…          → UD11 · ACL y seguridad básica
 src/content/docs/12-redes-inalambricas/…     → UD12 · Redes inalámbricas
 src/content/docs/13-alta-disponibilidad/…    → UD13 · Alta disponibilidad

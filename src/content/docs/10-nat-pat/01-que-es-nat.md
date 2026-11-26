@@ -5,7 +5,7 @@ description: La traducción que rescata a IPv4 y por qué existe 🌐
 
 <p><small>La traducción que rescata a IPv4 y por qué existe 🌐</small></p>
 
-> 🗺️ **Estás en:** 🌐 **NAT y PAT** → 1 · ¿Qué es NAT?
+> 🗺️ **Estás en:** 🌐 **Traducción de direcciones: NAT y PAT** → 1 · ¿Qué es NAT?
 
 ---
 

@@ -84,4 +84,4 @@ Al terminar, serás capaz de:
 - ¿Ya dominas OSPF de teoría? → Salta a la [configuración](/ApuntesRedes/09-ospf/07-configuracion-ospf) y al [diagnóstico](/ApuntesRedes/09-ospf/08-ruta-por-defecto-y-diagnostico).
 
 **📍 Primer punto:** [01 · De estático a dinámico](/ApuntesRedes/09-ospf/01-de-estatico-a-dinamico)  
-**⏭️ Al acabar la unidad, continúa en [NAT y PAT](/ApuntesRedes/10-nat-pat).**
+**⏭️ Al acabar la unidad, continúa en [Traducción de direcciones: NAT y PAT](/ApuntesRedes/10-nat-pat).**

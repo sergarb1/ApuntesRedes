@@ -5,7 +5,7 @@ description: El laboratorio NAT completo de principio a fin 🛠️
 
 <p><small>El laboratorio NAT completo de principio a fin 🛠️</small></p>
 
-> 🗺️ **Estás en:** 🌐 **NAT y PAT** → 8 · Configuración completa
+> 🗺️ **Estás en:** 🌐 **Traducción de direcciones: NAT y PAT** → 8 · Configuración completa
 
 ---
 

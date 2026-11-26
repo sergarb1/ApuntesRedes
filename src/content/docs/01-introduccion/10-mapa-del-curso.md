@@ -29,7 +29,7 @@ Antes de escribir una sola línea de configuración, vas a ver el plano completo
 | 6 | 🗄️ **Servicios de red** | Desplegar DHCP, DNS y NTP y diagnosticarlos | IPs (dirección IP), switches y VLANs (switching) y trunks (trunking) |
 | 7 | 🧭 **Enrutamiento estático** | Configurar un router y escribir sus rutas a mano | Subredes (dirección IP) y routers entre VLANs (trunking) |
 | 8 | 🗣️ **OSPF** | Dejar que los routers se hablen entre ellos y elijan la mejor ruta | Enrutamiento estático |
-| 9 | 🌍 **NAT y PAT** | Dar salida a Internet a una red privada con una sola IP pública | Routing (estático y OSPF) y subredes (dirección IP) |
+| 9 | 🌍 **Traducción de direcciones: NAT y PAT** | Dar salida a Internet a una red privada con una sola IP pública | Routing (estático y OSPF) y subredes (dirección IP) |
 | 10 | 🛡️ **ACL y seguridad** | Filtrar el tráfico y blindar el acceso a los dispositivos | IPs y subredes (dirección IP) y routing (estático y OSPF) |
 | 11 | 📶 **Redes inalámbricas** | Diseñar una WLAN: canales, cobertura y seguridad | Cableado (medios y cableado), IPs (dirección IP) y VLANs (switching) |
 | 12 | 🔁 **Alta disponibilidad** | Montar redes que aguanten la caída de un equipo | Switching, trunks y routing (estático) |
@@ -124,7 +124,7 @@ Para terminar el mapa, la misma historia que dará forma a todo el curso, contad
 | El paquete salta entre VLANs | Trunking e inter-VLAN |
 | El paquete cruza fronteras entre redes | Enrutamiento estático y OSPF |
 | El paquete pasa el filtro de seguridad | ACL y seguridad |
-| El paquete sale al ancho mundo | NAT y PAT |
+| El paquete sale al ancho mundo | Traducción de direcciones: NAT y PAT |
 | El paquete vuela por el aire | Redes inalámbricas |
 | El paquete aguanta aunque falle un equipo | Alta disponibilidad |
 
