@@ -25,6 +25,7 @@ Todo lo que has configurado hasta ahora (estático, dinámico, PAT, destino) tie
 | **VoIP/SIP** | Las IPs en el payload del protocolo no se traducen | ALG SIP, STUN, TURN |
 | **P2P/Juegos** | Necesitan puertos abiertos dinámicamente | UPnP, NAT-PMP, port forwarding manual |
 | **VPN (IPsec)** | IPsec no pasa NAT sin configuración especial | NAT-T (NAT Traversal) |
+| **CG-NAT del operador** | No tienes IP pública: tu router traduce y el operador traduce otra vez (NAT444), así que tu *port forwarding* no alcanza | IPv6, o contratar IP pública fija al operador |
 
 ### FTP activo, el ejemplo estrella
 

@@ -80,6 +80,18 @@ Cada técnica tiene su propio capítulo en esta unidad, con comandos y ejemplos:
 
 ---
 
+## 📡 CG-NAT: el PAT del operador
+
+Hay un uso de PAT que no configuras tú, pero que te afecta: cuando el operador se queda sin IPv4 públicas, pone su propia traducción delante de tu router. Es el **CG-NAT** (*Carrier-Grade NAT*), también llamado **NAT444**, porque suma una tercera capa de traducción a las dos de tu casa.
+
+- Tu router recibe en la WAN una dirección del bloque **`100.64.0.0/10`** (RFC 6598), reservado para redes de operador: no es un rango privado de casa y tampoco es enrutable en Internet.
+- En la central, un equipo hace **PAT masivo**: miles de abonados comparten un *pool* pequeño de IPs públicas y se distinguen solo por el puerto.
+- El resultado es una cadena de tres traducciones: LAN privada → WAN del cliente (`100.64.x.x`) → IP pública compartida.
+
+La consecuencia práctica es clara: **no tienes IP pública**, así que el *port forwarding* de tu router no sirve para que te alcancen desde fuera (consolas, P2P, cámaras, acceso remoto). Si la IP WAN de tu router empieza por `100.64`–`100.127`, estás detrás de un CG-NAT. Lo desarrollamos en [los mecanismos de transición](/ApuntesRedes/04-direccionamiento-ip/12-mecanismos-de-transicion), donde encaja como parche de la convivencia entre IPv4 e IPv6.
+
+---
+
 ## 🧠 Mini-chequeo
 
 1. ¿Cuál es la diferencia conceptual entre NAT de origen y NAT de destino?
