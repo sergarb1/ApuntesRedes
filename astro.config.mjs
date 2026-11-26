@@ -218,7 +218,7 @@ const boletinesGroups = boletinCodes.flatMap((code, i) => {
       items: boletinItems(code),
     },
   ];
-  if (code === '03' || code === '04' || code === '06' || code === '07') {
+  if (['03', '04', '06', '07', '08', '09', '11'].includes(code)) {
     groups.push(packetTracerGroup(code, i, emojis));
   }
   // La unidad 04 tiene además boletines específicos de IPv6

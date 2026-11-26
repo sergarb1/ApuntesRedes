@@ -59,6 +59,8 @@ Al terminar, serás capaz de:
   <a href="/ApuntesRedes/boletines/boletin-u09-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
   <a href="/ApuntesRedes/boletines/boletin-u09-avanzado" class="elink">⭐ Avanzado por resolver</a>
   <a href="/ApuntesRedes/boletines/boletin-u09-avanzado-resuelto" class="elink">💪 Avanzado resuelto</a>
+  <a href="/ApuntesRedes/boletines/boletin-u09-packettracer" class="elink">🖥️ Packet Tracer por resolver</a>
+  <a href="/ApuntesRedes/boletines/boletin-u09-packettracer-resuelto" class="elink">✅ Packet Tracer resuelto</a>
 </div>
 
 ---
